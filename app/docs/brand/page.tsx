@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ArrowDownToLineIcon } from "lucide-react"
 
 import {
   LivepeerLockup,
@@ -7,7 +8,7 @@ import {
   LivepeerWordmark,
 } from "@/components/brand"
 import { InstallCommand } from "@/components/docs/install-command"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { registryItemUrl } from "@/lib/docs"
 
 export const metadata: Metadata = {
@@ -16,35 +17,62 @@ export const metadata: Metadata = {
     "Livepeer brand marks — symbol, wordmark, and lockup as React components.",
 }
 
+function DownloadOverlay({
+  href,
+  label,
+  className,
+}: {
+  href: string
+  label: string
+  className?: string
+}) {
+  return (
+    <a
+      href={href}
+      download
+      aria-label={label}
+      className={cn(
+        "absolute top-3 right-3 opacity-50 transition-opacity hover:opacity-100",
+        className
+      )}
+    >
+      <ArrowDownToLineIcon className="size-4" />
+    </a>
+  )
+}
+
 function MarkTile({
   children,
   label,
-  file,
+  lightFile,
+  darkFile,
 }: {
   children: React.ReactNode
   label: string
-  file: string
+  lightFile: string
+  darkFile: string
 }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
-        <div className="flex min-h-[180px] items-center justify-center bg-background p-8 text-foreground">
+        <div className="relative flex min-h-[180px] items-center justify-center bg-background p-8 text-foreground">
           {children}
+          <DownloadOverlay
+            href={`/brand/${lightFile}`}
+            label="Download light variant SVG"
+            className="text-foreground"
+          />
         </div>
-        <div className="flex min-h-[180px] items-center justify-center border-t bg-neutral-950 p-8 text-white sm:border-t-0 sm:border-l">
+        <div className="relative flex min-h-[180px] items-center justify-center border-t bg-neutral-950 p-8 text-white sm:border-t-0 sm:border-l">
           {children}
+          <DownloadOverlay
+            href={`/brand/${darkFile}`}
+            label="Download dark variant SVG"
+            className="text-white"
+          />
         </div>
       </div>
-      <div className="flex items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <Button
-          variant="outline"
-          size="sm"
-          render={<a href={`/brand/${file}`} download />}
-        >
-          Download SVG
-        </Button>
-      </div>
+      <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   )
 }
@@ -56,26 +84,38 @@ export default function BrandPage() {
       <p className="mt-2 text-muted-foreground text-balance">
         The Livepeer marks — symbol, wordmark, and lockup. Available as
         theme-aware React components that inherit the current text color, and
-        as the original white SVG files.
+        as black and white SVG files — download either variant from its tile.
       </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Symbol</h2>
       <div className="mt-4">
-        <MarkTile label="The symbol stands alone at small sizes." file="livepeer-symbol-white.svg">
+        <MarkTile
+          label="The symbol stands alone at small sizes."
+          lightFile="livepeer-symbol-black.svg"
+          darkFile="livepeer-symbol-white.svg"
+        >
           <LivepeerSymbol className="h-16 w-auto" />
         </MarkTile>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Wordmark</h2>
       <div className="mt-4">
-        <MarkTile label="The wordmark, set in the brand letterforms." file="livepeer-wordmark-white.svg">
+        <MarkTile
+          label="The wordmark, set in the brand letterforms."
+          lightFile="livepeer-wordmark-black.svg"
+          darkFile="livepeer-wordmark-white.svg"
+        >
           <LivepeerWordmark className="h-8 w-auto max-w-full" />
         </MarkTile>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Lockup</h2>
       <div className="mt-4">
-        <MarkTile label="Symbol and wordmark combined. Preferred where space allows." file="livepeer-lockup-white.svg">
+        <MarkTile
+          label="Symbol and wordmark combined. Preferred where space allows."
+          lightFile="livepeer-lockup-black.svg"
+          darkFile="livepeer-lockup-white.svg"
+        >
           <LivepeerLockup className="h-8 w-auto max-w-full" />
         </MarkTile>
       </div>
@@ -83,60 +123,57 @@ export default function BrandPage() {
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Favicon</h2>
       <div className="mt-4 flex flex-col gap-3">
         <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
-          <div className="flex min-h-[140px] items-center justify-center gap-6 bg-background p-8">
+          <div className="relative flex min-h-[140px] items-center justify-center gap-6 bg-background p-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/favicon.svg" alt="Favicon at 32px" className="size-8" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/favicon.svg" alt="Favicon at 16px" className="size-4" />
+            <DownloadOverlay
+              href="/brand/favicon.svg"
+              label="Download favicon SVG"
+              className="text-foreground"
+            />
           </div>
-          <div className="flex min-h-[140px] items-center justify-center gap-6 border-t bg-neutral-950 p-8 sm:border-t-0 sm:border-l">
+          <div className="relative flex min-h-[140px] items-center justify-center gap-6 border-t bg-neutral-950 p-8 sm:border-t-0 sm:border-l">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 32px" className="size-8" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 16px" className="size-4" />
+            <DownloadOverlay
+              href="/brand/favicon-dark-preview.svg"
+              label="Download white favicon SVG"
+              className="text-white"
+            />
           </div>
         </div>
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            SVG favicon with an embedded{" "}
-            <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
-              prefers-color-scheme
-            </code>{" "}
-            query — black in light tabs, white in dark tabs.
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            render={<a href="/brand/favicon.svg" download />}
-          >
-            Download SVG
-          </Button>
-        </div>
+        <p className="text-sm text-muted-foreground">
+          SVG favicon with an embedded{" "}
+          <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+            prefers-color-scheme
+          </code>{" "}
+          query — black in light tabs, white in dark tabs.
+        </p>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Open Graph</h2>
       <div className="mt-4 flex flex-col gap-3">
-        <div className="overflow-hidden rounded-lg border">
+        <div className="relative overflow-hidden rounded-lg border">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/brand/og.png"
             alt="Open Graph embed — the lockup centered on black, 1200 by 630"
             className="w-full"
           />
+          <DownloadOverlay
+            href="/brand/og.png"
+            label="Download Open Graph PNG"
+            className="text-white"
+          />
         </div>
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            The share embed — lockup centered on black, 1200 × 630. Served on
-            every page via Open Graph and Twitter card metadata.
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            render={<a href="/brand/og.png" download />}
-          >
-            Download PNG
-          </Button>
-        </div>
+        <p className="text-sm text-muted-foreground">
+          The share embed — lockup centered on black, 1200 × 630. Served on
+          every page via Open Graph and Twitter card metadata.
+        </p>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">

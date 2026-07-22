@@ -61,9 +61,9 @@ export default function DocsPage() {
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
           bIkeynI
         </code>{" "}
-        — vega style, neutral base color, lucide icons, Inter, radius none,
-        subtle menu accent. The theme is available as a registry item and can be
-        applied to an existing project:
+        — vega style, neutral base color, lucide icons, radius none, subtle
+        menu accent — typeset in Favorit Pro and Favorit Mono. The theme is
+        available as a registry item and can be applied to an existing project:
       </p>
       <div className="mt-4">
         <InstallCommand url={registryItemUrl("theme")} />
