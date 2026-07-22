@@ -12,8 +12,8 @@ const packageManagers = [
 
 export function InstallCommand({ url }: { url: string }) {
   return (
-    <Tabs defaultValue="pnpm" className="gap-0 rounded-lg border">
-      <TabsList className="w-full justify-start rounded-none border-b bg-transparent px-2">
+    <Tabs defaultValue="pnpm" className="gap-3">
+      <TabsList>
         {packageManagers.map((pm) => (
           <TabsTrigger key={pm.name} value={pm.name}>
             {pm.name}
@@ -23,15 +23,12 @@ export function InstallCommand({ url }: { url: string }) {
       {packageManagers.map((pm) => {
         const command = `${pm.command} shadcn@latest add ${url}`
         return (
-          <TabsContent key={pm.name} value={pm.name} className="relative">
-            <CopyButton
-              value={command}
-              className="absolute top-1.5 right-2 bg-background/50 backdrop-blur-sm"
-            />
-            <div className="overflow-x-auto p-4 pr-12">
-              <code className="font-mono text-[13px] whitespace-nowrap">
+          <TabsContent key={pm.name} value={pm.name}>
+            <div className="flex w-fit max-w-full items-center gap-1 rounded-lg border bg-muted/30 py-1 pr-1 pl-4">
+              <code className="overflow-x-auto font-mono text-[13px] whitespace-nowrap">
                 {command}
               </code>
+              <CopyButton value={command} className="shrink-0" />
             </div>
           </TabsContent>
         )
