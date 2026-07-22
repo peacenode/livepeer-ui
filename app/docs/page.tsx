@@ -55,7 +55,9 @@ export default function DocsPage() {
         <CodeBlock code={registriesConfig} lang="json" />
       </div>
 
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Theme</h2>
+      <h2 id="theme" className="mt-10 scroll-mt-20 text-xl font-semibold tracking-tight">
+        Theme
+      </h2>
       <p className="mt-2 text-sm text-muted-foreground">
         The registry is generated from the shadcn preset{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">

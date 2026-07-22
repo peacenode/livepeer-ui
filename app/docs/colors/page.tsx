@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { ColorScale } from "@/components/docs/color-scale"
 
@@ -65,6 +66,16 @@ export default function ColorsPage() {
   return (
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Colors</h1>
+      <p className="mt-2 text-muted-foreground">
+        Installed with the{" "}
+        <Link
+          href="/docs#theme"
+          className="font-medium text-foreground underline underline-offset-4"
+        >
+          theme
+        </Link>
+        .
+      </p>
       {SCALES.map((scale) => (
         <ColorScale
           key={scale.name}
