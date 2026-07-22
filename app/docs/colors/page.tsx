@@ -65,12 +65,6 @@ export default function ColorsPage() {
   return (
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Colors</h1>
-      <p className="mt-2 text-muted-foreground text-balance">
-        The palette stays on default Tailwind scales. Neutral carries the
-        interface — it is the base color of the theme. Emerald and sky are the
-        accents, chosen as the closest Tailwind scales to the greens and blues
-        of the Livepeer brand. Click a swatch to copy its hex value.
-      </p>
       {SCALES.map((scale) => (
         <ColorScale
           key={scale.name}
