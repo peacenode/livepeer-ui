@@ -17,6 +17,22 @@ const WEIGHTS = [
   { label: "Bold", value: 700, className: "font-bold" },
 ]
 
+const SIZES = [
+  { label: "xs", px: "12px", className: "text-xs" },
+  { label: "sm", px: "14px", className: "text-sm" },
+  { label: "base", px: "16px", className: "text-base" },
+  { label: "lg", px: "18px", className: "text-lg" },
+  { label: "xl", px: "20px", className: "text-xl" },
+  { label: "2xl", px: "24px", className: "text-2xl" },
+  { label: "3xl", px: "30px", className: "text-3xl" },
+  { label: "4xl", px: "36px", className: "text-4xl" },
+  { label: "5xl", px: "48px", className: "text-5xl" },
+  { label: "6xl", px: "60px", className: "text-6xl" },
+  { label: "7xl", px: "72px", className: "text-7xl" },
+  { label: "8xl", px: "96px", className: "text-8xl" },
+  { label: "9xl", px: "128px", className: "text-9xl" },
+]
+
 export default function FavoritProPage() {
   return (
     <article className="max-w-3xl">
@@ -66,12 +82,17 @@ export default function FavoritProPage() {
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Scale</h2>
-      <div className="mt-4 flex flex-col gap-4 rounded-lg border p-6 sm:p-8">
-        <p className="text-4xl font-medium tracking-tight">Orchestrate the network</p>
-        <p className="text-2xl font-medium tracking-tight">Orchestrate the network</p>
-        <p className="text-lg">Orchestrate the network</p>
-        <p className="text-sm">Orchestrate the network</p>
-        <p className="text-xs text-muted-foreground">Orchestrate the network</p>
+      <div className="mt-4 flex flex-col divide-y rounded-lg border">
+        {SIZES.map((sizeStep) => (
+          <div key={sizeStep.label} className="flex flex-col gap-2 overflow-x-auto p-6">
+            <span className="font-mono text-xs text-muted-foreground">
+              {sizeStep.label} · {sizeStep.px}
+            </span>
+            <span className={`leading-none tracking-tight whitespace-nowrap ${sizeStep.className}`}>
+              Livepeer
+            </span>
+          </div>
+        ))}
       </div>
 
       <p className="mt-10 text-sm text-muted-foreground">

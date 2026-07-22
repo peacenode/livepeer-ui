@@ -16,6 +16,22 @@ const WEIGHTS = [
   { label: "Bold", value: 700, className: "font-bold" },
 ]
 
+const SIZES = [
+  { label: "xs", px: "12px", className: "text-xs" },
+  { label: "sm", px: "14px", className: "text-sm" },
+  { label: "base", px: "16px", className: "text-base" },
+  { label: "lg", px: "18px", className: "text-lg" },
+  { label: "xl", px: "20px", className: "text-xl" },
+  { label: "2xl", px: "24px", className: "text-2xl" },
+  { label: "3xl", px: "30px", className: "text-3xl" },
+  { label: "4xl", px: "36px", className: "text-4xl" },
+  { label: "5xl", px: "48px", className: "text-5xl" },
+  { label: "6xl", px: "60px", className: "text-6xl" },
+  { label: "7xl", px: "72px", className: "text-7xl" },
+  { label: "8xl", px: "96px", className: "text-8xl" },
+  { label: "9xl", px: "128px", className: "text-9xl" },
+]
+
 const CODE_SAMPLE = `const stream = await livepeer.stream.create({
   name: "quickstart",
   profiles: [{ bitrate: 3_000_000, fps: 30 }],
@@ -63,6 +79,20 @@ export default function FavoritMonoPage() {
             </span>
             <span className={`font-mono text-xl ${weight.className}`}>
               $ npx shadcn add @livepeer-ui/button
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Scale</h2>
+      <div className="mt-4 flex flex-col divide-y rounded-lg border">
+        {SIZES.map((sizeStep) => (
+          <div key={sizeStep.label} className="flex flex-col gap-2 overflow-x-auto p-6">
+            <span className="font-mono text-xs text-muted-foreground">
+              {sizeStep.label} · {sizeStep.px}
+            </span>
+            <span className={`font-mono leading-none whitespace-nowrap ${sizeStep.className}`}>
+              Livepeer
             </span>
           </div>
         ))}
