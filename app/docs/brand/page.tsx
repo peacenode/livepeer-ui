@@ -43,36 +43,31 @@ function DownloadOverlay({
 
 function MarkTile({
   children,
-  label,
   lightFile,
   darkFile,
 }: {
   children: React.ReactNode
-  label: string
   lightFile: string
   darkFile: string
 }) {
   return (
-    <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
-        <div className="relative flex min-h-[180px] items-center justify-center bg-background p-8 text-foreground">
-          {children}
-          <DownloadOverlay
-            href={`/brand/${lightFile}`}
-            label="Download light variant SVG"
-            className="text-foreground"
-          />
-        </div>
-        <div className="relative flex min-h-[180px] items-center justify-center border-t bg-neutral-950 p-8 text-white sm:border-t-0 sm:border-l">
-          {children}
-          <DownloadOverlay
-            href={`/brand/${darkFile}`}
-            label="Download dark variant SVG"
-            className="text-white"
-          />
-        </div>
+    <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
+      <div className="relative flex min-h-[180px] items-center justify-center bg-background p-8 text-foreground">
+        {children}
+        <DownloadOverlay
+          href={`/brand/${lightFile}`}
+          label="Download light variant SVG"
+          className="text-foreground"
+        />
       </div>
-      <p className="text-sm text-muted-foreground">{label}</p>
+      <div className="relative flex min-h-[180px] items-center justify-center border-t bg-neutral-950 p-8 text-white sm:border-t-0 sm:border-l">
+        {children}
+        <DownloadOverlay
+          href={`/brand/${darkFile}`}
+          label="Download dark variant SVG"
+          className="text-white"
+        />
+      </div>
     </div>
   )
 }
@@ -90,7 +85,6 @@ export default function BrandPage() {
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Symbol</h2>
       <div className="mt-4">
         <MarkTile
-          label="The symbol stands alone at small sizes."
           lightFile="livepeer-symbol-black.svg"
           darkFile="livepeer-symbol-white.svg"
         >
@@ -101,7 +95,6 @@ export default function BrandPage() {
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Wordmark</h2>
       <div className="mt-4">
         <MarkTile
-          label="The wordmark, set in the brand letterforms."
           lightFile="livepeer-wordmark-black.svg"
           darkFile="livepeer-wordmark-white.svg"
         >
@@ -112,75 +105,14 @@ export default function BrandPage() {
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Lockup</h2>
       <div className="mt-4">
         <MarkTile
-          label="Symbol and wordmark combined. Preferred where space allows."
           lightFile="livepeer-lockup-black.svg"
           darkFile="livepeer-lockup-white.svg"
         >
           <LivepeerLockup className="h-8 w-auto max-w-full" />
         </MarkTile>
       </div>
-
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Favicon</h2>
-      <div className="mt-4 flex flex-col gap-3">
-        <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
-          <div className="relative flex min-h-[140px] items-center justify-center gap-6 bg-background p-8">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/favicon.svg" alt="Favicon at 32px" className="size-8" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/favicon.svg" alt="Favicon at 16px" className="size-4" />
-            <DownloadOverlay
-              href="/brand/favicon.svg"
-              label="Download favicon SVG"
-              className="text-foreground"
-            />
-          </div>
-          <div className="relative flex min-h-[140px] items-center justify-center gap-6 border-t bg-neutral-950 p-8 sm:border-t-0 sm:border-l">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 32px" className="size-8" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 16px" className="size-4" />
-            <DownloadOverlay
-              href="/brand/favicon-dark-preview.svg"
-              label="Download white favicon SVG"
-              className="text-white"
-            />
-          </div>
-        </div>
-        <p className="text-sm text-muted-foreground">
-          SVG favicon with an embedded{" "}
-          <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
-            prefers-color-scheme
-          </code>{" "}
-          query — black in light tabs, white in dark tabs.
-        </p>
-      </div>
-
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Open Graph</h2>
-      <div className="mt-4 flex flex-col gap-3">
-        <div className="relative overflow-hidden rounded-lg border">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/brand/og.png"
-            alt="Open Graph embed — the lockup centered on black, 1200 by 630"
-            className="w-full"
-          />
-          <DownloadOverlay
-            href="/brand/og.png"
-            label="Download Open Graph PNG"
-            className="text-white"
-          />
-        </div>
-        <p className="text-sm text-muted-foreground">
-          The share embed — lockup centered on black, 1200 × 630. Served on
-          every page via Open Graph and Twitter card metadata.
-        </p>
-      </div>
-
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">
-        Installation
-      </h2>
-      <p className="mt-2 text-sm text-muted-foreground">
-        The marks are available from the registry as{" "}
+      <p className="mt-6 text-sm text-muted-foreground">
+        All three marks install as a single component —{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
           LivepeerSymbol
         </code>
@@ -200,6 +132,68 @@ export default function BrandPage() {
       </p>
       <div className="mt-4">
         <InstallCommand url={registryItemUrl("brand")} />
+      </div>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Favicon</h2>
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
+          <div className="relative flex min-h-[140px] items-center justify-center bg-background p-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon.svg" alt="Favicon, light scheme" className="size-8" />
+            <DownloadOverlay
+              href="/brand/favicon.svg"
+              label="Download favicon SVG"
+              className="text-foreground"
+            />
+          </div>
+          <div className="relative flex min-h-[140px] items-center justify-center border-t bg-neutral-950 p-8 sm:border-t-0 sm:border-l">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon-dark-preview.svg" alt="Favicon, dark scheme" className="size-8" />
+            <DownloadOverlay
+              href="/brand/favicon-dark-preview.svg"
+              label="Download white favicon SVG"
+              className="text-white"
+            />
+          </div>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          A single SVG with an embedded{" "}
+          <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+            prefers-color-scheme
+          </code>{" "}
+          query — black in light tabs, white in dark tabs. Installs as{" "}
+          <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+            app/icon.svg
+          </code>
+          .
+        </p>
+        <InstallCommand url={registryItemUrl("favicon")} />
+      </div>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Open Graph</h2>
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="relative overflow-hidden rounded-lg border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/og.png"
+            alt="Open Graph embed — the lockup centered on black, 1200 by 630"
+            className="w-full"
+          />
+          <DownloadOverlay
+            href="/brand/og.png"
+            label="Download Open Graph PNG"
+            className="text-white"
+          />
+        </div>
+        <p className="text-sm text-muted-foreground">
+          The share embed — lockup centered on black, 1200 × 630. Installs as
+          a file-based{" "}
+          <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+            app/opengraph-image.tsx
+          </code>{" "}
+          route, served automatically on every page.
+        </p>
+        <InstallCommand url={registryItemUrl("og")} />
       </div>
 
       <p className="mt-10 text-sm text-muted-foreground">

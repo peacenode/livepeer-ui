@@ -67,6 +67,30 @@ const items = [
       "Livepeer brand marks — symbol, wordmark, and lockup as theme-aware React components.",
     files: [{ path: "components/brand.tsx", type: "registry:component" }],
   },
+  {
+    name: "favicon",
+    type: "registry:item",
+    title: "Favicon",
+    description:
+      "Theme-aware SVG favicon — the Livepeer symbol, black in light tabs and white in dark tabs.",
+    files: [
+      { path: "app/icon.svg", type: "registry:file", target: "app/icon.svg" },
+    ],
+  },
+  {
+    name: "og",
+    type: "registry:item",
+    title: "Open Graph",
+    description:
+      "Open Graph embed route — the Livepeer lockup centered on black, 1200 × 630.",
+    files: [
+      {
+        path: "app/opengraph-image.tsx",
+        type: "registry:file",
+        target: "app/opengraph-image.tsx",
+      },
+    ],
+  },
 ]
 
 for (const component of meta.components) {
