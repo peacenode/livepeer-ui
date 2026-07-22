@@ -80,6 +80,65 @@ export default function BrandPage() {
         </MarkTile>
       </div>
 
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Favicon</h2>
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
+          <div className="flex min-h-[140px] items-center justify-center gap-6 bg-background p-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon.svg" alt="Favicon at 32px" className="size-8" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon.svg" alt="Favicon at 16px" className="size-4" />
+          </div>
+          <div className="flex min-h-[140px] items-center justify-center gap-6 border-t bg-neutral-950 p-8 sm:border-t-0 sm:border-l">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 32px" className="size-8" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/favicon-dark-preview.svg" alt="Favicon on dark at 16px" className="size-4" />
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            SVG favicon with an embedded{" "}
+            <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+              prefers-color-scheme
+            </code>{" "}
+            query — black in light tabs, white in dark tabs.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            render={<a href="/brand/favicon.svg" download />}
+          >
+            Download SVG
+          </Button>
+        </div>
+      </div>
+
+      <h2 className="mt-10 text-xl font-semibold tracking-tight">Open Graph</h2>
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="overflow-hidden rounded-lg border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/og.png"
+            alt="Open Graph embed — the lockup centered on black, 1200 by 630"
+            className="w-full"
+          />
+        </div>
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            The share embed — lockup centered on black, 1200 × 630. Served on
+            every page via Open Graph and Twitter card metadata.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            render={<a href="/brand/og.png" download />}
+          >
+            Download PNG
+          </Button>
+        </div>
+      </div>
+
       <h2 className="mt-10 text-xl font-semibold tracking-tight">
         Installation
       </h2>

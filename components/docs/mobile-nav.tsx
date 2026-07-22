@@ -3,6 +3,7 @@
 import * as React from "react"
 import { MenuIcon } from "lucide-react"
 
+import { LivepeerLockup } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -28,8 +29,8 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="left" className="w-72">
         <SheetHeader>
-          <SheetTitle className="text-left font-mono text-sm">
-            livepeer/ui
+          <SheetTitle className="text-left">
+            <LivepeerLockup className="h-3 w-auto" aria-label="Livepeer UI" />
           </SheetTitle>
         </SheetHeader>
         <div className="overflow-y-auto px-4 pb-8">

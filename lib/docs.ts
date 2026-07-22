@@ -1,9 +1,9 @@
 import registryMeta from "@/lib/registry-meta.json"
 
 export const siteConfig = {
-  name: "livepeer/ui",
+  name: "Livepeer UI",
   description:
-    "A shadcn component registry built on the vega style. Neutral palette, zero radius, Inter.",
+    "A shadcn component registry built on the vega style. Neutral palette, zero radius, Favorit.",
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
 }
 

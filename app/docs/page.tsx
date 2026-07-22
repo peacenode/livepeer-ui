@@ -21,9 +21,9 @@ export default function DocsPage() {
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Introduction</h1>
       <p className="mt-2 text-muted-foreground text-balance">
-        livepeer/ui is a shadcn component registry. Every component is built on
-        the vega style with the neutral palette, zero radius, and Inter — the
-        preset this registry ships as its theme.
+        Livepeer UI is a shadcn component registry. Every component is built on
+        the vega style with the neutral palette, zero radius, and the Favorit
+        typefaces — the preset this registry ships as its theme.
       </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">

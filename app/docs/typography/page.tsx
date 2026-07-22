@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Typography",
   description:
-    "The two brand typefaces — Inter for interface and product, Hack for code and data.",
+    "The two brand typefaces — Favorit Pro for interface and product, Favorit Mono for code and data.",
 }
 
 const ALPHABET = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789"
@@ -40,9 +40,9 @@ export default function TypographyPage() {
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Typography</h1>
       <p className="mt-2 text-muted-foreground text-balance">
-        Two typefaces carry the brand. Inter sets all interface and product
-        text. Hack sets code, data, and technical annotation. Both are
-        self-hosted and loaded as{" "}
+        Two typefaces carry the brand. Favorit Pro sets all interface and
+        product text. Favorit Mono sets code, data, and technical annotation.
+        Both are self-hosted and loaded as{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
           --font-sans
         </code>{" "}
@@ -55,9 +55,9 @@ export default function TypographyPage() {
 
       <section className="mt-10">
         <SpecimenHeader
-          name="Inter"
-          role="Sans — interface, product, and marketing text. Variable, weights 100–900."
-          source="https://rsms.me/inter"
+          name="Favorit Pro"
+          role="Sans — interface, product, and marketing text. Weights 300, 400, 450, 500, 700."
+          source="https://abcdinamo.com/typefaces/favorit"
         />
         <div className="mt-4 flex flex-col gap-6 rounded-lg border p-6 sm:p-8">
           <p className="text-4xl font-normal tracking-tight text-balance sm:text-5xl">
@@ -65,38 +65,38 @@ export default function TypographyPage() {
           </p>
           <p className="break-words text-lg text-muted-foreground">{ALPHABET}</p>
           <div className="flex flex-col gap-2 text-2xl">
+            <p className="font-light">Light — The quick brown fox jumps over the lazy dog</p>
             <p className="font-normal">Regular — The quick brown fox jumps over the lazy dog</p>
+            <p className="font-[450]">Book — The quick brown fox jumps over the lazy dog</p>
             <p className="font-medium">Medium — The quick brown fox jumps over the lazy dog</p>
-            <p className="font-semibold">Semibold — The quick brown fox jumps over the lazy dog</p>
             <p className="font-bold">Bold — The quick brown fox jumps over the lazy dog</p>
           </div>
           <p className="max-w-prose text-sm leading-relaxed text-muted-foreground">
-            Inter is drawn for screens: a tall x-height, open apertures, and
-            optical sizing that keeps small labels legible and large headings
-            tight. Use it for everything that is not code.
+            Favorit is a grotesk by Dinamo with a deliberately plain, almost
+            technical posture — flat curves, even rhythm, no flourish. Use it
+            for everything that is not code.
           </p>
         </div>
       </section>
 
       <section className="mt-10">
         <SpecimenHeader
-          name="Hack"
-          role="Mono — code, data, and technical annotation. Weights 400 and 700, with italics."
-          source="https://sourcefoundry.org/hack"
+          name="Favorit Mono"
+          role="Mono — code, data, and technical annotation. Weights 400, 500, 700."
+          source="https://abcdinamo.com/typefaces/favorit"
         />
         <div className="mt-4 flex flex-col gap-6 rounded-lg border p-6 sm:p-8 font-mono">
-          <p className="text-3xl sm:text-4xl">livepeer/ui</p>
+          <p className="text-3xl sm:text-4xl">LIVEPEER</p>
           <p className="break-words text-base text-muted-foreground">{ALPHABET}</p>
           <div className="flex flex-col gap-2 text-lg">
             <p>Regular — 0O 1lI 5S 8B {"->"} legibility at a glance</p>
-            <p className="italic">Italic — const stream = await broadcast()</p>
+            <p className="font-medium">Medium — const stream = await broadcast()</p>
             <p className="font-bold">Bold — $ npx shadcn add @livepeer-ui/button</p>
           </div>
           <p className="max-w-prose font-sans text-sm leading-relaxed text-muted-foreground">
-            Hack is designed for source code: disambiguated zeros, ones, and
-            els, wide punctuation, and consistent rhythm at small sizes. It
-            sets every code block, install command, and the wordmark in the
-            header.
+            The monospaced cut of Favorit keeps the same skeleton on a fixed
+            pitch. It sets every code block, install command, and inline
+            technical reference in the docs.
           </p>
         </div>
       </section>

@@ -2,7 +2,7 @@
 
 A shadcn component registry and docs site built on the shadcn preset
 `bIkeynI` — vega style, neutral base color, lucide icons, Inter, radius none,
-subtle menu accent.
+subtle menu accent. Typeset in Favorit Pro and Favorit Mono.
 
 - **Registry** — 31 UI components + brand marks + the theme, served as
   registry items from `public/r/*.json`.
@@ -60,8 +60,13 @@ npx shadcn@latest add @livepeer-ui/button
 ## Brand
 
 Brand marks live in `components/brand.tsx` (theme-aware, `currentColor`) and
-`public/brand/` (original white SVGs). Typefaces are self-hosted in
-`assets/fonts/`: Inter variable (`--font-sans`) and Hack (`--font-mono`).
+`public/brand/` (original white SVGs, favicon, OG embed). The favicon is
+`app/icon.svg` (theme-aware via `prefers-color-scheme`). Typefaces are
+self-hosted in `assets/fonts/`: Favorit Pro (`--font-sans`, weights
+300/400/450/500/700) and Favorit Mono (`--font-mono`, weights 400/500/700).
+Favorit is a commercial Dinamo typeface licensed by Livepeer — the woff2
+files mirror the ones livepeer.org ships; don't redistribute them outside
+Livepeer work.
 
 ## Adding a component to the registry
 
