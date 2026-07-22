@@ -1,21 +1,72 @@
-# Next.js template
+# livepeer/ui
 
-This is a Next.js template with shadcn/ui.
+A shadcn component registry and docs site built on the shadcn preset
+`bIkeynI` — vega style, neutral base color, lucide icons, Inter, radius none,
+subtle menu accent.
 
-## Adding components
+- **Registry** — 31 UI components + brand marks + the theme, served as
+  registry items from `public/r/*.json`.
+- **Docs site** — ui.shadcn-style docs: sidebar, per-component pages with a
+  live preview, install command, and full example source. Foundations pages
+  cover the brand marks and typography.
 
-To add components to your app, run the following command:
+## Development
 
 ```bash
-npx shadcn@latest add button
+npm run dev        # dev server on :3000
+npm run build      # production build
+npm run start      # serve production build
 ```
 
-This will place the ui components in the `components` directory.
+## Registry
 
-## Using components
+`registry.json` is generated — do not edit by hand. The source of truth is
+`lib/registry-meta.json` (names, titles, descriptions) plus the component
+sources in `components/ui/`. Dependencies and cross-component references are
+derived from imports.
 
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
+```bash
+npm run registry:build   # regenerate registry.json + public/r/*.json
 ```
+
+Registry item URLs (including cross-item `registryDependencies`) are baked
+with `NEXT_PUBLIC_BASE_URL` (default `http://localhost:3000`). Before
+deploying, rebuild with the production URL:
+
+```bash
+NEXT_PUBLIC_BASE_URL=https://your-domain npm run registry:build
+```
+
+### Consuming the registry
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/button.json
+```
+
+Or add a namespace to your project's `components.json`:
+
+```json
+{
+  "registries": {
+    "@livepeer-ui": "http://localhost:3000/r/{name}.json"
+  }
+}
+```
+
+```bash
+npx shadcn@latest add @livepeer-ui/button
+```
+
+## Brand
+
+Brand marks live in `components/brand.tsx` (theme-aware, `currentColor`) and
+`public/brand/` (original white SVGs). Typefaces are self-hosted in
+`assets/fonts/`: Inter variable (`--font-sans`) and Hack (`--font-mono`).
+
+## Adding a component to the registry
+
+1. `npx shadcn add <name>` (installs into `components/ui/`)
+2. Add an entry to `lib/registry-meta.json`
+3. Write a demo at `components/demos/<name>-demo.tsx` and register it in
+   `components/demos/index.ts`
+4. `npm run registry:build`
