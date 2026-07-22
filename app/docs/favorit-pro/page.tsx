@@ -36,21 +36,20 @@ const SIZES = [
 export default function FavoritProPage() {
   return (
     <article className="max-w-3xl">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Favorit Pro</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">Favorit Pro</h1>
+      <p className="mt-2 text-muted-foreground text-balance">
+        The brand sans. Favorit is a grotesk by{" "}
         <a
           href="https://abcdinamo.com/typefaces/favorit"
           target="_blank"
           rel="noreferrer"
-          className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+          className="font-medium text-foreground underline underline-offset-4"
         >
-          abcdinamo.com/typefaces/favorit
-        </a>
-      </div>
-      <p className="mt-2 text-muted-foreground text-balance">
-        The brand sans. Favorit is a grotesk by Dinamo with a deliberately
-        plain, almost technical posture — flat curves, even rhythm, no
-        flourish. It sets all interface, product, and marketing text, loaded as{" "}
+          Dinamo
+        </a>{" "}
+        with a deliberately plain, almost technical posture — flat curves,
+        even rhythm, no flourish. It sets all interface, product, and
+        marketing text, loaded as{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
           --font-sans
         </code>

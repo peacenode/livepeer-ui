@@ -40,21 +40,20 @@ const CODE_SAMPLE = `const stream = await livepeer.stream.create({
 export default function FavoritMonoPage() {
   return (
     <article className="max-w-3xl">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Favorit Mono</h1>
+      <h1 className="text-3xl font-semibold tracking-tight">Favorit Mono</h1>
+      <p className="mt-2 text-muted-foreground text-balance">
+        The brand mono. The monospaced cut of{" "}
         <a
           href="https://abcdinamo.com/typefaces/favorit"
           target="_blank"
           rel="noreferrer"
-          className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+          className="font-medium text-foreground underline underline-offset-4"
         >
-          abcdinamo.com/typefaces/favorit
-        </a>
-      </div>
-      <p className="mt-2 text-muted-foreground text-balance">
-        The brand mono. The monospaced cut of Favorit keeps the same skeleton
-        on a fixed pitch. It sets code, data, and technical annotation — every
-        code block, install command, and inline reference — loaded as{" "}
+          Favorit
+        </a>{" "}
+        keeps the same skeleton on a fixed pitch. It sets code, data, and
+        technical annotation — every code block, install command, and inline
+        reference — loaded as{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
           --font-mono
         </code>

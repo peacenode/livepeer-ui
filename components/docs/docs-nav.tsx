@@ -22,6 +22,7 @@ export function DocsNav({
         { title: "Introduction", href: "/docs" },
         { title: "Brand", href: "/docs/brand" },
         { title: "Assets", href: "/docs/assets" },
+        { title: "Colors", href: "/docs/colors" },
         { title: "Favorit Pro", href: "/docs/favorit-pro" },
         { title: "Favorit Mono", href: "/docs/favorit-mono" },
       ],
