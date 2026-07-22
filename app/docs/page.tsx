@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 
 import { CodeBlock } from "@/components/docs/code-block"
 import { InstallCommand } from "@/components/docs/install-command"
@@ -71,18 +70,6 @@ export default function DocsPage() {
         <InstallCommand url={registryItemUrl("theme")} />
       </div>
 
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Components</h2>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Each component page includes a live preview, the install command, and
-        the full source of the example.{" "}
-        <Link
-          href="/docs/components/accordion"
-          className="font-medium text-foreground underline underline-offset-4"
-        >
-          Browse the components
-        </Link>
-        .
-      </p>
     </article>
   )
 }
