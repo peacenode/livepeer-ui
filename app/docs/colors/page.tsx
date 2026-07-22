@@ -67,7 +67,7 @@ export default function ColorsPage() {
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Colors</h1>
       <p className="mt-2 text-muted-foreground">
-        Installed with the{" "}
+        Installed with{" "}
         <Link
           href="/docs#theme"
           className="font-medium text-foreground underline underline-offset-4"
