@@ -13,7 +13,6 @@ const STEPS = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "90
 const SCALES = [
   {
     name: "Neutral",
-    note: "The interface. Every theme token maps into this scale.",
     swatches: [
       "bg-neutral-50",
       "bg-neutral-100",
@@ -30,7 +29,6 @@ const SCALES = [
   },
   {
     name: "Emerald",
-    note: "The brand green — closest Tailwind scale to Livepeer green.",
     swatches: [
       "bg-emerald-50",
       "bg-emerald-100",
@@ -47,7 +45,6 @@ const SCALES = [
   },
   {
     name: "Sky",
-    note: "The brand blue — closest Tailwind scale to Livepeer blue.",
     swatches: [
       "bg-sky-50",
       "bg-sky-100",
@@ -78,7 +75,6 @@ export default function ColorsPage() {
         <ColorScale
           key={scale.name}
           name={scale.name}
-          note={scale.note}
           swatches={scale.swatches.map((className, index) => ({
             step: STEPS[index],
             className,

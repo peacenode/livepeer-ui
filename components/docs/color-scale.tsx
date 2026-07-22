@@ -50,19 +50,14 @@ function Swatch({ step, className }: { step: string; className: string }) {
 
 export function ColorScale({
   name,
-  note,
   swatches,
 }: {
   name: string
-  note: string
   swatches: { step: string; className: string }[]
 }) {
   return (
     <section className="mt-10">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="text-xl font-semibold tracking-tight">{name}</h2>
-        <p className="text-sm text-muted-foreground">{note}</p>
-      </div>
+      <h2 className="text-xl font-semibold tracking-tight">{name}</h2>
       <div className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-6 lg:grid-cols-11 lg:gap-2">
         {swatches.map((swatch) => (
           <Swatch key={swatch.step} step={swatch.step} className={swatch.className} />
