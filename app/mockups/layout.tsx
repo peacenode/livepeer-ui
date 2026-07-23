@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { LivepeerLockup } from "@/components/brand"
-import { GlobalSearch } from "@/components/mockups/global-search"
+import { PlatformMobileNav } from "@/components/mockups/platform-mobile-nav"
 import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
 
 export const metadata: Metadata = {
@@ -22,13 +22,11 @@ export default function MockupsLayout({
     <div className="relative flex min-h-dvh bg-background">
       <PlatformSidebar />
       <main className="min-w-0 flex-1">
-        <div className="flex items-center justify-between gap-4 px-6 pt-4 md:hidden">
+        <div className="flex items-center gap-3 px-4 pt-4 md:hidden">
+          <PlatformMobileNav />
           <Link href="/mockups" aria-label="Livepeer home" className="inline-flex">
             <LivepeerLockup className="h-4 w-auto" />
           </Link>
-          <div className="w-full max-w-xs">
-            <GlobalSearch shortcut={false} />
-          </div>
         </div>
         <div className="mx-auto w-full max-w-5xl px-6 py-8 md:px-10">
           {children}

@@ -8,7 +8,7 @@ import { GlobalSearch } from "@/components/mockups/global-search"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
-const items = [
+export const platformNavItems = [
   { title: "Home", href: "/mockups" },
   { title: "Compute", href: "/mockups/compute" },
   { title: "Inference", href: "/mockups/inference" },
@@ -30,7 +30,7 @@ export function PlatformSidebar() {
         <GlobalSearch />
       </div>
       <nav className="flex flex-col items-start gap-1 px-3">
-        {items.map((item) => (
+        {platformNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
