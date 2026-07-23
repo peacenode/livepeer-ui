@@ -19,7 +19,7 @@ export function PlatformSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="sticky top-0 flex h-dvh w-56 shrink-0 flex-col bg-background">
+    <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col bg-background md:flex">
       <div className="px-5 pt-6 pb-8">
         <Link href="/mockups" aria-label="Livepeer home" className="inline-flex">
           <LivepeerLockup className="h-4 w-auto" />
