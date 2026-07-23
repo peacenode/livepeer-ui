@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -18,76 +17,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { formatCompact, getOrchestrators, shortAddress } from "@/lib/livepeer"
 
 export const metadata: Metadata = {
   title: "Compute",
 }
 
-const stats = [
-  { label: "GPUs online", value: "24 / 26" },
-  { label: "Fleet utilization", value: "68%" },
-  { label: "Regions", value: "5" },
-]
+export default async function MockupComputePage() {
+  const orchestrators = await getOrchestrators()
+  const active = orchestrators.filter((orch) => orch.active)
+  const totalStake = orchestrators.reduce((sum, orch) => sum + orch.stakeLpt, 0)
+  const totalFees = orchestrators.reduce((sum, orch) => sum + orch.volumeUsd, 0)
 
-const nodes = [
-  {
-    id: "node-8f2a41",
-    gpu: "H100 80GB",
-    region: "us-west",
-    status: "Online",
-    utilization: 82,
-  },
-  {
-    id: "node-c19e03",
-    gpu: "H100 80GB",
-    region: "us-west",
-    status: "Online",
-    utilization: 74,
-  },
-  {
-    id: "node-77b2d8",
-    gpu: "A100 80GB",
-    region: "us-east",
-    status: "Online",
-    utilization: 61,
-  },
-  {
-    id: "node-3d90fc",
-    gpu: "A100 40GB",
-    region: "eu-central",
-    status: "Online",
-    utilization: 55,
-  },
-  {
-    id: "node-b64e17",
-    gpu: "RTX 4090",
-    region: "eu-central",
-    status: "Draining",
-    utilization: 12,
-  },
-  {
-    id: "node-04aa92",
-    gpu: "RTX 4090",
-    region: "ap-southeast",
-    status: "Offline",
-    utilization: 0,
-  },
-]
+  const stats = [
+    { label: "Active orchestrators", value: String(active.length) },
+    { label: "Total stake", value: `${formatCompact(totalStake)} LPT` },
+    { label: "Fees paid", value: `$${formatCompact(totalFees)}` },
+  ]
 
-function statusVariant(status: string) {
-  if (status === "Online") return "secondary" as const
-  if (status === "Draining") return "outline" as const
-  return "destructive" as const
-}
-
-export default function MockupComputePage() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="text-xl font-medium">Compute</h1>
           <p className="text-sm text-muted-foreground">
-            GPU capacity across your fleet.
+            Live orchestrators on the Livepeer network.
           </p>
         </div>
         <Button>Add capacity</Button>
@@ -105,41 +59,68 @@ export default function MockupComputePage() {
         ))}
       </div>
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Nodes</h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Node</TableHead>
-              <TableHead>GPU</TableHead>
-              <TableHead>Region</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-48">Utilization</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {nodes.map((node) => (
-              <TableRow key={node.id}>
-                <TableCell className="font-mono text-xs">{node.id}</TableCell>
-                <TableCell>{node.gpu}</TableCell>
-                <TableCell className="text-muted-foreground">
-                  {node.region}
-                </TableCell>
-                <TableCell>
-                  <Badge variant={statusVariant(node.status)}>{node.status}</Badge>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-3">
-                    <Progress value={node.utilization} className="flex-1" />
-                    <span className="w-8 text-right font-mono text-xs text-muted-foreground">
-                      {node.utilization}%
-                    </span>
-                  </div>
-                </TableCell>
+        <h2 className="text-sm font-medium">Orchestrators</h2>
+        {orchestrators.length === 0 ? (
+          <p className="rounded-md border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
+            Network data is unavailable right now.
+          </p>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Orchestrator</TableHead>
+                <TableHead>Service URI</TableHead>
+                <TableHead className="text-right">Stake</TableHead>
+                <TableHead className="text-right">Fees earned</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="w-44">Success rate</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {orchestrators.map((orch) => (
+                <TableRow key={orch.address}>
+                  <TableCell className="font-mono text-xs">
+                    {shortAddress(orch.address)}
+                  </TableCell>
+                  <TableCell className="max-w-48 truncate text-xs text-muted-foreground">
+                    {orch.serviceHost}
+                  </TableCell>
+                  <TableCell className="text-right font-mono text-xs">
+                    {formatCompact(orch.stakeLpt)} LPT
+                  </TableCell>
+                  <TableCell className="text-right font-mono text-xs">
+                    ${formatCompact(orch.volumeUsd)}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={orch.active ? "secondary" : "outline"}>
+                      {orch.active ? "Active" : "Inactive"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {orch.successRate === null ? (
+                      <span className="text-xs text-muted-foreground">—</span>
+                    ) : (
+                      <div className="flex items-center gap-3">
+                        <Progress
+                          value={orch.successRate * 100}
+                          className="flex-1"
+                        />
+                        <span className="w-10 text-right font-mono text-xs text-muted-foreground">
+                          {Math.round(orch.successRate * 100)}%
+                        </span>
+                      </div>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </div>
+      <p className="text-xs text-muted-foreground">
+        On-chain registry and performance leaderboard data, cached for 10
+        minutes.
+      </p>
     </div>
   )
 }
