@@ -25,7 +25,7 @@ export function PlatformSidebar() {
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
       </div>
-      <nav className="flex flex-col gap-1 px-3">
+      <nav className="flex flex-col items-start gap-1 px-3">
         {items.map((item) => (
           <Link
             key={item.href}
