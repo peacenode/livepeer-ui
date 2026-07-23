@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import Link from "next/link"
 
-import { LivepeerLockup } from "@/components/brand"
+import { LivepeerSymbol } from "@/components/brand"
 import { GlobalSearch } from "@/components/mockups/global-search"
 import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
 
@@ -28,7 +28,7 @@ export default function MockupsLayout({
             aria-label="Livepeer home"
             className="inline-flex md:hidden"
           >
-            <LivepeerLockup className="h-3.5 w-auto" />
+            <LivepeerSymbol className="h-4 w-auto" />
           </Link>
           <div className="flex w-full max-w-xs justify-end md:pointer-events-none md:absolute md:inset-x-0 md:top-4 md:max-w-none md:justify-center">
             <div className="w-full max-w-xs md:pointer-events-auto">
