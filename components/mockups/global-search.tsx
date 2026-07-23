@@ -12,13 +12,8 @@ import {
   ZapIcon,
 } from "lucide-react"
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { Kbd } from "@/components/ui/kbd"
+import { cn } from "@/lib/utils"
 
 const pages = [
   {
@@ -57,6 +52,8 @@ const actions = [
 
 export function GlobalSearch() {
   const router = useRouter()
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
   const [query, setQuery] = React.useState("")
 
@@ -64,16 +61,28 @@ export function GlobalSearch() {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
         event.preventDefault()
+        inputRef.current?.focus()
         setOpen(true)
       }
     }
+    function onPointerDown(event: PointerEvent) {
+      if (!containerRef.current?.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
     window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
+    document.addEventListener("pointerdown", onPointerDown)
+    return () => {
+      window.removeEventListener("keydown", onKeyDown)
+      document.removeEventListener("pointerdown", onPointerDown)
+    }
   }, [])
 
-  React.useEffect(() => {
-    if (!open) setQuery("")
-  }, [open])
+  function close() {
+    setOpen(false)
+    setQuery("")
+    inputRef.current?.blur()
+  }
 
   const matches = (text: string) =>
     text.toLowerCase().includes(query.trim().toLowerCase())
@@ -85,96 +94,97 @@ export function GlobalSearch() {
     (action) => matches(action.title) || matches(action.page)
   )
 
-  function go(href: string) {
-    setOpen(false)
-    router.push(href)
-  }
-
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger
-        render={
-          <button className="flex h-9 w-full max-w-xs items-center gap-2 rounded-md border border-input bg-background px-3 text-sm text-muted-foreground shadow-xs transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50" />
-        }
+    <div ref={containerRef} className="relative w-full">
+      <div
+        className={cn(
+          "relative z-50 flex h-9 items-center gap-2 px-3",
+          !open &&
+            "rounded-md border border-input bg-background shadow-xs transition-colors hover:bg-muted"
+        )}
       >
-        <SearchIcon className="size-4" />
-        <span>Search</span>
-        <Kbd className="ml-auto">⌘K</Kbd>
-      </DialogTrigger>
-      <DialogContent
-        showCloseButton={false}
-        className="top-24 max-w-lg translate-y-0 gap-0 p-0"
-      >
-        <DialogTitle className="sr-only">Search</DialogTitle>
-        <div className="flex items-center gap-3 border-b px-4">
-          <SearchIcon className="size-4 shrink-0 text-muted-foreground" />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                const first = pageResults[0] ?? actionResults[0]
-                if (first) go(first.href)
+        <SearchIcon className="size-4 shrink-0 text-muted-foreground" />
+        <input
+          ref={inputRef}
+          value={query}
+          role="combobox"
+          aria-expanded={open}
+          aria-label="Search"
+          onFocus={() => setOpen(true)}
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") close()
+            if (event.key === "Enter") {
+              const first = pageResults[0] ?? actionResults[0]
+              if (first) {
+                close()
+                router.push(first.href)
               }
-            }}
-            placeholder="Search pages and actions"
-            className="h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-          />
-        </div>
-        <div className="flex max-h-96 flex-col gap-4 overflow-y-auto p-3">
-          {pageResults.length > 0 && (
-            <div className="flex flex-col gap-2">
-              <span className="px-1 text-xs font-medium text-muted-foreground">
-                Pages
-              </span>
-              <div className="grid grid-cols-2 gap-2">
-                {pageResults.map((page) => (
+            }
+          }}
+          placeholder="Search"
+          className="h-full w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+        />
+        {!open && <Kbd>⌘K</Kbd>}
+      </div>
+      {open && (
+        <div className="absolute inset-x-0 top-0 z-40 rounded-xl bg-popover pt-9 shadow-lg ring-1 ring-foreground/10">
+          <div className="mx-3 border-t" />
+          <div className="flex max-h-96 flex-col gap-4 overflow-y-auto p-3">
+            {pageResults.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <span className="px-1 text-xs font-medium text-muted-foreground">
+                  Pages
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  {pageResults.map((page) => (
+                    <Link
+                      key={page.href}
+                      href={page.href}
+                      onClick={close}
+                      className="flex flex-col gap-3 rounded-lg border p-4 transition-colors hover:bg-muted"
+                    >
+                      <page.icon className="size-5" />
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-sm font-medium">{page.title}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {page.description}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {actionResults.length > 0 && (
+              <div className="flex flex-col gap-1">
+                <span className="px-1 text-xs font-medium text-muted-foreground">
+                  Actions
+                </span>
+                {actionResults.map((action) => (
                   <Link
-                    key={page.href}
-                    href={page.href}
-                    onClick={() => setOpen(false)}
-                    className="flex flex-col gap-3 rounded-lg border p-4 transition-colors hover:bg-muted"
+                    key={action.title}
+                    href={action.href}
+                    onClick={close}
+                    className="flex items-center gap-3 rounded-md px-2 py-2 text-sm transition-colors hover:bg-muted"
                   >
-                    <page.icon className="size-5" />
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-sm font-medium">{page.title}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {page.description}
-                      </span>
-                    </div>
+                    <CornerDownLeftIcon className="size-4 text-muted-foreground" />
+                    <span>{action.title}</span>
+                    <span className="ml-auto text-xs text-muted-foreground">
+                      {action.page}
+                    </span>
                   </Link>
                 ))}
               </div>
-            </div>
-          )}
-          {actionResults.length > 0 && (
-            <div className="flex flex-col gap-1">
-              <span className="px-1 text-xs font-medium text-muted-foreground">
-                Actions
-              </span>
-              {actionResults.map((action) => (
-                <Link
-                  key={action.title}
-                  href={action.href}
-                  onClick={() => setOpen(false)}
-                  className="group flex items-center gap-3 rounded-md px-2 py-2 text-sm transition-colors hover:bg-muted"
-                >
-                  <CornerDownLeftIcon className="size-4 text-muted-foreground" />
-                  <span>{action.title}</span>
-                  <span className="ml-auto text-xs text-muted-foreground">
-                    {action.page}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          )}
-          {pageResults.length === 0 && actionResults.length === 0 && (
-            <p className="px-1 py-6 text-center text-sm text-muted-foreground">
-              No results for &ldquo;{query}&rdquo;
-            </p>
-          )}
+            )}
+            {pageResults.length === 0 && actionResults.length === 0 && (
+              <p className="px-1 py-6 text-center text-sm text-muted-foreground">
+                No results for &ldquo;{query}&rdquo;
+              </p>
+            )}
+          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      )}
+    </div>
   )
 }
