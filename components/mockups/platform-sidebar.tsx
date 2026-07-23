@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { LivepeerLockup } from "@/components/brand"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
 const items = [
@@ -41,14 +41,8 @@ export function PlatformSidebar() {
           </Link>
         ))}
       </nav>
-      <div className="mt-auto flex items-center gap-3 px-5 py-5">
-        <Avatar className="size-9">
-          <AvatarFallback />
-        </Avatar>
-        <div className="flex flex-col text-sm leading-tight">
-          <span className="font-medium">Username</span>
-          <span className="text-muted-foreground">Organization</span>
-        </div>
+      <div className="mt-auto px-3 py-3">
+        <UserMenu />
       </div>
     </aside>
   )

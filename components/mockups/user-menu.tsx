@@ -1,0 +1,139 @@
+"use client"
+
+import * as React from "react"
+import {
+  BookOpenIcon,
+  Building2Icon,
+  CircleUserRoundIcon,
+  LifeBuoyIcon,
+  LogOutIcon,
+  MonitorIcon,
+  MoonIcon,
+  NotepadTextIcon,
+  SunIcon,
+} from "lucide-react"
+import { useTheme } from "next-themes"
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+
+const themes = [
+  { value: "system", label: "System theme", icon: MonitorIcon },
+  { value: "light", label: "Light theme", icon: SunIcon },
+  { value: "dark", label: "Dark theme", icon: MoonIcon },
+]
+
+export function UserMenu() {
+  const { theme, setTheme } = useTheme()
+  const [organization, setOrganization] = React.useState("personal")
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        render={
+          <button className="flex w-full items-center gap-3 rounded-md px-2 py-2 text-left transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" />
+        }
+      >
+        <Avatar className="size-9">
+          <AvatarFallback className="bg-foreground text-background">
+            P
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col text-sm leading-tight">
+          <span className="font-medium">Username</span>
+          <span className="text-muted-foreground">Organization</span>
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent side="top" sideOffset={8} className="w-60">
+        <div className="flex flex-col gap-2 px-2 pt-1.5 pb-2">
+          <span className="truncate text-sm text-muted-foreground">
+            username@example.com
+          </span>
+          <ToggleGroup
+            value={[theme ?? "system"]}
+            onValueChange={(value) => {
+              if (value[0]) setTheme(value[0])
+            }}
+            className="rounded-lg bg-muted p-0.5"
+          >
+            {themes.map(({ value, label, icon: Icon }) => (
+              <ToggleGroupItem
+                key={value}
+                value={value}
+                size="sm"
+                aria-label={label}
+                className="flex-1 data-[state=on]:bg-background data-[state=on]:shadow-xs"
+              >
+                <Icon />
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="gap-3">
+            <Avatar className="size-8">
+              <AvatarFallback className="bg-foreground text-xs text-background">
+                P
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col leading-tight">
+              <span className="font-medium">Personal</span>
+              <span className="text-xs text-muted-foreground">Organization</span>
+            </div>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuRadioGroup
+              value={organization}
+              onValueChange={setOrganization}
+            >
+              <DropdownMenuRadioItem value="personal">
+                Personal
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="acme">Acme Inc</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Building2Icon />
+          Organization settings
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <CircleUserRoundIcon />
+          Profile settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <BookOpenIcon />
+          Developer docs
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <NotepadTextIcon />
+          Terms &amp; policies
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <LifeBuoyIcon />
+          Help
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <LogOutIcon />
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
