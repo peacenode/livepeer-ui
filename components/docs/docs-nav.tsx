@@ -34,6 +34,17 @@ export function DocsNav({
         href: `/docs/components/${component.name}`,
       })),
     },
+    {
+      title: "Mockups",
+      external: true,
+      items: [
+        { title: "Home", href: "/mockups" },
+        { title: "Compute", href: "/mockups/compute" },
+        { title: "Inference", href: "/mockups/inference" },
+        { title: "Billing", href: "/mockups/billing" },
+        { title: "API", href: "/mockups/api" },
+      ],
+    },
   ]
 
   return (
@@ -46,6 +57,7 @@ export function DocsNav({
               key={item.href}
               href={item.href}
               onClick={onNavigate}
+              target={group.external ? "_blank" : undefined}
               className={cn(
                 "rounded-md px-2 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground",
                 pathname === item.href && "bg-accent font-medium text-accent-foreground"
