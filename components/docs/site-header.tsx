@@ -12,17 +12,6 @@ export function SiteHeader() {
         <Link href="/" aria-label="Livepeer UI home" className="flex items-center">
           <LivepeerLockup className="h-3.5 w-auto" />
         </Link>
-        <nav className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Link href="/docs" className="transition-colors hover:text-foreground">
-            Docs
-          </Link>
-          <Link
-            href="/docs/components/accordion"
-            className="transition-colors hover:text-foreground"
-          >
-            Components
-          </Link>
-        </nav>
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
         </div>

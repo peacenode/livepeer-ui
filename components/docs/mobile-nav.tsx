@@ -24,7 +24,7 @@ export function MobileNav() {
           <Button variant="ghost" size="icon-sm" className="md:hidden" />
         }
       >
-        <MenuIcon />
+        <MenuIcon strokeWidth={2.5} />
         <span className="sr-only">Open navigation</span>
       </SheetTrigger>
       <SheetContent side="left" className="w-72">
