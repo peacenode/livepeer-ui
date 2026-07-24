@@ -18,9 +18,11 @@ export default async function PlaybooksLibraryPage() {
           <h1 className="text-3xl font-medium text-balance sm:text-4xl">
             Playbooks
           </h1>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Production-ready recipes for agents. Choose a result, review the
-            workflow, and run it with Runner.
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Playbooks are step-by-step production recipes for AI agents. Each
+            one brings together the prompts, models, inputs, and workflow needed
+            to produce a specific result. Choose one, customize the brief, then
+            copy it into your agent to run.
           </p>
         </div>
         <div className="mt-8">
