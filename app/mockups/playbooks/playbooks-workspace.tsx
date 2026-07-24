@@ -317,10 +317,11 @@ export function PlaybooksWorkspace() {
         <div className="relative z-10 mx-auto flex w-full justify-center px-4 sm:px-6">
           <div className="flex w-full max-w-xl flex-col items-center text-center">
             <h1 className="text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
-              Core infrastructure for the next generation of AI and media.
+              Next generation media creation.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Livepeer is the open inference and compute platform.
+              Livepeer is the open inference and compute platform. Install the
+              plugin today and get started in your agent of choice.
             </p>
             <div className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-foreground px-4 py-3 text-left text-background">
               <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
