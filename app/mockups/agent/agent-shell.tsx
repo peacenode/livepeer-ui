@@ -2,12 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  FolderIcon,
-  Grid2X2Icon,
-  PersonStandingIcon,
-  PlusIcon,
-} from "lucide-react"
+import { ApertureIcon, FolderIcon, Grid2X2Icon, PlusIcon } from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -23,7 +18,7 @@ const navItems = [
   {
     href: "/mockups/agent/characters",
     label: "Characters",
-    icon: PersonStandingIcon,
+    icon: ApertureIcon,
   },
   {
     href: "/mockups/agent/projects",
@@ -67,7 +62,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                   active && "bg-muted font-medium text-foreground"
                 )}
               >
-                <item.icon className="size-4 shrink-0" />
+                <item.icon className="size-6 shrink-0" />
                 <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
                   {item.label}
                 </span>
@@ -105,7 +100,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                 active && "font-medium text-foreground"
               )}
             >
-              <item.icon className="size-4" />
+              <item.icon className="size-6" />
               <span className="truncate">{item.label}</span>
             </Link>
           )
