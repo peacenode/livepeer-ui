@@ -23,6 +23,13 @@ export type PlaybookDocument = {
   budget?: string
   reliability?: string
   caps: string[]
+  markdown: string
+  brief: {
+    yamlBlock: string
+    fields: { name: string; defaultValue: string; hint: string }[]
+    fenceStart: number
+    fenceEnd: number
+  } | null
   intro: string
   sections: { title: string; body: string }[]
   sourceUrl: string
@@ -120,6 +127,32 @@ export async function getPlaybookDocument(
     : []
   const heading = body.match(/^#\s+(.+)$/m)?.[1] ?? slug
   const intro = body.match(/^>\s+(.+(?:\n>\s+.*)*)/m)?.[1] ?? ""
+  const fenceStart = markdown.indexOf(
+    "```yaml",
+    frontmatterMatch?.[0].length ?? 0
+  )
+  const fenceEnd =
+    fenceStart === -1 ? -1 : markdown.indexOf("```", fenceStart + 7)
+  const yamlBlock =
+    fenceStart === -1 || fenceEnd === -1
+      ? ""
+      : markdown.slice(fenceStart + 7, fenceEnd).trim()
+  const briefFields = yamlBlock.split("\n").flatMap((line) => {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith("#")) return []
+    const match = /^([a-zA-Z_][\w]*)\s*:(.*)$/.exec(trimmed)
+    if (!match) return []
+    const rest = match[2]
+    const hashIndex = rest.indexOf("#")
+    return [
+      {
+        name: match[1],
+        defaultValue:
+          hashIndex === -1 ? rest.trim() : rest.slice(0, hashIndex).trim(),
+        hint: hashIndex === -1 ? "" : rest.slice(hashIndex + 1).trim(),
+      },
+    ]
+  })
   const sectionMatches = [...body.matchAll(/^##\s+(.+)$/gm)]
   const sections = sectionMatches.map((section, index) => {
     const start = (section.index ?? 0) + section[0].length
@@ -141,7 +174,16 @@ export async function getPlaybookDocument(
     budget: parseScalar(fields.get("budget_usd")),
     reliability: parseScalar(fields.get("reliability"))?.split("#")[0].trim(),
     caps,
-    intro: intro.replace(/^>\s+/gm, "").replace(/\*\*/g, "").trim(),
+    markdown,
+    brief:
+      yamlBlock && briefFields.length
+        ? { yamlBlock, fields: briefFields, fenceStart, fenceEnd }
+        : null,
+    intro: intro
+      .replace(/^>\s+/gm, "")
+      .replace(/\*\*/g, "")
+      .replace(/\bBRIEF\b/g, "details")
+      .trim(),
     sections,
     sourceUrl,
   }

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../../daydream-source"
+import { PlaybookBriefForm } from "../../playbook-brief-form"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -65,7 +66,13 @@ function inline(value: string): ReactNode[] {
   return nodes
 }
 
-function MarkdownBody({ body }: { body: string }) {
+function MarkdownBody({
+  body,
+  briefYaml,
+}: {
+  body: string
+  briefYaml?: string
+}) {
   const chunks = body.split(/(```[\s\S]*?```)/g).filter(Boolean)
 
   return (
@@ -75,6 +82,9 @@ function MarkdownBody({ body }: { body: string }) {
           const firstBreak = chunk.indexOf("\n")
           const language = chunk.slice(3, firstBreak).trim()
           const code = chunk.slice(firstBreak + 1, -3).trim()
+          if (language === "yaml" && briefYaml && code === briefYaml) {
+            return null
+          }
           return (
             <div
               key={chunkIndex}
@@ -273,6 +283,13 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
         ))}
       </div>
 
+      <div className="mt-12">
+        <PlaybookBriefForm
+          brief={playbook.brief}
+          markdown={playbook.markdown}
+        />
+      </div>
+
       <div className="mt-14 grid gap-12 lg:grid-cols-[14rem_minmax(0,1fr)]">
         <aside className="lg:sticky lg:top-8 lg:self-start">
           <p className="text-xs font-medium">On this page</p>
@@ -312,7 +329,10 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 {section.title}
               </h2>
               <div className="mt-5">
-                <MarkdownBody body={section.body} />
+                <MarkdownBody
+                  body={section.body.replace(/\bBRIEF\b/g, "details")}
+                  briefYaml={playbook.brief?.yamlBlock}
+                />
               </div>
             </section>
           ))}
