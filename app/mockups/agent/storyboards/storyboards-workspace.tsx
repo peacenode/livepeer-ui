@@ -160,12 +160,7 @@ export function StoryboardsWorkspace() {
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
-            <div>
-              <h1 className="text-xl font-medium">Storyboards</h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Image groups in upload order
-              </p>
-            </div>
+            <h1 className="text-xl font-medium">Storyboards</h1>
             <Button size="sm" onClick={() => setIsUploadOpen(true)}>
               <UploadIcon />
               Upload images
@@ -173,7 +168,7 @@ export function StoryboardsWorkspace() {
           </header>
 
           {batches.map((batch) => (
-            <section key={batch.id} className="border-t py-6 first:border-t-0">
+            <section key={batch.id} className="py-6">
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 {editingId === batch.id ? (
                   <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -241,32 +236,38 @@ export function StoryboardsWorkspace() {
                       )
                     }}
                     className={cn(
-                      "relative aspect-square cursor-grab overflow-hidden rounded-md bg-muted active:cursor-grabbing",
-                      draggedImage?.batchId === batch.id &&
-                        draggedImage.imageId === imageId &&
-                        "opacity-40"
+                      "relative aspect-square cursor-grab active:cursor-grabbing"
                     )}
                   >
-                    <Image
-                      src={sampleImage}
-                      alt=""
-                      fill
+                    <div
                       className={cn(
-                        "object-cover",
-                        imageId % 4 === 1 && "hue-rotate-15",
-                        imageId % 4 === 2 && "saturate-50",
-                        imageId % 4 === 3 && "contrast-125"
+                        "absolute inset-0 overflow-hidden rounded-md bg-muted",
+                        draggedImage?.batchId === batch.id &&
+                          draggedImage.imageId === imageId &&
+                          "opacity-40"
                       )}
-                    />
+                    >
+                      <Image
+                        src={sampleImage}
+                        alt=""
+                        fill
+                        className={cn(
+                          "object-cover",
+                          imageId % 4 === 1 && "hue-rotate-15",
+                          imageId % 4 === 2 && "saturate-50",
+                          imageId % 4 === 3 && "contrast-125"
+                        )}
+                      />
+                    </div>
                     {dropTarget?.batchId === batch.id &&
                       dropTarget.imageId === imageId &&
                       draggedImage?.imageId !== imageId && (
                         <span
                           className={cn(
-                            "pointer-events-none absolute inset-y-1 z-10 w-0.5 rounded-full bg-foreground",
+                            "pointer-events-none absolute inset-y-0 z-20 w-0.5 rounded-full bg-foreground",
                             dropTarget.position === "before"
-                              ? "left-0"
-                              : "right-0"
+                              ? "-left-1"
+                              : "-right-1"
                           )}
                         />
                       )}
