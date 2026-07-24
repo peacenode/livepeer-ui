@@ -173,11 +173,13 @@ export default function MockupHomePage() {
         <h2 className="text-sm font-medium">Recent activity</h2>
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>Event</TableHead>
-              <TableHead>Detail</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Time</TableHead>
+            <TableRow className="hover:bg-transparent">
+              <TableHead className="text-muted-foreground">Event</TableHead>
+              <TableHead className="text-muted-foreground">Detail</TableHead>
+              <TableHead className="text-muted-foreground">Status</TableHead>
+              <TableHead className="text-right text-muted-foreground">
+                Time
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
