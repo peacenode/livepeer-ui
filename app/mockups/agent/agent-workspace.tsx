@@ -321,8 +321,8 @@ export function AgentWorkspace() {
           >
             <InputGroup
               className={cn(
-                "rounded-t-none! rounded-b-3xl! border border-t-0 border-black bg-black text-white shadow-xl transition-colors has-[[data-slot=input-group-control]:focus-visible]:border-black! has-[[data-slot=input-group-control]:focus-visible]:ring-0!",
-                isDragging && "bg-black"
+                "rounded-t-none! rounded-b-3xl! border border-t-0 border-background bg-muted shadow-xl transition-colors has-[[data-slot=input-group-control]:focus-visible]:border-background! has-[[data-slot=input-group-control]:focus-visible]:ring-0!",
+                isDragging && "bg-muted"
               )}
             >
               {sources.length > 0 && (
@@ -376,7 +376,7 @@ export function AgentWorkspace() {
                     : "Describe an image, scene, storyboard, or character..."
                 }
                 aria-label="Creation prompt"
-                className="min-h-28 px-4 pt-4 text-base text-white caret-white placeholder:text-white/50 md:text-base"
+                className="min-h-28 px-4 pt-4 text-base md:text-base"
                 onKeyDown={(event) => {
                   if (event.key === "Enter" && !event.shiftKey) {
                     event.preventDefault()
@@ -392,7 +392,6 @@ export function AgentWorkspace() {
                   <InputGroupButton
                     size="icon-sm"
                     aria-label="Attach images"
-                    className="text-white hover:bg-white/10 hover:text-white"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <PaperclipIcon />
@@ -400,7 +399,6 @@ export function AgentWorkspace() {
                   <InputGroupButton
                     size="icon-sm"
                     aria-label="Attach a folder"
-                    className="text-white hover:bg-white/10 hover:text-white"
                     onClick={() => folderInputRef.current?.click()}
                   >
                     <FolderOpenIcon />
@@ -408,7 +406,7 @@ export function AgentWorkspace() {
                   <DropdownMenu>
                     <DropdownMenuTrigger
                       render={
-                        <InputGroupButton className="max-w-36 min-w-0 px-2 text-white hover:bg-white/10 hover:text-white" />
+                        <InputGroupButton className="max-w-36 min-w-0 px-2" />
                       }
                     >
                       <InputGroupText className="truncate text-xs">
@@ -436,7 +434,6 @@ export function AgentWorkspace() {
                   size="icon-sm"
                   aria-label="Generate"
                   disabled={!prompt.trim() || isGenerating}
-                  className="bg-white text-black hover:bg-white/80"
                 >
                   {isGenerating ? (
                     <RotateCwIcon className="animate-spin" />
