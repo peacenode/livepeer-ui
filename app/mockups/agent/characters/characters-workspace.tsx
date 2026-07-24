@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { imageRowRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const characterProperties = [
@@ -190,7 +191,7 @@ export function CharactersWorkspace() {
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
-                {character.images.map((imageId) => (
+                {character.images.map((imageId, index) => (
                   <button
                     type="button"
                     key={imageId}
@@ -201,7 +202,10 @@ export function CharactersWorkspace() {
                         imageId,
                       })
                     }
-                    className="group relative aspect-square overflow-hidden rounded-md bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className={cn(
+                      "group relative aspect-square overflow-hidden bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                      imageRowRadius(index)
+                    )}
                   >
                     <Image
                       src={sampleImage}
@@ -216,7 +220,12 @@ export function CharactersWorkspace() {
                     />
                   </button>
                 ))}
-                <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+                <label
+                  className={cn(
+                    "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                    imageRowRadius(character.images.length, true)
+                  )}
+                >
                   <PlusIcon className="size-4" />
                   <span className="sr-only">
                     Add reference images to {character.name}

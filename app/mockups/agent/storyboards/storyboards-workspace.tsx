@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { imageRowRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
@@ -216,7 +217,7 @@ export function StoryboardsWorkspace() {
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
-                {batch.images.map((imageId) => (
+                {batch.images.map((imageId, index) => (
                   <div
                     key={imageId}
                     draggable
@@ -239,12 +240,13 @@ export function StoryboardsWorkspace() {
                       )
                     }}
                     className={cn(
-                      "relative aspect-square cursor-grab active:cursor-grabbing"
+                      "relative aspect-square cursor-grab active:cursor-grabbing",
+                      imageRowRadius(index)
                     )}
                   >
                     <div
                       className={cn(
-                        "absolute inset-0 overflow-hidden rounded-md bg-muted",
+                        "absolute inset-0 overflow-hidden rounded-[inherit] bg-muted",
                         draggedImage?.batchId === batch.id &&
                           draggedImage.imageId === imageId &&
                           "opacity-40"
@@ -276,7 +278,12 @@ export function StoryboardsWorkspace() {
                       )}
                   </div>
                 ))}
-                <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+                <label
+                  className={cn(
+                    "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                    imageRowRadius(batch.images.length, true)
+                  )}
+                >
                   <PlusIcon className="size-4" />
                   <span className="sr-only">Add images to {batch.name}</span>
                   <input

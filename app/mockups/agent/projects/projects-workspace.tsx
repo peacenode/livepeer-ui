@@ -38,6 +38,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
+import { imageRowRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
@@ -1027,7 +1028,10 @@ function ProjectImageCollections({
               {Array.from({ length: item.count }, (_, index) => (
                 <div
                   key={index}
-                  className="relative aspect-square overflow-hidden rounded-md bg-muted"
+                  className={cn(
+                    "relative aspect-square overflow-hidden bg-muted",
+                    imageRowRadius(index)
+                  )}
                 >
                   <Image
                     src={sampleImage}
@@ -1042,7 +1046,12 @@ function ProjectImageCollections({
                   />
                 </div>
               ))}
-              <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+              <label
+                className={cn(
+                  "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                  imageRowRadius(item.count, true)
+                )}
+              >
                 <PlusIcon className="size-4" />
                 <span className="sr-only">Add images to {item.name}</span>
                 <input
