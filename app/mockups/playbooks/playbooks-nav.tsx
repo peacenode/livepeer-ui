@@ -45,7 +45,7 @@ export function PlaybooksNav() {
         href="https://github.com/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-black"
         aria-label="Livepeer on GitHub"
         title="GitHub"
       >
@@ -55,7 +55,7 @@ export function PlaybooksNav() {
         href="https://discord.gg/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-black"
         aria-label="Join Livepeer on Discord"
         title="Discord"
       >
