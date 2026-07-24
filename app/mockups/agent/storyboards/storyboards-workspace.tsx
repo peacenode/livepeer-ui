@@ -157,21 +157,21 @@ export function StoryboardsWorkspace() {
 
   return (
     <main className="flex h-[calc(100dvh-4rem)] flex-col overflow-hidden md:h-dvh">
-      <header className="flex shrink-0 items-center justify-between gap-4 px-4 py-4 sm:px-6">
-        <div>
-          <h1 className="text-xl font-medium">Storyboards</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Image groups in upload order
-          </p>
-        </div>
-        <Button size="sm" onClick={() => setIsUploadOpen(true)}>
-          <UploadIcon />
-          Upload images
-        </Button>
-      </header>
-
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+          <header className="flex items-center justify-between gap-4 py-4">
+            <div>
+              <h1 className="text-xl font-medium">Storyboards</h1>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Image groups in upload order
+              </p>
+            </div>
+            <Button size="sm" onClick={() => setIsUploadOpen(true)}>
+              <UploadIcon />
+              Upload images
+            </Button>
+          </header>
+
           {batches.map((batch) => (
             <section key={batch.id} className="border-t py-6 first:border-t-0">
               <div className="mb-4 flex flex-wrap items-center gap-3">
