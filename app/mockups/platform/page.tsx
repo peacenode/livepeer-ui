@@ -1,6 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { CheckIcon, ChevronRightIcon, CircleDashedIcon } from "lucide-react"
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  BoxIcon,
+  CheckIcon,
+  ChevronRightIcon,
+  CircleDashedIcon,
+  CpuIcon,
+} from "lucide-react"
 
 import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
 import { PlatformPage } from "@/components/mockups/platform-page"
@@ -147,6 +155,61 @@ export default function MockupHomePage() {
           <LivepeerSymbol3D />
         </div>
       </Card>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <a
+          href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
+          target="_blank"
+          rel="noreferrer"
+          className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        >
+          <Card className="h-full min-h-56 transition-colors group-hover:bg-accent">
+            <CardHeader className="flex h-full flex-col justify-between">
+              <CpuIcon
+                className="size-6 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <div className="flex items-end justify-between gap-6">
+                <div className="flex max-w-sm flex-col gap-2">
+                  <CardTitle className="text-xl">Run an Orchestrator</CardTitle>
+                  <CardDescription>
+                    Provide compute to the network and earn service fees and
+                    protocol rewards.
+                  </CardDescription>
+                </div>
+                <ArrowUpRightIcon
+                  className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </div>
+            </CardHeader>
+          </Card>
+        </a>
+        <Link
+          href="/mockups/platform/inference"
+          className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        >
+          <Card className="h-full min-h-56 transition-colors group-hover:bg-accent">
+            <CardHeader className="flex h-full flex-col justify-between">
+              <BoxIcon
+                className="size-6 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <div className="flex items-end justify-between gap-6">
+                <div className="flex max-w-sm flex-col gap-2">
+                  <CardTitle className="text-xl">Create a container</CardTitle>
+                  <CardDescription>
+                    Package a model or pipeline and deploy it for inference.
+                  </CardDescription>
+                </div>
+                <ArrowRightIcon
+                  className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </div>
+            </CardHeader>
+          </Card>
+        </Link>
+      </div>
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
