@@ -56,10 +56,10 @@ export function OrchestratorTable({
         <TableBody>
           {visibleItems.map((orchestrator) => (
             <TableRow key={orchestrator.address}>
-              <TableCell className="max-w-44 truncate font-medium">
+              <TableCell className="font-identifier max-w-44 truncate font-medium">
                 {orchestrator.name}
               </TableCell>
-              <TableCell className="font-mono text-xs text-muted-foreground">
+              <TableCell className="font-identifier font-mono text-xs text-muted-foreground">
                 {shortAddress(orchestrator.address)}
               </TableCell>
               <TableCell className="text-right text-xs tabular-nums">

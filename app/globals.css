@@ -144,3 +144,12 @@
     font-optical-sizing: auto;
   }
 }
+
+@layer utilities {
+  .font-identifier {
+    font-feature-settings:
+      "liga" 0,
+      "calt" 0;
+    font-variant-ligatures: none;
+  }
+}
