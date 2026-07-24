@@ -35,11 +35,8 @@ function ReliabilityStars({ value }: { value: string }) {
         const fill = Math.min(1, Math.max(0, score - index)) * 100
 
         return (
-          <span
-            key={index}
-            className="relative size-3.5 text-muted-foreground/30"
-          >
-            <StarIcon className="size-3.5 fill-current" strokeWidth={1.5} />
+          <span key={index} className="relative size-3.5 text-muted-foreground">
+            <StarIcon className="size-3.5" strokeWidth={1.5} />
             <span
               className="absolute inset-0 overflow-hidden text-foreground"
               style={{ width: `${fill}%` }}
