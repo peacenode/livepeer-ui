@@ -68,19 +68,19 @@ export function PlaybooksWorkspace() {
               size="lg"
               variant="secondary"
               nativeButton={false}
-              render={<Link href="/mockups/playbooks/library" />}
-              className="h-12 rounded-sm border-foreground/10 px-5"
-            >
-              Browse Playbooks
-            </Button>
-            <Button
-              size="lg"
-              variant="secondary"
-              nativeButton={false}
               render={<Link href="/mockups/playbooks/install" />}
               className="h-12 rounded-sm border-foreground/10 px-5"
             >
               Get Runner
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              nativeButton={false}
+              render={<Link href="/mockups/playbooks/library" />}
+              className="h-12 rounded-sm bg-background/60 px-5"
+            >
+              Browse Playbooks
             </Button>
           </div>
         </div>
