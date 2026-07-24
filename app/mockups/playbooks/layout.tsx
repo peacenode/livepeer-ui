@@ -21,7 +21,7 @@ export default function PlaybooksLayout({
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <header className="absolute inset-x-0 top-0 z-20">
-        <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6">
+        <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <Link
             href="/mockups/playbooks"
             className="flex items-center gap-3"
