@@ -1,9 +1,12 @@
 import type { Metadata } from "next"
+import Link from "next/link"
+import { BoxIcon, CheckIcon, ChevronRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -48,6 +51,24 @@ const stats = [
   },
 ]
 
+const getStartedSteps = [
+  {
+    label: "Add credits",
+    href: "/mockups/platform/billing",
+    complete: true,
+  },
+  {
+    label: "Create an API key",
+    href: "/mockups/platform/api",
+    complete: true,
+  },
+  {
+    label: "Test containers",
+    href: "/mockups/platform/inference",
+    complete: false,
+  },
+]
+
 const activity = [
   {
     event: "Pipeline deployed",
@@ -84,6 +105,38 @@ const activity = [
 export default function MockupHomePage() {
   return (
     <PlatformPage title="Home">
+      <Card>
+        <CardHeader>
+          <CardTitle>Get started</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ol className="flex max-w-xl flex-col">
+            {getStartedSteps.map((step, index) => (
+              <li key={step.label}>
+                <Link
+                  href={step.href}
+                  className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-background/60"
+                >
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-background">
+                    {step.complete ? (
+                      <CheckIcon className="size-4" aria-hidden="true" />
+                    ) : (
+                      <BoxIcon className="size-4" aria-hidden="true" />
+                    )}
+                  </span>
+                  <span className="min-w-0 flex-1 font-medium">
+                    {index + 1}. {step.label}
+                  </span>
+                  <ChevronRightIcon
+                    className="size-4 shrink-0 text-muted-foreground transition-transform group-hover/step:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </CardContent>
+      </Card>
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric" className="aspect-square">
