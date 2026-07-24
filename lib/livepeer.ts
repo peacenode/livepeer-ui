@@ -19,6 +19,11 @@ export type Orchestrator = {
   successRate: number | null
 }
 
+export type OrchestratorPage = {
+  orchestrators: Orchestrator[]
+  nextCursor: string | null
+}
+
 type RawOrchestrator = {
   address: string
   display_name?: string
@@ -51,20 +56,34 @@ export async function getNetworkStats(): Promise<NetworkStats | null> {
   }
 }
 
-export async function getOrchestrators(): Promise<Orchestrator[]> {
+export async function getOrchestratorsPage({
+  cursor,
+  limit = 50,
+}: {
+  cursor?: string
+  limit?: number
+} = {}): Promise<OrchestratorPage | null> {
   try {
+    const params = new URLSearchParams({ limit: String(limit) })
+    if (cursor) params.set("cursor", cursor)
+
     const [orchRes, statsRes] = await Promise.all([
-      fetch(`${REGISTRY_URL}/orchestrators`, { next: { revalidate: 600 } }),
+      fetch(`${REGISTRY_URL}/orchestrators?${params}`, {
+        next: { revalidate: 600 },
+      }),
       fetch(LEADERBOARD_URL, { next: { revalidate: 600 } }),
     ])
-    if (!orchRes.ok) return []
-    const raw: { data: RawOrchestrator[] } = await orchRes.json()
+    if (!orchRes.ok) return null
+    const raw: {
+      data: RawOrchestrator[]
+      meta?: { next_cursor?: string | null }
+    } = await orchRes.json()
     const stats: Record<string, RegionStats> = statsRes.ok
       ? await statsRes.json()
       : {}
 
-    return (raw.data ?? [])
-      .map((orch) => {
+    return {
+      orchestrators: (raw.data ?? []).map((orch) => {
         const regions = Object.values(stats[orch.address.toLowerCase()] ?? {})
         const successRate =
           regions.length > 0
@@ -80,12 +99,11 @@ export async function getOrchestrators(): Promise<Orchestrator[]> {
           active: Boolean(orch.is_active),
           successRate,
         }
-      })
-      .sort(
-        (a, b) => Number(b.active) - Number(a.active) || b.stakeLpt - a.stakeLpt
-      )
+      }),
+      nextCursor: raw.meta?.next_cursor ?? null,
+    }
   } catch {
-    return []
+    return null
   }
 }
 

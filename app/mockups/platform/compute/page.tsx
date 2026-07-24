@@ -12,7 +12,7 @@ import {
 import {
   formatCompact,
   getNetworkStats,
-  getOrchestrators,
+  getOrchestratorsPage,
 } from "@/lib/livepeer"
 
 export const metadata: Metadata = {
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
 }
 
 export default async function MockupComputePage() {
-  const [network, orchestrators] = await Promise.all([
+  const [network, orchestratorPage] = await Promise.all([
     getNetworkStats(),
-    getOrchestrators(),
+    getOrchestratorsPage(),
   ])
 
   const stats = [
@@ -85,7 +85,10 @@ export default async function MockupComputePage() {
           </Card>
         ))}
       </div>
-      <OrchestratorTable orchestrators={orchestrators} />
+      <OrchestratorTable
+        orchestrators={orchestratorPage?.orchestrators ?? []}
+        initialCursor={orchestratorPage?.nextCursor ?? null}
+      />
       <p className="text-xs text-muted-foreground">
         On-chain registry and performance leaderboard data, cached for 10
         minutes.

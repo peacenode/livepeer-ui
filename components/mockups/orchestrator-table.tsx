@@ -1,5 +1,7 @@
 "use client"
 
+import * as React from "react"
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -11,12 +13,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useProgressiveList } from "@/hooks/use-progressive-list"
-import { formatCompact, shortAddress, type Orchestrator } from "@/lib/livepeer"
+import {
+  formatCompact,
+  shortAddress,
+  type Orchestrator,
+  type OrchestratorPage,
+} from "@/lib/livepeer"
 
 type OrchestratorTableProps = {
   orchestrators: Orchestrator[]
-  pageSize?: number
+  initialCursor: string | null
 }
 
 function LiteralAddress({ value }: { value: string }) {
@@ -32,18 +38,63 @@ function LiteralAddress({ value }: { value: string }) {
 
 export function OrchestratorTable({
   orchestrators,
-  pageSize = 20,
+  initialCursor,
 }: OrchestratorTableProps) {
-  const {
-    visibleItems,
-    visibleCount,
-    totalCount,
-    hasMore,
-    loadMore,
-    sentinelRef,
-  } = useProgressiveList({ items: orchestrators, pageSize })
+  const [rows, setRows] = React.useState(orchestrators)
+  const [nextCursor, setNextCursor] = React.useState(initialCursor)
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(false)
+  const sentinelRef = React.useRef<HTMLDivElement>(null)
+  const cursorInFlight = React.useRef<string | null>(null)
 
-  if (totalCount === 0) {
+  const loadMore = React.useCallback(async () => {
+    if (!nextCursor || loading || cursorInFlight.current === nextCursor) return
+
+    cursorInFlight.current = nextCursor
+    setLoading(true)
+    setError(false)
+
+    try {
+      const response = await fetch(
+        `/api/orchestrators?cursor=${encodeURIComponent(nextCursor)}`
+      )
+      if (!response.ok) throw new Error("Unable to load orchestrators.")
+
+      const page: OrchestratorPage = await response.json()
+      setRows((current) => {
+        const knownAddresses = new Set(current.map((item) => item.address))
+        return [
+          ...current,
+          ...page.orchestrators.filter(
+            (item) => !knownAddresses.has(item.address)
+          ),
+        ]
+      })
+      setNextCursor(page.nextCursor)
+    } catch {
+      setError(true)
+    } finally {
+      cursorInFlight.current = null
+      setLoading(false)
+    }
+  }, [loading, nextCursor])
+
+  React.useEffect(() => {
+    const sentinel = sentinelRef.current
+    if (!sentinel || !nextCursor || error) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) void loadMore()
+      },
+      { rootMargin: "400px 0px" }
+    )
+
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [error, loadMore, nextCursor])
+
+  if (rows.length === 0) {
     return (
       <p className="rounded-md border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
         Network data is unavailable right now.
@@ -73,7 +124,7 @@ export function OrchestratorTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {visibleItems.map((orchestrator) => (
+          {rows.map((orchestrator) => (
             <TableRow key={orchestrator.address}>
               <TableCell className="font-identifier max-w-44 truncate font-medium">
                 <LiteralAddress value={orchestrator.name} />
@@ -116,11 +167,15 @@ export function OrchestratorTable({
         className="flex min-h-12 items-center justify-between gap-4 pt-2"
       >
         <p className="text-xs text-muted-foreground" aria-live="polite">
-          Showing {visibleCount} of {totalCount}
+          {loading
+            ? `Loading after ${rows.length} orchestrators…`
+            : nextCursor
+              ? `${rows.length} orchestrators loaded`
+              : `End of registry · ${rows.length} orchestrators`}
         </p>
-        {hasMore && (
-          <Button variant="outline" size="sm" onClick={loadMore}>
-            Load {Math.min(pageSize, totalCount - visibleCount)} more
+        {error && (
+          <Button variant="outline" size="sm" onClick={() => void loadMore()}>
+            Try again
           </Button>
         )}
       </div>
