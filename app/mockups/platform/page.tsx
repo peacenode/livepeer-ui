@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { BoxIcon, CheckIcon, ChevronRightIcon } from "lucide-react"
+import { CheckIcon, ChevronRightIcon, CircleDashedIcon } from "lucide-react"
 
 import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
 import { PlatformPage } from "@/components/mockups/platform-page"
@@ -117,13 +117,16 @@ export default function MockupHomePage() {
                     <li key={step.label}>
                       <Link
                         href={step.href}
-                        className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-background/60"
+                        className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-foreground/[0.06]"
                       >
                         <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-background">
                           {step.complete ? (
                             <CheckIcon className="size-4" aria-hidden="true" />
                           ) : (
-                            <BoxIcon className="size-4" aria-hidden="true" />
+                            <CircleDashedIcon
+                              className="size-4 text-muted-foreground"
+                              aria-hidden="true"
+                            />
                           )}
                         </span>
                         <span className="min-w-0 flex-1 font-medium">
