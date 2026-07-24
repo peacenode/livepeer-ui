@@ -22,6 +22,16 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
+const characterProperties = [
+  "Front",
+  "Profile",
+  "Three-quarter",
+  "Full body",
+  "Close-up",
+  "Neutral",
+  "Expression",
+  "Outfit",
+]
 
 type Character = {
   id: number
@@ -58,15 +68,13 @@ export function CharactersWorkspace() {
   const [isDragging, setIsDragging] = useState(false)
   const [characterName, setCharacterName] = useState("")
   const [uploadFiles, setUploadFiles] = useState<File[]>([])
-  const [draggedImage, setDraggedImage] = useState<{
+  const [selectedImage, setSelectedImage] = useState<{
     characterId: number
     imageId: number
   } | null>(null)
-  const [dropTarget, setDropTarget] = useState<{
-    characterId: number
-    imageId: number
-    position: "before" | "after"
-  } | null>(null)
+  const [imageProperties, setImageProperties] = useState<
+    Record<string, string[]>
+  >({})
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameCharacter(id: number, name: string) {
@@ -107,53 +115,17 @@ export function CharactersWorkspace() {
     setFiles(event.dataTransfer.files)
   }
 
-  function moveImage(
-    characterId: number,
-    fromIndex: number,
-    toIndex: number
-  ) {
-    setCharacters((current) =>
-      current.map((character) => {
-        if (character.id !== characterId || fromIndex === toIndex) {
-          return character
-        }
-        const images = [...character.images]
-        const [image] = images.splice(fromIndex, 1)
-        images.splice(toIndex, 0, image)
-        return { ...character, images }
-      })
-    )
-  }
-
-  function dropImage(
-    characterId: number,
-    targetImageId: number,
-    position: "before" | "after"
-  ) {
-    if (!draggedImage || draggedImage.characterId !== characterId) return
-    const character = characters.find((item) => item.id === characterId)
-    if (!character) return
-    const fromIndex = character.images.indexOf(draggedImage.imageId)
-    const targetIndex = character.images.indexOf(targetImageId)
-    let insertIndex = targetIndex + (position === "after" ? 1 : 0)
-    if (fromIndex < insertIndex) insertIndex -= 1
-    moveImage(characterId, fromIndex, insertIndex)
-    setDraggedImage(null)
-    setDropTarget(null)
-  }
-
-  function updateDropTarget(
-    event: DragEvent<HTMLDivElement>,
-    characterId: number,
-    imageId: number
-  ) {
-    event.preventDefault()
-    const bounds = event.currentTarget.getBoundingClientRect()
-    setDropTarget({
-      characterId,
-      imageId,
-      position:
-        event.clientX < bounds.left + bounds.width / 2 ? "before" : "after",
+  function toggleProperty(property: string) {
+    if (!selectedImage) return
+    const key = `${selectedImage.characterId}-${selectedImage.imageId}`
+    setImageProperties((current) => {
+      const properties = current[key] ?? []
+      return {
+        ...current,
+        [key]: properties.includes(property)
+          ? properties.filter((item) => item !== property)
+          : [...properties, property],
+      }
     })
   }
 
@@ -219,65 +191,30 @@ export function CharactersWorkspace() {
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
                 {character.images.map((imageId) => (
-                  <div
+                  <button
+                    type="button"
                     key={imageId}
-                    draggable
-                    onDragStart={() =>
-                      setDraggedImage({
+                    aria-label={`Open ${character.name} reference ${imageId + 1}`}
+                    onClick={() =>
+                      setSelectedImage({
                         characterId: character.id,
                         imageId,
                       })
                     }
-                    onDragEnd={() => {
-                      setDraggedImage(null)
-                      setDropTarget(null)
-                    }}
-                    onDragOver={(event) =>
-                      updateDropTarget(event, character.id, imageId)
-                    }
-                    onDrop={(event) => {
-                      event.preventDefault()
-                      dropImage(
-                        character.id,
-                        imageId,
-                        dropTarget?.position ?? "before"
-                      )
-                    }}
-                    className="relative aspect-square cursor-grab active:cursor-grabbing"
+                    className="group relative aspect-square overflow-hidden rounded-md bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <div
+                    <Image
+                      src={sampleImage}
+                      alt=""
+                      fill
                       className={cn(
-                        "absolute inset-0 overflow-hidden rounded-md bg-muted",
-                        draggedImage?.characterId === character.id &&
-                          draggedImage.imageId === imageId &&
-                          "opacity-40"
+                        "object-cover transition-transform group-hover:scale-105",
+                        imageId % 4 === 1 && "hue-rotate-15",
+                        imageId % 4 === 2 && "saturate-50",
+                        imageId % 4 === 3 && "contrast-125"
                       )}
-                    >
-                      <Image
-                        src={sampleImage}
-                        alt=""
-                        fill
-                        className={cn(
-                          "object-cover",
-                          imageId % 4 === 1 && "hue-rotate-15",
-                          imageId % 4 === 2 && "saturate-50",
-                          imageId % 4 === 3 && "contrast-125"
-                        )}
-                      />
-                    </div>
-                    {dropTarget?.characterId === character.id &&
-                      dropTarget.imageId === imageId &&
-                      draggedImage?.imageId !== imageId && (
-                        <span
-                          className={cn(
-                            "pointer-events-none absolute inset-y-0 z-20 w-0.5 rounded-full bg-foreground",
-                            dropTarget.position === "before"
-                              ? "-left-1"
-                              : "-right-1"
-                          )}
-                        />
-                      )}
-                  </div>
+                    />
+                  </button>
                 ))}
                 <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
                   <PlusIcon className="size-4" />
@@ -407,6 +344,82 @@ export function CharactersWorkspace() {
           >
             Create character
           </Button>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={selectedImage !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedImage(null)
+        }}
+      >
+        <DialogContent className="max-h-[calc(100dvh-2rem)] gap-0 overflow-hidden rounded-2xl p-0 sm:max-w-4xl">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Character reference</DialogTitle>
+            <DialogDescription>
+              Review this reference and assign character properties.
+            </DialogDescription>
+          </DialogHeader>
+          {selectedImage && (
+            <div className="grid min-h-0 overflow-y-auto md:grid-cols-[minmax(0,1fr)_300px]">
+              <div className="flex min-h-80 items-center bg-background">
+                <div className="relative aspect-square w-full max-h-[70dvh]">
+                  <Image
+                    src={sampleImage}
+                    alt="Character reference"
+                    fill
+                    className={cn(
+                      "object-cover",
+                      selectedImage.imageId % 4 === 1 && "hue-rotate-15",
+                      selectedImage.imageId % 4 === 2 && "saturate-50",
+                      selectedImage.imageId % 4 === 3 && "contrast-125"
+                    )}
+                    priority
+                  />
+                </div>
+              </div>
+              <aside className="bg-background p-5 sm:p-6">
+                <div className="pr-10">
+                  <p className="text-sm font-medium">
+                    {
+                      characters.find(
+                        (character) =>
+                          character.id === selectedImage.characterId
+                      )?.name
+                    }
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Reference image {selectedImage.imageId + 1}
+                  </p>
+                </div>
+                <div className="mt-8">
+                  <p className="mb-3 text-xs font-medium text-muted-foreground">
+                    Properties
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {characterProperties.map((property) => {
+                      const key = `${selectedImage.characterId}-${selectedImage.imageId}`
+                      const isSelected = (
+                        imageProperties[key] ?? []
+                      ).includes(property)
+                      return (
+                        <Button
+                          key={property}
+                          type="button"
+                          size="sm"
+                          variant={isSelected ? "secondary" : "outline"}
+                          aria-pressed={isSelected}
+                          onClick={() => toggleProperty(property)}
+                        >
+                          {property}
+                        </Button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </aside>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </main>
