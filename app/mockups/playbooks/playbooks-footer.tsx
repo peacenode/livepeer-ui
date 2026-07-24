@@ -1,12 +1,11 @@
-import {
-  ArrowUpRightIcon,
-  GitForkIcon,
-  GlobeIcon,
-  MessageCircleIcon,
-  XIcon,
-} from "lucide-react"
+import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
+import {
+  DiscordIcon,
+  GitHubIcon,
+  XIcon,
+} from "@/components/brand-social-icons"
 
 const groups = [
   {
@@ -71,7 +70,7 @@ const socials = [
   {
     label: "Livepeer on Discord",
     href: "https://discord.gg/livepeer",
-    icon: MessageCircleIcon,
+    icon: DiscordIcon,
   },
   {
     label: "Livepeer on X",
@@ -81,7 +80,7 @@ const socials = [
   {
     label: "Livepeer on GitHub",
     href: "https://github.com/livepeer",
-    icon: GitForkIcon,
+    icon: GitHubIcon,
   },
   {
     label: "Livepeer website",
@@ -92,15 +91,15 @@ const socials = [
 
 export function PlaybooksFooter() {
   return (
-    <footer className="bg-[#111] text-white">
-      <div className="px-6 pt-20 pb-10 sm:px-10 sm:pt-24 sm:pb-12 lg:px-12 lg:pt-28">
-        <div className="grid gap-14 md:grid-cols-[1.05fr_1fr_1fr] lg:grid-cols-[1.05fr_1fr_1fr_0.9fr] lg:gap-16">
-          <div className="md:col-span-3 lg:col-span-1">
-            <LivepeerLockup className="h-auto w-64 max-w-full text-white sm:w-72" />
-            <p className="mt-7 text-base text-white/50 sm:text-lg lg:whitespace-nowrap">
+    <footer className="border-t bg-background">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <LivepeerLockup className="h-auto w-44 text-foreground" />
+            <p className="mt-4 text-sm text-muted-foreground">
               The open network for inference &amp; compute.
             </p>
-            <div className="mt-10 flex items-center gap-6">
+            <div className="mt-7 flex items-center gap-4">
               {socials.map((social) => {
                 const Icon = social.icon
 
@@ -111,9 +110,9 @@ export function PlaybooksFooter() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="text-white/45 transition-colors hover:text-white"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <Icon className="size-6" aria-hidden="true" />
+                    <Icon className="size-5" aria-hidden="true" />
                   </a>
                 )
               })}
@@ -122,10 +121,8 @@ export function PlaybooksFooter() {
 
           {groups.map((group) => (
             <div key={group.title}>
-              <h2 className="text-lg font-medium text-white/80">
-                {group.title}
-              </h2>
-              <nav className="mt-8 flex flex-col items-start gap-6">
+              <h2 className="text-sm font-medium">{group.title}</h2>
+              <nav className="mt-4 flex flex-col items-start gap-3">
                 {group.links.map((link) => (
                   <a
                     key={link.label}
@@ -134,12 +131,12 @@ export function PlaybooksFooter() {
                     rel={
                       link.href.startsWith("http") ? "noreferrer" : undefined
                     }
-                    className="inline-flex items-center gap-1 text-base text-white/35 transition-colors hover:text-white sm:text-lg"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                     {link.external && (
                       <ArrowUpRightIcon
-                        className="size-4"
+                        className="size-3.5"
                         aria-hidden="true"
                       />
                     )}
@@ -150,8 +147,8 @@ export function PlaybooksFooter() {
           ))}
         </div>
 
-        <div className="mt-20 border-t border-white/10 pt-10 sm:mt-24 sm:pt-12">
-          <p className="text-sm text-white/30 sm:text-base">
+        <div className="mt-12 border-t pt-8">
+          <p className="text-xs text-muted-foreground">
             © 2026 Livepeer Foundation. All rights reserved.
           </p>
         </div>
