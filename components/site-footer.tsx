@@ -88,7 +88,7 @@ const socials = [
 export function SiteFooter() {
   return (
     <footer className="border-t bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-6xl px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <LivepeerLockup className="h-auto w-44 text-foreground" />
@@ -143,7 +143,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8">
+        <div className="mt-24">
           <p className="text-xs text-muted-foreground">
             © 2026 Livepeer Foundation. All rights reserved.
           </p>
