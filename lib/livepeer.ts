@@ -6,7 +6,7 @@ export type NetworkStats = {
   activeOrchestrators: number
   totalStakeLpt: number
   payoutsUsd24h: number
-  gatewaysKnown: number
+  rewardsUsd24h: number
 }
 
 export type Orchestrator = {
@@ -49,7 +49,7 @@ export async function getNetworkStats(): Promise<NetworkStats | null> {
       activeOrchestrators: Number(raw.active_orchestrators ?? 0),
       totalStakeLpt: Number(raw.total_lpt_staked ?? 0),
       payoutsUsd24h: Number(raw.payouts_usd_24h ?? 0),
-      gatewaysKnown: Number(raw.gateways_known ?? 0),
+      rewardsUsd24h: Number(raw.rewards_usd_24h ?? 0),
     }
   } catch {
     return null

@@ -40,8 +40,9 @@ export default async function MockupComputePage() {
       period: "24h",
     },
     {
-      label: "Known gateways",
-      value: network ? String(network.gatewaysKnown) : "—",
+      label: "Protocol rewards (USD)",
+      value: network ? `$${formatCompact(network.rewardsUsd24h)}` : "—",
+      period: "24h",
     },
   ]
 
