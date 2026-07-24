@@ -613,7 +613,7 @@ export function AgentWorkspace() {
           </DialogHeader>
           {selectedGeneration && (
             <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[minmax(0,1fr)_340px]">
-              <div className="flex min-h-72 items-center bg-black lg:min-h-[620px]">
+              <div className="flex min-h-72 items-center bg-background lg:min-h-[620px]">
                 <div className="relative aspect-video w-full overflow-hidden">
                   <Image
                     src={sampleImage}
