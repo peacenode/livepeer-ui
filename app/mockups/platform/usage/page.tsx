@@ -130,7 +130,7 @@ export default function MockupUsagePage() {
               </div>
               <Link
                 href="/mockups/platform/organization?tab=billing"
-                className="group w-full rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-square"
+                className="group w-full rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
               >
                 <Card
                   size="sm"
