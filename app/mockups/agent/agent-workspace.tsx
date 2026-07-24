@@ -180,12 +180,25 @@ export function AgentWorkspace() {
   const [project, setProject] = useState("Orbit")
   const [isDragging, setIsDragging] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [composerHeight, setComposerHeight] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const folderInputRef = useRef<HTMLInputElement>(null)
+  const composerRef = useRef<HTMLElement>(null)
   const resultsRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     folderInputRef.current?.setAttribute("webkitdirectory", "")
+  }, [])
+
+  useEffect(() => {
+    if (!composerRef.current) return
+    const observer = new ResizeObserver(([entry]) => {
+      setComposerHeight(
+        entry.borderBoxSize[0]?.blockSize ?? entry.contentRect.height
+      )
+    })
+    observer.observe(composerRef.current)
+    return () => observer.disconnect()
   }, [])
 
   function addFiles(files: FileList | null) {
@@ -243,8 +256,8 @@ export function AgentWorkspace() {
   }
 
   return (
-    <main className="flex h-[calc(100dvh-4rem)] flex-col overflow-hidden overscroll-none md:h-dvh">
-      <section className="shrink-0">
+    <main className="relative h-[calc(100dvh-4rem)] overflow-hidden overscroll-none md:h-dvh">
+      <section ref={composerRef} className="absolute inset-x-0 top-0 z-20">
         <div className="mx-auto max-w-3xl px-4 pb-8 sm:px-6 sm:pb-10">
           <form
             onSubmit={generate}
@@ -406,9 +419,12 @@ export function AgentWorkspace() {
 
       <section
         ref={resultsRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-none"
+        className="absolute inset-0 overflow-y-auto overscroll-none"
       >
-        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        <div
+          className="mx-auto max-w-5xl px-4 pb-8 sm:px-6 sm:pb-10"
+          style={{ paddingTop: composerHeight + 32 }}
+        >
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-sm font-medium">Recent</h2>
             <Button variant="ghost" size="sm">
