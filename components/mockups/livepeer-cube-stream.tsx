@@ -105,6 +105,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
       const parabola = height * (-0.4 + 0.94 * phase * phase)
       const convergence = 1 - MathUtils.smoothstep(phase, 0.06, 0.74)
       const laneY = seed.lane * convergence * Math.min(height * 0.2, 1.18)
+      const pathDepth = -1.45 * phase + Math.sin(phase * Math.PI) * 0.28
       const ripple =
         Math.sin(elapsed * 0.7 + seed.wobble * Math.PI * 2) *
         0.035 *
@@ -113,15 +114,23 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
       dummy.position.set(
         x,
         parabola + laneY + ripple + pointer.y * 0.05,
-        seed.depth * convergence * depthScale
+        pathDepth + seed.depth * convergence * depthScale
       )
       dummy.rotation.set(
         elapsed * 0.16 + seed.wobble,
         elapsed * 0.22 + phase * Math.PI,
         (phase - 0.5) * 0.42
       )
+      const distanceScale = MathUtils.lerp(
+        1.12,
+        0.42,
+        MathUtils.smoothstep(phase, 0.22, 1)
+      )
       const perspectiveScale =
-        seed.scale * (0.76 + convergence * 0.22) * (size.width < 640 ? 0.6 : 1)
+        seed.scale *
+        (0.76 + convergence * 0.22) *
+        distanceScale *
+        (size.width < 640 ? 0.6 : 1)
       dummy.scale.setScalar(perspectiveScale)
       dummy.updateMatrix()
       matrix.copy(dummy.matrix)
