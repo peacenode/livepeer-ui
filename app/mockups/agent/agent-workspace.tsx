@@ -350,7 +350,7 @@ export function AgentWorkspace() {
             >
               <InputGroupAddon
                 align="block-start"
-                className="justify-center gap-6 px-4 pt-3 pb-0"
+                className="justify-start gap-6 px-4 pt-3 pb-0"
               >
                 {creationModes.map(({ label: mode, icon: Icon }) => (
                   <button
