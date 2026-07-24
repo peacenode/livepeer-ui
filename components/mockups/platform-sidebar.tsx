@@ -9,11 +9,11 @@ import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
 export const platformNavItems = [
-  { title: "Home", href: "/mockups" },
-  { title: "Compute", href: "/mockups/compute" },
-  { title: "Inference", href: "/mockups/inference" },
-  { title: "Billing", href: "/mockups/billing" },
-  { title: "API", href: "/mockups/api" },
+  { title: "Home", href: "/mockups/platform" },
+  { title: "Compute", href: "/mockups/platform/compute" },
+  { title: "Inference", href: "/mockups/platform/inference" },
+  { title: "Billing", href: "/mockups/platform/billing" },
+  { title: "API", href: "/mockups/platform/api" },
 ]
 
 export function PlatformSidebar() {
@@ -22,7 +22,7 @@ export function PlatformSidebar() {
   return (
     <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col bg-background md:flex">
       <div className="px-5 pt-6">
-        <Link href="/mockups" aria-label="Livepeer home" className="inline-flex">
+        <Link href="/mockups/platform" aria-label="Livepeer home" className="inline-flex">
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
       </div>

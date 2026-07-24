@@ -24,7 +24,7 @@ export default function MockupsLayout({
       <main className="min-w-0 flex-1">
         <div className="flex items-center gap-3 px-4 pt-4 md:hidden">
           <PlatformMobileNav />
-          <Link href="/mockups" aria-label="Livepeer home" className="inline-flex">
+          <Link href="/mockups/platform" aria-label="Livepeer home" className="inline-flex">
             <LivepeerLockup className="h-4 w-auto" />
           </Link>
         </div>

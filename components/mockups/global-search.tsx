@@ -24,35 +24,35 @@ const pages = [
   {
     title: "Compute",
     description: "GPU fleet and capacity",
-    href: "/mockups/compute",
+    href: "/mockups/platform/compute",
     icon: CpuIcon,
   },
   {
     title: "Inference",
     description: "Pipelines and models",
-    href: "/mockups/inference",
+    href: "/mockups/platform/inference",
     icon: ZapIcon,
   },
   {
     title: "Billing",
     description: "Invoices and payment",
-    href: "/mockups/billing",
+    href: "/mockups/platform/billing",
     icon: CreditCardIcon,
   },
   {
     title: "API",
     description: "Keys and quick start",
-    href: "/mockups/api",
+    href: "/mockups/platform/api",
     icon: KeyRoundIcon,
   },
 ]
 
 const actions = [
-  { title: "Add compute capacity", page: "Compute", href: "/mockups/compute" },
-  { title: "New pipeline", page: "Inference", href: "/mockups/inference" },
-  { title: "View invoices", page: "Billing", href: "/mockups/billing" },
-  { title: "Update payment method", page: "Billing", href: "/mockups/billing" },
-  { title: "Create API key", page: "API", href: "/mockups/api" },
+  { title: "Add compute capacity", page: "Compute", href: "/mockups/platform/compute" },
+  { title: "New pipeline", page: "Inference", href: "/mockups/platform/inference" },
+  { title: "View invoices", page: "Billing", href: "/mockups/platform/billing" },
+  { title: "Update payment method", page: "Billing", href: "/mockups/platform/billing" },
+  { title: "Create API key", page: "API", href: "/mockups/platform/api" },
 ]
 
 export function GlobalSearch({ shortcut = true }: { shortcut?: boolean }) {

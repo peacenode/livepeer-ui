@@ -38,11 +38,8 @@ export function DocsNav({
       title: "Mockups",
       external: true,
       items: [
-        { title: "Home", href: "/mockups" },
-        { title: "Compute", href: "/mockups/compute" },
-        { title: "Inference", href: "/mockups/inference" },
-        { title: "Billing", href: "/mockups/billing" },
-        { title: "API", href: "/mockups/api" },
+        { title: "Platform", href: "/mockups/platform" },
+        { title: "Agent", href: "/mockups/agent" },
       ],
     },
   ]
