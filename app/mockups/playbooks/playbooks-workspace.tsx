@@ -54,21 +54,21 @@ export function PlaybooksWorkspace() {
 
       <section className="relative min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]">
         <Image
-          src="/playbooks/20260724-1905/playbook-mockup.jpg"
+          src="/playbooks/20260724-232148/ultramock.jpg"
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-[58%_center] sm:object-center"
           sizes="100vw"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/15 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-white via-white/65 to-transparent"
           aria-hidden="true"
         />
-        <div className="relative z-10 flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-end sm:gap-8 sm:p-10">
+        <div className="absolute inset-0 z-10 flex flex-col items-start justify-center gap-4 p-6 sm:p-10">
           <h2 className="text-4xl font-normal tracking-tight sm:text-5xl">
             Playbooks
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-foreground/65 sm:pb-1">
+          <p className="max-w-md text-sm leading-relaxed text-foreground/65">
             Ready-to-run AI workflows for creating images, video, and audio
             from your agent.
           </p>
@@ -76,7 +76,7 @@ export function PlaybooksWorkspace() {
             variant="outline"
             nativeButton={false}
             render={<Link href="/mockups/playbooks/library" />}
-            className="bg-background/75 backdrop-blur-sm sm:ml-2"
+            className="mt-2 bg-background/75 backdrop-blur-sm"
           >
             Browse Playbooks
           </Button>
