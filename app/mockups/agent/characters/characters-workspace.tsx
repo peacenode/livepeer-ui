@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
+import { ProjectPicker } from "../project-picker"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const characterProperties = [
@@ -39,6 +40,7 @@ type Character = {
   name: string
   images: number[]
   updated: string
+  project: string
 }
 
 const initialCharacters: Character[] = [
@@ -47,18 +49,21 @@ const initialCharacters: Character[] = [
     name: "Mara",
     images: Array.from({ length: 18 }, (_, index) => index),
     updated: "Today, 1:48 PM",
+    project: "Default project",
   },
   {
     id: 2,
     name: "The Courier",
     images: Array.from({ length: 12 }, (_, index) => index),
     updated: "Yesterday",
+    project: "Default project",
   },
   {
     id: 1,
     name: "June",
     images: Array.from({ length: 8 }, (_, index) => index),
     updated: "Jul 21",
+    project: "Default project",
   },
 ]
 
@@ -76,6 +81,13 @@ export function CharactersWorkspace() {
   const [imageProperties, setImageProperties] = useState<
     Record<string, string[]>
   >({})
+  const [projects, setProjects] = useState([
+    "Default project",
+    "Orbit",
+    "Soft launch",
+  ])
+  const [projectTargetId, setProjectTargetId] = useState<number | null>(null)
+  const [newProjectName, setNewProjectName] = useState("")
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameCharacter(id: number, name: string) {
@@ -102,6 +114,7 @@ export function CharactersWorkspace() {
         name,
         images: Array.from({ length: uploadFiles.length }, (_, index) => index),
         updated: "Just now",
+        project: "Default project",
       },
       ...current,
     ])
@@ -147,7 +160,8 @@ export function CharactersWorkspace() {
 
           {characters.map((character) => (
             <section key={character.id} className="py-6">
-              <div className="mb-4 flex min-h-9 flex-wrap items-center gap-3">
+              <div className="mb-4 flex min-h-9 items-center justify-between gap-3">
+                <div className="flex min-w-0 flex-wrap items-center gap-3">
                 {editingId === character.id ? (
                   <div className="flex min-w-0 flex-1 items-center gap-2">
                     <Input
@@ -188,6 +202,19 @@ export function CharactersWorkspace() {
                     </span>
                   </>
                 )}
+                </div>
+                <ProjectPicker
+                  value={character.project}
+                  projects={projects}
+                  onChange={(project) =>
+                    setCharacters((current) =>
+                      current.map((item) =>
+                        item.id === character.id ? { ...item, project } : item
+                      )
+                    )
+                  }
+                  onNew={() => setProjectTargetId(character.id)}
+                />
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
@@ -429,6 +456,51 @@ export function CharactersWorkspace() {
               </aside>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={projectTargetId !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setProjectTargetId(null)
+            setNewProjectName("")
+          }
+        }}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>New project</DialogTitle>
+            <DialogDescription>
+              Create and assign a project to this character.
+            </DialogDescription>
+          </DialogHeader>
+          <Input
+            value={newProjectName}
+            onChange={(event) => setNewProjectName(event.target.value)}
+            placeholder="Project name"
+            aria-label="Project name"
+            autoFocus
+          />
+          <Button
+            disabled={!newProjectName.trim()}
+            onClick={() => {
+              const project = newProjectName.trim()
+              if (!project || projectTargetId === null) return
+              setProjects((current) =>
+                current.includes(project) ? current : [...current, project]
+              )
+              setCharacters((current) =>
+                current.map((item) =>
+                  item.id === projectTargetId ? { ...item, project } : item
+                )
+              )
+              setProjectTargetId(null)
+              setNewProjectName("")
+            }}
+          >
+            Create project
+          </Button>
         </DialogContent>
       </Dialog>
     </main>

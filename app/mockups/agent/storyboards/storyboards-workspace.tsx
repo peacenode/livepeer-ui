@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
+import { ProjectPicker } from "../project-picker"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
@@ -29,6 +30,7 @@ type ImageBatch = {
   name: string
   images: number[]
   uploaded: string
+  project: string
 }
 
 const initialBatches: ImageBatch[] = [
@@ -37,24 +39,28 @@ const initialBatches: ImageBatch[] = [
     name: "Orbit launch film",
     images: Array.from({ length: 30 }, (_, index) => index),
     uploaded: "Today, 2:14 PM",
+    project: "Default project",
   },
   {
     id: 3,
     name: "Product reveal v2",
     images: Array.from({ length: 18 }, (_, index) => index),
     uploaded: "Today, 9:42 AM",
+    project: "Default project",
   },
   {
     id: 2,
     name: "Homepage loops",
     images: Array.from({ length: 12 }, (_, index) => index),
     uploaded: "Yesterday",
+    project: "Default project",
   },
   {
     id: 1,
     name: "Opening sequence",
     images: Array.from({ length: 8 }, (_, index) => index),
     uploaded: "Jul 21",
+    project: "Default project",
   },
 ]
 
@@ -74,6 +80,13 @@ export function StoryboardsWorkspace() {
     imageId: number
     position: "before" | "after"
   } | null>(null)
+  const [projects, setProjects] = useState([
+    "Default project",
+    "Orbit",
+    "Soft launch",
+  ])
+  const [projectTargetId, setProjectTargetId] = useState<number | null>(null)
+  const [newProjectName, setNewProjectName] = useState("")
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameBatch(id: number, name: string) {
@@ -98,6 +111,7 @@ export function StoryboardsWorkspace() {
         name: title,
         images: Array.from({ length: uploadFiles.length }, (_, index) => index),
         uploaded: "Just now",
+        project: "Default project",
       },
       ...current,
     ])
@@ -173,7 +187,8 @@ export function StoryboardsWorkspace() {
 
           {batches.map((batch) => (
             <section key={batch.id} className="py-6">
-              <div className="mb-4 flex min-h-9 flex-wrap items-center gap-3">
+              <div className="mb-4 flex min-h-9 items-center justify-between gap-3">
+                <div className="flex min-w-0 flex-wrap items-center gap-3">
                 {editingId === batch.id ? (
                   <div className="flex min-w-0 flex-1 items-center gap-2">
                     <Input
@@ -214,6 +229,19 @@ export function StoryboardsWorkspace() {
                     </span>
                   </>
                 )}
+                </div>
+                <ProjectPicker
+                  value={batch.project}
+                  projects={projects}
+                  onChange={(project) =>
+                    setBatches((current) =>
+                      current.map((item) =>
+                        item.id === batch.id ? { ...item, project } : item
+                      )
+                    )
+                  }
+                  onNew={() => setProjectTargetId(batch.id)}
+                />
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
@@ -408,6 +436,51 @@ export function StoryboardsWorkspace() {
             disabled={!uploadTitle.trim() || uploadFiles.length === 0}
           >
             Create storyboard
+          </Button>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={projectTargetId !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setProjectTargetId(null)
+            setNewProjectName("")
+          }
+        }}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>New project</DialogTitle>
+            <DialogDescription>
+              Create and assign a project to this storyboard.
+            </DialogDescription>
+          </DialogHeader>
+          <Input
+            value={newProjectName}
+            onChange={(event) => setNewProjectName(event.target.value)}
+            placeholder="Project name"
+            aria-label="Project name"
+            autoFocus
+          />
+          <Button
+            disabled={!newProjectName.trim()}
+            onClick={() => {
+              const project = newProjectName.trim()
+              if (!project || projectTargetId === null) return
+              setProjects((current) =>
+                current.includes(project) ? current : [...current, project]
+              )
+              setBatches((current) =>
+                current.map((item) =>
+                  item.id === projectTargetId ? { ...item, project } : item
+                )
+              )
+              setProjectTargetId(null)
+              setNewProjectName("")
+            }}
+          >
+            Create project
           </Button>
         </DialogContent>
       </Dialog>
