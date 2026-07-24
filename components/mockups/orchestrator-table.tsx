@@ -61,14 +61,14 @@ export function OrchestratorTable({
             </TableHead>
             <TableHead className="text-muted-foreground">Address</TableHead>
             <TableHead className="text-right text-muted-foreground">
-              Stake
+              Total stake
             </TableHead>
             <TableHead className="text-right text-muted-foreground">
               Fee cut
             </TableHead>
             <TableHead className="text-muted-foreground">Status</TableHead>
             <TableHead className="w-44 text-muted-foreground">
-              Success rate
+              Avg. success rate
             </TableHead>
           </TableRow>
         </TableHeader>

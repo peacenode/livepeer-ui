@@ -29,22 +29,19 @@ export default async function MockupComputePage() {
     {
       label: "Active orchestrators",
       value: network ? String(network.activeOrchestrators) : "—",
-      period: "24h",
     },
     {
       label: "Total LPT staked",
       value: network ? `${formatCompact(network.totalStakeLpt)} LPT` : "—",
-      period: "7d",
     },
     {
-      label: "Payouts",
+      label: "Payouts (USD)",
       value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
       period: "24h",
     },
     {
-      label: "Gateways",
+      label: "Known gateways",
       value: network ? String(network.gatewaysKnown) : "—",
-      period: "24h",
     },
   ]
 
@@ -56,9 +53,11 @@ export default async function MockupComputePage() {
             <CardHeader>
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
-                <span className="shrink-0 text-muted-foreground tabular-nums">
-                  {stat.period}
-                </span>
+                {stat.period && (
+                  <span className="shrink-0 text-muted-foreground tabular-nums">
+                    {stat.period}
+                  </span>
+                )}
               </CardDescription>
               <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                 {stat.value}
