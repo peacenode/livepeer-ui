@@ -111,9 +111,8 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
             </p>
           )}
           {playbook.caps.length > 0 && (
-            <div className="mt-7">
-              <p className="text-xs text-muted-foreground">Capabilities</p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
+            <div className="mt-6">
+              <div className="flex flex-wrap gap-1.5">
                 {playbook.caps.map((cap) => (
                   <Badge key={cap} variant="secondary">
                     {cap}
