@@ -95,23 +95,31 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
 
 function LivepeerSymbol3D({ className }: { className?: string }) {
   const [reduceMotion, setReduceMotion] = useState(true)
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const updatePreference = () => setReduceMotion(mediaQuery.matches)
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const desktopQuery = window.matchMedia("(min-width: 768px)")
+    const updatePreferences = () => {
+      setReduceMotion(motionQuery.matches)
+      setIsDesktop(desktopQuery.matches)
+    }
 
-    updatePreference()
-    mediaQuery.addEventListener("change", updatePreference)
+    updatePreferences()
+    motionQuery.addEventListener("change", updatePreferences)
+    desktopQuery.addEventListener("change", updatePreferences)
 
-    return () => mediaQuery.removeEventListener("change", updatePreference)
+    return () => {
+      motionQuery.removeEventListener("change", updatePreferences)
+      desktopQuery.removeEventListener("change", updatePreferences)
+    }
   }, [])
+
+  if (!isDesktop) return null
 
   return (
     <div
-      className={cn(
-        "min-h-40 overflow-hidden rounded-b-xl md:absolute md:inset-0 md:min-h-0 md:rounded-4xl",
-        className
-      )}
+      className={cn("absolute inset-0 overflow-hidden rounded-4xl", className)}
       aria-hidden="true"
     >
       <Canvas
