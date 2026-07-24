@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { FootageWorkspace } from "./footage-workspace"
 
 export const metadata: Metadata = {
-  title: "Footage - Livepeer",
+  title: "Clips - Livepeer",
 }
 
 export default function FootagePage() {

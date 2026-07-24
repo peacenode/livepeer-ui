@@ -66,13 +66,13 @@ export function FootageWorkspace() {
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
-            <h1 className="text-xl font-medium">Footage</h1>
+            <h1 className="text-xl font-medium">Clips</h1>
             <Button
               className="h-10 px-5"
               onClick={() => uploadRef.current?.click()}
             >
               <PlusIcon className="size-6" />
-              Upload footage
+              Upload clips
             </Button>
             <input
               ref={uploadRef}
@@ -149,7 +149,7 @@ export function FootageWorkspace() {
           ) : (
             <div className="flex min-h-80 flex-col items-center justify-center text-center">
               <FilmIcon className="size-5 text-muted-foreground" />
-              <p className="mt-3 text-sm font-medium">No footage yet</p>
+              <p className="mt-3 text-sm font-medium">No clips yet</p>
             </div>
           )}
         </div>

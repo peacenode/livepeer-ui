@@ -4,11 +4,8 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  ApertureIcon,
   BadgeInfoIcon,
-  FilmIcon,
   FolderIcon,
-  Grid2X2Icon,
   SettingsIcon,
 } from "lucide-react"
 
@@ -22,24 +19,6 @@ const navItems = [
     label: "Create",
     icon: LivepeerSymbol,
     brand: true,
-  },
-  {
-    href: "/mockups/agent/storyboards",
-    label: "Storyboards",
-    icon: Grid2X2Icon,
-    brand: false,
-  },
-  {
-    href: "/mockups/agent/characters",
-    label: "Characters",
-    icon: ApertureIcon,
-    brand: false,
-  },
-  {
-    href: "/mockups/agent/footage",
-    label: "Footage",
-    icon: FilmIcon,
-    brand: false,
   },
   {
     href: "/mockups/agent/projects",
@@ -181,7 +160,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
 
       <nav
         aria-label="Agent"
-        className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-5 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-2 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {navItems.map((item) => {
           const active = isActiveRoute(item.href, pathname)

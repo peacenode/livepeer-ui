@@ -103,7 +103,7 @@ export default function ProtocolPage() {
               How this workspace connects
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Storyboards, characters, footage, and projects organize creative
+              Storyboards, characters, clips, and projects organize creative
               inputs. A generation request can be routed to network compute,
               and the returned renders can be reviewed, rerolled, or promoted
               into a project&apos;s finals.

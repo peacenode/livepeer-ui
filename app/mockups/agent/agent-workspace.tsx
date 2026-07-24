@@ -9,10 +9,13 @@ import {
 } from "react"
 import Image from "next/image"
 import {
+  ApertureIcon,
   ArrowDownToLineIcon,
   ArrowUpIcon,
   ChevronDownIcon,
+  FilmIcon,
   FolderOpenIcon,
+  Grid2X2Icon,
   ImagesIcon,
   Layers3Icon,
   PaperclipIcon,
@@ -64,6 +67,12 @@ import {
   downloadMedia,
   MediaContextMenu,
 } from "./media-context-menu"
+
+const creationModes = [
+  { label: "Storyboard", icon: Grid2X2Icon },
+  { label: "Character", icon: ApertureIcon },
+  { label: "Clip", icon: FilmIcon },
+] as const
 
 const initialPrompt =
   "A lone courier crosses the salt flats toward a silent radio observatory as a dust front closes in"
@@ -341,19 +350,20 @@ export function AgentWorkspace() {
             >
               <InputGroupAddon
                 align="block-start"
-                className="justify-start gap-4 px-4 pt-3 pb-0"
+                className="justify-center gap-6 px-4 pt-3 pb-0"
               >
-                {(["Storyboard", "Character", "Clip"] as const).map((mode) => (
+                {creationModes.map(({ label: mode, icon: Icon }) => (
                   <button
                     key={mode}
                     type="button"
                     aria-pressed={generationMode === mode}
                     className={cn(
-                      "text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+                      "flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
                       generationMode === mode && "text-foreground"
                     )}
                     onClick={() => setGenerationMode(mode)}
                   >
+                    <Icon className="size-5" />
                     {mode}
                   </button>
                 ))}
