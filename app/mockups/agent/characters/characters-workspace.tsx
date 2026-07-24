@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { imageRowRadius } from "../image-grid-utils"
+import { imageGroupRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const characterProperties = [
@@ -204,7 +204,7 @@ export function CharactersWorkspace() {
                     }
                     className={cn(
                       "group relative aspect-square overflow-hidden bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                      imageRowRadius(index)
+                      imageGroupRadius(index, character.images.length + 1)
                     )}
                   >
                     <Image
@@ -223,7 +223,10 @@ export function CharactersWorkspace() {
                 <label
                   className={cn(
                     "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                    imageRowRadius(character.images.length, true)
+                    imageGroupRadius(
+                      character.images.length,
+                      character.images.length + 1
+                    )
                   )}
                 >
                   <PlusIcon className="size-4" />

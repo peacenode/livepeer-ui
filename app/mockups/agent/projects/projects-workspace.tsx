@@ -38,7 +38,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
-import { imageRowRadius } from "../image-grid-utils"
+import { imageGroupRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
@@ -1030,7 +1030,7 @@ function ProjectImageCollections({
                   key={index}
                   className={cn(
                     "relative aspect-square overflow-hidden bg-muted",
-                    imageRowRadius(index)
+                    imageGroupRadius(index, item.count + 1)
                   )}
                 >
                   <Image
@@ -1049,7 +1049,7 @@ function ProjectImageCollections({
               <label
                 className={cn(
                   "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                  imageRowRadius(item.count, true)
+                  imageGroupRadius(item.count, item.count + 1)
                 )}
               >
                 <PlusIcon className="size-4" />

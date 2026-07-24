@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { imageRowRadius } from "../image-grid-utils"
+import { imageGroupRadius } from "../image-grid-utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
@@ -241,7 +241,7 @@ export function StoryboardsWorkspace() {
                     }}
                     className={cn(
                       "relative aspect-square cursor-grab active:cursor-grabbing",
-                      imageRowRadius(index)
+                      imageGroupRadius(index, batch.images.length + 1)
                     )}
                   >
                     <div
@@ -281,7 +281,10 @@ export function StoryboardsWorkspace() {
                 <label
                   className={cn(
                     "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                    imageRowRadius(batch.images.length, true)
+                    imageGroupRadius(
+                      batch.images.length,
+                      batch.images.length + 1
+                    )
                   )}
                 >
                   <PlusIcon className="size-4" />
