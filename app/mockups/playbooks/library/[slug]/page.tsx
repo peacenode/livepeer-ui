@@ -128,42 +128,8 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           )}
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {meta.map((item) => {
-            const values = item.value?.split(/\s*·\s*/).filter(Boolean)
-
-            return (
-              <div key={item.label} className="py-2">
-                <p className="text-xs text-muted-foreground">{item.label}</p>
-                <div
-                  className={
-                    item.label === "Budget"
-                      ? "mt-3 space-y-0 text-lg leading-tight font-medium tabular-nums"
-                      : "mt-3 space-y-0 text-base leading-tight font-medium tabular-nums"
-                  }
-                >
-                  {values?.map((value) => {
-                    const isReliability = item.label === "Reliability"
-
-                    if (isReliability) {
-                      return (
-                        <div key={value}>
-                          <p>{value}</p>
-                          <ReliabilityStars value={value} />
-                        </div>
-                      )
-                    }
-
-                    return <p key={value}>{value}</p>
-                  })}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
         {catalogEntry && (
-          <section className="mt-14">
+          <section className="mt-12">
             <div className="grid overflow-hidden rounded-4xl bg-muted md:grid-cols-[1.1fr_0.9fr]">
               {catalogEntry.image && (
                 <div
@@ -203,6 +169,40 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
             </div>
           </section>
         )}
+
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          {meta.map((item) => {
+            const values = item.value?.split(/\s*·\s*/).filter(Boolean)
+
+            return (
+              <div key={item.label} className="py-2">
+                <p className="text-xs text-muted-foreground">{item.label}</p>
+                <div
+                  className={
+                    item.label === "Budget"
+                      ? "mt-3 space-y-0 text-lg leading-tight font-medium tabular-nums"
+                      : "mt-3 space-y-0 text-base leading-tight font-medium tabular-nums"
+                  }
+                >
+                  {values?.map((value) => {
+                    const isReliability = item.label === "Reliability"
+
+                    if (isReliability) {
+                      return (
+                        <div key={value}>
+                          <p>{value}</p>
+                          <ReliabilityStars value={value} />
+                        </div>
+                      )
+                    }
+
+                    return <p key={value}>{value}</p>
+                  })}
+                </div>
+              </div>
+            )
+          })}
+        </div>
 
         <div className="mt-12">
           <PlaybookBriefForm
