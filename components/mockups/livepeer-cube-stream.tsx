@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils"
 const cubeCount = 72
 const laneOffsets = [-1.45, -0.88, -0.32, 0.32, 0.88, 1.45]
 const laneDepths = [-0.72, -0.42, -0.14, 0.14, 0.42, 0.72]
+const strandCount = laneOffsets.length
 
 function StreamEnvironment() {
   const { gl, scene } = useThree()
@@ -48,7 +49,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
   const dummy = useMemo(() => new Object3D(), [])
   const matrix = useMemo(() => new Matrix4(), [])
   const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.13, 0.13, 0.13, 3, 0.014),
+    () => new RoundedBoxGeometry(0.11, 0.11, 0.11, 3, 0.012),
     []
   )
   const material = useMemo(
@@ -91,6 +92,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
     const height = viewport.height
     const activeCount =
       size.width < 640 ? 36 : size.width < 1024 ? 54 : cubeCount
+    const cubesPerStrand = activeCount / strandCount
     const depthScale = size.width < 768 ? 0.45 : 0.72
 
     seeds.forEach((seed, index) => {
@@ -101,22 +103,36 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         return
       }
 
-      const phase = (index / activeCount + travel) % 1
-      const x = width * (-0.74 + phase * 1.48)
+      const strandStep = Math.floor(index / strandCount)
+      const phase =
+        (strandStep / cubesPerStrand + seed.laneIndex / activeCount + travel) %
+        1
+      const lane = seed.lane / laneOffsets.at(-1)!
+      const mergeProgress = Math.max(0, 1 - phase / 0.76)
+      const strandSpread = mergeProgress * mergeProgress
+      const weave = MathUtils.smoothstep(phase, 0.5, 0.8)
+      const weaveAngle =
+        (seed.laneIndex / strandCount) * Math.PI * 2 + phase * Math.PI * 3
+      const x =
+        width * (-0.74 + phase * 1.48) - lane * width * 0.12 * strandSpread
       const parabola = height * (-0.4 + 0.94 * phase * phase)
-      const convergence = 1 - MathUtils.smoothstep(phase, 0.06, 0.74)
-      const laneY = seed.lane * convergence * Math.min(height * 0.2, 1.18)
+      const strandY =
+        lane * Math.min(height * 0.11, 0.68) * strandSpread +
+        Math.sin(weaveAngle) * 0.075 * weave
       const pathDepth = -1.45 * phase + Math.sin(phase * Math.PI) * 0.28
 
       dummy.position.set(
         x,
-        parabola + laneY + pointer.y * 0.05,
-        pathDepth + seed.depth * convergence * depthScale
+        parabola + strandY + pointer.y * 0.05,
+        pathDepth +
+          seed.depth * strandSpread * depthScale +
+          Math.cos(weaveAngle) * 0.2 * weave
       )
+      const tangent = Math.atan2(height * 1.88 * phase, width * 1.48)
       dummy.rotation.set(
         elapsed * 0.12 + phase * 0.8 + seed.laneIndex * 0.035,
         elapsed * 0.18 + phase * Math.PI * 0.85,
-        (phase - 0.5) * 0.42 + seed.laneIndex * 0.025
+        tangent + Math.sin(weaveAngle) * 0.08
       )
       const distanceScale = MathUtils.lerp(
         1.12,
@@ -124,7 +140,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         MathUtils.smoothstep(phase, 0.22, 1)
       )
       const perspectiveScale =
-        (0.88 + convergence * 0.12) *
+        (0.88 + strandSpread * 0.12) *
         distanceScale *
         (size.width < 640 ? 0.6 : 1)
       dummy.scale.setScalar(perspectiveScale)
@@ -187,9 +203,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         <CubeFlow reduceMotion={reduceMotion} />
         <EffectComposer multisampling={0}>
           <DepthOfField
-            focusDistance={7.25}
-            focusRange={1.15}
-            bokehScale={1.35}
+            focusDistance={6.35}
+            focusRange={0.28}
+            bokehScale={2.4}
             resolutionScale={0.5}
           />
         </EffectComposer>
