@@ -84,7 +84,7 @@ const activity = [
 export default function MockupHomePage() {
   return (
     <PlatformPage title="Home">
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>
@@ -94,7 +94,7 @@ export default function MockupHomePage() {
                   {stat.period}
                 </span>
               </CardDescription>
-              <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+              <CardTitle className="mt-2 text-3xl leading-none font-medium tabular-nums">
                 {stat.value}
               </CardTitle>
               <p className="-mt-2 text-sm text-muted-foreground tabular-nums">
