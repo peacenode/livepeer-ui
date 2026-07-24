@@ -88,7 +88,7 @@ export function PlaybookBriefForm({
   }
 
   return (
-    <section className="rounded-4xl bg-muted p-5 sm:p-8">
+    <section>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-2xl font-medium">Customize this playbook</h2>
@@ -108,7 +108,7 @@ export function PlaybookBriefForm({
               id,
               name: field.name,
               value: values[field.name] ?? "",
-              placeholder: field.defaultValue || field.hint,
+              placeholder: field.defaultValue,
               onChange: (
                 event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
               ) =>
@@ -132,7 +132,7 @@ export function PlaybookBriefForm({
                 {long ? (
                   <Textarea {...shared} className="mt-2 min-h-24" />
                 ) : (
-                  <Input {...shared} className="mt-2 bg-background" />
+                  <Input {...shared} className="mt-2" />
                 )}
               </div>
             )
@@ -144,7 +144,7 @@ export function PlaybookBriefForm({
         </p>
       )}
 
-      <div className="mt-8 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-relaxed text-muted-foreground">
           Nothing is submitted. The completed playbook is copied locally.
         </p>
