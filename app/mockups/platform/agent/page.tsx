@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { CableIcon, PlusIcon, TerminalIcon } from "lucide-react"
+import { CableIcon, GlobeIcon, PlusIcon, TerminalIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
@@ -23,7 +23,7 @@ const agents = [
   {
     name: "VideoBuddy",
     description:
-      "Packages realtime video, media generation, and ComfyUI containers behind CLI and MCP interfaces.",
+      "Packages realtime video, media generation, and ComfyUI containers behind CLI, MCP, and web interfaces.",
     containers: ["ai-runner", "comfystream", "comfyui-base"],
     href: "/mockups/videobuddy",
   },
@@ -41,7 +41,7 @@ export default function MockupAgentCatalogPage() {
       }
     >
       <p className="max-w-2xl text-sm text-muted-foreground">
-        Agents package inference containers behind CLI and MCP interfaces.
+        Agents package inference containers behind CLI, MCP, and web interfaces.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {agents.map((agent, agentIndex) => {
@@ -100,6 +100,13 @@ export default function MockupAgentCatalogPage() {
                     <Badge variant="secondary">
                       <CableIcon />
                       MCP
+                    </Badge>
+                    <Badge
+                      variant="secondary"
+                      render={<Link href={agent.href} />}
+                    >
+                      <GlobeIcon />
+                      Web
                     </Badge>
                   </div>
                 </div>
