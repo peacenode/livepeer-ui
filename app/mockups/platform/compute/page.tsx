@@ -27,15 +27,7 @@ export default async function MockupComputePage() {
 
   const stats = [
     {
-      label: "Active delegators",
-      value: network ? network.activeDelegators.toLocaleString("en-US") : "—",
-    },
-    {
-      label: "Total LPT staked",
-      value: network ? `${formatCompact(network.totalStakeLpt)} LPT` : "—",
-    },
-    {
-      label: "Payouts (USD)",
+      label: "Service payouts (USD)",
       value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
       period: "24h",
     },
@@ -67,7 +59,7 @@ export default async function MockupComputePage() {
         </Button>
       }
     >
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>

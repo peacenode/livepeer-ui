@@ -3,8 +3,6 @@ const LEADERBOARD_URL =
   "https://leaderboard-serverless.vercel.app/api/aggregated_stats"
 
 export type NetworkStats = {
-  activeDelegators: number
-  totalStakeLpt: number
   payoutsUsd24h: number
   rewardsUsd24h: number
 }
@@ -46,8 +44,6 @@ export async function getNetworkStats(): Promise<NetworkStats | null> {
     if (!res.ok) return null
     const raw = await res.json()
     return {
-      activeDelegators: Number(raw.active_delegators ?? 0),
-      totalStakeLpt: Number(raw.total_lpt_staked ?? 0),
       payoutsUsd24h: Number(raw.payouts_usd_24h ?? 0),
       rewardsUsd24h: Number(raw.rewards_usd_24h ?? 0),
     }
