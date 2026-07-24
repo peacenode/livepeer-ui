@@ -1,8 +1,14 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
-const items = [{ label: "Playbooks", href: "/mockups/playbooks#playbooks" }]
+import { cn } from "@/lib/utils"
+
+const items = [
+  { label: "Playbooks", href: "/mockups/playbooks/library" },
+  { label: "Earn with GPU", href: "/mockups/playbooks/earn" },
+]
 
 function GitHubLogo({ className }: { className?: string }) {
   return (
@@ -31,6 +37,8 @@ function DiscordLogo({ className }: { className?: string }) {
 }
 
 export function PlaybooksNav() {
+  const pathname = usePathname()
+
   return (
     <nav className="flex items-center gap-1 text-sm">
       <a
@@ -54,30 +62,32 @@ export function PlaybooksNav() {
         <DiscordLogo className="size-4" />
       </a>
       <div className="flex items-center gap-1">
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="rounded-md px-2 py-2 text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground sm:px-3"
-          >
-            {item.label}
-          </Link>
-        ))}
-        <a
-          href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
-          target="_blank"
-          rel="noreferrer"
-          className="hidden rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:block"
-        >
-          Provide GPUs
-        </a>
+        {items.map((item) => {
+          const active = pathname === item.href
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "rounded-md px-2 py-2 text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground sm:px-3",
+                active && "bg-foreground/5 font-medium text-foreground"
+              )}
+            >
+              {item.label}
+            </Link>
+          )
+        })}
         <a
           href="https://docs.livepeer.org/"
           target="_blank"
           rel="noreferrer"
-          className="hidden rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:block"
+          className="hidden items-center gap-1 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground md:flex"
         >
           Docs
+          <span className="font-sans" aria-hidden="true">
+            ↗
+          </span>
         </a>
       </div>
       <Link

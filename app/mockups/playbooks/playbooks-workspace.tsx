@@ -181,10 +181,12 @@ const resourceGroups = [
   },
 ]
 
-export function PlaybooksWorkspace() {
+export function PlaybooksCatalog({
+  standalone = false,
+}: {
+  standalone?: boolean
+}) {
   const [category, setCategory] = useState<Category>("All")
-  const [copied, setCopied] = useState(false)
-
   const visiblePlaybooks = useMemo(
     () =>
       category === "All"
@@ -192,6 +194,114 @@ export function PlaybooksWorkspace() {
         : playbooks.filter((playbook) => playbook.category === category),
     [category]
   )
+
+  return (
+    <section
+      id="playbooks"
+      className={cn(
+        "mx-auto max-w-6xl scroll-mt-20 px-4 sm:px-6",
+        standalone ? "pt-28 pb-14 sm:pt-32 sm:pb-20" : "py-14 sm:py-20"
+      )}
+    >
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1
+            className={cn(
+              "font-medium text-balance",
+              standalone ? "text-3xl sm:text-4xl" : "text-2xl"
+            )}
+          >
+            {standalone ? "Playbooks" : "Start with a playbook"}
+          </h1>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Proven production plans composed from reusable workflows.
+          </p>
+        </div>
+        <div className="flex gap-1 overflow-x-auto pb-1">
+          {categories.map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => setCategory(item)}
+              className={cn(
+                "shrink-0 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                category === item && "bg-muted font-medium text-foreground"
+              )}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-7 grid gap-4 md:grid-cols-2">
+        {visiblePlaybooks.map((playbook, index) => (
+          <Card key={playbook.name} className="py-0">
+            <div className="grid sm:grid-cols-[11rem_1fr]">
+              <div className="relative aspect-[16/10] overflow-hidden bg-muted sm:aspect-auto sm:min-h-72">
+                <Image
+                  src={playbook.image}
+                  alt=""
+                  fill
+                  preload={index < 2}
+                  className="object-cover"
+                  sizes="(min-width: 768px) 176px, 100vw"
+                />
+              </div>
+              <div className="flex min-w-0 flex-col py-6">
+                <CardHeader>
+                  <div className="flex items-start justify-between gap-3">
+                    <Badge variant="secondary">{playbook.category}</Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {playbook.runs}
+                    </span>
+                  </div>
+                  <CardTitle className="mt-2 text-xl">
+                    {playbook.name}
+                  </CardTitle>
+                  <CardDescription className="leading-relaxed">
+                    {playbook.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="mt-6 flex flex-1 flex-col gap-5">
+                  <div className="flex flex-col gap-2">
+                    {playbook.workflows.map((workflow) => (
+                      <div
+                        key={workflow}
+                        className="flex items-center gap-2 text-sm"
+                      >
+                        <CheckIcon
+                          className="size-3.5 text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                        {workflow}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex items-end justify-between gap-4">
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock3Icon className="size-3.5" aria-hidden="true" />
+                        {playbook.duration}
+                      </span>
+                      <span>{playbook.cost}</span>
+                    </div>
+                    <Button size="icon-sm" aria-label={`Use ${playbook.name}`}>
+                      <ArrowRightIcon />
+                    </Button>
+                  </div>
+                </CardContent>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export function PlaybooksWorkspace() {
+  const [copied, setCopied] = useState(false)
 
   return (
     <main>
@@ -207,11 +317,10 @@ export function PlaybooksWorkspace() {
         <div className="relative z-10 mx-auto flex w-full justify-center px-4 sm:px-6">
           <div className="flex w-full max-w-xl flex-col items-center text-center">
             <h1 className="text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
-              Video infrastructure for agents.
+              Core infrastructure for the next generation of AI and media.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Give Codex, Cowork, or your application access to reusable video
-              workflows backed by open GPU compute.
+              Livepeer is the open inference and compute platform.
             </p>
             <div className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-foreground px-4 py-3 text-left text-background">
               <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
@@ -285,100 +394,7 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
-      <section
-        id="playbooks"
-        className="mx-auto max-w-6xl scroll-mt-20 px-4 py-14 sm:px-6 sm:py-20"
-      >
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-medium">Start with a playbook</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Proven production plans composed from reusable workflows.
-            </p>
-          </div>
-          <div className="flex gap-1 overflow-x-auto pb-1">
-            {categories.map((item) => (
-              <button
-                key={item}
-                type="button"
-                onClick={() => setCategory(item)}
-                className={cn(
-                  "shrink-0 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                  category === item && "bg-muted font-medium text-foreground"
-                )}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-7 grid gap-4 md:grid-cols-2">
-          {visiblePlaybooks.map((playbook, index) => (
-            <Card key={playbook.name} className="py-0">
-              <div className="grid sm:grid-cols-[11rem_1fr]">
-                <div className="relative aspect-[16/10] overflow-hidden bg-muted sm:aspect-auto sm:min-h-72">
-                  <Image
-                    src={playbook.image}
-                    alt=""
-                    fill
-                    preload={index < 2}
-                    className="object-cover"
-                    sizes="(min-width: 768px) 176px, 100vw"
-                  />
-                </div>
-                <div className="flex min-w-0 flex-col py-6">
-                  <CardHeader>
-                    <div className="flex items-start justify-between gap-3">
-                      <Badge variant="secondary">{playbook.category}</Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {playbook.runs}
-                      </span>
-                    </div>
-                    <CardTitle className="mt-2 text-xl">
-                      {playbook.name}
-                    </CardTitle>
-                    <CardDescription className="leading-relaxed">
-                      {playbook.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="mt-6 flex flex-1 flex-col gap-5">
-                    <div className="flex flex-col gap-2">
-                      {playbook.workflows.map((workflow) => (
-                        <div
-                          key={workflow}
-                          className="flex items-center gap-2 text-sm"
-                        >
-                          <CheckIcon
-                            className="size-3.5 text-muted-foreground"
-                            aria-hidden="true"
-                          />
-                          {workflow}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-auto flex items-end justify-between gap-4">
-                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1.5">
-                          <Clock3Icon className="size-3.5" aria-hidden="true" />
-                          {playbook.duration}
-                        </span>
-                        <span>{playbook.cost}</span>
-                      </div>
-                      <Button
-                        size="icon-sm"
-                        aria-label={`Use ${playbook.name}`}
-                      >
-                        <ArrowRightIcon />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
+      <PlaybooksCatalog />
 
       <section className="bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
