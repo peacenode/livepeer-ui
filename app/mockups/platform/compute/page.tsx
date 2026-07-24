@@ -59,7 +59,7 @@ export default async function MockupComputePage() {
         </Button>
       }
     >
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>
