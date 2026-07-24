@@ -20,7 +20,6 @@ import {
   PlusIcon,
   RotateCwIcon,
   SearchIcon,
-  SparklesIcon,
   XIcon,
 } from "lucide-react"
 
@@ -35,7 +34,14 @@ import {
   AttachmentTitle,
 } from "@/components/ui/attachment"
 import { Badge } from "@/components/ui/badge"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -58,6 +64,15 @@ const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
 const initialPrompt =
   "A translucent cobalt running shoe suspended above rippled brushed aluminum, sharp diagonal studio light, chrome details"
+
+function getRerollPrompts(generation: Generation) {
+  return [
+    `${generation.prompt}, with slower camera movement and softer directional light`,
+    `Reframe the same subject as a tight macro sequence, preserving the materials and color palette`,
+    `Keep the composition, but move the camera in a low orbit with stronger reflections`,
+    `Create a seamless loop with the subject locked in place and the key light moving across frame`,
+  ]
+}
 
 type Reference =
   | { kind: "storyboard"; name: string; count: number }
@@ -192,6 +207,8 @@ export function AgentWorkspace() {
   const [searchQuery, setSearchQuery] = useState("")
   const [isDragging, setIsDragging] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [selectedGeneration, setSelectedGeneration] =
+    useState<Generation | null>(null)
   const [composerHeight, setComposerHeight] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const folderInputRef = useRef<HTMLInputElement>(null)
@@ -247,15 +264,17 @@ export function AgentWorkspace() {
     addFiles(event.dataTransfer.files)
   }
 
-  function generate(event?: FormEvent) {
-    event?.preventDefault()
-    if (!prompt.trim() || isGenerating) return
+  function startGeneration(nextPrompt: string) {
+    const cleanPrompt = nextPrompt.trim()
+    if (!cleanPrompt || isGenerating) return
     setIsGenerating(true)
+    setSelectedGeneration(null)
+    resultsRef.current?.scrollTo({ top: 0, behavior: "smooth" })
     window.setTimeout(() => {
       setGenerations((current) => [
         {
           id: current[0].id + 1,
-          prompt: prompt.trim(),
+          prompt: cleanPrompt,
           project,
           section: "Today",
           time: "Just now",
@@ -275,6 +294,11 @@ export function AgentWorkspace() {
       setSources([])
       setIsGenerating(false)
     }, 900)
+  }
+
+  function generate(event?: FormEvent) {
+    event?.preventDefault()
+    startGeneration(prompt)
   }
 
   return (
@@ -475,7 +499,12 @@ export function AgentWorkspace() {
                       key={generation.id}
                       className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
                     >
-                      <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+                      <button
+                        type="button"
+                        aria-label={`Open render ${generation.id}`}
+                        onClick={() => setSelectedGeneration(generation)}
+                        className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
                         <Image
                           src={sampleImage}
                           alt={`Video render ${generation.id}`}
@@ -485,19 +514,15 @@ export function AgentWorkspace() {
                             generation.imageClass
                           )}
                         />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                          <button
-                            type="button"
-                            aria-label={`Play render ${generation.id}`}
-                            className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur"
-                          >
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
+                          <span className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur">
                             <PlayIcon className="ml-0.5 size-5 fill-current" />
-                          </button>
+                          </span>
                         </div>
                         <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
                           {generation.duration}
                         </span>
-                      </div>
+                      </button>
                       <div className="flex min-w-0 flex-col py-1">
                         <div>
                           <div className="flex items-center gap-2">
@@ -551,28 +576,6 @@ export function AgentWorkspace() {
                               </span>
                             </div>
                           )}
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="bg-background"
-                            >
-                              <SparklesIcon />
-                              Get alternates
-                            </Button>
-                            <a
-                              href={sampleImage}
-                              download={`render-${generation.id}.mp4`}
-                              className={buttonVariants({
-                                variant: "outline",
-                                size: "sm",
-                                className: "bg-background",
-                              })}
-                            >
-                              <ArrowDownToLineIcon />
-                              Download
-                            </a>
-                          </div>
                         </div>
                       </div>
                     </article>
@@ -588,6 +591,127 @@ export function AgentWorkspace() {
           </div>
         </div>
       </section>
+
+      <Dialog
+        open={selectedGeneration !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedGeneration(null)
+        }}
+      >
+        <DialogContent
+          className="max-h-[calc(100dvh-2rem)] gap-0 overflow-hidden rounded-2xl p-0 sm:max-w-[min(1100px,calc(100%-3rem))]"
+          showCloseButton
+        >
+          <DialogHeader className="sr-only">
+            <DialogTitle>
+              Render {selectedGeneration?.id ?? ""}
+            </DialogTitle>
+            <DialogDescription>
+              Watch the render, review its metadata, download it, or create a
+              variation.
+            </DialogDescription>
+          </DialogHeader>
+          {selectedGeneration && (
+            <div className="grid min-h-0 overflow-y-auto lg:grid-cols-[minmax(0,1fr)_340px]">
+              <div className="flex min-h-72 items-center bg-black lg:min-h-[620px]">
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <Image
+                    src={sampleImage}
+                    alt={`Video render ${selectedGeneration.id}`}
+                    fill
+                    className={cn(
+                      "object-cover",
+                      selectedGeneration.imageClass
+                    )}
+                    priority
+                  />
+                  <button
+                    type="button"
+                    aria-label={`Play render ${selectedGeneration.id}`}
+                    className="absolute inset-0 flex items-center justify-center bg-black/10 text-foreground"
+                  >
+                    <span className="flex size-14 items-center justify-center rounded-full bg-background/90 shadow-lg backdrop-blur">
+                      <PlayIcon className="ml-1 size-6 fill-current" />
+                    </span>
+                  </button>
+                  <span className="absolute right-3 bottom-3 rounded-md bg-black/75 px-2 py-1 text-xs font-medium text-white">
+                    {selectedGeneration.duration}
+                  </span>
+                </div>
+              </div>
+
+              <aside className="flex min-w-0 flex-col bg-background p-5 sm:p-6">
+                <div className="pr-10">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="secondary">
+                      {selectedGeneration.project}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {selectedGeneration.section} · {selectedGeneration.time}
+                    </span>
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed">
+                    {selectedGeneration.prompt}
+                  </p>
+                  <div className="mt-4 text-xs text-muted-foreground">
+                    {selectedGeneration.reference.kind === "storyboard" ? (
+                      <div className="flex items-center gap-2">
+                        <Layers3Icon className="size-4" />
+                        <span className="font-medium text-foreground">
+                          {selectedGeneration.reference.name}
+                        </span>
+                        <span>
+                          {selectedGeneration.reference.count} frames
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <ImagesIcon className="size-4" />
+                        <span>
+                          {selectedGeneration.reference.count} source images
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <a
+                  href={sampleImage}
+                  download={`render-${selectedGeneration.id}.mp4`}
+                  className="mt-6 inline-flex h-9 items-center justify-center gap-1.5 rounded-full border border-border bg-background px-3 text-sm font-medium transition-colors hover:bg-muted"
+                >
+                  <ArrowDownToLineIcon className="size-4" />
+                  Download
+                </a>
+
+                <div className="mt-8 lg:mt-auto lg:pt-8">
+                  <p className="mb-2 text-xs font-medium text-muted-foreground">
+                    Reroll with
+                  </p>
+                  <div className="space-y-1">
+                    {getRerollPrompts(selectedGeneration).map(
+                      (rerollPrompt, index) => (
+                        <button
+                          key={rerollPrompt}
+                          type="button"
+                          onClick={() => startGeneration(rerollPrompt)}
+                          disabled={isGenerating}
+                          className="w-full rounded-lg px-3 py-2.5 text-left text-sm leading-snug transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-50"
+                        >
+                          <span className="mr-2 text-xs text-muted-foreground">
+                            {index + 1}
+                          </span>
+                          {rerollPrompt}
+                        </button>
+                      )
+                    )}
+                  </div>
+                </div>
+              </aside>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Button
         size="icon"
