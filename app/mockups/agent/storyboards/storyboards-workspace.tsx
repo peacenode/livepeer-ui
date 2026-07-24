@@ -161,9 +161,12 @@ export function StoryboardsWorkspace() {
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
             <h1 className="text-xl font-medium">Storyboards</h1>
-            <Button size="sm" onClick={() => setIsUploadOpen(true)}>
-              <UploadIcon />
-              Upload images
+            <Button
+              className="h-10 px-5"
+              onClick={() => setIsUploadOpen(true)}
+            >
+              <PlusIcon />
+              New storyboard
             </Button>
           </header>
 
