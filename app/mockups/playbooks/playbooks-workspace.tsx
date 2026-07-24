@@ -43,7 +43,7 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
-      <section className="relative min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]">
+      <section className="relative min-h-[44rem] overflow-hidden bg-muted sm:min-h-[56rem]">
         <Image
           src="/playbooks/20260724-232451/ultramock.jpg"
           alt=""
