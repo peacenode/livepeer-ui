@@ -30,18 +30,20 @@ export function PlaybooksWorkspace() {
             <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <Button
                 size="lg"
+                variant="secondary"
                 nativeButton={false}
                 render={<Link href="/mockups/playbooks/earn" />}
+                className="h-12 rounded-sm border-foreground/10 px-5"
               >
                 Get Started
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </Button>
               <Button
                 size="lg"
-                variant="outline"
+                variant="secondary"
                 nativeButton={false}
                 render={<Link href="/mockups/platform" />}
-                className="bg-background/70 backdrop-blur-sm"
+                className="h-12 rounded-sm border-foreground/10 px-5"
               >
                 Sign up with Google
               </Button>
@@ -73,10 +75,11 @@ export function PlaybooksWorkspace() {
             from your agent.
           </p>
           <Button
-            variant="outline"
+            size="lg"
+            variant="secondary"
             nativeButton={false}
             render={<Link href="/mockups/playbooks/library" />}
-            className="mt-2 bg-background/75 backdrop-blur-sm"
+            className="mt-2 h-12 rounded-sm border-foreground/10 px-5"
           >
             Browse Playbooks
           </Button>
