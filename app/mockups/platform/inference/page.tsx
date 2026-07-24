@@ -35,7 +35,7 @@ export default async function MockupInferencePage() {
               href={`/mockups/platform/inference/${container.slug}`}
               className="group"
             >
-              <Card className="h-full gap-3 transition-colors group-hover:bg-muted-foreground/15">
+              <Card className="h-full gap-3">
                 <CardHeader>
                   <CardTitle className="font-mono text-sm font-medium">
                     {container.slug}
