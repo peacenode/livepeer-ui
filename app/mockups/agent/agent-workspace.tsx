@@ -275,7 +275,7 @@ export function AgentWorkspace() {
           >
             <InputGroup
               className={cn(
-                "rounded-t-none! rounded-b-3xl! border bg-muted shadow-xl transition-colors has-[[data-slot=input-group-control]:focus-visible]:border-border! has-[[data-slot=input-group-control]:focus-visible]:ring-0!",
+                "rounded-t-none! rounded-b-3xl! border border-foreground bg-muted shadow-xl transition-colors has-[[data-slot=input-group-control]:focus-visible]:border-foreground! has-[[data-slot=input-group-control]:focus-visible]:ring-0!",
                 isDragging && "border-foreground"
               )}
             >
