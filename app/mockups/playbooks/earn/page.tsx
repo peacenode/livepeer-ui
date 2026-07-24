@@ -190,7 +190,7 @@ export default function EarnWithGpuPage() {
             {paths.map((path) => (
               <article
                 key={path.title}
-                className="flex flex-col border-b py-8 md:border-r md:px-8 md:last:border-r-0 md:first:pl-0 md:last:pr-0"
+                className="flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0"
               >
                 <p className="text-xs font-medium text-muted-foreground">
                   {path.fit}
