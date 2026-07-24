@@ -27,8 +27,8 @@ export default async function MockupComputePage() {
 
   const stats = [
     {
-      label: "Active orchestrators",
-      value: network ? String(network.activeOrchestrators) : "—",
+      label: "Active delegators",
+      value: network ? network.activeDelegators.toLocaleString("en-US") : "—",
     },
     {
       label: "Total LPT staked",
