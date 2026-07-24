@@ -5,8 +5,6 @@ import { ArrowRightIcon, CpuIcon } from "lucide-react"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 
-import { InstallRunnerFooter } from "./install-runner-footer"
-
 export function PlaybooksWorkspace() {
   return (
     <main>
@@ -48,8 +46,6 @@ export function PlaybooksWorkspace() {
           </div>
         </div>
       </section>
-
-      <InstallRunnerFooter className="mt-0" />
 
       <section className="relative min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]">
         <Image
