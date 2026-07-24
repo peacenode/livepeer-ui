@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 const command = "npm install -g @livepeer/runner"
 
 export function InstallRunnerFooter({
-  title = "Run this playbook with Runner.",
+  title = "Runner",
   description = "Install the plugin once, paste your copied playbook into the agent of your choice, and approve each production step.",
 }: {
   title?: string
