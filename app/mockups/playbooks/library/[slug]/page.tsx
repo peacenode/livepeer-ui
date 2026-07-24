@@ -102,15 +102,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
         </Breadcrumb>
 
         <div className="mt-10 max-w-4xl">
-          <div className="flex flex-wrap gap-2">
-            {playbook.tier && (
-              <Badge variant="secondary">{playbook.tier}</Badge>
-            )}
-            {playbook.format && (
-              <Badge variant="outline">{playbook.format}</Badge>
-            )}
-          </div>
-          <h1 className="mt-5 text-3xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
+          <h1 className="text-3xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
             {playbook.title}
           </h1>
           {intro && (
