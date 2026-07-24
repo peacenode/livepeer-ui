@@ -311,7 +311,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           )}
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-[repeat(3,max-content)] sm:gap-16 md:gap-24">
           {meta.map((item) => {
             const values = item.value?.split(/\s*·\s*/).filter(Boolean)
 
@@ -358,7 +358,9 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 />
               )}
               <div className="flex flex-col justify-center p-6 sm:p-8">
-                <p className="mb-5 text-xs font-medium">Output</p>
+                <p className="mb-5 text-base leading-snug font-medium">
+                  Output
+                </p>
                 {catalogEntry.deliverables.length > 0 ? (
                   <div className="divide-y">
                     {catalogEntry.deliverables.map((deliverable) => (
