@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
 
 type Brief = {
   yamlBlock: string
@@ -153,6 +154,12 @@ export function PlaybookBriefForm({
   const aspectFields = fields.filter((field) =>
     field.name.toLowerCase().includes("aspect")
   )
+  const hasBrandCompositionLayout = [
+    "brand_name",
+    "one_liner",
+    "shots",
+    "aesthetic",
+  ].every((name) => fields.some((field) => field.name === name))
   const orderedFields = fields.flatMap((field) => {
     if (/^(true|false)$/i.test(field.defaultValue.trim())) return []
     if (field.name === "finish" && hasFinishingPasses) return []
@@ -167,6 +174,24 @@ export function PlaybookBriefForm({
     !fields.some((field) => field.name.toLowerCase() === "aesthetic")
   ) {
     orderedFields.push(...aspectFields)
+  }
+  if (hasBrandCompositionLayout) {
+    const compositionOrder = [
+      "brand_name",
+      "one_liner",
+      "shots",
+      "aesthetic",
+      ...aspectFields.map((field) => field.name),
+    ]
+    orderedFields.sort((a, b) => {
+      const aIndex = compositionOrder.indexOf(a.name)
+      const bIndex = compositionOrder.indexOf(b.name)
+
+      return (
+        (aIndex === -1 ? compositionOrder.length : aIndex) -
+        (bIndex === -1 ? compositionOrder.length : bIndex)
+      )
+    })
   }
 
   async function copyPlaybook() {
@@ -232,6 +257,14 @@ export function PlaybookBriefForm({
             const long = (field.hint || field.defaultValue).length > 60
             const isAspectRatio = field.name.toLowerCase().includes("aspect")
             const isAesthetic = field.name.toLowerCase() === "aesthetic"
+            const compositionClass =
+              hasBrandCompositionLayout &&
+              {
+                brand_name: "sm:col-start-1 sm:row-start-1",
+                one_liner: "sm:col-start-1 sm:row-start-2",
+                shots: "sm:col-start-2 sm:row-start-1",
+                aesthetic: "sm:col-start-2 sm:row-start-2",
+              }[field.name]
             const aspectOptions = Array.from(
               new Set(
                 `${field.defaultValue} ${field.hint}`.match(/\d+\s*:\s*\d+/g) ??
@@ -260,7 +293,16 @@ export function PlaybookBriefForm({
             return (
               <div
                 key={field.name}
-                className={long && !isAesthetic ? "sm:col-span-2" : undefined}
+                className={cn(
+                  long &&
+                    !isAesthetic &&
+                    !compositionClass &&
+                    "sm:col-span-2",
+                  compositionClass,
+                  hasBrandCompositionLayout &&
+                    isAspectRatio &&
+                    "sm:col-span-2 sm:row-start-3"
+                )}
               >
                 <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
                   {labelFor(field.name)}
