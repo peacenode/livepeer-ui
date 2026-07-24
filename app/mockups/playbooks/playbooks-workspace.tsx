@@ -17,43 +17,53 @@ export function PlaybooksWorkspace() {
       <section className="relative flex min-h-svh w-full items-center overflow-hidden bg-muted">
         <LivepeerSymbol3D
           showOnMobile
-          className="rounded-none [&>canvas]:scale-125"
+          className="rounded-none opacity-75 [&>canvas]:scale-125"
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-muted/45"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-muted/35"
           aria-hidden="true"
         />
-        <div className="relative z-10 mx-auto flex w-full justify-center px-4 sm:px-6">
-          <div className="flex w-full max-w-xl flex-col items-center text-center">
-            <h1 className="text-4xl leading-[0.98] font-normal tracking-tight text-balance sm:text-6xl">
-              The open network for inference &amp; compute.
+        <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
+          <div className="flex max-w-6xl flex-col items-start">
+            <h1 className="text-[clamp(2.75rem,5.8vw,5.75rem)] leading-[0.94] font-normal tracking-[-0.05em] text-balance">
+              Open infrastructure to run AI on your terms.
+              <span className="mt-3 block text-foreground/45">
+                Run inference, automate repeatable workflows, and put GPUs to
+                work—from your first prompt to production.
+              </span>
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-              Install Runner and get started in your agent of choice.
-            </p>
-            <div className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-foreground px-4 py-3 text-left text-background">
-              <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
-                npm install -g @livepeer/runner
-              </code>
-              <button
-                type="button"
-                onClick={async () => {
-                  await navigator.clipboard.writeText(
-                    "npm install -g @livepeer/runner"
-                  )
-                  setCopied(true)
-                }}
-                className="flex size-8 shrink-0 items-center justify-center rounded-full text-background/70 transition-colors hover:bg-background/10 hover:text-background"
-                aria-label={
-                  copied ? "Install command copied" : "Copy install command"
-                }
+            <div className="mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+              <div className="inline-flex min-w-0 items-center gap-4 rounded-xl bg-foreground px-4 py-2.5 text-left text-background">
+                <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
+                  npm install -g @livepeer/runner
+                </code>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(
+                      "npm install -g @livepeer/runner"
+                    )
+                    setCopied(true)
+                  }}
+                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-background/70 transition-colors hover:bg-background/10 hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+                  aria-label={
+                    copied ? "Install command copied" : "Copy install command"
+                  }
+                >
+                  {copied ? (
+                    <CheckIcon className="size-4" aria-hidden="true" />
+                  ) : (
+                    <CopyIcon className="size-4" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
+              <Link
+                href="/mockups/playbooks/library"
+                className="inline-flex h-13 items-center justify-center gap-2 rounded-xl border border-foreground/15 bg-background/70 px-5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
-                {copied ? (
-                  <CheckIcon className="size-4" aria-hidden="true" />
-                ) : (
-                  <CopyIcon className="size-4" aria-hidden="true" />
-                )}
-              </button>
+                Browse Playbooks
+                <ArrowRightIcon className="size-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>
