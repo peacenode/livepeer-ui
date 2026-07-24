@@ -1,27 +1,51 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import {
+  type DragEvent,
+  type FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import Image from "next/image"
 import {
   ArrowDownToLineIcon,
   ArrowUpIcon,
   ChevronDownIcon,
-  FilesIcon,
   FolderOpenIcon,
-  ImageIcon,
-  ImagesIcon,
+  ImagePlusIcon,
+  PaperclipIcon,
   PlusIcon,
   RotateCwIcon,
-  SparklesIcon,
   XIcon,
 } from "lucide-react"
 
-import { LivepeerLockup } from "@/components/brand"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentGroup,
+  AttachmentMedia,
+  AttachmentTitle,
+} from "@/components/ui/attachment"
 import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 
 const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
@@ -29,39 +53,45 @@ const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const initialPrompt =
   "A translucent cobalt running shoe suspended above rippled brushed aluminum, sharp diagonal studio light, chrome details"
 
-const alternatives = [
-  "Place the shoe on mirrored black glass with a low, electric-blue horizon light.",
-  "Turn the scene into a macro editorial crop with condensation and soft silver light.",
-  "Suspend the shoe inside a clear acrylic cube with hard midday shadows.",
-  "Reframe as a top-down campaign image with chrome spheres and rippled metal.",
+const seedRuns = [
+  {
+    id: 12,
+    prompt: initialPrompt,
+    project: "Orbit",
+    time: "Just now",
+  },
+  {
+    id: 11,
+    prompt:
+      "Campaign still with a cobalt runner on black glass, low horizon light, cool studio atmosphere",
+    project: "Orbit",
+    time: "18 min ago",
+  },
 ]
 
-const variants = [
-  { id: 1, label: "01", imageClass: "object-cover" },
-  { id: 2, label: "02", imageClass: "scale-110 object-cover hue-rotate-15" },
-  {
-    id: 3,
-    label: "03",
-    imageClass: "scale-125 -translate-x-3 object-cover saturate-75",
-  },
-  {
-    id: 4,
-    label: "04",
-    imageClass: "scale-110 translate-y-3 object-cover contrast-125",
-  },
+const imageClasses = [
+  "object-cover",
+  "scale-110 object-cover hue-rotate-15",
+  "scale-125 -translate-x-3 object-cover saturate-75",
+  "scale-110 translate-y-3 object-cover contrast-125",
 ]
 
 type SourceFile = {
   name: string
+  size: number
   url: string
 }
 
+type Generation = (typeof seedRuns)[number]
+
 export function AgentWorkspace() {
-  const [prompt, setPrompt] = useState(initialPrompt)
+  const [prompt, setPrompt] = useState("")
   const [sources, setSources] = useState<SourceFile[]>([])
-  const [selected, setSelected] = useState(1)
+  const [generations, setGenerations] = useState<Generation[]>(seedRuns)
+  const [project, setProject] = useState("Orbit")
+  const [isDragging, setIsDragging] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
-  const [run, setRun] = useState(12)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const folderInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -77,284 +107,293 @@ export function AgentWorkspace() {
         .slice(0, Math.max(0, 12 - current.length))
         .map((file) => ({
           name: file.name,
+          size: file.size,
           url: URL.createObjectURL(file),
         })),
     ])
   }
 
-  function generate(nextPrompt = prompt) {
-    if (!nextPrompt.trim() || isGenerating) return
-    setPrompt(nextPrompt)
+  function handleDrop(event: DragEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setIsDragging(false)
+    addFiles(event.dataTransfer.files)
+  }
+
+  function generate(event?: FormEvent) {
+    event?.preventDefault()
+    if (!prompt.trim() || isGenerating) return
     setIsGenerating(true)
     window.setTimeout(() => {
-      setRun((current) => current + 1)
-      setSelected(1)
+      setGenerations((current) => [
+        {
+          id: current[0].id + 1,
+          prompt: prompt.trim(),
+          project,
+          time: "Just now",
+        },
+        ...current.map((item, index) =>
+          index === 0 && item.time === "Just now"
+            ? { ...item, time: "1 min ago" }
+            : item
+        ),
+      ])
+      setPrompt("")
+      setSources([])
       setIsGenerating(false)
     }, 900)
   }
 
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
-      <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/95 px-4 backdrop-blur sm:px-6">
-        <div className="flex min-w-0 items-center gap-3">
-          <LivepeerLockup className="h-4 w-auto shrink-0" />
-          <Separator orientation="vertical" className="h-4" />
-          <span className="truncate text-sm text-muted-foreground">
-            Image agent
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="hidden sm:flex">
-            History
-          </Button>
-          <Avatar className="size-8">
-            <AvatarFallback className="bg-foreground text-xs text-background">
-              P
-            </AvatarFallback>
-          </Avatar>
-        </div>
-      </header>
-
-      <main className="mx-auto grid w-full max-w-[1480px] flex-1 gap-0 lg:grid-cols-[minmax(280px,360px)_minmax(0,1fr)]">
-        <aside className="border-b p-4 sm:p-6 lg:sticky lg:top-14 lg:h-[calc(100dvh-3.5rem)] lg:border-r lg:border-b-0">
-          <div className="flex h-full flex-col gap-6">
-            <div>
-              <p className="text-sm font-medium">Create images</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Add references, describe the result, then generate four options.
-              </p>
-            </div>
-
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-medium">References</label>
-                {sources.length > 0 && (
-                  <span className="text-xs text-muted-foreground">
-                    {sources.length}/12
-                  </span>
-                )}
-              </div>
-              {sources.length === 0 ? (
-                <div className="grid grid-cols-2 gap-2">
-                  <label className="flex min-h-24 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground">
-                    <ImageIcon className="size-4" />
-                    Add images
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      className="sr-only"
-                      onChange={(event) => addFiles(event.target.files)}
-                    />
-                  </label>
-                  <button
-                    type="button"
-                    className="flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border border-dashed text-xs text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
-                    onClick={() => folderInputRef.current?.click()}
-                  >
-                    <FolderOpenIcon className="size-4" />
-                    Add folder
-                  </button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-4 gap-2">
-                  {sources.map((source) => (
-                    <div
-                      key={source.url}
-                      className="group relative aspect-square overflow-hidden rounded-lg border bg-muted"
-                    >
-                      <Image
-                        src={source.url}
-                        alt={source.name}
-                        fill
-                        unoptimized
-                        className="object-cover"
-                      />
-                      <button
-                        type="button"
-                        aria-label={`Remove ${source.name}`}
-                        className="absolute top-1 right-1 flex size-5 items-center justify-center rounded-full bg-background/90 opacity-0 shadow-xs transition-opacity group-hover:opacity-100"
-                        onClick={() =>
-                          setSources((current) =>
-                            current.filter((item) => item.url !== source.url)
-                          )
-                        }
-                      >
-                        <XIcon className="size-3" />
-                      </button>
-                    </div>
-                  ))}
-                  <label className="flex aspect-square cursor-pointer items-center justify-center rounded-lg border border-dashed text-muted-foreground hover:bg-muted/50">
-                    <PlusIcon className="size-4" />
-                    <span className="sr-only">Add more images</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      className="sr-only"
-                      onChange={(event) => addFiles(event.target.files)}
-                    />
-                  </label>
-                </div>
-              )}
-              <input
-                ref={folderInputRef}
-                type="file"
-                accept="image/*"
-                multiple
-                className="sr-only"
-                onChange={(event) => addFiles(event.target.files)}
-              />
-            </section>
-
-            <section className="space-y-3">
-              <label htmlFor="prompt" className="text-xs font-medium">
-                Prompt
-              </label>
-              <div className="rounded-2xl border bg-background p-1 shadow-xs focus-within:ring-3 focus-within:ring-ring/20">
-                <Textarea
-                  id="prompt"
-                  value={prompt}
-                  onChange={(event) => setPrompt(event.target.value)}
-                  placeholder="Describe what you want to create"
-                  className="min-h-32 border-0 bg-transparent shadow-none focus-visible:ring-0"
-                />
-                <div className="flex items-center justify-between px-2 pb-2">
-                  <button
-                    type="button"
-                    className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                  >
-                    1:1 <ChevronDownIcon className="size-3" />
-                  </button>
-                  <Button
-                    size="sm"
-                    disabled={!prompt.trim() || isGenerating}
-                    onClick={() => generate()}
-                  >
-                    {isGenerating ? (
-                      <RotateCwIcon className="animate-spin" />
-                    ) : (
-                      <ArrowUpIcon />
-                    )}
-                    {isGenerating ? "Generating" : "Generate"}
-                  </Button>
-                </div>
-              </div>
-            </section>
-
-            <div className="mt-auto hidden items-center justify-between border-t pt-4 text-xs text-muted-foreground lg:flex">
-              <span>Flux 1.1 Pro</span>
-              <span>4 images · 6 credits</span>
-            </div>
+    <main>
+      <section className="border-b">
+        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+          <div className="mb-6 text-center">
+            <h1 className="text-xl font-medium text-balance sm:text-2xl">
+              What do you want to make?
+            </h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Start with a prompt, references, or a folder of images.
+            </p>
           </div>
-        </aside>
 
-        <div className="min-w-0 p-4 sm:p-6 lg:p-8">
-          <div className="mx-auto max-w-5xl space-y-8">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg font-medium text-balance">
-                    Generation {run}
-                  </h1>
-                  <Badge variant="secondary">4 images</Badge>
-                </div>
-                <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-                  {prompt}
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={isGenerating}
-                  onClick={() => generate()}
-                >
-                  <RotateCwIcon />
-                  Reroll
-                </Button>
-                <a
-                  href={sampleImage}
-                  download={`generation-${run}-${selected}.png`}
-                  className={buttonVariants({ size: "sm" })}
-                >
-                  <ArrowDownToLineIcon />
-                  Download
-                </a>
-              </div>
-            </div>
-
-            <div
+          <form
+            onSubmit={generate}
+            onDragEnter={(event) => {
+              event.preventDefault()
+              setIsDragging(true)
+            }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                setIsDragging(false)
+              }
+            }}
+            onDrop={handleDrop}
+          >
+            <InputGroup
               className={cn(
-                "grid grid-cols-2 gap-2 transition-opacity sm:gap-3",
-                isGenerating && "animate-pulse opacity-40"
+                "rounded-3xl border bg-background shadow-sm transition-colors has-[textarea]:rounded-3xl",
+                isDragging && "border-foreground bg-muted/50"
               )}
             >
-              {variants.map((variant) => (
-                <button
-                  key={variant.id}
-                  type="button"
-                  aria-label={`Select result ${variant.label}`}
-                  className={cn(
-                    "group relative aspect-square overflow-hidden rounded-xl bg-muted ring-offset-2 ring-offset-background transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none",
-                    selected === variant.id && "ring-2 ring-foreground"
-                  )}
-                  onClick={() => setSelected(variant.id)}
+              {sources.length > 0 && (
+                <InputGroupAddon
+                  align="block-start"
+                  className="block cursor-default px-3 pt-3"
                 >
-                  <Image
-                    src={sampleImage}
-                    alt={`Cobalt running shoe variation ${variant.label}`}
-                    fill
-                    priority={variant.id === 1}
-                    className={cn(
-                      "transition-transform duration-500 group-hover:scale-[1.03]",
-                      variant.imageClass
-                    )}
-                  />
-                  <span className="absolute top-2 left-2 flex size-6 items-center justify-center rounded-full bg-background/90 text-[10px] font-medium shadow-xs backdrop-blur">
-                    {variant.label}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <section className="space-y-3 border-t pt-6">
-              <div className="flex items-center gap-2">
-                <SparklesIcon className="size-4" />
-                <h2 className="text-sm font-medium">Try another direction</h2>
-              </div>
-              <div className="grid gap-2 md:grid-cols-2">
-                {alternatives.map((alternative, index) => (
-                  <button
-                    key={alternative}
-                    type="button"
-                    className="group flex min-h-20 items-start gap-3 rounded-xl border p-3 text-left transition-colors hover:bg-muted/50"
-                    onClick={() => generate(alternative)}
+                  <AttachmentGroup>
+                    {sources.map((source) => (
+                      <Attachment key={source.url} size="sm">
+                        <AttachmentMedia variant="image">
+                          <Image
+                            src={source.url}
+                            alt=""
+                            width={32}
+                            height={32}
+                            unoptimized
+                          />
+                        </AttachmentMedia>
+                        <AttachmentContent className="max-w-32">
+                          <AttachmentTitle>{source.name}</AttachmentTitle>
+                          <AttachmentDescription>
+                            {Math.max(1, Math.round(source.size / 1024))} KB
+                          </AttachmentDescription>
+                        </AttachmentContent>
+                        <AttachmentActions>
+                          <AttachmentAction
+                            aria-label={`Remove ${source.name}`}
+                            onClick={() =>
+                              setSources((current) =>
+                                current.filter(
+                                  (item) => item.url !== source.url
+                                )
+                              )
+                            }
+                          >
+                            <XIcon />
+                          </AttachmentAction>
+                        </AttachmentActions>
+                      </Attachment>
+                    ))}
+                  </AttachmentGroup>
+                </InputGroupAddon>
+              )}
+              <InputGroupTextarea
+                value={prompt}
+                onChange={(event) => setPrompt(event.target.value)}
+                placeholder={
+                  isDragging
+                    ? "Drop images to attach"
+                    : "Describe an image, scene, storyboard, or character..."
+                }
+                aria-label="Creation prompt"
+                className="min-h-28 px-4 pt-4 text-base md:text-base"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault()
+                    generate()
+                  }
+                }}
+              />
+              <InputGroupAddon
+                align="block-end"
+                className="justify-between gap-2 px-3 pb-3"
+              >
+                <div className="flex min-w-0 items-center gap-1">
+                  <InputGroupButton
+                    size="icon-sm"
+                    aria-label="Attach images"
+                    onClick={() => fileInputRef.current?.click()}
                   >
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-xs text-muted-foreground">
-                      {index + 1}
+                    <PaperclipIcon />
+                  </InputGroupButton>
+                  <InputGroupButton
+                    size="icon-sm"
+                    aria-label="Attach a folder"
+                    onClick={() => folderInputRef.current?.click()}
+                  >
+                    <FolderOpenIcon />
+                  </InputGroupButton>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      render={
+                        <InputGroupButton className="max-w-36 min-w-0 px-2" />
+                      }
+                    >
+                      <InputGroupText className="truncate text-xs">
+                        {project}
+                        <ChevronDownIcon />
+                      </InputGroupText>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>Save to project</DropdownMenuLabel>
+                      {["Orbit", "Soft launch", "Unsorted"].map((item) => (
+                        <DropdownMenuItem
+                          key={item}
+                          onClick={() => setProject(item)}
+                        >
+                          {item}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                <Button
+                  type="submit"
+                  size="icon-sm"
+                  aria-label="Generate"
+                  disabled={!prompt.trim() || isGenerating}
+                >
+                  {isGenerating ? (
+                    <RotateCwIcon className="animate-spin" />
+                  ) : (
+                    <ArrowUpIcon />
+                  )}
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => addFiles(event.target.files)}
+            />
+            <input
+              ref={folderInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => addFiles(event.target.files)}
+            />
+          </form>
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Drop anywhere on the input · Enter to generate · Shift Enter for a
+            new line
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-sm font-medium">Recent</h2>
+          <Button variant="ghost" size="sm">
+            Filter
+          </Button>
+        </div>
+        <div className="space-y-12">
+          {generations.map((generation) => (
+            <article key={generation.id} className="space-y-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary">{generation.project}</Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {generation.time}
                     </span>
-                    <span className="text-sm leading-relaxed">
-                      {alternative}
-                    </span>
-                    <ArrowUpIcon className="mt-1 ml-auto size-3.5 shrink-0 rotate-45 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                  </button>
+                  </div>
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+                    {generation.prompt}
+                  </p>
+                </div>
+                <Button variant="outline" size="sm">
+                  <RotateCwIcon />
+                  Rerun
+                </Button>
+              </div>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
+                {imageClasses.map((imageClass, index) => (
+                  <div
+                    key={imageClass}
+                    className="group relative aspect-square overflow-hidden rounded-xl bg-muted"
+                  >
+                    <Image
+                      src={sampleImage}
+                      alt={`Generation ${generation.id}, result ${index + 1}`}
+                      fill
+                      className={cn(
+                        "transition-transform duration-500 group-hover:scale-[1.03]",
+                        imageClass
+                      )}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-gradient-to-t from-black/60 to-transparent p-2 pt-8 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
+                      <Button
+                        variant="secondary"
+                        size="icon-xs"
+                        aria-label="Use as reference"
+                      >
+                        <ImagePlusIcon />
+                      </Button>
+                      <a
+                        href={sampleImage}
+                        download={`generation-${generation.id}-${index + 1}.png`}
+                        aria-label="Download image"
+                        className={buttonVariants({
+                          variant: "secondary",
+                          size: "icon-xs",
+                        })}
+                      >
+                        <ArrowDownToLineIcon />
+                      </a>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </section>
-
-            <div className="flex items-center justify-center gap-4 pb-4 text-xs text-muted-foreground lg:hidden">
-              <span className="flex items-center gap-1.5">
-                <FilesIcon className="size-3.5" />
-                Flux 1.1 Pro
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ImagesIcon className="size-3.5" />4 images · 6 credits
-              </span>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      <Button
+        size="icon"
+        aria-label="New creation"
+        className="fixed right-4 bottom-4 shadow-lg sm:hidden"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <PlusIcon />
+      </Button>
+    </main>
   )
 }
