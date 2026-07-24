@@ -301,7 +301,7 @@ export function PlaybookBriefForm({
                   compositionClass,
                   hasBrandCompositionLayout &&
                     isAspectRatio &&
-                    "sm:col-span-2 sm:row-start-3"
+                    "sm:col-start-2 sm:row-start-3"
                 )}
               >
                 <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
@@ -349,6 +349,26 @@ export function PlaybookBriefForm({
       <div className="mt-8 flex flex-col gap-3">
         {(booleanFields.length > 0 || trainBrandLoraField) && (
           <div className="grid gap-4 pt-1 sm:grid-cols-2">
+            {trainBrandLoraField && (
+              <div className="flex items-start gap-2">
+                <Checkbox
+                  id="brief-train_brand_lora"
+                  checked={
+                    (values[trainBrandLoraField.name] ??
+                      trainBrandLoraField.defaultValue) === "true"
+                  }
+                  onCheckedChange={(checked) =>
+                    setValues((current) => ({
+                      ...current,
+                      [trainBrandLoraField.name]: String(checked),
+                    }))
+                  }
+                />
+                <Label htmlFor="brief-train_brand_lora">
+                  {labelFor(trainBrandLoraField.name)}
+                </Label>
+              </div>
+            )}
             <div className="flex flex-col gap-3">
               {booleanFields.map((field) => {
                 const id = `brief-${field.name}`
@@ -373,26 +393,6 @@ export function PlaybookBriefForm({
                 )
               })}
             </div>
-            {trainBrandLoraField && (
-              <div className="flex items-start gap-2">
-                <Checkbox
-                  id="brief-train_brand_lora"
-                  checked={
-                    (values[trainBrandLoraField.name] ??
-                      trainBrandLoraField.defaultValue) === "true"
-                  }
-                  onCheckedChange={(checked) =>
-                    setValues((current) => ({
-                      ...current,
-                      [trainBrandLoraField.name]: String(checked),
-                    }))
-                  }
-                />
-                <Label htmlFor="brief-train_brand_lora">
-                  {labelFor(trainBrandLoraField.name)}
-                </Label>
-              </div>
-            )}
           </div>
         )}
         <Button
