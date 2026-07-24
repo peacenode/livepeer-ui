@@ -1,6 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRightIcon, CpuIcon } from "lucide-react"
+import {
+  ArrowDownToLineIcon,
+  ArrowRightIcon,
+  CpuIcon,
+} from "lucide-react"
 
 import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
 import { Button } from "@/components/ui/button"
@@ -67,22 +71,37 @@ export function PlaybooksWorkspace() {
           aria-hidden="true"
         />
         <div className="absolute inset-0 z-10 flex flex-col items-start justify-center gap-4 p-6 sm:p-10">
-          <h2 className="text-4xl font-normal tracking-tight sm:text-5xl">
-            Playbooks
+          <h2 className="font-runner text-4xl font-medium tracking-tight sm:text-5xl">
+            Runner
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-foreground/65">
             Ready-to-run AI workflows for creating images, video, and audio
             from your agent.
           </p>
-          <Button
-            size="lg"
-            variant="secondary"
-            nativeButton={false}
-            render={<Link href="/mockups/playbooks/library" />}
-            className="mt-2 h-12 rounded-sm border-foreground/10 px-5"
-          >
-            Browse Playbooks
-          </Button>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button
+              size="lg"
+              variant="secondary"
+              nativeButton={false}
+              render={<Link href="/mockups/playbooks/library" />}
+              className="h-12 rounded-sm border-foreground/10 px-5"
+            >
+              Browse Playbooks
+              <span className="font-sans" aria-hidden="true">
+                →
+              </span>
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              nativeButton={false}
+              render={<Link href="/mockups/playbooks/install" />}
+              className="h-12 rounded-sm border-foreground/10 px-5"
+            >
+              Get Runner
+              <ArrowDownToLineIcon aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </section>
 

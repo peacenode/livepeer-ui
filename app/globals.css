@@ -15,6 +15,7 @@
 @theme inline {
   --font-heading: InterVariable, Inter, sans-serif;
   --font-sans: InterVariable, Inter, sans-serif;
+  --font-runner: "Serpentine Runner", sans-serif;
   --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
