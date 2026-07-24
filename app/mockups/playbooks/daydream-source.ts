@@ -7,6 +7,16 @@ const titleOverrides: Record<string, string> = {
     "Krea 2 Open-Source: Train Your Brand Aesthetic",
 }
 
+const metadataOverrides: Record<
+  string,
+  { duration?: string; budget?: string }
+> = {
+  "train-your-brand-aesthetic": {
+    duration: "~30s campaign render · ~6–8m w/ brand LoRA",
+    budget: "~$0.25 campaign · ~$0.05 each after · ~$22 one-time LoRA training",
+  },
+}
+
 export type SourcePlaybook = {
   slug: string
   title: string
@@ -180,8 +190,10 @@ export async function getPlaybookDocument(
     format: parseScalar(fields.get("format")),
     theme: parseScalar(fields.get("theme")),
     persona: parseScalar(fields.get("persona")),
-    duration: parseScalar(fields.get("duration")),
-    budget: parseScalar(fields.get("budget_usd")),
+    duration:
+      metadataOverrides[slug]?.duration ?? parseScalar(fields.get("duration")),
+    budget:
+      metadataOverrides[slug]?.budget ?? parseScalar(fields.get("budget_usd")),
     reliability: parseScalar(fields.get("reliability"))?.split("#")[0].trim(),
     caps,
     markdown,
