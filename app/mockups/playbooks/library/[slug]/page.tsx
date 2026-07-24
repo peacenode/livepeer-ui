@@ -284,15 +284,29 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
         </div>
 
         <div className="mt-12 grid border-y sm:grid-cols-3">
-          {meta.map((item) => (
-            <div
-              key={item.label}
-              className="border-b py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:border-r-0"
-            >
-              <p className="text-xs text-muted-foreground">{item.label}</p>
-              <p className="mt-2 text-sm font-medium">{item.value}</p>
-            </div>
-          ))}
+          {meta.map((item) => {
+            const values = item.value?.split(/\s*·\s*/).filter(Boolean)
+
+            return (
+              <div
+                key={item.label}
+                className="border-b py-6 last:border-b-0 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:border-r-0"
+              >
+                <p className="text-xs text-muted-foreground">{item.label}</p>
+                <div
+                  className={
+                    item.label === "Budget"
+                      ? "mt-3 space-y-1 text-lg leading-snug font-medium tabular-nums"
+                      : "mt-3 space-y-1 text-base leading-snug font-medium tabular-nums"
+                  }
+                >
+                  {values?.map((value) => (
+                    <p key={value}>{value}</p>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         {catalogEntry && (
