@@ -204,7 +204,7 @@ export function CharactersWorkspace() {
                     }
                     className={cn(
                       "group relative aspect-square overflow-hidden bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                      imageGroupRadius(index, character.images.length + 1)
+                      imageGroupRadius(index, character.images.length)
                     )}
                   >
                     <Image
@@ -223,10 +223,7 @@ export function CharactersWorkspace() {
                 <label
                   className={cn(
                     "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                    imageGroupRadius(
-                      character.images.length,
-                      character.images.length + 1
-                    )
+                    "rounded-md"
                   )}
                 >
                   <PlusIcon className="size-4" />

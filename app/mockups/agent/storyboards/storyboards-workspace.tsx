@@ -241,7 +241,7 @@ export function StoryboardsWorkspace() {
                     }}
                     className={cn(
                       "relative aspect-square cursor-grab active:cursor-grabbing",
-                      imageGroupRadius(index, batch.images.length + 1)
+                      imageGroupRadius(index, batch.images.length)
                     )}
                   >
                     <div
@@ -281,10 +281,7 @@ export function StoryboardsWorkspace() {
                 <label
                   className={cn(
                     "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                    imageGroupRadius(
-                      batch.images.length,
-                      batch.images.length + 1
-                    )
+                    "rounded-md"
                   )}
                 >
                   <PlusIcon className="size-4" />

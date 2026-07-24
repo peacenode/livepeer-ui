@@ -1030,7 +1030,7 @@ function ProjectImageCollections({
                   key={index}
                   className={cn(
                     "relative aspect-square overflow-hidden bg-muted",
-                    imageGroupRadius(index, item.count + 1)
+                    imageGroupRadius(index, item.count)
                   )}
                 >
                   <Image
@@ -1049,7 +1049,7 @@ function ProjectImageCollections({
               <label
                 className={cn(
                   "flex aspect-square items-center justify-center border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                  imageGroupRadius(item.count, item.count + 1)
+                  "rounded-md"
                 )}
               >
                 <PlusIcon className="size-4" />
