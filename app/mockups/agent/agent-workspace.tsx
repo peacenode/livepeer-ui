@@ -442,9 +442,11 @@ export function AgentWorkspace() {
                           <InputGroupButton className="max-w-16 min-w-0 px-2 sm:max-w-32" />
                         }
                       >
-                        <InputGroupText className="truncate text-xs">
-                          {selectedStoryboard}
-                          <ChevronDownIcon />
+                        <InputGroupText className="min-w-0 gap-1 text-xs">
+                          <span className="truncate">
+                            {selectedStoryboard}
+                          </span>
+                          <ChevronDownIcon className="size-3.5 shrink-0" />
                         </InputGroupText>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
@@ -476,9 +478,9 @@ export function AgentWorkspace() {
                           <InputGroupButton className="max-w-16 min-w-0 px-2 sm:max-w-28" />
                         }
                       >
-                        <InputGroupText className="truncate text-xs">
-                          {selectedCharacter}
-                          <ChevronDownIcon />
+                        <InputGroupText className="min-w-0 gap-1 text-xs">
+                          <span className="truncate">{selectedCharacter}</span>
+                          <ChevronDownIcon className="size-3.5 shrink-0" />
                         </InputGroupText>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
@@ -504,9 +506,9 @@ export function AgentWorkspace() {
                         <InputGroupButton className="max-w-20 min-w-0 px-2 sm:max-w-36" />
                       }
                     >
-                      <InputGroupText className="truncate text-xs">
-                        {project}
-                        <ChevronDownIcon />
+                      <InputGroupText className="min-w-0 gap-1 text-xs">
+                        <span className="truncate">{project}</span>
+                        <ChevronDownIcon className="size-3.5 shrink-0" />
                       </InputGroupText>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
