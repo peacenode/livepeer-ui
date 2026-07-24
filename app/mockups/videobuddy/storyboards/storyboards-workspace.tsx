@@ -340,6 +340,7 @@ export function StoryboardsWorkspace() {
                           src={frameAt(batch.frames, imageId)}
                           alt=""
                           fill
+                          sizes="(min-width: 768px) 88px, (min-width: 640px) 11vw, 16vw"
                           className={cn(
                             "object-cover",
                             imageId % 4 === 1 && "hue-rotate-15",
