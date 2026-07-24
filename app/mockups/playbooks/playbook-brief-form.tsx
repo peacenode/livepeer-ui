@@ -63,7 +63,7 @@ function AspectRatioSelect({
   return (
     <div
       id={id}
-      className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4"
+      className="mt-2 grid grid-cols-3 gap-2"
       role="radiogroup"
       aria-labelledby={labelId}
     >
@@ -77,12 +77,15 @@ function AspectRatioSelect({
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(option)}
-            className="flex min-w-0 flex-col items-center gap-2 rounded-xl bg-muted px-3 py-3 transition-colors outline-none hover:bg-muted-foreground/15 focus-visible:ring-2 focus-visible:ring-ring data-[selected=true]:bg-foreground data-[selected=true]:text-background"
-            data-selected={selected}
+            className="group flex min-w-0 flex-col items-center gap-2 rounded-lg px-2 py-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <span className="flex h-14 w-full items-center justify-center">
               <span
-                className="block h-12 max-w-full rounded-[3px] border border-current bg-current/10"
+                className={
+                  selected
+                    ? "block h-12 max-w-full rounded-[3px] border border-foreground bg-foreground"
+                    : "block h-12 max-w-full rounded-[3px] border border-muted-foreground/60 transition-colors group-hover:border-foreground"
+                }
                 style={{ aspectRatio: option.replace(":", " / ") }}
                 aria-hidden="true"
               />
@@ -104,6 +107,23 @@ export function PlaybookBriefForm({
 }) {
   const [values, setValues] = useState<Record<string, string>>({})
   const [copied, setCopied] = useState(false)
+  const fields = brief?.fields ?? []
+  const aspectFields = fields.filter((field) =>
+    field.name.toLowerCase().includes("aspect")
+  )
+  const orderedFields = fields.flatMap((field) => {
+    if (field.name.toLowerCase().includes("aspect")) return []
+    if (field.name.toLowerCase() === "aesthetic") {
+      return [field, ...aspectFields]
+    }
+    return [field]
+  })
+  if (
+    aspectFields.length > 0 &&
+    !fields.some((field) => field.name.toLowerCase() === "aesthetic")
+  ) {
+    orderedFields.push(...aspectFields)
+  }
 
   async function copyPlaybook() {
     let final = markdown
@@ -149,9 +169,10 @@ export function PlaybookBriefForm({
 
       {brief && brief.fields.length > 0 ? (
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {brief.fields.map((field) => {
+          {orderedFields.map((field) => {
             const long = (field.hint || field.defaultValue).length > 60
             const isAspectRatio = field.name.toLowerCase().includes("aspect")
+            const isAesthetic = field.name.toLowerCase() === "aesthetic"
             const aspectOptions = Array.from(
               new Set(
                 `${field.defaultValue} ${field.hint}`.match(/\d+\s*:\s*\d+/g) ??
@@ -177,7 +198,7 @@ export function PlaybookBriefForm({
             return (
               <div
                 key={field.name}
-                className={long || isAspectRatio ? "sm:col-span-2" : undefined}
+                className={long && !isAesthetic ? "sm:col-span-2" : undefined}
               >
                 <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
                   {labelFor(field.name)}
