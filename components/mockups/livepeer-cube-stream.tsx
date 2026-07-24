@@ -93,9 +93,8 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
 
     seeds.forEach((seed, index) => {
       const phase = (seed.phase + travel) % 1
-      const x = width * (0.74 - phase * 1.48)
-      const normalizedX = x / Math.max(width, 1)
-      const parabola = height * (-0.08 + 0.92 * normalizedX * normalizedX)
+      const x = width * (-0.74 + phase * 1.48)
+      const parabola = height * (-0.4 + 0.94 * phase * phase)
       const convergence = 1 - MathUtils.smoothstep(phase, 0.04, 0.46)
       const laneY = seed.lane * convergence * Math.min(height * 0.2, 1.18)
       const ripple =
@@ -111,7 +110,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
       dummy.rotation.set(
         elapsed * 0.16 + seed.wobble,
         elapsed * 0.22 + phase * Math.PI,
-        normalizedX * 0.42
+        (phase - 0.5) * 0.42
       )
       const perspectiveScale =
         seed.scale * (0.8 + convergence * 0.28) * (size.width < 640 ? 0.82 : 1)
