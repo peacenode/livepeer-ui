@@ -171,7 +171,7 @@ export default async function EarnWithGpuPage() {
         </div>
       </section>
 
-      <section id="choose-a-path" className="scroll-mt-20">
+      <section id="choose-a-path" className="scroll-mt-20 bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mb-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
             {earnings.map((earning) => (
