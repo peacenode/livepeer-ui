@@ -8,17 +8,6 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/docs"
 import { cn } from "@/lib/utils"
 
-const fontSans = localFont({
-  src: [
-    { path: "../assets/fonts/FavoritPro-Light.woff2", weight: "300" },
-    { path: "../assets/fonts/FavoritPro-Regular.woff2", weight: "400" },
-    { path: "../assets/fonts/FavoritPro-Book.woff2", weight: "450" },
-    { path: "../assets/fonts/FavoritPro-Medium.woff2", weight: "500" },
-    { path: "../assets/fonts/FavoritPro-Bold.woff2", weight: "700" },
-  ],
-  variable: "--font-sans",
-})
-
 const fontMono = localFont({
   src: [
     { path: "../assets/fonts/FavoritMono-Regular.woff2", weight: "400" },
@@ -57,8 +46,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", fontSans.variable)}
+      className={cn("font-sans antialiased", fontMono.variable)}
     >
+      <head>
+        <link rel="preconnect" href="https://rsms.me" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      </head>
       <body>
         <ThemeProvider>
           <TooltipProvider>{children}</TooltipProvider>
