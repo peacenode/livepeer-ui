@@ -294,10 +294,7 @@ export function PlaybookBriefForm({
               <div
                 key={field.name}
                 className={cn(
-                  long &&
-                    !isAesthetic &&
-                    !compositionClass &&
-                    "sm:col-span-2",
+                  long && !isAesthetic && !compositionClass && "sm:col-span-2",
                   compositionClass,
                   hasBrandCompositionLayout &&
                     isAspectRatio &&
