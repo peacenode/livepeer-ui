@@ -20,8 +20,12 @@ export function PlatformSidebar() {
 
   return (
     <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col bg-background md:flex">
-      <div className="px-5 pt-6 pb-6">
-        <Link href="/mockups/platform" aria-label="Livepeer home" className="inline-flex">
+      <div className="px-5 pt-6 pb-1">
+        <Link
+          href="/mockups/platform"
+          aria-label="Livepeer home"
+          className="inline-flex h-9 items-center"
+        >
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
       </div>
