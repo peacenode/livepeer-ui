@@ -41,7 +41,7 @@ function StudioEnvironment() {
 function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const group = useRef<Group>(null)
   const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 5, 0.075),
+    () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 4, 0.035),
     []
   )
 
@@ -63,9 +63,9 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <group
       ref={group}
-      position={[-0.35, 0, 0]}
+      position={[0, 0, 0]}
       rotation={[-0.52, 0.72, 0.16]}
-      scale={1.35}
+      scale={1.1}
     >
       {blocks.map((position) => (
         <mesh geometry={geometry} key={position.join("-")} position={position}>
@@ -109,7 +109,7 @@ function LivepeerSymbol3D({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <Canvas
-        camera={{ position: [0, 0, 4.2], fov: 36 }}
+        camera={{ position: [0, 0, 7.2], fov: 36 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
       >
