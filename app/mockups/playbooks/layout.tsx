@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { LivepeerLockup, LivepeerSymbol } from "@/components/brand"
 
+import { PlaybooksFooter } from "./playbooks-footer"
 import { PlaybooksNav } from "./playbooks-nav"
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function PlaybooksLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="min-h-dvh bg-background">
+    <div className="flex min-h-dvh flex-col bg-background">
       <header className="absolute inset-x-0 top-0 z-20">
         <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6">
           <Link
@@ -32,7 +33,8 @@ export default function PlaybooksLayout({
           <PlaybooksNav />
         </div>
       </header>
-      {children}
+      <div className="flex-1">{children}</div>
+      <PlaybooksFooter />
     </div>
   )
 }
