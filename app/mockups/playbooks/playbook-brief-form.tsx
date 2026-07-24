@@ -47,6 +47,54 @@ function labelFor(name: string) {
     .join(" ")
 }
 
+function AspectRatioSelect({
+  id,
+  labelId,
+  value,
+  options,
+  onChange,
+}: {
+  id: string
+  labelId: string
+  value: string
+  options: string[]
+  onChange: (value: string) => void
+}) {
+  return (
+    <div
+      id={id}
+      className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4"
+      role="radiogroup"
+      aria-labelledby={labelId}
+    >
+      {options.map((option) => {
+        const selected = value === option
+
+        return (
+          <button
+            key={option}
+            type="button"
+            role="radio"
+            aria-checked={selected}
+            onClick={() => onChange(option)}
+            className="flex min-w-0 flex-col items-center gap-2 rounded-xl bg-muted px-3 py-3 transition-colors outline-none hover:bg-muted-foreground/15 focus-visible:ring-2 focus-visible:ring-ring data-[selected=true]:bg-foreground data-[selected=true]:text-background"
+            data-selected={selected}
+          >
+            <span className="flex h-14 w-full items-center justify-center">
+              <span
+                className="block h-12 max-w-full rounded-[3px] border border-current bg-current/10"
+                style={{ aspectRatio: option.replace(":", " / ") }}
+                aria-hidden="true"
+              />
+            </span>
+            <span className="text-xs font-medium tabular-nums">{option}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 export function PlaybookBriefForm({
   brief,
   markdown,
@@ -103,7 +151,15 @@ export function PlaybookBriefForm({
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {brief.fields.map((field) => {
             const long = (field.hint || field.defaultValue).length > 60
+            const isAspectRatio = field.name.toLowerCase().includes("aspect")
+            const aspectOptions = Array.from(
+              new Set(
+                `${field.defaultValue} ${field.hint}`.match(/\d+\s*:\s*\d+/g) ??
+                  []
+              )
+            ).map((option) => option.replace(/\s/g, ""))
             const id = `brief-${field.name}`
+            const labelId = `${id}-label`
             const shared = {
               id,
               name: field.name,
@@ -121,15 +177,36 @@ export function PlaybookBriefForm({
             return (
               <div
                 key={field.name}
-                className={long ? "sm:col-span-2" : undefined}
+                className={long || isAspectRatio ? "sm:col-span-2" : undefined}
               >
-                <Label htmlFor={id}>{labelFor(field.name)}</Label>
+                <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
+                  {labelFor(field.name)}
+                </Label>
                 {field.hint && (
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     {field.hint}
                   </p>
                 )}
-                {long ? (
+                {isAspectRatio && aspectOptions.length > 0 ? (
+                  <AspectRatioSelect
+                    id={id}
+                    labelId={labelId}
+                    value={
+                      values[field.name] ??
+                      aspectOptions.find((option) =>
+                        field.defaultValue.includes(option)
+                      ) ??
+                      aspectOptions[0]
+                    }
+                    options={aspectOptions}
+                    onChange={(value) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: value,
+                      }))
+                    }
+                  />
+                ) : long ? (
                   <Textarea {...shared} className="mt-2 min-h-24" />
                 ) : (
                   <Input {...shared} className="mt-2" />
