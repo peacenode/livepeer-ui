@@ -1,17 +1,13 @@
-"use client"
-
-import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRightIcon, CheckIcon, CopyIcon, CpuIcon } from "lucide-react"
+import { ArrowRightIcon, CpuIcon } from "lucide-react"
 
 import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
+import { Button } from "@/components/ui/button"
 
 import { InstallRunnerFooter } from "./install-runner-footer"
 
 export function PlaybooksWorkspace() {
-  const [copied, setCopied] = useState(false)
-
   return (
     <main>
       <section className="relative flex min-h-svh w-full items-center overflow-hidden bg-muted">
@@ -24,46 +20,32 @@ export function PlaybooksWorkspace() {
           aria-hidden="true"
         />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
-          <div className="flex max-w-6xl flex-col items-start">
-            <h1 className="text-[clamp(2.75rem,5.8vw,5.75rem)] leading-[0.94] font-normal tracking-[-0.05em] text-balance">
-              Open infrastructure to run AI on your terms.
+          <div className="flex max-w-4xl flex-col items-start">
+            <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
+              Put your GPUs to work.
               <span className="mt-3 block text-foreground/45">
-                Run inference, automate repeatable workflows, and put GPUs to
-                work—from your first prompt to production.
+                Connect to Livepeer, serve AI inference jobs, and earn for the
+                compute you provide.
               </span>
             </h1>
-            <div className="mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
-              <div className="inline-flex min-w-0 items-center gap-4 rounded-xl bg-foreground px-4 py-2.5 text-left text-background">
-                <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
-                  npm install -g @livepeer/runner
-                </code>
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await navigator.clipboard.writeText(
-                      "npm install -g @livepeer/runner"
-                    )
-                    setCopied(true)
-                  }}
-                  className="flex size-8 shrink-0 items-center justify-center rounded-full text-background/70 transition-colors hover:bg-background/10 hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
-                  aria-label={
-                    copied ? "Install command copied" : "Copy install command"
-                  }
-                >
-                  {copied ? (
-                    <CheckIcon className="size-4" aria-hidden="true" />
-                  ) : (
-                    <CopyIcon className="size-4" aria-hidden="true" />
-                  )}
-                </button>
-              </div>
-              <Link
-                href="/mockups/playbooks/library"
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-xl border border-foreground/15 bg-background/70 px-5 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <Button
+                size="lg"
+                nativeButton={false}
+                render={<Link href="/mockups/playbooks/earn" />}
               >
-                Browse Playbooks
+                Get Started
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
-              </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                nativeButton={false}
+                render={<Link href="/mockups/platform" />}
+                className="bg-background/70 backdrop-blur-sm"
+              >
+                Sign up with Google
+              </Button>
             </div>
           </div>
         </div>
