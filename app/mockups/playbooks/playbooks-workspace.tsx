@@ -3,49 +3,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  CheckIcon,
-  CopyIcon,
-  CpuIcon,
-  MessageCircleIcon,
-  TerminalIcon,
-} from "lucide-react"
+import { ArrowRightIcon, CheckIcon, CopyIcon, CpuIcon } from "lucide-react"
 
 import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 
 import { InstallRunnerFooter } from "./install-runner-footer"
-
-const paths = [
-  {
-    title: "Build with Runner",
-    description: "Install Runner and use Livepeer from Codex or Cowork.",
-    href: "/mockups/playbooks/install",
-    icon: TerminalIcon,
-    external: false,
-  },
-  {
-    title: "Provide GPU compute",
-    description: "Run an orchestrator and earn fees for completed work.",
-    href: "https://docs.livepeer.org/v1/orchestrators/guides/get-started",
-    icon: CpuIcon,
-    external: true,
-  },
-  {
-    title: "Join the community",
-    description: "Meet builders, operators, and contributors in Discord.",
-    href: "https://discord.gg/livepeer",
-    icon: MessageCircleIcon,
-    external: true,
-  },
-]
 
 export function PlaybooksWorkspace() {
   const [copied, setCopied] = useState(false)
@@ -125,59 +87,29 @@ export function PlaybooksWorkspace() {
         </div>
       </Link>
 
-      <section className="bg-muted">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-          <h2 className="text-2xl font-medium">Choose how to participate</h2>
-          <div className="mt-7 grid gap-3 md:grid-cols-3">
-            {paths.map((path) => {
-              const PathIcon = path.icon
-              const content = (
-                <Card className="h-full min-h-52 transition-colors group-hover:bg-accent">
-                  <CardHeader className="flex h-full flex-col justify-between">
-                    <PathIcon
-                      className="size-5 text-muted-foreground"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <div className="flex items-center justify-between gap-4">
-                        <CardTitle>{path.title}</CardTitle>
-                        {path.external ? (
-                          <ArrowUpRightIcon className="size-4 text-muted-foreground" />
-                        ) : (
-                          <ArrowRightIcon className="size-4 text-muted-foreground" />
-                        )}
-                      </div>
-                      <CardDescription className="mt-2 leading-relaxed">
-                        {path.description}
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
-                </Card>
-              )
-
-              return path.external ? (
-                <a
-                  key={path.title}
-                  href={path.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                >
-                  {content}
-                </a>
-              ) : (
-                <Link
-                  key={path.title}
-                  href={path.href}
-                  className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                >
-                  {content}
-                </Link>
-              )
-            })}
+      <Link
+        href="/mockups/playbooks/earn"
+        aria-label="Earn with GPU"
+        className="group flex min-h-[32rem] bg-foreground text-background sm:min-h-[40rem]"
+      >
+        <div className="flex w-full flex-col justify-between p-6 sm:p-10">
+          <div className="flex items-center justify-between gap-6">
+            <CpuIcon className="size-8" strokeWidth={1.25} aria-hidden="true" />
+            <span className="flex size-11 items-center justify-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-1">
+              <ArrowRightIcon className="size-5" aria-hidden="true" />
+            </span>
+          </div>
+          <div className="max-w-3xl">
+            <h2 className="text-4xl font-normal tracking-tight sm:text-6xl">
+              Earn with GPU
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-background/65">
+              Put a GPU on the Livepeer network and earn from inference
+              workloads, service payouts, and protocol rewards.
+            </p>
           </div>
         </div>
-      </section>
+      </Link>
     </main>
   )
 }
