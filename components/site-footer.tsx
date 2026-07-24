@@ -1,11 +1,7 @@
 import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
-import {
-  DiscordIcon,
-  GitHubIcon,
-  XIcon,
-} from "@/components/brand-social-icons"
+import { DiscordIcon, GitHubIcon, XIcon } from "@/components/brand-social-icons"
 
 const groups = [
   {
@@ -147,7 +143,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 border-t pt-8">
+        <div className="mt-12 pt-8">
           <p className="text-xs text-muted-foreground">
             © 2026 Livepeer Foundation. All rights reserved.
           </p>
