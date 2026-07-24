@@ -297,9 +297,18 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                       : "mt-3 space-y-1 text-base leading-snug font-medium tabular-nums"
                   }
                 >
-                  {values?.map((value) => (
-                    <p key={value}>{value}</p>
-                  ))}
+                  {values?.map((value) => {
+                    const isReliability = item.label === "Reliability"
+
+                    return (
+                      <p key={value}>
+                        {value}
+                        {isReliability && (
+                          <span className="text-muted-foreground"> / 5</span>
+                        )}
+                      </p>
+                    )
+                  })}
                 </div>
               </div>
             )
@@ -319,7 +328,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 />
               )}
               <div className="flex flex-col justify-center p-6 sm:p-8">
-                <p className="mb-5 text-sm font-medium">Output</p>
+                <p className="mb-5 text-xs font-medium">Output</p>
                 {catalogEntry.deliverables.length > 0 ? (
                   <div className="divide-y">
                     {catalogEntry.deliverables.map((deliverable) => (

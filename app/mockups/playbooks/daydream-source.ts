@@ -20,7 +20,7 @@ const metadataOverrides: Record<
     duration: "30s · 6–8m w/ LoRA",
     durationLabel: "Render time",
     budget: "$0.25 · $22.00 w/ LoRA",
-    reliability: "4.3 / 5",
+    reliability: "4.3",
   },
 }
 
