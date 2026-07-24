@@ -51,6 +51,7 @@ const fieldLabels: Record<string, string> = {
   teaser: "5s motion teaser",
   music: "Licensed soundtrack",
   reel: "Reel",
+  shots: "Shot list",
   train_brand_lora: "Train brand LoRA",
 }
 
@@ -175,6 +176,21 @@ export function PlaybookBriefForm({
       let nextYaml = brief.yamlBlock
       Object.entries(values).forEach(([name, value]) => {
         if (!value.trim()) return
+        if (name === "shots") {
+          const shots = value
+            .split(",")
+            .map((shot) => shot.trim())
+            .filter(Boolean)
+          if (!shots.length) return
+          nextYaml = nextYaml.replace(
+            /^(\s*)shots:\s*[^\n]*(?:\n\1[ \t]+-[^\n]*)*/m,
+            (_, indent) =>
+              `${indent}shots:\n${shots
+                .map((shot) => `${indent}  - ${JSON.stringify(shot)}`)
+                .join("\n")}`
+          )
+          return
+        }
         const expression = new RegExp(
           `^(\\s*)(${name}:\\s*)([^\\n#]*)(\\s*#?.*)$`,
           "m"
@@ -228,7 +244,10 @@ export function PlaybookBriefForm({
               id,
               name: field.name,
               value: values[field.name] ?? "",
-              placeholder: field.defaultValue,
+              placeholder:
+                field.name === "shots"
+                  ? "hero portrait, full-length look, macro detail, lifestyle scene"
+                  : field.defaultValue,
               onChange: (
                 event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
               ) =>
