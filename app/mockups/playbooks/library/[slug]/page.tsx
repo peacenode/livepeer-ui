@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { CheckIcon, StarIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { LivepeerSymbol } from "@/components/brand"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -371,8 +372,8 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                         key={deliverable}
                         className="flex items-center gap-3 py-4 first:pt-0 last:pb-0"
                       >
-                        <CheckIcon
-                          className="size-4 shrink-0 text-muted-foreground"
+                        <LivepeerSymbol
+                          className="h-3 w-auto shrink-0 text-muted-foreground"
                           aria-hidden="true"
                         />
                         <span className="text-sm">{deliverable}</span>
