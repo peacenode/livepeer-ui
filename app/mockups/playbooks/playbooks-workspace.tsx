@@ -8,6 +8,7 @@ import {
   ArrowUpRightIcon,
   CheckIcon,
   Clock3Icon,
+  CopyIcon,
   CodeIcon,
   CpuIcon,
   MessageCircleIcon,
@@ -182,6 +183,7 @@ const resourceGroups = [
 
 export function PlaybooksWorkspace() {
   const [category, setCategory] = useState<Category>("All")
+  const [copied, setCopied] = useState(false)
 
   const visiblePlaybooks = useMemo(
     () =>
@@ -193,50 +195,47 @@ export function PlaybooksWorkspace() {
 
   return (
     <main>
-      <section className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[0.85fr_1.15fr] md:items-center md:py-20">
-        <div className="max-w-xl">
-          <p className="text-sm text-muted-foreground">Livepeer Runner</p>
-          <h1 className="mt-3 text-4xl leading-tight font-medium text-balance sm:text-5xl">
-            Video infrastructure for agents.
-          </h1>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
-            Install one tool to give Codex, Cowork, or your application access
-            to reusable video workflows backed by open GPU compute.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button
-              size="lg"
-              className="px-5"
-              nativeButton={false}
-              render={<Link href="/mockups/playbooks/install" />}
-            >
-              Install Runner
-              <ArrowRightIcon />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              nativeButton={false}
-              render={<a href="#playbooks" />}
-            >
-              Browse playbooks
-            </Button>
-          </div>
-        </div>
-        <div className="relative min-h-80 overflow-hidden rounded-4xl bg-muted md:min-h-[28rem]">
-          <LivepeerSymbol className="absolute top-8 right-8 h-44 w-auto opacity-[0.06] md:hidden" />
-          <LivepeerSymbol3D className="[&>canvas]:scale-110" />
-          <div className="absolute inset-x-4 bottom-4 rounded-3xl bg-foreground p-5 text-background sm:inset-x-6 sm:bottom-6">
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-sm font-medium">Install Runner</p>
-              <span className="text-xs text-background/60">Codex · Cowork</span>
-            </div>
-            <code className="mt-5 block overflow-x-auto pb-1 font-mono text-xs whitespace-nowrap text-background/80">
-              npx install @livepeer/runner
-            </code>
-            <div className="mt-4 flex items-center gap-2 border-t border-background/15 pt-4 text-xs text-background/60">
-              <span className="size-1.5 rounded-full bg-background" />
-              Connects to this project with OAuth
+      <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-muted">
+        <LivepeerSymbol3D
+          showOnMobile
+          className="rounded-none [&>canvas]:scale-125"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-muted/45"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 mx-auto flex w-full justify-center px-4 sm:px-6">
+          <div className="flex w-full max-w-xl flex-col items-center text-center">
+            <h1 className="text-4xl leading-tight font-medium text-balance sm:text-6xl">
+              Video infrastructure for agents.
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+              Give Codex, Cowork, or your application access to reusable video
+              workflows backed by open GPU compute.
+            </p>
+            <div className="mt-8 inline-flex max-w-full items-center gap-4 rounded-2xl bg-foreground px-4 py-3 text-left text-background">
+              <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-background/80">
+                npm install -g @livepeer/runner
+              </code>
+              <button
+                type="button"
+                onClick={async () => {
+                  await navigator.clipboard.writeText(
+                    "npm install -g @livepeer/runner"
+                  )
+                  setCopied(true)
+                }}
+                className="flex size-8 shrink-0 items-center justify-center rounded-full text-background/70 transition-colors hover:bg-background/10 hover:text-background"
+                aria-label={
+                  copied ? "Install command copied" : "Copy install command"
+                }
+              >
+                {copied ? (
+                  <CheckIcon className="size-4" aria-hidden="true" />
+                ) : (
+                  <CopyIcon className="size-4" aria-hidden="true" />
+                )}
+              </button>
             </div>
           </div>
         </div>

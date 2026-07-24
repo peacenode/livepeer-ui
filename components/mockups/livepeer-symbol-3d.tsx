@@ -93,7 +93,13 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   )
 }
 
-function LivepeerSymbol3D({ className }: { className?: string }) {
+function LivepeerSymbol3D({
+  className,
+  showOnMobile = false,
+}: {
+  className?: string
+  showOnMobile?: boolean
+}) {
   const [reduceMotion, setReduceMotion] = useState(true)
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -115,7 +121,7 @@ function LivepeerSymbol3D({ className }: { className?: string }) {
     }
   }, [])
 
-  if (!isDesktop) return null
+  if (!isDesktop && !showOnMobile) return null
 
   return (
     <div
