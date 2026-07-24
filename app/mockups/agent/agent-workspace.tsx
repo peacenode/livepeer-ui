@@ -19,6 +19,7 @@ import {
   PlayIcon,
   PlusIcon,
   RotateCwIcon,
+  SearchIcon,
   SparklesIcon,
   XIcon,
 } from "lucide-react"
@@ -47,6 +48,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
+  InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
 } from "@/components/ui/input-group"
@@ -178,6 +180,7 @@ export function AgentWorkspace() {
   const [sources, setSources] = useState<SourceFile[]>([])
   const [generations, setGenerations] = useState<Generation[]>(seedRuns)
   const [project, setProject] = useState("Orbit")
+  const [searchQuery, setSearchQuery] = useState("")
   const [isDragging, setIsDragging] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
   const [composerHeight, setComposerHeight] = useState(0)
@@ -185,6 +188,9 @@ export function AgentWorkspace() {
   const folderInputRef = useRef<HTMLInputElement>(null)
   const composerRef = useRef<HTMLElement>(null)
   const resultsRef = useRef<HTMLElement>(null)
+  const visibleGenerations = generations.filter((generation) =>
+    generation.prompt.toLowerCase().includes(searchQuery.trim().toLowerCase())
+  )
 
   useEffect(() => {
     folderInputRef.current?.setAttribute("webkitdirectory", "")
@@ -427,12 +433,20 @@ export function AgentWorkspace() {
         >
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-sm font-medium">Recent</h2>
-            <Button variant="ghost" size="sm">
-              Filter
-            </Button>
+            <InputGroup className="h-8 w-52 border bg-background sm:w-64">
+              <InputGroupInput
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Search prompts"
+                aria-label="Search prompts"
+              />
+              <InputGroupAddon align="inline-start">
+                <SearchIcon />
+              </InputGroupAddon>
+            </InputGroup>
           </div>
           <div>
-            {generations.map((generation) => (
+            {visibleGenerations.map((generation) => (
               <article
                 key={generation.id}
                 className="grid gap-4 border-b py-4 first:pt-0 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
@@ -537,6 +551,11 @@ export function AgentWorkspace() {
                 </div>
               </article>
             ))}
+            {visibleGenerations.length === 0 && (
+              <p className="py-12 text-center text-sm text-muted-foreground">
+                No prompts match “{searchQuery}”
+              </p>
+            )}
           </div>
         </div>
       </section>
