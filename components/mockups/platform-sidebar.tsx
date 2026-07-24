@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 export const platformNavItems = [
   { title: "Home", href: "/mockups/platform" },
-  { title: "Compute", href: "/mockups/platform/compute" },
+  { title: "Network compute", href: "/mockups/platform/compute" },
   { title: "Inference", href: "/mockups/platform/inference" },
   { title: "API", href: "/mockups/platform/api" },
   { title: "Usage", href: "/mockups/platform/usage" },
