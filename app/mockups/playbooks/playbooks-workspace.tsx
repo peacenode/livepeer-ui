@@ -60,8 +60,8 @@ export function PlaybooksWorkspace() {
             RUNNER
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-foreground/65">
-            Ready-to-run AI workflows for creating images, video, and audio
-            from your agent.
+            Your agent companion, ready to create images, video, and audio with
+            the latest workflows purpose built into your agent.
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
             <Button
