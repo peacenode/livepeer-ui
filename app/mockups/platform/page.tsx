@@ -107,8 +107,8 @@ export default function MockupHomePage() {
   return (
     <PlatformPage title="Home">
       <Card className="py-0">
-        <div className="grid min-h-64 md:grid-cols-[minmax(0,1fr)_20rem]">
-          <div className="flex items-center py-6">
+        <div className="relative grid min-h-64 md:block">
+          <div className="relative z-10 flex items-center py-6 md:min-h-64 md:w-[calc(100%-20rem)]">
             <CardContent className="mx-auto w-full max-w-xl">
               <div className="flex flex-col gap-3">
                 <CardTitle className="px-2">Get started</CardTitle>

@@ -40,6 +40,8 @@ function StudioEnvironment() {
 
 function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const group = useRef<Group>(null)
+  const { viewport } = useThree()
+  const isWide = viewport.aspect >= 2
   const geometry = useMemo(
     () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 4, 0.035),
     []
@@ -63,9 +65,9 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <group
       ref={group}
-      position={[0, 0, 0]}
+      position={[isWide ? viewport.width * 0.27 : 0, 0, 0]}
       rotation={[-0.52, 0.72, 0.16]}
-      scale={1.1}
+      scale={isWide ? 1.55 : 1}
     >
       {blocks.map((position) => (
         <mesh geometry={geometry} key={position.join("-")} position={position}>
@@ -103,13 +105,13 @@ function LivepeerSymbol3D({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "min-h-52 overflow-hidden rounded-b-xl md:min-h-full md:rounded-r-xl md:rounded-bl-none",
+        "min-h-52 overflow-hidden rounded-b-xl md:absolute md:inset-0 md:min-h-0 md:rounded-4xl",
         className
       )}
       aria-hidden="true"
     >
       <Canvas
-        camera={{ position: [0, 0, 7.2], fov: 36 }}
+        camera={{ position: [0, 0, 5.3], fov: 36 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
       >
