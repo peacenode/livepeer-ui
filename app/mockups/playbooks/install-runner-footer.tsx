@@ -33,7 +33,7 @@ export function InstallRunnerFooter({
       <div className="absolute inset-0 -z-10 bg-black/55" aria-hidden="true" />
       <div className="mx-auto grid min-h-96 max-w-6xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-[1fr_auto] md:items-end">
         <div>
-          <h2 className="[font-family:'Serpentine_Runner',sans-serif] text-2xl font-medium tracking-[-0.06em] text-balance">
+          <h2 className="[font-family:'Serpentine_Runner',sans-serif] text-4xl font-medium tracking-[-0.06em] text-balance uppercase sm:text-5xl">
             {title}
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
