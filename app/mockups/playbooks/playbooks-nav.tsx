@@ -89,6 +89,17 @@ export function PlaybooksNav() {
             ↗
           </span>
         </a>
+        <a
+          href="/mockups/platform/api"
+          target="_blank"
+          rel="noreferrer"
+          className="hidden items-center gap-1 rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground md:flex"
+        >
+          API Console
+          <span className="font-sans" aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </nav>
   )
