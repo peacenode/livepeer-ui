@@ -93,7 +93,7 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Project spend</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-normal tracking-tight tabular-nums">
+                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
@@ -101,7 +101,7 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Inference requests</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-normal tracking-tight tabular-nums">
+                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
@@ -109,7 +109,7 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Compute time</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-normal tracking-tight tabular-nums">
+                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
                     2,431 GPU min
                   </CardTitle>
                 </CardHeader>
