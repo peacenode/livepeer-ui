@@ -41,7 +41,7 @@ const getStartedSteps = [
     complete: false,
   },
   {
-    label: "Run a workflow",
+    label: "Test workflows",
     href: "/mockups/platform/workflows",
     complete: false,
   },
