@@ -3,10 +3,7 @@
 import { type DragEvent, useRef, useState } from "react"
 import Image from "next/image"
 import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
   CheckIcon,
-  GripVerticalIcon,
   ImagesIcon,
   PencilIcon,
   PlusIcon,
@@ -71,6 +68,11 @@ export function StoryboardsWorkspace() {
     batchId: number
     imageId: number
   } | null>(null)
+  const [dropTarget, setDropTarget] = useState<{
+    batchId: number
+    imageId: number
+    position: "before" | "after"
+  } | null>(null)
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameBatch(id: number, name: string) {
@@ -121,16 +123,36 @@ export function StoryboardsWorkspace() {
     )
   }
 
-  function dropImage(batchId: number, targetImageId: number) {
+  function dropImage(
+    batchId: number,
+    targetImageId: number,
+    position: "before" | "after"
+  ) {
     if (!draggedImage || draggedImage.batchId !== batchId) return
     const batch = batches.find((item) => item.id === batchId)
     if (!batch) return
-    moveImage(
-      batchId,
-      batch.images.indexOf(draggedImage.imageId),
-      batch.images.indexOf(targetImageId)
-    )
+    const fromIndex = batch.images.indexOf(draggedImage.imageId)
+    const targetIndex = batch.images.indexOf(targetImageId)
+    let insertIndex = targetIndex + (position === "after" ? 1 : 0)
+    if (fromIndex < insertIndex) insertIndex -= 1
+    moveImage(batchId, fromIndex, insertIndex)
     setDraggedImage(null)
+    setDropTarget(null)
+  }
+
+  function updateDropTarget(
+    event: DragEvent<HTMLDivElement>,
+    batchId: number,
+    imageId: number
+  ) {
+    event.preventDefault()
+    const bounds = event.currentTarget.getBoundingClientRect()
+    setDropTarget({
+      batchId,
+      imageId,
+      position:
+        event.clientX < bounds.left + bounds.width / 2 ? "before" : "after",
+    })
   }
 
   return (
@@ -196,21 +218,30 @@ export function StoryboardsWorkspace() {
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
-                {batch.images.map((imageId, index) => (
+                {batch.images.map((imageId) => (
                   <div
                     key={imageId}
                     draggable
                     onDragStart={() =>
                       setDraggedImage({ batchId: batch.id, imageId })
                     }
-                    onDragEnd={() => setDraggedImage(null)}
-                    onDragOver={(event) => event.preventDefault()}
+                    onDragEnd={() => {
+                      setDraggedImage(null)
+                      setDropTarget(null)
+                    }}
+                    onDragOver={(event) =>
+                      updateDropTarget(event, batch.id, imageId)
+                    }
                     onDrop={(event) => {
                       event.preventDefault()
-                      dropImage(batch.id, imageId)
+                      dropImage(
+                        batch.id,
+                        imageId,
+                        dropTarget?.position ?? "before"
+                      )
                     }}
                     className={cn(
-                      "group relative aspect-square overflow-hidden rounded-md bg-muted",
+                      "relative aspect-square cursor-grab overflow-hidden rounded-md bg-muted active:cursor-grabbing",
                       draggedImage?.batchId === batch.id &&
                         draggedImage.imageId === imageId &&
                         "opacity-40"
@@ -227,33 +258,18 @@ export function StoryboardsWorkspace() {
                         imageId % 4 === 3 && "contrast-125"
                       )}
                     />
-                    <div className="absolute inset-x-1 bottom-1 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                      <Button
-                        type="button"
-                        size="icon-xs"
-                        variant="secondary"
-                        aria-label={`Move image ${index + 1} earlier`}
-                        disabled={index === 0}
-                        onClick={() =>
-                          moveImage(batch.id, index, index - 1)
-                        }
-                      >
-                        <ArrowLeftIcon />
-                      </Button>
-                      <GripVerticalIcon className="size-3.5 text-white drop-shadow" />
-                      <Button
-                        type="button"
-                        size="icon-xs"
-                        variant="secondary"
-                        aria-label={`Move image ${index + 1} later`}
-                        disabled={index === batch.images.length - 1}
-                        onClick={() =>
-                          moveImage(batch.id, index, index + 1)
-                        }
-                      >
-                        <ArrowRightIcon />
-                      </Button>
-                    </div>
+                    {dropTarget?.batchId === batch.id &&
+                      dropTarget.imageId === imageId &&
+                      draggedImage?.imageId !== imageId && (
+                        <span
+                          className={cn(
+                            "pointer-events-none absolute inset-y-1 z-10 w-0.5 rounded-full bg-foreground",
+                            dropTarget.position === "before"
+                              ? "left-0"
+                              : "right-0"
+                          )}
+                        />
+                      )}
                   </div>
                 ))}
                 <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
