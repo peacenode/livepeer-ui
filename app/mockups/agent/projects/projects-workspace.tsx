@@ -456,7 +456,7 @@ export function ProjectsWorkspace() {
                       event.preventDefault()
                       setProjectThumbnail(event.dataTransfer.files[0])
                     }}
-                    className="relative size-14 shrink-0 overflow-hidden rounded-full bg-muted outline-none ring-1 ring-border transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
+                    className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-muted outline-none ring-1 ring-border transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <Image
                       src={project.thumbnailUrl ?? sampleImage}
