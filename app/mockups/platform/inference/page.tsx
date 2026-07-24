@@ -44,9 +44,6 @@ export default async function MockupInferencePage() {
           )
         })}
       </div>
-      <p className="text-xs text-muted-foreground">
-        Container metadata live from Docker Hub, cached for an hour.
-      </p>
     </PlatformPage>
   )
 }
