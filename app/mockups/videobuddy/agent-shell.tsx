@@ -19,31 +19,31 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   {
-    href: "/mockups/videobuddy",
+    href: "/mockups/runner",
     label: "Create",
     icon: LivepeerSymbol,
     brand: true,
   },
   {
-    href: "/mockups/videobuddy/storyboards",
+    href: "/mockups/runner/storyboards",
     label: "Storyboards",
     icon: Grid2X2Icon,
     brand: false,
   },
   {
-    href: "/mockups/videobuddy/characters",
+    href: "/mockups/runner/characters",
     label: "Characters",
     icon: ApertureIcon,
     brand: false,
   },
   {
-    href: "/mockups/videobuddy/footage",
+    href: "/mockups/runner/footage",
     label: "Clips",
     icon: FilmIcon,
     brand: false,
   },
   {
-    href: "/mockups/videobuddy/projects",
+    href: "/mockups/runner/projects",
     label: "Projects",
     icon: FolderIcon,
     brand: false,
@@ -51,7 +51,7 @@ const navItems = [
 ]
 
 function isActiveRoute(href: string, pathname: string) {
-  return href === "/mockups/videobuddy"
+  return href === "/mockups/runner"
     ? pathname === href
     : pathname.startsWith(href)
 }
@@ -71,7 +71,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         onMouseLeave={() => setExpanded(false)}
       >
         <nav
-          aria-label="VideoBuddy"
+          aria-label="Runner"
           className="flex flex-1 flex-col gap-1 px-2 py-2"
         >
           {navItems.map((item) => {
@@ -112,20 +112,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             )
           })}
           <Link
-            href="/mockups/videobuddy/install"
-            data-active={pathname.startsWith("/mockups/videobuddy/install")}
+            href="/mockups/runner/install"
+            data-active={pathname.startsWith("/mockups/runner/install")}
             onClick={() => setExpanded(false)}
             className={cn(
               "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
               expanded &&
-                pathname.startsWith("/mockups/videobuddy/install") &&
+                pathname.startsWith("/mockups/runner/install") &&
                 "bg-muted font-medium text-foreground"
             )}
           >
             <span
               className={cn(
                 "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-                pathname.startsWith("/mockups/videobuddy/install") &&
+                pathname.startsWith("/mockups/runner/install") &&
                   !expanded &&
                   "bg-muted"
               )}
@@ -144,20 +144,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         <Link
-          href="/mockups/videobuddy/protocol"
-          data-active={pathname.startsWith("/mockups/videobuddy/protocol")}
+          href="/mockups/runner/protocol"
+          data-active={pathname.startsWith("/mockups/runner/protocol")}
           onClick={() => setExpanded(false)}
           className={cn(
             "mx-2 flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
             expanded &&
-              pathname.startsWith("/mockups/videobuddy/protocol") &&
+              pathname.startsWith("/mockups/runner/protocol") &&
               "bg-muted font-medium text-foreground"
           )}
         >
           <span
             className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-              pathname.startsWith("/mockups/videobuddy/protocol") &&
+              pathname.startsWith("/mockups/runner/protocol") &&
                 !expanded &&
                 "bg-muted"
             )}
@@ -211,7 +211,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
       <div>{children}</div>
 
       <nav
-        aria-label="VideoBuddy"
+        aria-label="Runner"
         className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-5 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {navItems.map((item) => {

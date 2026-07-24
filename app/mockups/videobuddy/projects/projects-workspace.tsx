@@ -31,19 +31,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
-import {
-  frameAt,
-  framesForName,
-  storyMedia,
-} from "../media-assets"
+import { frameAt, framesForName, storyMedia } from "../media-assets"
 
 type Project = {
   id: string
@@ -139,14 +130,16 @@ const initialProjects: Project[] = [
     renders: [
       {
         id: 202,
-        prompt: "June follows the cliff path as the seabirds circle the lighthouse",
+        prompt:
+          "June follows the cliff path as the seabirds circle the lighthouse",
         duration: "0:08",
         time: "Yesterday",
         imageUrl: storyMedia.blackTide.wide,
       },
       {
         id: 201,
-        prompt: "A quiet ferry-shelter portrait as the storm reaches the island",
+        prompt:
+          "A quiet ferry-shelter portrait as the storm reaches the island",
         duration: "0:05",
         time: "Jul 21",
         imageUrl: storyMedia.blackTide.character,
@@ -367,10 +360,7 @@ export function ProjectsWorkspace() {
           {!selectedProjectId ? (
             <div className="grid gap-5 py-6 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((item) => (
-                <article
-                  key={item.id}
-                  className="group relative rounded-2xl"
-                >
+                <article key={item.id} className="group relative rounded-2xl">
                   <button
                     type="button"
                     aria-label={`Open ${item.name}`}
@@ -466,7 +456,7 @@ export function ProjectsWorkspace() {
                       event.preventDefault()
                       setProjectThumbnail(event.dataTransfer.files[0])
                     }}
-                    className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-muted outline-none ring-1 ring-border transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
+                    className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-muted ring-1 ring-border transition-opacity outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <Image
                       src={project.thumbnailUrl ?? storyMedia.saltSignal.wide}
@@ -504,9 +494,7 @@ export function ProjectsWorkspace() {
                   variant="line"
                   className="max-w-full justify-start overflow-x-auto"
                 >
-                  <TabsTrigger value="storyboards">
-                    Storyboards
-                  </TabsTrigger>
+                  <TabsTrigger value="storyboards">Storyboards</TabsTrigger>
                   <TabsTrigger value="characters">Characters</TabsTrigger>
                   <TabsTrigger value="renders">
                     Renders
@@ -594,7 +582,7 @@ export function ProjectsWorkspace() {
                       variant="outline"
                       onClick={() =>
                         window.location.assign(
-                          `/mockups/videobuddy?project=${encodeURIComponent(project.name)}`
+                          `/mockups/runner?project=${encodeURIComponent(project.name)}`
                         )
                       }
                     >
@@ -724,10 +712,7 @@ export function ProjectsWorkspace() {
               autoFocus
             />
           </div>
-          <Button
-            disabled={!newProjectName.trim()}
-            onClick={createProject}
-          >
+          <Button disabled={!newProjectName.trim()} onClick={createProject}>
             Create project
           </Button>
         </DialogContent>
@@ -811,9 +796,7 @@ export function ProjectsWorkspace() {
             />
           </div>
           <Button
-            disabled={
-              !storyboardTitle.trim() || storyboardFiles.length === 0
-            }
+            disabled={!storyboardTitle.trim() || storyboardFiles.length === 0}
             onClick={createProjectStoryboard}
           >
             Create storyboard
@@ -907,10 +890,7 @@ export function ProjectsWorkspace() {
         </DialogContent>
       </Dialog>
 
-      <Dialog
-        open={isThumbnailOpen}
-        onOpenChange={setIsThumbnailOpen}
-      >
+      <Dialog open={isThumbnailOpen} onOpenChange={setIsThumbnailOpen}>
         <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>Project thumbnail</DialogTitle>

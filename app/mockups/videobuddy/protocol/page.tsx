@@ -2,40 +2,40 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import {
   ArrowRightIcon,
-  BotIcon,
-  BoxIcon,
+  BlocksIcon,
   CpuIcon,
+  PlayIcon,
   WalletCardsIcon,
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Agents, inference, and compute",
+  title: "Runner, workflows, and compute",
 }
 
 const layers = [
   {
     number: "01",
-    title: "Agents",
+    title: "Runner",
     description:
-      "VideoBuddy combines instructions, tools, project context, and interfaces into one product experience. It decides which capability to use and submits the job.",
-    detail: "Web · CLI · MCP",
-    href: "/mockups/platform/agent",
-    icon: BotIcon,
+      "Runner is the interface between people, agents, applications, and Livepeer. It accepts a task, authenticates the caller, and starts the right workflow.",
+    detail: "CLI · MCP with OAuth · API",
+    href: "/mockups/platform/runner",
+    icon: PlayIcon,
   },
   {
     number: "02",
-    title: "Inference",
+    title: "Workflows",
     description:
-      "Containers package the models, pipelines, and runtime needed for each capability. The inference layer turns an agent request into a runnable workload.",
-    detail: "ai-runner · comfystream · comfyui-base",
-    href: "/mockups/platform/inference",
-    icon: BoxIcon,
+      "Workflows are reusable media operations created in ai-runner. Each workflow defines the inputs, models, and steps needed to produce a result.",
+    detail: "Create · reuse · measure usage",
+    href: "/mockups/platform/workflows",
+    icon: BlocksIcon,
   },
   {
     number: "03",
     title: "Compute",
     description:
-      "Orchestrators provide the GPUs that run inference containers. The network matches workloads with available compute and returns the result.",
+      "Orchestrators provide the GPUs that execute workflows. The network matches each run with available compute and returns the result to Runner.",
     detail: "Orchestrators · GPUs · rewards",
     href: "/mockups/platform/compute",
     icon: CpuIcon,
@@ -46,22 +46,21 @@ const requestSteps = [
   {
     title: "Intent",
     description:
-      "A person asks VideoBuddy to create or transform a piece of video.",
+      "A person, agent, or application asks Runner to create or transform media.",
   },
   {
-    title: "Selection",
-    description:
-      "The agent chooses a capability and the inference container that provides it.",
+    title: "Workflow",
+    description: "Runner selects the saved workflow and validates its inputs.",
   },
   {
     title: "Execution",
     description:
-      "An orchestrator loads the container, runs the job on its GPU, and returns the output.",
+      "An orchestrator runs the workflow on its GPU and returns the output.",
   },
   {
     title: "Result",
     description:
-      "VideoBuddy adds the output to the project so it can be reviewed, revised, or published.",
+      "Runner returns the output to the CLI, connected agent, or application.",
   },
 ]
 
@@ -72,12 +71,13 @@ export default function ProtocolPage() {
         <header className="max-w-3xl">
           <p className="text-sm text-muted-foreground">Livepeer</p>
           <h1 className="mt-2 text-3xl font-medium text-balance">
-            Agents turn intent into inference jobs. Compute runs them.
+            Runner connects applications and agents to media workflows. Compute
+            runs them.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            VideoBuddy is the agent people interact with. Inference containers
-            provide its capabilities, and the Livepeer compute network supplies
-            the GPUs that execute them.
+            Workflows define what happens. Runner makes them available through
+            the CLI, MCP, and API. The Livepeer network supplies the compute
+            that executes every run.
           </p>
         </header>
 
@@ -99,9 +99,7 @@ export default function ProtocolPage() {
         </section>
 
         <section className="mt-14">
-          <h2 className="text-lg font-medium">
-            How a VideoBuddy request moves
-          </h2>
+          <h2 className="text-lg font-medium">How a Runner request moves</h2>
           <div className="mt-4 border-y">
             {requestSteps.map((step, index) => (
               <div
@@ -122,14 +120,14 @@ export default function ProtocolPage() {
 
         <section className="mt-14 grid gap-10 md:grid-cols-2">
           <div>
-            <BotIcon className="size-5" aria-hidden="true" />
+            <PlayIcon className="size-5" aria-hidden="true" />
             <h2 className="mt-3 text-lg font-medium">
-              The agent stays product-shaped
+              Any agent can use Runner
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              VideoBuddy owns the interface, creative workflow, and project
-              context. It can add or replace inference containers without asking
-              people to manage models or GPUs directly.
+              Connect the Runner MCP and authorize it with OAuth. The agent gets
+              access to this project&rsquo;s workflows without handling a
+              long-lived API credential.
             </p>
           </div>
           <div>
@@ -138,8 +136,8 @@ export default function ProtocolPage() {
               Payment follows execution
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The project pays when an inference workload runs. The orchestrator
-              that supplies the GPU earns service fees, while protocol rewards
+              The project pays when a workflow runs. The orchestrator that
+              supplies the GPU earns service fees, while protocol rewards
               support active network compute.
             </p>
           </div>

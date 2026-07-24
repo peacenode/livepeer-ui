@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils"
 export const platformNavItems = [
   { title: "Home", href: "/mockups/platform" },
   { title: "Compute", href: "/mockups/platform/compute" },
-  { title: "Inference", href: "/mockups/platform/inference" },
-  { title: "Agents", href: "/mockups/platform/agent" },
+  { title: "Workflows", href: "/mockups/platform/workflows" },
+  { title: "Runner", href: "/mockups/platform/runner" },
   { title: "API", href: "/mockups/platform/api" },
   { title: "Usage", href: "/mockups/platform/usage" },
   { title: "Settings", href: "/mockups/platform/settings" },

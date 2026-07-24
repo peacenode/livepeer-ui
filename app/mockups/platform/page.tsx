@@ -41,8 +41,8 @@ const getStartedSteps = [
     complete: false,
   },
   {
-    label: "Test containers",
-    href: "/mockups/platform/inference",
+    label: "Run a workflow",
+    href: "/mockups/platform/workflows",
     complete: false,
   },
 ]
@@ -130,7 +130,7 @@ export default async function MockupHomePage() {
           </Card>
         </a>
         <Link
-          href="/mockups/platform/inference"
+          href="/mockups/platform/workflows"
           className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <Card className="h-full min-h-56 transition-colors group-hover:bg-accent">
@@ -141,9 +141,9 @@ export default async function MockupHomePage() {
               />
               <div className="flex items-end justify-between gap-6">
                 <div className="flex max-w-sm flex-col gap-2">
-                  <CardTitle className="text-xl">Create a container</CardTitle>
+                  <CardTitle className="text-xl">Create a workflow</CardTitle>
                   <CardDescription>
-                    Package a model or pipeline and deploy it for inference.
+                    Turn a media operation into a reusable workflow for Runner.
                   </CardDescription>
                 </div>
                 <ArrowRightIcon

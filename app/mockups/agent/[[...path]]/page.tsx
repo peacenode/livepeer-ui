@@ -18,10 +18,9 @@ export default async function LegacyAgentRedirect({
     }
   }
 
-  const pathname = [
-    "/mockups/videobuddy",
-    ...path.map(encodeURIComponent),
-  ].join("/")
+  const pathname = ["/mockups/runner", ...path.map(encodeURIComponent)].join(
+    "/"
+  )
   const queryString = query.toString()
 
   redirect(queryString ? `${pathname}?${queryString}` : pathname)

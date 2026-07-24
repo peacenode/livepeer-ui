@@ -105,9 +105,9 @@ export default function MockupApiPage() {
         </CardHeader>
         <CardContent>
           <pre className="overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs leading-relaxed">
-            {`curl https://api.livepeer.org/v1/inference \\
+            {`curl https://api.livepeer.org/v1/workflows/text-to-image/runs \\
   -H "Authorization: Bearer $LIVEPEER_API_KEY" \\
-  -d '{ "pipeline": "text-to-image", "prompt": "..." }'`}
+  -d '{ "prompt": "..." }'`}
           </pre>
         </CardContent>
       </Card>

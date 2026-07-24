@@ -27,25 +27,25 @@ export const metadata: Metadata = {
 const dailyUsage = [
   {
     date: "Jul 23",
-    inference: "182.4K",
+    workflowRuns: "182.4K",
     compute: "284 GPU min",
     cost: "$91.20",
   },
   {
     date: "Jul 22",
-    inference: "168.1K",
+    workflowRuns: "168.1K",
     compute: "261 GPU min",
     cost: "$84.05",
   },
   {
     date: "Jul 21",
-    inference: "155.7K",
+    workflowRuns: "155.7K",
     compute: "249 GPU min",
     cost: "$79.63",
   },
   {
     date: "Jul 20",
-    inference: "149.2K",
+    workflowRuns: "149.2K",
     compute: "238 GPU min",
     cost: "$75.18",
   },
@@ -53,14 +53,14 @@ const dailyUsage = [
 
 const resourceUsage = [
   {
-    resource: "ai-runner",
-    type: "Inference",
+    resource: "text-to-image",
+    type: "Workflow",
     usage: "612.8K requests",
     cost: "$821.40",
   },
   {
-    resource: "comfystream",
-    type: "Inference",
+    resource: "live-video-to-video",
+    type: "Workflow",
     usage: "396.1K requests",
     cost: "$604.75",
   },
@@ -100,7 +100,7 @@ export default function MockupUsagePage() {
               </Card>
               <Card variant="metric">
                 <CardHeader>
-                  <CardDescription>Inference requests</CardDescription>
+                  <CardDescription>Workflow runs</CardDescription>
                   <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
                     1.2M
                   </CardTitle>
@@ -161,7 +161,7 @@ export default function MockupUsagePage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Date</TableHead>
-                    <TableHead>Inference</TableHead>
+                    <TableHead>Workflow runs</TableHead>
                     <TableHead>Compute</TableHead>
                     <TableHead className="text-right">Cost</TableHead>
                   </TableRow>
@@ -171,7 +171,7 @@ export default function MockupUsagePage() {
                     <TableRow key={day.date}>
                       <TableCell className="font-medium">{day.date}</TableCell>
                       <TableCell className="text-xs tabular-nums">
-                        {day.inference}
+                        {day.workflowRuns}
                       </TableCell>
                       <TableCell className="text-xs tabular-nums">
                         {day.compute}
