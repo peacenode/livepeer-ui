@@ -21,9 +21,12 @@ export default function Page() {
               with the shadcn CLI.
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
-              <Button render={<Link href="/docs" />}>Get Started</Button>
+              <Button nativeButton={false} render={<Link href="/docs" />}>
+                Get Started
+              </Button>
               <Button
                 variant="outline"
+                nativeButton={false}
                 render={<Link href="/docs/components/accordion" />}
               >
                 Browse Components

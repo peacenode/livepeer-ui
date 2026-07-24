@@ -70,6 +70,7 @@ export default async function ContainerDetailPage({
           variant="ghost"
           size="sm"
           className="self-start"
+          nativeButton={false}
           render={<Link href="/mockups/platform/inference" />}
         >
           <ArrowLeftIcon data-icon="inline-start" />
@@ -89,7 +90,10 @@ export default async function ContainerDetailPage({
               {container.description}
             </p>
           </div>
-          <Button render={<Link href="/mockups/platform/inference" />}>
+          <Button
+            nativeButton={false}
+            render={<Link href="/mockups/platform/inference" />}
+          >
             Deploy
           </Button>
         </div>
