@@ -429,7 +429,7 @@ export function AgentWorkspace() {
         >
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-sm font-medium">Recent</h2>
-            <InputGroup className="h-8 w-52 border bg-background sm:w-64">
+            <InputGroup className="h-8 w-52 border border-border bg-background sm:w-64">
               <InputGroupInput
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
