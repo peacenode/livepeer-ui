@@ -389,7 +389,7 @@ export function AgentWorkspace() {
       <Button
         size="icon"
         aria-label="New creation"
-        className="fixed right-4 bottom-4 shadow-lg sm:hidden"
+        className="fixed right-4 bottom-20 shadow-lg sm:hidden"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <PlusIcon />
