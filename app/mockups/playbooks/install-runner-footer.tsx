@@ -24,7 +24,7 @@ export function InstallRunnerFooter({
   }
 
   return (
-    <footer className="mt-20 border-t bg-muted">
+    <footer className="mt-20 bg-muted">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <h2 className="text-2xl font-medium text-balance">{title}</h2>
