@@ -47,6 +47,11 @@ const fieldLabels: Record<string, string> = {
   one_liner: "Brand tagline",
   aspect: "Aspect ratio",
   aspect_ratio: "Aspect ratio",
+  packshot: "Create product packshot",
+  teaser: "Create 5s motion teaser",
+  music: "Add licensed soundtrack",
+  reel: "Create platform-ready reel",
+  train_brand_lora: "Train reusable brand LoRA",
 }
 
 function labelFor(name: string) {
@@ -133,9 +138,13 @@ export function PlaybookBriefForm({
   const [values, setValues] = useState<Record<string, string>>({})
   const [copied, setCopied] = useState(false)
   const fields = brief?.fields ?? []
-  const trainBrandLoraField = fields.find(
-    (field) => field.name === "train_brand_lora"
-  )
+  const booleanFields = fields
+    .filter((field) => /^(true|false)$/i.test(field.defaultValue.trim()))
+    .sort((a, b) => {
+      if (a.name === "train_brand_lora") return 1
+      if (b.name === "train_brand_lora") return -1
+      return 0
+    })
   const hasFinishingPasses = fields.some((field) =>
     ["packshot", "teaser", "music", "reel"].includes(field.name)
   )
@@ -143,7 +152,7 @@ export function PlaybookBriefForm({
     field.name.toLowerCase().includes("aspect")
   )
   const orderedFields = fields.flatMap((field) => {
-    if (field.name === "train_brand_lora") return []
+    if (/^(true|false)$/i.test(field.defaultValue.trim())) return []
     if (field.name === "finish" && hasFinishingPasses) return []
     if (field.name.toLowerCase().includes("aspect")) return []
     if (field.name.toLowerCase() === "aesthetic") {
@@ -206,7 +215,6 @@ export function PlaybookBriefForm({
             const long = (field.hint || field.defaultValue).length > 60
             const isAspectRatio = field.name.toLowerCase().includes("aspect")
             const isAesthetic = field.name.toLowerCase() === "aesthetic"
-            const isBoolean = /^(true|false)$/i.test(field.defaultValue.trim())
             const aspectOptions = Array.from(
               new Set(
                 `${field.defaultValue} ${field.hint}`.match(/\d+\s*:\s*\d+/g) ??
@@ -227,35 +235,6 @@ export function PlaybookBriefForm({
                   ...current,
                   [field.name]: event.target.value,
                 })),
-            }
-
-            if (isBoolean) {
-              const checked =
-                (values[field.name] ?? field.defaultValue).toLowerCase() ===
-                "true"
-
-              return (
-                <div key={field.name} className="flex items-start gap-2 py-1">
-                  <Checkbox
-                    id={id}
-                    checked={checked}
-                    onCheckedChange={(nextChecked) =>
-                      setValues((current) => ({
-                        ...current,
-                        [field.name]: String(nextChecked),
-                      }))
-                    }
-                  />
-                  <div>
-                    <Label htmlFor={id}>{labelFor(field.name)}</Label>
-                    {field.hint && (
-                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        {field.hint}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )
             }
 
             return (
@@ -306,22 +285,30 @@ export function PlaybookBriefForm({
       )}
 
       <div className="mt-8 flex flex-col gap-3">
-        {trainBrandLoraField && (
-          <div className="flex items-center gap-2 py-1">
-            <Checkbox
-              id="brief-train_brand_lora"
-              checked={
-                (values[trainBrandLoraField.name] ??
-                  trainBrandLoraField.defaultValue) === "true"
-              }
-              onCheckedChange={(checked) =>
-                setValues((current) => ({
-                  ...current,
-                  [trainBrandLoraField.name]: String(checked),
-                }))
-              }
-            />
-            <Label htmlFor="brief-train_brand_lora">Train brand LoRA</Label>
+        {booleanFields.length > 0 && (
+          <div className="flex flex-col gap-3 py-1">
+            {booleanFields.map((field) => {
+              const id = `brief-${field.name}`
+              const checked =
+                (values[field.name] ?? field.defaultValue).toLowerCase() ===
+                "true"
+
+              return (
+                <div key={field.name} className="flex items-center gap-2">
+                  <Checkbox
+                    id={id}
+                    checked={checked}
+                    onCheckedChange={(nextChecked) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: String(nextChecked),
+                      }))
+                    }
+                  />
+                  <Label htmlFor={id}>{labelFor(field.name)}</Label>
+                </div>
+              )
+            })}
           </div>
         )}
         <Button
