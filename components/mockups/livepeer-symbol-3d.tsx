@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import type { Group } from "three"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { PMREMGenerator, type Group } from "three"
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
 
 import { cn } from "@/lib/utils"
 
@@ -15,6 +16,27 @@ const blocks: [number, number, number][] = [
   [1.2, 0, 0],
 ]
 
+function StudioEnvironment() {
+  const { gl, scene } = useThree()
+
+  useEffect(() => {
+    const generator = new PMREMGenerator(gl)
+    const environment = generator.fromScene(new RoomEnvironment(), 0.04)
+
+    // Three.js scene configuration is intentionally imperative.
+    // eslint-disable-next-line react-hooks/immutability
+    scene.environment = environment.texture
+
+    return () => {
+      scene.environment = null
+      environment.dispose()
+      generator.dispose()
+    }
+  }, [gl, scene])
+
+  return null
+}
+
 function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const group = useRef<Group>(null)
 
@@ -23,7 +45,7 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
 
     const time = clock.getElapsedTime()
     const targetX = -0.52 + pointer.y * 0.1
-    const targetY = -0.72 + pointer.x * 0.14 + Math.sin(time * 0.35) * 0.05
+    const targetY = 0.72 + pointer.x * 0.14 + Math.sin(time * 0.35) * 0.05
     const damping = Math.min(delta * 4, 1)
 
     group.current.rotation.x += (targetX - group.current.rotation.x) * damping
@@ -34,8 +56,8 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <group
       ref={group}
-      position={[0.35, 0, 0]}
-      rotation={[-0.52, -0.72, -0.16]}
+      position={[-0.35, 0, 0]}
+      rotation={[-0.52, 0.72, 0.16]}
       scale={1.35}
     >
       {blocks.map((position) => (
@@ -43,10 +65,11 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
           <boxGeometry args={[0.66, 0.66, 0.48]} />
           <meshPhysicalMaterial
             clearcoat={0.75}
-            clearcoatRoughness={0.16}
-            color="#4a4a4a"
-            metalness={0.82}
-            roughness={0.22}
+            clearcoatRoughness={0.12}
+            color="#6b6b6b"
+            envMapIntensity={1.35}
+            metalness={0.9}
+            roughness={0.2}
           />
         </mesh>
       ))}
@@ -80,10 +103,11 @@ function LivepeerSymbol3D({ className }: { className?: string }) {
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
       >
-        <ambientLight intensity={0.65} />
-        <directionalLight position={[3, 4, 5]} intensity={4.5} />
-        <directionalLight position={[-4, -1, 2]} intensity={1.4} />
-        <pointLight position={[0, -3, 3]} intensity={10} />
+        <StudioEnvironment />
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[-4, 5, 5]} intensity={4.8} />
+        <directionalLight position={[4, -2, 3]} intensity={1.6} />
+        <pointLight position={[-2, -3, 3]} intensity={9} />
         <Symbol reduceMotion={reduceMotion} />
       </Canvas>
     </div>

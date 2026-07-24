@@ -56,12 +56,12 @@ const getStartedSteps = [
   {
     label: "Add credits",
     href: "/mockups/platform/billing",
-    complete: true,
+    complete: false,
   },
   {
     label: "Create an API key",
     href: "/mockups/platform/api",
-    complete: true,
+    complete: false,
   },
   {
     label: "Test containers",
@@ -108,7 +108,7 @@ export default function MockupHomePage() {
     <PlatformPage title="Home">
       <Card className="py-0">
         <div className="grid min-h-64 md:grid-cols-[minmax(0,1fr)_20rem]">
-          <div className="flex flex-col py-6">
+          <div className="flex flex-col justify-center py-6">
             <CardHeader>
               <CardTitle>Get started</CardTitle>
             </CardHeader>
