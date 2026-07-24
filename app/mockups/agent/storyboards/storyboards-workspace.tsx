@@ -21,9 +21,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
+import { frameAt, storyboardFrames } from "../media-assets"
 import { ProjectPicker } from "../project-picker"
-
-const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 
 type ImageBatch = {
   id: number
@@ -31,36 +30,41 @@ type ImageBatch = {
   images: number[]
   uploaded: string
   project: string
+  frames: readonly string[]
 }
 
 const initialBatches: ImageBatch[] = [
   {
     id: 4,
-    name: "Orbit launch film",
+    name: "Salt Signal — arrival",
     images: Array.from({ length: 30 }, (_, index) => index),
     uploaded: "Today, 2:14 PM",
     project: "Default project",
+    frames: storyboardFrames.saltSignal,
   },
   {
     id: 3,
-    name: "Product reveal v2",
+    name: "Black Tide — lighthouse",
     images: Array.from({ length: 18 }, (_, index) => index),
     uploaded: "Today, 9:42 AM",
     project: "Default project",
+    frames: storyboardFrames.blackTide,
   },
   {
     id: 2,
-    name: "Homepage loops",
+    name: "After Hours — rehearsal",
     images: Array.from({ length: 12 }, (_, index) => index),
     uploaded: "Yesterday",
     project: "Default project",
+    frames: storyboardFrames.afterHours,
   },
   {
     id: 1,
-    name: "Opening sequence",
+    name: "Salt Signal — observatory",
     images: Array.from({ length: 8 }, (_, index) => index),
     uploaded: "Jul 21",
     project: "Default project",
+    frames: storyboardFrames.saltSignal,
   },
 ]
 
@@ -82,8 +86,9 @@ export function StoryboardsWorkspace() {
   } | null>(null)
   const [projects, setProjects] = useState([
     "Default project",
-    "Orbit",
-    "Soft launch",
+    "Salt Signal",
+    "Black Tide",
+    "After Hours",
   ])
   const [projectTargetId, setProjectTargetId] = useState<number | null>(null)
   const [newProjectName, setNewProjectName] = useState("")
@@ -112,6 +117,7 @@ export function StoryboardsWorkspace() {
         images: Array.from({ length: uploadFiles.length }, (_, index) => index),
         uploaded: "Just now",
         project: "Default project",
+        frames: storyboardFrames.saltSignal,
       },
       ...current,
     ])
@@ -281,7 +287,7 @@ export function StoryboardsWorkspace() {
                       )}
                     >
                       <Image
-                        src={sampleImage}
+                        src={frameAt(batch.frames, imageId)}
                         alt=""
                         fill
                         className={cn(

@@ -5,38 +5,37 @@ import Image from "next/image"
 import { FilmIcon, PlayIcon, PlusIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-
-const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
+import { storyMedia } from "../media-assets"
 
 type FootageItem = {
   id: number
   name: string
   duration: string
   uploaded: string
-  imageClass?: string
+  imageUrl: string
 }
 
 const initialFootage: FootageItem[] = [
   {
     id: 3,
-    name: "Studio orbit take 04.mp4",
+    name: "salt-flats-wind-test-04.mp4",
     duration: "0:18",
     uploaded: "Today, 3:08 PM",
+    imageUrl: storyMedia.saltSignal.wide,
   },
   {
     id: 2,
-    name: "Chrome detail macro.mov",
+    name: "lighthouse-weather-reference.mov",
     duration: "0:12",
     uploaded: "Yesterday",
-    imageClass: "contrast-125",
+    imageUrl: storyMedia.blackTide.wide,
   },
   {
     id: 1,
-    name: "Lighting sweep reference.mp4",
+    name: "pool-rehearsal-wide.mp4",
     duration: "0:24",
     uploaded: "Jul 21",
-    imageClass: "hue-rotate-15",
+    imageUrl: storyMedia.afterHours.wide,
   },
 ]
 
@@ -53,6 +52,7 @@ export function FootageWorkspace() {
         name: file.name,
         duration: "0:00",
         uploaded: "Just now",
+        imageUrl: storyMedia.saltSignal.wide,
       }))
     setFootage((current) => [...additions.reverse(), ...current])
   }
@@ -92,13 +92,10 @@ export function FootageWorkspace() {
                     className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <Image
-                      src={sampleImage}
+                      src={item.imageUrl}
                       alt=""
                       fill
-                      className={cn(
-                        "object-cover transition-transform group-hover:scale-105",
-                        item.imageClass
-                      )}
+                      className="object-cover transition-transform group-hover:scale-105"
                     />
                     <span className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20">
                       <span className="flex size-11 items-center justify-center rounded-full bg-background/90">

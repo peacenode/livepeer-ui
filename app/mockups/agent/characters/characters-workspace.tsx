@@ -21,9 +21,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
+import { frameAt, storyboardFrames } from "../media-assets"
 import { ProjectPicker } from "../project-picker"
 
-const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const characterProperties = [
   "Front",
   "Profile",
@@ -41,6 +41,7 @@ type Character = {
   images: number[]
   updated: string
   project: string
+  frames: readonly string[]
 }
 
 const initialCharacters: Character[] = [
@@ -50,13 +51,15 @@ const initialCharacters: Character[] = [
     images: Array.from({ length: 18 }, (_, index) => index),
     updated: "Today, 1:48 PM",
     project: "Default project",
+    frames: storyboardFrames.saltSignal,
   },
   {
     id: 2,
-    name: "The Courier",
+    name: "Eli",
     images: Array.from({ length: 12 }, (_, index) => index),
     updated: "Yesterday",
     project: "Default project",
+    frames: storyboardFrames.afterHours,
   },
   {
     id: 1,
@@ -64,6 +67,7 @@ const initialCharacters: Character[] = [
     images: Array.from({ length: 8 }, (_, index) => index),
     updated: "Jul 21",
     project: "Default project",
+    frames: storyboardFrames.blackTide,
   },
 ]
 
@@ -83,8 +87,9 @@ export function CharactersWorkspace() {
   >({})
   const [projects, setProjects] = useState([
     "Default project",
-    "Orbit",
-    "Soft launch",
+    "Salt Signal",
+    "Black Tide",
+    "After Hours",
   ])
   const [projectTargetId, setProjectTargetId] = useState<number | null>(null)
   const [newProjectName, setNewProjectName] = useState("")
@@ -115,6 +120,7 @@ export function CharactersWorkspace() {
         images: Array.from({ length: uploadFiles.length }, (_, index) => index),
         updated: "Just now",
         project: "Default project",
+        frames: storyboardFrames.saltSignal,
       },
       ...current,
     ])
@@ -235,7 +241,7 @@ export function CharactersWorkspace() {
                     )}
                   >
                     <Image
-                      src={sampleImage}
+                      src={frameAt(character.frames, imageId + 1)}
                       alt=""
                       fill
                       className={cn(
@@ -401,7 +407,13 @@ export function CharactersWorkspace() {
               <div className="flex min-h-80 items-center bg-background">
                 <div className="relative aspect-square w-full max-h-[70dvh]">
                   <Image
-                    src={sampleImage}
+                    src={frameAt(
+                      characters.find(
+                        (character) =>
+                          character.id === selectedImage.characterId
+                      )?.frames ?? storyboardFrames.saltSignal,
+                      selectedImage.imageId + 1
+                    )}
                     alt="Character reference"
                     fill
                     className={cn(

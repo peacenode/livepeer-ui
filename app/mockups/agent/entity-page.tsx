@@ -21,14 +21,14 @@ const pageData = {
     icon: ClapperboardIcon,
     items: [
       {
-        name: "Orbit launch film",
+        name: "Salt Signal — arrival",
         detail: "18 scenes · Updated today",
-        project: "Orbit",
+        project: "Salt Signal",
       },
       {
-        name: "Opening sequence",
+        name: "Black Tide — lighthouse",
         detail: "8 scenes · Updated Tuesday",
-        project: "Soft launch",
+        project: "Black Tide",
       },
     ],
   },
@@ -42,17 +42,17 @@ const pageData = {
       {
         name: "Mara",
         detail: "12 references · Updated today",
-        project: "Orbit",
+        project: "Salt Signal",
       },
       {
-        name: "The Courier",
+        name: "Eli",
         detail: "7 references · Updated Monday",
-        project: "Orbit",
+        project: "After Hours",
       },
       {
         name: "June",
         detail: "4 references · Draft",
-        project: "Soft launch",
+        project: "Black Tide",
       },
     ],
   },
@@ -64,17 +64,17 @@ const pageData = {
     icon: BoxesIcon,
     items: [
       {
-        name: "Orbit",
+        name: "Salt Signal",
         detail: "2 storyboards · 2 characters · 38 generations",
         project: "Active",
       },
       {
-        name: "Soft launch",
+        name: "Black Tide",
         detail: "1 storyboard · 1 character · 14 generations",
         project: "Active",
       },
       {
-        name: "Unsorted",
+        name: "After Hours",
         detail: "No storyboards · 6 generations",
         project: "Inbox",
       },

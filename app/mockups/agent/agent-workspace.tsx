@@ -59,11 +59,10 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
-
-const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
+import { storyMedia } from "./media-assets"
 
 const initialPrompt =
-  "A translucent cobalt running shoe suspended above rippled brushed aluminum, sharp diagonal studio light, chrome details"
+  "A lone courier crosses the salt flats toward a silent radio observatory as a dust front closes in"
 
 function getRerollPrompts(generation: Generation) {
   return [
@@ -86,110 +85,112 @@ type Generation = {
   time: string
   duration: string
   reference: Reference
-  imageClass?: string
+  imageUrl: string
 }
 
 const seedRuns: Generation[] = [
   {
     id: 18,
     prompt: initialPrompt,
-    project: "Orbit",
+    project: "Salt Signal",
     section: "Today",
     time: "Just now",
     duration: "0:08",
     reference: {
       kind: "storyboard",
-      name: "Orbit launch film",
+      name: "Salt Signal — arrival",
       count: 30,
     },
+    imageUrl: storyMedia.saltSignal.wide,
   },
   {
     id: 17,
     prompt:
-      "Campaign still with a cobalt runner on black glass, low horizon light, cool studio atmosphere",
-    project: "Orbit",
+      "Mara listens to a numbers station in the observatory control room while the desert light fades",
+    project: "Salt Signal",
     section: "Today",
     time: "1:56 PM",
     duration: "0:06",
     reference: { kind: "images", count: 8 },
-    imageClass: "hue-rotate-15",
+    imageUrl: storyMedia.saltSignal.character,
   },
   {
     id: 16,
     prompt:
-      "Slow orbit around the product as the key light sweeps across the translucent upper",
-    project: "Orbit",
+      "June follows a flock of white birds along the cliff path toward the black lighthouse",
+    project: "Black Tide",
     section: "Today",
     time: "1:32 PM",
     duration: "0:10",
     reference: {
       kind: "storyboard",
-      name: "Product reveal v2",
+      name: "Black Tide — lighthouse",
       count: 14,
     },
-    imageClass: "contrast-125",
+    imageUrl: storyMedia.blackTide.wide,
   },
   {
     id: 15,
     prompt:
-      "Macro push through chrome details into a wide hero frame, restrained camera movement",
-    project: "Orbit",
+      "A quiet close-up of June in the ferry shelter as the lighthouse lamp comes alive behind her",
+    project: "Black Tide",
     section: "Today",
     time: "11:24 AM",
     duration: "0:07",
     reference: { kind: "images", count: 4 },
-    imageClass: "saturate-75",
+    imageUrl: storyMedia.blackTide.character,
   },
   {
     id: 14,
     prompt:
-      "Shoe descends through soft haze and settles just above a mirrored aluminum surface",
-    project: "Orbit",
+      "Three dancers rehearse a crossing pattern in the drained pool under sodium and moonlight",
+    project: "After Hours",
     section: "Today",
     time: "9:08 AM",
     duration: "0:12",
     reference: {
       kind: "storyboard",
-      name: "Opening sequence",
+      name: "After Hours — rehearsal",
       count: 22,
     },
-    imageClass: "brightness-90",
+    imageUrl: storyMedia.afterHours.wide,
   },
   {
     id: 13,
     prompt:
-      "Top-down rotation with hard graphic shadows and small chrome spheres crossing frame",
-    project: "Soft launch",
+      "Eli rests at the edge of the empty pool after the final rehearsal, still catching his breath",
+    project: "After Hours",
     section: "Yesterday",
     time: "6:42 PM",
     duration: "0:08",
     reference: { kind: "images", count: 12 },
-    imageClass: "hue-rotate-30",
+    imageUrl: storyMedia.afterHours.character,
   },
   {
     id: 12,
     prompt:
-      "Wide campaign loop, quiet motion in the reflective surface, product held perfectly still",
-    project: "Soft launch",
+      "A wide storm front swallows the island village while the lighthouse remains visible through fog",
+    project: "Black Tide",
     section: "Yesterday",
     time: "10:17 AM",
     duration: "0:15",
     reference: {
       kind: "storyboard",
-      name: "Homepage loops",
+      name: "Black Tide — weather study",
       count: 18,
     },
+    imageUrl: storyMedia.blackTide.wide,
   },
   {
     id: 11,
     prompt:
-      "Fast cut test between four lighting directions on a seamless black stage",
+      "Fast intercut between the observatory dishes turning and Mara crossing the white salt basin",
     project: "Unsorted",
     section: "Jul 21, 2026",
     time: "4:05 PM",
     duration: "0:05",
     reference: { kind: "images", count: 16 },
-    imageClass: "contrast-150",
+    imageUrl: storyMedia.saltSignal.wide,
   },
 ]
 
@@ -292,9 +293,10 @@ export function AgentWorkspace() {
               ? { kind: "images", count: sources.length }
               : {
                   kind: "storyboard",
-                  name: "Orbit launch film",
+                  name: "Salt Signal — arrival",
                   count: 30,
                 },
+          imageUrl: storyMedia.saltSignal.wide,
         },
         ...current,
       ])
@@ -452,9 +454,9 @@ export function AgentWorkspace() {
                         <DropdownMenuGroup>
                           <DropdownMenuLabel>Storyboard</DropdownMenuLabel>
                           {[
-                            "Orbit launch film",
-                            "Product reveal v2",
-                            "Homepage loops",
+                            "Salt Signal — arrival",
+                            "Black Tide — lighthouse",
+                            "After Hours — rehearsal",
                           ].map((storyboard) => (
                             <DropdownMenuItem
                               key={storyboard}
@@ -468,7 +470,7 @@ export function AgentWorkspace() {
                         </DropdownMenuGroup>
                         <DropdownMenuGroup>
                           <DropdownMenuLabel>Character</DropdownMenuLabel>
-                          {["Mara", "The Courier", "June"].map((character) => (
+                          {["Mara", "Eli", "June"].map((character) => (
                             <DropdownMenuItem
                               key={character}
                               onClick={() =>
@@ -497,7 +499,7 @@ export function AgentWorkspace() {
                       <DropdownMenuContent>
                         <DropdownMenuGroup>
                           <DropdownMenuLabel>Character</DropdownMenuLabel>
-                          {["Mara", "The Courier", "June"].map((character) => (
+                          {["Mara", "Eli", "June"].map((character) => (
                             <DropdownMenuItem
                               key={character}
                               onClick={() => setSelectedCharacter(character)}
@@ -527,9 +529,10 @@ export function AgentWorkspace() {
                         <DropdownMenuLabel>Save to project</DropdownMenuLabel>
                         {[
                           "New project",
-                          "Orbit",
-                          "Soft launch",
-                          "Unsorted",
+                          "Salt Signal",
+                          "Black Tide",
+                          "After Hours",
+                          "After Hours",
                         ].map((item) => (
                           <DropdownMenuItem
                             key={item}
@@ -619,13 +622,10 @@ export function AgentWorkspace() {
                         className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         <Image
-                          src={sampleImage}
+                          src={generation.imageUrl}
                           alt={`Video render ${generation.id}`}
                           fill
-                          className={cn(
-                            "scale-110 object-cover",
-                            generation.imageClass
-                          )}
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
                           <span className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur">
@@ -671,14 +671,16 @@ export function AgentWorkspace() {
                                     className="relative size-7 overflow-hidden rounded-md bg-muted ring-2 ring-background"
                                   >
                                     <Image
-                                      src={sampleImage}
+                                      src={
+                                        [
+                                          generation.imageUrl,
+                                          storyMedia.saltSignal.character,
+                                          storyMedia.blackTide.character,
+                                        ][index]
+                                      }
                                       alt=""
                                       fill
-                                      className={cn(
-                                        "object-cover",
-                                        index === 1 && "hue-rotate-15",
-                                        index === 2 && "contrast-125"
-                                      )}
+                                      className="object-cover"
                                     />
                                   </div>
                                 ))}
@@ -729,13 +731,10 @@ export function AgentWorkspace() {
               <div className="flex min-h-72 items-center bg-background lg:min-h-[620px]">
                 <div className="relative aspect-video w-full overflow-hidden">
                   <Image
-                    src={sampleImage}
+                    src={selectedGeneration.imageUrl}
                     alt={`Video render ${selectedGeneration.id}`}
                     fill
-                    className={cn(
-                      "object-cover",
-                      selectedGeneration.imageClass
-                    )}
+                    className="object-cover"
                     priority
                   />
                   <button
@@ -789,7 +788,7 @@ export function AgentWorkspace() {
                 </div>
 
                 <a
-                  href={sampleImage}
+                  href={selectedGeneration.imageUrl}
                   download={`render-${selectedGeneration.id}.mp4`}
                   className="mt-6 inline-flex h-9 items-center justify-center gap-1.5 rounded-full border border-border bg-background px-3 text-sm font-medium transition-colors hover:bg-muted"
                 >

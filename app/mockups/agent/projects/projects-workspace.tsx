@@ -39,8 +39,11 @@ import {
 } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
-
-const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
+import {
+  frameAt,
+  framesForName,
+  storyMedia,
+} from "../media-assets"
 
 type Project = {
   id: string
@@ -55,111 +58,115 @@ type Project = {
     prompt: string
     duration: string
     time: string
-    imageClass?: string
+    imageUrl: string
   }[]
 }
 
 const initialProjects: Project[] = [
   {
     id: "orbit",
-    name: "Orbit",
+    name: "Salt Signal",
     updated: "Updated today",
+    thumbnailUrl: storyMedia.saltSignal.wide,
     storyboards: [
-      { name: "Orbit launch film", count: 30, updated: "Today, 2:14 PM" },
-      { name: "Product reveal v2", count: 18, updated: "Today, 9:42 AM" },
+      { name: "Salt Signal — arrival", count: 30, updated: "Today, 2:14 PM" },
+      { name: "Observatory interiors", count: 18, updated: "Today, 9:42 AM" },
     ],
     characters: [
       { name: "Mara", count: 18, updated: "Today, 1:48 PM" },
-      { name: "The Courier", count: 12, updated: "Yesterday" },
+      { name: "Station Keeper", count: 12, updated: "Yesterday" },
     ],
     renders: [
       {
         id: 108,
         prompt:
-          "Slow orbit around the product as the key light moves across the translucent upper",
+          "Mara crosses the salt basin as the observatory dishes turn toward an unknown signal",
         duration: "0:08",
         time: "Today, 2:14 PM",
+        imageUrl: storyMedia.saltSignal.wide,
       },
       {
         id: 107,
         prompt:
-          "Macro push through chrome details into a wide hero composition",
+          "A restrained push toward Mara listening in the analog control room",
         duration: "0:06",
         time: "Today, 1:56 PM",
-        imageClass: "hue-rotate-15",
+        imageUrl: storyMedia.saltSignal.character,
       },
       {
         id: 106,
         prompt:
-          "Product suspended over black glass with a quiet reflected light sweep",
+          "Dust lifts behind the courier while the radio array disappears into the approaching front",
         duration: "0:10",
         time: "Today, 11:24 AM",
-        imageClass: "contrast-125",
+        imageUrl: storyMedia.saltSignal.wide,
       },
       {
         id: 105,
         prompt:
-          "Top-down rotation with graphic shadows and chrome spheres crossing frame",
+          "The control room lights wake one by one as Mara decodes the repeating signal",
         duration: "0:07",
         time: "Yesterday",
-        imageClass: "saturate-75",
+        imageUrl: storyMedia.saltSignal.character,
       },
       {
         id: 104,
         prompt:
-          "Shoe descends through haze and settles above brushed aluminum",
+          "Wide locked frame of the observatory at dusk with the courier approaching from the flats",
         duration: "0:12",
         time: "Yesterday",
-        imageClass: "brightness-90",
+        imageUrl: storyMedia.saltSignal.wide,
       },
       {
         id: 103,
         prompt:
-          "Wide campaign loop with restrained motion in the reflective surface",
+          "Mara turns toward the dish window as the transmission abruptly stops",
         duration: "0:15",
         time: "Jul 21",
+        imageUrl: storyMedia.saltSignal.character,
       },
     ],
   },
   {
     id: "soft-launch",
-    name: "Soft launch",
+    name: "Black Tide",
     updated: "Updated yesterday",
-    thumbnailClass: "hue-rotate-30",
+    thumbnailUrl: storyMedia.blackTide.wide,
     storyboards: [
-      { name: "Homepage loops", count: 12, updated: "Yesterday" },
+      { name: "Black Tide — lighthouse", count: 12, updated: "Yesterday" },
     ],
     characters: [{ name: "June", count: 8, updated: "Jul 21" }],
     renders: [
       {
         id: 202,
-        prompt: "Quiet product loop on a seamless black stage",
+        prompt: "June follows the cliff path as the seabirds circle the lighthouse",
         duration: "0:08",
         time: "Yesterday",
-        imageClass: "hue-rotate-30",
+        imageUrl: storyMedia.blackTide.wide,
       },
       {
         id: 201,
-        prompt: "Four lighting directions cut into a fast campaign sequence",
+        prompt: "A quiet ferry-shelter portrait as the storm reaches the island",
         duration: "0:05",
         time: "Jul 21",
-        imageClass: "contrast-150",
+        imageUrl: storyMedia.blackTide.character,
       },
     ],
   },
   {
     id: "unsorted",
-    name: "Unsorted",
+    name: "After Hours",
     updated: "Updated Jul 21",
-    thumbnailClass: "contrast-125",
+    thumbnailUrl: storyMedia.afterHours.wide,
     storyboards: [],
     characters: [],
     renders: [
       {
         id: 301,
-        prompt: "Material and lighting exploration",
+        prompt: "Dancers cross the empty pool under mixed sodium and moonlight",
         duration: "0:06",
         time: "Today, 9:08 AM",
+        imageUrl: storyMedia.afterHours.wide,
       },
     ],
   },
@@ -377,7 +384,7 @@ export function ProjectsWorkspace() {
                   <div className="pointer-events-none relative z-[1]">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
                       <Image
-                        src={item.thumbnailUrl ?? sampleImage}
+                        src={item.thumbnailUrl ?? storyMedia.saltSignal.wide}
                         alt=""
                         fill
                         className={cn(
@@ -462,7 +469,7 @@ export function ProjectsWorkspace() {
                     className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-muted outline-none ring-1 ring-border transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <Image
-                      src={project.thumbnailUrl ?? sampleImage}
+                      src={project.thumbnailUrl ?? storyMedia.saltSignal.wide}
                       alt=""
                       fill
                       className={cn("object-cover", project.thumbnailClass)}
@@ -650,13 +657,10 @@ export function ProjectsWorkspace() {
               <div className="flex min-h-72 items-center bg-background lg:min-h-[590px]">
                 <div className="relative aspect-video w-full overflow-hidden">
                   <Image
-                    src={sampleImage}
+                    src={selectedRender.imageUrl}
                     alt={`Render ${selectedRender.id}`}
                     fill
-                    className={cn(
-                      "object-cover",
-                      selectedRender.imageClass
-                    )}
+                    className="object-cover"
                     priority
                   />
                   <span className="absolute right-3 bottom-3 rounded-md bg-black/75 px-2 py-1 text-xs font-medium text-white">
@@ -926,8 +930,7 @@ export function ProjectsWorkspace() {
                       item.id === project.id
                         ? {
                             ...item,
-                            thumbnailUrl: undefined,
-                            thumbnailClass: render.imageClass,
+                            thumbnailUrl: render.imageUrl,
                           }
                         : item
                     )
@@ -937,10 +940,10 @@ export function ProjectsWorkspace() {
                 className="relative aspect-square overflow-hidden rounded-lg bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Image
-                  src={sampleImage}
+                  src={render.imageUrl}
                   alt=""
                   fill
-                  className={cn("object-cover", render.imageClass)}
+                  className="object-cover"
                 />
               </button>
             ))}
@@ -1036,15 +1039,10 @@ function ProjectImageCollections({
                   )}
                 >
                   <Image
-                    src={sampleImage}
+                    src={frameAt(framesForName(item.name), index)}
                     alt=""
                     fill
-                    className={cn(
-                      "object-cover",
-                      index % 4 === 1 && "hue-rotate-15",
-                      index % 4 === 2 && "saturate-50",
-                      index % 4 === 3 && "contrast-125"
-                    )}
+                    className="object-cover"
                   />
                 </div>
               ))}
@@ -1100,13 +1098,10 @@ function RenderList({
             className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Image
-              src={sampleImage}
+              src={render.imageUrl}
               alt=""
               fill
-              className={cn(
-                "object-cover transition-transform group-hover:scale-105",
-                render.imageClass
-              )}
+              className="object-cover transition-transform group-hover:scale-105"
             />
             <span className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
               <span className="flex size-11 items-center justify-center rounded-full bg-background/90">
