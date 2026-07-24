@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
@@ -22,10 +23,18 @@ export const metadata: Metadata = {
 }
 
 const stats = [
-  { label: "Inference requests", value: "1.2M", change: "+12.4% from last week" },
+  {
+    label: "Inference requests",
+    value: "1.2M",
+    change: "+12.4% from last week",
+  },
   { label: "Compute hours", value: "8,431", change: "+3.1% from last week" },
   { label: "Active pipelines", value: "14", change: "2 deployed this week" },
-  { label: "Spend this month", value: "$2,148.90", change: "$71.63 per day avg" },
+  {
+    label: "Spend this month",
+    value: "$2,148.90",
+    change: "$71.63 per day avg",
+  },
 ]
 
 const activity = [
@@ -63,10 +72,7 @@ const activity = [
 
 export default function MockupHomePage() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex h-9 items-center">
-        <h1 className="text-xl font-medium">Home</h1>
-      </div>
+    <PlatformPage title="Home">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="gap-2">
@@ -102,7 +108,9 @@ export default function MockupHomePage() {
                 </TableCell>
                 <TableCell>
                   <Badge
-                    variant={item.status === "Complete" ? "secondary" : "destructive"}
+                    variant={
+                      item.status === "Complete" ? "secondary" : "destructive"
+                    }
                   >
                     {item.status}
                   </Badge>
@@ -115,6 +123,6 @@ export default function MockupHomePage() {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </PlatformPage>
   )
 }

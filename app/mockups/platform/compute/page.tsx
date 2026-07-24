@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import { OrchestratorTable } from "@/components/mockups/orchestrator-table"
+import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -44,11 +45,7 @@ export default async function MockupComputePage() {
   ]
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between gap-4 bg-background px-6 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-6 after:bg-gradient-to-b after:from-background after:to-transparent md:-mx-10 md:px-10">
-        <h1 className="text-xl font-medium">Compute</h1>
-        <Button>Add capacity</Button>
-      </div>
+    <PlatformPage title="Compute" action={<Button>Add capacity</Button>}>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="gap-2">
@@ -69,6 +66,6 @@ export default async function MockupComputePage() {
         On-chain registry and performance leaderboard data, cached for 10
         minutes.
       </p>
-    </div>
+    </PlatformPage>
   )
 }

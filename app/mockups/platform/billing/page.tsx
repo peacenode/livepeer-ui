@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -24,19 +25,41 @@ export const metadata: Metadata = {
 }
 
 const invoices = [
-  { id: "INV-2026-006", period: "June 2026", amount: "$1,982.44", status: "Paid" },
-  { id: "INV-2026-005", period: "May 2026", amount: "$2,204.10", status: "Paid" },
-  { id: "INV-2026-004", period: "April 2026", amount: "$1,730.28", status: "Paid" },
-  { id: "INV-2026-003", period: "March 2026", amount: "$1,412.90", status: "Paid" },
-  { id: "INV-2026-002", period: "February 2026", amount: "$986.55", status: "Paid" },
+  {
+    id: "INV-2026-006",
+    period: "June 2026",
+    amount: "$1,982.44",
+    status: "Paid",
+  },
+  {
+    id: "INV-2026-005",
+    period: "May 2026",
+    amount: "$2,204.10",
+    status: "Paid",
+  },
+  {
+    id: "INV-2026-004",
+    period: "April 2026",
+    amount: "$1,730.28",
+    status: "Paid",
+  },
+  {
+    id: "INV-2026-003",
+    period: "March 2026",
+    amount: "$1,412.90",
+    status: "Paid",
+  },
+  {
+    id: "INV-2026-002",
+    period: "February 2026",
+    amount: "$986.55",
+    status: "Paid",
+  },
 ]
 
 export default function MockupBillingPage() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex h-9 items-center">
-        <h1 className="text-xl font-medium">Billing</h1>
-      </div>
+    <PlatformPage title="Billing">
       <div className="grid gap-4 sm:grid-cols-2">
         <Card className="gap-2">
           <CardHeader>
@@ -54,7 +77,9 @@ export default function MockupBillingPage() {
         <Card className="gap-2">
           <CardHeader>
             <CardDescription>Payment method</CardDescription>
-            <CardTitle className="text-2xl font-medium">Visa ···· 4242</CardTitle>
+            <CardTitle className="text-2xl font-medium">
+              Visa ···· 4242
+            </CardTitle>
             <CardAction>
               <Button variant="outline" size="sm">
                 Update
@@ -81,7 +106,9 @@ export default function MockupBillingPage() {
           <TableBody>
             {invoices.map((invoice) => (
               <TableRow key={invoice.id}>
-                <TableCell className="font-mono text-xs">{invoice.id}</TableCell>
+                <TableCell className="font-mono text-xs">
+                  {invoice.id}
+                </TableCell>
                 <TableCell>{invoice.period}</TableCell>
                 <TableCell className="text-right font-mono text-xs">
                   {invoice.amount}
@@ -99,6 +126,6 @@ export default function MockupBillingPage() {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </PlatformPage>
   )
 }

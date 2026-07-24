@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -55,11 +56,7 @@ const keys = [
 
 export default function MockupApiPage() {
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="text-xl font-medium">API</h1>
-        <Button>Create key</Button>
-      </div>
+    <PlatformPage title="API" action={<Button>Create key</Button>}>
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-medium">Keys</h2>
         <Table>
@@ -80,7 +77,11 @@ export default function MockupApiPage() {
                   {key.token}
                 </TableCell>
                 <TableCell>
-                  <Badge variant={key.scope === "Full access" ? "secondary" : "outline"}>
+                  <Badge
+                    variant={
+                      key.scope === "Full access" ? "secondary" : "outline"
+                    }
+                  >
                     {key.scope}
                   </Badge>
                 </TableCell>
@@ -110,6 +111,6 @@ export default function MockupApiPage() {
           </pre>
         </CardContent>
       </Card>
-    </div>
+    </PlatformPage>
   )
 }
