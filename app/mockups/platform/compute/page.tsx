@@ -48,7 +48,7 @@ export default async function MockupComputePage() {
     <PlatformPage title="Compute" action={<Button>Add capacity</Button>}>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label} className="gap-2">
+          <Card key={stat.label} variant="metric">
             <CardHeader>
               <CardDescription>{stat.label}</CardDescription>
               <CardTitle className="font-mono text-2xl font-medium">

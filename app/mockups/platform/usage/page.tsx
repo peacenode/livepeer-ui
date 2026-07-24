@@ -83,7 +83,7 @@ export default function MockupUsagePage() {
         <TabsContent value="overview">
           <div className="flex flex-col gap-8">
             <div className="grid gap-4 sm:grid-cols-3">
-              <Card className="gap-2">
+              <Card variant="metric">
                 <CardHeader>
                   <span className="text-sm text-muted-foreground">
                     Project spend
@@ -93,7 +93,7 @@ export default function MockupUsagePage() {
                   </CardTitle>
                 </CardHeader>
               </Card>
-              <Card className="gap-2">
+              <Card variant="metric">
                 <CardHeader>
                   <span className="text-sm text-muted-foreground">
                     Inference requests
@@ -103,7 +103,7 @@ export default function MockupUsagePage() {
                   </CardTitle>
                 </CardHeader>
               </Card>
-              <Card className="gap-2">
+              <Card variant="metric">
                 <CardHeader>
                   <span className="text-sm text-muted-foreground">
                     Compute time
