@@ -22,10 +22,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
-import {
-  downloadMedia,
-  MediaContextMenu,
-} from "../media-context-menu"
+import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
 
 type ImageBatch = {
@@ -38,6 +35,14 @@ type ImageBatch = {
 }
 
 const initialBatches: ImageBatch[] = [
+  {
+    id: 5,
+    name: "The Slug Gang and the Umbrellas of Mercy",
+    images: Array.from({ length: 8 }, (_, index) => index),
+    uploaded: "Today",
+    project: "The Slug Gang and the Umbrellas of Mercy",
+    frames: storyboardFrames.slugGang,
+  },
   {
     id: 4,
     name: "Salt Signal — arrival",
@@ -90,6 +95,7 @@ export function StoryboardsWorkspace() {
   } | null>(null)
   const [projects, setProjects] = useState([
     "Default project",
+    "The Slug Gang and the Umbrellas of Mercy",
     "Salt Signal",
     "Black Tide",
     "After Hours",
@@ -186,10 +192,7 @@ export function StoryboardsWorkspace() {
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
             <h1 className="text-xl font-medium">Storyboards</h1>
-            <Button
-              className="h-10 px-5"
-              onClick={() => setIsUploadOpen(true)}
-            >
+            <Button className="h-10 px-5" onClick={() => setIsUploadOpen(true)}>
               <PlusIcon className="size-6" />
               New storyboard
             </Button>
@@ -199,46 +202,46 @@ export function StoryboardsWorkspace() {
             <section key={batch.id} className="py-6">
               <div className="mb-4 flex min-h-9 items-center justify-between gap-3">
                 <div className="flex min-w-0 flex-wrap items-center gap-3">
-                {editingId === batch.id ? (
-                  <div className="flex min-w-0 flex-1 items-center gap-2">
-                    <Input
-                      value={batch.name}
-                      aria-label="Storyboard name"
-                      className="max-w-sm"
-                      onChange={(event) =>
-                        renameBatch(batch.id, event.target.value)
-                      }
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") setEditingId(null)
-                      }}
-                      autoFocus
-                    />
-                    <Button
-                      size="icon-sm"
-                      variant="ghost"
-                      aria-label="Save name"
-                      onClick={() => setEditingId(null)}
-                    >
-                      <CheckIcon />
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="group flex min-w-0 items-center gap-2"
-                      onClick={() => setEditingId(batch.id)}
-                    >
-                      <h2 className="truncate text-sm font-medium">
-                        {batch.name}
-                      </h2>
-                      <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    </button>
-                    <span className="text-xs text-muted-foreground">
-                      {batch.images.length} images · {batch.uploaded}
-                    </span>
-                  </>
-                )}
+                  {editingId === batch.id ? (
+                    <div className="flex min-w-0 flex-1 items-center gap-2">
+                      <Input
+                        value={batch.name}
+                        aria-label="Storyboard name"
+                        className="max-w-sm"
+                        onChange={(event) =>
+                          renameBatch(batch.id, event.target.value)
+                        }
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") setEditingId(null)
+                        }}
+                        autoFocus
+                      />
+                      <Button
+                        size="icon-sm"
+                        variant="ghost"
+                        aria-label="Save name"
+                        onClick={() => setEditingId(null)}
+                      >
+                        <CheckIcon />
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="group flex min-w-0 items-center gap-2"
+                        onClick={() => setEditingId(batch.id)}
+                      >
+                        <h2 className="truncate text-sm font-medium">
+                          {batch.name}
+                        </h2>
+                        <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      </button>
+                      <span className="text-xs text-muted-foreground">
+                        {batch.images.length} images · {batch.uploaded}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <ProjectPicker
                   value={batch.project}
@@ -285,9 +288,7 @@ export function StoryboardsWorkspace() {
                     <MediaContextMenu
                       className="absolute inset-0"
                       openLabel="Move to beginning"
-                      onOpen={() =>
-                        moveImage(batch.id, index, 0)
-                      }
+                      onOpen={() => moveImage(batch.id, index, 0)}
                       onDownload={() =>
                         downloadMedia(
                           frameAt(batch.frames, imageId),
@@ -318,8 +319,7 @@ export function StoryboardsWorkspace() {
                               ? {
                                   ...item,
                                   images: item.images.filter(
-                                    (itemImageId) =>
-                                      itemImageId !== imageId
+                                    (itemImageId) => itemImageId !== imageId
                                   ),
                                 }
                               : item
@@ -388,7 +388,7 @@ export function StoryboardsWorkspace() {
                                   ...Array.from(
                                     { length: count },
                                     (_, index) =>
-                                      (Math.max(-1, ...item.images) + 1 + index)
+                                      Math.max(-1, ...item.images) + 1 + index
                                   ),
                                 ],
                               }
