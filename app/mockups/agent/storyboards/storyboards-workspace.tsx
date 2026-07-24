@@ -3,7 +3,10 @@
 import { type DragEvent, useRef, useState } from "react"
 import Image from "next/image"
 import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
   CheckIcon,
+  GripVerticalIcon,
   ImagesIcon,
   PencilIcon,
   PlusIcon,
@@ -26,7 +29,7 @@ const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 type ImageBatch = {
   id: number
   name: string
-  count: number
+  images: number[]
   uploaded: string
 }
 
@@ -34,25 +37,25 @@ const initialBatches: ImageBatch[] = [
   {
     id: 4,
     name: "Orbit launch film",
-    count: 30,
+    images: Array.from({ length: 30 }, (_, index) => index),
     uploaded: "Today, 2:14 PM",
   },
   {
     id: 3,
     name: "Product reveal v2",
-    count: 18,
+    images: Array.from({ length: 18 }, (_, index) => index),
     uploaded: "Today, 9:42 AM",
   },
   {
     id: 2,
     name: "Homepage loops",
-    count: 12,
+    images: Array.from({ length: 12 }, (_, index) => index),
     uploaded: "Yesterday",
   },
   {
     id: 1,
     name: "Opening sequence",
-    count: 8,
+    images: Array.from({ length: 8 }, (_, index) => index),
     uploaded: "Jul 21",
   },
 ]
@@ -64,6 +67,10 @@ export function StoryboardsWorkspace() {
   const [isDragging, setIsDragging] = useState(false)
   const [uploadTitle, setUploadTitle] = useState("")
   const [uploadFiles, setUploadFiles] = useState<File[]>([])
+  const [draggedImage, setDraggedImage] = useState<{
+    batchId: number
+    imageId: number
+  } | null>(null)
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameBatch(id: number, name: string) {
@@ -86,7 +93,7 @@ export function StoryboardsWorkspace() {
       {
         id: (current[0]?.id ?? 0) + 1,
         name: title,
-        count: uploadFiles.length,
+        images: Array.from({ length: uploadFiles.length }, (_, index) => index),
         uploaded: "Just now",
       },
       ...current,
@@ -100,6 +107,30 @@ export function StoryboardsWorkspace() {
     event.preventDefault()
     setIsDragging(false)
     setFiles(event.dataTransfer.files)
+  }
+
+  function moveImage(batchId: number, fromIndex: number, toIndex: number) {
+    setBatches((current) =>
+      current.map((batch) => {
+        if (batch.id !== batchId || fromIndex === toIndex) return batch
+        const images = [...batch.images]
+        const [image] = images.splice(fromIndex, 1)
+        images.splice(toIndex, 0, image)
+        return { ...batch, images }
+      })
+    )
+  }
+
+  function dropImage(batchId: number, targetImageId: number) {
+    if (!draggedImage || draggedImage.batchId !== batchId) return
+    const batch = batches.find((item) => item.id === batchId)
+    if (!batch) return
+    moveImage(
+      batchId,
+      batch.images.indexOf(draggedImage.imageId),
+      batch.images.indexOf(targetImageId)
+    )
+    setDraggedImage(null)
   }
 
   return (
@@ -158,17 +189,32 @@ export function StoryboardsWorkspace() {
                       <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                     </button>
                     <span className="text-xs text-muted-foreground">
-                      {batch.count} images · {batch.uploaded}
+                      {batch.images.length} images · {batch.uploaded}
                     </span>
                   </>
                 )}
               </div>
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
-                {Array.from({ length: batch.count }, (_, index) => (
+                {batch.images.map((imageId, index) => (
                   <div
-                    key={index}
-                    className="relative aspect-square overflow-hidden rounded-md bg-muted"
+                    key={imageId}
+                    draggable
+                    onDragStart={() =>
+                      setDraggedImage({ batchId: batch.id, imageId })
+                    }
+                    onDragEnd={() => setDraggedImage(null)}
+                    onDragOver={(event) => event.preventDefault()}
+                    onDrop={(event) => {
+                      event.preventDefault()
+                      dropImage(batch.id, imageId)
+                    }}
+                    className={cn(
+                      "group relative aspect-square overflow-hidden rounded-md bg-muted",
+                      draggedImage?.batchId === batch.id &&
+                        draggedImage.imageId === imageId &&
+                        "opacity-40"
+                    )}
                   >
                     <Image
                       src={sampleImage}
@@ -176,11 +222,38 @@ export function StoryboardsWorkspace() {
                       fill
                       className={cn(
                         "object-cover",
-                        index % 4 === 1 && "hue-rotate-15",
-                        index % 4 === 2 && "saturate-50",
-                        index % 4 === 3 && "contrast-125"
+                        imageId % 4 === 1 && "hue-rotate-15",
+                        imageId % 4 === 2 && "saturate-50",
+                        imageId % 4 === 3 && "contrast-125"
                       )}
                     />
+                    <div className="absolute inset-x-1 bottom-1 flex items-center justify-between opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                      <Button
+                        type="button"
+                        size="icon-xs"
+                        variant="secondary"
+                        aria-label={`Move image ${index + 1} earlier`}
+                        disabled={index === 0}
+                        onClick={() =>
+                          moveImage(batch.id, index, index - 1)
+                        }
+                      >
+                        <ArrowLeftIcon />
+                      </Button>
+                      <GripVerticalIcon className="size-3.5 text-white drop-shadow" />
+                      <Button
+                        type="button"
+                        size="icon-xs"
+                        variant="secondary"
+                        aria-label={`Move image ${index + 1} later`}
+                        disabled={index === batch.images.length - 1}
+                        onClick={() =>
+                          moveImage(batch.id, index, index + 1)
+                        }
+                      >
+                        <ArrowRightIcon />
+                      </Button>
+                    </div>
                   </div>
                 ))}
                 <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
@@ -196,7 +269,17 @@ export function StoryboardsWorkspace() {
                       setBatches((current) =>
                         current.map((item) =>
                           item.id === batch.id
-                            ? { ...item, count: item.count + count }
+                            ? {
+                                ...item,
+                                images: [
+                                  ...item.images,
+                                  ...Array.from(
+                                    { length: count },
+                                    (_, index) =>
+                                      (Math.max(-1, ...item.images) + 1 + index)
+                                  ),
+                                ],
+                              }
                             : item
                         )
                       )
