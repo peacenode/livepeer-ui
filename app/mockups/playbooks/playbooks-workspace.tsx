@@ -5,12 +5,17 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRightIcon,
+  ArrowUpRightIcon,
   CheckIcon,
   Clock3Icon,
-  PlusIcon,
-  WorkflowIcon,
+  CodeIcon,
+  CpuIcon,
+  MessageCircleIcon,
+  TerminalIcon,
 } from "lucide-react"
 
+import { LivepeerSymbol } from "@/components/brand"
+import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -106,18 +111,72 @@ const playbooks: Playbook[] = [
   },
 ]
 
-const steps = [
+const layers = [
   {
-    title: "Choose a playbook",
-    description: "Start from a proven sequence of workflows.",
+    title: "Runner",
+    description: "Connects Codex, Cowork, or your application to Livepeer.",
+    href: "/mockups/playbooks/install",
   },
   {
-    title: "Add your brief",
-    description: "Provide the project inputs once.",
+    title: "Playbooks",
+    description: "Reusable production plans composed from multiple workflows.",
+    href: "#playbooks",
   },
   {
-    title: "Run with Runner",
-    description: "Review the plan and cost before execution.",
+    title: "Compute",
+    description: "Independent GPU operators execute each workflow run.",
+    href: "https://docs.livepeer.org/v1/orchestrators/guides/get-started",
+  },
+]
+
+const paths = [
+  {
+    title: "Build with Runner",
+    description: "Install Runner and use Livepeer from Codex or Cowork.",
+    href: "/mockups/playbooks/install",
+    icon: TerminalIcon,
+    external: false,
+  },
+  {
+    title: "Provide GPU compute",
+    description: "Run an orchestrator and earn fees for completed work.",
+    href: "https://docs.livepeer.org/v1/orchestrators/guides/get-started",
+    icon: CpuIcon,
+    external: true,
+  },
+  {
+    title: "Join the community",
+    description: "Meet builders, operators, and contributors in Discord.",
+    href: "https://discord.gg/livepeer",
+    icon: MessageCircleIcon,
+    external: true,
+  },
+]
+
+const resourceGroups = [
+  {
+    title: "Build",
+    links: [
+      { label: "Documentation", href: "https://docs.livepeer.org/" },
+      { label: "Ecosystem", href: "https://livepeer.org/ecosystem" },
+      { label: "GitHub", href: "https://github.com/livepeer" },
+    ],
+  },
+  {
+    title: "Network",
+    links: [
+      { label: "Primer", href: "https://livepeer.org/primer" },
+      { label: "Roadmap", href: "https://roadmap.livepeer.org/roadmap" },
+      { label: "Delegate LPT", href: "https://explorer.livepeer.org/" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { label: "Discord", href: "https://discord.gg/livepeer" },
+      { label: "Forum", href: "https://forum.livepeer.org/" },
+      { label: "Research", href: "https://forum.livepeer.org/c/research/15" },
+    ],
   },
 ]
 
@@ -133,53 +192,109 @@ export function PlaybooksWorkspace() {
   )
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-      <section className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-2xl">
-          <p className="text-sm text-muted-foreground">Runner</p>
-          <h1 className="mt-2 text-3xl font-medium text-balance sm:text-4xl">
-            Start with a complete production plan.
+    <main>
+      <section className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[0.85fr_1.15fr] md:items-center md:py-20">
+        <div className="max-w-xl">
+          <p className="text-sm text-muted-foreground">Livepeer Runner</p>
+          <h1 className="mt-3 text-4xl leading-tight font-medium text-balance sm:text-5xl">
+            Video infrastructure for agents.
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Playbooks chain reusable workflows into a finished deliverable.
-            Choose one, add a brief, then run it from Codex, Cowork, or your
-            application.
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+            Install one tool to give Codex, Cowork, or your application access
+            to reusable video workflows backed by open GPU compute.
           </p>
-        </div>
-        <Button size="lg" className="self-start px-5 font-medium sm:self-auto">
-          <PlusIcon />
-          Create playbook
-        </Button>
-      </section>
-
-      <section className="mt-12 border-y">
-        <h2 className="sr-only">How playbooks work</h2>
-        <div className="grid md:grid-cols-3">
-          {steps.map((step, index) => (
-            <div
-              key={step.title}
-              className="flex gap-4 border-b py-5 last:border-b-0 md:border-r md:border-b-0 md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              className="px-5"
+              nativeButton={false}
+              render={<Link href="/mockups/playbooks/install" />}
             >
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs tabular-nums">
-                {index + 1}
-              </span>
-              <div>
-                <h3 className="font-medium">{step.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
+              Install Runner
+              <ArrowRightIcon />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              nativeButton={false}
+              render={<a href="#playbooks" />}
+            >
+              Browse playbooks
+            </Button>
+          </div>
+        </div>
+        <div className="relative min-h-80 overflow-hidden rounded-4xl bg-muted md:min-h-[28rem]">
+          <LivepeerSymbol className="absolute top-8 right-8 h-44 w-auto opacity-[0.06] md:hidden" />
+          <LivepeerSymbol3D className="[&>canvas]:scale-110" />
+          <div className="absolute inset-x-4 bottom-4 rounded-3xl bg-foreground p-5 text-background sm:inset-x-6 sm:bottom-6">
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm font-medium">Install Runner</p>
+              <span className="text-xs text-background/60">Codex · Cowork</span>
             </div>
-          ))}
+            <code className="mt-5 block overflow-x-auto pb-1 font-mono text-xs whitespace-nowrap text-background/80">
+              npx install @livepeer/runner
+            </code>
+            <div className="mt-4 flex items-center gap-2 border-t border-background/15 pt-4 text-xs text-background/60">
+              <span className="size-1.5 rounded-full bg-background" />
+              Connects to this project with OAuth
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mt-12">
+      <section className="border-y">
+        <div className="mx-auto grid max-w-6xl px-4 sm:px-6 md:grid-cols-3">
+          {layers.map((layer, index) => {
+            const content = (
+              <>
+                <span className="text-xs text-muted-foreground tabular-nums">
+                  0{index + 1}
+                </span>
+                <div>
+                  <h2 className="font-medium">{layer.title}</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {layer.description}
+                  </p>
+                </div>
+                <ArrowRightIcon
+                  className="mt-0.5 ml-auto size-4 shrink-0 text-muted-foreground"
+                  aria-hidden="true"
+                />
+              </>
+            )
+
+            return layer.href.startsWith("http") ? (
+              <a
+                key={layer.title}
+                href={layer.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-4 border-b py-6 last:border-b-0 hover:text-muted-foreground md:border-r md:border-b-0 md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              >
+                {content}
+              </a>
+            ) : (
+              <Link
+                key={layer.title}
+                href={layer.href}
+                className="flex gap-4 border-b py-6 last:border-b-0 hover:text-muted-foreground md:border-r md:border-b-0 md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              >
+                {content}
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+
+      <section
+        id="playbooks"
+        className="mx-auto max-w-6xl scroll-mt-20 px-4 py-14 sm:px-6 sm:py-20"
+      >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-xl font-medium">Playbooks</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Curated recipes built from Runner workflows.
+            <h2 className="text-2xl font-medium">Start with a playbook</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Proven production plans composed from reusable workflows.
             </p>
           </div>
           <div className="flex gap-1 overflow-x-auto pb-1">
@@ -199,7 +314,7 @@ export function PlaybooksWorkspace() {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="mt-7 grid gap-4 md:grid-cols-2">
           {visiblePlaybooks.map((playbook, index) => (
             <Card key={playbook.name} className="py-0">
               <div className="grid sm:grid-cols-[11rem_1fr]">
@@ -266,28 +381,99 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
-      <section className="mt-12 flex flex-col gap-5 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-start gap-3">
-          <WorkflowIcon
-            className="mt-0.5 size-5 text-muted-foreground"
-            aria-hidden="true"
-          />
-          <div>
-            <h2 className="font-medium">Build from workflows</h2>
-            <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-              Combine the workflows in your project into a reusable playbook.
-            </p>
+      <section className="bg-muted">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+          <h2 className="text-2xl font-medium">Choose how to participate</h2>
+          <div className="mt-7 grid gap-3 md:grid-cols-3">
+            {paths.map((path) => {
+              const PathIcon = path.icon
+              const content = (
+                <Card className="h-full min-h-52 transition-colors group-hover:bg-accent">
+                  <CardHeader className="flex h-full flex-col justify-between">
+                    <PathIcon
+                      className="size-5 text-muted-foreground"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <div className="flex items-center justify-between gap-4">
+                        <CardTitle>{path.title}</CardTitle>
+                        {path.external ? (
+                          <ArrowUpRightIcon className="size-4 text-muted-foreground" />
+                        ) : (
+                          <ArrowRightIcon className="size-4 text-muted-foreground" />
+                        )}
+                      </div>
+                      <CardDescription className="mt-2 leading-relaxed">
+                        {path.description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                </Card>
+              )
+
+              return path.external ? (
+                <a
+                  key={path.title}
+                  href={path.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                >
+                  {content}
+                </a>
+              ) : (
+                <Link
+                  key={path.title}
+                  href={path.href}
+                  className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                >
+                  {content}
+                </Link>
+              )
+            })}
           </div>
         </div>
-        <Button
-          variant="outline"
-          nativeButton={false}
-          render={<Link href="/mockups/platform/workflows" />}
-        >
-          View workflows
-          <ArrowRightIcon />
-        </Button>
       </section>
+
+      <footer className="border-t">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:grid-cols-[1fr_2fr] sm:px-6">
+          <div>
+            <LivepeerSymbol className="h-7 w-auto" />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              Open video infrastructure powered by independent GPU operators.
+            </p>
+            <a
+              href="https://github.com/livepeer"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-medium hover:underline"
+            >
+              <CodeIcon className="size-4" aria-hidden="true" />
+              Contribute on GitHub
+            </a>
+          </div>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+            {resourceGroups.map((group) => (
+              <div key={group.title}>
+                <h2 className="text-sm font-medium">{group.title}</h2>
+                <div className="mt-4 flex flex-col gap-3">
+                  {group.links.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }

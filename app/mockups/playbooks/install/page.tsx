@@ -4,8 +4,7 @@ export const metadata: Metadata = {
   title: "Install",
 }
 
-const installCommand =
-  "npx skills add livepeer/agent-skills --global --agent codex claude-code"
+const installCommand = "npx install @livepeer/runner"
 
 export default function PlaybooksInstallPage() {
   return (
