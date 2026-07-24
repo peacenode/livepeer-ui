@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -48,10 +49,18 @@ function isActiveRoute(href: string, pathname: string) {
 
 export function AgentShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const [expanded, setExpanded] = useState(false)
 
   return (
     <div className="min-h-dvh bg-background pb-16 md:pb-0 md:pl-14">
-      <aside className="group/sidebar fixed inset-y-0 left-0 z-40 hidden w-14 flex-col overflow-hidden bg-background transition-[width] duration-200 hover:w-44 md:flex">
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-40 hidden w-14 flex-col overflow-hidden bg-background transition-[width] duration-200 md:flex",
+          expanded && "w-44"
+        )}
+        onMouseEnter={() => setExpanded(true)}
+        onMouseLeave={() => setExpanded(false)}
+      >
         <nav
           aria-label="Agent"
           className="flex flex-1 flex-col gap-1 px-2 py-2"
@@ -63,14 +72,16 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                 key={item.href}
                 href={item.href}
                 data-active={active}
+                onClick={() => setExpanded(false)}
                 className={cn(
-                  "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground group-hover/sidebar:data-[active=true]:bg-muted group-hover/sidebar:data-[active=true]:font-medium group-hover/sidebar:data-[active=true]:text-foreground"
+                  "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                  expanded && active && "bg-muted font-medium text-foreground"
                 )}
               >
                 <span
                   className={cn(
                     "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground transition-colors",
-                    active && "bg-muted group-hover/sidebar:bg-transparent"
+                    active && !expanded && "bg-muted"
                   )}
                 >
                   <item.icon
@@ -80,7 +91,12 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                     )}
                   />
                 </span>
-                <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
+                <span
+                  className={cn(
+                    "truncate opacity-0 transition-opacity duration-150",
+                    expanded && "opacity-100"
+                  )}
+                >
                   {item.label}
                 </span>
               </Link>
@@ -95,7 +111,12 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
           <span className="flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground">
             <SettingsIcon className="size-6" />
           </span>
-          <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
+          <span
+            className={cn(
+              "truncate opacity-0 transition-opacity duration-150",
+              expanded && "opacity-100"
+            )}
+          >
             Settings
           </span>
         </button>
@@ -106,7 +127,12 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
               P
             </AvatarFallback>
           </Avatar>
-          <span className="truncate text-sm opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
+          <span
+            className={cn(
+              "truncate text-sm opacity-0 transition-opacity duration-150",
+              expanded && "opacity-100"
+            )}
+          >
             Peace
           </span>
         </div>
