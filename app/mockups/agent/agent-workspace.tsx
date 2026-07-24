@@ -35,6 +35,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
@@ -266,15 +267,17 @@ export function AgentWorkspace() {
                       </InputGroupText>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuLabel>Save to project</DropdownMenuLabel>
-                      {["Orbit", "Soft launch", "Unsorted"].map((item) => (
-                        <DropdownMenuItem
-                          key={item}
-                          onClick={() => setProject(item)}
-                        >
-                          {item}
-                        </DropdownMenuItem>
-                      ))}
+                      <DropdownMenuGroup>
+                        <DropdownMenuLabel>Save to project</DropdownMenuLabel>
+                        {["Orbit", "Soft launch", "Unsorted"].map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            onClick={() => setProject(item)}
+                          >
+                            {item}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
