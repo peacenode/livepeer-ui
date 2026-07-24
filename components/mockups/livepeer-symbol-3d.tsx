@@ -43,7 +43,7 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const { size, viewport } = useThree()
   const isWide = size.width >= 640
   const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 4, 0.025),
+    () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 4, 0.015),
     []
   )
 
