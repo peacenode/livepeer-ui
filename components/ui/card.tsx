@@ -17,7 +17,7 @@ function Card({
       data-size={size}
       data-variant={variant}
       className={cn(
-        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-4xl bg-muted py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)] data-[variant=metric]:min-h-28 data-[variant=metric]:rounded-none data-[variant=metric]:bg-transparent data-[variant=metric]:py-0 data-[variant=metric]:[--card-spacing:--spacing(0)] *:[img:first-child]:rounded-t-4xl *:[img:last-child]:rounded-b-4xl",
+        "group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-4xl bg-muted py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(6)] has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)] data-[variant=metric]:rounded-none data-[variant=metric]:bg-transparent data-[variant=metric]:py-0 data-[variant=metric]:[--card-spacing:--spacing(0)] *:[img:first-child]:rounded-t-4xl *:[img:last-child]:rounded-b-4xl",
         className
       )}
       {...props}
@@ -30,7 +30,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "group/card-header @container/card-header grid auto-rows-min items-start gap-3 rounded-t-4xl px-(--card-spacing) group-data-[variant=metric]/card:flex group-data-[variant=metric]/card:flex-1 group-data-[variant=metric]/card:flex-col group-data-[variant=metric]/card:justify-between group-data-[variant=metric]/card:gap-4 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)",
+        "group/card-header @container/card-header grid auto-rows-min items-start gap-3 rounded-t-4xl px-(--card-spacing) group-data-[variant=metric]/card:flex group-data-[variant=metric]/card:flex-col group-data-[variant=metric]/card:gap-1.5 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)",
         className
       )}
       {...props}
@@ -52,10 +52,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn(
-        "text-sm text-muted-foreground group-data-[variant=metric]/card:font-medium group-data-[variant=metric]/card:text-foreground",
-        className
-      )}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   )

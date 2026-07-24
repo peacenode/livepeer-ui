@@ -91,30 +91,24 @@ export default function MockupUsagePage() {
           <div className="flex flex-col gap-8">
             <div className="grid gap-3 sm:grid-cols-3">
               <Card variant="metric">
-                <CardHeader className="flex-1 justify-between">
-                  <span className="font-medium text-foreground">
-                    Project spend
-                  </span>
+                <CardHeader>
+                  <CardDescription>Project spend</CardDescription>
                   <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
               </Card>
               <Card variant="metric">
-                <CardHeader className="flex-1 justify-between">
-                  <span className="font-medium text-foreground">
-                    Inference requests
-                  </span>
+                <CardHeader>
+                  <CardDescription>Inference requests</CardDescription>
                   <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
               </Card>
               <Card variant="metric">
-                <CardHeader className="flex-1 justify-between">
-                  <span className="font-medium text-foreground">
-                    Compute time
-                  </span>
+                <CardHeader>
+                  <CardDescription>Compute time</CardDescription>
                   <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     2,431 GPU min
                   </CardTitle>

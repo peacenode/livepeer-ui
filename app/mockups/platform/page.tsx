@@ -140,7 +140,7 @@ export default function MockupHomePage() {
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
-            <CardHeader className="flex-1 justify-between">
+            <CardHeader>
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
                 <span className="shrink-0 text-muted-foreground tabular-nums">
