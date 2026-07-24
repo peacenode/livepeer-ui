@@ -50,6 +50,8 @@ export default async function MockupComputePage() {
       title="Compute"
       action={
         <Button
+          size="lg"
+          className="px-5 font-medium"
           nativeButton={false}
           render={
             <a
