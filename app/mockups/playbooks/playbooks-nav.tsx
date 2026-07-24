@@ -90,12 +90,6 @@ export function PlaybooksNav() {
           </span>
         </a>
       </div>
-      <Link
-        href="/mockups/playbooks/install"
-        className="rounded-md bg-foreground px-2.5 py-2 font-medium text-background transition-colors hover:bg-foreground/80 sm:px-3"
-      >
-        Install
-      </Link>
     </nav>
   )
 }
