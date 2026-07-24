@@ -204,9 +204,8 @@ export function AgentWorkspace() {
   const [generationMode, setGenerationMode] = useState<
     "Storyboard" | "Character" | "Clip"
   >("Storyboard")
-  const [selectedStoryboard, setSelectedStoryboard] = useState(
-    "Select storyboard"
-  )
+  const [selectedClipReference, setSelectedClipReference] =
+    useState("Select reference")
   const [selectedCharacter, setSelectedCharacter] = useState(
     "Select character"
   )
@@ -444,7 +443,7 @@ export function AgentWorkspace() {
                       >
                         <InputGroupText className="min-w-0 gap-1 text-xs">
                           <span className="truncate">
-                            {selectedStoryboard}
+                            {selectedClipReference}
                           </span>
                           <ChevronDownIcon className="size-3.5 shrink-0" />
                         </InputGroupText>
@@ -460,18 +459,30 @@ export function AgentWorkspace() {
                             <DropdownMenuItem
                               key={storyboard}
                               onClick={() =>
-                                setSelectedStoryboard(storyboard)
+                                setSelectedClipReference(storyboard)
                               }
                             >
                               {storyboard}
                             </DropdownMenuItem>
                           ))}
                         </DropdownMenuGroup>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>Character</DropdownMenuLabel>
+                          {["Mara", "The Courier", "June"].map((character) => (
+                            <DropdownMenuItem
+                              key={character}
+                              onClick={() =>
+                                setSelectedClipReference(character)
+                              }
+                            >
+                              {character}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   )}
-                  {(generationMode === "Storyboard" ||
-                    generationMode === "Clip") && (
+                  {generationMode === "Storyboard" && (
                     <DropdownMenu>
                       <DropdownMenuTrigger
                         render={
