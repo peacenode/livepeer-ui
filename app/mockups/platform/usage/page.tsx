@@ -115,8 +115,8 @@ export default function MockupUsagePage() {
                 </CardHeader>
               </Card>
             </div>
-            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_18rem] md:items-stretch">
-              <div className="flex flex-col justify-center gap-3">
+            <div className="grid gap-4 md:grid-cols-2 md:items-start">
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4 text-sm">
                   <span className="font-medium">Monthly project budget</span>
                   <span className="text-muted-foreground tabular-nums">
@@ -130,14 +130,14 @@ export default function MockupUsagePage() {
               </div>
               <Link
                 href="/mockups/platform/organization?tab=billing"
-                className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                className="group w-full rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-square"
               >
                 <Card
                   size="sm"
                   className="h-full transition-colors group-hover:bg-accent"
                 >
-                  <CardHeader className="h-full grid-cols-[1fr_auto]">
-                    <div className="flex flex-col justify-between gap-3">
+                  <CardHeader className="flex h-full flex-row items-start justify-between">
+                    <div className="flex h-full flex-col justify-between gap-3">
                       <CardTitle>Billing</CardTitle>
                       <CardDescription>
                         Payment methods and invoices
