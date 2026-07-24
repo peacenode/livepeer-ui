@@ -2,7 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ApertureIcon, FolderIcon, Grid2X2Icon, PlusIcon } from "lucide-react"
+import {
+  ApertureIcon,
+  FolderIcon,
+  Grid2X2Icon,
+  PlusIcon,
+  SettingsIcon,
+} from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -42,7 +48,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         <Link
           href="/mockups/agent"
           aria-label="Livepeer create"
-          className="flex h-14 w-44 shrink-0 items-center px-[18px]"
+          className="flex h-14 w-14 shrink-0 items-center justify-center"
         >
           <LivepeerSymbol className="h-5 w-auto shrink-0" />
         </Link>
@@ -57,12 +63,16 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={cn(
-                  "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl px-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                  active && "bg-muted font-medium text-foreground"
-                )}
+                className="group/item flex h-10 w-40 shrink-0 items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                <item.icon className="size-6 shrink-0" />
+                <span
+                  className={cn(
+                    "flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/item:bg-muted",
+                    active && "bg-muted text-foreground"
+                  )}
+                >
+                  <item.icon className="size-6 shrink-0" />
+                </span>
                 <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
                   {item.label}
                 </span>
@@ -70,6 +80,18 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             )
           })}
         </nav>
+
+        <button
+          type="button"
+          className="group/item mx-2 flex h-10 w-40 shrink-0 items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl transition-colors group-hover/item:bg-muted">
+            <SettingsIcon className="size-6" />
+          </span>
+          <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
+            Settings
+          </span>
+        </button>
 
         <div className="flex h-14 w-44 shrink-0 items-center gap-3 px-3">
           <Avatar className="size-8 shrink-0">
@@ -95,12 +117,14 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                "flex min-w-0 flex-col items-center justify-center gap-1 text-[11px] text-muted-foreground transition-colors",
-                active && "font-medium text-foreground"
-              )}
+              className="flex min-w-0 flex-col items-center justify-center gap-1 text-[11px] text-muted-foreground transition-colors"
             >
-              <item.icon className="size-6" />
+              <item.icon
+                className={cn(
+                  "size-6",
+                  active && "stroke-[2.5] text-foreground"
+                )}
+              />
               <span className="truncate">{item.label}</span>
             </Link>
           )
