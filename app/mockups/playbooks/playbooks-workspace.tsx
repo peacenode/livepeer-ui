@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
+import { InstallRunnerFooter } from "./install-runner-footer"
+
 type Category = "All" | "Brand" | "Creator" | "Video" | "Product"
 
 type Playbook = {
@@ -321,6 +323,8 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
+      <InstallRunnerFooter className="mt-0" />
+
       <section className="border-y">
         <div className="mx-auto grid max-w-6xl px-4 sm:px-6 md:grid-cols-3">
           {layers.map((layer, index) => {
@@ -420,7 +424,6 @@ export function PlaybooksWorkspace() {
           </div>
         </div>
       </section>
-
     </main>
   )
 }

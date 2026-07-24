@@ -3,14 +3,18 @@
 import { useState } from "react"
 import { CheckIcon, CopyIcon } from "lucide-react"
 
+import { cn } from "@/lib/utils"
+
 const command = "npm install -g @livepeer/runner"
 
 export function InstallRunnerFooter({
   title = "Runner",
   description = "Install the plugin once, paste your copied playbook into the agent of your choice, and approve each production step.",
+  className,
 }: {
   title?: string
   description?: string
+  className?: string
 }) {
   const [copied, setCopied] = useState(false)
 
@@ -21,8 +25,11 @@ export function InstallRunnerFooter({
   }
 
   return (
-    <footer
-      className="relative isolate mt-20 border-t bg-cover bg-center text-white"
+    <section
+      className={cn(
+        "relative isolate mt-20 border-t bg-cover bg-center text-white",
+        className
+      )}
       style={{
         backgroundImage: "url('/runner/20260724-1825/train-motion-blur.png')",
       }}
@@ -58,6 +65,6 @@ export function InstallRunnerFooter({
           </div>
         </div>
       </div>
-    </footer>
+    </section>
   )
 }
