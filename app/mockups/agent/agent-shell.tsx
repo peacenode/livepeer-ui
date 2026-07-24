@@ -6,7 +6,6 @@ import {
   ApertureIcon,
   FolderIcon,
   Grid2X2Icon,
-  PlusIcon,
   SettingsIcon,
 } from "lucide-react"
 
@@ -15,21 +14,29 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { href: "/mockups/agent", label: "Create", icon: PlusIcon },
+  {
+    href: "/mockups/agent",
+    label: "Create",
+    icon: LivepeerSymbol,
+    brand: true,
+  },
   {
     href: "/mockups/agent/storyboards",
     label: "Storyboards",
     icon: Grid2X2Icon,
+    brand: false,
   },
   {
     href: "/mockups/agent/characters",
     label: "Characters",
     icon: ApertureIcon,
+    brand: false,
   },
   {
     href: "/mockups/agent/projects",
     label: "Projects",
     icon: FolderIcon,
+    brand: false,
   },
 ]
 
@@ -71,7 +78,12 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                     active && "bg-muted text-foreground"
                   )}
                 >
-                  <item.icon className="size-6 shrink-0" />
+                  <item.icon
+                    className={cn(
+                      "shrink-0",
+                      item.brand ? "h-6 w-5" : "size-6"
+                    )}
+                  />
                 </span>
                 <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
                   {item.label}
@@ -121,7 +133,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             >
               <item.icon
                 className={cn(
-                  "size-6",
+                  item.brand ? "h-6 w-5" : "size-6",
                   active && "stroke-[2.5] text-foreground"
                 )}
               />
