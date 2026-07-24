@@ -60,7 +60,7 @@ export default async function MockupComputePage() {
                   {stat.period}
                 </span>
               </CardDescription>
-              <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+              <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                 {stat.value}
               </CardTitle>
             </CardHeader>

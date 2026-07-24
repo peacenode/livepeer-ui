@@ -34,7 +34,7 @@ export function PlatformSidebar() {
       <div className="px-3 pt-3 pb-4">
         <ProjectMenu />
       </div>
-      <nav className="flex flex-col items-start px-3">
+      <nav className="flex flex-col items-start gap-1 px-3">
         {platformNavItems.map((item) => (
           <Link
             key={item.href}

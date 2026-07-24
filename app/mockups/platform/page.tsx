@@ -139,7 +139,7 @@ export default function MockupHomePage() {
       </Card>
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label} variant="metric" className="aspect-square">
+          <Card key={stat.label} variant="metric">
             <CardHeader className="flex-1 justify-between">
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
@@ -148,7 +148,7 @@ export default function MockupHomePage() {
                 </span>
               </CardDescription>
               <div className="flex flex-col gap-1.5">
-                <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+                <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                   {stat.value}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground tabular-nums">

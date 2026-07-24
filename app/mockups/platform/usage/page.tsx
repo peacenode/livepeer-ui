@@ -95,7 +95,7 @@ export default function MockupUsagePage() {
                   <span className="font-medium text-foreground">
                     Project spend
                   </span>
-                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+                  <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
@@ -105,7 +105,7 @@ export default function MockupUsagePage() {
                   <span className="font-medium text-foreground">
                     Inference requests
                   </span>
-                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+                  <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
@@ -115,7 +115,7 @@ export default function MockupUsagePage() {
                   <span className="font-medium text-foreground">
                     Compute time
                   </span>
-                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+                  <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
                     2,431 GPU min
                   </CardTitle>
                 </CardHeader>
