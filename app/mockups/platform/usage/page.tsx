@@ -85,26 +85,30 @@ export default function MockupUsagePage() {
             <div className="grid gap-3 sm:grid-cols-3">
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-xs text-foreground">Project spend</span>
-                  <CardTitle className="text-2xl font-medium tabular-nums">
+                  <span className="font-medium text-foreground">
+                    Project spend
+                  </span>
+                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
               </Card>
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-xs text-foreground">
+                  <span className="font-medium text-foreground">
                     Inference requests
                   </span>
-                  <CardTitle className="text-2xl font-medium tabular-nums">
+                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
               </Card>
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-xs text-foreground">Compute time</span>
-                  <CardTitle className="text-2xl font-medium tabular-nums">
+                  <span className="font-medium text-foreground">
+                    Compute time
+                  </span>
+                  <CardTitle className="text-3xl leading-none font-medium tabular-nums">
                     2,431 GPU min
                   </CardTitle>
                 </CardHeader>
