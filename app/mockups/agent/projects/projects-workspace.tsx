@@ -5,6 +5,8 @@ import Image from "next/image"
 import {
   ApertureIcon,
   CheckIcon,
+  ChevronLeftIcon,
+  EllipsisIcon,
   FolderIcon,
   ImagesIcon,
   Layers3Icon,
@@ -22,6 +24,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import {
   Tabs,
@@ -36,6 +46,8 @@ const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 type Project = {
   id: string
   name: string
+  updated: string
+  thumbnailClass?: string
   storyboards: { name: string; count: number }[]
   characters: { name: string; count: number }[]
   renders: {
@@ -51,6 +63,7 @@ const initialProjects: Project[] = [
   {
     id: "orbit",
     name: "Orbit",
+    updated: "Updated today",
     storyboards: [
       { name: "Orbit launch film", count: 30 },
       { name: "Product reveal v2", count: 18 },
@@ -111,6 +124,8 @@ const initialProjects: Project[] = [
   {
     id: "soft-launch",
     name: "Soft launch",
+    updated: "Updated yesterday",
+    thumbnailClass: "hue-rotate-30",
     storyboards: [{ name: "Homepage loops", count: 12 }],
     characters: [{ name: "June", count: 8 }],
     renders: [
@@ -133,6 +148,8 @@ const initialProjects: Project[] = [
   {
     id: "unsorted",
     name: "Unsorted",
+    updated: "Updated Jul 21",
+    thumbnailClass: "contrast-125",
     storyboards: [],
     characters: [],
     renders: [
@@ -148,10 +165,10 @@ const initialProjects: Project[] = [
 
 export function ProjectsWorkspace() {
   const [projects, setProjects] = useState(initialProjects)
-  const [selectedProjectId, setSelectedProjectId] = useState(
-    initialProjects[0].id
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
+    null
   )
-  const [activeTab, setActiveTab] = useState("overview")
+  const [activeTab, setActiveTab] = useState("storyboards")
   const [selectedRenderId, setSelectedRenderId] = useState<number | null>(null)
   const [finals, setFinals] = useState<Record<string, number[]>>({
     orbit: [106],
@@ -192,6 +209,7 @@ export function ProjectsWorkspace() {
     const newProject: Project = {
       id: `project-${Date.now()}`,
       name,
+      updated: "Updated just now",
       storyboards: [],
       characters: [],
       renders: [],
@@ -199,7 +217,7 @@ export function ProjectsWorkspace() {
     setProjects((current) => [...current, newProject])
     setSelectedProjectId(newProject.id)
     setFinals((current) => ({ ...current, [newProject.id]: [] }))
-    setActiveTab("overview")
+    setActiveTab("storyboards")
     setNewProjectName("")
     setIsNewProjectOpen(false)
   }
@@ -209,7 +227,21 @@ export function ProjectsWorkspace() {
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
-            <h1 className="text-xl font-medium">Projects</h1>
+            {selectedProjectId ? (
+              <Button
+                variant="ghost"
+                className="-ml-3"
+                onClick={() => {
+                  setSelectedProjectId(null)
+                  setSelectedRenderId(null)
+                }}
+              >
+                <ChevronLeftIcon />
+                Projects
+              </Button>
+            ) : (
+              <h1 className="text-xl font-medium">Projects</h1>
+            )}
             <Button
               className="h-10 px-5"
               onClick={() => setIsNewProjectOpen(true)}
@@ -219,113 +251,187 @@ export function ProjectsWorkspace() {
             </Button>
           </header>
 
-          <div className="flex gap-1 overflow-x-auto py-2">
-            {projects.map((item) => (
-              <Button
-                key={item.id}
-                variant={
-                  selectedProjectId === item.id ? "secondary" : "ghost"
-                }
-                onClick={() => {
-                  setSelectedProjectId(item.id)
-                  setActiveTab("overview")
-                  setShareCopied(false)
-                }}
-              >
-                <FolderIcon />
-                {item.name}
-              </Button>
-            ))}
-          </div>
-
-          <div className="mt-5 flex items-center justify-between gap-4">
-            <div>
-              <h2 className="text-lg font-medium">{project.name}</h2>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {project.storyboards.length} storyboards ·{" "}
-                {project.characters.length} characters ·{" "}
-                {project.renders.length} renders
-              </p>
-            </div>
-            <Button
-              variant="outline"
-              disabled={projectFinals.length === 0}
-              onClick={shareFinals}
-            >
-              <Share2Icon />
-              {shareCopied ? "Link copied" : "Share finals"}
-            </Button>
-          </div>
-
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="mt-5 gap-6"
-          >
-            <TabsList variant="line">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="renders">
-                Renders
-                <span className="text-xs text-muted-foreground">
-                  {project.renders.length}
-                </span>
-              </TabsTrigger>
-              <TabsTrigger value="finals">
-                Finals
-                <span className="text-xs text-muted-foreground">
-                  {projectFinals.length}
-                </span>
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="overview" className="space-y-10">
-              <ProjectCollection
-                title="Storyboards"
-                icon={Layers3Icon}
-                items={project.storyboards}
-                empty="No storyboards in this project"
-              />
-              <ProjectCollection
-                title="Characters"
-                icon={ApertureIcon}
-                items={project.characters}
-                empty="No characters in this project"
-              />
-            </TabsContent>
-
-            <TabsContent value="renders">
-              <RenderGrid
-                renders={project.renders}
-                finals={finals[project.id] ?? []}
-                onOpen={setSelectedRenderId}
-              />
-            </TabsContent>
-
-            <TabsContent value="finals">
-              {projectFinals.length > 0 ? (
-                <RenderGrid
-                  renders={projectFinals}
-                  finals={finals[project.id] ?? []}
-                  onOpen={setSelectedRenderId}
-                />
-              ) : (
-                <div className="flex min-h-64 flex-col items-center justify-center text-center">
-                  <FolderIcon className="size-5 text-muted-foreground" />
-                  <p className="mt-3 text-sm font-medium">No finals yet</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Open a render and mark it as final.
-                  </p>
-                  <Button
-                    variant="outline"
-                    className="mt-4"
-                    onClick={() => setActiveTab("renders")}
+          {!selectedProjectId ? (
+            <div className="grid gap-5 py-6 sm:grid-cols-2 lg:grid-cols-3">
+              {projects.map((item) => (
+                <article
+                  key={item.id}
+                  className="overflow-hidden rounded-2xl border border-border bg-background p-2"
+                >
+                  <button
+                    type="button"
+                    className="group block w-full text-left"
+                    onClick={() => {
+                      setSelectedProjectId(item.id)
+                      setActiveTab("storyboards")
+                      setShareCopied(false)
+                    }}
                   >
-                    View renders
-                  </Button>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
+                      <Image
+                        src={sampleImage}
+                        alt=""
+                        fill
+                        className={cn(
+                          "object-cover transition-transform group-hover:scale-105",
+                          item.thumbnailClass
+                        )}
+                      />
+                    </div>
+                    <h2 className="px-2 pt-3 text-base font-medium">
+                      {item.name}
+                    </h2>
+                  </button>
+                  <div className="flex items-center justify-between gap-3 px-2 pt-1 pb-1">
+                    <span className="text-xs text-muted-foreground">
+                      {item.updated}
+                    </span>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            aria-label={`Project options for ${item.name}`}
+                          />
+                        }
+                      >
+                        <EllipsisIcon />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>
+                            Choose thumbnail
+                          </DropdownMenuLabel>
+                          {[
+                            ["Latest render", ""],
+                            ["Alternate render", "hue-rotate-30"],
+                            ["High contrast", "contrast-125"],
+                          ].map(([label, imageClass]) => (
+                            <DropdownMenuItem
+                              key={label}
+                              onClick={() =>
+                                setProjects((current) =>
+                                  current.map((projectItem) =>
+                                    projectItem.id === item.id
+                                      ? {
+                                          ...projectItem,
+                                          thumbnailClass: imageClass,
+                                        }
+                                      : projectItem
+                                  )
+                                )
+                              }
+                            >
+                              {label}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div className="mt-3 flex items-center justify-between gap-4">
+                <div>
+                  <h1 className="text-xl font-medium">{project.name}</h1>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {project.updated}
+                  </p>
                 </div>
-              )}
-            </TabsContent>
-          </Tabs>
+                <Button
+                  variant="outline"
+                  disabled={projectFinals.length === 0}
+                  onClick={shareFinals}
+                >
+                  <Share2Icon />
+                  {shareCopied ? "Link copied" : "Share finals"}
+                </Button>
+              </div>
+
+              <Tabs
+                value={activeTab}
+                onValueChange={setActiveTab}
+                className="mt-5 gap-6"
+              >
+                <TabsList
+                  variant="line"
+                  className="max-w-full justify-start overflow-x-auto"
+                >
+                  <TabsTrigger value="storyboards">
+                    Storyboards
+                  </TabsTrigger>
+                  <TabsTrigger value="characters">Characters</TabsTrigger>
+                  <TabsTrigger value="renders">
+                    Renders
+                    <span className="text-xs text-muted-foreground">
+                      {project.renders.length}
+                    </span>
+                  </TabsTrigger>
+                  <TabsTrigger value="finals">
+                    Finals
+                    <span className="text-xs text-muted-foreground">
+                      {projectFinals.length}
+                    </span>
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="storyboards">
+                  <ProjectCollection
+                    title="Storyboards"
+                    icon={Layers3Icon}
+                    items={project.storyboards}
+                    empty="No storyboards in this project"
+                  />
+                </TabsContent>
+
+                <TabsContent value="characters">
+                  <ProjectCollection
+                    title="Characters"
+                    icon={ApertureIcon}
+                    items={project.characters}
+                    empty="No characters in this project"
+                  />
+                </TabsContent>
+
+                <TabsContent value="renders">
+                  <RenderGrid
+                    renders={project.renders}
+                    finals={finals[project.id] ?? []}
+                    onOpen={setSelectedRenderId}
+                  />
+                </TabsContent>
+
+                <TabsContent value="finals">
+                  {projectFinals.length > 0 ? (
+                    <RenderGrid
+                      renders={projectFinals}
+                      finals={finals[project.id] ?? []}
+                      onOpen={setSelectedRenderId}
+                    />
+                  ) : (
+                    <div className="flex min-h-64 flex-col items-center justify-center text-center">
+                      <FolderIcon className="size-5 text-muted-foreground" />
+                      <p className="mt-3 text-sm font-medium">No finals yet</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Open a render and mark it as final.
+                      </p>
+                      <Button
+                        variant="outline"
+                        className="mt-4"
+                        onClick={() => setActiveTab("renders")}
+                      >
+                        View renders
+                      </Button>
+                    </div>
+                  )}
+                </TabsContent>
+              </Tabs>
+            </>
+          )}
         </div>
       </section>
 
