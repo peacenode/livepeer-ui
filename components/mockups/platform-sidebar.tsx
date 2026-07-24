@@ -14,6 +14,7 @@ export const platformNavItems = [
   { title: "Inference", href: "/mockups/platform/inference" },
   { title: "Billing", href: "/mockups/platform/billing" },
   { title: "API", href: "/mockups/platform/api" },
+  { title: "Settings", href: "/mockups/platform/settings" },
 ]
 
 export function PlatformSidebar() {
