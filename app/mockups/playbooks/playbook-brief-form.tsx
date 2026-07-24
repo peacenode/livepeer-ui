@@ -42,7 +42,15 @@ const fieldsWithoutDescriptions = new Set([
   "aspect_ratio",
 ])
 
+const fieldLabels: Record<string, string> = {
+  one_liner: "Tagline",
+  aspect: "Aspect ratio",
+  aspect_ratio: "Aspect ratio",
+}
+
 function labelFor(name: string) {
+  if (fieldLabels[name]) return fieldLabels[name]
+
   return name
     .split("_")
     .map((part, index) => {
@@ -71,7 +79,7 @@ function AspectRatioSelect({
   return (
     <div
       id={id}
-      className="mt-2 flex flex-wrap justify-start gap-3"
+      className="mt-2 flex flex-wrap justify-start gap-6"
       role="radiogroup"
       aria-labelledby={labelId}
     >
@@ -85,9 +93,9 @@ function AspectRatioSelect({
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(option)}
-            className="group flex w-24 flex-col items-center gap-2 rounded-lg py-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group flex w-fit flex-col items-center gap-2 rounded-lg py-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="flex h-14 w-full items-center justify-center">
+            <span className="flex h-14 items-center justify-center">
               <span
                 className={
                   selected
