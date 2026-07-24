@@ -147,16 +147,7 @@ export function AgentWorkspace() {
   return (
     <main>
       <section className="border-b">
-        <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-          <div className="mb-6 text-center">
-            <h1 className="text-xl font-medium text-balance sm:text-2xl">
-              What do you want to make?
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Start with a prompt, references, or a folder of images.
-            </p>
-          </div>
-
+        <div className="mx-auto max-w-3xl px-4 pb-8 sm:px-6 sm:pb-10">
           <form
             onSubmit={generate}
             onDragEnter={(event) => {
@@ -173,8 +164,8 @@ export function AgentWorkspace() {
           >
             <InputGroup
               className={cn(
-                "rounded-3xl border bg-background shadow-sm transition-colors has-[textarea]:rounded-3xl",
-                isDragging && "border-foreground bg-muted/50"
+                "rounded-t-none! rounded-b-3xl! border bg-muted shadow-sm transition-colors",
+                isDragging && "border-foreground"
               )}
             >
               {sources.length > 0 && (
