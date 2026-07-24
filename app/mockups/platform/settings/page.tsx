@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { ArrowUpRightIcon, Building2Icon } from "lucide-react"
+import Link from "next/link"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export const metadata: Metadata = {
@@ -24,7 +33,11 @@ export default function MockupSettingsPage() {
     <PlatformPage
       title="Project settings"
       action={
-        <Button variant="outline">
+        <Button
+          variant="outline"
+          nativeButton={false}
+          render={<Link href="/mockups/platform/organization" />}
+        >
           <Building2Icon data-icon="inline-start" />
           <span className="hidden sm:inline">Organization settings</span>
           <ArrowUpRightIcon
@@ -94,14 +107,61 @@ export default function MockupSettingsPage() {
           </form>
         </TabsContent>
         <TabsContent value="members">
-          <p className="text-sm text-muted-foreground">
-            Project members inherit access from the organization.
-          </p>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm text-muted-foreground">
+                Add organization members to this project.
+              </p>
+              <Button>Add member</Button>
+            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Member</TableHead>
+                  <TableHead>Access</TableHead>
+                  <TableHead className="text-right">Source</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-medium">Username</TableCell>
+                  <TableCell>Owner</TableCell>
+                  <TableCell className="text-right text-muted-foreground">
+                    Organization
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </TabsContent>
         <TabsContent value="webhooks">
-          <p className="text-sm text-muted-foreground">
-            No webhooks have been configured for this project.
-          </p>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm text-muted-foreground">
+                Deliver project events to external services.
+              </p>
+              <Button>Add webhook</Button>
+            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Endpoint</TableHead>
+                  <TableHead>Events</TableHead>
+                  <TableHead className="text-right">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell
+                    colSpan={3}
+                    className="h-24 text-center text-muted-foreground"
+                  >
+                    No webhooks configured
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </TabsContent>
       </Tabs>
     </PlatformPage>

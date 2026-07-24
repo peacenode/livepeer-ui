@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   BookOpenIcon,
   Building2Icon,
@@ -91,7 +92,9 @@ export function UserMenu() {
             </Avatar>
             <div className="flex flex-col leading-tight">
               <span className="font-medium">Personal</span>
-              <span className="text-xs text-muted-foreground">Organization</span>
+              <span className="text-xs text-muted-foreground">
+                Organization
+              </span>
             </div>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
@@ -102,18 +105,22 @@ export function UserMenu() {
               <DropdownMenuRadioItem value="personal">
                 Personal
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="acme">Acme Inc</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="acme">
+                Acme Inc
+              </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          render={<Link href="/mockups/platform/organization" />}
+        >
           <Building2Icon />
           Organization settings
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem render={<Link href="/mockups/platform/account" />}>
           <CircleUserRoundIcon />
-          Profile settings
+          Account settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
