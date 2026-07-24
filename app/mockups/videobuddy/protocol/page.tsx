@@ -1,31 +1,67 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import {
   ArrowRightIcon,
-  BlocksIcon,
+  BotIcon,
+  BoxIcon,
   CpuIcon,
-  NetworkIcon,
-  ShieldCheckIcon,
+  WalletCardsIcon,
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Livepeer Protocol",
+  title: "Agents, inference, and compute",
 }
 
-const roles = [
+const layers = [
   {
-    name: "Gateways",
+    number: "01",
+    title: "Agents",
     description:
-      "Accept requests from applications, discover available orchestrators, route jobs, and check returned work.",
+      "VideoBuddy combines instructions, tools, project context, and interfaces into one product experience. It decides which capability to use and submits the job.",
+    detail: "Web · CLI · MCP",
+    href: "/mockups/platform/agent",
+    icon: BotIcon,
   },
   {
-    name: "Orchestrators",
+    number: "02",
+    title: "Inference",
     description:
-      "Independent GPU operators that perform video transcoding and AI inference in exchange for fees.",
+      "Containers package the models, pipelines, and runtime needed for each capability. The inference layer turns an agent request into a runnable workload.",
+    detail: "ai-runner · comfystream · comfyui-base",
+    href: "/mockups/platform/inference",
+    icon: BoxIcon,
   },
   {
-    name: "Delegators",
+    number: "03",
+    title: "Compute",
     description:
-      "LPT holders who stake toward orchestrators they trust, helping secure and coordinate the active network.",
+      "Orchestrators provide the GPUs that run inference containers. The network matches workloads with available compute and returns the result.",
+    detail: "Orchestrators · GPUs · rewards",
+    href: "/mockups/platform/compute",
+    icon: CpuIcon,
+  },
+]
+
+const requestSteps = [
+  {
+    title: "Intent",
+    description:
+      "A person asks VideoBuddy to create or transform a piece of video.",
+  },
+  {
+    title: "Selection",
+    description:
+      "The agent chooses a capability and the inference container that provides it.",
+  },
+  {
+    title: "Execution",
+    description:
+      "An orchestrator loads the container, runs the job on its GPU, and returns the output.",
+  },
+  {
+    title: "Result",
+    description:
+      "VideoBuddy adds the output to the project so it can be reviewed, revised, or published.",
   },
 ]
 
@@ -36,50 +72,48 @@ export default function ProtocolPage() {
         <header className="max-w-3xl">
           <p className="text-sm text-muted-foreground">Livepeer</p>
           <h1 className="mt-2 text-3xl font-medium text-balance">
-            An open network for video compute
+            Agents turn intent into inference jobs. Compute runs them.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Livepeer coordinates independent GPU operators to generate,
-            transform, analyze, transcode, and stream video. Applications send
-            work through gateways while the protocol handles discovery,
-            payments, verification, and economic security.
+            VideoBuddy is the agent people interact with. Inference containers
+            provide its capabilities, and the Livepeer compute network supplies
+            the GPUs that execute them.
           </p>
         </header>
 
         <section className="mt-12">
-          <h2 className="text-lg font-medium">How a request moves</h2>
+          <h2 className="text-lg font-medium">Three layers, one request</h2>
           <div className="mt-5 grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
-            <ProtocolStep
-              icon={NetworkIcon}
-              title="Application"
-              text="Submits a video or AI workload through a gateway."
-            />
-            <ArrowRightIcon className="hidden size-4 text-muted-foreground md:block" />
-            <ProtocolStep
-              icon={CpuIcon}
-              title="GPU network"
-              text="An orchestrator runs the requested inference or video job."
-            />
-            <ArrowRightIcon className="hidden size-4 text-muted-foreground md:block" />
-            <ProtocolStep
-              icon={ShieldCheckIcon}
-              title="Result"
-              text="The gateway checks and returns the completed media."
-            />
+            {layers.map((layer, index) => (
+              <div key={layer.title} className="contents">
+                <ProtocolLayer {...layer} />
+                {index < layers.length - 1 && (
+                  <ArrowRightIcon
+                    className="hidden size-4 text-muted-foreground md:block"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="mt-14">
-          <h2 className="text-lg font-medium">Network roles</h2>
-          <div className="mt-4">
-            {roles.map((role) => (
+          <h2 className="text-lg font-medium">
+            How a VideoBuddy request moves
+          </h2>
+          <div className="mt-4 border-y">
+            {requestSteps.map((step, index) => (
               <div
-                key={role.name}
-                className="grid gap-2 border-t py-5 first:border-t-0 sm:grid-cols-[160px_1fr]"
+                key={step.title}
+                className="grid gap-2 border-b py-5 last:border-b-0 sm:grid-cols-[48px_140px_1fr] sm:items-baseline"
               >
-                <h3 className="text-sm font-medium">{role.name}</h3>
+                <span className="text-xs text-muted-foreground tabular-nums">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-sm font-medium">{step.title}</h3>
                 <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                  {role.description}
+                  {step.description}
                 </p>
               </div>
             ))}
@@ -88,25 +122,25 @@ export default function ProtocolPage() {
 
         <section className="mt-14 grid gap-10 md:grid-cols-2">
           <div>
-            <BlocksIcon className="size-5" />
-            <h2 className="mt-3 text-lg font-medium">Layered by design</h2>
+            <BotIcon className="size-5" aria-hidden="true" />
+            <h2 className="mt-3 text-lg font-medium">
+              The agent stays product-shaped
+            </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              High-throughput video and AI work happens off-chain. Contracts on
-              Arbitrum One coordinate stake, payments, governance, and the
-              active set, while gateways and orchestrators handle job traffic
-              directly.
+              VideoBuddy owns the interface, creative workflow, and project
+              context. It can add or replace inference containers without asking
+              people to manage models or GPUs directly.
             </p>
           </div>
           <div>
-            <CpuIcon className="size-5" />
+            <WalletCardsIcon className="size-5" aria-hidden="true" />
             <h2 className="mt-3 text-lg font-medium">
-              How this workspace connects
+              Payment follows execution
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Storyboards, characters, clips, and projects organize creative
-              inputs. A generation request can be routed to network compute,
-              and the returned renders can be reviewed, rerolled, or promoted
-              into a project&apos;s finals.
+              The project pays when an inference workload runs. The orchestrator
+              that supplies the GPU earns service fees, while protocol rewards
+              support active network compute.
             </p>
           </div>
         </section>
@@ -119,7 +153,7 @@ export default function ProtocolPage() {
             className="inline-flex items-center gap-2 text-sm font-medium hover:underline"
           >
             Read the protocol architecture
-            <ArrowRightIcon className="size-4" />
+            <ArrowRightIcon className="size-4" aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -127,22 +161,32 @@ export default function ProtocolPage() {
   )
 }
 
-function ProtocolStep({
-  icon: Icon,
+function ProtocolLayer({
+  number,
   title,
-  text,
-}: {
-  icon: typeof NetworkIcon
-  title: string
-  text: string
-}) {
+  description,
+  detail,
+  href,
+  icon: Icon,
+}: (typeof layers)[number]) {
   return (
-    <div className="min-h-36 rounded-xl bg-muted p-5">
-      <Icon className="size-5" />
-      <h3 className="mt-5 text-sm font-medium">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        {text}
-      </p>
-    </div>
+    <Link
+      href={href}
+      className="group flex min-h-64 flex-col rounded-3xl bg-muted p-5 transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+    >
+      <div className="flex items-center justify-between gap-4">
+        <Icon className="size-5" aria-hidden="true" />
+        <span className="text-xs text-muted-foreground tabular-nums">
+          {number}
+        </span>
+      </div>
+      <div className="mt-auto">
+        <h3 className="text-base font-medium">{title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+        <p className="mt-4 text-xs text-muted-foreground">{detail}</p>
+      </div>
+    </Link>
   )
 }
