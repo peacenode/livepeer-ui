@@ -113,7 +113,9 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
     if (!mesh.current) return
 
     const elapsed = reduceMotion ? 3.4 : clock.getElapsedTime()
-    const travel = reduceMotion ? 0 : elapsed * 0.055
+    const travel = reduceMotion
+      ? 0
+      : elapsed * 0.052 + Math.sin(elapsed * 0.42) * 0.012
     const width = viewport.width
     const height = viewport.height
     const activeCount =
@@ -149,12 +151,26 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
       const tangentY =
         quadraticTangent(start[1], control[1], end[1], progress) * height
       const tangent = Math.atan2(tangentY, tangentX)
+      const pathEnvelope = Math.sin(progress * Math.PI)
+      const flowWave =
+        Math.sin(phase * Math.PI * 3.2 - elapsed * 0.7) * pathEnvelope * 0.012
+      const rotationDrift =
+        Math.sin(elapsed * 0.34 + seed.routeIndex * 1.3) * 0.12
 
-      dummy.position.set(x, y, z)
+      dummy.position.set(
+        x - Math.sin(tangent) * flowWave * height,
+        y + Math.cos(tangent) * flowWave * height,
+        z +
+          Math.cos(phase * Math.PI * 2.4 - elapsed * 0.48) *
+            pathEnvelope *
+            0.035
+      )
       dummy.rotation.set(
-        elapsed * 0.12 + phase * 0.8 + seed.routeIndex * 0.045,
-        elapsed * 0.18 + phase * Math.PI * 0.85,
-        tangent
+        elapsed * (0.09 + seed.routeIndex * 0.008) +
+          phase * 0.8 +
+          rotationDrift,
+        elapsed * (0.14 + seed.routeIndex * 0.006) + phase * Math.PI * 0.85,
+        tangent + rotationDrift * 0.2
       )
       const distanceScale = MathUtils.lerp(
         1.08,
