@@ -373,7 +373,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                         className="flex items-center gap-3 py-4 first:pt-0 last:pb-0"
                       >
                         <LivepeerSymbol
-                          className="h-2.5 w-auto shrink-0 text-foreground"
+                          className="h-2 w-auto shrink-0 text-foreground"
                           aria-hidden="true"
                         />
                         <span className="text-sm">{deliverable}</span>
