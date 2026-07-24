@@ -84,7 +84,7 @@ export default function MockupUsagePage() {
           <div className="flex flex-col gap-8">
             <div className="grid gap-3 sm:grid-cols-3">
               <Card variant="metric">
-                <CardHeader>
+                <CardHeader className="flex-1 justify-between">
                   <span className="font-medium text-foreground">
                     Project spend
                   </span>
@@ -94,7 +94,7 @@ export default function MockupUsagePage() {
                 </CardHeader>
               </Card>
               <Card variant="metric">
-                <CardHeader>
+                <CardHeader className="flex-1 justify-between">
                   <span className="font-medium text-foreground">
                     Inference requests
                   </span>
@@ -104,7 +104,7 @@ export default function MockupUsagePage() {
                 </CardHeader>
               </Card>
               <Card variant="metric">
-                <CardHeader>
+                <CardHeader className="flex-1 justify-between">
                   <span className="font-medium text-foreground">
                     Compute time
                   </span>

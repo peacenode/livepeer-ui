@@ -53,7 +53,7 @@ export default async function MockupComputePage() {
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
-            <CardHeader>
+            <CardHeader className="flex-1 justify-between">
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
                 <span className="shrink-0 text-muted-foreground tabular-nums">
