@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { type DragEvent, useRef, useState } from "react"
 import Image from "next/image"
 import {
   CheckIcon,
@@ -11,6 +11,13 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
@@ -53,6 +60,10 @@ const initialBatches: ImageBatch[] = [
 export function StoryboardsWorkspace() {
   const [batches, setBatches] = useState(initialBatches)
   const [editingId, setEditingId] = useState<number | null>(null)
+  const [isUploadOpen, setIsUploadOpen] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [uploadTitle, setUploadTitle] = useState("")
+  const [uploadFiles, setUploadFiles] = useState<File[]>([])
   const uploadRef = useRef<HTMLInputElement>(null)
 
   function renameBatch(id: number, name: string) {
@@ -61,17 +72,34 @@ export function StoryboardsWorkspace() {
     )
   }
 
-  function addBatch(files: FileList | null) {
+  function setFiles(files: FileList | null) {
     if (!files?.length) return
+    setUploadFiles(
+      Array.from(files).filter((file) => file.type.startsWith("image/"))
+    )
+  }
+
+  function createBatch() {
+    const title = uploadTitle.trim()
+    if (!title || uploadFiles.length === 0) return
     setBatches((current) => [
       {
         id: (current[0]?.id ?? 0) + 1,
-        name: `Upload ${current.length + 1}`,
-        count: files.length,
+        name: title,
+        count: uploadFiles.length,
         uploaded: "Just now",
       },
       ...current,
     ])
+    setUploadTitle("")
+    setUploadFiles([])
+    setIsUploadOpen(false)
+  }
+
+  function handleDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    setIsDragging(false)
+    setFiles(event.dataTransfer.files)
   }
 
   return (
@@ -83,18 +111,10 @@ export function StoryboardsWorkspace() {
             Image groups in upload order
           </p>
         </div>
-        <Button size="sm" onClick={() => uploadRef.current?.click()}>
+        <Button size="sm" onClick={() => setIsUploadOpen(true)}>
           <UploadIcon />
           Upload images
         </Button>
-        <input
-          ref={uploadRef}
-          type="file"
-          accept="image/*"
-          multiple
-          className="sr-only"
-          onChange={(event) => addBatch(event.target.files)}
-        />
       </header>
 
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
@@ -195,6 +215,92 @@ export function StoryboardsWorkspace() {
           <p className="text-sm font-medium">No image uploads yet</p>
         </div>
       )}
+
+      <Dialog
+        open={isUploadOpen}
+        onOpenChange={(open) => {
+          setIsUploadOpen(open)
+          if (!open) {
+            setIsDragging(false)
+            setUploadTitle("")
+            setUploadFiles([])
+          }
+        }}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Upload storyboard</DialogTitle>
+            <DialogDescription>
+              Name this image group and add its frames.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-2">
+            <label htmlFor="storyboard-title" className="text-sm font-medium">
+              Title
+            </label>
+            <Input
+              id="storyboard-title"
+              value={uploadTitle}
+              onChange={(event) => setUploadTitle(event.target.value)}
+              placeholder="Storyboard title"
+              autoFocus
+            />
+          </div>
+
+          <div
+            onDragEnter={(event) => {
+              event.preventDefault()
+              setIsDragging(true)
+            }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                setIsDragging(false)
+              }
+            }}
+            onDrop={handleDrop}
+            className={cn(
+              "flex min-h-64 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted",
+              isDragging && "bg-muted"
+            )}
+            onClick={() => uploadRef.current?.click()}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault()
+                uploadRef.current?.click()
+              }
+            }}
+          >
+            <UploadIcon className="size-6 text-muted-foreground" />
+            <p className="mt-3 text-sm font-medium">
+              {uploadFiles.length > 0
+                ? `${uploadFiles.length} image${uploadFiles.length === 1 ? "" : "s"} selected`
+                : "Drop storyboard images here"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              or click to choose files
+            </p>
+            <input
+              ref={uploadRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => setFiles(event.target.files)}
+            />
+          </div>
+
+          <Button
+            onClick={createBatch}
+            disabled={!uploadTitle.trim() || uploadFiles.length === 0}
+          >
+            Create storyboard
+          </Button>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
