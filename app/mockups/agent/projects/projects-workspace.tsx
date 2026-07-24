@@ -350,7 +350,7 @@ export function ProjectsWorkspace() {
                 className="h-10 px-5"
                 onClick={() => setIsNewProjectOpen(true)}
               >
-                <PlusIcon />
+                <PlusIcon className="size-6" />
                 New project
               </Button>
             )}
@@ -998,7 +998,7 @@ function ProjectImageCollections({
         className="flex min-h-24 cursor-pointer items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted"
       >
         <div>
-          <PlusIcon className="mx-auto size-5 text-muted-foreground" />
+          <PlusIcon className="mx-auto size-6 text-muted-foreground" />
           <p className="mt-2 text-sm font-medium">New {singular}</p>
           <p className="mt-1 text-xs text-muted-foreground">
             Drop images or click to upload

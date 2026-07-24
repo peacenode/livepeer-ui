@@ -165,7 +165,7 @@ export function StoryboardsWorkspace() {
               className="h-10 px-5"
               onClick={() => setIsUploadOpen(true)}
             >
-              <PlusIcon />
+              <PlusIcon className="size-6" />
               New storyboard
             </Button>
           </header>

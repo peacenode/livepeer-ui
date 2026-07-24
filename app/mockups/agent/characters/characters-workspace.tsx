@@ -139,7 +139,7 @@ export function CharactersWorkspace() {
               className="h-10 px-5"
               onClick={() => setIsCreateOpen(true)}
             >
-              <PlusIcon />
+              <PlusIcon className="size-6" />
               New character
             </Button>
           </header>
