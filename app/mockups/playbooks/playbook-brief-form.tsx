@@ -348,7 +348,7 @@ export function PlaybookBriefForm({
 
       <div className="mt-8 flex flex-col gap-3">
         {(booleanFields.length > 0 || trainBrandLoraField) && (
-          <div className="grid gap-4 py-1 sm:grid-cols-2">
+          <div className="grid gap-4 pt-1 sm:grid-cols-2">
             <div className="flex flex-col gap-3">
               {booleanFields.map((field) => {
                 const id = `brief-${field.name}`
