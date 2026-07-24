@@ -8,8 +8,8 @@ import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
 
 export const metadata: Metadata = {
   title: {
-    default: "Platform",
-    template: "%s - Livepeer Platform",
+    default: "Console",
+    template: "%s - Livepeer Console",
   },
 }
 

@@ -31,7 +31,7 @@ export function DocsNav({
       title: "Mockups",
       external: true,
       items: [
-        { title: "Platform", href: "/mockups/platform" },
+        { title: "Console", href: "/mockups/platform" },
         { title: "Agent", href: "/mockups/agent" },
       ],
     },
