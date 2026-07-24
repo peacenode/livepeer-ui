@@ -86,7 +86,7 @@ export default function MockupHomePage() {
     <PlatformPage title="Home">
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label} variant="metric">
+          <Card key={stat.label} variant="metric" className="rounded-none">
             <CardHeader>
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
