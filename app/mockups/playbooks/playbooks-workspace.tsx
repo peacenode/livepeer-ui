@@ -2,14 +2,24 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRightIcon, CpuIcon } from "lucide-react"
 
-import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 
 export function PlaybooksWorkspace() {
   return (
     <main>
       <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-muted sm:min-h-[76svh]">
-        <LivepeerCubeStream className="opacity-80" />
+        <Image
+          src="/generated/20260724-194934/livepeer-stream-hero.webp"
+          alt=""
+          fill
+          priority
+          className="object-cover object-[68%_center] sm:object-center"
+          sizes="100vw"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-muted/10 sm:via-muted/75 sm:to-transparent"
+          aria-hidden="true"
+        />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-4xl flex-col items-start">
             <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
