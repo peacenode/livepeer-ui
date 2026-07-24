@@ -311,7 +311,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           )}
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-[repeat(3,max-content)] sm:gap-16 md:gap-24">
+        <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {meta.map((item) => {
             const values = item.value?.split(/\s*·\s*/).filter(Boolean)
 
@@ -321,8 +321,8 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 <div
                   className={
                     item.label === "Budget"
-                      ? "mt-3 space-y-1 text-lg leading-snug font-medium tabular-nums"
-                      : "mt-3 space-y-1 text-base leading-snug font-medium tabular-nums"
+                      ? "mt-3 space-y-0 text-lg leading-tight font-medium tabular-nums"
+                      : "mt-3 space-y-0 text-base leading-tight font-medium tabular-nums"
                   }
                 >
                   {values?.map((value) => {
