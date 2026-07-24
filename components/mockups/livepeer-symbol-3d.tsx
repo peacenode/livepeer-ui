@@ -53,8 +53,8 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
     if (!group.current || reduceMotion) return
 
     const time = clock.getElapsedTime()
-    const targetX = -0.52 + pointer.y * 0.1
-    const targetY = 0.72 + pointer.x * 0.14 + Math.sin(time * 0.35) * 0.05
+    const targetX = -0.22 + pointer.y * 0.07
+    const targetY = 0.32 + pointer.x * 0.1 + Math.sin(time * 0.35) * 0.035
     const damping = Math.min(delta * 4, 1)
 
     group.current.rotation.x += (targetX - group.current.rotation.x) * damping
@@ -65,8 +65,8 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   return (
     <group
       ref={group}
-      position={[isWide ? viewport.width * 0.27 : 0, 0, 0]}
-      rotation={[-0.52, 0.72, 0.16]}
+      position={[isWide ? viewport.width * 0.34 : 0, 0, 0]}
+      rotation={[-0.22, 0.32, 0.04]}
       scale={isWide ? 1.55 : 1}
     >
       {blocks.map((position) => (
