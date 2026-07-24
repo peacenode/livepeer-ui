@@ -202,8 +202,14 @@ type SourceFile = {
 export function AgentWorkspace() {
   const [prompt, setPrompt] = useState("")
   const [generationMode, setGenerationMode] = useState<
-    "Images" | "Storyboard" | "Clip"
-  >("Images")
+    "Storyboard" | "Character" | "Clip"
+  >("Storyboard")
+  const [selectedStoryboard, setSelectedStoryboard] = useState(
+    "Select storyboard"
+  )
+  const [selectedCharacter, setSelectedCharacter] = useState(
+    "Select character"
+  )
   const [sources, setSources] = useState<SourceFile[]>([])
   const [generations, setGenerations] = useState<Generation[]>(seedRuns)
   const [project, setProject] = useState("New project")
@@ -332,7 +338,7 @@ export function AgentWorkspace() {
                 align="block-start"
                 className="justify-start gap-4 px-4 pt-3 pb-0"
               >
-                {(["Images", "Storyboard", "Clip"] as const).map((mode) => (
+                {(["Storyboard", "Character", "Clip"] as const).map((mode) => (
                   <button
                     key={mode}
                     type="button"
@@ -347,6 +353,74 @@ export function AgentWorkspace() {
                   </button>
                 ))}
               </InputGroupAddon>
+              {(generationMode === "Storyboard" ||
+                generationMode === "Clip") && (
+                <InputGroupAddon
+                  align="block-start"
+                  className="justify-start gap-4 px-4 pt-2 pb-0"
+                >
+                  {generationMode === "Clip" && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <button
+                            type="button"
+                            className="flex appearance-none items-center gap-1 border-0 bg-transparent p-0 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground"
+                          />
+                        }
+                      >
+                        {selectedStoryboard}
+                        <ChevronDownIcon className="size-3.5" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>Storyboard</DropdownMenuLabel>
+                          {[
+                            "Orbit launch film",
+                            "Product reveal v2",
+                            "Homepage loops",
+                          ].map((storyboard) => (
+                            <DropdownMenuItem
+                              key={storyboard}
+                              onClick={() =>
+                                setSelectedStoryboard(storyboard)
+                              }
+                            >
+                              {storyboard}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      render={
+                        <button
+                          type="button"
+                          className="flex appearance-none items-center gap-1 border-0 bg-transparent p-0 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground"
+                        />
+                      }
+                    >
+                      {selectedCharacter}
+                      <ChevronDownIcon className="size-3.5" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuGroup>
+                        <DropdownMenuLabel>Character</DropdownMenuLabel>
+                        {["Mara", "The Courier", "June"].map((character) => (
+                          <DropdownMenuItem
+                            key={character}
+                            onClick={() => setSelectedCharacter(character)}
+                          >
+                            {character}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </InputGroupAddon>
+              )}
               {sources.length > 0 && (
                 <InputGroupAddon
                   align="block-start"
@@ -395,10 +469,10 @@ export function AgentWorkspace() {
                 placeholder={
                   isDragging
                     ? "Drop images to attach"
-                    : generationMode === "Images"
-                      ? "Describe an image or character..."
-                      : generationMode === "Storyboard"
-                        ? "Describe a storyboard or sequence..."
+                    : generationMode === "Storyboard"
+                      ? "Describe a storyboard or sequence..."
+                      : generationMode === "Character"
+                        ? "Describe a character..."
                         : "Describe a video clip..."
                 }
                 aria-label="Creation prompt"
