@@ -353,74 +353,6 @@ export function AgentWorkspace() {
                   </button>
                 ))}
               </InputGroupAddon>
-              {(generationMode === "Storyboard" ||
-                generationMode === "Clip") && (
-                <InputGroupAddon
-                  align="block-start"
-                  className="justify-start gap-4 px-4 pt-2 pb-0"
-                >
-                  {generationMode === "Clip" && (
-                    <DropdownMenu>
-                      <DropdownMenuTrigger
-                        render={
-                          <button
-                            type="button"
-                            className="flex appearance-none items-center gap-1 border-0 bg-transparent p-0 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground"
-                          />
-                        }
-                      >
-                        {selectedStoryboard}
-                        <ChevronDownIcon className="size-3.5" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuGroup>
-                          <DropdownMenuLabel>Storyboard</DropdownMenuLabel>
-                          {[
-                            "Orbit launch film",
-                            "Product reveal v2",
-                            "Homepage loops",
-                          ].map((storyboard) => (
-                            <DropdownMenuItem
-                              key={storyboard}
-                              onClick={() =>
-                                setSelectedStoryboard(storyboard)
-                              }
-                            >
-                              {storyboard}
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  )}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      render={
-                        <button
-                          type="button"
-                          className="flex appearance-none items-center gap-1 border-0 bg-transparent p-0 text-xs text-muted-foreground outline-none transition-colors hover:text-foreground"
-                        />
-                      }
-                    >
-                      {selectedCharacter}
-                      <ChevronDownIcon className="size-3.5" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuGroup>
-                        <DropdownMenuLabel>Character</DropdownMenuLabel>
-                        {["Mara", "The Courier", "June"].map((character) => (
-                          <DropdownMenuItem
-                            key={character}
-                            onClick={() => setSelectedCharacter(character)}
-                          >
-                            {character}
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuGroup>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </InputGroupAddon>
-              )}
               {sources.length > 0 && (
                 <InputGroupAddon
                   align="block-start"
@@ -488,7 +420,7 @@ export function AgentWorkspace() {
                 align="block-end"
                 className="justify-between gap-2 px-3 pb-3"
               >
-                <div className="flex min-w-0 items-center gap-1">
+                <div className="flex min-w-0 items-center gap-1 overflow-hidden">
                   <InputGroupButton
                     size="icon-sm"
                     aria-label="Attach images"
@@ -503,10 +435,73 @@ export function AgentWorkspace() {
                   >
                     <FolderOpenIcon />
                   </InputGroupButton>
+                  {generationMode === "Clip" && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <InputGroupButton className="max-w-16 min-w-0 px-2 sm:max-w-32" />
+                        }
+                      >
+                        <InputGroupText className="truncate text-xs">
+                          {selectedStoryboard}
+                          <ChevronDownIcon />
+                        </InputGroupText>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>Storyboard</DropdownMenuLabel>
+                          {[
+                            "Orbit launch film",
+                            "Product reveal v2",
+                            "Homepage loops",
+                          ].map((storyboard) => (
+                            <DropdownMenuItem
+                              key={storyboard}
+                              onClick={() =>
+                                setSelectedStoryboard(storyboard)
+                              }
+                            >
+                              {storyboard}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+                  {(generationMode === "Storyboard" ||
+                    generationMode === "Clip") && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        render={
+                          <InputGroupButton className="max-w-16 min-w-0 px-2 sm:max-w-28" />
+                        }
+                      >
+                        <InputGroupText className="truncate text-xs">
+                          {selectedCharacter}
+                          <ChevronDownIcon />
+                        </InputGroupText>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>Character</DropdownMenuLabel>
+                          {["Mara", "The Courier", "June"].map((character) => (
+                            <DropdownMenuItem
+                              key={character}
+                              onClick={() => setSelectedCharacter(character)}
+                            >
+                              {character}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
+                </div>
+                <div className="flex shrink-0 items-center gap-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger
                       render={
-                        <InputGroupButton className="max-w-36 min-w-0 px-2" />
+                        <InputGroupButton className="max-w-20 min-w-0 px-2 sm:max-w-36" />
                       }
                     >
                       <InputGroupText className="truncate text-xs">
@@ -533,19 +528,19 @@ export function AgentWorkspace() {
                       </DropdownMenuGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
+                  <Button
+                    type="submit"
+                    size="icon-sm"
+                    aria-label="Generate"
+                    disabled={!prompt.trim() || isGenerating}
+                  >
+                    {isGenerating ? (
+                      <RotateCwIcon className="animate-spin" />
+                    ) : (
+                      <ArrowUpIcon />
+                    )}
+                  </Button>
                 </div>
-                <Button
-                  type="submit"
-                  size="icon-sm"
-                  aria-label="Generate"
-                  disabled={!prompt.trim() || isGenerating}
-                >
-                  {isGenerating ? (
-                    <RotateCwIcon className="animate-spin" />
-                  ) : (
-                    <ArrowUpIcon />
-                  )}
-                </Button>
               </InputGroupAddon>
             </InputGroup>
             <input
