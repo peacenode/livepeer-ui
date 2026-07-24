@@ -191,16 +191,6 @@ export function AgentWorkspace() {
   const visibleGenerations = generations.filter((generation) =>
     generation.prompt.toLowerCase().includes(searchQuery.trim().toLowerCase())
   )
-  const groupedGenerations = Object.entries(
-    visibleGenerations.reduce<Record<string, Generation[]>>(
-      (groups, generation) => {
-        groups[generation.time] ??= []
-        groups[generation.time].push(generation)
-        return groups
-      },
-      {}
-    )
-  )
 
   useEffect(() => {
     folderInputRef.current?.setAttribute("webkitdirectory", "")
@@ -451,113 +441,111 @@ export function AgentWorkspace() {
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div>
-            {groupedGenerations.map(([timeframe, items]) => (
-              <section key={timeframe} className="mb-8 last:mb-0">
-                <h3 className="mb-3 text-xs font-medium text-muted-foreground">
-                  {timeframe}
-                </h3>
-                {items.map((generation) => (
-                  <article
-                    key={generation.id}
-                    className="grid gap-4 border-b py-4 first:pt-0 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
-                  >
-                    <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
-                      <Image
-                        src={sampleImage}
-                        alt={`Video render ${generation.id}`}
-                        fill
-                        className={cn(
-                          "scale-110 object-cover",
-                          generation.imageClass
-                        )}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                        <button
-                          type="button"
-                          aria-label={`Play render ${generation.id}`}
-                          className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur"
-                        >
-                          <PlayIcon className="ml-0.5 size-5 fill-current" />
-                        </button>
-                      </div>
-                      <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
-                        {generation.duration}
+          <div className="space-y-2">
+            {visibleGenerations.map((generation) => (
+              <article
+                key={generation.id}
+                className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
+              >
+                <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+                  <Image
+                    src={sampleImage}
+                    alt={`Video render ${generation.id}`}
+                    fill
+                    className={cn(
+                      "scale-110 object-cover",
+                      generation.imageClass
+                    )}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                    <button
+                      type="button"
+                      aria-label={`Play render ${generation.id}`}
+                      className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur"
+                    >
+                      <PlayIcon className="ml-0.5 size-5 fill-current" />
+                    </button>
+                  </div>
+                  <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
+                    {generation.duration}
+                  </span>
+                </div>
+                <div className="flex min-w-0 flex-col py-1">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{generation.project}</Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {generation.time}
                       </span>
                     </div>
-                    <div className="flex min-w-0 flex-col py-1">
-                      <div>
-                        <Badge variant="secondary">{generation.project}</Badge>
-                        <p className="mt-3 text-sm leading-relaxed">
-                          {generation.prompt}
-                        </p>
-                      </div>
+                    <p className="mt-3 text-sm leading-relaxed">
+                      {generation.prompt}
+                    </p>
+                  </div>
 
-                      <div className="mt-5 lg:mt-auto">
-                        {generation.reference.kind === "storyboard" ? (
-                          <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
-                            <Layers3Icon className="size-4 shrink-0" />
-                            <span className="truncate font-medium text-foreground">
-                              {generation.reference.name}
-                            </span>
-                            <span className="shrink-0">
-                              {generation.reference.count} frames
-                            </span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                            <div className="flex -space-x-2">
-                              {[0, 1, 2].map((index) => (
-                                <div
-                                  key={index}
-                                  className="relative size-7 overflow-hidden rounded-md bg-muted ring-2 ring-background"
-                                >
-                                  <Image
-                                    src={sampleImage}
-                                    alt=""
-                                    fill
-                                    className={cn(
-                                      "object-cover",
-                                      index === 1 && "hue-rotate-15",
-                                      index === 2 && "contrast-125"
-                                    )}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                            <span className="flex items-center gap-1.5">
-                              <ImagesIcon className="size-3.5" />
-                              {generation.reference.count} source images
-                            </span>
-                          </div>
-                        )}
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="bg-background"
-                          >
-                            <SparklesIcon />
-                            Get alternates
-                          </Button>
-                          <a
-                            href={sampleImage}
-                            download={`render-${generation.id}.mp4`}
-                            className={buttonVariants({
-                              variant: "outline",
-                              size: "sm",
-                              className: "bg-background",
-                            })}
-                          >
-                            <ArrowDownToLineIcon />
-                            Download
-                          </a>
-                        </div>
+                  <div className="mt-5 lg:mt-auto">
+                    {generation.reference.kind === "storyboard" ? (
+                      <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                        <Layers3Icon className="size-4 shrink-0" />
+                        <span className="truncate font-medium text-foreground">
+                          {generation.reference.name}
+                        </span>
+                        <span className="shrink-0">
+                          {generation.reference.count} frames
+                        </span>
                       </div>
+                    ) : (
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                        <div className="flex -space-x-2">
+                          {[0, 1, 2].map((index) => (
+                            <div
+                              key={index}
+                              className="relative size-7 overflow-hidden rounded-md bg-muted ring-2 ring-background"
+                            >
+                              <Image
+                                src={sampleImage}
+                                alt=""
+                                fill
+                                className={cn(
+                                  "object-cover",
+                                  index === 1 && "hue-rotate-15",
+                                  index === 2 && "contrast-125"
+                                )}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        <span className="flex items-center gap-1.5">
+                          <ImagesIcon className="size-3.5" />
+                          {generation.reference.count} source images
+                        </span>
+                      </div>
+                    )}
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-background"
+                      >
+                        <SparklesIcon />
+                        Get alternates
+                      </Button>
+                      <a
+                        href={sampleImage}
+                        download={`render-${generation.id}.mp4`}
+                        className={buttonVariants({
+                          variant: "outline",
+                          size: "sm",
+                          className: "bg-background",
+                        })}
+                      >
+                        <ArrowDownToLineIcon />
+                        Download
+                      </a>
                     </div>
-                  </article>
-                ))}
-              </section>
+                  </div>
+                </div>
+              </article>
             ))}
             {visibleGenerations.length === 0 && (
               <p className="py-12 text-center text-sm text-muted-foreground">
