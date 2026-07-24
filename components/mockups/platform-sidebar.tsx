@@ -29,13 +29,13 @@ export function PlatformSidebar() {
       <div className="px-3 pt-5 pb-4">
         <GlobalSearch />
       </div>
-      <nav className="flex flex-col items-start gap-1 px-3">
+      <nav className="flex flex-col items-start px-3">
         {platformNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
-              "rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+              "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
               pathname === item.href
                 ? "font-medium text-foreground"
                 : "text-muted-foreground hover:text-foreground"

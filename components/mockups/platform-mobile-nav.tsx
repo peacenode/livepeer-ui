@@ -42,14 +42,14 @@ export function PlatformMobileNav() {
         <div className="px-4 pb-4">
           <GlobalSearch shortcut={false} />
         </div>
-        <nav className="flex flex-col items-start gap-1 overflow-y-auto px-3">
+        <nav className="flex flex-col items-start overflow-y-auto px-3">
           {platformNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted",
+                "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
                 pathname === item.href
                   ? "font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground"
