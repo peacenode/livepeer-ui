@@ -330,20 +330,21 @@ export function AgentWorkspace() {
             >
               <InputGroupAddon
                 align="block-start"
-                className="justify-start gap-1 px-3 pt-3 pb-0"
+                className="justify-start gap-4 px-4 pt-3 pb-0"
               >
                 {(["Images", "Storyboard", "Clip"] as const).map((mode) => (
-                  <Button
+                  <button
                     key={mode}
                     type="button"
-                    size="xs"
-                    variant={
-                      generationMode === mode ? "secondary" : "ghost"
-                    }
+                    aria-pressed={generationMode === mode}
+                    className={cn(
+                      "text-xs font-medium text-muted-foreground transition-colors hover:text-foreground",
+                      generationMode === mode && "text-foreground"
+                    )}
                     onClick={() => setGenerationMode(mode)}
                   >
                     {mode}
-                  </Button>
+                  </button>
                 ))}
               </InputGroupAddon>
               {sources.length > 0 && (
