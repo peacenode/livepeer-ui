@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ImagePlusIcon } from "lucide-react"
+import { DownloadIcon, ImagePlusIcon } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -51,8 +51,8 @@ function ContainerPostCard({
   }
 
   return (
-    <Card className="h-full gap-0 bg-background py-0 ring-1 ring-foreground/8 transition-colors hover:ring-foreground/16">
-      <div className="flex items-center justify-between gap-3 px-5 py-4">
+    <Card className="h-full gap-0 bg-background py-0">
+      <div className="flex items-center justify-between gap-3 py-4">
         <div className="flex min-w-0 items-center gap-3">
           <Avatar size="sm">
             <AvatarFallback className="bg-foreground text-background">
@@ -62,8 +62,13 @@ function ContainerPostCard({
           <p className="truncate text-sm font-medium">{creator}</p>
         </div>
         {pullCount !== undefined && (
-          <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
-            {formatCompact(pullCount)} pulls
+          <span className="flex shrink-0 items-center gap-1.5 text-xs font-medium tabular-nums">
+            <DownloadIcon
+              className="size-3.5 text-muted-foreground"
+              aria-hidden="true"
+            />
+            {formatCompact(pullCount)}
+            <span className="sr-only">pulls</span>
           </span>
         )}
       </div>
@@ -104,7 +109,7 @@ function ContainerPostCard({
         />
       </div>
 
-      <CardContent className="py-5">
+      <CardContent className="px-0 pt-3 pb-5">
         <div className="flex flex-col gap-1.5">
           <Link
             href={`/mockups/platform/inference/${slug}`}
