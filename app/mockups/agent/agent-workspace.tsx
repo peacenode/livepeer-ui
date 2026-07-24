@@ -60,6 +60,10 @@ import {
 } from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 import { storyMedia } from "./media-assets"
+import {
+  downloadMedia,
+  MediaContextMenu,
+} from "./media-context-menu"
 
 const initialPrompt =
   "A lone courier crosses the salt flats toward a silent radio observatory as a dust front closes in"
@@ -361,37 +365,54 @@ export function AgentWorkspace() {
                 >
                   <AttachmentGroup>
                     {sources.map((source) => (
-                      <Attachment key={source.url} size="sm">
-                        <AttachmentMedia variant="image">
-                          <Image
-                            src={source.url}
-                            alt=""
-                            width={32}
-                            height={32}
-                            unoptimized
-                          />
-                        </AttachmentMedia>
-                        <AttachmentContent className="max-w-32">
-                          <AttachmentTitle>{source.name}</AttachmentTitle>
-                          <AttachmentDescription>
-                            {Math.max(1, Math.round(source.size / 1024))} KB
-                          </AttachmentDescription>
-                        </AttachmentContent>
-                        <AttachmentActions>
-                          <AttachmentAction
-                            aria-label={`Remove ${source.name}`}
-                            onClick={() =>
-                              setSources((current) =>
-                                current.filter(
-                                  (item) => item.url !== source.url
+                      <MediaContextMenu
+                        key={source.url}
+                        onOpen={() => window.open(source.url, "_blank")}
+                        openLabel="Open source"
+                        onDownload={() =>
+                          downloadMedia(source.url, source.name)
+                        }
+                        onRemove={() =>
+                          setSources((current) =>
+                            current.filter(
+                              (item) => item.url !== source.url
+                            )
+                          )
+                        }
+                        removeLabel="Remove source"
+                      >
+                        <Attachment size="sm">
+                          <AttachmentMedia variant="image">
+                            <Image
+                              src={source.url}
+                              alt=""
+                              width={32}
+                              height={32}
+                              unoptimized
+                            />
+                          </AttachmentMedia>
+                          <AttachmentContent className="max-w-32">
+                            <AttachmentTitle>{source.name}</AttachmentTitle>
+                            <AttachmentDescription>
+                              {Math.max(1, Math.round(source.size / 1024))} KB
+                            </AttachmentDescription>
+                          </AttachmentContent>
+                          <AttachmentActions>
+                            <AttachmentAction
+                              aria-label={`Remove ${source.name}`}
+                              onClick={() =>
+                                setSources((current) =>
+                                  current.filter(
+                                    (item) => item.url !== source.url
+                                  )
                                 )
-                              )
-                            }
-                          >
-                            <XIcon />
-                          </AttachmentAction>
-                        </AttachmentActions>
-                      </Attachment>
+                              }
+                            >
+                              <XIcon />
+                            </AttachmentAction>
+                          </AttachmentActions>
+                        </Attachment>
+                      </MediaContextMenu>
                     ))}
                   </AttachmentGroup>
                 </InputGroupAddon>
@@ -615,27 +636,53 @@ export function AgentWorkspace() {
                       key={generation.id}
                       className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
                     >
-                      <button
-                        type="button"
-                        aria-label={`Open render ${generation.id}`}
-                        onClick={() => setSelectedGeneration(generation)}
-                        className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      <MediaContextMenu
+                        className="relative aspect-video overflow-hidden rounded-xl bg-muted"
+                        onOpen={() => setSelectedGeneration(generation)}
+                        openLabel="Open render"
+                        onDownload={() =>
+                          downloadMedia(
+                            generation.imageUrl,
+                            `render-${generation.id}.webp`
+                          )
+                        }
+                        onDuplicate={() =>
+                          startGeneration(
+                            getRerollPrompts(generation)[0]
+                          )
+                        }
+                        duplicateLabel="Reroll prompt"
+                        onRemove={() =>
+                          setGenerations((current) =>
+                            current.filter(
+                              (item) => item.id !== generation.id
+                            )
+                          )
+                        }
+                        removeLabel="Delete render"
                       >
-                        <Image
-                          src={generation.imageUrl}
-                          alt={`Video render ${generation.id}`}
-                          fill
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
-                          <span className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur">
-                            <PlayIcon className="ml-0.5 size-5 fill-current" />
+                        <button
+                          type="button"
+                          aria-label={`Open render ${generation.id}`}
+                          onClick={() => setSelectedGeneration(generation)}
+                          className="group relative size-full text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        >
+                          <Image
+                            src={generation.imageUrl}
+                            alt={`Video render ${generation.id}`}
+                            fill
+                            className="object-cover"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
+                            <span className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur">
+                              <PlayIcon className="ml-0.5 size-5 fill-current" />
+                            </span>
+                          </div>
+                          <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
+                            {generation.duration}
                           </span>
-                        </div>
-                        <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
-                          {generation.duration}
-                        </span>
-                      </button>
+                        </button>
+                      </MediaContextMenu>
                       <div className="flex min-w-0 flex-col py-1">
                         <div>
                           <div className="flex items-center gap-2">

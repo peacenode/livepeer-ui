@@ -22,6 +22,10 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
+import {
+  downloadMedia,
+  MediaContextMenu,
+} from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
 
 type ImageBatch = {
@@ -278,26 +282,73 @@ export function StoryboardsWorkspace() {
                       imageGroupRadius(index, batch.images.length)
                     )}
                   >
-                    <div
-                      className={cn(
-                        "absolute inset-0 overflow-hidden rounded-[inherit] bg-muted",
-                        draggedImage?.batchId === batch.id &&
-                          draggedImage.imageId === imageId &&
-                          "opacity-40"
-                      )}
+                    <MediaContextMenu
+                      className="absolute inset-0"
+                      openLabel="Move to beginning"
+                      onOpen={() =>
+                        moveImage(batch.id, index, 0)
+                      }
+                      onDownload={() =>
+                        downloadMedia(
+                          frameAt(batch.frames, imageId),
+                          `${batch.name}-frame-${index + 1}.webp`
+                        )
+                      }
+                      onDuplicate={() =>
+                        setBatches((current) =>
+                          current.map((item) =>
+                            item.id === batch.id
+                              ? {
+                                  ...item,
+                                  images: [
+                                    ...item.images.slice(0, index + 1),
+                                    Math.max(...item.images) + 1,
+                                    ...item.images.slice(index + 1),
+                                  ],
+                                }
+                              : item
+                          )
+                        )
+                      }
+                      duplicateLabel="Duplicate frame"
+                      onRemove={() =>
+                        setBatches((current) =>
+                          current.map((item) =>
+                            item.id === batch.id
+                              ? {
+                                  ...item,
+                                  images: item.images.filter(
+                                    (itemImageId) =>
+                                      itemImageId !== imageId
+                                  ),
+                                }
+                              : item
+                          )
+                        )
+                      }
+                      removeLabel="Remove frame"
                     >
-                      <Image
-                        src={frameAt(batch.frames, imageId)}
-                        alt=""
-                        fill
+                      <div
                         className={cn(
-                          "object-cover",
-                          imageId % 4 === 1 && "hue-rotate-15",
-                          imageId % 4 === 2 && "saturate-50",
-                          imageId % 4 === 3 && "contrast-125"
+                          "absolute inset-0 overflow-hidden rounded-[inherit] bg-muted",
+                          draggedImage?.batchId === batch.id &&
+                            draggedImage.imageId === imageId &&
+                            "opacity-40"
                         )}
-                      />
-                    </div>
+                      >
+                        <Image
+                          src={frameAt(batch.frames, imageId)}
+                          alt=""
+                          fill
+                          className={cn(
+                            "object-cover",
+                            imageId % 4 === 1 && "hue-rotate-15",
+                            imageId % 4 === 2 && "saturate-50",
+                            imageId % 4 === 3 && "contrast-125"
+                          )}
+                        />
+                      </div>
+                    </MediaContextMenu>
                     {dropTarget?.batchId === batch.id &&
                       dropTarget.imageId === imageId &&
                       draggedImage?.imageId !== imageId && (

@@ -22,6 +22,10 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
+import {
+  downloadMedia,
+  MediaContextMenu,
+} from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
 
 const characterProperties = [
@@ -225,33 +229,82 @@ export function CharactersWorkspace() {
 
               <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
                 {character.images.map((imageId, index) => (
-                  <button
-                    type="button"
+                  <MediaContextMenu
                     key={imageId}
-                    aria-label={`Open ${character.name} reference ${imageId + 1}`}
-                    onClick={() =>
+                    className={cn(
+                      "relative aspect-square overflow-hidden bg-muted",
+                      imageGroupRadius(index, character.images.length)
+                    )}
+                    onOpen={() =>
                       setSelectedImage({
                         characterId: character.id,
                         imageId,
                       })
                     }
-                    className={cn(
-                      "group relative aspect-square overflow-hidden bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                      imageGroupRadius(index, character.images.length)
-                    )}
+                    openLabel="Open details"
+                    onDownload={() =>
+                      downloadMedia(
+                        frameAt(character.frames, imageId + 1),
+                        `${character.name}-reference-${index + 1}.webp`
+                      )
+                    }
+                    onDuplicate={() =>
+                      setCharacters((current) =>
+                        current.map((item) =>
+                          item.id === character.id
+                            ? {
+                                ...item,
+                                images: [
+                                  ...item.images.slice(0, index + 1),
+                                  Math.max(...item.images) + 1,
+                                  ...item.images.slice(index + 1),
+                                ],
+                              }
+                            : item
+                        )
+                      )
+                    }
+                    duplicateLabel="Duplicate reference"
+                    onRemove={() =>
+                      setCharacters((current) =>
+                        current.map((item) =>
+                          item.id === character.id
+                            ? {
+                                ...item,
+                                images: item.images.filter(
+                                  (itemImageId) => itemImageId !== imageId
+                                ),
+                              }
+                            : item
+                        )
+                      )
+                    }
+                    removeLabel="Remove reference"
                   >
-                    <Image
-                      src={frameAt(character.frames, imageId + 1)}
-                      alt=""
-                      fill
-                      className={cn(
-                        "object-cover transition-transform group-hover:scale-105",
-                        imageId % 4 === 1 && "hue-rotate-15",
-                        imageId % 4 === 2 && "saturate-50",
-                        imageId % 4 === 3 && "contrast-125"
-                      )}
-                    />
-                  </button>
+                    <button
+                      type="button"
+                      aria-label={`Open ${character.name} reference ${imageId + 1}`}
+                      onClick={() =>
+                        setSelectedImage({
+                          characterId: character.id,
+                          imageId,
+                        })
+                      }
+                      className="group relative size-full outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <Image
+                        src={frameAt(character.frames, imageId + 1)}
+                        alt=""
+                        fill
+                        className={cn(
+                          "object-cover transition-transform group-hover:scale-105",
+                          imageId % 4 === 1 && "hue-rotate-15",
+                          imageId % 4 === 2 && "saturate-50",
+                          imageId % 4 === 3 && "contrast-125"
+                        )}
+                      />
+                    </button>
+                  </MediaContextMenu>
                 ))}
                 <label
                   className={cn(

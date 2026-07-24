@@ -6,6 +6,10 @@ import { FilmIcon, PlayIcon, PlusIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { storyMedia } from "../media-assets"
+import {
+  downloadMedia,
+  MediaContextMenu,
+} from "../media-context-menu"
 
 type FootageItem = {
   id: number
@@ -87,25 +91,52 @@ export function FootageWorkspace() {
                   key={item.id}
                   className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
                 >
-                  <button
-                    type="button"
-                    className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  <MediaContextMenu
+                    className="relative aspect-video overflow-hidden rounded-xl bg-muted"
+                    onOpen={() => undefined}
+                    openLabel="Play clip"
+                    onDownload={() =>
+                      downloadMedia(item.imageUrl, item.name)
+                    }
+                    onDuplicate={() =>
+                      setFootage((current) => [
+                        {
+                          ...item,
+                          id: Math.max(...current.map((entry) => entry.id)) + 1,
+                          name: `Copy of ${item.name}`,
+                          uploaded: "Just now",
+                        },
+                        ...current,
+                      ])
+                    }
+                    duplicateLabel="Duplicate clip"
+                    onRemove={() =>
+                      setFootage((current) =>
+                        current.filter((entry) => entry.id !== item.id)
+                      )
+                    }
+                    removeLabel="Remove clip"
                   >
-                    <Image
-                      src={item.imageUrl}
-                      alt=""
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20">
-                      <span className="flex size-11 items-center justify-center rounded-full bg-background/90">
-                        <PlayIcon className="ml-0.5 size-5 fill-current" />
+                    <button
+                      type="button"
+                      className="group relative size-full text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <Image
+                        src={item.imageUrl}
+                        alt=""
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                      <span className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20">
+                        <span className="flex size-11 items-center justify-center rounded-full bg-background/90">
+                          <PlayIcon className="ml-0.5 size-5 fill-current" />
+                        </span>
                       </span>
-                    </span>
-                    <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] text-white">
-                      {item.duration}
-                    </span>
-                  </button>
+                      <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] text-white">
+                        {item.duration}
+                      </span>
+                    </button>
+                  </MediaContextMenu>
                   <div className="flex min-w-0 flex-col py-1">
                     <p className="truncate text-sm font-medium">{item.name}</p>
                     <p className="mt-2 text-xs text-muted-foreground lg:mt-auto">
