@@ -117,7 +117,7 @@ export default async function ContainerDetailPage({
           <Card key={stat.label} variant="metric">
             <CardHeader>
               <CardDescription>{stat.label}</CardDescription>
-              <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
+              <CardTitle className="text-3xl leading-none font-normal tracking-tight tabular-nums">
                 {stat.value}
               </CardTitle>
             </CardHeader>

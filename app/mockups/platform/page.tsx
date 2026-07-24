@@ -148,7 +148,7 @@ export default function MockupHomePage() {
                 </span>
               </CardDescription>
               <div className="flex flex-col gap-1.5">
-                <CardTitle className="text-4xl leading-none font-semibold tracking-tight tabular-nums">
+                <CardTitle className="text-3xl leading-none font-normal tracking-tight tabular-nums">
                   {stat.value}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground tabular-nums">
