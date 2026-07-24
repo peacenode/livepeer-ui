@@ -319,7 +319,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 />
               )}
               <div className="flex flex-col justify-center p-6 sm:p-8">
-                <p className="mb-5 text-sm font-medium">You’ll receive…</p>
+                <p className="mb-5 text-sm font-medium">Output</p>
                 {catalogEntry.deliverables.length > 0 ? (
                   <div className="divide-y">
                     {catalogEntry.deliverables.map((deliverable) => (
