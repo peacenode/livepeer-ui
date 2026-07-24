@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 import {
   Color,
   InstancedMesh,
@@ -18,6 +19,7 @@ import { cn } from "@/lib/utils"
 
 const cubeCount = 72
 const laneOffsets = [-1.45, -0.88, -0.32, 0.32, 0.88, 1.45]
+const laneDepths = [-0.72, -0.42, -0.14, 0.14, 0.42, 0.72]
 
 function StreamEnvironment() {
   const { gl, scene } = useThree()
@@ -65,9 +67,9 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
   const seeds = useMemo(
     () =>
       Array.from({ length: cubeCount }, (_, index) => ({
+        laneIndex: index % laneOffsets.length,
         lane: laneOffsets[index % laneOffsets.length],
-        depth: ((index * 7) % 11) / 10 - 0.5,
-        wobble: ((index * 13) % 17) / 17,
+        depth: laneDepths[index % laneDepths.length],
       })),
     []
   )
@@ -105,20 +107,16 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
       const convergence = 1 - MathUtils.smoothstep(phase, 0.06, 0.74)
       const laneY = seed.lane * convergence * Math.min(height * 0.2, 1.18)
       const pathDepth = -1.45 * phase + Math.sin(phase * Math.PI) * 0.28
-      const ripple =
-        Math.sin(elapsed * 0.7 + seed.wobble * Math.PI * 2) *
-        0.035 *
-        convergence
 
       dummy.position.set(
         x,
-        parabola + laneY + ripple + pointer.y * 0.05,
+        parabola + laneY + pointer.y * 0.05,
         pathDepth + seed.depth * convergence * depthScale
       )
       dummy.rotation.set(
-        elapsed * 0.16 + seed.wobble,
-        elapsed * 0.22 + phase * Math.PI,
-        (phase - 0.5) * 0.42
+        elapsed * 0.12 + phase * 0.8 + seed.laneIndex * 0.035,
+        elapsed * 0.18 + phase * Math.PI * 0.85,
+        (phase - 0.5) * 0.42 + seed.laneIndex * 0.025
       )
       const distanceScale = MathUtils.lerp(
         1.12,
@@ -187,6 +185,14 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         />
         <pointLight color="#c5d6ff" position={[1, 1, 4]} intensity={10} />
         <CubeFlow reduceMotion={reduceMotion} />
+        <EffectComposer multisampling={0}>
+          <DepthOfField
+            focusDistance={7.25}
+            focusRange={1.15}
+            bokehScale={1.35}
+            resolutionScale={0.5}
+          />
+        </EffectComposer>
       </Canvas>
     </div>
   )
