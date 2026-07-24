@@ -362,7 +362,7 @@ export function ProjectsWorkspace() {
               {projects.map((item) => (
                 <article
                   key={item.id}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-background p-2"
+                  className="group relative rounded-2xl"
                 >
                   <button
                     type="button"
@@ -375,7 +375,7 @@ export function ProjectsWorkspace() {
                     }}
                   />
                   <div className="pointer-events-none relative z-[1]">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
                       <Image
                         src={item.thumbnailUrl ?? sampleImage}
                         alt=""
@@ -386,12 +386,14 @@ export function ProjectsWorkspace() {
                         )}
                         unoptimized={Boolean(item.thumbnailUrl)}
                       />
+                      <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 via-black/35 to-transparent px-4 pt-14 pb-4">
+                        <h2 className="text-base font-medium text-white">
+                          {item.name}
+                        </h2>
+                      </div>
                     </div>
-                    <h2 className="px-2 pt-3 text-base font-medium">
-                      {item.name}
-                    </h2>
                   </div>
-                  <div className="flex items-center justify-between gap-3 px-2 pt-1 pb-1">
+                  <div className="flex items-center justify-between gap-3 px-1 pt-2">
                     <span className="pointer-events-none relative z-[1] text-xs text-muted-foreground">
                       {item.updated}
                     </span>
