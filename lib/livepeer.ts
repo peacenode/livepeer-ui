@@ -89,6 +89,82 @@ export async function getOrchestrators(): Promise<Orchestrator[]> {
   }
 }
 
+export type AiGateway = {
+  address: string
+  name: string
+  depositEth: number
+  reserveEth: number
+}
+
+export async function getAiGateways(): Promise<AiGateway[]> {
+  try {
+    const res = await fetch(`${REGISTRY_URL}/gateways`, {
+      next: { revalidate: 600 },
+    })
+    if (!res.ok) return []
+    const raw: {
+      data: {
+        address: string
+        display_name?: string | null
+        kind?: string
+        latest_deposit?: string
+        latest_reserve?: string
+      }[]
+    } = await res.json()
+    return (raw.data ?? [])
+      .filter((gateway) => gateway.kind === "ai")
+      .map((gateway) => ({
+        address: gateway.address,
+        name: gateway.display_name || shortAddress(gateway.address),
+        depositEth: Number(gateway.latest_deposit ?? 0),
+        reserveEth: Number(gateway.latest_reserve ?? 0),
+      }))
+      .sort((a, b) => b.depositEth - a.depositEth)
+  } catch {
+    return []
+  }
+}
+
+export type NetworkContainer = {
+  orchestrator: string
+  pipeline: string
+  modelId: string
+  pricePerUnit: string
+  warm: boolean
+}
+
+// Container advertisements come from a gateway's getNetworkCapabilities
+// feed, which no public gateway currently exposes — set
+// LIVEPEER_GATEWAY_URL to a reachable AI gateway to populate it.
+export async function getNetworkContainers(): Promise<NetworkContainer[]> {
+  const gateway = process.env.LIVEPEER_GATEWAY_URL
+  if (!gateway) return []
+  try {
+    const res = await fetch(
+      `${gateway.replace(/\/$/, "")}/getNetworkCapabilities`,
+      { next: { revalidate: 600 } }
+    )
+    if (!res.ok) return []
+    const raw = await res.json()
+    const containers: NetworkContainer[] = []
+    for (const orch of raw.orchestrators ?? []) {
+      const name = orch.address ?? orch.orchestrator ?? "unknown"
+      for (const cap of orch.capabilities_prices ?? []) {
+        containers.push({
+          orchestrator: String(name),
+          pipeline: String(cap.pipeline ?? cap.capability ?? ""),
+          modelId: String(cap.model_id ?? ""),
+          pricePerUnit: String(cap.price_per_unit ?? ""),
+          warm: Boolean(cap.warm),
+        })
+      }
+    }
+    return containers
+  } catch {
+    return []
+  }
+}
+
 const DOCKER_HUB_URL = "https://hub.docker.com/v2/repositories/livepeer/ai-runner"
 
 export type ContainerImage = {
