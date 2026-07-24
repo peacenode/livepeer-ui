@@ -106,7 +106,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
             {playbook.title}
           </h1>
           {intro && (
-            <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">
+            <p className="mt-6 max-w-3xl text-sm leading-7 text-muted-foreground">
               {intro}
             </p>
           )}
@@ -114,7 +114,12 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
             <div className="mt-6">
               <div className="flex flex-wrap gap-1.5">
                 {playbook.caps.map((cap) => (
-                  <Badge key={cap} variant="secondary">
+                  <Badge
+                    key={cap}
+                    variant="secondary"
+                    className="max-w-40 truncate"
+                    title={cap}
+                  >
                     {cap}
                   </Badge>
                 ))}
