@@ -4,6 +4,7 @@ import { type ChangeEvent, useState } from "react"
 import { CheckIcon, CopyIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -132,10 +133,14 @@ export function PlaybookBriefForm({
   const [values, setValues] = useState<Record<string, string>>({})
   const [copied, setCopied] = useState(false)
   const fields = brief?.fields ?? []
+  const trainBrandLoraField = fields.find(
+    (field) => field.name === "train_brand_lora"
+  )
   const aspectFields = fields.filter((field) =>
     field.name.toLowerCase().includes("aspect")
   )
   const orderedFields = fields.flatMap((field) => {
+    if (field.name === "train_brand_lora") return []
     if (field.name.toLowerCase().includes("aspect")) return []
     if (field.name.toLowerCase() === "aesthetic") {
       return [field, ...aspectFields]
@@ -266,15 +271,33 @@ export function PlaybookBriefForm({
         </p>
       )}
 
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col gap-3">
         <p className="text-xs leading-relaxed text-muted-foreground">
           Nothing is submitted. The completed playbook is copied locally.
         </p>
+        {trainBrandLoraField && (
+          <div className="flex items-center gap-2 py-1">
+            <Checkbox
+              id="brief-train_brand_lora"
+              checked={
+                (values[trainBrandLoraField.name] ??
+                  trainBrandLoraField.defaultValue) === "true"
+              }
+              onCheckedChange={(checked) =>
+                setValues((current) => ({
+                  ...current,
+                  [trainBrandLoraField.name]: String(checked),
+                }))
+              }
+            />
+            <Label htmlFor="brief-train_brand_lora">Train brand LoRA</Label>
+          </div>
+        )}
         <Button
           type="button"
           size="lg"
           onClick={copyPlaybook}
-          className="w-full sm:w-auto"
+          className="w-full"
         >
           {copied ? <CheckIcon /> : <CopyIcon />}
           {copied ? "Copied — paste into your agent" : "Copy playbook"}
