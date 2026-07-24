@@ -260,10 +260,10 @@ export function PlaybookBriefForm({
             const compositionClass =
               hasBrandCompositionLayout &&
               {
-                brand_name: "sm:col-start-1 sm:row-start-1",
-                one_liner: "sm:col-start-1 sm:row-start-2",
-                shots: "sm:col-start-2 sm:row-start-1",
-                aesthetic: "sm:col-start-2 sm:row-start-2",
+                brand_name: "order-1 sm:col-start-1 sm:row-start-1",
+                one_liner: "order-2 sm:col-start-1 sm:row-start-2",
+                shots: "order-4 sm:col-start-2 sm:row-start-1",
+                aesthetic: "order-5 sm:col-start-2 sm:row-start-2",
               }[field.name]
             const aspectOptions = Array.from(
               new Set(
@@ -298,7 +298,7 @@ export function PlaybookBriefForm({
                   compositionClass,
                   hasBrandCompositionLayout &&
                     isAspectRatio &&
-                    "sm:col-start-2 sm:row-start-3"
+                    "order-6 sm:col-start-2 sm:row-start-3"
                 )}
               >
                 <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
@@ -336,6 +336,26 @@ export function PlaybookBriefForm({
               </div>
             )
           })}
+          {hasBrandCompositionLayout && trainBrandLoraField && (
+            <div className="order-3 flex items-start gap-2 sm:col-start-1 sm:row-start-3">
+              <Checkbox
+                id="brief-train_brand_lora"
+                checked={
+                  (values[trainBrandLoraField.name] ??
+                    trainBrandLoraField.defaultValue) === "true"
+                }
+                onCheckedChange={(checked) =>
+                  setValues((current) => ({
+                    ...current,
+                    [trainBrandLoraField.name]: String(checked),
+                  }))
+                }
+              />
+              <Label htmlFor="brief-train_brand_lora">
+                {labelFor(trainBrandLoraField.name)}
+              </Label>
+            </div>
+          )}
         </div>
       ) : (
         <p className="mt-6 text-sm text-muted-foreground">
@@ -344,9 +364,10 @@ export function PlaybookBriefForm({
       )}
 
       <div className="mt-8 flex flex-col gap-3">
-        {(booleanFields.length > 0 || trainBrandLoraField) && (
+        {(booleanFields.length > 0 ||
+          (trainBrandLoraField && !hasBrandCompositionLayout)) && (
           <div className="grid gap-4 pt-1 sm:grid-cols-2">
-            {trainBrandLoraField && (
+            {trainBrandLoraField && !hasBrandCompositionLayout && (
               <div className="flex items-start gap-2">
                 <Checkbox
                   id="brief-train_brand_lora"
