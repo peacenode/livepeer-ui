@@ -245,15 +245,9 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
 
   return (
     <main>
-      <div className="mx-auto max-w-6xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
+      <div className="mx-auto max-w-5xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink render={<Link href="/mockups/playbooks" />}>
-                Home
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink
                 render={<Link href="/mockups/playbooks/library" />}
