@@ -10,7 +10,6 @@ import {
   UploadIcon,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
@@ -21,7 +20,6 @@ type ImageBatch = {
   id: number
   name: string
   count: number
-  project: string
   uploaded: string
 }
 
@@ -30,28 +28,24 @@ const initialBatches: ImageBatch[] = [
     id: 4,
     name: "Orbit launch film",
     count: 30,
-    project: "Orbit",
     uploaded: "Today, 2:14 PM",
   },
   {
     id: 3,
     name: "Product reveal v2",
     count: 18,
-    project: "Orbit",
     uploaded: "Today, 9:42 AM",
   },
   {
     id: 2,
     name: "Homepage loops",
     count: 12,
-    project: "Soft launch",
     uploaded: "Yesterday",
   },
   {
     id: 1,
     name: "Opening sequence",
     count: 8,
-    project: "Orbit",
     uploaded: "Jul 21",
   },
 ]
@@ -74,7 +68,6 @@ export function StoryboardsWorkspace() {
         id: (current[0]?.id ?? 0) + 1,
         name: `Upload ${current.length + 1}`,
         count: files.length,
-        project: "Unsorted",
         uploaded: "Just now",
       },
       ...current,
@@ -144,7 +137,6 @@ export function StoryboardsWorkspace() {
                       </h2>
                       <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                     </button>
-                    <Badge variant="secondary">{batch.project}</Badge>
                     <span className="text-xs text-muted-foreground">
                       {batch.count} images · {batch.uploaded}
                     </span>
