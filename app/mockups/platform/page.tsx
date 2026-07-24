@@ -87,19 +87,21 @@ export default function MockupHomePage() {
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric" className="aspect-square">
-            <CardHeader>
+            <CardHeader className="flex-1 justify-between">
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
                 <span className="shrink-0 text-muted-foreground tabular-nums">
                   {stat.period}
                 </span>
               </CardDescription>
-              <CardTitle className="mt-2 text-3xl leading-none font-medium tabular-nums">
-                {stat.value}
-              </CardTitle>
-              <p className="-mt-2 text-sm text-muted-foreground tabular-nums">
-                {stat.context}
-              </p>
+              <div className="flex flex-col gap-1.5">
+                <CardTitle className="text-3xl leading-none font-medium tabular-nums">
+                  {stat.value}
+                </CardTitle>
+                <p className="text-sm text-muted-foreground tabular-nums">
+                  {stat.context}
+                </p>
+              </div>
             </CardHeader>
           </Card>
         ))}
