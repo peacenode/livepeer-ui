@@ -28,19 +28,19 @@ export function DocsNav({
       ],
     },
     {
-      title: "Components",
-      items: components.map((component) => ({
-        title: component.title,
-        href: `/docs/components/${component.name}`,
-      })),
-    },
-    {
       title: "Mockups",
       external: true,
       items: [
         { title: "Platform", href: "/mockups/platform" },
         { title: "Agent", href: "/mockups/agent" },
       ],
+    },
+    {
+      title: "Components",
+      items: components.map((component) => ({
+        title: component.title,
+        href: `/docs/components/${component.name}`,
+      })),
     },
   ]
 
