@@ -16,9 +16,9 @@ export default function Page() {
               <LivepeerLockup className="h-8 w-auto sm:h-10" aria-label="Livepeer UI" />
             </h1>
             <p className="text-base text-muted-foreground text-balance sm:text-lg">
-              A shadcn component registry built on the vega style. Neutral
-              palette, zero radius, Favorit. {components.length} components,
-              installable with the shadcn CLI.
+              A shadcn component registry built on the luma style. Neutral
+              palette, Favorit. {components.length} components, installable
+              with the shadcn CLI.
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
               <Button render={<Link href="/docs" />}>Get Started</Button>

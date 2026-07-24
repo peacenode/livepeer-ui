@@ -21,8 +21,8 @@ export default function DocsPage() {
       <h1 className="text-3xl font-semibold tracking-tight">Introduction</h1>
       <p className="mt-2 text-muted-foreground text-balance">
         Livepeer UI is a shadcn component registry. Every component is built on
-        the vega style with the neutral palette, zero radius, and the Favorit
-        typefaces — the preset this registry ships as its theme.
+        the luma style with the neutral palette and the Favorit typefaces — the
+        preset this registry ships as its theme.
       </p>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">
@@ -60,9 +60,9 @@ export default function DocsPage() {
       <p className="mt-2 text-sm text-muted-foreground">
         The registry is generated from the shadcn preset{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
-          bIkeynI
+          b1VlIttI
         </code>{" "}
-        — vega style, neutral base color, lucide icons, radius none, subtle
+        — luma style, neutral base color, lucide icons, default radius, subtle
         menu accent — typeset in Favorit Pro and Favorit Mono. The theme is
         available as a registry item and can be applied to an existing project:
       </p>

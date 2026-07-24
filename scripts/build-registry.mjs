@@ -53,7 +53,7 @@ const items = [
     type: "registry:theme",
     title: "Livepeer UI Theme",
     description:
-      "Neutral theme for the vega style. Radius none, Inter, subtle menu accent.",
+      "Neutral theme for the luma style. Default radius, subtle menu accent.",
     cssVars: {
       light: extractCssVars(css, ":root"),
       dark: extractCssVars(css, "\\.dark"),
