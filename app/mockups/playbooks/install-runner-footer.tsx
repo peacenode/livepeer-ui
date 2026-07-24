@@ -1,10 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { CheckIcon, CopyIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 
 const command = "npm install -g @livepeer/runner"
 
@@ -31,22 +28,25 @@ export function InstallRunnerFooter({
       }}
     >
       <div className="absolute inset-0 -z-10 bg-black/55" aria-hidden="true" />
-      <div className="mx-auto grid min-h-96 max-w-6xl gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-[1fr_auto] md:items-end">
-        <div>
+      <div className="mx-auto flex min-h-96 max-w-6xl items-end px-4 py-12 sm:px-6 sm:py-16">
+        <div className="w-full max-w-xl">
           <h2 className="[font-family:'Serpentine_Runner',sans-serif] text-4xl font-medium tracking-[-0.06em] text-balance uppercase sm:text-5xl">
             {title}
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
             {description}
           </p>
-          <div className="mt-6 inline-flex max-w-full items-center gap-4 rounded-2xl bg-white px-4 py-3 text-black">
-            <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap text-black/80">
-              {command}
+          <div className="mt-7 flex w-full max-w-md items-center justify-between gap-4 rounded-2xl bg-white/95 px-5 py-4 text-black backdrop-blur-sm">
+            <code className="flex min-w-0 items-center gap-2 overflow-x-auto font-mono text-xs whitespace-nowrap">
+              <span className="text-black/40" aria-hidden="true">
+                $
+              </span>
+              <span className="text-black/80">{command}</span>
             </code>
             <button
               type="button"
               onClick={copyCommand}
-              className="flex size-8 shrink-0 items-center justify-center rounded-full text-black/70 transition-colors hover:bg-black/10 hover:text-black"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-black text-white transition-colors hover:bg-black/80"
               aria-label={copied ? "Install command copied" : "Copy command"}
             >
               {copied ? (
@@ -57,14 +57,6 @@ export function InstallRunnerFooter({
             </button>
           </div>
         </div>
-        <Button
-          nativeButton={false}
-          variant="outline"
-          className="bg-white text-black hover:bg-white/90 hover:text-black"
-          render={<Link href="/mockups/playbooks/install" />}
-        >
-          Installation guide
-        </Button>
       </div>
     </footer>
   )
