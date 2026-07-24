@@ -22,9 +22,10 @@ export function PlaybooksWorkspace() {
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-4xl flex-col items-start">
             <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
-              Your GPUs should make you money.{" "}
+              Render faster for less.{" "}
               <span className="text-foreground/45">
-                Connect them to Livepeer and earn by powering AI inference.
+                Runner connects your agent to Livepeer compute—from your first
+                prompt to production.
               </span>
             </h1>
             <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
