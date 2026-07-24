@@ -256,17 +256,19 @@ export function ProjectsWorkspace() {
               {projects.map((item) => (
                 <article
                   key={item.id}
-                  className="overflow-hidden rounded-2xl border border-border bg-background p-2"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-background p-2"
                 >
                   <button
                     type="button"
-                    className="group block w-full text-left"
+                    aria-label={`Open ${item.name}`}
+                    className="absolute inset-0 z-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     onClick={() => {
                       setSelectedProjectId(item.id)
                       setActiveTab("storyboards")
                       setShareCopied(false)
                     }}
-                  >
+                  />
+                  <div className="pointer-events-none relative z-[1]">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                       <Image
                         src={sampleImage}
@@ -281,54 +283,56 @@ export function ProjectsWorkspace() {
                     <h2 className="px-2 pt-3 text-base font-medium">
                       {item.name}
                     </h2>
-                  </button>
+                  </div>
                   <div className="flex items-center justify-between gap-3 px-2 pt-1 pb-1">
-                    <span className="text-xs text-muted-foreground">
+                    <span className="pointer-events-none relative z-[1] text-xs text-muted-foreground">
                       {item.updated}
                     </span>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger
-                        render={
-                          <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            aria-label={`Project options for ${item.name}`}
-                          />
-                        }
-                      >
-                        <EllipsisIcon />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuGroup>
-                          <DropdownMenuLabel>
-                            Choose thumbnail
-                          </DropdownMenuLabel>
-                          {[
-                            ["Latest render", ""],
-                            ["Alternate render", "hue-rotate-30"],
-                            ["High contrast", "contrast-125"],
-                          ].map(([label, imageClass]) => (
-                            <DropdownMenuItem
-                              key={label}
-                              onClick={() =>
-                                setProjects((current) =>
-                                  current.map((projectItem) =>
-                                    projectItem.id === item.id
-                                      ? {
-                                          ...projectItem,
-                                          thumbnailClass: imageClass,
-                                        }
-                                      : projectItem
+                    <div className="relative z-10">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger
+                          render={
+                            <Button
+                              variant="ghost"
+                              size="icon-sm"
+                              aria-label={`Project options for ${item.name}`}
+                            />
+                          }
+                        >
+                          <EllipsisIcon />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuGroup>
+                            <DropdownMenuLabel>
+                              Choose thumbnail
+                            </DropdownMenuLabel>
+                            {[
+                              ["Latest render", ""],
+                              ["Alternate render", "hue-rotate-30"],
+                              ["High contrast", "contrast-125"],
+                            ].map(([label, imageClass]) => (
+                              <DropdownMenuItem
+                                key={label}
+                                onClick={() =>
+                                  setProjects((current) =>
+                                    current.map((projectItem) =>
+                                      projectItem.id === item.id
+                                        ? {
+                                            ...projectItem,
+                                            thumbnailClass: imageClass,
+                                          }
+                                        : projectItem
+                                    )
                                   )
-                                )
-                              }
-                            >
-                              {label}
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuGroup>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                                }
+                              >
+                                {label}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuGroup>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
                   </div>
                 </article>
               ))}
