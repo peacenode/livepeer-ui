@@ -82,12 +82,10 @@ export default function MockupUsagePage() {
         </TabsList>
         <TabsContent value="overview">
           <div className="flex flex-col gap-8">
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-sm text-muted-foreground">
-                    Project spend
-                  </span>
+                  <span className="text-xs text-foreground">Project spend</span>
                   <CardTitle className="text-2xl font-medium tabular-nums">
                     $1,898.25
                   </CardTitle>
@@ -95,7 +93,7 @@ export default function MockupUsagePage() {
               </Card>
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-xs text-foreground">
                     Inference requests
                   </span>
                   <CardTitle className="text-2xl font-medium tabular-nums">
@@ -105,9 +103,7 @@ export default function MockupUsagePage() {
               </Card>
               <Card variant="metric">
                 <CardHeader>
-                  <span className="text-sm text-muted-foreground">
-                    Compute time
-                  </span>
+                  <span className="text-xs text-foreground">Compute time</span>
                   <CardTitle className="text-2xl font-medium tabular-nums">
                     2,431 GPU min
                   </CardTitle>

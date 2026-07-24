@@ -112,7 +112,7 @@ export default async function ContainerDetailPage({
           )}
         </p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-3">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>

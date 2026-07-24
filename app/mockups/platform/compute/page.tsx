@@ -29,28 +29,37 @@ export default async function MockupComputePage() {
     {
       label: "Active orchestrators",
       value: network ? String(network.activeOrchestrators) : "—",
+      period: "24h",
     },
     {
-      label: "Total stake",
+      label: "Total LPT staked",
       value: network ? `${formatCompact(network.totalStakeLpt)} LPT` : "—",
+      period: "7d",
     },
     {
-      label: "Payouts (24h)",
+      label: "Payouts",
       value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
+      period: "24h",
     },
     {
       label: "Gateways",
       value: network ? String(network.gatewaysKnown) : "—",
+      period: "24h",
     },
   ]
 
   return (
     <PlatformPage title="Compute" action={<Button>Add capacity</Button>}>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>
-              <CardDescription>{stat.label}</CardDescription>
+              <CardDescription className="flex w-full items-baseline gap-1.5">
+                <span>{stat.label}</span>
+                <span className="shrink-0 text-muted-foreground tabular-nums">
+                  {stat.period}
+                </span>
+              </CardDescription>
               <CardTitle className="text-2xl font-medium tabular-nums">
                 {stat.value}
               </CardTitle>
