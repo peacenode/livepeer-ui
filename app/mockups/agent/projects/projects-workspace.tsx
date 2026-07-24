@@ -998,12 +998,10 @@ function ProjectImageCollections({
         className="flex min-h-24 cursor-pointer items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted"
       >
         <div>
-          <UploadIcon className="mx-auto size-5 text-muted-foreground" />
-          <p className="mt-2 text-sm font-medium">
-            Drop images or click to upload
-          </p>
+          <PlusIcon className="mx-auto size-5 text-muted-foreground" />
+          <p className="mt-2 text-sm font-medium">New {singular}</p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Create a new {singular}
+            Drop images or click to upload
           </p>
         </div>
         <input
