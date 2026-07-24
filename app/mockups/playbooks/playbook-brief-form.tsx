@@ -34,6 +34,14 @@ const abbreviations = new Set([
   "us",
 ])
 
+const fieldsWithoutDescriptions = new Set([
+  "brand_name",
+  "one_liner",
+  "aesthetic",
+  "aspect",
+  "aspect_ratio",
+])
+
 function labelFor(name: string) {
   return name
     .split("_")
@@ -90,7 +98,15 @@ function AspectRatioSelect({
                 aria-hidden="true"
               />
             </span>
-            <span className="text-xs font-medium tabular-nums">{option}</span>
+            <span
+              className={
+                selected
+                  ? "text-xs font-medium tabular-nums"
+                  : "text-xs font-medium text-muted-foreground tabular-nums"
+              }
+            >
+              {option}
+            </span>
           </button>
         )
       })}
@@ -203,7 +219,7 @@ export function PlaybookBriefForm({
                 <Label id={labelId} htmlFor={isAspectRatio ? undefined : id}>
                   {labelFor(field.name)}
                 </Label>
-                {field.hint && (
+                {field.hint && !fieldsWithoutDescriptions.has(field.name) && (
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     {field.hint}
                   </p>
