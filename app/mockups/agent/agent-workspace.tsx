@@ -431,11 +431,11 @@ export function AgentWorkspace() {
               Filter
             </Button>
           </div>
-          <div className="space-y-6">
+          <div>
             {generations.map((generation) => (
               <article
                 key={generation.id}
-                className="grid gap-0 overflow-hidden rounded-2xl bg-muted/50 p-2 lg:grid-cols-[minmax(0,1.7fr)_minmax(280px,0.8fr)]"
+                className="grid gap-4 border-b py-4 first:pt-0 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
               >
                 <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
                   <Image
@@ -460,7 +460,7 @@ export function AgentWorkspace() {
                     {generation.duration}
                   </span>
                 </div>
-                <div className="flex min-w-0 flex-col p-3 sm:p-4 lg:p-5">
+                <div className="flex min-w-0 flex-col py-1">
                   <div>
                     <div className="flex items-center gap-2">
                       <Badge variant="secondary">{generation.project}</Badge>
