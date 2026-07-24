@@ -64,14 +64,13 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 data-active={active}
                 className={cn(
-                  "group/item flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:text-foreground group-hover/sidebar:data-[active=true]:bg-muted group-hover/sidebar:data-[active=true]:font-medium group-hover/sidebar:data-[active=true]:text-foreground"
+                  "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground group-hover/sidebar:data-[active=true]:bg-muted group-hover/sidebar:data-[active=true]:font-medium group-hover/sidebar:data-[active=true]:text-foreground"
                 )}
               >
                 <span
                   className={cn(
                     "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground transition-colors",
-                    active && "bg-muted group-hover/sidebar:bg-transparent",
-                    !active && "group-hover/item:bg-muted"
+                    active && "bg-muted group-hover/sidebar:bg-transparent"
                   )}
                 >
                   <item.icon
@@ -91,9 +90,9 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
 
         <button
           type="button"
-          className="group/item mx-2 flex h-10 w-40 shrink-0 items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="mx-2 flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground transition-colors group-hover/item:bg-muted">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground">
             <SettingsIcon className="size-6" />
           </span>
           <span className="truncate opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100">
