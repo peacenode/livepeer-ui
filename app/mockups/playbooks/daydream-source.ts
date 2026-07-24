@@ -2,6 +2,11 @@ import "server-only"
 
 const origin = "https://storyboard.daydream.monster"
 
+const titleOverrides: Record<string, string> = {
+  "train-your-brand-aesthetic":
+    "Krea 2 Open-Source: Train Your Brand Aesthetic",
+}
+
 export type SourcePlaybook = {
   slug: string
   title: string
@@ -67,7 +72,9 @@ export async function getSourcePlaybooks(): Promise<SourcePlaybook[]> {
       matches[index + 1]?.index ?? html.indexOf("</div>\n\n  </div>", start)
     const block = html.slice(start, end > start ? end : undefined)
     const image = block.match(/<img src="([^"]+)"/)?.[1] ?? null
-    const title = text(block.match(/<h2>([\s\S]*?)<\/h2>/)?.[1] ?? match[1])
+    const title =
+      titleOverrides[match[1]] ??
+      text(block.match(/<h2>([\s\S]*?)<\/h2>/)?.[1] ?? match[1])
     const summary = text(
       block.match(/<p class="tldr">([\s\S]*?)<\/p>/)?.[1] ?? ""
     )
@@ -165,7 +172,10 @@ export async function getPlaybookDocument(
 
   return {
     slug,
-    title: parseScalar(fields.get("title")) ?? heading.replace(/\s+⭐.*$/, ""),
+    title:
+      titleOverrides[slug] ??
+      parseScalar(fields.get("title")) ??
+      heading.replace(/\s+⭐.*$/, ""),
     tier: parseScalar(fields.get("tier")),
     format: parseScalar(fields.get("format")),
     theme: parseScalar(fields.get("theme")),
