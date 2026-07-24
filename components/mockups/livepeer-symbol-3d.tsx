@@ -66,12 +66,12 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
     <group
       ref={group}
       position={[
-        isWide ? viewport.width * 0.36 : viewport.width * 0.1,
-        isWide ? 0 : -0.08,
+        isWide ? viewport.width * 0.36 : viewport.width * 0.2,
+        isWide ? 0 : -0.16,
         0,
       ]}
       rotation={[-0.22, 0.32, 0.04]}
-      scale={isWide ? 1.55 : 0.72}
+      scale={isWide ? 1.55 : 1.15}
     >
       {blocks.map((position) => (
         <mesh geometry={geometry} key={position.join("-")} position={position}>
