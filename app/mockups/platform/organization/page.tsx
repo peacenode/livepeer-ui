@@ -158,7 +158,7 @@ export default function MockupOrganizationPage() {
               <Card className="gap-2">
                 <CardHeader>
                   <CardDescription>Current period</CardDescription>
-                  <CardTitle className="font-mono text-2xl font-medium">
+                  <CardTitle className="text-2xl font-medium tabular-nums">
                     $2,148.90
                   </CardTitle>
                 </CardHeader>
@@ -171,7 +171,7 @@ export default function MockupOrganizationPage() {
               <Card className="gap-2">
                 <CardHeader>
                   <CardDescription>Credit balance</CardDescription>
-                  <CardTitle className="font-mono text-2xl font-medium">
+                  <CardTitle className="text-2xl font-medium tabular-nums">
                     $500.00
                   </CardTitle>
                   <CardAction>
@@ -244,7 +244,7 @@ export default function MockupOrganizationPage() {
                         {invoice.id}
                       </TableCell>
                       <TableCell>{invoice.period}</TableCell>
-                      <TableCell className="text-right font-mono text-xs">
+                      <TableCell className="text-right text-xs tabular-nums">
                         {invoice.amount}
                       </TableCell>
                       <TableCell>

@@ -12,11 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useProgressiveList } from "@/hooks/use-progressive-list"
-import {
-  formatCompact,
-  shortAddress,
-  type Orchestrator,
-} from "@/lib/livepeer"
+import { formatCompact, shortAddress, type Orchestrator } from "@/lib/livepeer"
 
 type OrchestratorTableProps = {
   orchestrators: Orchestrator[]
@@ -66,16 +62,14 @@ export function OrchestratorTable({
               <TableCell className="font-mono text-xs text-muted-foreground">
                 {shortAddress(orchestrator.address)}
               </TableCell>
-              <TableCell className="text-right font-mono text-xs">
+              <TableCell className="text-right text-xs tabular-nums">
                 {formatCompact(orchestrator.stakeLpt)} LPT
               </TableCell>
-              <TableCell className="text-right font-mono text-xs">
+              <TableCell className="text-right text-xs tabular-nums">
                 {orchestrator.feeCutPercent}%
               </TableCell>
               <TableCell>
-                <Badge
-                  variant={orchestrator.active ? "secondary" : "outline"}
-                >
+                <Badge variant={orchestrator.active ? "secondary" : "outline"}>
                   {orchestrator.active ? "Active" : "Inactive"}
                 </Badge>
               </TableCell>
@@ -88,7 +82,7 @@ export function OrchestratorTable({
                       value={orchestrator.successRate * 100}
                       className="flex-1"
                     />
-                    <span className="w-10 text-right font-mono text-xs text-muted-foreground">
+                    <span className="w-10 text-right text-xs text-muted-foreground tabular-nums">
                       {Math.round(orchestrator.successRate * 100)}%
                     </span>
                   </div>

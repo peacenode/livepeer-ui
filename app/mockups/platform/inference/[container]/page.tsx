@@ -117,7 +117,7 @@ export default async function ContainerDetailPage({
           <Card key={stat.label} variant="metric">
             <CardHeader>
               <CardDescription>{stat.label}</CardDescription>
-              <CardTitle className="font-mono text-2xl font-medium">
+              <CardTitle className="text-2xl font-medium tabular-nums">
                 {stat.value}
               </CardTitle>
             </CardHeader>
@@ -141,10 +141,10 @@ export default async function ContainerDetailPage({
                   <TableCell className="font-mono text-xs">
                     livepeer/{container.slug}:{image.tag}
                   </TableCell>
-                  <TableCell className="text-right font-mono text-xs">
+                  <TableCell className="text-right text-xs tabular-nums">
                     {image.sizeGb.toFixed(1)} GB
                   </TableCell>
-                  <TableCell className="text-right font-mono text-xs text-muted-foreground">
+                  <TableCell className="text-right text-xs text-muted-foreground tabular-nums">
                     {image.updatedAt.slice(0, 10)}
                   </TableCell>
                 </TableRow>

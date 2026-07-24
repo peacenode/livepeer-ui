@@ -45,7 +45,7 @@ export default async function MockupInferencePage() {
                 <CardContent className="mt-auto flex items-center justify-between gap-2 text-xs text-muted-foreground">
                   <span>{container.creator}</span>
                   {hub && (
-                    <span className="font-mono">
+                    <span className="tabular-nums">
                       {formatCompact(hub.pullCount)} pulls
                     </span>
                   )}

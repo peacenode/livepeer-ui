@@ -88,7 +88,7 @@ export default function MockupUsagePage() {
                   <span className="text-sm text-muted-foreground">
                     Project spend
                   </span>
-                  <CardTitle className="font-mono text-2xl font-medium">
+                  <CardTitle className="text-2xl font-medium tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
@@ -98,7 +98,7 @@ export default function MockupUsagePage() {
                   <span className="text-sm text-muted-foreground">
                     Inference requests
                   </span>
-                  <CardTitle className="font-mono text-2xl font-medium">
+                  <CardTitle className="text-2xl font-medium tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
@@ -108,7 +108,7 @@ export default function MockupUsagePage() {
                   <span className="text-sm text-muted-foreground">
                     Compute time
                   </span>
-                  <CardTitle className="font-mono text-2xl font-medium">
+                  <CardTitle className="text-2xl font-medium tabular-nums">
                     2,431 GPU min
                   </CardTitle>
                 </CardHeader>
@@ -117,7 +117,7 @@ export default function MockupUsagePage() {
             <div className="flex max-w-xl flex-col gap-3">
               <div className="flex items-center justify-between gap-4 text-sm">
                 <span className="font-medium">Monthly project budget</span>
-                <span className="font-mono text-muted-foreground">
+                <span className="text-muted-foreground tabular-nums">
                   $1,898.25 / $3,000
                 </span>
               </div>
@@ -141,13 +141,13 @@ export default function MockupUsagePage() {
                   {dailyUsage.map((day) => (
                     <TableRow key={day.date}>
                       <TableCell className="font-medium">{day.date}</TableCell>
-                      <TableCell className="font-mono text-xs">
+                      <TableCell className="text-xs tabular-nums">
                         {day.inference}
                       </TableCell>
-                      <TableCell className="font-mono text-xs">
+                      <TableCell className="text-xs tabular-nums">
                         {day.compute}
                       </TableCell>
-                      <TableCell className="text-right font-mono text-xs">
+                      <TableCell className="text-right text-xs tabular-nums">
                         {day.cost}
                       </TableCell>
                     </TableRow>
@@ -174,10 +174,10 @@ export default function MockupUsagePage() {
                     {resource.resource}
                   </TableCell>
                   <TableCell>{resource.type}</TableCell>
-                  <TableCell className="font-mono text-xs">
+                  <TableCell className="text-xs tabular-nums">
                     {resource.usage}
                   </TableCell>
-                  <TableCell className="text-right font-mono text-xs">
+                  <TableCell className="text-right text-xs tabular-nums">
                     {resource.cost}
                   </TableCell>
                 </TableRow>

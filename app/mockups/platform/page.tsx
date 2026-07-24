@@ -77,7 +77,7 @@ export default function MockupHomePage() {
           <Card key={stat.label} variant="metric">
             <CardHeader>
               <CardDescription>{stat.label}</CardDescription>
-              <CardTitle className="font-mono text-2xl font-medium">
+              <CardTitle className="text-2xl font-medium tabular-nums">
                 {stat.value}
               </CardTitle>
               <p className="text-xs text-muted-foreground">{stat.change}</p>
