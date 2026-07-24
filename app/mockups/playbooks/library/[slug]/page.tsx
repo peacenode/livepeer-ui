@@ -36,12 +36,15 @@ function ReliabilityStars({ value }: { value: string }) {
 
         return (
           <span key={index} className="relative size-3.5 text-muted-foreground">
-            <StarIcon className="size-3.5" strokeWidth={1} />
+            <StarIcon className="size-3.5" strokeWidth={12 / 7} />
             <span
               className="absolute inset-0 overflow-hidden text-foreground"
               style={{ width: `${fill}%` }}
             >
-              <StarIcon className="size-3.5 fill-current" strokeWidth={1} />
+              <StarIcon
+                className="size-3.5 fill-current"
+                strokeWidth={12 / 7}
+              />
             </span>
           </span>
         )
