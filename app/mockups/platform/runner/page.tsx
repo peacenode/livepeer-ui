@@ -1,11 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  CableIcon,
-  KeyRoundIcon,
-  TerminalIcon,
-} from "lucide-react"
+import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
@@ -20,64 +15,45 @@ const installCommand =
 export default function RunnerPage() {
   return (
     <PlatformPage title="Runner">
-      <div className="max-w-3xl">
-        <h2 className="text-2xl font-medium text-balance">
-          Run media workflows from anywhere.
-        </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Runner connects agents and applications to the workflows in this
-          project. Use the CLI directly, authorize the MCP from any agent, or
-          authenticate an application with an API key.
-        </p>
-      </div>
-
-      <div className="max-w-4xl border-y">
-        <section className="grid gap-5 border-b py-7 md:grid-cols-[180px_1fr]">
-          <div className="flex items-center gap-3">
-            <TerminalIcon className="size-5" aria-hidden="true" />
-            <h3 className="font-medium">CLI</h3>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">
-              Install Runner globally, then sign in to this project.
-            </p>
-            <pre className="mt-4 overflow-x-auto rounded-xl bg-foreground px-4 py-3 font-mono text-xs leading-relaxed text-background">
-              {installCommand}
-            </pre>
-          </div>
+      <div className="max-w-3xl border-y">
+        <section className="border-b py-8">
+          <h2 className="text-xl font-medium">Get started in Codex/Cowork</h2>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Install Runner, then use this project&rsquo;s workflows from your
+            agent.
+          </p>
+          <pre className="mt-5 overflow-x-auto rounded-xl bg-foreground px-4 py-3 font-mono text-xs leading-relaxed text-background">
+            {installCommand}
+          </pre>
         </section>
 
-        <section className="grid gap-5 border-b py-7 md:grid-cols-[180px_1fr]">
-          <div className="flex items-center gap-3">
-            <CableIcon className="size-5" aria-hidden="true" />
-            <h3 className="font-medium">MCP</h3>
-          </div>
-          <div>
-            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Add the Runner MCP to any compatible agent. OAuth connects the
-              agent to your Livepeer account without copying an API key.
-            </p>
-            <Button className="mt-4">Connect with OAuth</Button>
-          </div>
-        </section>
-
-        <section className="grid gap-5 py-7 md:grid-cols-[180px_1fr]">
-          <div className="flex items-center gap-3">
-            <KeyRoundIcon className="size-5" aria-hidden="true" />
-            <h3 className="font-medium">API</h3>
-          </div>
-          <div>
-            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Build Runner into a product or service with a project API key.
-            </p>
+        <section className="py-8">
+          <h2 className="text-xl font-medium">Build your own app</h2>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Create a project API key and use the Livepeer API to run workflows
+            from your application.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
             <Button
-              className="mt-4"
-              variant="outline"
               nativeButton={false}
               render={<Link href="/mockups/platform/api" />}
             >
               Create an API key
               <ArrowRightIcon />
+            </Button>
+            <Button
+              variant="outline"
+              nativeButton={false}
+              render={
+                <a
+                  href="https://docs.livepeer.org/v1/developers/quick-start"
+                  target="_blank"
+                  rel="noreferrer"
+                />
+              }
+            >
+              View docs
+              <ArrowUpRightIcon />
             </Button>
           </div>
         </section>
