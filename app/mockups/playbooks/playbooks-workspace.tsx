@@ -52,31 +52,36 @@ export function PlaybooksWorkspace() {
 
       <InstallRunnerFooter className="mt-0" />
 
-      <Link
-        href="/mockups/playbooks/library"
-        aria-label="Browse Playbooks"
-        className="group relative block min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]"
-      >
+      <section className="relative min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]">
         <Image
           src="/playbooks/20260724-1905/playbook-mockup.jpg"
           alt=""
           fill
-          className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.01]"
+          className="object-cover object-center"
           sizes="100vw"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-white/25 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/15 to-transparent"
           aria-hidden="true"
         />
-        <div className="relative z-10 flex items-center justify-between gap-6 p-6 sm:p-10">
+        <div className="relative z-10 flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-end sm:gap-8 sm:p-10">
           <h2 className="text-4xl font-normal tracking-tight sm:text-5xl">
             Playbooks
           </h2>
-          <span className="flex size-11 items-center justify-center rounded-full bg-black text-white transition-transform group-hover:translate-x-1">
-            <ArrowRightIcon className="size-5" aria-hidden="true" />
-          </span>
+          <p className="max-w-md text-sm leading-relaxed text-foreground/65 sm:pb-1">
+            Ready-to-run AI workflows for creating images, video, and audio
+            from your agent.
+          </p>
+          <Button
+            variant="outline"
+            nativeButton={false}
+            render={<Link href="/mockups/playbooks/library" />}
+            className="bg-background/75 backdrop-blur-sm sm:ml-2"
+          >
+            Browse Playbooks
+          </Button>
         </div>
-      </Link>
+      </section>
 
       <Link
         href="/mockups/playbooks/earn"
