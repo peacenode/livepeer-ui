@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRightIcon, CpuIcon } from "lucide-react"
 
+import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 
 export function PlaybooksWorkspace() {
@@ -16,6 +17,7 @@ export function PlaybooksWorkspace() {
           className="object-cover object-[68%_center] sm:object-center"
           sizes="100vw"
         />
+        <LivepeerCubeStream className="opacity-90" />
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-muted/10 sm:via-muted/75 sm:to-transparent"
           aria-hidden="true"

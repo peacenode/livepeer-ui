@@ -2,52 +2,86 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 import {
+  CatmullRomCurve3,
   Color,
   InstancedMesh,
-  MathUtils,
-  Matrix4,
   MeshPhysicalMaterial,
   Object3D,
   PMREMGenerator,
+  TubeGeometry,
+  Vector3,
 } from "three"
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js"
 
 import { cn } from "@/lib/utils"
 
-const cubeCount = 72
-const ingressPortion = 0.62
-const routes = [
-  {
-    start: [-0.8, -0.58, 0.62],
-    control: [-0.44, -0.3, 0.48],
-  },
-  {
-    start: [-0.82, -0.16, 0.28],
-    control: [-0.44, 0.12, 0.18],
-  },
-  {
-    start: [-0.62, 0.38, -0.04],
-    control: [-0.24, -0.12, -0.12],
-  },
-  {
-    start: [-0.2, -0.68, 0.78],
-    control: [-0.04, -0.36, 0.34],
-  },
-] as const
-const join = [0.14, -0.03, -0.28] as const
-const exitControl = [0.46, 0.08, -0.92] as const
-const exit = [0.8, 0.62, -1.72] as const
+const laneCount = 6
+const segmentsPerLane = 34
 
-function quadratic(a: number, b: number, c: number, t: number) {
-  const inverse = 1 - t
-  return inverse * inverse * a + 2 * inverse * t * b + t * t * c
+type Layer = "glass" | "graphite" | "prism"
+
+type StreamSeed = {
+  jitter: number
+  lane: number
+  layer: Layer
+  scale: number
+  slot: number
+  spin: number
 }
 
-function quadraticTangent(a: number, b: number, c: number, t: number) {
-  return 2 * (1 - t) * (b - a) + 2 * t * (c - b)
+function seededNoise(value: number) {
+  return Math.sin(value * 91.733) * 0.5 + 0.5
+}
+
+const seeds = Array.from(
+  { length: laneCount * segmentsPerLane },
+  (_, index): StreamSeed => {
+    const lane = index % laneCount
+    const slot = Math.floor(index / laneCount)
+    const materialIndex = (slot * 5 + lane * 3) % 10
+
+    return {
+      lane,
+      slot,
+      layer:
+        materialIndex < 5
+          ? "glass"
+          : materialIndex < 8
+            ? "graphite"
+            : "prism",
+      jitter: seededNoise(index + 4.2) - 0.5,
+      scale: 0.78 + seededNoise(index + 12.8) * 0.48,
+      spin: seededNoise(index + 31.4) * Math.PI,
+    }
+  }
+)
+
+const seedsByLayer: Record<Layer, StreamSeed[]> = {
+  glass: seeds.filter((seed) => seed.layer === "glass"),
+  graphite: seeds.filter((seed) => seed.layer === "graphite"),
+  prism: seeds.filter((seed) => seed.layer === "prism"),
+}
+
+function streamPosition(
+  lane: number,
+  progress: number,
+  width: number,
+  height: number
+) {
+  const lanePosition = (lane - (laneCount - 1) / 2) / ((laneCount - 1) / 2)
+  const spread = (0.035 + progress * 0.11) * lanePosition
+  const center = -0.03 + Math.sin(progress * 1.48) * 0.38
+
+  return {
+    x: (center + spread) * width,
+    y: (0.65 - progress * 1.3) * height,
+    z:
+      -0.68 +
+      Math.sin(progress * Math.PI) * 0.44 +
+      lanePosition * 0.16,
+  }
 }
 
 function StreamEnvironment() {
@@ -55,7 +89,7 @@ function StreamEnvironment() {
 
   useEffect(() => {
     const generator = new PMREMGenerator(gl)
-    const environment = generator.fromScene(new RoomEnvironment(), 0.04)
+    const environment = generator.fromScene(new RoomEnvironment(), 0.035)
 
     // Three.js scene configuration is intentionally imperative.
     // eslint-disable-next-line react-hooks/immutability
@@ -71,128 +105,208 @@ function StreamEnvironment() {
   return null
 }
 
-function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
-  const mesh = useRef<InstancedMesh>(null)
-  const { size, viewport } = useThree()
-  const dummy = useMemo(() => new Object3D(), [])
-  const matrix = useMemo(() => new Matrix4(), [])
-  const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.11, 0.11, 0.11, 3, 0.012),
-    []
-  )
+function FiberLanes() {
+  const { viewport } = useThree()
   const material = useMemo(
     () =>
       new MeshPhysicalMaterial({
-        anisotropy: 0.35,
-        clearcoat: 0.8,
-        clearcoatRoughness: 0.16,
-        color: new Color("#3f4348"),
-        envMapIntensity: 1.4,
-        metalness: 0.76,
-        roughness: 0.28,
+        color: new Color("#d8e6eb"),
+        clearcoat: 1,
+        clearcoatRoughness: 0.14,
+        envMapIntensity: 1.25,
+        opacity: 0.16,
+        roughness: 0.24,
+        thickness: 0.3,
+        transmission: 0.92,
+        transparent: true,
+        depthWrite: false,
       }),
     []
   )
-  const seeds = useMemo(
+  const geometries = useMemo(
     () =>
-      Array.from({ length: cubeCount }, (_, index) => ({
-        routeIndex: index % routes.length,
-      })),
+      Array.from({ length: laneCount }, (_, lane) => {
+        const points = Array.from({ length: 13 }, (__, index) => {
+          const progress = index / 12
+          const point = streamPosition(
+            lane,
+            progress,
+            viewport.width,
+            viewport.height
+          )
+
+          return new Vector3(point.x, point.y, point.z - 0.12)
+        })
+
+        return new TubeGeometry(
+          new CatmullRomCurve3(points),
+          72,
+          0.008,
+          6,
+          false
+        )
+      }),
+    [viewport.height, viewport.width]
+  )
+
+  useEffect(
+    () => () => {
+      geometries.forEach((geometry) => geometry.dispose())
+      material.dispose()
+    },
+    [geometries, material]
+  )
+
+  return geometries.map((geometry, index) => (
+    <mesh geometry={geometry} material={material} key={index} />
+  ))
+}
+
+function StreamInstances({ reduceMotion }: { reduceMotion: boolean }) {
+  const glass = useRef<InstancedMesh>(null)
+  const graphite = useRef<InstancedMesh>(null)
+  const prism = useRef<InstancedMesh>(null)
+  const { size, viewport } = useThree()
+  const dummy = useMemo(() => new Object3D(), [])
+  const geometry = useMemo(
+    () => new RoundedBoxGeometry(0.105, 0.105, 0.105, 3, 0.012),
+    []
+  )
+  const materials = useMemo(
+    () => ({
+      glass: new MeshPhysicalMaterial({
+        color: new Color("#dcecf2"),
+        clearcoat: 1,
+        clearcoatRoughness: 0.08,
+        envMapIntensity: 1.5,
+        opacity: 0.68,
+        roughness: 0.1,
+        thickness: 0.52,
+        transmission: 0.88,
+        transparent: true,
+        depthWrite: false,
+      }),
+      graphite: new MeshPhysicalMaterial({
+        color: new Color("#555b62"),
+        clearcoat: 0.95,
+        clearcoatRoughness: 0.12,
+        envMapIntensity: 1.65,
+        metalness: 0.78,
+        roughness: 0.2,
+      }),
+      prism: new MeshPhysicalMaterial({
+        color: new Color("#cbd7ff"),
+        clearcoat: 1,
+        clearcoatRoughness: 0.06,
+        envMapIntensity: 1.85,
+        iridescence: 0.9,
+        iridescenceIOR: 1.55,
+        iridescenceThicknessRange: [160, 460],
+        metalness: 0.08,
+        opacity: 0.82,
+        roughness: 0.1,
+        thickness: 0.38,
+        transmission: 0.52,
+        transparent: true,
+        depthWrite: false,
+      }),
+    }),
     []
   )
 
   useEffect(
     () => () => {
       geometry.dispose()
-      material.dispose()
+      Object.values(materials).forEach((material) => material.dispose())
     },
-    [geometry, material]
+    [geometry, materials]
   )
 
   useFrame(({ clock, pointer }) => {
-    if (!mesh.current) return
+    const elapsed = reduceMotion ? 0 : clock.getElapsedTime()
+    const travel = reduceMotion ? 0.16 : elapsed * 0.018
+    const mobileScale = size.width < 640 ? 0.66 : 1
+    const activeStride = size.width < 640 ? 2 : 1
 
-    const elapsed = reduceMotion ? 3.4 : clock.getElapsedTime()
-    const travel = reduceMotion
-      ? 0
-      : elapsed * 0.052 + Math.sin(elapsed * 0.42) * 0.012
-    const width = viewport.width
-    const height = viewport.height
-    const activeCount =
-      size.width < 640 ? 36 : size.width < 1024 ? 52 : cubeCount
-    const cubesPerRoute = activeCount / routes.length
+    const updateLayer = (
+      mesh: InstancedMesh | null,
+      layerSeeds: StreamSeed[]
+    ) => {
+      if (!mesh) return
 
-    seeds.forEach((seed, index) => {
-      if (index >= activeCount) {
-        dummy.scale.setScalar(0)
+      layerSeeds.forEach((seed, index) => {
+        if (seed.slot % activeStride !== 0) {
+          dummy.scale.setScalar(0)
+          dummy.updateMatrix()
+          mesh.setMatrixAt(index, dummy.matrix)
+          return
+        }
+
+        const progress =
+          (seed.slot / segmentsPerLane + seed.lane * 0.012 + travel) % 1
+        const position = streamPosition(
+          seed.lane,
+          progress,
+          viewport.width,
+          viewport.height
+        )
+        const nextPosition = streamPosition(
+          seed.lane,
+          Math.min(progress + 0.002, 1),
+          viewport.width,
+          viewport.height
+        )
+        const tangent = Math.atan2(
+          nextPosition.y - position.y,
+          nextPosition.x - position.x
+        )
+        const perspective = 0.42 + progress * 1.05
+        const pulse =
+          1 + Math.sin(elapsed * 0.85 + seed.spin) * 0.045 * (1 - progress)
+
+        dummy.position.set(
+          position.x + pointer.x * 0.035 * viewport.width,
+          position.y + pointer.y * 0.025 * viewport.height,
+          position.z + seed.jitter * 0.18
+        )
+        dummy.rotation.set(
+          seed.spin + elapsed * 0.08,
+          seed.spin * 0.62 + elapsed * 0.12,
+          tangent + seed.jitter * 0.16
+        )
+        dummy.scale.setScalar(
+          perspective * seed.scale * pulse * mobileScale
+        )
         dummy.updateMatrix()
-        mesh.current?.setMatrixAt(index, dummy.matrix)
-        return
-      }
+        mesh.setMatrixAt(index, dummy.matrix)
+      })
 
-      const routeStep = Math.floor(index / routes.length)
-      const phase =
-        (routeStep / cubesPerRoute + seed.routeIndex / activeCount + travel) % 1
-      const route = routes[seed.routeIndex]
-      const isIncoming = phase < ingressPortion
-      const progress = isIncoming
-        ? phase / ingressPortion
-        : (phase - ingressPortion) / (1 - ingressPortion)
-      const start = isIncoming ? route.start : join
-      const control = isIncoming ? route.control : exitControl
-      const end = isIncoming ? join : exit
-      const x = quadratic(start[0], control[0], end[0], progress) * width
-      const y =
-        quadratic(start[1], control[1], end[1], progress) * height +
-        pointer.y * 0.05
-      const z = quadratic(start[2], control[2], end[2], progress)
-      const tangentX =
-        quadraticTangent(start[0], control[0], end[0], progress) * width
-      const tangentY =
-        quadraticTangent(start[1], control[1], end[1], progress) * height
-      const tangent = Math.atan2(tangentY, tangentX)
-      const pathEnvelope = Math.sin(progress * Math.PI)
-      const flowWave =
-        Math.sin(phase * Math.PI * 3.2 - elapsed * 0.7) * pathEnvelope * 0.012
-      const rotationDrift =
-        Math.sin(elapsed * 0.34 + seed.routeIndex * 1.3) * 0.12
+      mesh.instanceMatrix.needsUpdate = true
+    }
 
-      dummy.position.set(
-        x - Math.sin(tangent) * flowWave * height,
-        y + Math.cos(tangent) * flowWave * height,
-        z +
-          Math.cos(phase * Math.PI * 2.4 - elapsed * 0.48) *
-            pathEnvelope *
-            0.035
-      )
-      dummy.rotation.set(
-        elapsed * (0.09 + seed.routeIndex * 0.008) +
-          phase * 0.8 +
-          rotationDrift,
-        elapsed * (0.14 + seed.routeIndex * 0.006) + phase * Math.PI * 0.85,
-        tangent + rotationDrift * 0.2
-      )
-      const distanceScale = MathUtils.lerp(
-        1.08,
-        0.38,
-        MathUtils.smoothstep(phase, 0.22, 1)
-      )
-      const perspectiveScale = distanceScale * (size.width < 640 ? 0.64 : 1)
-      dummy.scale.setScalar(perspectiveScale)
-      dummy.updateMatrix()
-      matrix.copy(dummy.matrix)
-      mesh.current?.setMatrixAt(index, matrix)
-    })
-
-    mesh.current.instanceMatrix.needsUpdate = true
+    updateLayer(glass.current, seedsByLayer.glass)
+    updateLayer(graphite.current, seedsByLayer.graphite)
+    updateLayer(prism.current, seedsByLayer.prism)
   })
 
   return (
-    <instancedMesh
-      ref={mesh}
-      args={[geometry, material, cubeCount]}
-      frustumCulled={false}
-    />
+    <>
+      <instancedMesh
+        ref={glass}
+        args={[geometry, materials.glass, seedsByLayer.glass.length]}
+        frustumCulled={false}
+      />
+      <instancedMesh
+        ref={graphite}
+        args={[geometry, materials.graphite, seedsByLayer.graphite.length]}
+        frustumCulled={false}
+      />
+      <instancedMesh
+        ref={prism}
+        args={[geometry, materials.prism, seedsByLayer.prism.length]}
+        frustumCulled={false}
+      />
+    </>
   )
 }
 
@@ -218,32 +332,29 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <Canvas
-        camera={{ position: [0, 0, 6.8], fov: 34 }}
-        dpr={[1, 1.5]}
-        gl={{ alpha: true, antialias: true }}
+        camera={{ position: [0, 0, 6.5], fov: 34 }}
+        dpr={[1, 1.6]}
+        gl={{
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance",
+        }}
       >
         <StreamEnvironment />
-        <ambientLight intensity={0.42} />
+        <ambientLight intensity={0.48} />
         <directionalLight
-          color="#dce9ff"
+          color="#e9f5ff"
           position={[-4, 5, 6]}
-          intensity={4.8}
+          intensity={4.6}
         />
         <directionalLight
-          color="#ffe7d2"
+          color="#d9fff1"
           position={[5, -3, 4]}
-          intensity={2.4}
+          intensity={2.8}
         />
-        <pointLight color="#c5d6ff" position={[1, 1, 4]} intensity={10} />
-        <CubeFlow reduceMotion={reduceMotion} />
-        <EffectComposer multisampling={0}>
-          <DepthOfField
-            focusDistance={6.35}
-            focusRange={0.28}
-            bokehScale={2.4}
-            resolutionScale={0.5}
-          />
-        </EffectComposer>
+        <pointLight color="#c9c3ff" position={[2, 1, 4]} intensity={8} />
+        <FiberLanes />
+        <StreamInstances reduceMotion={reduceMotion} />
       </Canvas>
     </div>
   )
