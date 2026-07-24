@@ -169,7 +169,7 @@ export function StoryboardsWorkspace() {
 
           {batches.map((batch) => (
             <section key={batch.id} className="py-6">
-              <div className="mb-4 flex flex-wrap items-center gap-3">
+              <div className="mb-4 flex min-h-9 flex-wrap items-center gap-3">
                 {editingId === batch.id ? (
                   <div className="flex min-w-0 flex-1 items-center gap-2">
                     <Input
