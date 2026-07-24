@@ -94,6 +94,7 @@ export function AgentWorkspace() {
   const [isGenerating, setIsGenerating] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const folderInputRef = useRef<HTMLInputElement>(null)
+  const resultsRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     folderInputRef.current?.setAttribute("webkitdirectory", "")
@@ -145,8 +146,8 @@ export function AgentWorkspace() {
   }
 
   return (
-    <main>
-      <section>
+    <main className="flex h-[calc(100dvh-4rem)] flex-col overflow-hidden overscroll-none md:h-dvh">
+      <section className="shrink-0">
         <div className="mx-auto max-w-3xl px-4 pb-8 sm:px-6 sm:pb-10">
           <form
             onSubmit={generate}
@@ -306,73 +307,78 @@ export function AgentWorkspace() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-sm font-medium">Recent</h2>
-          <Button variant="ghost" size="sm">
-            Filter
-          </Button>
-        </div>
-        <div className="space-y-12">
-          {generations.map((generation) => (
-            <article key={generation.id} className="space-y-4">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary">{generation.project}</Badge>
-                    <span className="text-xs text-muted-foreground">
-                      {generation.time}
-                    </span>
-                  </div>
-                  <p className="mt-2 max-w-3xl text-sm leading-relaxed">
-                    {generation.prompt}
-                  </p>
-                </div>
-                <Button variant="outline" size="sm">
-                  <RotateCwIcon />
-                  Rerun
-                </Button>
-              </div>
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
-                {imageClasses.map((imageClass, index) => (
-                  <div
-                    key={imageClass}
-                    className="group relative aspect-square overflow-hidden rounded-xl bg-muted"
-                  >
-                    <Image
-                      src={sampleImage}
-                      alt={`Generation ${generation.id}, result ${index + 1}`}
-                      fill
-                      className={cn(
-                        "transition-transform duration-500 group-hover:scale-[1.03]",
-                        imageClass
-                      )}
-                    />
-                    <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-gradient-to-t from-black/60 to-transparent p-2 pt-8 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
-                      <Button
-                        variant="secondary"
-                        size="icon-xs"
-                        aria-label="Use as reference"
-                      >
-                        <ImagePlusIcon />
-                      </Button>
-                      <a
-                        href={sampleImage}
-                        download={`generation-${generation.id}-${index + 1}.png`}
-                        aria-label="Download image"
-                        className={buttonVariants({
-                          variant: "secondary",
-                          size: "icon-xs",
-                        })}
-                      >
-                        <ArrowDownToLineIcon />
-                      </a>
+      <section
+        ref={resultsRef}
+        className="min-h-0 flex-1 overflow-y-auto overscroll-none"
+      >
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-sm font-medium">Recent</h2>
+            <Button variant="ghost" size="sm">
+              Filter
+            </Button>
+          </div>
+          <div className="space-y-12">
+            {generations.map((generation) => (
+              <article key={generation.id} className="space-y-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{generation.project}</Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {generation.time}
+                      </span>
                     </div>
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+                      {generation.prompt}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </article>
-          ))}
+                  <Button variant="outline" size="sm">
+                    <RotateCwIcon />
+                    Rerun
+                  </Button>
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
+                  {imageClasses.map((imageClass, index) => (
+                    <div
+                      key={imageClass}
+                      className="group relative aspect-square overflow-hidden rounded-xl bg-muted"
+                    >
+                      <Image
+                        src={sampleImage}
+                        alt={`Generation ${generation.id}, result ${index + 1}`}
+                        fill
+                        className={cn(
+                          "transition-transform duration-500 group-hover:scale-[1.03]",
+                          imageClass
+                        )}
+                      />
+                      <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-gradient-to-t from-black/60 to-transparent p-2 pt-8 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
+                        <Button
+                          variant="secondary"
+                          size="icon-xs"
+                          aria-label="Use as reference"
+                        >
+                          <ImagePlusIcon />
+                        </Button>
+                        <a
+                          href={sampleImage}
+                          download={`generation-${generation.id}-${index + 1}.png`}
+                          aria-label="Download image"
+                          className={buttonVariants({
+                            variant: "secondary",
+                            size: "icon-xs",
+                          })}
+                        >
+                          <ArrowDownToLineIcon />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -380,7 +386,9 @@ export function AgentWorkspace() {
         size="icon"
         aria-label="New creation"
         className="fixed right-4 bottom-20 shadow-lg sm:hidden"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() =>
+          resultsRef.current?.scrollTo({ top: 0, behavior: "smooth" })
+        }
       >
         <PlusIcon />
       </Button>
