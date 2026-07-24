@@ -283,15 +283,12 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           )}
         </div>
 
-        <div className="mt-12 grid border-y sm:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {meta.map((item) => {
             const values = item.value?.split(/\s*·\s*/).filter(Boolean)
 
             return (
-              <div
-                key={item.label}
-                className="border-b py-6 last:border-b-0 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:border-r-0"
-              >
+              <div key={item.label} className="py-2">
                 <p className="text-xs text-muted-foreground">{item.label}</p>
                 <div
                   className={
