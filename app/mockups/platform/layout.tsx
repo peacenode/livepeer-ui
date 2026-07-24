@@ -22,11 +22,11 @@ export default function MockupsLayout({
     <div className="relative flex min-h-dvh bg-background">
       <PlatformSidebar />
       <main className="min-w-0 flex-1">
-        <div className="flex items-center gap-3 px-4 pt-4 md:hidden">
-          <PlatformMobileNav />
+        <div className="flex items-center justify-between gap-3 px-4 pt-4 md:hidden">
           <Link href="/mockups/platform" aria-label="Livepeer home" className="inline-flex">
             <LivepeerLockup className="h-4 w-auto" />
           </Link>
+          <PlatformMobileNav />
         </div>
         <div className="mx-auto w-full max-w-5xl px-6 pt-6 pb-8 md:px-10">
           {children}
