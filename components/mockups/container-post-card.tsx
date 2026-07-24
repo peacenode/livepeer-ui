@@ -52,16 +52,20 @@ function ContainerPostCard({
 
   return (
     <Card className="h-full gap-0 bg-background py-0 ring-1 ring-foreground/8 transition-colors hover:ring-foreground/16">
-      <div className="flex items-center gap-3 px-5 py-4">
-        <Avatar size="sm">
-          <AvatarFallback className="bg-foreground text-background">
-            {creator.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
-        <div className="min-w-0">
+      <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <Avatar size="sm">
+            <AvatarFallback className="bg-foreground text-background">
+              {creator.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
           <p className="truncate text-sm font-medium">{creator}</p>
-          <p className="text-xs text-muted-foreground">Published a container</p>
         </div>
+        {pullCount !== undefined && (
+          <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
+            {formatCompact(pullCount)} pulls
+          </span>
+        )}
       </div>
 
       <div className="group/media relative aspect-[4/3] overflow-hidden bg-muted">
@@ -100,7 +104,7 @@ function ContainerPostCard({
         />
       </div>
 
-      <CardContent className="flex flex-1 flex-col gap-3 py-5">
+      <CardContent className="py-5">
         <div className="flex flex-col gap-1.5">
           <Link
             href={`/mockups/platform/inference/${slug}`}
@@ -111,14 +115,6 @@ function ContainerPostCard({
           <CardDescription className="line-clamp-2">
             {description}
           </CardDescription>
-        </div>
-        <div className="mt-auto flex items-center justify-between gap-3 text-xs text-muted-foreground">
-          <span>Docker Hub</span>
-          {pullCount !== undefined && (
-            <span className="tabular-nums">
-              {formatCompact(pullCount)} pulls
-            </span>
-          )}
         </div>
       </CardContent>
     </Card>
