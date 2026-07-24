@@ -333,29 +333,31 @@ export function PlaybookBriefForm({
                 ) : (
                   <Input {...shared} className="mt-2" />
                 )}
+                {hasBrandCompositionLayout &&
+                  field.name === "one_liner" &&
+                  trainBrandLoraField && (
+                    <div className="mt-7 mb-2 flex items-start gap-2">
+                      <Checkbox
+                        id="brief-train_brand_lora"
+                        checked={
+                          (values[trainBrandLoraField.name] ??
+                            trainBrandLoraField.defaultValue) === "true"
+                        }
+                        onCheckedChange={(checked) =>
+                          setValues((current) => ({
+                            ...current,
+                            [trainBrandLoraField.name]: String(checked),
+                          }))
+                        }
+                      />
+                      <Label htmlFor="brief-train_brand_lora">
+                        {labelFor(trainBrandLoraField.name)}
+                      </Label>
+                    </div>
+                  )}
               </div>
             )
           })}
-          {hasBrandCompositionLayout && trainBrandLoraField && (
-            <div className="order-3 my-2 flex items-start gap-2 sm:col-start-1 sm:row-start-3">
-              <Checkbox
-                id="brief-train_brand_lora"
-                checked={
-                  (values[trainBrandLoraField.name] ??
-                    trainBrandLoraField.defaultValue) === "true"
-                }
-                onCheckedChange={(checked) =>
-                  setValues((current) => ({
-                    ...current,
-                    [trainBrandLoraField.name]: String(checked),
-                  }))
-                }
-              />
-              <Label htmlFor="brief-train_brand_lora">
-                {labelFor(trainBrandLoraField.name)}
-              </Label>
-            </div>
-          )}
           {hasBrandCompositionLayout && booleanFields.length > 0 && (
             <div className="order-7 flex flex-col gap-3 sm:col-start-2 sm:row-start-4">
               {booleanFields.map((field) => {
