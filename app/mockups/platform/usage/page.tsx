@@ -1,7 +1,14 @@
 import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import {
   Table,
@@ -82,7 +89,7 @@ export default function MockupUsagePage() {
         </TabsList>
         <TabsContent value="overview">
           <div className="flex flex-col gap-8">
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               <Card variant="metric">
                 <CardHeader className="flex-1 justify-between">
                   <span className="font-medium text-foreground">
@@ -113,6 +120,28 @@ export default function MockupUsagePage() {
                   </CardTitle>
                 </CardHeader>
               </Card>
+              <Link
+                href="/mockups/platform/organization?tab=billing"
+                className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              >
+                <Card
+                  variant="metric"
+                  className="h-full transition-colors group-hover:bg-accent"
+                >
+                  <CardHeader className="flex-1 justify-between">
+                    <div className="flex w-full items-center justify-between gap-3">
+                      <CardDescription>Billing</CardDescription>
+                      <ArrowUpRightIcon
+                        className="size-4 text-muted-foreground"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <p className="max-w-40 text-sm text-muted-foreground">
+                      Payment methods and invoices
+                    </p>
+                  </CardHeader>
+                </Card>
+              </Link>
             </div>
             <div className="flex max-w-xl flex-col gap-3">
               <div className="flex items-center justify-between gap-4 text-sm">

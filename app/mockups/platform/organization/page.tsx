@@ -72,10 +72,21 @@ const invoices = [
   },
 ]
 
-export default function MockupOrganizationPage() {
+export default async function MockupOrganizationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string | string[] }>
+}) {
+  const requestedTab = (await searchParams).tab
+  const defaultTab =
+    typeof requestedTab === "string" &&
+    ["general", "members", "billing"].includes(requestedTab)
+      ? requestedTab
+      : "general"
+
   return (
     <PlatformPage title="Organization settings">
-      <Tabs defaultValue="general" className="gap-8">
+      <Tabs defaultValue={defaultTab} className="gap-8">
         <TabsList
           variant="line"
           className="w-full justify-start overflow-x-auto border-b px-0 pb-1"
