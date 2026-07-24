@@ -337,7 +337,7 @@ export function PlaybookBriefForm({
             )
           })}
           {hasBrandCompositionLayout && trainBrandLoraField && (
-            <div className="order-3 mb-4 flex items-start gap-2 sm:col-start-1 sm:row-start-3 sm:mb-0 sm:-translate-y-[38px]">
+            <div className="order-3 my-2 flex items-start gap-2 sm:col-start-1 sm:row-start-3 sm:my-0 sm:-translate-y-[38px]">
               <Checkbox
                 id="brief-train_brand_lora"
                 checked={
