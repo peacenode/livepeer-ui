@@ -146,7 +146,7 @@ export function AgentWorkspace() {
 
   return (
     <main>
-      <section className="border-b">
+      <section>
         <div className="mx-auto max-w-3xl px-4 pb-8 sm:px-6 sm:pb-10">
           <form
             onSubmit={generate}
@@ -303,10 +303,6 @@ export function AgentWorkspace() {
               onChange={(event) => addFiles(event.target.files)}
             />
           </form>
-          <p className="mt-3 text-center text-xs text-muted-foreground">
-            Drop anywhere on the input · Enter to generate · Shift Enter for a
-            new line
-          </p>
         </div>
       </section>
 

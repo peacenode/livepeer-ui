@@ -51,7 +51,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-background pb-16 md:pb-0 md:pl-14">
-      <aside className="group/sidebar fixed inset-y-0 left-0 z-40 hidden w-14 flex-col overflow-hidden border-r bg-background transition-[width] duration-200 hover:w-44 md:flex">
+      <aside className="group/sidebar fixed inset-y-0 left-0 z-40 hidden w-14 flex-col overflow-hidden bg-background transition-[width] duration-200 hover:w-44 md:flex">
         <nav
           aria-label="Agent"
           className="flex flex-1 flex-col gap-1 px-2 py-2"
