@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   ApertureIcon,
+  BadgeInfoIcon,
   FilmIcon,
   FolderIcon,
   Grid2X2Icon,
@@ -110,6 +111,37 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             )
           })}
         </nav>
+
+        <Link
+          href="/mockups/agent/protocol"
+          data-active={pathname.startsWith("/mockups/agent/protocol")}
+          onClick={() => setExpanded(false)}
+          className={cn(
+            "mx-2 flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+            expanded &&
+              pathname.startsWith("/mockups/agent/protocol") &&
+              "bg-muted font-medium text-foreground"
+          )}
+        >
+          <span
+            className={cn(
+              "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
+              pathname.startsWith("/mockups/agent/protocol") &&
+                !expanded &&
+                "bg-muted"
+            )}
+          >
+            <BadgeInfoIcon className="size-6" />
+          </span>
+          <span
+            className={cn(
+              "truncate opacity-0 transition-opacity duration-150",
+              expanded && "opacity-100"
+            )}
+          >
+            Protocol
+          </span>
+        </Link>
 
         <button
           type="button"
