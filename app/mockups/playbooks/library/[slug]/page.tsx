@@ -294,8 +294,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
 
         {catalogEntry && (
           <section className="mt-14">
-            <h2 className="text-2xl font-medium">Deliverables</h2>
-            <div className="mt-6 grid overflow-hidden rounded-4xl bg-muted md:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid overflow-hidden rounded-4xl bg-muted md:grid-cols-[1.1fr_0.9fr]">
               {catalogEntry.image && (
                 <div
                   className="min-h-72 bg-cover bg-center"
@@ -306,6 +305,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                 />
               )}
               <div className="flex flex-col justify-center p-6 sm:p-8">
+                <p className="mb-5 text-sm font-medium">You’ll receive…</p>
                 {catalogEntry.deliverables.length > 0 ? (
                   <div className="divide-y">
                     {catalogEntry.deliverables.map((deliverable) => (
