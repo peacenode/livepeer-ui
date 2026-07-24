@@ -18,9 +18,37 @@ import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeom
 import { cn } from "@/lib/utils"
 
 const cubeCount = 72
-const laneOffsets = [-1.45, -0.88, -0.32, 0.32, 0.88, 1.45]
-const laneDepths = [-0.72, -0.42, -0.14, 0.14, 0.42, 0.72]
-const strandCount = laneOffsets.length
+const ingressPortion = 0.62
+const routes = [
+  {
+    start: [-0.8, -0.58, 0.62],
+    control: [-0.44, -0.3, 0.48],
+  },
+  {
+    start: [-0.82, -0.16, 0.28],
+    control: [-0.44, 0.12, 0.18],
+  },
+  {
+    start: [-0.62, 0.38, -0.04],
+    control: [-0.24, -0.12, -0.12],
+  },
+  {
+    start: [-0.2, -0.68, 0.78],
+    control: [-0.04, -0.36, 0.34],
+  },
+] as const
+const join = [0.14, -0.03, -0.28] as const
+const exitControl = [0.46, 0.08, -0.92] as const
+const exit = [0.8, 0.62, -1.72] as const
+
+function quadratic(a: number, b: number, c: number, t: number) {
+  const inverse = 1 - t
+  return inverse * inverse * a + 2 * inverse * t * b + t * t * c
+}
+
+function quadraticTangent(a: number, b: number, c: number, t: number) {
+  return 2 * (1 - t) * (b - a) + 2 * t * (c - b)
+}
 
 function StreamEnvironment() {
   const { gl, scene } = useThree()
@@ -68,9 +96,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
   const seeds = useMemo(
     () =>
       Array.from({ length: cubeCount }, (_, index) => ({
-        laneIndex: index % laneOffsets.length,
-        lane: laneOffsets[index % laneOffsets.length],
-        depth: laneDepths[index % laneDepths.length],
+        routeIndex: index % routes.length,
       })),
     []
   )
@@ -91,9 +117,8 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
     const width = viewport.width
     const height = viewport.height
     const activeCount =
-      size.width < 640 ? 36 : size.width < 1024 ? 54 : cubeCount
-    const cubesPerStrand = activeCount / strandCount
-    const depthScale = size.width < 768 ? 0.45 : 0.72
+      size.width < 640 ? 36 : size.width < 1024 ? 52 : cubeCount
+    const cubesPerRoute = activeCount / routes.length
 
     seeds.forEach((seed, index) => {
       if (index >= activeCount) {
@@ -103,46 +128,40 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         return
       }
 
-      const strandStep = Math.floor(index / strandCount)
+      const routeStep = Math.floor(index / routes.length)
       const phase =
-        (strandStep / cubesPerStrand + seed.laneIndex / activeCount + travel) %
-        1
-      const lane = seed.lane / laneOffsets.at(-1)!
-      const mergeProgress = Math.max(0, 1 - phase / 0.76)
-      const strandSpread = mergeProgress * mergeProgress
-      const weave = MathUtils.smoothstep(phase, 0.5, 0.8)
-      const weaveAngle =
-        (seed.laneIndex / strandCount) * Math.PI * 2 + phase * Math.PI * 3
-      const x =
-        width * (-0.74 + phase * 1.48) - lane * width * 0.12 * strandSpread
-      const parabola = height * (-0.4 + 0.94 * phase * phase)
-      const strandY =
-        lane * Math.min(height * 0.11, 0.68) * strandSpread +
-        Math.sin(weaveAngle) * 0.075 * weave
-      const pathDepth = -1.45 * phase + Math.sin(phase * Math.PI) * 0.28
+        (routeStep / cubesPerRoute + seed.routeIndex / activeCount + travel) % 1
+      const route = routes[seed.routeIndex]
+      const isIncoming = phase < ingressPortion
+      const progress = isIncoming
+        ? phase / ingressPortion
+        : (phase - ingressPortion) / (1 - ingressPortion)
+      const start = isIncoming ? route.start : join
+      const control = isIncoming ? route.control : exitControl
+      const end = isIncoming ? join : exit
+      const x = quadratic(start[0], control[0], end[0], progress) * width
+      const y =
+        quadratic(start[1], control[1], end[1], progress) * height +
+        pointer.y * 0.05
+      const z = quadratic(start[2], control[2], end[2], progress)
+      const tangentX =
+        quadraticTangent(start[0], control[0], end[0], progress) * width
+      const tangentY =
+        quadraticTangent(start[1], control[1], end[1], progress) * height
+      const tangent = Math.atan2(tangentY, tangentX)
 
-      dummy.position.set(
-        x,
-        parabola + strandY + pointer.y * 0.05,
-        pathDepth +
-          seed.depth * strandSpread * depthScale +
-          Math.cos(weaveAngle) * 0.2 * weave
-      )
-      const tangent = Math.atan2(height * 1.88 * phase, width * 1.48)
+      dummy.position.set(x, y, z)
       dummy.rotation.set(
-        elapsed * 0.12 + phase * 0.8 + seed.laneIndex * 0.035,
+        elapsed * 0.12 + phase * 0.8 + seed.routeIndex * 0.045,
         elapsed * 0.18 + phase * Math.PI * 0.85,
-        tangent + Math.sin(weaveAngle) * 0.08
+        tangent
       )
       const distanceScale = MathUtils.lerp(
-        1.12,
-        0.42,
+        1.08,
+        0.38,
         MathUtils.smoothstep(phase, 0.22, 1)
       )
-      const perspectiveScale =
-        (0.88 + strandSpread * 0.12) *
-        distanceScale *
-        (size.width < 640 ? 0.6 : 1)
+      const perspectiveScale = distanceScale * (size.width < 640 ? 0.64 : 1)
       dummy.scale.setScalar(perspectiveScale)
       dummy.updateMatrix()
       matrix.copy(dummy.matrix)
