@@ -2,9 +2,17 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeftIcon, CheckIcon } from "lucide-react"
+import { CheckIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../../daydream-source"
@@ -239,13 +247,29 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
   return (
     <main>
       <div className="mx-auto max-w-6xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
-        <Link
-          href="/mockups/playbooks/library"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <ArrowLeftIcon className="size-4" aria-hidden="true" />
-          All playbooks
-        </Link>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink render={<Link href="/mockups/playbooks" />}>
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink
+                render={<Link href="/mockups/playbooks/library" />}
+              >
+                Playbooks
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="min-w-0">
+              <BreadcrumbPage className="max-w-64 truncate sm:max-w-md">
+                {playbook.title}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
         <div className="mt-10 max-w-4xl">
           <div className="flex flex-wrap gap-2">
