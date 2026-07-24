@@ -7,8 +7,6 @@ import {
   ApertureIcon,
   ArrowDownToLineIcon,
   BadgeInfoIcon,
-  CheckIcon,
-  CopyIcon,
   FilmIcon,
   FolderIcon,
   Grid2X2Icon,
@@ -17,18 +15,7 @@ import {
 
 import { LivepeerSymbol } from "@/components/brand"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
-
-const installCommand =
-  "npx skills add livepeer/agent-skills --global --agent codex claude-code"
 
 const navItems = [
   {
@@ -72,14 +59,6 @@ function isActiveRoute(href: string, pathname: string) {
 export function AgentShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState(false)
-  const [installOpen, setInstallOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
-
-  async function copyInstallCommand() {
-    await navigator.clipboard.writeText(installCommand)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1600)
-  }
 
   return (
     <div className="min-h-dvh bg-background pb-16 md:pb-0 md:pl-14">
@@ -132,12 +111,25 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
               </Link>
             )
           })}
-          <button
-            type="button"
-            onClick={() => setInstallOpen(true)}
-            className="flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          <Link
+            href="/mockups/agent/install"
+            data-active={pathname.startsWith("/mockups/agent/install")}
+            onClick={() => setExpanded(false)}
+            className={cn(
+              "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+              expanded &&
+                pathname.startsWith("/mockups/agent/install") &&
+                "bg-muted font-medium text-foreground"
+            )}
           >
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground">
+            <span
+              className={cn(
+                "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
+                pathname.startsWith("/mockups/agent/install") &&
+                  !expanded &&
+                  "bg-muted"
+              )}
+            >
               <ArrowDownToLineIcon className="size-6" />
             </span>
             <span
@@ -148,7 +140,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             >
               Install
             </span>
-          </button>
+          </Link>
         </nav>
 
         <Link
@@ -245,36 +237,6 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         })}
       </nav>
 
-      <Dialog
-        open={installOpen}
-        onOpenChange={(open) => {
-          setInstallOpen(open)
-          if (!open) setCopied(false)
-        }}
-      >
-        <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
-          <DialogHeader>
-            <DialogTitle>Install Livepeer</DialogTitle>
-            <DialogDescription>
-              Add the Livepeer skills globally for Codex and Claude Code.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex items-center gap-2 rounded-xl bg-muted p-2 pl-4">
-            <code className="min-w-0 flex-1 overflow-x-auto text-xs whitespace-nowrap">
-              {installCommand}
-            </code>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-sm"
-              aria-label={copied ? "Copied install command" : "Copy install command"}
-              onClick={copyInstallCommand}
-            >
-              {copied ? <CheckIcon /> : <CopyIcon />}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }
