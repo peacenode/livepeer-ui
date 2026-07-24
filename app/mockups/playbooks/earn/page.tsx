@@ -10,6 +10,13 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { formatCompact, getNetworkStats } from "@/lib/livepeer"
 
 export const metadata: Metadata = {
   title: "Provide GPU compute",
@@ -134,15 +141,26 @@ const fundingLinks = [
   },
 ]
 
-export default function EarnWithGpuPage() {
+export default async function EarnWithGpuPage() {
+  const network = await getNetworkStats()
+  const earnings = [
+    {
+      label: "Service payouts (USD)",
+      value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
+      period: "24h",
+    },
+    {
+      label: "Protocol rewards (USD)",
+      value: network ? `$${formatCompact(network.rewardsUsd24h)}` : "—",
+      period: "24h",
+    },
+  ]
+
   return (
     <main>
       <section className="mx-auto max-w-6xl px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24">
         <div className="max-w-3xl">
-          <p className="text-sm font-medium text-muted-foreground">
-            Livepeer GPU provider guide
-          </p>
-          <h1 className="mt-4 text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
+          <h1 className="text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
             Put a GPU on the network.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -150,30 +168,28 @@ export default function EarnWithGpuPage() {
             tolerance for infrastructure work. A pool is the shortest path. A
             solo node gives you control and the full operating burden.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button nativeButton={false} render={<a href="#choose-a-path" />}>
-              Choose a path
-            </Button>
-            <Button
-              nativeButton={false}
-              variant="outline"
-              render={
-                <a
-                  href="https://docs.livepeer.org/v2/orchestrators/setup/guide"
-                  target="_blank"
-                  rel="noreferrer"
-                />
-              }
-            >
-              Full operator docs
-              <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-            </Button>
-          </div>
         </div>
       </section>
 
       <section id="choose-a-path" className="scroll-mt-20">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mb-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
+            {earnings.map((earning) => (
+              <Card key={earning.label} variant="metric">
+                <CardHeader>
+                  <CardDescription className="flex w-full items-baseline gap-1.5">
+                    <span>{earning.label}</span>
+                    <span className="shrink-0 tabular-nums">
+                      {earning.period}
+                    </span>
+                  </CardDescription>
+                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
+                    {earning.value}
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
           <div className="max-w-2xl">
             <h2 className="text-2xl font-medium sm:text-3xl">
               Choose the right path
