@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { CheckIcon } from "lucide-react"
+import { CheckIcon, StarIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -20,6 +20,37 @@ import { PlaybookBriefForm } from "../../playbook-brief-form"
 
 type PageProps = {
   params: Promise<{ slug: string }>
+}
+
+function ReliabilityStars({ value }: { value: string }) {
+  const score = Math.min(5, Math.max(0, Number.parseFloat(value) || 0))
+
+  return (
+    <div
+      className="mt-2 flex gap-1"
+      aria-label={`${score} out of 5 stars`}
+      role="img"
+    >
+      {Array.from({ length: 5 }, (_, index) => {
+        const fill = Math.min(1, Math.max(0, score - index)) * 100
+
+        return (
+          <span
+            key={index}
+            className="relative size-3.5 text-muted-foreground/30"
+          >
+            <StarIcon className="size-3.5 fill-current" strokeWidth={1.5} />
+            <span
+              className="absolute inset-0 overflow-hidden text-foreground"
+              style={{ width: `${fill}%` }}
+            >
+              <StarIcon className="size-3.5 fill-current" strokeWidth={1.5} />
+            </span>
+          </span>
+        )
+      })}
+    </div>
+  )
 }
 
 function inline(value: string): ReactNode[] {
@@ -300,14 +331,16 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                   {values?.map((value) => {
                     const isReliability = item.label === "Reliability"
 
-                    return (
-                      <p key={value}>
-                        {value}
-                        {isReliability && (
-                          <span className="text-muted-foreground"> / 5</span>
-                        )}
-                      </p>
-                    )
+                    if (isReliability) {
+                      return (
+                        <div key={value}>
+                          <p>{value}</p>
+                          <ReliabilityStars value={value} />
+                        </div>
+                      )
+                    }
+
+                    return <p key={value}>{value}</p>
                   })}
                 </div>
               </div>
