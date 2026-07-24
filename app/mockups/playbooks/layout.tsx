@@ -3,10 +3,12 @@ import Link from "next/link"
 
 import { LivepeerLockup } from "@/components/brand"
 
+import { PlaybooksNav } from "./playbooks-nav"
+
 export const metadata: Metadata = {
   title: {
-    default: "Playbooks",
-    template: "%s - Playbooks",
+    default: "Livepeer",
+    template: "%s - Livepeer",
   },
 }
 
@@ -25,29 +27,8 @@ export default function PlaybooksLayout({
             aria-label="Playbooks home"
           >
             <LivepeerLockup className="h-4 w-auto" />
-            <span className="h-4 w-px bg-border" aria-hidden="true" />
-            <span className="text-sm font-medium">Playbooks</span>
           </Link>
-          <nav className="flex items-center gap-1 text-sm">
-            <Link
-              href="/mockups/playbooks"
-              className="rounded-md bg-muted px-3 py-2 font-medium"
-            >
-              Discover
-            </Link>
-            <Link
-              href="/mockups/platform/workflows"
-              className="hidden rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:block"
-            >
-              Workflows
-            </Link>
-            <Link
-              href="/mockups/platform/runner"
-              className="hidden rounded-md px-3 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:block"
-            >
-              Runner
-            </Link>
-          </nav>
+          <PlaybooksNav />
         </div>
       </header>
       {children}
