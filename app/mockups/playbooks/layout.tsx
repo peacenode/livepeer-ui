@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { LivepeerLockup, LivepeerSymbol } from "@/components/brand"
+import { SiteFooter } from "@/components/site-footer"
 
-import { PlaybooksFooter } from "./playbooks-footer"
 import { PlaybooksNav } from "./playbooks-nav"
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function PlaybooksLayout({
         </div>
       </header>
       <div className="flex-1">{children}</div>
-      <PlaybooksFooter />
+      <SiteFooter />
     </div>
   )
 }
