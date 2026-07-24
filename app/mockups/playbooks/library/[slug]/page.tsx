@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../../daydream-source"
+import { InstallRunnerFooter } from "../../install-runner-footer"
 import { PlaybookBriefForm } from "../../playbook-brief-form"
 
 type PageProps = {
@@ -215,8 +216,19 @@ export async function generateMetadata({
 
 export default async function SourcePlaybookPage({ params }: PageProps) {
   const { slug } = await params
-  const playbook = await getPlaybookDocument(slug)
+  const [playbook, catalog] = await Promise.all([
+    getPlaybookDocument(slug),
+    getSourcePlaybooks(),
+  ])
   if (!playbook) notFound()
+  const catalogEntry = catalog.find((item) => item.slug === slug)
+  const referenceSections = playbook.sections.filter(
+    (section) => section.title.toLowerCase() !== "what you'll get"
+  )
+  const intro = playbook.intro.replace(
+    /^Paste this whole file.*?(?:Claude cowork, chat, or Code|agent)\.\s*/i,
+    ""
+  )
 
   const meta = [
     { label: "Time", value: playbook.duration },
@@ -225,119 +237,158 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
   ].filter((item) => item.value)
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pt-24 pb-20 sm:px-6 sm:pt-28">
-      <Link
-        href="/mockups/playbooks/library"
-        className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <ArrowLeftIcon className="size-4" aria-hidden="true" />
-        All playbooks
-      </Link>
+    <main>
+      <div className="mx-auto max-w-6xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
+        <Link
+          href="/mockups/playbooks/library"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeftIcon className="size-4" aria-hidden="true" />
+          All playbooks
+        </Link>
 
-      <div className="mt-10 max-w-4xl">
-        <div className="flex flex-wrap gap-2">
-          {playbook.tier && <Badge variant="secondary">{playbook.tier}</Badge>}
-          {playbook.format && (
-            <Badge variant="outline">{playbook.format}</Badge>
-          )}
-        </div>
-        <h1 className="mt-5 text-3xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
-          {playbook.title}
-        </h1>
-        {playbook.intro && (
-          <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">
-            {playbook.intro}
-          </p>
-        )}
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button
-            nativeButton={false}
-            render={<Link href="/mockups/playbooks/install" />}
-          >
-            Install Runner
-          </Button>
-          <Button
-            nativeButton={false}
-            variant="outline"
-            render={
-              <a href={playbook.sourceUrl} target="_blank" rel="noreferrer" />
-            }
-          >
-            Source
-            <span className="font-sans" aria-hidden="true">
-              ↗
-            </span>
-          </Button>
-        </div>
-      </div>
-
-      <div className="mt-12 grid border-y sm:grid-cols-3">
-        {meta.map((item) => (
-          <div
-            key={item.label}
-            className="border-b py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:border-r-0"
-          >
-            <p className="text-xs text-muted-foreground">{item.label}</p>
-            <p className="mt-2 text-sm font-medium">{item.value}</p>
+        <div className="mt-10 max-w-4xl">
+          <div className="flex flex-wrap gap-2">
+            {playbook.tier && (
+              <Badge variant="secondary">{playbook.tier}</Badge>
+            )}
+            {playbook.format && (
+              <Badge variant="outline">{playbook.format}</Badge>
+            )}
           </div>
-        ))}
-      </div>
+          <h1 className="mt-5 text-3xl leading-tight font-medium tracking-tight text-balance sm:text-5xl">
+            {playbook.title}
+          </h1>
+          {intro && (
+            <p className="mt-6 max-w-3xl text-base leading-8 text-muted-foreground">
+              {intro}
+            </p>
+          )}
+          <div className="mt-8">
+            <Button
+              nativeButton={false}
+              variant="outline"
+              render={
+                <a href={playbook.sourceUrl} target="_blank" rel="noreferrer" />
+              }
+            >
+              Source
+              <span className="font-sans" aria-hidden="true">
+                ↗
+              </span>
+            </Button>
+          </div>
+        </div>
 
-      <div className="mt-12">
-        <PlaybookBriefForm
-          brief={playbook.brief}
-          markdown={playbook.markdown}
-        />
-      </div>
+        <div className="mt-12 grid border-y sm:grid-cols-3">
+          {meta.map((item) => (
+            <div
+              key={item.label}
+              className="border-b py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:border-r-0"
+            >
+              <p className="text-xs text-muted-foreground">{item.label}</p>
+              <p className="mt-2 text-sm font-medium">{item.value}</p>
+            </div>
+          ))}
+        </div>
 
-      <div className="mt-14 grid gap-12 lg:grid-cols-[14rem_minmax(0,1fr)]">
-        <aside className="lg:sticky lg:top-8 lg:self-start">
-          <p className="text-xs font-medium">On this page</p>
-          <nav className="mt-4 flex flex-col gap-2">
-            {playbook.sections.map((section) => (
-              <a
-                key={section.title}
-                href={`#${section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {section.title}
-              </a>
-            ))}
-          </nav>
-          {playbook.caps.length > 0 && (
-            <div className="mt-8">
-              <p className="text-xs font-medium">Capabilities</p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {playbook.caps.map((cap) => (
-                  <Badge key={cap} variant="secondary">
-                    {cap}
-                  </Badge>
-                ))}
+        {catalogEntry && (
+          <section className="mt-14">
+            <h2 className="text-2xl font-medium">Deliverables</h2>
+            <div className="mt-6 grid overflow-hidden rounded-4xl bg-muted md:grid-cols-[1.1fr_0.9fr]">
+              {catalogEntry.image && (
+                <div
+                  className="min-h-72 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url("${catalogEntry.image}")`,
+                  }}
+                  aria-hidden="true"
+                />
+              )}
+              <div className="flex flex-col justify-center p-6 sm:p-8">
+                {catalogEntry.deliverables.length > 0 ? (
+                  <div className="divide-y">
+                    {catalogEntry.deliverables.map((deliverable) => (
+                      <div
+                        key={deliverable}
+                        className="flex items-center gap-3 py-4 first:pt-0 last:pb-0"
+                      >
+                        <CheckIcon
+                          className="size-4 shrink-0 text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                        <span className="text-sm">{deliverable}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    The completed media and project files described in this
+                    playbook.
+                  </p>
+                )}
               </div>
             </div>
-          )}
-        </aside>
+          </section>
+        )}
 
-        <article className="min-w-0">
-          {playbook.sections.map((section) => (
-            <section
-              key={section.title}
-              id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-              className="scroll-mt-8 border-t py-9 first:border-t-0 first:pt-0"
-            >
-              <h2 className="text-2xl font-medium text-balance">
-                {section.title}
-              </h2>
-              <div className="mt-5">
-                <MarkdownBody
-                  body={section.body.replace(/\bBRIEF\b/g, "details")}
-                  briefYaml={playbook.brief?.yamlBlock}
-                />
+        <div className="mt-12">
+          <PlaybookBriefForm
+            brief={playbook.brief}
+            markdown={playbook.markdown}
+          />
+        </div>
+
+        <div className="mt-16 grid gap-12 lg:grid-cols-[14rem_minmax(0,1fr)]">
+          <aside className="lg:sticky lg:top-8 lg:self-start">
+            <p className="text-xs font-medium">Reference</p>
+            <nav className="mt-4 flex flex-col gap-2">
+              {referenceSections.map((section) => (
+                <a
+                  key={section.title}
+                  href={`#${section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {section.title}
+                </a>
+              ))}
+            </nav>
+            {playbook.caps.length > 0 && (
+              <div className="mt-8">
+                <p className="text-xs font-medium">Capabilities</p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {playbook.caps.map((cap) => (
+                    <Badge key={cap} variant="secondary">
+                      {cap}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </section>
-          ))}
-        </article>
+            )}
+          </aside>
+
+          <article className="min-w-0">
+            {referenceSections.map((section) => (
+              <section
+                key={section.title}
+                id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                className="scroll-mt-8 border-t py-9 first:border-t-0 first:pt-0"
+              >
+                <h2 className="text-2xl font-medium text-balance">
+                  {section.title}
+                </h2>
+                <div className="mt-5">
+                  <MarkdownBody
+                    body={section.body.replace(/\bBRIEF\b/g, "details")}
+                    briefYaml={playbook.brief?.yamlBlock}
+                  />
+                </div>
+              </section>
+            ))}
+          </article>
+        </div>
       </div>
+      <InstallRunnerFooter />
     </main>
   )
 }

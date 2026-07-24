@@ -88,13 +88,13 @@ export function PlaybookBriefForm({
   }
 
   return (
-    <section className="rounded-4xl bg-muted p-5 sm:p-7">
+    <section className="rounded-4xl bg-muted p-5 sm:p-8">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-lg font-medium">Set up this playbook</h2>
+          <h2 className="text-2xl font-medium">Customize this playbook</h2>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-            Add your details, copy the complete recipe, and paste it into your
-            agent.
+            Fill in the fields below. Your answers are inserted into the
+            complete recipe when you copy it.
           </p>
         </div>
       </div>
@@ -144,10 +144,20 @@ export function PlaybookBriefForm({
         </p>
       )}
 
-      <Button type="button" onClick={copyPlaybook} className="mt-6">
-        {copied ? <CheckIcon /> : <CopyIcon />}
-        {copied ? "Copied — paste into your agent" : "Copy playbook"}
-      </Button>
+      <div className="mt-8 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          Nothing is submitted. The completed playbook is copied locally.
+        </p>
+        <Button
+          type="button"
+          size="lg"
+          onClick={copyPlaybook}
+          className="w-full sm:w-auto"
+        >
+          {copied ? <CheckIcon /> : <CopyIcon />}
+          {copied ? "Copied — paste into your agent" : "Copy playbook"}
+        </Button>
+      </div>
     </section>
   )
 }
