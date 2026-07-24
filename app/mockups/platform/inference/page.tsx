@@ -1,18 +1,11 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { PlusIcon } from "lucide-react"
 
+import { ContainerPostCard } from "@/components/mockups/container-post-card"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import { inferenceContainers } from "@/lib/containers"
-import { formatCompact, getContainerHubInfo } from "@/lib/livepeer"
+import { getContainerHubInfo } from "@/lib/livepeer"
 
 export const metadata: Metadata = {
   title: "Inference",
@@ -39,28 +32,15 @@ export default async function MockupInferencePage() {
         {inferenceContainers.map((container, index) => {
           const hub = hubInfo[index]
           return (
-            <Link
+            <ContainerPostCard
               key={container.slug}
-              href={`/mockups/platform/inference/${container.slug}`}
-              className="group"
-            >
-              <Card className="h-full gap-3">
-                <CardHeader>
-                  <CardTitle className="font-mono text-sm font-medium">
-                    {container.slug}
-                  </CardTitle>
-                  <CardDescription>{container.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="mt-auto flex items-center justify-between gap-2 text-xs text-muted-foreground">
-                  <span>{container.creator}</span>
-                  {hub && (
-                    <span className="tabular-nums">
-                      {formatCompact(hub.pullCount)} pulls
-                    </span>
-                  )}
-                </CardContent>
-              </Card>
-            </Link>
+              creator={container.creator}
+              description={container.description}
+              image={container.image}
+              preload={index === 0}
+              pullCount={hub?.pullCount}
+              slug={container.slug}
+            />
           )
         })}
       </div>
