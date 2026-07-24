@@ -245,7 +245,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
 
   return (
     <main>
-      <div className="mx-auto max-w-5xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
+      <div className="mx-auto max-w-4xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
