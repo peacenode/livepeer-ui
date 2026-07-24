@@ -202,6 +202,7 @@ export function PlaybookBriefForm({
             const long = (field.hint || field.defaultValue).length > 60
             const isAspectRatio = field.name.toLowerCase().includes("aspect")
             const isAesthetic = field.name.toLowerCase() === "aesthetic"
+            const isBoolean = /^(true|false)$/i.test(field.defaultValue.trim())
             const aspectOptions = Array.from(
               new Set(
                 `${field.defaultValue} ${field.hint}`.match(/\d+\s*:\s*\d+/g) ??
@@ -222,6 +223,35 @@ export function PlaybookBriefForm({
                   ...current,
                   [field.name]: event.target.value,
                 })),
+            }
+
+            if (isBoolean) {
+              const checked =
+                (values[field.name] ?? field.defaultValue).toLowerCase() ===
+                "true"
+
+              return (
+                <div key={field.name} className="flex items-start gap-2 py-1">
+                  <Checkbox
+                    id={id}
+                    checked={checked}
+                    onCheckedChange={(nextChecked) =>
+                      setValues((current) => ({
+                        ...current,
+                        [field.name]: String(nextChecked),
+                      }))
+                    }
+                  />
+                  <div>
+                    <Label htmlFor={id}>{labelFor(field.name)}</Label>
+                    {field.hint && (
+                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {field.hint}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )
             }
 
             return (
