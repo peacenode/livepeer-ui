@@ -71,7 +71,8 @@ export function PlaybooksNav() {
               href={item.href}
               className={cn(
                 "rounded-md px-2 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-3",
-                active && "bg-muted font-medium text-foreground"
+                active &&
+                  "bg-background/90 font-medium text-foreground backdrop-blur-sm"
               )}
             >
               {item.label}
