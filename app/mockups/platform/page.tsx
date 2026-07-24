@@ -108,36 +108,36 @@ export default function MockupHomePage() {
     <PlatformPage title="Home">
       <Card className="py-0">
         <div className="grid min-h-64 md:grid-cols-[minmax(0,1fr)_20rem]">
-          <div className="flex flex-col justify-center py-6">
-            <CardHeader>
-              <CardTitle>Get started</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ol className="flex max-w-xl flex-col">
-                {getStartedSteps.map((step, index) => (
-                  <li key={step.label}>
-                    <Link
-                      href={step.href}
-                      className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-background/60"
-                    >
-                      <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-background">
-                        {step.complete ? (
-                          <CheckIcon className="size-4" aria-hidden="true" />
-                        ) : (
-                          <BoxIcon className="size-4" aria-hidden="true" />
-                        )}
-                      </span>
-                      <span className="min-w-0 flex-1 font-medium">
-                        {index + 1}. {step.label}
-                      </span>
-                      <ChevronRightIcon
-                        className="size-4 shrink-0 text-muted-foreground transition-transform group-hover/step:translate-x-0.5"
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  </li>
-                ))}
-              </ol>
+          <div className="flex items-center py-6">
+            <CardContent className="mx-auto w-full max-w-xl">
+              <div className="flex flex-col gap-3">
+                <CardTitle className="px-2">Get started</CardTitle>
+                <ol className="flex max-w-xl flex-col">
+                  {getStartedSteps.map((step, index) => (
+                    <li key={step.label}>
+                      <Link
+                        href={step.href}
+                        className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-background/60"
+                      >
+                        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-background">
+                          {step.complete ? (
+                            <CheckIcon className="size-4" aria-hidden="true" />
+                          ) : (
+                            <BoxIcon className="size-4" aria-hidden="true" />
+                          )}
+                        </span>
+                        <span className="min-w-0 flex-1 font-medium">
+                          {index + 1}. {step.label}
+                        </span>
+                        <ChevronRightIcon
+                          className="size-4 shrink-0 text-muted-foreground transition-transform group-hover/step:translate-x-0.5"
+                          aria-hidden="true"
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </CardContent>
           </div>
           <LivepeerSymbol3D />
