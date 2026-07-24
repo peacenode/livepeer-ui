@@ -136,17 +136,21 @@ export default function MockupUsagePage() {
                   size="sm"
                   className="h-full transition-colors group-hover:bg-accent"
                 >
-                  <CardHeader className="flex h-full flex-row items-start justify-between">
-                    <div className="flex h-full flex-col justify-between gap-3">
+                  <CardHeader className="flex h-full flex-col justify-between">
+                    <div className="flex items-center gap-1.5">
                       <CardTitle>Billing</CardTitle>
-                      <CardDescription>
-                        Payment methods and invoices
-                      </CardDescription>
+                      <ArrowUpRightIcon
+                        className="size-4 text-muted-foreground"
+                        aria-hidden="true"
+                      />
                     </div>
-                    <ArrowUpRightIcon
-                      className="size-4 text-muted-foreground"
-                      aria-hidden="true"
-                    />
+                    <div className="flex flex-col gap-1.5">
+                      <CardDescription>Default payment method</CardDescription>
+                      <p className="text-2xl font-medium">Visa ···· 4242</p>
+                      <p className="text-xs text-muted-foreground">
+                        Expires 08/2029
+                      </p>
+                    </div>
                   </CardHeader>
                 </Card>
               </Link>
