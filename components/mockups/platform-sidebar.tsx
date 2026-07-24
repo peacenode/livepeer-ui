@@ -11,7 +11,6 @@ export const platformNavItems = [
   { title: "Home", href: "/mockups/platform" },
   { title: "Compute", href: "/mockups/platform/compute" },
   { title: "Inference", href: "/mockups/platform/inference" },
-  { title: "AI Runner", href: "/mockups/platform/ai-runner" },
   { title: "Billing", href: "/mockups/platform/billing" },
   { title: "API", href: "/mockups/platform/api" },
 ]

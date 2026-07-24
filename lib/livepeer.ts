@@ -89,83 +89,7 @@ export async function getOrchestrators(): Promise<Orchestrator[]> {
   }
 }
 
-export type AiGateway = {
-  address: string
-  name: string
-  depositEth: number
-  reserveEth: number
-}
-
-export async function getAiGateways(): Promise<AiGateway[]> {
-  try {
-    const res = await fetch(`${REGISTRY_URL}/gateways`, {
-      next: { revalidate: 600 },
-    })
-    if (!res.ok) return []
-    const raw: {
-      data: {
-        address: string
-        display_name?: string | null
-        kind?: string
-        latest_deposit?: string
-        latest_reserve?: string
-      }[]
-    } = await res.json()
-    return (raw.data ?? [])
-      .filter((gateway) => gateway.kind === "ai")
-      .map((gateway) => ({
-        address: gateway.address,
-        name: gateway.display_name || shortAddress(gateway.address),
-        depositEth: Number(gateway.latest_deposit ?? 0),
-        reserveEth: Number(gateway.latest_reserve ?? 0),
-      }))
-      .sort((a, b) => b.depositEth - a.depositEth)
-  } catch {
-    return []
-  }
-}
-
-export type NetworkContainer = {
-  orchestrator: string
-  pipeline: string
-  modelId: string
-  pricePerUnit: string
-  warm: boolean
-}
-
-// Container advertisements come from a gateway's getNetworkCapabilities
-// feed, which no public gateway currently exposes — set
-// LIVEPEER_GATEWAY_URL to a reachable AI gateway to populate it.
-export async function getNetworkContainers(): Promise<NetworkContainer[]> {
-  const gateway = process.env.LIVEPEER_GATEWAY_URL
-  if (!gateway) return []
-  try {
-    const res = await fetch(
-      `${gateway.replace(/\/$/, "")}/getNetworkCapabilities`,
-      { next: { revalidate: 600 } }
-    )
-    if (!res.ok) return []
-    const raw = await res.json()
-    const containers: NetworkContainer[] = []
-    for (const orch of raw.orchestrators ?? []) {
-      const name = orch.address ?? orch.orchestrator ?? "unknown"
-      for (const cap of orch.capabilities_prices ?? []) {
-        containers.push({
-          orchestrator: String(name),
-          pipeline: String(cap.pipeline ?? cap.capability ?? ""),
-          modelId: String(cap.model_id ?? ""),
-          pricePerUnit: String(cap.price_per_unit ?? ""),
-          warm: Boolean(cap.warm),
-        })
-      }
-    }
-    return containers
-  } catch {
-    return []
-  }
-}
-
-const DOCKER_HUB_URL = "https://hub.docker.com/v2/repositories/livepeer/ai-runner"
+const DOCKER_HUB_URL = "https://hub.docker.com/v2/repositories/livepeer"
 
 export type ContainerImage = {
   tag: string
@@ -173,40 +97,75 @@ export type ContainerImage = {
   updatedAt: string
 }
 
-export type AiRunnerInfo = {
+export type ContainerHubInfo = {
   pullCount: number
-  images: Record<string, ContainerImage>
+  updatedAt: string
+  images: ContainerImage[]
 }
 
-const RUNNER_TAGS = [
-  "latest",
-  "audio-to-text",
-  "text-to-speech",
-  "segment-anything-2",
-  "llm",
-]
-
-export async function getAiRunnerInfo(): Promise<AiRunnerInfo | null> {
+export async function getContainerHubInfo(
+  slug: string,
+  tags: string[]
+): Promise<ContainerHubInfo | null> {
   try {
     const [repoRes, ...tagResults] = await Promise.all([
-      fetch(`${DOCKER_HUB_URL}/`, { next: { revalidate: 3600 } }),
-      ...RUNNER_TAGS.map((tag) =>
-        fetch(`${DOCKER_HUB_URL}/tags/${tag}`, { next: { revalidate: 3600 } })
+      fetch(`${DOCKER_HUB_URL}/${slug}/`, { next: { revalidate: 3600 } }),
+      ...tags.map((tag) =>
+        fetch(`${DOCKER_HUB_URL}/${slug}/tags/${tag}`, {
+          next: { revalidate: 3600 },
+        })
       ),
     ])
     if (!repoRes.ok) return null
     const repo = await repoRes.json()
-    const images: Record<string, ContainerImage> = {}
+    const images: ContainerImage[] = []
     for (const res of tagResults) {
       if (!res.ok) continue
       const tag = await res.json()
-      images[tag.name] = {
+      images.push({
         tag: tag.name,
         sizeGb: tag.full_size / 1e9,
         updatedAt: tag.last_updated,
-      }
+      })
     }
-    return { pullCount: Number(repo.pull_count ?? 0), images }
+    return {
+      pullCount: Number(repo.pull_count ?? 0),
+      updatedAt: String(repo.last_updated ?? ""),
+      images,
+    }
+  } catch {
+    return null
+  }
+}
+
+export type GithubRepoInfo = {
+  stars: number
+  license: string | null
+  contributors: string[]
+}
+
+export async function getGithubRepoInfo(
+  repo: string
+): Promise<GithubRepoInfo | null> {
+  try {
+    const [repoRes, contributorsRes] = await Promise.all([
+      fetch(`https://api.github.com/repos/${repo}`, {
+        next: { revalidate: 3600 },
+      }),
+      fetch(`https://api.github.com/repos/${repo}/contributors?per_page=5`, {
+        next: { revalidate: 3600 },
+      }),
+    ])
+    if (!repoRes.ok) return null
+    const raw = await repoRes.json()
+    const contributors: { login: string }[] = contributorsRes.ok
+      ? await contributorsRes.json()
+      : []
+    return {
+      stars: Number(raw.stargazers_count ?? 0),
+      license: raw.license?.spdx_id ?? null,
+      contributors: contributors.map((c) => c.login),
+    }
   } catch {
     return null
   }
