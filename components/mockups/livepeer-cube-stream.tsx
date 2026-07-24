@@ -16,7 +16,7 @@ import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeom
 
 import { cn } from "@/lib/utils"
 
-const cubeCount = 96
+const cubeCount = 72
 const laneOffsets = [-1.45, -0.88, -0.32, 0.32, 0.88, 1.45]
 
 function StreamEnvironment() {
@@ -46,7 +46,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
   const dummy = useMemo(() => new Object3D(), [])
   const matrix = useMemo(() => new Matrix4(), [])
   const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.18, 0.18, 0.18, 3, 0.018),
+    () => new RoundedBoxGeometry(0.13, 0.13, 0.13, 3, 0.014),
     []
   )
   const material = useMemo(
@@ -65,7 +65,6 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
   const seeds = useMemo(
     () =>
       Array.from({ length: cubeCount }, (_, index) => ({
-        phase: index / cubeCount,
         lane: laneOffsets[index % laneOffsets.length],
         depth: ((index * 7) % 11) / 10 - 0.5,
         wobble: ((index * 13) % 17) / 17,
@@ -89,13 +88,22 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
     const travel = reduceMotion ? 0 : elapsed * 0.055
     const width = viewport.width
     const height = viewport.height
+    const activeCount =
+      size.width < 640 ? 36 : size.width < 1024 ? 54 : cubeCount
     const depthScale = size.width < 768 ? 0.45 : 0.72
 
     seeds.forEach((seed, index) => {
-      const phase = (seed.phase + travel) % 1
+      if (index >= activeCount) {
+        dummy.scale.setScalar(0)
+        dummy.updateMatrix()
+        mesh.current?.setMatrixAt(index, dummy.matrix)
+        return
+      }
+
+      const phase = (index / activeCount + travel) % 1
       const x = width * (-0.74 + phase * 1.48)
       const parabola = height * (-0.4 + 0.94 * phase * phase)
-      const convergence = 1 - MathUtils.smoothstep(phase, 0.04, 0.46)
+      const convergence = 1 - MathUtils.smoothstep(phase, 0.06, 0.74)
       const laneY = seed.lane * convergence * Math.min(height * 0.2, 1.18)
       const ripple =
         Math.sin(elapsed * 0.7 + seed.wobble * Math.PI * 2) *
@@ -113,7 +121,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         (phase - 0.5) * 0.42
       )
       const perspectiveScale =
-        seed.scale * (0.8 + convergence * 0.28) * (size.width < 640 ? 0.82 : 1)
+        seed.scale * (0.76 + convergence * 0.22) * (size.width < 640 ? 0.6 : 1)
       dummy.scale.setScalar(perspectiveScale)
       dummy.updateMatrix()
       matrix.copy(dummy.matrix)
