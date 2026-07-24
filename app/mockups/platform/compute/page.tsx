@@ -46,7 +46,24 @@ export default async function MockupComputePage() {
   ]
 
   return (
-    <PlatformPage title="Compute" action={<Button>Add capacity</Button>}>
+    <PlatformPage
+      title="Compute"
+      action={
+        <Button
+          nativeButton={false}
+          render={
+            <a
+              href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+        >
+          Run an Orchestrator
+          <span aria-hidden="true">↗</span>
+        </Button>
+      }
+    >
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
