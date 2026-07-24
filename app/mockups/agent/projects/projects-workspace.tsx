@@ -3,12 +3,10 @@
 import { type DragEvent, useRef, useState } from "react"
 import Image from "next/image"
 import {
-  ApertureIcon,
   CheckIcon,
   ChevronLeftIcon,
   EllipsisIcon,
   FolderIcon,
-  ImagesIcon,
   PlayIcon,
   PlusIcon,
   Share2Icon,
@@ -49,7 +47,7 @@ type Project = {
   updated: string
   thumbnailClass?: string
   storyboards: { name: string; count: number; updated: string }[]
-  characters: { name: string; count: number }[]
+  characters: { name: string; count: number; updated: string }[]
   renders: {
     id: number
     prompt: string
@@ -69,8 +67,8 @@ const initialProjects: Project[] = [
       { name: "Product reveal v2", count: 18, updated: "Today, 9:42 AM" },
     ],
     characters: [
-      { name: "Mara", count: 18 },
-      { name: "The Courier", count: 12 },
+      { name: "Mara", count: 18, updated: "Today, 1:48 PM" },
+      { name: "The Courier", count: 12, updated: "Yesterday" },
     ],
     renders: [
       {
@@ -129,7 +127,7 @@ const initialProjects: Project[] = [
     storyboards: [
       { name: "Homepage loops", count: 12, updated: "Yesterday" },
     ],
-    characters: [{ name: "June", count: 8 }],
+    characters: [{ name: "June", count: 8, updated: "Jul 21" }],
     renders: [
       {
         id: 202,
@@ -185,6 +183,11 @@ export function ProjectsWorkspace() {
   const [storyboardFiles, setStoryboardFiles] = useState<File[]>([])
   const [isStoryboardDragging, setIsStoryboardDragging] = useState(false)
   const storyboardUploadRef = useRef<HTMLInputElement>(null)
+  const [isNewCharacterOpen, setIsNewCharacterOpen] = useState(false)
+  const [characterName, setCharacterName] = useState("")
+  const [characterFiles, setCharacterFiles] = useState<File[]>([])
+  const [isCharacterDragging, setIsCharacterDragging] = useState(false)
+  const characterUploadRef = useRef<HTMLInputElement>(null)
   const project =
     projects.find((item) => item.id === selectedProjectId) ?? projects[0]
   const selectedRender =
@@ -266,6 +269,45 @@ export function ProjectsWorkspace() {
     setStoryboardTitle("")
     setStoryboardFiles([])
     setIsNewStoryboardOpen(false)
+  }
+
+  function setCharacterUpload(files: FileList | null) {
+    if (!files?.length) return
+    setCharacterFiles(
+      Array.from(files).filter((file) => file.type.startsWith("image/"))
+    )
+  }
+
+  function handleCharacterDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    setIsCharacterDragging(false)
+    setCharacterUpload(event.dataTransfer.files)
+  }
+
+  function createProjectCharacter() {
+    const name = characterName.trim()
+    if (!name || characterFiles.length === 0) return
+    setProjects((current) =>
+      current.map((item) =>
+        item.id === project.id
+          ? {
+              ...item,
+              updated: "Updated just now",
+              characters: [
+                {
+                  name,
+                  count: characterFiles.length,
+                  updated: "Just now",
+                },
+                ...item.characters,
+              ],
+            }
+          : item
+      )
+    )
+    setCharacterName("")
+    setCharacterFiles([])
+    setIsNewCharacterOpen(false)
   }
 
   return (
@@ -430,7 +472,9 @@ export function ProjectsWorkspace() {
                 </TabsList>
 
                 <TabsContent value="storyboards">
-                  <ProjectStoryboards
+                  <ProjectImageCollections
+                    title="Storyboards"
+                    singular="storyboard"
                     items={project.storyboards}
                     onNew={() => setIsNewStoryboardOpen(true)}
                     onAddImages={(name, count) =>
@@ -458,16 +502,50 @@ export function ProjectsWorkspace() {
                 </TabsContent>
 
                 <TabsContent value="characters">
-                  <ProjectCollection
+                  <ProjectImageCollections
                     title="Characters"
-                    icon={ApertureIcon}
+                    singular="character"
                     items={project.characters}
-                    empty="No characters in this project"
+                    onNew={() => setIsNewCharacterOpen(true)}
+                    onAddImages={(name, count) =>
+                      setProjects((current) =>
+                        current.map((item) =>
+                          item.id === project.id
+                            ? {
+                                ...item,
+                                characters: item.characters.map((character) =>
+                                  character.name === name
+                                    ? {
+                                        ...character,
+                                        count: character.count + count,
+                                        updated: "Just now",
+                                      }
+                                    : character
+                                ),
+                              }
+                            : item
+                        )
+                      )
+                    }
                   />
                 </TabsContent>
 
                 <TabsContent value="renders">
-                  <RenderGrid
+                  <div className="mb-6 flex min-h-9 items-center justify-between gap-4">
+                    <h3 className="text-sm font-medium">Renders</h3>
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        window.location.assign(
+                          `/mockups/agent?project=${encodeURIComponent(project.name)}`
+                        )
+                      }
+                    >
+                      <PlusIcon />
+                      New render
+                    </Button>
+                  </div>
+                  <RenderList
                     renders={project.renders}
                     finals={finals[project.id] ?? []}
                     onOpen={setSelectedRenderId}
@@ -476,7 +554,7 @@ export function ProjectsWorkspace() {
 
                 <TabsContent value="finals">
                   {projectFinals.length > 0 ? (
-                    <RenderGrid
+                    <RenderList
                       renders={projectFinals}
                       finals={finals[project.id] ?? []}
                       onOpen={setSelectedRenderId}
@@ -688,26 +766,116 @@ export function ProjectsWorkspace() {
           </Button>
         </DialogContent>
       </Dialog>
+
+      <Dialog
+        open={isNewCharacterOpen}
+        onOpenChange={(open) => {
+          setIsNewCharacterOpen(open)
+          if (!open) {
+            setCharacterName("")
+            setCharacterFiles([])
+            setIsCharacterDragging(false)
+          }
+        }}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>New character</DialogTitle>
+            <DialogDescription>
+              Add a character to {project.name}.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <label
+              htmlFor="project-character-name"
+              className="text-sm font-medium"
+            >
+              Name
+            </label>
+            <Input
+              id="project-character-name"
+              value={characterName}
+              onChange={(event) => setCharacterName(event.target.value)}
+              placeholder="Character name"
+              autoFocus
+            />
+          </div>
+          <div
+            onDragEnter={(event) => {
+              event.preventDefault()
+              setIsCharacterDragging(true)
+            }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                setIsCharacterDragging(false)
+              }
+            }}
+            onDrop={handleCharacterDrop}
+            onClick={() => characterUploadRef.current?.click()}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault()
+                characterUploadRef.current?.click()
+              }
+            }}
+            className={cn(
+              "flex min-h-64 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted",
+              isCharacterDragging && "bg-muted"
+            )}
+          >
+            <UploadIcon className="size-6 text-muted-foreground" />
+            <p className="mt-3 text-sm font-medium">
+              {characterFiles.length > 0
+                ? `${characterFiles.length} image${characterFiles.length === 1 ? "" : "s"} selected`
+                : "Drop character images here"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              or click to choose files
+            </p>
+            <input
+              ref={characterUploadRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => setCharacterUpload(event.target.files)}
+            />
+          </div>
+          <Button
+            disabled={!characterName.trim() || characterFiles.length === 0}
+            onClick={createProjectCharacter}
+          >
+            Create character
+          </Button>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
 
-function ProjectStoryboards({
+function ProjectImageCollections({
+  title,
+  singular,
   items,
   onNew,
   onAddImages,
 }: {
-  items: Project["storyboards"]
+  title: string
+  singular: "storyboard" | "character"
+  items: { name: string; count: number; updated: string }[]
   onNew: () => void
   onAddImages: (name: string, count: number) => void
 }) {
   return (
     <div>
       <div className="flex min-h-9 items-center justify-between gap-4">
-        <h3 className="text-sm font-medium">Storyboards</h3>
+        <h3 className="text-sm font-medium">{title}</h3>
         <Button variant="outline" onClick={onNew}>
           <PlusIcon />
-          New storyboard
+          New {singular}
         </Button>
       </div>
       {items.length > 0 ? (
@@ -756,10 +924,10 @@ function ProjectStoryboards({
         ))
       ) : (
         <div className="flex min-h-64 flex-col items-center justify-center text-center">
-          <p className="text-sm font-medium">No storyboards yet</p>
+          <p className="text-sm font-medium">No {title.toLowerCase()} yet</p>
           <Button variant="outline" className="mt-4" onClick={onNew}>
             <PlusIcon />
-            New storyboard
+            New {singular}
           </Button>
         </div>
       )}
@@ -767,51 +935,7 @@ function ProjectStoryboards({
   )
 }
 
-function ProjectCollection({
-  title,
-  icon: Icon,
-  items,
-  empty,
-}: {
-  title: string
-  icon: typeof ImagesIcon
-  items: { name: string; count: number }[]
-  empty: string
-}) {
-  return (
-    <section>
-      <div className="mb-4 flex min-h-9 items-center gap-2">
-        <Icon className="size-4" />
-        <h3 className="text-sm font-medium">{title}</h3>
-      </div>
-      {items.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2">
-          {items.map((item) => (
-            <button
-              key={item.name}
-              type="button"
-              className="flex items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-muted"
-            >
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-lg bg-muted">
-                <Image src={sampleImage} alt="" fill className="object-cover" />
-              </div>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-medium">{item.name}</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {item.count} images
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      ) : (
-        <p className="text-sm text-muted-foreground">{empty}</p>
-      )}
-    </section>
-  )
-}
-
-function RenderGrid({
+function RenderList({
   renders,
   finals,
   onOpen,
@@ -821,15 +945,17 @@ function RenderGrid({
   onOpen: (id: number) => void
 }) {
   return (
-    <div className="grid gap-x-3 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="space-y-2">
       {renders.map((render) => (
-        <button
+        <article
           key={render.id}
-          type="button"
-          onClick={() => onOpen(render.id)}
-          className="group min-w-0 text-left"
+          className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
         >
-          <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+          <button
+            type="button"
+            onClick={() => onOpen(render.id)}
+            className="group relative aspect-video overflow-hidden rounded-xl bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
             <Image
               src={sampleImage}
               alt=""
@@ -840,8 +966,8 @@ function RenderGrid({
               )}
             />
             <span className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/20">
-              <span className="flex size-10 items-center justify-center rounded-full bg-background/90">
-                <PlayIcon className="ml-0.5 size-4 fill-current" />
+              <span className="flex size-11 items-center justify-center rounded-full bg-background/90">
+                <PlayIcon className="ml-0.5 size-5 fill-current" />
               </span>
             </span>
             <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] text-white">
@@ -853,12 +979,17 @@ function RenderGrid({
                 <span className="sr-only">Final</span>
               </span>
             )}
+          </button>
+          <div className="flex min-w-0 flex-col py-1">
+            <p className="text-sm leading-relaxed">{render.prompt}</p>
+            <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground lg:mt-auto">
+              <span>{render.time}</span>
+              {finals.includes(render.id) && (
+                <Badge variant="secondary">Final</Badge>
+              )}
+            </div>
           </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-snug">
-            {render.prompt}
-          </p>
-          <p className="mt-1 text-xs text-muted-foreground">{render.time}</p>
-        </button>
+        </article>
       ))}
     </div>
   )
