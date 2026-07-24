@@ -66,7 +66,7 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
     <group
       ref={group}
       position={[
-        isWide ? viewport.width * 0.36 : viewport.width * 0.2,
+        isWide ? viewport.width * 0.29 : viewport.width * 0.14,
         isWide ? 0 : -0.16,
         0,
       ]}

@@ -206,7 +206,7 @@ export function PlaybooksWorkspace() {
         />
         <div className="relative z-10 mx-auto flex w-full justify-center px-4 sm:px-6">
           <div className="flex w-full max-w-xl flex-col items-center text-center">
-            <h1 className="text-4xl leading-tight font-medium text-balance sm:text-6xl">
+            <h1 className="text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
               Video infrastructure for agents.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">

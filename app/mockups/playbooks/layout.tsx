@@ -19,7 +19,7 @@ export default function PlaybooksLayout({
 }>) {
   return (
     <div className="min-h-dvh bg-background">
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur">
+      <header className="relative z-20 bg-transparent">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6">
           <Link
             href="/mockups/playbooks"
