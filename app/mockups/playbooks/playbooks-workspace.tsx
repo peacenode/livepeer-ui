@@ -195,7 +195,7 @@ export function PlaybooksWorkspace() {
 
   return (
     <main>
-      <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-muted">
+      <section className="relative flex min-h-svh w-full items-center overflow-hidden bg-muted">
         <LivepeerSymbol3D
           showOnMobile
           className="rounded-none [&>canvas]:scale-125"
