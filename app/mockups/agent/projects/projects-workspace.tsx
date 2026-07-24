@@ -46,6 +46,7 @@ type Project = {
   name: string
   updated: string
   thumbnailClass?: string
+  thumbnailUrl?: string
   storyboards: { name: string; count: number; updated: string }[]
   characters: { name: string; count: number; updated: string }[]
   renders: {
@@ -188,6 +189,8 @@ export function ProjectsWorkspace() {
   const [characterFiles, setCharacterFiles] = useState<File[]>([])
   const [isCharacterDragging, setIsCharacterDragging] = useState(false)
   const characterUploadRef = useRef<HTMLInputElement>(null)
+  const [isThumbnailOpen, setIsThumbnailOpen] = useState(false)
+  const thumbnailUploadRef = useRef<HTMLInputElement>(null)
   const project =
     projects.find((item) => item.id === selectedProjectId) ?? projects[0]
   const selectedRender =
@@ -310,6 +313,18 @@ export function ProjectsWorkspace() {
     setIsNewCharacterOpen(false)
   }
 
+  function setProjectThumbnail(file: File | undefined) {
+    if (!file?.type.startsWith("image/")) return
+    const url = URL.createObjectURL(file)
+    setProjects((current) =>
+      current.map((item) =>
+        item.id === project.id
+          ? { ...item, thumbnailUrl: url, thumbnailClass: "" }
+          : item
+      )
+    )
+  }
+
   return (
     <main className="flex h-[calc(100dvh-4rem)] flex-col overflow-hidden md:h-dvh">
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
@@ -330,13 +345,15 @@ export function ProjectsWorkspace() {
             ) : (
               <h1 className="text-xl font-medium">Projects</h1>
             )}
-            <Button
-              className="h-10 px-5"
-              onClick={() => setIsNewProjectOpen(true)}
-            >
-              <PlusIcon />
-              New project
-            </Button>
+            {!selectedProjectId && (
+              <Button
+                className="h-10 px-5"
+                onClick={() => setIsNewProjectOpen(true)}
+              >
+                <PlusIcon />
+                New project
+              </Button>
+            )}
           </header>
 
           {!selectedProjectId ? (
@@ -359,13 +376,14 @@ export function ProjectsWorkspace() {
                   <div className="pointer-events-none relative z-[1]">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted">
                       <Image
-                        src={sampleImage}
+                        src={item.thumbnailUrl ?? sampleImage}
                         alt=""
                         fill
                         className={cn(
                           "object-cover transition-transform group-hover:scale-105",
                           item.thumbnailClass
                         )}
+                        unoptimized={Boolean(item.thumbnailUrl)}
                       />
                     </div>
                     <h2 className="px-2 pt-3 text-base font-medium">
@@ -428,11 +446,34 @@ export function ProjectsWorkspace() {
           ) : (
             <>
               <div className="mt-3 flex items-center justify-between gap-4">
-                <div>
-                  <h1 className="text-xl font-medium">{project.name}</h1>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {project.updated}
-                  </p>
+                <div className="flex min-w-0 items-center gap-3">
+                  <button
+                    type="button"
+                    aria-label="Choose project thumbnail"
+                    onClick={() => setIsThumbnailOpen(true)}
+                    onDragOver={(event) => event.preventDefault()}
+                    onDrop={(event) => {
+                      event.preventDefault()
+                      setProjectThumbnail(event.dataTransfer.files[0])
+                    }}
+                    className="relative size-14 shrink-0 overflow-hidden rounded-full bg-muted outline-none ring-1 ring-border transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <Image
+                      src={project.thumbnailUrl ?? sampleImage}
+                      alt=""
+                      fill
+                      className={cn("object-cover", project.thumbnailClass)}
+                      unoptimized={Boolean(project.thumbnailUrl)}
+                    />
+                  </button>
+                  <div className="min-w-0">
+                    <h1 className="truncate text-xl font-medium">
+                      {project.name}
+                    </h1>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {project.updated}
+                    </p>
+                  </div>
                 </div>
                 <Button
                   variant="outline"
@@ -476,7 +517,10 @@ export function ProjectsWorkspace() {
                     title="Storyboards"
                     singular="storyboard"
                     items={project.storyboards}
-                    onNew={() => setIsNewStoryboardOpen(true)}
+                    onUpload={(files) => {
+                      setStoryboardUpload(files)
+                      if (files.length > 0) setIsNewStoryboardOpen(true)
+                    }}
                     onAddImages={(name, count) =>
                       setProjects((current) =>
                         current.map((item) =>
@@ -506,7 +550,10 @@ export function ProjectsWorkspace() {
                     title="Characters"
                     singular="character"
                     items={project.characters}
-                    onNew={() => setIsNewCharacterOpen(true)}
+                    onUpload={(files) => {
+                      setCharacterUpload(files)
+                      if (files.length > 0) setIsNewCharacterOpen(true)
+                    }}
                     onAddImages={(name, count) =>
                       setProjects((current) =>
                         current.map((item) =>
@@ -852,6 +899,77 @@ export function ProjectsWorkspace() {
           </Button>
         </DialogContent>
       </Dialog>
+
+      <Dialog
+        open={isThumbnailOpen}
+        onOpenChange={setIsThumbnailOpen}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Project thumbnail</DialogTitle>
+            <DialogDescription>
+              Choose an image from {project.name} or upload another.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            {project.renders.map((render) => (
+              <button
+                key={render.id}
+                type="button"
+                aria-label={`Use render ${render.id} as thumbnail`}
+                onClick={() => {
+                  setProjects((current) =>
+                    current.map((item) =>
+                      item.id === project.id
+                        ? {
+                            ...item,
+                            thumbnailUrl: undefined,
+                            thumbnailClass: render.imageClass,
+                          }
+                        : item
+                    )
+                  )
+                  setIsThumbnailOpen(false)
+                }}
+                className="relative aspect-square overflow-hidden rounded-lg bg-muted outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Image
+                  src={sampleImage}
+                  alt=""
+                  fill
+                  className={cn("object-cover", render.imageClass)}
+                />
+              </button>
+            ))}
+          </div>
+          <label
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              event.preventDefault()
+              setProjectThumbnail(event.dataTransfer.files[0])
+              setIsThumbnailOpen(false)
+            }}
+            className="flex min-h-24 cursor-pointer items-center justify-center rounded-xl border border-dashed border-border text-center transition-colors hover:bg-muted"
+          >
+            <div>
+              <UploadIcon className="mx-auto size-5 text-muted-foreground" />
+              <p className="mt-2 text-sm font-medium">
+                Drop an image or click to upload
+              </p>
+            </div>
+            <input
+              ref={thumbnailUploadRef}
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              onChange={(event) => {
+                setProjectThumbnail(event.target.files?.[0])
+                setIsThumbnailOpen(false)
+              }}
+            />
+          </label>
+        </DialogContent>
+      </Dialog>
     </main>
   )
 }
@@ -860,24 +978,44 @@ function ProjectImageCollections({
   title,
   singular,
   items,
-  onNew,
+  onUpload,
   onAddImages,
 }: {
   title: string
   singular: "storyboard" | "character"
   items: { name: string; count: number; updated: string }[]
-  onNew: () => void
+  onUpload: (files: FileList) => void
   onAddImages: (name: string, count: number) => void
 }) {
   return (
     <div>
-      <div className="flex min-h-9 items-center justify-between gap-4">
-        <h3 className="text-sm font-medium">{title}</h3>
-        <Button variant="outline" onClick={onNew}>
-          <PlusIcon />
-          New {singular}
-        </Button>
-      </div>
+      <label
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={(event) => {
+          event.preventDefault()
+          onUpload(event.dataTransfer.files)
+        }}
+        className="flex min-h-24 cursor-pointer items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted"
+      >
+        <div>
+          <UploadIcon className="mx-auto size-5 text-muted-foreground" />
+          <p className="mt-2 text-sm font-medium">
+            Drop images or click to upload
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Create a new {singular}
+          </p>
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          className="sr-only"
+          onChange={(event) => {
+            if (event.target.files) onUpload(event.target.files)
+          }}
+        />
+      </label>
       {items.length > 0 ? (
         items.map((item) => (
           <section key={item.name} className="py-6">
@@ -925,10 +1063,6 @@ function ProjectImageCollections({
       ) : (
         <div className="flex min-h-64 flex-col items-center justify-center text-center">
           <p className="text-sm font-medium">No {title.toLowerCase()} yet</p>
-          <Button variant="outline" className="mt-4" onClick={onNew}>
-            <PlusIcon />
-            New {singular}
-          </Button>
         </div>
       )}
     </div>
