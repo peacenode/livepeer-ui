@@ -56,7 +56,7 @@ export function PlaybooksWorkspace() {
 
       <section className="relative min-h-[32rem] overflow-hidden bg-muted sm:min-h-[40rem]">
         <Image
-          src="/playbooks/20260724-232148/ultramock.jpg"
+          src="/playbooks/20260724-232451/ultramock.jpg"
           alt=""
           fill
           className="object-cover object-[58%_center] sm:object-center"
