@@ -1,12 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
-import {
-  ArrowDownToLineIcon,
-  ArrowRightIcon,
-  CpuIcon,
-} from "lucide-react"
+import { ArrowRightIcon, CpuIcon } from "lucide-react"
 
-import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
+import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 
 import { InstallRunnerFooter } from "./install-runner-footer"
@@ -15,10 +11,7 @@ export function PlaybooksWorkspace() {
   return (
     <main>
       <section className="relative flex min-h-svh w-full items-center overflow-hidden bg-muted">
-        <LivepeerSymbol3D
-          showOnMobile
-          className="rounded-none opacity-75 [&>canvas]:scale-125"
-        />
+        <LivepeerCubeStream className="opacity-80" />
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-muted/35"
           aria-hidden="true"
@@ -72,7 +65,7 @@ export function PlaybooksWorkspace() {
         />
         <div className="absolute inset-0 z-10 flex flex-col items-start justify-center gap-4 p-6 sm:p-10">
           <h2 className="font-runner text-4xl font-medium tracking-tight sm:text-5xl">
-            Runner
+            RUNNER
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-foreground/65">
             Ready-to-run AI workflows for creating images, video, and audio
@@ -87,9 +80,6 @@ export function PlaybooksWorkspace() {
               className="h-12 rounded-sm border-foreground/10 px-5"
             >
               Browse Playbooks
-              <span className="font-sans" aria-hidden="true">
-                →
-              </span>
             </Button>
             <Button
               size="lg"
@@ -99,7 +89,6 @@ export function PlaybooksWorkspace() {
               className="h-12 rounded-sm border-foreground/10 px-5"
             >
               Get Runner
-              <ArrowDownToLineIcon aria-hidden="true" />
             </Button>
           </div>
         </div>
