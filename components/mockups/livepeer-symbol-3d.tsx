@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { PMREMGenerator, type Group } from "three"
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
+import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js"
 
 import { cn } from "@/lib/utils"
 
@@ -39,6 +40,12 @@ function StudioEnvironment() {
 
 function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const group = useRef<Group>(null)
+  const geometry = useMemo(
+    () => new RoundedBoxGeometry(0.66, 0.66, 0.48, 5, 0.075),
+    []
+  )
+
+  useEffect(() => () => geometry.dispose(), [geometry])
 
   useFrame(({ clock, pointer }, delta) => {
     if (!group.current || reduceMotion) return
@@ -61,15 +68,18 @@ function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
       scale={1.35}
     >
       {blocks.map((position) => (
-        <mesh key={position.join("-")} position={position}>
-          <boxGeometry args={[0.66, 0.66, 0.48]} />
+        <mesh geometry={geometry} key={position.join("-")} position={position}>
           <meshPhysicalMaterial
-            clearcoat={0.75}
-            clearcoatRoughness={0.12}
-            color="#6b6b6b"
-            envMapIntensity={1.35}
-            metalness={0.9}
-            roughness={0.2}
+            anisotropy={0.45}
+            clearcoat={0.9}
+            clearcoatRoughness={0.1}
+            color="#50545a"
+            envMapIntensity={1.6}
+            iridescence={0.18}
+            iridescenceIOR={1.45}
+            iridescenceThicknessRange={[180, 420]}
+            metalness={0.82}
+            roughness={0.24}
           />
         </mesh>
       ))}
@@ -104,10 +114,18 @@ function LivepeerSymbol3D({ className }: { className?: string }) {
         gl={{ alpha: true, antialias: true }}
       >
         <StudioEnvironment />
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[-4, 5, 5]} intensity={4.8} />
-        <directionalLight position={[4, -2, 3]} intensity={1.6} />
-        <pointLight position={[-2, -3, 3]} intensity={9} />
+        <ambientLight intensity={0.3} />
+        <directionalLight
+          color="#dce9ff"
+          position={[-4, 5, 5]}
+          intensity={5.2}
+        />
+        <directionalLight
+          color="#ffe2c8"
+          position={[4, -2, 3]}
+          intensity={2.2}
+        />
+        <pointLight color="#c4d7ff" position={[-2, -3, 3]} intensity={12} />
         <Symbol reduceMotion={reduceMotion} />
       </Canvas>
     </div>
