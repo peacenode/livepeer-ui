@@ -201,9 +201,12 @@ type SourceFile = {
 
 export function AgentWorkspace() {
   const [prompt, setPrompt] = useState("")
+  const [generationMode, setGenerationMode] = useState<
+    "Images" | "Storyboard" | "Clip"
+  >("Images")
   const [sources, setSources] = useState<SourceFile[]>([])
   const [generations, setGenerations] = useState<Generation[]>(seedRuns)
-  const [project, setProject] = useState("Orbit")
+  const [project, setProject] = useState("New project")
   const [searchQuery, setSearchQuery] = useState("")
   const [isDragging, setIsDragging] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
@@ -325,6 +328,24 @@ export function AgentWorkspace() {
                 isDragging && "bg-muted"
               )}
             >
+              <InputGroupAddon
+                align="block-start"
+                className="justify-start gap-1 px-3 pt-3 pb-0"
+              >
+                {(["Images", "Storyboard", "Clip"] as const).map((mode) => (
+                  <Button
+                    key={mode}
+                    type="button"
+                    size="xs"
+                    variant={
+                      generationMode === mode ? "secondary" : "ghost"
+                    }
+                    onClick={() => setGenerationMode(mode)}
+                  >
+                    {mode}
+                  </Button>
+                ))}
+              </InputGroupAddon>
               {sources.length > 0 && (
                 <InputGroupAddon
                   align="block-start"
@@ -373,7 +394,11 @@ export function AgentWorkspace() {
                 placeholder={
                   isDragging
                     ? "Drop images to attach"
-                    : "Describe an image, scene, storyboard, or character..."
+                    : generationMode === "Images"
+                      ? "Describe an image or character..."
+                      : generationMode === "Storyboard"
+                        ? "Describe a storyboard or sequence..."
+                        : "Describe a video clip..."
                 }
                 aria-label="Creation prompt"
                 className="min-h-28 px-4 pt-4 text-base md:text-base"
@@ -417,7 +442,12 @@ export function AgentWorkspace() {
                     <DropdownMenuContent>
                       <DropdownMenuGroup>
                         <DropdownMenuLabel>Save to project</DropdownMenuLabel>
-                        {["Orbit", "Soft launch", "Unsorted"].map((item) => (
+                        {[
+                          "New project",
+                          "Orbit",
+                          "Soft launch",
+                          "Unsorted",
+                        ].map((item) => (
                           <DropdownMenuItem
                             key={item}
                             onClick={() => setProject(item)}

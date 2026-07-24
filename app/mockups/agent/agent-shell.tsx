@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   ApertureIcon,
+  FilmIcon,
   FolderIcon,
   Grid2X2Icon,
   SettingsIcon,
@@ -31,6 +32,12 @@ const navItems = [
     href: "/mockups/agent/characters",
     label: "Characters",
     icon: ApertureIcon,
+    brand: false,
+  },
+  {
+    href: "/mockups/agent/footage",
+    label: "Footage",
+    icon: FilmIcon,
     brand: false,
   },
   {
@@ -142,7 +149,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
 
       <nav
         aria-label="Agent"
-        className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-4 border-t bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-5 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {navItems.map((item) => {
           const active = isActiveRoute(item.href, pathname)
