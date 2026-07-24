@@ -16,34 +16,23 @@ import {
 import { getInferenceContainer } from "@/lib/containers"
 
 export const metadata: Metadata = {
-  title: "Agent",
+  title: "Agents",
 }
 
 const agents = [
   {
-    name: "Realtime video",
+    name: "VideoBuddy",
     description:
-      "Run live video pipelines with realtime inference and ComfyUI workflows.",
-    containers: ["comfystream", "comfyui-base"],
-  },
-  {
-    name: "Media generation",
-    description:
-      "Generate and transform images, video, speech, and other media.",
-    containers: ["ai-runner", "comfyui-base"],
-  },
-  {
-    name: "Multimodal",
-    description:
-      "Combine batch model inference with realtime video processing.",
-    containers: ["ai-runner", "comfystream"],
+      "Packages realtime video, media generation, and ComfyUI containers behind CLI and MCP interfaces.",
+    containers: ["ai-runner", "comfystream", "comfyui-base"],
+    href: "/mockups/videobuddy",
   },
 ]
 
 export default function MockupAgentCatalogPage() {
   return (
     <PlatformPage
-      title="Agent"
+      title="Agents"
       action={
         <Button size="lg" className="px-5 font-medium">
           <PlusIcon />
@@ -64,7 +53,14 @@ export default function MockupAgentCatalogPage() {
           return (
             <Card key={agent.name} className="min-h-72">
               <CardHeader>
-                <CardTitle className="text-xl">{agent.name}</CardTitle>
+                <CardTitle className="text-xl">
+                  <Link
+                    href={agent.href}
+                    className="rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {agent.name}
+                  </Link>
+                </CardTitle>
                 <CardDescription>{agent.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex flex-1 flex-col gap-6">
@@ -82,9 +78,7 @@ export default function MockupAgentCatalogPage() {
                             src={container.image}
                             alt=""
                             fill
-                            preload={
-                              agentIndex === 0 && containerIndex === 0
-                            }
+                            preload={agentIndex === 0 && containerIndex === 0}
                             className="object-cover"
                             sizes="36px"
                           />

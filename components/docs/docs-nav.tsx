@@ -32,7 +32,7 @@ export function DocsNav({
       external: true,
       items: [
         { title: "Console", href: "/mockups/platform" },
-        { title: "Agent", href: "/mockups/agent" },
+        { title: "VideoBuddy", href: "/mockups/videobuddy" },
       ],
     },
     {
