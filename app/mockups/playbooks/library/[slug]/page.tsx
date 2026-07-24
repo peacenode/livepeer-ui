@@ -13,7 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../../daydream-source"
 import { InstallRunnerFooter } from "../../install-runner-footer"
@@ -288,20 +287,6 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
               {intro}
             </p>
           )}
-          <div className="mt-8">
-            <Button
-              nativeButton={false}
-              variant="outline"
-              render={
-                <a href={playbook.sourceUrl} target="_blank" rel="noreferrer" />
-              }
-            >
-              Source
-              <span className="font-sans" aria-hidden="true">
-                ↗
-              </span>
-            </Button>
-          </div>
         </div>
 
         <div className="mt-12 grid border-y sm:grid-cols-3">
