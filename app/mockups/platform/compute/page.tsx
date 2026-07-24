@@ -17,22 +17,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { formatCompact, getOrchestrators, shortAddress } from "@/lib/livepeer"
+import {
+  formatCompact,
+  getNetworkStats,
+  getOrchestrators,
+  shortAddress,
+} from "@/lib/livepeer"
 
 export const metadata: Metadata = {
   title: "Compute",
 }
 
+const TOP_COUNT = 20
+
 export default async function MockupComputePage() {
-  const orchestrators = await getOrchestrators()
-  const active = orchestrators.filter((orch) => orch.active)
-  const totalStake = orchestrators.reduce((sum, orch) => sum + orch.stakeLpt, 0)
-  const totalFees = orchestrators.reduce((sum, orch) => sum + orch.volumeUsd, 0)
+  const [network, orchestrators] = await Promise.all([
+    getNetworkStats(),
+    getOrchestrators(),
+  ])
+  const top = orchestrators.slice(0, TOP_COUNT)
 
   const stats = [
-    { label: "Active orchestrators", value: String(active.length) },
-    { label: "Total stake", value: `${formatCompact(totalStake)} LPT` },
-    { label: "Fees paid", value: `$${formatCompact(totalFees)}` },
+    {
+      label: "Active orchestrators",
+      value: network ? String(network.activeOrchestrators) : "—",
+    },
+    {
+      label: "Total stake",
+      value: network ? `${formatCompact(network.totalStakeLpt)} LPT` : "—",
+    },
+    {
+      label: "Payouts (24h)",
+      value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
+    },
+    {
+      label: "Gateways",
+      value: network ? String(network.gatewaysKnown) : "—",
+    },
   ]
 
   return (
@@ -46,7 +67,7 @@ export default async function MockupComputePage() {
         </div>
         <Button>Add capacity</Button>
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="gap-2">
             <CardHeader>
@@ -59,8 +80,12 @@ export default async function MockupComputePage() {
         ))}
       </div>
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Orchestrators</h2>
-        {orchestrators.length === 0 ? (
+        <h2 className="text-sm font-medium">
+          Orchestrators by stake
+          {orchestrators.length > TOP_COUNT &&
+            ` (top ${TOP_COUNT} of ${orchestrators.length})`}
+        </h2>
+        {top.length === 0 ? (
           <p className="rounded-md border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
             Network data is unavailable right now.
           </p>
@@ -69,27 +94,27 @@ export default async function MockupComputePage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Orchestrator</TableHead>
-                <TableHead>Service URI</TableHead>
+                <TableHead>Address</TableHead>
                 <TableHead className="text-right">Stake</TableHead>
-                <TableHead className="text-right">Fees earned</TableHead>
+                <TableHead className="text-right">Fee cut</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="w-44">Success rate</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {orchestrators.map((orch) => (
+              {top.map((orch) => (
                 <TableRow key={orch.address}>
-                  <TableCell className="font-mono text-xs">
-                    {shortAddress(orch.address)}
+                  <TableCell className="max-w-44 truncate font-medium">
+                    {orch.name}
                   </TableCell>
-                  <TableCell className="max-w-48 truncate text-xs text-muted-foreground">
-                    {orch.serviceHost}
+                  <TableCell className="font-mono text-xs text-muted-foreground">
+                    {shortAddress(orch.address)}
                   </TableCell>
                   <TableCell className="text-right font-mono text-xs">
                     {formatCompact(orch.stakeLpt)} LPT
                   </TableCell>
                   <TableCell className="text-right font-mono text-xs">
-                    ${formatCompact(orch.volumeUsd)}
+                    {orch.feeCutPercent}%
                   </TableCell>
                   <TableCell>
                     <Badge variant={orch.active ? "secondary" : "outline"}>

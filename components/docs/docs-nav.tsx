@@ -47,7 +47,7 @@ export function DocsNav({
   return (
     <nav className={cn("flex flex-col gap-6", className)}>
       {groups.map((group) => (
-        <div key={group.title} className="flex flex-col gap-1">
+        <div key={group.title} className="flex flex-col items-start">
           <h4 className="px-2 py-1 text-sm font-medium">{group.title}</h4>
           {group.items.map((item) => (
             <Link
@@ -56,8 +56,10 @@ export function DocsNav({
               onClick={onNavigate}
               target={group.external ? "_blank" : undefined}
               className={cn(
-                "rounded-md px-2 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground",
-                pathname === item.href && "bg-accent font-medium text-accent-foreground"
+                "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+                pathname === item.href
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {item.title}

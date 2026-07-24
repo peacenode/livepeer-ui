@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation"
 import { MenuIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
-import { GlobalSearch } from "@/components/mockups/global-search"
 import { platformNavItems } from "@/components/mockups/platform-sidebar"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { Button } from "@/components/ui/button"
@@ -39,10 +38,7 @@ export function PlatformMobileNav() {
             <LivepeerLockup className="h-4 w-auto" aria-label="Livepeer" />
           </SheetTitle>
         </SheetHeader>
-        <div className="px-4 pb-4">
-          <GlobalSearch shortcut={false} />
-        </div>
-        <nav className="flex flex-col items-start overflow-y-auto px-3">
+        <nav className="flex flex-col items-start overflow-y-auto px-3 pt-2">
           {platformNavItems.map((item) => (
             <Link
               key={item.href}

@@ -4,7 +4,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { LivepeerLockup } from "@/components/brand"
-import { GlobalSearch } from "@/components/mockups/global-search"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
@@ -21,13 +20,10 @@ export function PlatformSidebar() {
 
   return (
     <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col bg-background md:flex">
-      <div className="px-5 pt-6">
+      <div className="px-5 pt-6 pb-6">
         <Link href="/mockups/platform" aria-label="Livepeer home" className="inline-flex">
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
-      </div>
-      <div className="px-3 pt-5 pb-4">
-        <GlobalSearch />
       </div>
       <nav className="flex flex-col items-start px-3">
         {platformNavItems.map((item) => (
