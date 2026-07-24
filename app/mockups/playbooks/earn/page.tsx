@@ -151,10 +151,7 @@ export default function EarnWithGpuPage() {
             solo node gives you control and the full operating burden.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              nativeButton={false}
-              render={<a href="#choose-a-path" />}
-            >
+            <Button nativeButton={false} render={<a href="#choose-a-path" />}>
               Choose a path
             </Button>
             <Button
@@ -175,7 +172,7 @@ export default function EarnWithGpuPage() {
         </div>
       </section>
 
-      <section id="choose-a-path" className="scroll-mt-20 border-y">
+      <section id="choose-a-path" className="scroll-mt-20">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="max-w-2xl">
             <h2 className="text-2xl font-medium sm:text-3xl">
@@ -186,7 +183,7 @@ export default function EarnWithGpuPage() {
               actually want to run.
             </p>
           </div>
-          <div className="mt-10 grid border-t md:grid-cols-3">
+          <div className="mt-10 grid md:grid-cols-3">
             {paths.map((path) => (
               <article
                 key={path.title}
@@ -213,7 +210,7 @@ export default function EarnWithGpuPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 flex items-end justify-between gap-4 border-t pt-5">
+                <div className="mt-8 flex items-end justify-between gap-4 pt-5">
                   <span className="text-xs text-muted-foreground">
                     {path.note}
                   </span>
@@ -224,10 +221,7 @@ export default function EarnWithGpuPage() {
                     className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
                   >
                     Details
-                    <ArrowUpRightIcon
-                      className="size-4"
-                      aria-hidden="true"
-                    />
+                    <ArrowUpRightIcon className="size-4" aria-hidden="true" />
                   </a>
                 </div>
               </article>
@@ -303,10 +297,7 @@ export default function EarnWithGpuPage() {
                       className="mt-4 inline-flex items-center gap-1 text-sm font-medium hover:underline"
                     >
                       {step.linkLabel}
-                      <ArrowUpRightIcon
-                        className="size-4"
-                        aria-hidden="true"
-                      />
+                      <ArrowUpRightIcon className="size-4" aria-hidden="true" />
                     </a>
                   )}
                 </div>
@@ -332,7 +323,7 @@ export default function EarnWithGpuPage() {
           {fundingLinks.map((item) => (
             <div
               key={item.title}
-              className="flex flex-col border-b py-8 md:border-r md:px-8 md:last:border-r-0 md:first:pl-0 md:last:pr-0"
+              className="flex flex-col border-b py-8 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
             >
               <h3 className="font-medium">{item.title}</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
