@@ -19,6 +19,17 @@ type OrchestratorTableProps = {
   pageSize?: number
 }
 
+function LiteralAddress({ value }: { value: string }) {
+  if (!value.startsWith("0x")) return value
+
+  return (
+    <>
+      <span>{value[0]}</span>
+      <span>{value.slice(1)}</span>
+    </>
+  )
+}
+
 export function OrchestratorTable({
   orchestrators,
   pageSize = 20,
@@ -45,22 +56,30 @@ export function OrchestratorTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Orchestrator</TableHead>
-            <TableHead>Address</TableHead>
-            <TableHead className="text-right">Stake</TableHead>
-            <TableHead className="text-right">Fee cut</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="w-44">Success rate</TableHead>
+            <TableHead className="text-muted-foreground">
+              Orchestrator
+            </TableHead>
+            <TableHead className="text-muted-foreground">Address</TableHead>
+            <TableHead className="text-right text-muted-foreground">
+              Stake
+            </TableHead>
+            <TableHead className="text-right text-muted-foreground">
+              Fee cut
+            </TableHead>
+            <TableHead className="text-muted-foreground">Status</TableHead>
+            <TableHead className="w-44 text-muted-foreground">
+              Success rate
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {visibleItems.map((orchestrator) => (
             <TableRow key={orchestrator.address}>
               <TableCell className="font-identifier max-w-44 truncate font-medium">
-                {orchestrator.name}
+                <LiteralAddress value={orchestrator.name} />
               </TableCell>
               <TableCell className="font-identifier font-mono text-xs text-muted-foreground">
-                {shortAddress(orchestrator.address)}
+                <LiteralAddress value={shortAddress(orchestrator.address)} />
               </TableCell>
               <TableCell className="text-right text-xs tabular-nums">
                 {formatCompact(orchestrator.stakeLpt)} LPT

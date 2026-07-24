@@ -67,10 +67,7 @@ export default async function MockupComputePage() {
           </Card>
         ))}
       </div>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Orchestrators by stake</h2>
-        <OrchestratorTable orchestrators={orchestrators} />
-      </div>
+      <OrchestratorTable orchestrators={orchestrators} />
       <p className="text-xs text-muted-foreground">
         On-chain registry and performance leaderboard data, cached for 10
         minutes.
