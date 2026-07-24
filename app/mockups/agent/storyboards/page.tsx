@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
-import { EntityPage } from "../entity-page"
+import { StoryboardsWorkspace } from "./storyboards-workspace"
 
 export const metadata: Metadata = {
   title: "Storyboards - Livepeer",
 }
 
 export default function StoryboardsPage() {
-  return <EntityPage type="storyboards" />
+  return <StoryboardsWorkspace />
 }

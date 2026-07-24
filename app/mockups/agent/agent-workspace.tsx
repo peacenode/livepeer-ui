@@ -13,10 +13,13 @@ import {
   ArrowUpIcon,
   ChevronDownIcon,
   FolderOpenIcon,
-  ImagePlusIcon,
+  ImagesIcon,
+  Layers3Icon,
   PaperclipIcon,
+  PlayIcon,
   PlusIcon,
   RotateCwIcon,
+  SparklesIcon,
   XIcon,
 } from "lucide-react"
 
@@ -54,27 +57,114 @@ const sampleImage = "/generated/2026-07-23-1730/cobalt-runner.png"
 const initialPrompt =
   "A translucent cobalt running shoe suspended above rippled brushed aluminum, sharp diagonal studio light, chrome details"
 
-const seedRuns = [
+type Reference =
+  | { kind: "storyboard"; name: string; count: number }
+  | { kind: "images"; count: number }
+
+type Generation = {
+  id: number
+  prompt: string
+  project: string
+  time: string
+  duration: string
+  reference: Reference
+  imageClass?: string
+}
+
+const seedRuns: Generation[] = [
   {
-    id: 12,
+    id: 18,
     prompt: initialPrompt,
     project: "Orbit",
     time: "Just now",
+    duration: "0:08",
+    reference: {
+      kind: "storyboard",
+      name: "Orbit launch film",
+      count: 30,
+    },
   },
   {
-    id: 11,
+    id: 17,
     prompt:
       "Campaign still with a cobalt runner on black glass, low horizon light, cool studio atmosphere",
     project: "Orbit",
     time: "18 min ago",
+    duration: "0:06",
+    reference: { kind: "images", count: 8 },
+    imageClass: "hue-rotate-15",
   },
-]
-
-const imageClasses = [
-  "object-cover",
-  "scale-110 object-cover hue-rotate-15",
-  "scale-125 -translate-x-3 object-cover saturate-75",
-  "scale-110 translate-y-3 object-cover contrast-125",
+  {
+    id: 16,
+    prompt:
+      "Slow orbit around the product as the key light sweeps across the translucent upper",
+    project: "Orbit",
+    time: "42 min ago",
+    duration: "0:10",
+    reference: {
+      kind: "storyboard",
+      name: "Product reveal v2",
+      count: 14,
+    },
+    imageClass: "contrast-125",
+  },
+  {
+    id: 15,
+    prompt:
+      "Macro push through chrome details into a wide hero frame, restrained camera movement",
+    project: "Orbit",
+    time: "Today, 11:24 AM",
+    duration: "0:07",
+    reference: { kind: "images", count: 4 },
+    imageClass: "saturate-75",
+  },
+  {
+    id: 14,
+    prompt:
+      "Shoe descends through soft haze and settles just above a mirrored aluminum surface",
+    project: "Orbit",
+    time: "Today, 9:08 AM",
+    duration: "0:12",
+    reference: {
+      kind: "storyboard",
+      name: "Opening sequence",
+      count: 22,
+    },
+    imageClass: "brightness-90",
+  },
+  {
+    id: 13,
+    prompt:
+      "Top-down rotation with hard graphic shadows and small chrome spheres crossing frame",
+    project: "Soft launch",
+    time: "Yesterday",
+    duration: "0:08",
+    reference: { kind: "images", count: 12 },
+    imageClass: "hue-rotate-30",
+  },
+  {
+    id: 12,
+    prompt:
+      "Wide campaign loop, quiet motion in the reflective surface, product held perfectly still",
+    project: "Soft launch",
+    time: "Yesterday",
+    duration: "0:15",
+    reference: {
+      kind: "storyboard",
+      name: "Homepage loops",
+      count: 18,
+    },
+  },
+  {
+    id: 11,
+    prompt:
+      "Fast cut test between four lighting directions on a seamless black stage",
+    project: "Unsorted",
+    time: "Jul 21",
+    duration: "0:05",
+    reference: { kind: "images", count: 16 },
+    imageClass: "contrast-150",
+  },
 ]
 
 type SourceFile = {
@@ -82,8 +172,6 @@ type SourceFile = {
   size: number
   url: string
 }
-
-type Generation = (typeof seedRuns)[number]
 
 export function AgentWorkspace() {
   const [prompt, setPrompt] = useState("")
@@ -132,6 +220,15 @@ export function AgentWorkspace() {
           prompt: prompt.trim(),
           project,
           time: "Just now",
+          duration: "0:08",
+          reference:
+            sources.length > 0
+              ? { kind: "images", count: sources.length }
+              : {
+                  kind: "storyboard",
+                  name: "Orbit launch film",
+                  count: 30,
+                },
         },
         ...current.map((item, index) =>
           index === 0 && item.time === "Just now"
@@ -321,60 +418,95 @@ export function AgentWorkspace() {
           <div className="space-y-12">
             {generations.map((generation) => (
               <article key={generation.id} className="space-y-4">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary">{generation.project}</Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {generation.time}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary">{generation.project}</Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {generation.time}
+                    </span>
+                  </div>
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed">
+                    {generation.prompt}
+                  </p>
+                </div>
+                <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
+                  <Image
+                    src={sampleImage}
+                    alt={`Video render ${generation.id}`}
+                    fill
+                    className={cn(
+                      "scale-110 object-cover",
+                      generation.imageClass
+                    )}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                    <button
+                      type="button"
+                      aria-label={`Play render ${generation.id}`}
+                      className="flex size-11 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur"
+                    >
+                      <PlayIcon className="ml-0.5 size-5 fill-current" />
+                    </button>
+                  </div>
+                  <span className="absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] font-medium text-white">
+                    {generation.duration}
+                  </span>
+                </div>
+                <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                  {generation.reference.kind === "storyboard" ? (
+                    <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                      <Layers3Icon className="size-4 shrink-0" />
+                      <span className="truncate font-medium text-foreground">
+                        {generation.reference.name}
+                      </span>
+                      <span className="shrink-0">
+                        {generation.reference.count} frames
                       </span>
                     </div>
-                    <p className="mt-2 max-w-3xl text-sm leading-relaxed">
-                      {generation.prompt}
-                    </p>
-                  </div>
-                  <Button variant="outline" size="sm">
-                    <RotateCwIcon />
-                    Rerun
-                  </Button>
-                </div>
-                <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
-                  {imageClasses.map((imageClass, index) => (
-                    <div
-                      key={imageClass}
-                      className="group relative aspect-square overflow-hidden rounded-xl bg-muted"
-                    >
-                      <Image
-                        src={sampleImage}
-                        alt={`Generation ${generation.id}, result ${index + 1}`}
-                        fill
-                        className={cn(
-                          "transition-transform duration-500 group-hover:scale-[1.03]",
-                          imageClass
-                        )}
-                      />
-                      <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-gradient-to-t from-black/60 to-transparent p-2 pt-8 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100">
-                        <Button
-                          variant="secondary"
-                          size="icon-xs"
-                          aria-label="Use as reference"
-                        >
-                          <ImagePlusIcon />
-                        </Button>
-                        <a
-                          href={sampleImage}
-                          download={`generation-${generation.id}-${index + 1}.png`}
-                          aria-label="Download image"
-                          className={buttonVariants({
-                            variant: "secondary",
-                            size: "icon-xs",
-                          })}
-                        >
-                          <ArrowDownToLineIcon />
-                        </a>
+                  ) : (
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <div className="flex -space-x-2">
+                        {[0, 1, 2].map((index) => (
+                          <div
+                            key={index}
+                            className="relative size-7 overflow-hidden rounded-md bg-muted ring-2 ring-background"
+                          >
+                            <Image
+                              src={sampleImage}
+                              alt=""
+                              fill
+                              className={cn(
+                                "object-cover",
+                                index === 1 && "hue-rotate-15",
+                                index === 2 && "contrast-125"
+                              )}
+                            />
+                          </div>
+                        ))}
                       </div>
+                      <span className="flex items-center gap-1.5">
+                        <ImagesIcon className="size-3.5" />
+                        {generation.reference.count} source images
+                      </span>
                     </div>
-                  ))}
+                  )}
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <SparklesIcon />
+                      Get alternates
+                    </Button>
+                    <a
+                      href={sampleImage}
+                      download={`render-${generation.id}.mp4`}
+                      className={buttonVariants({
+                        variant: "outline",
+                        size: "sm",
+                      })}
+                    >
+                      <ArrowDownToLineIcon />
+                      Download
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
