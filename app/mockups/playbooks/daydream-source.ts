@@ -13,7 +13,7 @@ const metadataOverrides: Record<
 > = {
   "train-your-brand-aesthetic": {
     duration: "~30s campaign render · ~6–8m w/ brand LoRA",
-    budget: "~$0.25 campaign · ~$0.05 each after · ~$22 one-time LoRA training",
+    budget: "~$0.25 campaign · ~$0.05 each after · ~$22 w/ LoRA training",
   },
 }
 
