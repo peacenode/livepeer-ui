@@ -25,7 +25,7 @@ export default async function MockupInferencePage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center justify-between gap-4">
+      <div className="sticky top-0 z-10 -mx-6 flex items-center justify-between gap-4 bg-background px-6 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-6 after:bg-gradient-to-b after:from-background after:to-transparent md:-mx-10 md:px-10">
         <h1 className="text-xl font-medium">Inference</h1>
         <Button>Publish container</Button>
       </div>
