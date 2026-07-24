@@ -16,7 +16,7 @@ import {
 } from "@/lib/livepeer"
 
 export const metadata: Metadata = {
-  title: "Network compute",
+  title: "Compute",
 }
 
 export default async function MockupComputePage() {
@@ -47,7 +47,7 @@ export default async function MockupComputePage() {
 
   return (
     <PlatformPage
-      title="Network compute"
+      title="Compute"
       action={
         <Button
           nativeButton={false}
