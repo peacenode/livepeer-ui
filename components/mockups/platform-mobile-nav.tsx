@@ -37,7 +37,7 @@ export function PlatformMobileNav() {
             <LivepeerLockup className="h-4 w-auto" aria-label="Livepeer" />
           </SheetTitle>
         </SheetHeader>
-        <div className="px-3 pb-2">
+        <div className="px-3 py-3">
           <ProjectMenu />
         </div>
         <nav className="flex flex-col items-start overflow-y-auto px-3 pt-2">

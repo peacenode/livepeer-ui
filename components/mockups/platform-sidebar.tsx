@@ -31,7 +31,7 @@ export function PlatformSidebar() {
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
       </div>
-      <div className="px-3 pb-2">
+      <div className="px-3 pt-3 pb-4">
         <ProjectMenu />
       </div>
       <nav className="flex flex-col items-start px-3">
