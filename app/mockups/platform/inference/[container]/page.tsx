@@ -76,8 +76,8 @@ export default async function ContainerDetailPage({
           <ArrowLeftIcon data-icon="inline-start" />
           Inference
         </Button>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <h1 className="font-mono text-xl font-medium">
                 {container.slug}
@@ -86,16 +86,16 @@ export default async function ContainerDetailPage({
                 <Badge variant="outline">{github.license}</Badge>
               )}
             </div>
-            <p className="max-w-xl text-sm text-balance text-muted-foreground">
-              {container.description}
-            </p>
+            <Button
+              nativeButton={false}
+              render={<Link href="/mockups/platform/inference" />}
+            >
+              Deploy
+            </Button>
           </div>
-          <Button
-            nativeButton={false}
-            render={<Link href="/mockups/platform/inference" />}
-          >
-            Deploy
-          </Button>
+          <p className="max-w-xl text-sm text-balance text-muted-foreground">
+            {container.description}
+          </p>
         </div>
         <p className="text-xs text-muted-foreground">
           By {container.creator} ·{" "}
