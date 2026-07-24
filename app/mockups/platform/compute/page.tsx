@@ -50,7 +50,7 @@ export default async function MockupComputePage() {
 
   return (
     <PlatformPage title="Compute" action={<Button>Add capacity</Button>}>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>

@@ -25,14 +25,26 @@ const stats = [
   {
     label: "Inference requests",
     value: "1.2M",
-    change: "+12.4% · 7d",
+    period: "7d",
+    context: "+12.4%",
   },
-  { label: "Compute hours", value: "8,431", change: "+3.1% · 7d" },
-  { label: "Active pipelines", value: "14", change: "+2 · 7d" },
+  {
+    label: "Compute hours",
+    value: "8,431",
+    period: "7d",
+    context: "+3.1%",
+  },
+  {
+    label: "Active pipelines",
+    value: "14",
+    period: "7d",
+    context: "+2",
+  },
   {
     label: "Spend this month",
     value: "$2,148.90",
-    change: "$71.63/day",
+    period: "MTD",
+    context: "$71.63/day",
   },
 ]
 
@@ -72,19 +84,22 @@ const activity = [
 export default function MockupHomePage() {
   return (
     <PlatformPage title="Home">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} variant="metric">
             <CardHeader>
               <CardDescription className="flex w-full items-baseline gap-1.5">
                 <span>{stat.label}</span>
                 <span className="shrink-0 text-muted-foreground tabular-nums">
-                  {stat.change}
+                  {stat.period}
                 </span>
               </CardDescription>
               <CardTitle className="text-3xl leading-none font-medium tabular-nums">
                 {stat.value}
               </CardTitle>
+              <p className="-mt-2 text-sm text-muted-foreground tabular-nums">
+                {stat.context}
+              </p>
             </CardHeader>
           </Card>
         ))}
