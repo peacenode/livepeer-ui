@@ -238,7 +238,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
   )
 
   const meta = [
-    { label: "Time", value: playbook.duration },
+    { label: playbook.durationLabel ?? "Time", value: playbook.duration },
     { label: "Budget", value: playbook.budget },
     { label: "Reliability", value: playbook.reliability },
   ].filter((item) => item.value)

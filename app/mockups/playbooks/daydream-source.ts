@@ -9,12 +9,18 @@ const titleOverrides: Record<string, string> = {
 
 const metadataOverrides: Record<
   string,
-  { duration?: string; budget?: string }
+  {
+    duration?: string
+    durationLabel?: string
+    budget?: string
+    reliability?: string
+  }
 > = {
   "train-your-brand-aesthetic": {
-    duration: "~30s campaign render · ~6–8m w/ brand LoRA",
-    budget:
-      "~$0.25 for 8 campaign images · ~$0.05 each after · ~$22 w/ LoRA training",
+    duration: "30s · 6–8m w/ LoRA",
+    durationLabel: "Render time",
+    budget: "$0.25 · $22.00 w/ LoRA",
+    reliability: "4.3 / 5",
   },
 }
 
@@ -36,6 +42,7 @@ export type PlaybookDocument = {
   theme?: string
   persona?: string
   duration?: string
+  durationLabel?: string
   budget?: string
   reliability?: string
   caps: string[]
@@ -193,9 +200,12 @@ export async function getPlaybookDocument(
     persona: parseScalar(fields.get("persona")),
     duration:
       metadataOverrides[slug]?.duration ?? parseScalar(fields.get("duration")),
+    durationLabel: metadataOverrides[slug]?.durationLabel,
     budget:
       metadataOverrides[slug]?.budget ?? parseScalar(fields.get("budget_usd")),
-    reliability: parseScalar(fields.get("reliability"))?.split("#")[0].trim(),
+    reliability:
+      metadataOverrides[slug]?.reliability ??
+      parseScalar(fields.get("reliability"))?.split("#")[0].trim(),
     caps,
     markdown,
     brief:
