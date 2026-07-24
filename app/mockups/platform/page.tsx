@@ -19,31 +19,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  getForumTopicUrl,
+  getLatestResearchTopics,
+  RESEARCH_FORUM_URL,
+} from "@/lib/forum"
 
 export const metadata: Metadata = {
   title: "Home",
 }
-
-const updates = [
-  {
-    title: "Container pipelines",
-    description: "Create, publish, and run reusable inference pipelines.",
-    date: "Jul 24, 2026",
-    href: "/mockups/platform/inference",
-  },
-  {
-    title: "Orchestrator rewards",
-    description: "Review network service payouts and protocol rewards.",
-    date: "Jul 18, 2026",
-    href: "/mockups/platform/compute",
-  },
-  {
-    title: "Project usage controls",
-    description: "Track project spend and configure monthly budgets.",
-    date: "Jul 10, 2026",
-    href: "/mockups/platform/usage",
-  },
-]
 
 const getStartedSteps = [
   {
@@ -63,7 +47,16 @@ const getStartedSteps = [
   },
 ]
 
-export default function MockupHomePage() {
+const forumDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+})
+
+export default async function MockupHomePage() {
+  const forumTopics = await getLatestResearchTopics()
+
   return (
     <PlatformPage title="Home">
       <Card className="py-0">
@@ -163,29 +156,63 @@ export default function MockupHomePage() {
         </Link>
       </div>
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Updates</h2>
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-sm font-medium">Updates</h2>
+          <a
+            href={RESEARCH_FORUM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            View forum
+            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+          </a>
+        </div>
         <div className="border-y">
-          {updates.map((update) => (
-            <Link
-              key={update.title}
-              href={update.href}
+          {forumTopics.map((topic) => (
+            <a
+              key={topic.id}
+              href={getForumTopicUrl(topic)}
+              target="_blank"
+              rel="noreferrer"
               className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-muted-foreground"
             >
               <div className="min-w-0 flex-1">
-                <h3 className="font-medium text-foreground">{update.title}</h3>
+                <h3 className="line-clamp-2 font-medium text-foreground">
+                  {topic.title}
+                </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {update.description}
+                  {topic.replyCount}{" "}
+                  {topic.replyCount === 1 ? "reply" : "replies"} · Latest by{" "}
+                  {topic.lastPosterUsername}
                 </p>
               </div>
-              <time className="hidden shrink-0 text-sm text-muted-foreground tabular-nums sm:block">
-                {update.date}
+              <time
+                dateTime={topic.lastPostedAt}
+                className="hidden shrink-0 text-sm text-muted-foreground tabular-nums sm:block"
+              >
+                {forumDateFormatter.format(new Date(topic.lastPostedAt))}
               </time>
-              <ArrowRightIcon
+              <ArrowUpRightIcon
                 className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
-            </Link>
+            </a>
           ))}
+          {forumTopics.length === 0 && (
+            <a
+              href={RESEARCH_FORUM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center justify-between gap-6 py-5"
+            >
+              <span className="font-medium">Visit the Livepeer forum</span>
+              <ArrowUpRightIcon
+                className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </a>
+          )}
         </div>
       </div>
     </PlatformPage>
