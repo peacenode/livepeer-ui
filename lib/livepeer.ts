@@ -89,6 +89,53 @@ export async function getOrchestrators(): Promise<Orchestrator[]> {
   }
 }
 
+const DOCKER_HUB_URL = "https://hub.docker.com/v2/repositories/livepeer/ai-runner"
+
+export type ContainerImage = {
+  tag: string
+  sizeGb: number
+  updatedAt: string
+}
+
+export type AiRunnerInfo = {
+  pullCount: number
+  images: Record<string, ContainerImage>
+}
+
+const RUNNER_TAGS = [
+  "latest",
+  "audio-to-text",
+  "text-to-speech",
+  "segment-anything-2",
+  "llm",
+]
+
+export async function getAiRunnerInfo(): Promise<AiRunnerInfo | null> {
+  try {
+    const [repoRes, ...tagResults] = await Promise.all([
+      fetch(`${DOCKER_HUB_URL}/`, { next: { revalidate: 3600 } }),
+      ...RUNNER_TAGS.map((tag) =>
+        fetch(`${DOCKER_HUB_URL}/tags/${tag}`, { next: { revalidate: 3600 } })
+      ),
+    ])
+    if (!repoRes.ok) return null
+    const repo = await repoRes.json()
+    const images: Record<string, ContainerImage> = {}
+    for (const res of tagResults) {
+      if (!res.ok) continue
+      const tag = await res.json()
+      images[tag.name] = {
+        tag: tag.name,
+        sizeGb: tag.full_size / 1e9,
+        updatedAt: tag.last_updated,
+      }
+    }
+    return { pullCount: Number(repo.pull_count ?? 0), images }
+  } catch {
+    return null
+  }
+}
+
 function hostFromUri(uri: string | undefined) {
   if (!uri) return ""
   try {
