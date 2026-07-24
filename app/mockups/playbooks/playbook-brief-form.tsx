@@ -44,7 +44,7 @@ const fieldsWithoutDescriptions = new Set([
 ])
 
 const fieldLabels: Record<string, string> = {
-  one_liner: "Tagline",
+  one_liner: "Brand tagline",
   aspect: "Aspect ratio",
   aspect_ratio: "Aspect ratio",
 }
@@ -136,11 +136,15 @@ export function PlaybookBriefForm({
   const trainBrandLoraField = fields.find(
     (field) => field.name === "train_brand_lora"
   )
+  const hasFinishingPasses = fields.some((field) =>
+    ["packshot", "teaser", "music", "reel"].includes(field.name)
+  )
   const aspectFields = fields.filter((field) =>
     field.name.toLowerCase().includes("aspect")
   )
   const orderedFields = fields.flatMap((field) => {
     if (field.name === "train_brand_lora") return []
+    if (field.name === "finish" && hasFinishingPasses) return []
     if (field.name.toLowerCase().includes("aspect")) return []
     if (field.name.toLowerCase() === "aesthetic") {
       return [field, ...aspectFields]
