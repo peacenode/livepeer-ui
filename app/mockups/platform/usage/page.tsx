@@ -89,7 +89,7 @@ export default function MockupUsagePage() {
         </TabsList>
         <TabsContent value="overview">
           <div className="flex flex-col gap-8">
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-3">
               <Card variant="metric">
                 <CardHeader className="flex-1 justify-between">
                   <span className="font-medium text-foreground">
@@ -120,40 +120,42 @@ export default function MockupUsagePage() {
                   </CardTitle>
                 </CardHeader>
               </Card>
+            </div>
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_18rem] md:items-stretch">
+              <div className="flex flex-col justify-center gap-3">
+                <div className="flex items-center justify-between gap-4 text-sm">
+                  <span className="font-medium">Monthly project budget</span>
+                  <span className="text-muted-foreground tabular-nums">
+                    $1,898.25 / $3,000
+                  </span>
+                </div>
+                <Progress value={63} />
+                <p className="text-xs text-muted-foreground">
+                  Alerts are sent at 75%, 90%, and 100% of the project budget.
+                </p>
+              </div>
               <Link
                 href="/mockups/platform/organization?tab=billing"
                 className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               >
                 <Card
-                  variant="metric"
+                  size="sm"
                   className="h-full transition-colors group-hover:bg-accent"
                 >
-                  <CardHeader className="flex-1 justify-between">
-                    <div className="flex w-full items-center justify-between gap-3">
-                      <CardDescription>Billing</CardDescription>
-                      <ArrowUpRightIcon
-                        className="size-4 text-muted-foreground"
-                        aria-hidden="true"
-                      />
+                  <CardHeader className="h-full grid-cols-[1fr_auto]">
+                    <div className="flex flex-col justify-between gap-3">
+                      <CardTitle>Billing</CardTitle>
+                      <CardDescription>
+                        Payment methods and invoices
+                      </CardDescription>
                     </div>
-                    <p className="max-w-40 text-sm text-muted-foreground">
-                      Payment methods and invoices
-                    </p>
+                    <ArrowUpRightIcon
+                      className="size-4 text-muted-foreground"
+                      aria-hidden="true"
+                    />
                   </CardHeader>
                 </Card>
               </Link>
-            </div>
-            <div className="flex max-w-xl flex-col gap-3">
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="font-medium">Monthly project budget</span>
-                <span className="text-muted-foreground tabular-nums">
-                  $1,898.25 / $3,000
-                </span>
-              </div>
-              <Progress value={63} />
-              <p className="text-xs text-muted-foreground">
-                Alerts are sent at 75%, 90%, and 100% of the project budget.
-              </p>
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="text-sm font-medium">Daily usage</h2>
