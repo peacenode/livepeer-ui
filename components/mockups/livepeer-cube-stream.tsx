@@ -71,8 +71,11 @@ function streamPosition(
   height: number
 ) {
   const lanePosition = (lane - (laneCount - 1) / 2) / ((laneCount - 1) / 2)
-  const spread = (0.035 + progress * 0.11) * lanePosition
-  const center = -0.03 + Math.sin(progress * 1.48) * 0.38
+  // Follow the source artwork's accelerating arch: nearly vertical at the
+  // crown, then opening decisively toward the lower-right.
+  const arch = progress * progress
+  const spread = (0.035 + progress * 0.09 + arch * 0.025) * lanePosition
+  const center = -0.04 + progress * 0.14 + arch * 0.44
 
   return {
     x: (center + spread) * width,
@@ -110,16 +113,12 @@ function FiberLanes() {
   const material = useMemo(
     () =>
       new MeshPhysicalMaterial({
-        color: new Color("#d8e6eb"),
-        clearcoat: 1,
-        clearcoatRoughness: 0.14,
-        envMapIntensity: 1.25,
-        opacity: 0.16,
-        roughness: 0.24,
-        thickness: 0.3,
-        transmission: 0.92,
-        transparent: true,
-        depthWrite: false,
+        color: new Color("#c8cdd0"),
+        clearcoat: 0.72,
+        clearcoatRoughness: 0.22,
+        envMapIntensity: 1.1,
+        metalness: 0.36,
+        roughness: 0.42,
       }),
     []
   )
@@ -175,16 +174,12 @@ function StreamInstances({ reduceMotion }: { reduceMotion: boolean }) {
   const materials = useMemo(
     () => ({
       glass: new MeshPhysicalMaterial({
-        color: new Color("#dcecf2"),
-        clearcoat: 1,
-        clearcoatRoughness: 0.08,
-        envMapIntensity: 1.5,
-        opacity: 0.68,
-        roughness: 0.1,
-        thickness: 0.52,
-        transmission: 0.88,
-        transparent: true,
-        depthWrite: false,
+        color: new Color("#edf0ee"),
+        clearcoat: 0.94,
+        clearcoatRoughness: 0.12,
+        envMapIntensity: 1.45,
+        metalness: 0.18,
+        roughness: 0.2,
       }),
       graphite: new MeshPhysicalMaterial({
         color: new Color("#555b62"),
@@ -195,20 +190,15 @@ function StreamInstances({ reduceMotion }: { reduceMotion: boolean }) {
         roughness: 0.2,
       }),
       prism: new MeshPhysicalMaterial({
-        color: new Color("#cbd7ff"),
+        color: new Color("#aeb9d9"),
         clearcoat: 1,
-        clearcoatRoughness: 0.06,
-        envMapIntensity: 1.85,
-        iridescence: 0.9,
+        clearcoatRoughness: 0.1,
+        envMapIntensity: 1.7,
+        iridescence: 0.72,
         iridescenceIOR: 1.55,
         iridescenceThicknessRange: [160, 460],
-        metalness: 0.08,
-        opacity: 0.82,
-        roughness: 0.1,
-        thickness: 0.38,
-        transmission: 0.52,
-        transparent: true,
-        depthWrite: false,
+        metalness: 0.34,
+        roughness: 0.16,
       }),
     }),
     []
