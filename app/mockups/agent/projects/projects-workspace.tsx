@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { type DragEvent, useRef, useState } from "react"
 import Image from "next/image"
 import {
   ApertureIcon,
@@ -9,10 +9,10 @@ import {
   EllipsisIcon,
   FolderIcon,
   ImagesIcon,
-  Layers3Icon,
   PlayIcon,
   PlusIcon,
   Share2Icon,
+  UploadIcon,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -48,7 +48,7 @@ type Project = {
   name: string
   updated: string
   thumbnailClass?: string
-  storyboards: { name: string; count: number }[]
+  storyboards: { name: string; count: number; updated: string }[]
   characters: { name: string; count: number }[]
   renders: {
     id: number
@@ -65,8 +65,8 @@ const initialProjects: Project[] = [
     name: "Orbit",
     updated: "Updated today",
     storyboards: [
-      { name: "Orbit launch film", count: 30 },
-      { name: "Product reveal v2", count: 18 },
+      { name: "Orbit launch film", count: 30, updated: "Today, 2:14 PM" },
+      { name: "Product reveal v2", count: 18, updated: "Today, 9:42 AM" },
     ],
     characters: [
       { name: "Mara", count: 18 },
@@ -126,7 +126,9 @@ const initialProjects: Project[] = [
     name: "Soft launch",
     updated: "Updated yesterday",
     thumbnailClass: "hue-rotate-30",
-    storyboards: [{ name: "Homepage loops", count: 12 }],
+    storyboards: [
+      { name: "Homepage loops", count: 12, updated: "Yesterday" },
+    ],
     characters: [{ name: "June", count: 8 }],
     renders: [
       {
@@ -178,6 +180,11 @@ export function ProjectsWorkspace() {
   const [isNewProjectOpen, setIsNewProjectOpen] = useState(false)
   const [newProjectName, setNewProjectName] = useState("")
   const [shareCopied, setShareCopied] = useState(false)
+  const [isNewStoryboardOpen, setIsNewStoryboardOpen] = useState(false)
+  const [storyboardTitle, setStoryboardTitle] = useState("")
+  const [storyboardFiles, setStoryboardFiles] = useState<File[]>([])
+  const [isStoryboardDragging, setIsStoryboardDragging] = useState(false)
+  const storyboardUploadRef = useRef<HTMLInputElement>(null)
   const project =
     projects.find((item) => item.id === selectedProjectId) ?? projects[0]
   const selectedRender =
@@ -220,6 +227,45 @@ export function ProjectsWorkspace() {
     setActiveTab("storyboards")
     setNewProjectName("")
     setIsNewProjectOpen(false)
+  }
+
+  function setStoryboardUpload(files: FileList | null) {
+    if (!files?.length) return
+    setStoryboardFiles(
+      Array.from(files).filter((file) => file.type.startsWith("image/"))
+    )
+  }
+
+  function handleStoryboardDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault()
+    setIsStoryboardDragging(false)
+    setStoryboardUpload(event.dataTransfer.files)
+  }
+
+  function createProjectStoryboard() {
+    const name = storyboardTitle.trim()
+    if (!name || storyboardFiles.length === 0) return
+    setProjects((current) =>
+      current.map((item) =>
+        item.id === project.id
+          ? {
+              ...item,
+              updated: "Updated just now",
+              storyboards: [
+                {
+                  name,
+                  count: storyboardFiles.length,
+                  updated: "Just now",
+                },
+                ...item.storyboards,
+              ],
+            }
+          : item
+      )
+    )
+    setStoryboardTitle("")
+    setStoryboardFiles([])
+    setIsNewStoryboardOpen(false)
   }
 
   return (
@@ -384,11 +430,30 @@ export function ProjectsWorkspace() {
                 </TabsList>
 
                 <TabsContent value="storyboards">
-                  <ProjectCollection
-                    title="Storyboards"
-                    icon={Layers3Icon}
+                  <ProjectStoryboards
                     items={project.storyboards}
-                    empty="No storyboards in this project"
+                    onNew={() => setIsNewStoryboardOpen(true)}
+                    onAddImages={(name, count) =>
+                      setProjects((current) =>
+                        current.map((item) =>
+                          item.id === project.id
+                            ? {
+                                ...item,
+                                storyboards: item.storyboards.map(
+                                  (storyboard) =>
+                                    storyboard.name === name
+                                      ? {
+                                          ...storyboard,
+                                          count: storyboard.count + count,
+                                          updated: "Just now",
+                                        }
+                                      : storyboard
+                                ),
+                              }
+                            : item
+                        )
+                      )
+                    }
                   />
                 </TabsContent>
 
@@ -535,7 +600,170 @@ export function ProjectsWorkspace() {
           </Button>
         </DialogContent>
       </Dialog>
+
+      <Dialog
+        open={isNewStoryboardOpen}
+        onOpenChange={(open) => {
+          setIsNewStoryboardOpen(open)
+          if (!open) {
+            setStoryboardTitle("")
+            setStoryboardFiles([])
+            setIsStoryboardDragging(false)
+          }
+        }}
+      >
+        <DialogContent className="gap-5 rounded-2xl sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>New storyboard</DialogTitle>
+            <DialogDescription>
+              Add a storyboard to {project.name}.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2">
+            <label
+              htmlFor="project-storyboard-title"
+              className="text-sm font-medium"
+            >
+              Title
+            </label>
+            <Input
+              id="project-storyboard-title"
+              value={storyboardTitle}
+              onChange={(event) => setStoryboardTitle(event.target.value)}
+              placeholder="Storyboard title"
+              autoFocus
+            />
+          </div>
+          <div
+            onDragEnter={(event) => {
+              event.preventDefault()
+              setIsStoryboardDragging(true)
+            }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                setIsStoryboardDragging(false)
+              }
+            }}
+            onDrop={handleStoryboardDrop}
+            onClick={() => storyboardUploadRef.current?.click()}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault()
+                storyboardUploadRef.current?.click()
+              }
+            }}
+            className={cn(
+              "flex min-h-64 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-border px-6 text-center transition-colors hover:bg-muted",
+              isStoryboardDragging && "bg-muted"
+            )}
+          >
+            <UploadIcon className="size-6 text-muted-foreground" />
+            <p className="mt-3 text-sm font-medium">
+              {storyboardFiles.length > 0
+                ? `${storyboardFiles.length} image${storyboardFiles.length === 1 ? "" : "s"} selected`
+                : "Drop storyboard images here"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              or click to choose files
+            </p>
+            <input
+              ref={storyboardUploadRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="sr-only"
+              onChange={(event) => setStoryboardUpload(event.target.files)}
+            />
+          </div>
+          <Button
+            disabled={
+              !storyboardTitle.trim() || storyboardFiles.length === 0
+            }
+            onClick={createProjectStoryboard}
+          >
+            Create storyboard
+          </Button>
+        </DialogContent>
+      </Dialog>
     </main>
+  )
+}
+
+function ProjectStoryboards({
+  items,
+  onNew,
+  onAddImages,
+}: {
+  items: Project["storyboards"]
+  onNew: () => void
+  onAddImages: (name: string, count: number) => void
+}) {
+  return (
+    <div>
+      <div className="flex min-h-9 items-center justify-between gap-4">
+        <h3 className="text-sm font-medium">Storyboards</h3>
+        <Button variant="outline" onClick={onNew}>
+          <PlusIcon />
+          New storyboard
+        </Button>
+      </div>
+      {items.length > 0 ? (
+        items.map((item) => (
+          <section key={item.name} className="py-6">
+            <div className="mb-4 flex min-h-9 flex-wrap items-center gap-3">
+              <h4 className="text-sm font-medium">{item.name}</h4>
+              <span className="text-xs text-muted-foreground">
+                {item.count} images · {item.updated}
+              </span>
+            </div>
+            <div className="grid grid-cols-6 gap-1.5 sm:grid-cols-9 md:grid-cols-12">
+              {Array.from({ length: item.count }, (_, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-square overflow-hidden rounded-md bg-muted"
+                >
+                  <Image
+                    src={sampleImage}
+                    alt=""
+                    fill
+                    className={cn(
+                      "object-cover",
+                      index % 4 === 1 && "hue-rotate-15",
+                      index % 4 === 2 && "saturate-50",
+                      index % 4 === 3 && "contrast-125"
+                    )}
+                  />
+                </div>
+              ))}
+              <label className="flex aspect-square items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+                <PlusIcon className="size-4" />
+                <span className="sr-only">Add images to {item.name}</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="sr-only"
+                  onChange={(event) =>
+                    onAddImages(item.name, event.target.files?.length ?? 0)
+                  }
+                />
+              </label>
+            </div>
+          </section>
+        ))
+      ) : (
+        <div className="flex min-h-64 flex-col items-center justify-center text-center">
+          <p className="text-sm font-medium">No storyboards yet</p>
+          <Button variant="outline" className="mt-4" onClick={onNew}>
+            <PlusIcon />
+            New storyboard
+          </Button>
+        </div>
+      )}
+    </div>
   )
 }
 
