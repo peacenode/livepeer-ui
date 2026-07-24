@@ -68,7 +68,6 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         lane: laneOffsets[index % laneOffsets.length],
         depth: ((index * 7) % 11) / 10 - 0.5,
         wobble: ((index * 13) % 17) / 17,
-        scale: 0.72 + ((index * 5) % 9) / 20,
       })),
     []
   )
@@ -127,8 +126,7 @@ function CubeFlow({ reduceMotion }: { reduceMotion: boolean }) {
         MathUtils.smoothstep(phase, 0.22, 1)
       )
       const perspectiveScale =
-        seed.scale *
-        (0.76 + convergence * 0.22) *
+        (0.88 + convergence * 0.12) *
         distanceScale *
         (size.width < 640 ? 0.6 : 1)
       dummy.scale.setScalar(perspectiveScale)
