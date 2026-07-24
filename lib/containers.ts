@@ -49,10 +49,10 @@ export const inferenceContainers: InferenceContainer[] = [
   },
   {
     slug: "comfyui-base",
-    creator: "ComfyUI",
-    github: "comfyanonymous/ComfyUI",
+    creator: "Livepeer",
+    github: "livepeer/ai-runner",
     description:
-      "Base ComfyUI image comfystream builds on — the node-graph engine for diffusion workflows, packaged for the network by Livepeer.",
+      "Base image comfystream builds on — packages ComfyUI, the node-graph diffusion engine by comfyanonymous, built from the ai-runner repo.",
     tags: ["latest"],
     run: "docker run --gpus all -p 8188:8188 livepeer/comfyui-base:latest",
     ping: "curl http://localhost:8188/system_stats",
