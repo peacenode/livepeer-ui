@@ -42,7 +42,7 @@ export function PlaybooksNav() {
         href="https://github.com/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="flex size-9 items-center justify-center rounded-md bg-foreground/5 text-muted-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 hover:text-foreground"
         aria-label="Livepeer on GitHub"
         title="GitHub"
       >
@@ -52,7 +52,7 @@ export function PlaybooksNav() {
         href="https://discord.gg/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="flex size-9 items-center justify-center rounded-md bg-foreground/5 text-muted-foreground backdrop-blur-sm transition-colors hover:bg-foreground/10 hover:text-foreground"
         aria-label="Join Livepeer on Discord"
         title="Discord"
       >
@@ -72,7 +72,7 @@ export function PlaybooksNav() {
               className={cn(
                 "rounded-md px-2 py-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:px-3",
                 active &&
-                  "bg-background/90 font-medium text-foreground backdrop-blur-sm"
+                  "bg-foreground/5 font-medium text-foreground backdrop-blur-sm"
               )}
             >
               {item.label}
