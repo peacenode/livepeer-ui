@@ -47,7 +47,7 @@ export function PlatformMobileNav() {
               className={cn(
                 "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
                 pathname === item.href
-                  ? "font-medium text-foreground"
+                  ? "bg-muted font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
