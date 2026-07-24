@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { LivepeerLockup } from "@/components/brand"
+import { ProjectMenu } from "@/components/mockups/project-menu"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
@@ -28,6 +29,9 @@ export function PlatformSidebar() {
         >
           <LivepeerLockup className="h-4 w-auto" />
         </Link>
+      </div>
+      <div className="px-3 pb-2">
+        <ProjectMenu />
       </div>
       <nav className="flex flex-col items-start px-3">
         {platformNavItems.map((item) => (

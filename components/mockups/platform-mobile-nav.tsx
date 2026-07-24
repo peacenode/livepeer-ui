@@ -7,6 +7,7 @@ import { MenuIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
 import { platformNavItems } from "@/components/mockups/platform-sidebar"
+import { ProjectMenu } from "@/components/mockups/project-menu"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { Button } from "@/components/ui/button"
 import {
@@ -25,9 +26,7 @@ export function PlatformMobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        render={
-          <Button variant="ghost" size="icon-sm" className="md:hidden" />
-        }
+        render={<Button variant="ghost" size="icon-sm" className="md:hidden" />}
       >
         <MenuIcon strokeWidth={2.5} />
         <span className="sr-only">Open navigation</span>
@@ -38,6 +37,9 @@ export function PlatformMobileNav() {
             <LivepeerLockup className="h-4 w-auto" aria-label="Livepeer" />
           </SheetTitle>
         </SheetHeader>
+        <div className="px-3 pb-2">
+          <ProjectMenu />
+        </div>
         <nav className="flex flex-col items-start overflow-y-auto px-3 pt-2">
           {platformNavItems.map((item) => (
             <Link
