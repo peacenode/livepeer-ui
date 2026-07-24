@@ -356,6 +356,32 @@ export function PlaybookBriefForm({
               </Label>
             </div>
           )}
+          {hasBrandCompositionLayout && booleanFields.length > 0 && (
+            <div className="order-7 flex flex-col gap-3 sm:col-start-2 sm:row-start-4">
+              {booleanFields.map((field) => {
+                const id = `brief-${field.name}`
+                const checked =
+                  (values[field.name] ?? field.defaultValue).toLowerCase() ===
+                  "true"
+
+                return (
+                  <div key={field.name} className="flex items-center gap-2">
+                    <Checkbox
+                      id={id}
+                      checked={checked}
+                      onCheckedChange={(nextChecked) =>
+                        setValues((current) => ({
+                          ...current,
+                          [field.name]: String(nextChecked),
+                        }))
+                      }
+                    />
+                    <Label htmlFor={id}>{labelFor(field.name)}</Label>
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </div>
       ) : (
         <p className="mt-6 text-sm text-muted-foreground">
@@ -364,7 +390,7 @@ export function PlaybookBriefForm({
       )}
 
       <div className="mt-8 flex flex-col gap-3">
-        {(booleanFields.length > 0 ||
+        {((booleanFields.length > 0 && !hasBrandCompositionLayout) ||
           (trainBrandLoraField && !hasBrandCompositionLayout)) && (
           <div className="grid gap-4 pt-1 sm:grid-cols-2">
             {trainBrandLoraField && !hasBrandCompositionLayout && (
