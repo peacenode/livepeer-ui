@@ -56,13 +56,8 @@ const keys = [
 export default function MockupApiPage() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-medium">API</h1>
-          <p className="text-sm text-muted-foreground">
-            Keys for authenticating requests to the Livepeer API.
-          </p>
-        </div>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="text-xl font-medium">API</h1>
         <Button>Create key</Button>
       </div>
       <div className="flex flex-col gap-3">

@@ -28,7 +28,7 @@ export default function MockupsLayout({
             <LivepeerLockup className="h-4 w-auto" />
           </Link>
         </div>
-        <div className="mx-auto w-full max-w-5xl px-6 py-8 md:px-10">
+        <div className="mx-auto w-full max-w-5xl px-6 pt-6 pb-8 md:px-10">
           {children}
         </div>
       </main>

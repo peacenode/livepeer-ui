@@ -64,11 +64,8 @@ const activity = [
 export default function MockupHomePage() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-1">
+      <div className="flex h-9 items-center">
         <h1 className="text-xl font-medium">Home</h1>
-        <p className="text-sm text-muted-foreground">
-          Usage and activity across your organization.
-        </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (

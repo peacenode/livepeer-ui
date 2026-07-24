@@ -58,13 +58,8 @@ export default async function MockupComputePage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-medium">Compute</h1>
-          <p className="text-sm text-muted-foreground">
-            Live orchestrators on the Livepeer network.
-          </p>
-        </div>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="text-xl font-medium">Compute</h1>
         <Button>Add capacity</Button>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
