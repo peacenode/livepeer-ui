@@ -77,7 +77,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
                   <item.icon
                     className={cn(
                       "shrink-0",
-                      item.brand ? "h-7 w-auto" : "size-6"
+                      item.brand ? "h-[18px] w-auto" : "size-6"
                     )}
                   />
                 </span>
@@ -133,7 +133,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
               <item.icon
                 className={cn(
                   "text-foreground",
-                  item.brand ? "h-7 w-auto" : "size-6"
+                  item.brand ? "h-[18px] w-auto" : "size-6"
                 )}
               />
               <span className="truncate">{item.label}</span>
