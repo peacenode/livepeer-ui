@@ -4,45 +4,41 @@ import { useEffect, useRef } from "react"
 
 import { cn } from "@/lib/utils"
 
-const laneCount = 6
-const desktopParticleCount = 360
-const mobileParticleCount = 150
-const colors = ["#24282a", "#626a6d", "#aeb5b2", "#d7dbd7", "#00a86b"]
+const desktopParticleCount = 1800
+const mobileParticleCount = 650
+const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type Particle = {
   color: string
-  drift: number
-  lane: number
+  offset: number
   opacity: number
   phase: number
   size: number
   speed: number
+  wave: number
 }
 
 function noise(seed: number) {
-  return Math.sin(seed * 91.733) * 0.5 + 0.5
+  const value = Math.sin(seed * 12.9898 + 78.233) * 43758.5453
+  return value - Math.floor(value)
 }
 
 function makeParticles(count: number): Particle[] {
-  const particlesPerLane = count / laneCount
-
   return Array.from({ length: count }, (_, index) => {
-    const lane = index % laneCount
-    const slot = Math.floor(index / laneCount)
+    const offsetNoise = noise(index + 19) * 2 - 1
+    const offset =
+      Math.sign(offsetNoise) *
+      Math.pow(Math.abs(offsetNoise), 1.75) *
+      (0.08 + noise(index + 53) * 0.92)
 
     return {
       color: colors[Math.floor(noise(index + 41) * colors.length)],
-      drift: noise(index + 19) - 0.5,
-      lane,
-      opacity: 0.46 + noise(index + 7) * 0.48,
-      phase:
-        (slot / particlesPerLane +
-          lane / count +
-          (noise(index + 3) - 0.5) * 0.012 +
-          1) %
-        1,
-      size: 2.5 + noise(index + 13) * 5,
-      speed: 0.84 + noise(index + 29) * 0.3,
+      offset,
+      opacity: 0.18 + noise(index + 7) * 0.7,
+      phase: (index / count + (noise(index + 3) - 0.5) * 0.008 + 1) % 1,
+      size: 1 + Math.pow(noise(index + 13), 2.4) * 4,
+      speed: 0.72 + noise(index + 29) * 0.72,
+      wave: noise(index + 67) * Math.PI * 2,
     }
   })
 }
@@ -89,27 +85,32 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const travel = reduceMotion ? 0 : elapsed * 0.028 * particle.speed
         const progress = (particle.phase + travel) % 1
         const arch = progress * progress
-        const lanePosition =
-          (particle.lane - (laneCount - 1) / 2) / ((laneCount - 1) / 2)
-
-        // This is the source drawing's silhouette: a compact entry at the
-        // upper center that progressively opens into the lower-right.
-        const centerX = 0.59 + progress * 0.025 + arch * 0.285
-        const bandWidth = 0.018 + progress * 0.035 + arch * 0.018
-        const scatter = particle.drift * (5 + progress * 13)
+        const centerX = (0.58 + progress * 0.02 + arch * 0.29) * width
+        const centerY = (-0.1 + progress * 1.2) * height
+        const derivativeX = (0.02 + progress * 0.58) * width
+        const derivativeY = 1.2 * height
+        const tangentLength = Math.hypot(derivativeX, derivativeY)
+        const normalX = -derivativeY / tangentLength
+        const normalY = derivativeX / tangentLength
+        const fieldWidth = Math.min(width * 0.23, 310)
+        const turbulence =
+          Math.sin(elapsed * 0.85 + particle.wave + progress * 14) *
+          (8 + Math.abs(particle.offset) * 22)
+        const distance = particle.offset * fieldWidth + turbulence
         const x =
-          (centerX + lanePosition * bandWidth) * width +
-          scatter +
-          pointer.x * 8
+          centerX +
+          normalX * distance +
+          Math.sin(particle.wave + progress * 31) * 4 +
+          pointer.x * (8 + Math.abs(particle.offset) * 16)
         const y =
-          (-0.08 + progress * 1.18) * height +
-          particle.drift * 12 +
-          pointer.y * 5
-        const perspective = 0.48 + progress * 0.9
+          centerY +
+          normalY * distance +
+          Math.cos(particle.wave + progress * 23) * 5 +
+          pointer.y * (5 + Math.abs(particle.offset) * 10)
+        const perspective = 0.58 + progress * 0.72
         const size = particle.size * perspective
 
-        context.globalAlpha =
-          particle.opacity * (0.65 + progress * 0.35)
+        context.globalAlpha = particle.opacity * (0.55 + progress * 0.45)
         context.fillStyle = particle.color
         context.fillRect(
           Math.round(x - size / 2),
