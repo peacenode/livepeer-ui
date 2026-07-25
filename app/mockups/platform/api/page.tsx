@@ -1,15 +1,9 @@
 import type { Metadata } from "next"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -56,7 +50,23 @@ const keys = [
 
 export default function MockupApiPage() {
   return (
-    <PlatformPage title="API" action={<Button>Create key</Button>}>
+    <PlatformPage
+      title="API"
+      action={
+        <div className="flex items-center gap-4">
+          <a
+            href="https://docs.livepeer.org/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+          >
+            Docs
+            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+          </a>
+          <Button>Create key</Button>
+        </div>
+      }
+    >
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-medium">Keys</h2>
         <Table>
@@ -96,21 +106,6 @@ export default function MockupApiPage() {
           </TableBody>
         </Table>
       </div>
-      <Card className="gap-2 rounded-sm">
-        <CardHeader>
-          <CardTitle className="text-sm">Quick start</CardTitle>
-          <CardDescription>
-            Authenticate with a bearer token on every request.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <pre className="overflow-x-auto rounded-sm bg-foreground px-4 py-4 font-mono text-xs leading-relaxed text-background">
-            {`curl https://api.livepeer.org/v1/workflows/text-to-image/runs \\
-  -H "Authorization: Bearer $LIVEPEER_API_KEY" \\
-  -d '{ "prompt": "..." }'`}
-          </pre>
-        </CardContent>
-      </Card>
     </PlatformPage>
   )
 }

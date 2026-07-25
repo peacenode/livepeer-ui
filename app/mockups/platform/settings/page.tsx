@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
@@ -146,23 +145,6 @@ export default function MockupSettingsPage() {
           </div>
         </TabsContent>
       </Tabs>
-      <nav
-        aria-label="Related settings"
-        className="flex flex-col items-start gap-3 text-sm sm:flex-row sm:items-center sm:gap-5"
-      >
-        <Link
-          href="/mockups/platform/organization"
-          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
-        >
-          Organization settings
-        </Link>
-        <Link
-          href="/mockups/platform/account"
-          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
-        >
-          Account settings
-        </Link>
-      </nav>
     </PlatformPage>
   )
 }
