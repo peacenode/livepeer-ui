@@ -55,7 +55,7 @@ function makeParticles(count: number, width: number, height: number): Particle[]
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
-      vy: -(0.22 + noise(index + 79) * 0.34),
+      vy: -(0.38 + noise(index + 79) * 0.52),
       x,
       y,
     }
@@ -127,7 +127,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
           const radialForce = radialError * 0.000035 * proximity
-          const orbitForce = proximity * proximity * 0.026
+          const orbitForce = proximity * proximity * 0.034
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
@@ -139,7 +139,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         }
 
         particle.vx += waveX * delta
-        particle.vy += (-0.004 * particle.speed + waveY) * delta
+        particle.vy += (-0.006 * particle.speed + waveY) * delta
         particle.vx *= Math.pow(0.992, delta)
         particle.vy *= Math.pow(0.992, delta)
         particle.x += particle.vx * delta
@@ -154,7 +154,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x = width * 0.82 + spread
           particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
           particle.vx = -0.04 - noise(particle.wave + 17) * 0.12
-          particle.vy = -(0.24 + particle.speed * 0.22)
+          particle.vy = -(0.42 + particle.speed * 0.3)
         }
 
         const progress = Math.max(0, Math.min(1, particle.y / height))
