@@ -75,6 +75,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
     ).matches
     let frame = 0
     let height = 0
+    let heroExclusionRadius = 0
+    let resizeFrame = 0
     let width = 0
     let particles: Particle[] = []
     let start = performance.now()
@@ -82,17 +84,57 @@ function LivepeerCubeStream({ className }: { className?: string }) {
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect()
+      const nextWidth = bounds.width
+      const nextHeight = bounds.height
+
+      if (nextWidth <= 0 || nextHeight <= 0) return
+
       const ratio = Math.min(window.devicePixelRatio || 1, 1.5)
-      width = bounds.width
-      height = bounds.height
+      const previousWidth = width
+      const previousHeight = height
+      const crossedMobileBreakpoint =
+        previousWidth > 0 && previousWidth < 640 !== nextWidth < 640
+
+      width = nextWidth
+      height = nextHeight
       canvas.width = Math.round(width * ratio)
       canvas.height = Math.round(height * ratio)
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
-      particles = makeParticles(
-        width < 640 ? mobileParticleCount : desktopParticleCount,
-        width,
-        height
-      )
+
+      const heroCopy = canvas.parentElement?.querySelector("h1")?.parentElement
+
+      if (heroCopy instanceof HTMLElement && width >= 640) {
+        const copyBounds = heroCopy.getBoundingClientRect()
+        const fieldCenterX = width * 0.3
+        const fieldCenterY = height * 0.5
+        const copyRight = copyBounds.right - bounds.left + 32
+        const copyTop = copyBounds.top - bounds.top - 32
+        const copyBottom = copyBounds.bottom - bounds.top + 32
+
+        heroExclusionRadius = Math.max(
+          Math.hypot(copyRight - fieldCenterX, copyTop - fieldCenterY),
+          Math.hypot(copyRight - fieldCenterX, copyBottom - fieldCenterY)
+        )
+      }
+
+      if (particles.length === 0 || crossedMobileBreakpoint) {
+        particles = makeParticles(
+          width < 640 ? mobileParticleCount : desktopParticleCount,
+          width,
+          height
+        )
+        return
+      }
+
+      const scaleX = width / previousWidth
+      const scaleY = height / previousHeight
+
+      for (const particle of particles) {
+        particle.x *= scaleX
+        particle.y *= scaleY
+        particle.vx *= scaleX
+        particle.vy *= scaleY
+      }
     }
 
     const draw = (time: number) => {
@@ -106,7 +148,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
       const fieldCenterY = height * 0.5
       const fieldRadius =
-        width < 640 ? width * 0.92 : Math.min(width * 0.42, height * 0.78)
+        width < 640
+          ? width * 0.92
+          : Math.max(Math.min(width * 0.42, height * 0.78), heroExclusionRadius)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
       const particleSize = width < 640 ? 2 : 3
 
@@ -195,7 +239,10 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       if (!reduceMotion) frame = requestAnimationFrame(draw)
     }
 
-    const observer = new ResizeObserver(resize)
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame)
+      resizeFrame = requestAnimationFrame(resize)
+    })
     observer.observe(canvas)
     resize()
     start = performance.now()
@@ -203,6 +250,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
 
     return () => {
       cancelAnimationFrame(frame)
+      cancelAnimationFrame(resizeFrame)
       observer.disconnect()
     }
   }, [])
