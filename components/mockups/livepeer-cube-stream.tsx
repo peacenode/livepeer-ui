@@ -10,7 +10,6 @@ const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type Particle = {
   color: string
-  size: number
   speed: number
   wave: number
   vx: number
@@ -49,7 +48,6 @@ function makeParticles(count: number, width: number, height: number): Particle[]
 
     return {
       color: colors[Math.floor(noise(index + 41) * colors.length)],
-      size: 1 + Math.pow(noise(index + 13), 2.4) * 4,
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
@@ -111,6 +109,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           ? width * 0.92
           : Math.min(width * 0.36, height * 0.54)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
+      const particleSize = width < 640 ? 2 : 3
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
@@ -155,17 +154,13 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.vy = -(0.9 + particle.speed * 0.58)
         }
 
-        const progress = Math.max(0, Math.min(1, particle.y / height))
-        const perspective = 0.58 + progress * 0.72
-        const size = particle.size * perspective
-
         context.globalAlpha = 1
         context.fillStyle = particle.color
         context.fillRect(
-          Math.round(particle.x - size / 2),
-          Math.round(particle.y - size / 2),
-          Math.max(2, Math.round(size)),
-          Math.max(2, Math.round(size))
+          Math.round(particle.x - particleSize / 2),
+          Math.round(particle.y - particleSize / 2),
+          particleSize,
+          particleSize
         )
       }
 
