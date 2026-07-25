@@ -8,6 +8,16 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { siteConfig } from "@/lib/docs"
 import { cn } from "@/lib/utils"
 
+const fontDisplay = localFont({
+  src: [
+    { path: "../assets/fonts/FavoritPro-Light.woff2", weight: "300" },
+    { path: "../assets/fonts/FavoritPro-Book.woff2", weight: "400" },
+    { path: "../assets/fonts/FavoritPro-Medium.woff2", weight: "500" },
+    { path: "../assets/fonts/FavoritPro-Bold.woff2", weight: "700" },
+  ],
+  variable: "--font-favorit",
+})
+
 const fontMono = localFont({
   src: [
     { path: "../assets/fonts/FavoritMono-Regular.woff2", weight: "400" },
@@ -46,7 +56,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("font-sans antialiased", fontMono.variable)}
+      className={cn(
+        "font-sans antialiased",
+        fontDisplay.variable,
+        fontMono.variable,
+      )}
     >
       <head>
         <link rel="preconnect" href="https://rsms.me" />

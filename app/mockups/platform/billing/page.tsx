@@ -61,7 +61,7 @@ export default function MockupBillingPage() {
   return (
     <PlatformPage title="Billing">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Card className="gap-2">
+        <Card className="gap-2 rounded-sm">
           <CardHeader>
             <CardDescription>Current period</CardDescription>
             <CardTitle className="text-2xl font-medium tabular-nums">
@@ -74,7 +74,7 @@ export default function MockupBillingPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="gap-2">
+        <Card className="gap-2 rounded-sm">
           <CardHeader>
             <CardDescription>Payment method</CardDescription>
             <CardTitle className="text-2xl font-medium">

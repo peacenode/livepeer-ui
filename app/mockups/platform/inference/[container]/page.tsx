@@ -165,7 +165,7 @@ export default async function ContainerDetailPage({
           </div>
         </div>
       )}
-      <Card className="gap-4">
+      <Card className="gap-4 rounded-sm">
         <CardHeader>
           <CardTitle className="text-sm">Run locally</CardTitle>
           <CardDescription>

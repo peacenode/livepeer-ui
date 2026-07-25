@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import Link from "next/link"
 
-import { LivepeerLockup } from "@/components/brand"
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { PlatformMobileNav } from "@/components/mockups/platform-mobile-nav"
 import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
 
@@ -28,11 +28,14 @@ export default function MockupsLayout({
             aria-label="Livepeer home"
             className="inline-flex"
           >
-            <LivepeerLockup className="h-4 w-auto" />
+            <span className="flex items-center gap-1.5 text-black">
+              <LivepeerGradientSymbol className="h-4 w-auto" />
+              <LivepeerWordmark className="h-4 w-auto" />
+            </span>
           </Link>
           <PlatformMobileNav />
         </div>
-        <div className="mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col px-6 pt-6 md:px-10">
+        <div className="mx-auto flex min-h-0 w-full max-w-screen-2xl flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
           {children}
         </div>
       </main>

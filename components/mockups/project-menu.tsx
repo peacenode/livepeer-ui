@@ -24,7 +24,7 @@ export function ProjectMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <button className="flex h-9 w-full items-center gap-2 rounded-md px-2 text-left text-sm transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" />
+          <button className="flex h-10 w-full items-center gap-2 rounded-sm px-2 text-left text-sm transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" />
         }
       >
         <span className="min-w-0 flex-1 truncate font-medium">

@@ -102,7 +102,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
         </Breadcrumb>
 
         <div className="mt-10 max-w-4xl">
-          <h1 className="text-3xl leading-tight font-normal tracking-tight text-balance sm:text-5xl">
+          <h1 className="text-3xl leading-tight font-light tracking-tight text-balance sm:text-5xl">
             {playbook.title}
           </h1>
           {intro && (

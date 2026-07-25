@@ -93,7 +93,7 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Project spend</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
+                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
                     $1,898.25
                   </CardTitle>
                 </CardHeader>
@@ -101,7 +101,7 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Workflow runs</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
+                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
                     1.2M
                   </CardTitle>
                 </CardHeader>
@@ -109,17 +109,17 @@ export default function MockupUsagePage() {
               <Card variant="metric">
                 <CardHeader>
                   <CardDescription>Compute time</CardDescription>
-                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
+                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
                     2,431 GPU min
                   </CardTitle>
                 </CardHeader>
               </Card>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 md:items-start">
+            <div className="grid gap-8 md:grid-cols-2 md:items-start">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4 text-sm">
                   <span className="font-medium">Monthly project budget</span>
-                  <span className="text-muted-foreground tabular-nums">
+                  <span className="font-sans text-muted-foreground tabular-nums">
                     $1,898.25 / $3,000
                   </span>
                 </div>
@@ -130,17 +130,19 @@ export default function MockupUsagePage() {
               </div>
               <Link
                 href="/mockups/platform/organization?tab=billing"
-                className="group w-full rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
+                className="group w-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
               >
                 <Card
                   size="sm"
-                  className="h-full transition-colors group-hover:bg-accent"
+                  className="h-full rounded-sm transition-colors group-hover:bg-accent"
                 >
                   <CardHeader className="flex h-full flex-col justify-between">
                     <div className="flex flex-col gap-1.5">
                       <CardDescription>Default payment method</CardDescription>
-                      <p className="text-2xl font-medium">Visa ···· 4242</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="font-sans text-2xl font-medium tabular-nums">
+                        Visa ···· 4242
+                      </p>
+                      <p className="font-sans text-xs text-muted-foreground tabular-nums">
                         Expires 08/2029
                       </p>
                     </div>
@@ -170,13 +172,13 @@ export default function MockupUsagePage() {
                   {dailyUsage.map((day) => (
                     <TableRow key={day.date}>
                       <TableCell className="font-medium">{day.date}</TableCell>
-                      <TableCell className="text-xs tabular-nums">
+                      <TableCell className="font-sans text-xs tabular-nums">
                         {day.workflowRuns}
                       </TableCell>
-                      <TableCell className="text-xs tabular-nums">
+                      <TableCell className="font-sans text-xs tabular-nums">
                         {day.compute}
                       </TableCell>
-                      <TableCell className="text-right text-xs tabular-nums">
+                      <TableCell className="text-right font-sans text-xs tabular-nums">
                         {day.cost}
                       </TableCell>
                     </TableRow>
@@ -203,10 +205,10 @@ export default function MockupUsagePage() {
                     {resource.resource}
                   </TableCell>
                   <TableCell>{resource.type}</TableCell>
-                  <TableCell className="text-xs tabular-nums">
+                  <TableCell className="font-sans text-xs tabular-nums">
                     {resource.usage}
                   </TableCell>
-                  <TableCell className="text-right text-xs tabular-nums">
+                  <TableCell className="text-right font-sans text-xs tabular-nums">
                     {resource.cost}
                   </TableCell>
                 </TableRow>

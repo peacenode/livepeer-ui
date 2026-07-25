@@ -96,7 +96,7 @@ export default function MockupApiPage() {
           </TableBody>
         </Table>
       </div>
-      <Card className="gap-2">
+      <Card className="gap-2 rounded-sm">
         <CardHeader>
           <CardTitle className="text-sm">Quick start</CardTitle>
           <CardDescription>
@@ -104,7 +104,7 @@ export default function MockupApiPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <pre className="overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs leading-relaxed">
+          <pre className="overflow-x-auto rounded-sm bg-foreground px-4 py-4 font-mono text-xs leading-relaxed text-background">
             {`curl https://api.livepeer.org/v1/workflows/text-to-image/runs \\
   -H "Authorization: Bearer $LIVEPEER_API_KEY" \\
   -d '{ "prompt": "..." }'`}

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 const desktopParticleCount = 1800
 const mobileParticleCount = 650
 const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
+const invertedColors = ["#ffffff", "#d8ddda", "#9ca5a2", "#596164", "#00c982"]
 
 type Particle = {
   color: string
@@ -26,7 +27,9 @@ function noise(seed: number) {
 function makeParticles(
   count: number,
   width: number,
-  height: number
+  height: number,
+  palette: string[],
+  variant: "card" | "default"
 ): Particle[] {
   return Array.from({ length: count }, (_, index) => {
     const progress = noise(index + 3)
@@ -36,10 +39,15 @@ function makeParticles(
       (noise(index + 19) * 2 - 1) *
       Math.min(width * 0.25, 340) *
       (0.4 + progress * 0.6)
-    const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
+    const fieldCenterX =
+      width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
     const fieldCenterY = height * 0.5
     const fieldRadius =
-      width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
+      width < 640
+        ? width * 0.92
+        : variant === "card"
+          ? Math.min(width * 0.42, height * 0.95)
+          : Math.min(width * 0.36, height * 0.54)
     let x = centerX + spread
     let y = (-0.1 + progress * 1.2) * height
     const fieldX = x - fieldCenterX
@@ -52,7 +60,7 @@ function makeParticles(
     }
 
     return {
-      color: colors[Math.floor(noise(index + 41) * colors.length)],
+      color: palette[Math.floor(noise(index + 41) * palette.length)],
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
@@ -63,7 +71,15 @@ function makeParticles(
   })
 }
 
-function LivepeerCubeStream({ className }: { className?: string }) {
+function LivepeerCubeStream({
+  className,
+  inverted = false,
+  variant = "default",
+}: {
+  className?: string
+  inverted?: boolean
+  variant?: "card" | "default"
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -104,15 +120,19 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       canvas.height = Math.round(height * ratio)
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
 
-      const heroCopy = canvas.parentElement?.querySelector("h1")?.parentElement
+      const heroCopy =
+        variant === "card"
+          ? canvas.parentElement?.querySelector("[data-particle-exclusion]")
+          : canvas.parentElement?.querySelector("h1")?.parentElement
 
       if (heroCopy instanceof HTMLElement && width >= 640) {
         const copyBounds = heroCopy.getBoundingClientRect()
-        const fieldCenterX = width * 0.3
+        const fieldCenterX = width * (variant === "card" ? 0.32 : 0.3)
         const fieldCenterY = height * 0.5
-        const copyRight = copyBounds.right - bounds.left + 32
-        const copyTop = copyBounds.top - bounds.top - 32
-        const copyBottom = copyBounds.bottom - bounds.top + 32
+        const fieldPadding = variant === "card" ? 20 : 32
+        const copyRight = copyBounds.right - bounds.left + fieldPadding
+        const copyTop = copyBounds.top - bounds.top - fieldPadding
+        const copyBottom = copyBounds.bottom - bounds.top + fieldPadding
 
         heroExclusionRadius = Math.max(
           Math.hypot(copyRight - fieldCenterX, copyTop - fieldCenterY),
@@ -124,7 +144,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         particles = makeParticles(
           width < 640 ? mobileParticleCount : desktopParticleCount,
           width,
-          height
+          height,
+          inverted ? invertedColors : colors,
+          variant
         )
         return
       }
@@ -148,15 +170,23 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         ? 0
         : Math.min(2, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
-      const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
+      const fieldCenterX =
+        width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
       const fieldCenterY = height * 0.5
       const fieldRadius =
         width < 640
           ? width * 0.92
-          : Math.max(Math.min(width * 0.42, height * 0.78), heroExclusionRadius)
-      const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
+          : Math.max(
+              variant === "card"
+                ? Math.min(width * 0.42, height * 0.95)
+                : Math.min(width * 0.42, height * 0.78),
+              heroExclusionRadius
+            )
+      const influenceRadius =
+        fieldRadius + Math.min(width * (variant === "card" ? 0.15 : 0.1), 180)
       const particleSize = width < 640 ? 2 : 3
-      const windForce = width < 640 ? -0.002 : -0.0065
+      const windForce =
+        width < 640 ? -0.002 : variant === "card" ? -0.014 : -0.0065
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
@@ -181,8 +211,10 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           const radialX = fieldX / fieldDistance
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
-          const radialForce = radialError * 0.000035 * proximity
-          const orbitForce = proximity * proximity * 0.06
+          const radialForce =
+            radialError * (variant === "card" ? 0.00006 : 0.000035) * proximity
+          const orbitForce =
+            proximity * proximity * (variant === "card" ? 0.085 : 0.06)
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
@@ -259,7 +291,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
     }
-  }, [])
+  }, [inverted, variant])
 
   return (
     <canvas

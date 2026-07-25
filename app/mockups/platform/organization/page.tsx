@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -166,7 +167,7 @@ export default async function MockupOrganizationPage({
         <TabsContent value="billing">
           <div className="flex flex-col gap-8">
             <div className="grid gap-4 sm:grid-cols-2">
-              <Card className="gap-2">
+              <Card className="gap-2 rounded-sm">
                 <CardHeader>
                   <CardDescription>Current period</CardDescription>
                   <CardTitle className="text-2xl font-medium tabular-nums">
@@ -179,7 +180,7 @@ export default async function MockupOrganizationPage({
                   </p>
                 </CardContent>
               </Card>
-              <Card className="gap-2">
+              <Card className="gap-2 rounded-sm">
                 <CardHeader>
                   <CardDescription>Credit balance</CardDescription>
                   <CardTitle className="text-2xl font-medium tabular-nums">
@@ -274,6 +275,23 @@ export default async function MockupOrganizationPage({
           </div>
         </TabsContent>
       </Tabs>
+      <nav
+        aria-label="Related settings"
+        className="flex flex-col items-start gap-3 text-sm sm:flex-row sm:items-center sm:gap-5"
+      >
+        <Link
+          href="/mockups/platform/settings"
+          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+        >
+          Project settings
+        </Link>
+        <Link
+          href="/mockups/platform/account"
+          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+        >
+          Account settings
+        </Link>
+      </nav>
     </PlatformPage>
   )
 }

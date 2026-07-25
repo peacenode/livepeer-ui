@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import {
   ArrowUpRightIcon,
   CheckIcon,
@@ -6,9 +7,9 @@ import {
   CpuIcon,
   NetworkIcon,
   ServerIcon,
-  WalletIcon,
 } from "lucide-react"
 
+import { LivepeerSymbol } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -29,10 +30,15 @@ const paths = [
     title: "Join a pool",
     fit: "Fastest path",
     description:
-      "Connect your GPU to an existing operator. The pool handles the orchestrator, stake, and on-chain work.",
-    requirements: ["NVIDIA GPU", "Linux host", "Reliable internet"],
+      "Connect as a worker behind an existing Orchestrator. The operator handles registration, LPT, routing, and payouts; you provide GPU compute and receive off-chain earnings under the pool’s terms.",
+    requirements: [
+      "NVIDIA GPU and Linux",
+      "Docker or go-livepeer",
+      "Verified payout terms",
+    ],
     note: "No LPT required",
-    href: "https://docs.livepeer.org/v2/orchestrators/quickstart/join-a-pool",
+    href: "https://docs.livepeer.org/v2/orchestrators/guides/deployment-details/new-join-a-pool",
+    action: "Pool setup guide",
   },
   {
     title: "Run AI-first",
@@ -42,6 +48,7 @@ const paths = [
     requirements: ["CUDA 12+", "Docker", "NVIDIA Container Toolkit"],
     note: "Lower stake barrier",
     href: "https://docs.livepeer.org/v2/orchestrators/guides/ai-and-job-workloads/ai-inference-operations",
+    action: "AI operations",
   },
   {
     title: "Run a solo node",
@@ -51,6 +58,7 @@ const paths = [
     requirements: ["Arbitrum ETH", "LPT for video", "Public service URI"],
     note: "Most responsibility",
     href: "https://docs.livepeer.org/v2/orchestrators/setup/guide",
+    action: "Solo setup guide",
   },
 ]
 
@@ -81,76 +89,16 @@ const baseline = [
   },
 ]
 
-const launchSteps = [
-  {
-    title: "Choose the operating path",
-    description:
-      "Start with a pool if you want to contribute a GPU without managing LPT or protocol transactions. Choose AI-first or solo only if you want to operate the full stack.",
-  },
-  {
-    title: "Validate the machine",
-    description:
-      "Check the GPU with nvidia-smi, confirm CUDA and Docker access, benchmark real capacity, and leave headroom for network and workload spikes.",
-    href: "https://docs.livepeer.org/v2/orchestrators/guides/operator-considerations/requirements",
-    linkLabel: "Check hardware requirements",
-  },
-  {
-    title: "Install and configure go-livepeer",
-    description:
-      "Pin a release, select the GPU, set capacity and pricing, and use an Arbitrum One RPC. A solo node also needs a publicly reachable service address.",
-    href: "https://docs.livepeer.org/v2/orchestrators/setup/install",
-    linkLabel: "Open installation guide",
-  },
-  {
-    title: "Fund and activate if required",
-    description:
-      "A solo on-chain node needs ETH on Arbitrum One for gas. Solo video operators also need enough self-stake plus delegated LPT to enter the active set.",
-    href: "https://docs.livepeer.org/v2/orchestrators/setup/connect",
-    linkLabel: "Connect to Arbitrum",
-  },
-  {
-    title: "Verify before accepting work",
-    description:
-      "Test external reachability, GPU execution, pricing, and capacity. Then monitor uptime, job success, wallet balance, and reward calls.",
-    href: "https://docs.livepeer.org/v2/orchestrators/setup/verify",
-    linkLabel: "Run verification",
-  },
-]
-
-const fundingLinks = [
-  {
-    title: "Get ETH onto Arbitrum One",
-    description:
-      "Use the official Arbitrum bridge to move ETH from Ethereum, or withdraw ETH directly to Arbitrum One from a supported exchange.",
-    href: "https://bridge.arbitrum.io/",
-    action: "Open Arbitrum bridge",
-  },
-  {
-    title: "Check the LPT threshold",
-    description:
-      "For solo video, compare your total bonded stake with the lowest-ranked active orchestrator before acquiring or bonding LPT.",
-    href: "https://explorer.livepeer.org/orchestrators",
-    action: "View active orchestrators",
-  },
-  {
-    title: "Keep the wallet healthy",
-    description:
-      "Gas pays for activation, reward calls, and ticket redemption. Use a dedicated wallet, back up its keystore, and maintain an ETH buffer.",
-    href: "https://docs.livepeer.org/v2/orchestrators/guides/monitoring-and-tooling/explorer-operations",
-    action: "Review wallet monitoring",
-  },
-]
-
 export default async function EarnWithGpuPage() {
   const network = await getNetworkStats()
   const earnings = [
     {
-      label: "Service payouts (USD)",
+      label: "Service payouts",
       value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
       period: "24h",
     },
     {
-      label: "Protocol rewards (USD)",
+      label: "Protocol rewards",
       value: network ? `$${formatCompact(network.rewardsUsd24h)}` : "—",
       period: "24h",
     },
@@ -158,9 +106,9 @@ export default async function EarnWithGpuPage() {
 
   return (
     <main>
-      <section className="mx-auto max-w-6xl px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24">
+      <section className="mx-auto max-w-screen-2xl px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24 lg:px-10">
         <div className="max-w-3xl">
-          <h1 className="text-4xl leading-[0.98] font-medium tracking-tight text-balance sm:text-6xl">
+          <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
             Put a GPU on the network.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -169,29 +117,44 @@ export default async function EarnWithGpuPage() {
             solo node gives you control and the full operating burden.
           </p>
         </div>
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
+          {earnings.map((earning) => (
+            <Card key={earning.label} variant="metric" className="rounded-sm">
+              <CardHeader>
+                <CardDescription className="flex w-full items-baseline gap-1.5">
+                  <span>{earning.label}</span>
+                  <span className="shrink-0 tabular-nums">
+                    {earning.period}
+                  </span>
+                </CardDescription>
+                <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                  {earning.value}
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+        <Button
+          nativeButton={false}
+          size="lg"
+          className="mt-16 h-16 rounded-sm px-6 sm:mt-24"
+          render={
+            <a
+              href="https://docs.livepeer.org/v2/orchestrators/setup/guide"
+              target="_blank"
+              rel="noreferrer"
+            />
+          }
+        >
+          Orchestrator docs
+          <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+        </Button>
       </section>
 
       <section id="choose-a-path" className="scroll-mt-20 bg-muted">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <div className="mb-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
-            {earnings.map((earning) => (
-              <Card key={earning.label} variant="metric" className="rounded-sm">
-                <CardHeader>
-                  <CardDescription className="flex w-full items-baseline gap-1.5">
-                    <span>{earning.label}</span>
-                    <span className="shrink-0 tabular-nums">
-                      {earning.period}
-                    </span>
-                  </CardDescription>
-                  <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    {earning.value}
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
+        <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-medium sm:text-3xl">
+            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
               Choose the right path
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -200,15 +163,18 @@ export default async function EarnWithGpuPage() {
             </p>
           </div>
           <div className="mt-10 grid md:grid-cols-3">
-            {paths.map((path) => (
+            {paths.map((path, index) => (
               <article
                 key={path.title}
-                className="flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0"
+                className={[
+                  "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
+                  index === 0 ? "md:mt-48" : index === 1 ? "md:mt-24" : "",
+                ].join(" ")}
               >
-                <p className="text-xs font-medium text-muted-foreground">
+                <p className="border-t border-emerald-500 pt-3 text-xs font-medium text-muted-foreground">
                   {path.fit}
                 </p>
-                <h3 className="mt-3 text-xl font-medium">{path.title}</h3>
+                <h3 className="mt-3 text-xl font-light">{path.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {path.description}
                 </p>
@@ -226,7 +192,7 @@ export default async function EarnWithGpuPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 flex items-end justify-between gap-4 pt-5">
+                <div className="mt-6 flex flex-col items-start gap-3">
                   <span className="text-xs text-muted-foreground">
                     {path.note}
                   </span>
@@ -236,7 +202,7 @@ export default async function EarnWithGpuPage() {
                     rel="noreferrer"
                     className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
                   >
-                    Details
+                    {path.action}
                     <ArrowUpRightIcon className="size-4" aria-hidden="true" />
                   </a>
                 </div>
@@ -246,10 +212,12 @@ export default async function EarnWithGpuPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <section className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-10">
         <div className="grid gap-10 md:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <h2 className="text-2xl font-medium">Baseline requirements</h2>
+            <h2 className="text-3xl font-light tracking-tight sm:text-4xl">
+              Baseline requirements
+            </h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
               These are the practical requirements that apply before protocol
               configuration.
@@ -271,7 +239,7 @@ export default async function EarnWithGpuPage() {
                     className="size-5 text-muted-foreground"
                     aria-hidden="true"
                   />
-                  <h3 className="mt-6 font-medium">{item.title}</h3>
+                  <h3 className="mt-6 text-lg font-light">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
@@ -282,113 +250,79 @@ export default async function EarnWithGpuPage() {
         </div>
       </section>
 
-      <section className="bg-muted">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-[0.7fr_1.3fr]">
-          <div>
-            <h2 className="text-2xl font-medium">From machine to live node</h2>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Treat activation as a checkpoint after the host is tested, not as
-              the first proof that setup worked.
-            </p>
-          </div>
-          <ol className="border-t">
-            {launchSteps.map((step, index) => (
-              <li
-                key={step.title}
-                className="grid gap-4 border-b py-7 sm:grid-cols-[2rem_1fr]"
-              >
-                <span className="text-xs text-muted-foreground tabular-nums">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3 className="font-medium">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {step.description}
-                  </p>
-                  {step.href && (
-                    <a
-                      href={step.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-4 inline-flex items-center gap-1 text-sm font-medium hover:underline"
-                    >
-                      {step.linkLabel}
-                      <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-                    </a>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-        <div className="flex items-center gap-3">
-          <WalletIcon
-            className="size-5 text-muted-foreground"
-            aria-hidden="true"
-          />
-          <h2 className="text-2xl font-medium">Wallet and network funding</h2>
-        </div>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          This only applies when you operate an on-chain node. Pool workers
-          normally do not manage the protocol wallet.
-        </p>
-        <div className="mt-10 grid border-t md:grid-cols-3">
-          {fundingLinks.map((item) => (
-            <div
-              key={item.title}
-              className="flex flex-col border-b py-8 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
-            >
-              <h3 className="font-medium">{item.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-1 text-sm font-medium hover:underline"
-              >
-                {item.action}
-                <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-              </a>
-            </div>
-          ))}
-        </div>
-        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          Use Arbitrum One, not Ethereum mainnet, for the operator wallet’s gas.
-          Never paste a private key into a website. Confirm the network and
-          destination address before bridging or withdrawing funds.
-        </p>
-      </section>
-
-      <section className="border-t">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div>
-            <h2 className="font-medium">Check the economics before launch.</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Compare current demand, pricing, stake, power cost, and expected
-              uptime before committing hardware.
-            </p>
-          </div>
-          <Button
-            nativeButton={false}
-            variant="outline"
-            className="rounded-sm"
-            render={
-              <a
-                href="https://docs.livepeer.org/v2/orchestrators/guides/operator-considerations/operator-rationale"
-                target="_blank"
-                rel="noreferrer"
+      <section className="grid md:grid-cols-2">
+        <article className="aspect-square bg-black text-white">
+          <div className="relative flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src="/brands/20260725-0345/arbitrum.svg"
+                alt="Arbitrum"
+                width={64}
+                height={64}
+                className="size-10 sm:size-16"
               />
-            }
-          >
-            Review operator economics
-            <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-          </Button>
-        </div>
+              <h2 className="mt-4 text-3xl font-light tracking-tight sm:mt-8 sm:text-4xl">
+                Arbitrum One
+              </h2>
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-white/60 sm:mt-3">
+                Solo on-chain nodes need ETH on Arbitrum One for activation,
+                reward calls, ticket redemption, and ongoing gas.
+              </p>
+              <Button
+                nativeButton={false}
+                variant="ghost"
+                size="lg"
+                className="mt-5 h-14 rounded-sm bg-white/10 px-6 text-white hover:bg-white/15 hover:text-white sm:mt-7 sm:h-16"
+                render={
+                  <a
+                    href="https://bridge.arbitrum.io/"
+                    target="_blank"
+                    rel="noreferrer"
+                  />
+                }
+              >
+                Official Arbitrum Bridge
+                <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+              </Button>
+            </div>
+            <p className="absolute right-6 bottom-4 left-6 text-[0.625rem] leading-4 font-normal text-balance text-white/40 sm:right-10 sm:bottom-7 sm:left-10 sm:text-[0.6875rem] sm:leading-relaxed">
+              Use Arbitrum One, not Ethereum mainnet, for the operator wallet’s
+              gas. Confirm the network and destination address before bridging
+              or withdrawing funds, keep an ETH buffer for ongoing transactions,
+              and never paste a private key into a website.
+            </p>
+          </div>
+        </article>
+
+        <article className="aspect-square bg-muted">
+          <div className="flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
+            <LivepeerSymbol className="size-10 text-emerald-500 sm:size-16" />
+            <h2 className="mt-4 text-3xl font-light tracking-tight sm:mt-8 sm:text-4xl">
+              $LPT stake
+            </h2>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-balance text-muted-foreground sm:mt-3">
+              Solo video operators need enough self-stake and delegated LPT to
+              enter the active orchestrator set. Pool workers do not manage
+              stake.
+            </p>
+            <Button
+              nativeButton={false}
+              variant="outline"
+              size="lg"
+              className="mt-5 h-14 rounded-sm bg-background px-6 sm:mt-7 sm:h-16"
+              render={
+                <a
+                  href="https://explorer.livepeer.org/orchestrators"
+                  target="_blank"
+                  rel="noreferrer"
+                />
+              }
+            >
+              View active orchestrators
+              <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+            </Button>
+          </div>
+        </article>
       </section>
     </main>
   )

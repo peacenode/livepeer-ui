@@ -1,24 +1,11 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
-import {
-  ArrowRightIcon,
-  ArrowUpRightIcon,
-  BoxIcon,
-  CheckIcon,
-  ChevronRightIcon,
-  CircleDashedIcon,
-  CpuIcon,
-} from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
 
-import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
 import { PlatformPage } from "@/components/mockups/platform-page"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { RunnerOnboardingCard } from "@/components/mockups/runner-onboarding-card"
+import { CardTitle } from "@/components/ui/card"
 import {
   getForumTopicUrl,
   getLatestResearchTopics,
@@ -28,24 +15,6 @@ import {
 export const metadata: Metadata = {
   title: "Home",
 }
-
-const getStartedSteps = [
-  {
-    label: "Add credits",
-    href: "/mockups/platform/billing",
-    complete: false,
-  },
-  {
-    label: "Create an API key",
-    href: "/mockups/platform/api",
-    complete: false,
-  },
-  {
-    label: "Test workflows",
-    href: "/mockups/platform/workflows",
-    complete: false,
-  },
-]
 
 const forumDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -59,101 +28,65 @@ export default async function MockupHomePage() {
 
   return (
     <PlatformPage title="Home">
-      <Card className="py-0">
-        <div className="relative grid min-h-64 md:block">
-          <div className="relative z-10 flex items-center py-6 md:min-h-64 md:w-[calc(100%-20rem)]">
-            <CardContent className="mx-auto w-full max-w-xl">
-              <div className="flex flex-col gap-3">
-                <CardTitle className="px-2">Get started</CardTitle>
-                <ol className="flex max-w-xl flex-col">
-                  {getStartedSteps.map((step, index) => (
-                    <li key={step.label}>
-                      <Link
-                        href={step.href}
-                        className="group/step flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-foreground/[0.06]"
-                      >
-                        {step.complete ? (
-                          <CheckIcon
-                            className="size-4 shrink-0"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <CircleDashedIcon
-                            className="size-4 shrink-0 text-muted-foreground"
-                            aria-hidden="true"
-                          />
-                        )}
-                        <span className="min-w-0 flex-1 font-medium">
-                          {index + 1}. {step.label}
-                        </span>
-                        <ChevronRightIcon
-                          className="size-4 shrink-0 text-muted-foreground transition-transform group-hover/step:translate-x-0.5"
-                          aria-hidden="true"
-                        />
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </CardContent>
-          </div>
-          <LivepeerSymbol3D />
-        </div>
-      </Card>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <a
-          href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
-          target="_blank"
-          rel="noreferrer"
-          className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-        >
-          <Card className="h-full min-h-56 transition-colors group-hover:bg-accent">
-            <CardHeader className="flex h-full flex-col justify-between">
-              <CpuIcon
-                className="size-6 text-muted-foreground"
-                aria-hidden="true"
+      <div className="flex flex-col gap-6">
+        <RunnerOnboardingCard />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <a
+            href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
+            target="_blank"
+            rel="noreferrer"
+            className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
+              <Image
+                src="/generated/20260725-101313-console-home-cards/orchestrator.png"
+                alt=""
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
               />
-              <div className="flex items-end justify-between gap-6">
-                <div className="flex max-w-sm flex-col gap-2">
-                  <CardTitle className="text-xl">Run an Orchestrator</CardTitle>
-                  <CardDescription>
-                    Provide compute to the network and earn service fees and
-                    protocol rewards.
-                  </CardDescription>
-                </div>
+            </div>
+            <div className="mt-4 flex max-w-sm flex-col gap-1.5">
+              <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
+                Run an Orchestrator
                 <ArrowUpRightIcon
-                  className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
-              </div>
-            </CardHeader>
-          </Card>
-        </a>
-        <Link
-          href="/mockups/platform/workflows"
-          className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-        >
-          <Card className="h-full min-h-56 transition-colors group-hover:bg-accent">
-            <CardHeader className="flex h-full flex-col justify-between">
-              <BoxIcon
-                className="size-6 text-muted-foreground"
-                aria-hidden="true"
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Provide compute to the network and earn service fees and
+                protocol rewards.
+              </p>
+            </div>
+          </a>
+          <Link
+            href="/mockups/playbooks/install"
+            className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
+              <Image
+                src="/generated/20260725-101313-console-home-cards/runner.png"
+                alt=""
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
               />
-              <div className="flex items-end justify-between gap-6">
-                <div className="flex max-w-sm flex-col gap-2">
-                  <CardTitle className="text-xl">Create a workflow</CardTitle>
-                  <CardDescription>
-                    Turn a media operation into a reusable workflow for Runner.
-                  </CardDescription>
-                </div>
-                <ArrowRightIcon
-                  className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+            </div>
+            <div className="mt-4 flex max-w-sm flex-col gap-1.5">
+              <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
+                Install Runner
+                <ArrowUpRightIcon
+                  className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
-              </div>
-            </CardHeader>
-          </Card>
-        </Link>
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Create and edit images and video from the agent of your choice.
+              </p>
+            </div>
+          </Link>
+        </div>
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between gap-4">
@@ -162,7 +95,7 @@ export default async function MockupHomePage() {
             href={RESEARCH_FORUM_URL}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
           >
             View forum
             <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
@@ -175,7 +108,7 @@ export default async function MockupHomePage() {
               href={getForumTopicUrl(topic)}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-muted-foreground"
+              className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-emerald-500"
             >
               <div className="min-w-0 flex-1">
                 <h3 className="line-clamp-2 font-medium text-foreground">

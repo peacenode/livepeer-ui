@@ -1,68 +1,45 @@
-"use client"
-
-import { useState } from "react"
-import { CheckIcon, CopyIcon } from "lucide-react"
-
+import { CopyButton } from "@/components/docs/copy-button"
+import { RunnerDeltaStream } from "@/components/mockups/runner-delta-stream"
 import { cn } from "@/lib/utils"
 
 const command = "npm install -g @livepeer/runner"
 
 export function InstallRunnerFooter({
-  title = "Runner",
-  description = "Install the plugin once, paste your copied playbook into the agent of your choice, and approve each production step.",
+  title = "Create and edit images and video with your agent.",
   className,
 }: {
   title?: string
-  description?: string
   className?: string
 }) {
-  const [copied, setCopied] = useState(false)
-
-  async function copyCommand() {
-    await navigator.clipboard.writeText(command)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 3000)
-  }
-
   return (
     <section
       className={cn(
-        "relative isolate mt-20 border-t bg-cover bg-center text-white",
+        "relative mt-20 min-h-[42rem] overflow-hidden bg-white px-4 text-foreground sm:min-h-[48rem] sm:px-6",
         className
       )}
-      style={{
-        backgroundImage: "url('/runner/20260724-1825/train-motion-blur.png')",
-      }}
     >
-      <div className="absolute inset-0 -z-10 bg-black/55" aria-hidden="true" />
-      <div className="mx-auto flex min-h-96 max-w-6xl items-end px-4 py-12 sm:px-6 sm:py-16">
-        <div className="w-full max-w-xl">
-          <h2 className="[font-family:'Serpentine_Runner',sans-serif] text-4xl font-medium tracking-[-0.06em] text-balance uppercase sm:text-5xl">
+      <RunnerDeltaStream />
+      <div className="absolute inset-x-4 top-[calc(25.5%+1.75rem)] z-10 mx-auto flex max-w-4xl flex-col items-center text-center sm:inset-x-6 sm:top-[calc(39%+1.75rem)]">
+        <p className="font-runner text-5xl leading-none font-medium tracking-tight sm:text-6xl">
+          RUNNER
+        </p>
+        <div className="mt-5 flex flex-col items-center">
+          <h2 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
             {title}
           </h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
-            {description}
-          </p>
-          <div className="mt-7 flex w-full max-w-md items-center justify-between gap-4 rounded-sm bg-white/95 px-5 py-4 text-black backdrop-blur-sm">
-            <code className="flex min-w-0 items-center gap-2 overflow-x-auto font-mono text-xs whitespace-nowrap">
-              <span className="text-black/40" aria-hidden="true">
-                $
-              </span>
-              <span className="text-black/80">{command}</span>
-            </code>
-            <button
-              type="button"
-              onClick={copyCommand}
-              className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-black text-white transition-colors hover:bg-black/80"
-              aria-label={copied ? "Install command copied" : "Copy command"}
-            >
-              {copied ? (
-                <CheckIcon className="size-4" aria-hidden="true" />
-              ) : (
-                <CopyIcon className="size-4" aria-hidden="true" />
-              )}
-            </button>
-          </div>
+        </div>
+
+        <div className="mt-9 inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+          <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap sm:text-sm">
+            <span className="mr-2 text-background/40" aria-hidden="true">
+              $
+            </span>
+            {command}
+          </code>
+          <CopyButton
+            value={command}
+            className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
+          />
         </div>
       </div>
     </section>

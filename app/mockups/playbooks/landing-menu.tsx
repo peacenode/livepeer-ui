@@ -1,0 +1,209 @@
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { ArrowUpRightIcon, GlobeIcon, MenuIcon, XIcon } from "lucide-react"
+
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import {
+  DiscordIcon,
+  GitHubIcon,
+  XIcon as SocialXIcon,
+} from "@/components/brand-social-icons"
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { cn } from "@/lib/utils"
+
+const siteLinks = [
+  { label: "Home", href: "/mockups/playbooks" },
+  { label: "GPU", href: "/mockups/playbooks/earn" },
+  { label: "Runner", href: "/mockups/playbooks/install" },
+  { label: "Playbooks", href: "/mockups/playbooks/library" },
+]
+
+const footerGroups = [
+  {
+    title: "Network",
+    links: [
+      { label: "Ecosystem", href: "https://livepeer.org/ecosystem" },
+      { label: "Livepeer Token", href: "https://livepeer.org/token" },
+      { label: "Delegate LPT", href: "https://explorer.livepeer.org/" },
+      { label: "Roadmap", href: "https://roadmap.livepeer.org/roadmap" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Research", href: "https://forum.livepeer.org/c/research/15" },
+      { label: "Docs", href: "https://docs.livepeer.org/" },
+      { label: "Blog", href: "https://blog.livepeer.org/" },
+      { label: "API Console", href: "/mockups/platform/api" },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      { label: "Discord", href: "https://discord.gg/livepeer" },
+      { label: "X / Twitter", href: "https://x.com/Livepeer" },
+      { label: "Forum", href: "https://forum.livepeer.org/" },
+      { label: "GitHub", href: "https://github.com/livepeer" },
+    ],
+  },
+]
+
+const socials = [
+  {
+    label: "Livepeer on Discord",
+    href: "https://discord.gg/livepeer",
+    icon: DiscordIcon,
+  },
+  {
+    label: "Livepeer on X",
+    href: "https://x.com/Livepeer",
+    icon: SocialXIcon,
+  },
+  {
+    label: "Livepeer on GitHub",
+    href: "https://github.com/livepeer",
+    icon: GitHubIcon,
+  },
+  {
+    label: "Livepeer website",
+    href: "https://livepeer.org/",
+    icon: GlobeIcon,
+  },
+]
+
+export function LandingMenu() {
+  const pathname = usePathname()
+  const [open, setOpen] = React.useState(false)
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="-mr-2 hover:bg-transparent hover:text-emerald-500"
+          />
+        }
+      >
+        <MenuIcon />
+        <span className="sr-only">Open site navigation</span>
+      </SheetTrigger>
+      <SheetContent
+        side="top"
+        showCloseButton={false}
+        overlayClassName="bg-transparent duration-200 supports-backdrop-filter:backdrop-blur-none"
+        className="h-dvh max-h-none overflow-y-auto border-0 shadow-none duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:duration-200 data-ending-style:ease-in motion-reduce:transition-none"
+      >
+        <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
+          <SheetTitle className="text-left">
+            <span
+              className="flex items-center gap-1.5 text-black"
+              aria-label="Livepeer"
+            >
+              <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
+              <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
+            </span>
+          </SheetTitle>
+          <SheetClose
+            render={
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="-mr-2 hover:bg-transparent hover:text-emerald-500"
+              />
+            }
+          >
+            <XIcon />
+            <span className="sr-only">Close site navigation</span>
+          </SheetClose>
+        </header>
+
+        <div className="grid gap-12 px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
+          <nav className="flex flex-col items-start gap-4 text-left">
+            {siteLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "text-2xl font-light tracking-tight transition-colors hover:text-emerald-500 sm:text-3xl",
+                  pathname === item.href
+                    ? "text-foreground underline underline-offset-8"
+                    : "text-muted-foreground"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            {socials.map((social) => {
+              const Icon = social.icon
+
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                  className="text-muted-foreground transition-colors hover:text-emerald-500"
+                >
+                  <Icon className="size-5" aria-hidden="true" />
+                </a>
+              )
+            })}
+          </div>
+
+          <div className="grid gap-10 sm:grid-cols-3">
+            {footerGroups.map((group) => (
+              <div key={group.title}>
+                <h2 className="text-sm font-medium">{group.title}</h2>
+                <div className="mt-4 flex flex-col items-start gap-3">
+                  {group.links.map((link) => {
+                    const external = link.href.startsWith("http")
+
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noreferrer" : undefined}
+                        onClick={() => setOpen(false)}
+                        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
+                      >
+                        {link.label}
+                        {external && (
+                          <ArrowUpRightIcon
+                            className="size-3.5"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-xs text-muted-foreground">
+            © 2026 Livepeer Foundation. All rights reserved.
+          </p>
+        </div>
+      </SheetContent>
+    </Sheet>
+  )
+}

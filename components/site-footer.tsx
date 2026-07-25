@@ -1,6 +1,6 @@
 import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
-import { LivepeerLockup } from "@/components/brand"
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GitHubIcon, XIcon } from "@/components/brand-social-icons"
 
 const groups = [
@@ -91,9 +91,16 @@ export function SiteFooter() {
       <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
-            <LivepeerLockup className="h-auto w-44 text-foreground" />
+            <a
+              href="/mockups/playbooks"
+              className="inline-flex items-center gap-1.5 text-black"
+              aria-label="Livepeer home"
+            >
+              <LivepeerGradientSymbol className="h-4 w-auto" />
+              <LivepeerWordmark className="h-4 w-auto" />
+            </a>
             <p className="mt-4 text-sm text-muted-foreground">
-              The open network for inference &amp; compute.
+              The open inference network.
             </p>
             <div className="mt-7 flex items-center gap-4">
               {socials.map((social) => {
@@ -106,7 +113,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground transition-colors hover:text-emerald-500"
                   >
                     <Icon className="size-5" aria-hidden="true" />
                   </a>
@@ -127,7 +134,7 @@ export function SiteFooter() {
                     rel={
                       link.href.startsWith("http") ? "noreferrer" : undefined
                     }
-                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
                   >
                     {link.label}
                     {link.external && (

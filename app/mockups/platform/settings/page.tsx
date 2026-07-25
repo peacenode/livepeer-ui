@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { ArrowUpRightIcon, Building2Icon } from "lucide-react"
 import Link from "next/link"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
@@ -30,24 +29,7 @@ export const metadata: Metadata = {
 
 export default function MockupSettingsPage() {
   return (
-    <PlatformPage
-      title="Project settings"
-      action={
-        <Button
-          variant="outline"
-          nativeButton={false}
-          render={<Link href="/mockups/platform/organization" />}
-        >
-          <Building2Icon data-icon="inline-start" />
-          <span className="hidden sm:inline">Organization settings</span>
-          <ArrowUpRightIcon
-            data-icon="inline-end"
-            className="hidden sm:block"
-          />
-          <span className="sr-only sm:hidden">Organization settings</span>
-        </Button>
-      }
-    >
+    <PlatformPage title="Project settings">
       <Tabs defaultValue="general" className="gap-8">
         <TabsList
           variant="line"
@@ -164,6 +146,23 @@ export default function MockupSettingsPage() {
           </div>
         </TabsContent>
       </Tabs>
+      <nav
+        aria-label="Related settings"
+        className="flex flex-col items-start gap-3 text-sm sm:flex-row sm:items-center sm:gap-5"
+      >
+        <Link
+          href="/mockups/platform/organization"
+          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+        >
+          Organization settings
+        </Link>
+        <Link
+          href="/mockups/platform/account"
+          className="text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+        >
+          Account settings
+        </Link>
+      </nav>
     </PlatformPage>
   )
 }

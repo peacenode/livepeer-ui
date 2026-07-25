@@ -44,7 +44,7 @@ export function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <button className="flex w-full items-center gap-3 rounded-md px-2 py-2 text-left transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" />
+          <button className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-left transition-colors outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" />
         }
       >
         <Avatar className="size-9">

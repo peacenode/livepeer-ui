@@ -1,30 +1,35 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRightIcon, CpuIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 
+import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 
 export function PlaybooksWorkspace() {
   return (
     <main>
-      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-[#f3f3f3] sm:min-h-[76svh]">
+      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-white sm:min-h-[76svh]">
         <LivepeerCubeStream />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-3xl flex-col items-start">
-            <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
-              Put your GPUs to work.{" "}
+            <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
+              The open inference network.{" "}
               <span className="text-foreground/45">
-                Power AI and media workloads on Livepeer.
+                Connect GPUs, power AI and media workloads on Livepeer.
               </span>
             </h1>
-            <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <div className="mt-9 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
               <Button
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
                 render={<Link href="/mockups/playbooks/earn" />}
-                className="h-12 rounded-sm border-foreground/10 px-5"
+                className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+                }}
               >
                 Get Started
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
@@ -34,7 +39,7 @@ export function PlaybooksWorkspace() {
                 variant="outline"
                 nativeButton={false}
                 render={<Link href="/mockups/platform" />}
-                className="h-12 rounded-sm border-foreground/20 bg-transparent px-5 transition-none hover:border-emerald-600 hover:bg-transparent"
+                className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
                 Sign up with GitHub
               </Button>
@@ -43,72 +48,103 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
-      <section className="relative min-h-[44rem] overflow-hidden bg-muted sm:min-h-[56rem]">
+      <section className="relative overflow-hidden bg-[#f3f3f3] sm:min-h-[56rem]">
         <Image
-          src="/playbooks/20260724-232451/ultramock.jpg"
+          src="/playbooks/20260725-031450/runner-background.jpg"
           alt=""
           fill
-          className="object-cover object-[58%_center] sm:object-center"
+          className="hidden object-cover object-center sm:block"
           sizes="100vw"
         />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-white via-white/65 to-transparent"
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 z-10 flex flex-col items-start justify-center gap-4 p-6 sm:p-10">
-          <h2 className="font-runner text-4xl font-medium tracking-tight sm:text-5xl">
+        <div className="relative z-10 flex flex-col items-center gap-5 px-6 py-12 text-center sm:absolute sm:inset-0 sm:items-start sm:justify-center sm:p-10 sm:text-left">
+          <div className="mb-5 flex items-center gap-2 text-xs text-foreground/55">
+            <Image
+              src="/runner/20260724-2105/olive-branch-left.svg"
+              alt=""
+              width={10}
+              height={20}
+              className="h-5 w-2.5 object-contain opacity-50"
+            />
+            <span>Summer ’26</span>
+            <Image
+              src="/runner/20260724-2105/olive-branch-right.svg"
+              alt=""
+              width={10}
+              height={20}
+              className="h-5 w-2.5 object-contain opacity-50"
+            />
+          </div>
+          <h2 className="font-runner text-5xl font-medium tracking-tight">
             RUNNER
           </h2>
-          <p className="max-w-md text-sm leading-relaxed text-foreground/65">
+          <p className="max-w-md text-sm leading-relaxed text-balance text-foreground/65">
             Your agent companion, ready to create images, video, and audio with
             the latest workflows purpose built into your agent.
           </p>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap justify-center gap-2 sm:justify-start">
             <Button
               size="lg"
               variant="secondary"
               nativeButton={false}
               render={<Link href="/mockups/playbooks/install" />}
-              className="h-12 rounded-sm border-foreground/10 px-5"
+              className="h-16 rounded-sm border-foreground/10 bg-muted px-4 text-foreground transition-[filter] hover:bg-muted hover:brightness-[0.97]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(160deg, color-mix(in oklab, var(--muted) 82%, white) 0%, var(--muted) 36%, color-mix(in oklab, var(--muted) 88%, black) 100%)",
+              }}
             >
-              Get Runner
+              Install
+              <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Button>
             <Button
               size="lg"
               variant="outline"
               nativeButton={false}
               render={<Link href="/mockups/playbooks/library" />}
-              className="h-12 rounded-sm bg-background/60 px-5"
+              className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground"
             >
               Browse Playbooks
             </Button>
           </div>
+          <AgentCompatibility className="mt-5" responsiveAlignment />
+        </div>
+        <div className="relative aspect-4/3 w-full sm:hidden">
+          <Image
+            src="/playbooks/20260725-031450/runner-background.jpg"
+            alt=""
+            fill
+            className="object-cover object-[65%_center]"
+            sizes="100vw"
+          />
         </div>
       </section>
 
-      <Link
-        href="/mockups/playbooks/earn"
-        aria-label="Earn with GPU"
-        className="group flex min-h-[32rem] bg-foreground text-background sm:min-h-[40rem]"
-      >
-        <div className="flex w-full flex-col justify-between p-6 sm:p-10">
-          <div className="flex items-center justify-between gap-6">
-            <CpuIcon className="size-8" strokeWidth={1.25} aria-hidden="true" />
-            <span className="flex size-11 items-center justify-center rounded-sm bg-background text-foreground transition-transform group-hover:translate-x-1">
-              <ArrowRightIcon className="size-5" aria-hidden="true" />
-            </span>
-          </div>
-          <div className="max-w-3xl">
-            <h2 className="text-4xl font-normal tracking-tight sm:text-6xl">
-              Earn with GPU
+      <section className="relative flex min-h-[32rem] overflow-hidden bg-foreground text-background sm:min-h-[56rem]">
+        <LivepeerCubeStream inverted className="-scale-x-100 opacity-80" />
+        <div className="relative z-10 flex w-full flex-col justify-center p-6 sm:p-10">
+          <div className="ml-auto max-w-3xl text-right">
+            <h2 className="text-4xl font-normal tracking-tight text-balance sm:text-6xl">
+              Become an Orchestrator
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-background/65">
+            <p className="mt-4 ml-auto max-w-xl text-base leading-relaxed text-balance text-background/65">
               Put a GPU on the Livepeer network and earn from inference
               workloads, service payouts, and protocol rewards.
             </p>
+            <div className="mt-6 flex justify-end">
+              <Button
+                size="lg"
+                variant="secondary"
+                nativeButton={false}
+                render={<Link href="/mockups/playbooks/earn" />}
+                className="h-16 rounded-sm border-background/10 px-4"
+              >
+                Get Started
+                <ArrowRightIcon className="size-4" aria-hidden="true" />
+              </Button>
+            </div>
           </div>
         </div>
-      </Link>
+      </section>
     </main>
   )
 }

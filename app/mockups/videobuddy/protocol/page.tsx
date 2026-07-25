@@ -19,16 +19,16 @@ const layers = [
     description:
       "Runner is the interface between people, agents, applications, and Livepeer. It accepts a task, authenticates the caller, and starts the right workflow.",
     detail: "CLI · MCP with OAuth · API",
-    href: "/mockups/platform/runner",
+    href: "/mockups/playbooks/install",
     icon: PlayIcon,
   },
   {
     number: "02",
-    title: "Workflows",
+    title: "Inference",
     description:
-      "Workflows are reusable media operations created in ai-runner. Each workflow defines the inputs, models, and steps needed to produce a result.",
-    detail: "Create · reuse · measure usage",
-    href: "/mockups/platform/workflows",
+      "Inference containers define the models, inputs, and runtime needed to produce a result on the network.",
+    detail: "Select · run · measure usage",
+    href: "/mockups/platform/inference/ai-runner",
     icon: BlocksIcon,
   },
   {

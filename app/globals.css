@@ -13,7 +13,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: InterVariable, Inter, sans-serif;
+  --font-display: var(--font-favorit), InterVariable, Inter, sans-serif;
+  --font-heading: var(--font-favorit), InterVariable, Inter, sans-serif;
   --font-sans: InterVariable, Inter, sans-serif;
   --font-runner: "Serpentine Runner", sans-serif;
   --font-mono: var(--font-mono);
@@ -144,6 +145,14 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
   }
   html {
     @apply font-sans;

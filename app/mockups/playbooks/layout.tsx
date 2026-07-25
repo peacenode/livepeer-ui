@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-import { LivepeerLockup, LivepeerSymbol } from "@/components/brand"
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { SiteFooter } from "@/components/site-footer"
 
+import { LandingMenu } from "./landing-menu"
 import { PlaybooksNav } from "./playbooks-nav"
 
 export const metadata: Metadata = {
@@ -24,13 +25,18 @@ export default function PlaybooksLayout({
         <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <Link
             href="/mockups/playbooks"
-            className="flex items-center gap-3"
-            aria-label="Playbooks home"
+            className="flex shrink-0 items-center gap-3"
+            aria-label="Landing home"
           >
-            <LivepeerSymbol className="h-5 w-auto sm:hidden" />
-            <LivepeerLockup className="hidden h-4 w-auto sm:block" />
+            <span className="flex items-center gap-1.5 text-black">
+              <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
+              <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
+            </span>
           </Link>
-          <PlaybooksNav />
+          <div className="flex items-center gap-1">
+            <PlaybooksNav />
+            <LandingMenu />
+          </div>
         </div>
       </header>
       <div className="flex-1">{children}</div>

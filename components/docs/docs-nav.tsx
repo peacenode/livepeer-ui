@@ -33,7 +33,7 @@ export function DocsNav({
       items: [
         { title: "Console", href: "/mockups/platform" },
         { title: "Runner", href: "/mockups/runner" },
-        { title: "Playbooks", href: "/mockups/playbooks" },
+        { title: "Landing", href: "/mockups/playbooks" },
       ],
     },
     {
