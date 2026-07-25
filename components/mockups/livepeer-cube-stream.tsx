@@ -34,7 +34,7 @@ function makeParticles(
     const arch = progress * progress
     const centerX = (0.46 + progress * 0.12 + arch * 0.3) * width
     const spread = (noise(index + 19) * 2 - 1) * Math.min(width * 0.25, 340)
-    const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
+    const fieldCenterX = width * (width < 640 ? 0.21 : 0.33)
     const fieldCenterY = height * 0.56
     const fieldRadius =
       width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
@@ -106,7 +106,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         ? 0
         : Math.min(1.25, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
-      const fieldCenterX = width * (width < 640 ? 0.18 : 0.3) + pointer.x * 18
+      const fieldCenterX = width * (width < 640 ? 0.21 : 0.33) + pointer.x * 18
       const fieldCenterY = height * 0.56 + pointer.y * 12
       const fieldRadius =
         width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
