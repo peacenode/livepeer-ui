@@ -36,7 +36,7 @@ function makeParticles(count: number, width: number, height: number): Particle[]
         ? width * 0.92
         : Math.min(width * 0.36, height * 0.54)
     let x = centerX + spread
-    let y = (-0.1 + progress * 1.2) * height
+    let y = (-0.24 + progress * 1.58) * height
     const fieldX = x - fieldCenterX
     const fieldY = y - fieldCenterY
     const distance = Math.max(1, Math.hypot(fieldX, fieldY))
@@ -109,7 +109,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           ? width * 0.92
           : Math.min(width * 0.36, height * 0.54)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
-      const particleSize = 2
+      const particleSize = 3
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.0015
@@ -143,13 +143,13 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         particle.y += particle.vy * delta
 
         if (
-          particle.y < -height * 0.16 ||
+          particle.y < -height * 0.26 ||
           particle.x < -width * 0.25 ||
           particle.x > width * 1.25
         ) {
           const spread = (noise(particle.wave + time) * 2 - 1) * width * 0.18
           particle.x = width * 0.7 + spread
-          particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
+          particle.y = height * (1.18 + noise(particle.wave + 11) * 0.16)
           particle.vx = -0.08 - noise(particle.wave + 17) * 0.18
           particle.vy = -(1.05 + particle.speed * 0.68)
         }
