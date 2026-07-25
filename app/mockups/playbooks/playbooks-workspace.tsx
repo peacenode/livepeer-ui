@@ -95,7 +95,7 @@ export function PlaybooksWorkspace() {
         <div className="flex w-full flex-col justify-between p-6 sm:p-10">
           <div className="flex items-center justify-between gap-6">
             <CpuIcon className="size-8" strokeWidth={1.25} aria-hidden="true" />
-            <span className="flex size-11 items-center justify-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-1">
+            <span className="flex size-11 items-center justify-center rounded-sm bg-background text-foreground transition-transform group-hover:translate-x-1">
               <ArrowRightIcon className="size-5" aria-hidden="true" />
             </span>
           </div>

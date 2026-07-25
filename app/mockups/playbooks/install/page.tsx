@@ -17,7 +17,7 @@ export default function PlaybooksInstallPage() {
       </header>
       <section className="mt-10 border-y py-8">
         <h2 className="text-sm font-medium">Install command</h2>
-        <pre className="mt-4 overflow-x-auto rounded-xl bg-foreground px-4 py-3 font-mono text-xs leading-relaxed text-background">
+        <pre className="mt-4 overflow-x-auto rounded-sm bg-foreground px-4 py-3 font-mono text-xs leading-relaxed text-background">
           {installCommand}
         </pre>
         <p className="mt-3 text-xs text-muted-foreground">

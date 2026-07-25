@@ -39,7 +39,7 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search playbooks"
-          className="pl-9"
+          className="rounded-sm pl-9"
         />
       </div>
 
@@ -48,9 +48,9 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
           <Link
             key={playbook.slug}
             href={`/mockups/playbooks/library/${playbook.slug}`}
-            className="group rounded-4xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            className="group rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
-            <Card className="h-full overflow-hidden py-0 transition-colors group-hover:bg-accent">
+            <Card className="h-full overflow-hidden rounded-sm py-0 transition-colors group-hover:bg-accent">
               {playbook.image && (
                 <div
                   className="aspect-[16/9] bg-muted bg-cover bg-center"
@@ -62,7 +62,11 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
                 <CardHeader>
                   <div className="flex flex-wrap gap-1.5">
                     {playbook.tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="secondary">
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="rounded-sm"
+                      >
                         {tag}
                       </Badge>
                     ))}

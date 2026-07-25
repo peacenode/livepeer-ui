@@ -43,7 +43,7 @@ export function InstallRunnerFooter({
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/70">
             {description}
           </p>
-          <div className="mt-7 flex w-full max-w-md items-center justify-between gap-4 rounded-2xl bg-white/95 px-5 py-4 text-black backdrop-blur-sm">
+          <div className="mt-7 flex w-full max-w-md items-center justify-between gap-4 rounded-sm bg-white/95 px-5 py-4 text-black backdrop-blur-sm">
             <code className="flex min-w-0 items-center gap-2 overflow-x-auto font-mono text-xs whitespace-nowrap">
               <span className="text-black/40" aria-hidden="true">
                 $
@@ -53,7 +53,7 @@ export function InstallRunnerFooter({
             <button
               type="button"
               onClick={copyCommand}
-              className="flex size-10 shrink-0 items-center justify-center rounded-full bg-black text-white transition-colors hover:bg-black/80"
+              className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-black text-white transition-colors hover:bg-black/80"
               aria-label={copied ? "Install command copied" : "Copy command"}
             >
               {copied ? (

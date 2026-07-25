@@ -101,14 +101,14 @@ function AspectRatioSelect({
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(option)}
-            className="group flex w-fit flex-col items-center gap-2 rounded-lg py-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group flex w-fit flex-col items-center gap-2 rounded-sm py-2 outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <span className="flex h-14 items-center justify-center">
               <span
                 className={
                   selected
-                    ? "block h-12 max-w-full rounded-[3px] border border-foreground bg-foreground"
-                    : "block h-12 max-w-full rounded-[3px] border border-muted-foreground/60 transition-colors group-hover:border-foreground"
+                    ? "block h-12 max-w-full rounded-sm border border-foreground bg-foreground"
+                    : "block h-12 max-w-full rounded-sm border border-muted-foreground/60 transition-colors group-hover:border-foreground"
                 }
                 style={{ aspectRatio: option.replace(":", " / ") }}
                 aria-hidden="true"
@@ -329,9 +329,9 @@ export function PlaybookBriefForm({
                     }
                   />
                 ) : long ? (
-                  <Textarea {...shared} className="mt-2 min-h-24" />
+                  <Textarea {...shared} className="mt-2 min-h-24 rounded-sm" />
                 ) : (
-                  <Input {...shared} className="mt-2" />
+                  <Input {...shared} className="mt-2 rounded-sm" />
                 )}
                 {hasBrandCompositionLayout &&
                   field.name === "one_liner" &&
@@ -339,6 +339,7 @@ export function PlaybookBriefForm({
                     <div className="mt-7 mb-2 flex items-start gap-2">
                       <Checkbox
                         id="brief-train_brand_lora"
+                        className="rounded-sm"
                         checked={
                           (values[trainBrandLoraField.name] ??
                             trainBrandLoraField.defaultValue) === "true"
@@ -370,6 +371,7 @@ export function PlaybookBriefForm({
                   <div key={field.name} className="flex items-center gap-2">
                     <Checkbox
                       id={id}
+                      className="rounded-sm"
                       checked={checked}
                       onCheckedChange={(nextChecked) =>
                         setValues((current) => ({
@@ -399,6 +401,7 @@ export function PlaybookBriefForm({
               <div className="flex items-start gap-2">
                 <Checkbox
                   id="brief-train_brand_lora"
+                  className="rounded-sm"
                   checked={
                     (values[trainBrandLoraField.name] ??
                       trainBrandLoraField.defaultValue) === "true"
@@ -426,6 +429,7 @@ export function PlaybookBriefForm({
                   <div key={field.name} className="flex items-center gap-2">
                     <Checkbox
                       id={id}
+                      className="rounded-sm"
                       checked={checked}
                       onCheckedChange={(nextChecked) =>
                         setValues((current) => ({
@@ -445,7 +449,7 @@ export function PlaybookBriefForm({
           type="button"
           size="lg"
           onClick={copyPlaybook}
-          className="h-24 w-full rounded-2xl"
+          className="h-24 w-full rounded-sm"
         >
           {copied ? <CheckIcon /> : <CopyIcon />}
           {copied ? "Copied — paste into your agent" : "Copy playbook"}

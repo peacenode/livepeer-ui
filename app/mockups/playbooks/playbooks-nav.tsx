@@ -7,7 +7,7 @@ export function PlaybooksNav() {
         href="https://github.com/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="hidden size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-emerald-500 md:flex"
+        className="hidden size-9 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-emerald-500 md:flex"
         aria-label="Livepeer on GitHub"
         title="GitHub"
       >
@@ -17,7 +17,7 @@ export function PlaybooksNav() {
         href="https://discord.gg/livepeer"
         target="_blank"
         rel="noreferrer"
-        className="hidden size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-emerald-500 md:flex"
+        className="hidden size-9 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-emerald-500 md:flex"
         aria-label="Join Livepeer on Discord"
         title="Discord"
       >
@@ -28,7 +28,7 @@ export function PlaybooksNav() {
           href="https://docs.livepeer.org/"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1 rounded-md px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"
+          className="flex items-center gap-1 rounded-sm px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"
         >
           Docs
           <span className="font-sans" aria-hidden="true">
@@ -39,7 +39,7 @@ export function PlaybooksNav() {
           href="/mockups/platform/api"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1 rounded-md px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"
+          className="flex items-center gap-1 rounded-sm px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"
         >
           API Console
           <span className="font-sans" aria-hidden="true">

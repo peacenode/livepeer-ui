@@ -175,7 +175,7 @@ export default async function EarnWithGpuPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mb-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
             {earnings.map((earning) => (
-              <Card key={earning.label} variant="metric">
+              <Card key={earning.label} variant="metric" className="rounded-sm">
                 <CardHeader>
                   <CardDescription className="flex w-full items-baseline gap-1.5">
                     <span>{earning.label}</span>
@@ -376,6 +376,7 @@ export default async function EarnWithGpuPage() {
           <Button
             nativeButton={false}
             variant="outline"
+            className="rounded-sm"
             render={
               <a
                 href="https://docs.livepeer.org/v2/orchestrators/guides/operator-considerations/operator-rationale"

@@ -117,7 +117,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
                   <Badge
                     key={cap}
                     variant="secondary"
-                    className="max-w-40 truncate"
+                    className="max-w-40 truncate rounded-sm"
                     title={cap}
                   >
                     {cap}
@@ -130,7 +130,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
 
         {catalogEntry && (
           <section className="mt-12">
-            <div className="grid overflow-hidden rounded-4xl bg-muted md:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid overflow-hidden rounded-sm bg-muted md:grid-cols-[1.1fr_0.9fr]">
               {catalogEntry.image && (
                 <div
                   className="min-h-72 bg-cover bg-center"
