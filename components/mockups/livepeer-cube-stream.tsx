@@ -137,6 +137,14 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           const radialError = fieldDistance - fieldRadius
           const radialForce = radialError * 0.00011 * proximity
           const orbitForce = proximity * proximity * 0.09
+          const throatDistance = fieldY / (fieldRadius * 0.48)
+          const compression =
+            Math.exp(-(throatDistance * throatDistance)) * 0.34
+          const seamX = fieldCenterX + radialX * fieldRadius
+          const seamY = fieldCenterY + radialY * fieldRadius
+
+          particle.x += (seamX - particle.x) * compression * delta
+          particle.y += (seamY - particle.y) * compression * delta
 
           if (fieldDistance < fieldRadius) {
             particle.x = fieldCenterX + radialX * fieldRadius
