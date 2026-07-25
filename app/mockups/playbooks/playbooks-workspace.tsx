@@ -31,10 +31,10 @@ export function PlaybooksWorkspace() {
               </Button>
               <Button
                 size="lg"
-                variant="secondary"
+                variant="outline"
                 nativeButton={false}
                 render={<Link href="/mockups/platform" />}
-                className="h-12 rounded-sm border-foreground/10 px-5"
+                className="h-12 rounded-sm border-foreground/20 bg-transparent px-5 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
                 Sign up with Google
               </Button>
