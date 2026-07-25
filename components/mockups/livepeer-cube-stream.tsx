@@ -144,11 +144,17 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x < -width * 0.25 ||
           particle.x > width * 1.25
         ) {
-          const spread = (noise(particle.wave + time) * 2 - 1) * width * 0.18
-          particle.x = width * 0.7 + spread
-          particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
-          particle.vx = -0.08 - noise(particle.wave + 17) * 0.18
-          particle.vy = -(0.9 + particle.speed * 0.58)
+          const respawnAngle =
+            0.72 + noise(particle.wave + time * 0.0001) * 0.42
+          const respawnRadius =
+            fieldRadius * (1.02 + noise(particle.wave + 11) * 0.08)
+          const tangentSpeed =
+            0.82 + particle.speed * 0.34 + noise(particle.wave + 17) * 0.16
+
+          particle.x = fieldCenterX + Math.cos(respawnAngle) * respawnRadius
+          particle.y = fieldCenterY + Math.sin(respawnAngle) * respawnRadius
+          particle.vx = Math.sin(respawnAngle) * tangentSpeed
+          particle.vy = -Math.cos(respawnAngle) * tangentSpeed
         }
 
         context.globalAlpha = 1
