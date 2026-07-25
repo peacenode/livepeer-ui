@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 
 const desktopParticleCount = 5000
-const mobileParticleCount = 1600
+const mobileParticleCount = 1000
 const particleSize = 4
 const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
@@ -85,15 +85,56 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       occupancy.fill(0)
 
       const elapsed = reduceMotion ? 2.4 : (time - start) / 1000
+      const isMobile = width < 640
       const fieldCenterX =
-        width * (width < 640 ? 0.21 : 0.33) + pointer.x * 18
+        width * (isMobile ? 0.21 : 0.33) + pointer.x * 18
       const fieldCenterY = height * 0.56 + pointer.y * 12
       const fieldRadius =
-        width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
+        isMobile ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
       const streamWidth = Math.min(width * 0.23, 330)
       const transitionBand = fieldRadius * 0.24
 
       for (const particle of particles) {
+        if (isMobile) {
+          const progress =
+            (1 - particle.phase + elapsed * 0.105 * particle.speed + 10) % 1
+          const turbulenceSeed = particle.phase * mobileParticleCount
+          const x = (-0.16 + progress * 1.32) * width
+          const centerY =
+            height * 0.84 -
+            Math.sin(progress * Math.PI) * height * 0.025
+          const fan = 0.5 + Math.abs(progress - 0.5) * 0.72
+          const y =
+            centerY +
+            particle.offset * 46 * fan +
+            Math.sin(progress * 18 + turbulenceSeed * 0.13) * 5 +
+            Math.sin(progress * 41 + turbulenceSeed * 0.29) * 2
+          const gridX = Math.round(x / particleSize)
+          const gridY = Math.round(y / particleSize)
+
+          if (
+            gridX >= 0 &&
+            gridX < gridColumns &&
+            gridY >= 0 &&
+            gridY < gridRows
+          ) {
+            const occupancyIndex = gridY * gridColumns + gridX
+
+            if (occupancy[occupancyIndex] === 0) {
+              occupancy[occupancyIndex] = 1
+              context.fillStyle = particle.color
+              context.fillRect(
+                x - particleSize / 2,
+                y - particleSize / 2,
+                particleSize,
+                particleSize
+              )
+            }
+          }
+
+          continue
+        }
+
         const progress =
           (particle.phase - elapsed * 0.105 * particle.speed + 10) % 1
         const y = (-0.26 + progress * 1.62) * height
@@ -168,8 +209,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
             occupancy[occupancyIndex] = 1
             context.fillStyle = particle.color
             context.fillRect(
-              gridX * particleSize,
-              gridY * particleSize,
+              x - particleSize / 2,
+              renderedY - particleSize / 2,
               particleSize,
               particleSize
             )
