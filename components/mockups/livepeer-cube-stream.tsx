@@ -144,10 +144,10 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x < -width * 0.25 ||
           particle.x > width * 1.25
         ) {
-          const spread = (noise(particle.wave + time) * 2 - 1) * width * 0.2
-          particle.x = width * 0.82 + spread
+          const spread = (noise(particle.wave + time) * 2 - 1) * width * 0.18
+          particle.x = width * 0.7 + spread
           particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
-          particle.vx = -0.04 - noise(particle.wave + 17) * 0.12
+          particle.vx = -0.08 - noise(particle.wave + 17) * 0.18
           particle.vy = -(0.9 + particle.speed * 0.58)
         }
 
