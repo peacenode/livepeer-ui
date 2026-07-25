@@ -87,13 +87,13 @@ const socials = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-background">
+    <footer className="bg-background">
       <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <LivepeerLockup className="h-auto w-44 text-foreground" />
             <p className="mt-4 text-sm text-muted-foreground">
-              The open network for inference &amp; compute.
+              The open inference network.
             </p>
             <div className="mt-7 flex items-center gap-4">
               {socials.map((social) => {
