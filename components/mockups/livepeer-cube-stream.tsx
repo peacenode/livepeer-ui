@@ -98,7 +98,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           (particle.phase - elapsed * 0.105 * particle.speed + 10) % 1
         const y = (-0.26 + progress * 1.62) * height
         const baseX =
-          (0.4 + progress * progress * 0.52) * width
+          (0.4 + progress * progress * 0.48) * width
         const fieldY = y - fieldCenterY
         const absoluteFieldY = Math.abs(fieldY)
         const circleReach = fieldRadius + transitionBand
@@ -123,7 +123,14 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const throatDistance = Math.abs(fieldY) / fieldRadius
         const compression =
           1 - smoothstep(0.16, 0.78, throatDistance)
-        const widthScale = 1 - compression * 0.965
+        const sharedFlow =
+          (Math.sin(fieldY * 0.012 + elapsed * 0.72) * 3.5 +
+            Math.sin(fieldY * 0.005 - elapsed * 0.38) * 2.5) *
+          compression
+        // At full compression every particle snaps to the same grid column.
+        // Occupancy then permits exactly one 4px particle per row through
+        // the throat before the stream smoothly fans out again.
+        const widthScale = 1 - compression
         const naturalOffset =
           particle.offset * streamWidth * (0.72 + progress * 0.28)
         const outsideOffset =
@@ -133,7 +140,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const lateralOffset =
           naturalOffset * (1 - circleBlend) +
           outsideOffset * circleBlend
-        const turbulenceStrength = 1 - compression * 0.92
+        const turbulenceStrength = 1 - compression
         const turbulenceSeed = particle.phase * desktopParticleCount
         const curlX =
           (Math.sin(progress * 29 + turbulenceSeed * 0.17) * 13 +
@@ -143,7 +150,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           (Math.cos(progress * 23 + turbulenceSeed * 0.31) * 7 +
             Math.sin(progress * 53 + turbulenceSeed * 0.11) * 3) *
           turbulenceStrength
-        const x = centerX + lateralOffset * widthScale + curlX
+        const x =
+          centerX + sharedFlow + lateralOffset * widthScale + curlX
         const renderedY = y + curlY
         const gridX = Math.round(x / particleSize)
         const gridY = Math.round(renderedY / particleSize)
