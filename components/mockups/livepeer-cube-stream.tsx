@@ -106,7 +106,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
       const fieldCenterY = height * 0.5
       const fieldRadius =
-        width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
+        width < 640 ? width * 0.92 : Math.min(width * 0.42, height * 0.78)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
       const particleSize = width < 640 ? 2 : 3
 
@@ -147,6 +147,27 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         particle.vy *= Math.pow(0.992, delta)
         particle.x += particle.vx * delta
         particle.y += particle.vy * delta
+
+        const nextFieldX = particle.x - fieldCenterX
+        const nextFieldY = particle.y - fieldCenterY
+        const nextFieldDistance = Math.max(
+          1,
+          Math.hypot(nextFieldX, nextFieldY)
+        )
+
+        if (nextFieldDistance < fieldRadius) {
+          const normalX = nextFieldX / nextFieldDistance
+          const normalY = nextFieldY / nextFieldDistance
+          const inwardVelocity = particle.vx * normalX + particle.vy * normalY
+
+          particle.x = fieldCenterX + normalX * fieldRadius
+          particle.y = fieldCenterY + normalY * fieldRadius
+
+          if (inwardVelocity < 0) {
+            particle.vx -= inwardVelocity * normalX
+            particle.vy -= inwardVelocity * normalY
+          }
+        }
 
         if (
           particle.y < -height * 0.16 ||
