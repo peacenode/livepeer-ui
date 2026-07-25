@@ -36,7 +36,7 @@ export function PlaybooksWorkspace() {
                 render={<Link href="/mockups/platform" />}
                 className="h-12 rounded-sm border-foreground/20 bg-transparent px-5 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
-                Sign up with Google
+                Sign up with GitHub
               </Button>
             </div>
           </div>
