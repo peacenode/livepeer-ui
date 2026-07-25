@@ -117,8 +117,17 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const fieldY = particle.y - fieldCenterY
         const fieldDistance = Math.max(1, Math.hypot(fieldX, fieldY))
 
-        if (fieldDistance < influenceRadius) {
-          const proximity = 1 - fieldDistance / influenceRadius
+        const approachDistance = Math.min(width * 0.28, 360)
+        const approachProgress = Math.max(
+          0,
+          1 - (fieldDistance - influenceRadius) / approachDistance
+        )
+
+        if (approachProgress > 0) {
+          const proximity =
+            fieldDistance < influenceRadius
+              ? 1 - fieldDistance / influenceRadius
+              : approachProgress * 0.16
           const radialX = fieldX / fieldDistance
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
@@ -144,17 +153,11 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x < -width * 0.25 ||
           particle.x > width * 1.25
         ) {
-          const respawnAngle =
-            0.72 + noise(particle.wave + time * 0.0001) * 0.42
-          const respawnRadius =
-            fieldRadius * (1.02 + noise(particle.wave + 11) * 0.08)
-          const tangentSpeed =
-            0.82 + particle.speed * 0.34 + noise(particle.wave + 17) * 0.16
-
-          particle.x = fieldCenterX + Math.cos(respawnAngle) * respawnRadius
-          particle.y = fieldCenterY + Math.sin(respawnAngle) * respawnRadius
-          particle.vx = Math.sin(respawnAngle) * tangentSpeed
-          particle.vy = -Math.cos(respawnAngle) * tangentSpeed
+          const spread = (noise(particle.wave + time) * 2 - 1) * width * 0.18
+          particle.x = width * 0.7 + spread
+          particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
+          particle.vx = -0.08 - noise(particle.wave + 17) * 0.18
+          particle.vy = -(0.9 + particle.speed * 0.58)
         }
 
         context.globalAlpha = 1
