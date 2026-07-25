@@ -50,7 +50,7 @@ function makeParticles(count: number, width: number, height: number): Particle[]
 
     return {
       color: colors[Math.floor(noise(index + 41) * colors.length)],
-      opacity: 0.18 + noise(index + 7) * 0.7,
+      opacity: 0.08 + noise(index + 7) * 0.42,
       size: 1 + Math.pow(noise(index + 13), 2.4) * 4,
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
@@ -161,7 +161,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const perspective = 0.58 + progress * 0.72
         const size = particle.size * perspective
 
-        context.globalAlpha = particle.opacity * (0.55 + progress * 0.45)
+        context.globalAlpha = particle.opacity * (0.48 + progress * 0.4)
         context.fillStyle = particle.color
         context.fillRect(
           Math.round(particle.x - size / 2),
