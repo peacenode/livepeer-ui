@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 
 const desktopParticleCount = 5000
 const mobileParticleCount = 1600
-const particleSize = 3
+const particleSize = 4
 const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type Particle = {
@@ -57,6 +57,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
     const pointer = { x: 0, y: 0 }
     let frame = 0
     let height = 0
+    let gridColumns = 0
+    let gridRows = 0
+    let occupancy = new Uint8Array()
     let particles: Particle[] = []
     let start = performance.now()
     let width = 0
@@ -69,6 +72,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       canvas.width = Math.round(width * ratio)
       canvas.height = Math.round(height * ratio)
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
+      gridColumns = Math.ceil(width / particleSize)
+      gridRows = Math.ceil(height / particleSize)
+      occupancy = new Uint8Array(gridColumns * gridRows)
       particles = makeParticles(
         width < 640 ? mobileParticleCount : desktopParticleCount
       )
@@ -76,6 +82,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
 
     const draw = (time: number) => {
       context.clearRect(0, 0, width, height)
+      occupancy.fill(0)
 
       const elapsed = reduceMotion ? 2.4 : (time - start) / 1000
       const fieldCenterX =
@@ -127,15 +134,40 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         const lateralOffset =
           naturalOffset * (1 - circleBlend) +
           outsideOffset * circleBlend
-        const x = centerX + lateralOffset * widthScale
+        const turbulenceStrength = 1 - compression * 0.92
+        const turbulenceSeed = particle.phase * desktopParticleCount
+        const curlX =
+          (Math.sin(progress * 29 + turbulenceSeed * 0.17) * 13 +
+            Math.sin(progress * 67 + turbulenceSeed * 0.43) * 6) *
+          turbulenceStrength
+        const curlY =
+          (Math.cos(progress * 23 + turbulenceSeed * 0.31) * 7 +
+            Math.sin(progress * 53 + turbulenceSeed * 0.11) * 3) *
+          turbulenceStrength
+        const x = centerX + lateralOffset * widthScale + curlX
+        const renderedY = y + curlY
+        const gridX = Math.round(x / particleSize)
+        const gridY = Math.round(renderedY / particleSize)
 
-        context.fillStyle = particle.color
-        context.fillRect(
-          Math.round(x - particleSize / 2),
-          Math.round(y - particleSize / 2),
-          particleSize,
-          particleSize
-        )
+        if (
+          gridX >= 0 &&
+          gridX < gridColumns &&
+          gridY >= 0 &&
+          gridY < gridRows
+        ) {
+          const occupancyIndex = gridY * gridColumns + gridX
+
+          if (occupancy[occupancyIndex] === 0) {
+            occupancy[occupancyIndex] = 1
+            context.fillStyle = particle.color
+            context.fillRect(
+              gridX * particleSize,
+              gridY * particleSize,
+              particleSize,
+              particleSize
+            )
+          }
+        }
       }
 
       if (!reduceMotion) frame = requestAnimationFrame(draw)
