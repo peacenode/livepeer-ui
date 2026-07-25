@@ -102,7 +102,8 @@ export function LandingMenu() {
       <SheetContent
         side="top"
         showCloseButton={false}
-        className="max-h-dvh overflow-y-auto border-0 shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none"
+        overlayClassName="duration-100"
+        className="max-h-dvh overflow-y-auto border-0 shadow-none delay-100 duration-200 ease-out data-ending-style:opacity-100 data-ending-style:delay-0 data-ending-style:duration-150 data-ending-style:ease-in data-[side=top]:border-b-0 motion-reduce:transition-none"
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
