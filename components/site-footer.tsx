@@ -93,7 +93,7 @@ export function SiteFooter() {
           <div className="sm:col-span-2 lg:col-span-1">
             <LivepeerLockup className="h-auto w-44 text-foreground" />
             <p className="mt-4 text-sm text-muted-foreground">
-              The open inference network.
+              The open network for inference &amp; compute.
             </p>
             <div className="mt-7 flex items-center gap-4">
               {socials.map((social) => {
