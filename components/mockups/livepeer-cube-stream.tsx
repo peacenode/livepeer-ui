@@ -24,18 +24,20 @@ function noise(seed: number) {
   return value - Math.floor(value)
 }
 
-function makeParticles(count: number, width: number, height: number): Particle[] {
+function makeParticles(
+  count: number,
+  width: number,
+  height: number
+): Particle[] {
   return Array.from({ length: count }, (_, index) => {
     const progress = noise(index + 3)
     const arch = progress * progress
     const centerX = (0.46 + progress * 0.12 + arch * 0.3) * width
     const spread = (noise(index + 19) * 2 - 1) * Math.min(width * 0.25, 340)
     const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
-    const fieldCenterY = height * 0.5
+    const fieldCenterY = height * 0.56
     const fieldRadius =
-      width < 640
-        ? width * 0.92
-        : Math.min(width * 0.36, height * 0.54)
+      width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
     let x = centerX + spread
     let y = (-0.24 + progress * 1.58) * height
     const fieldX = x - fieldCenterX
@@ -105,11 +107,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         : Math.min(1.25, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
       const fieldCenterX = width * (width < 640 ? 0.18 : 0.3) + pointer.x * 18
-      const fieldCenterY = height * 0.5 + pointer.y * 12
+      const fieldCenterY = height * 0.56 + pointer.y * 12
       const fieldRadius =
-        width < 640
-          ? width * 0.92
-          : Math.min(width * 0.36, height * 0.54)
+        width < 640 ? width * 0.92 : Math.min(width * 0.36, height * 0.54)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
       const particleSize = 3
 
@@ -118,14 +118,11 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           0,
           Math.min(1, (particle.y / height + 0.26) / 1.6)
         )
-        const guideX =
-          (0.82 - streamProgress * streamProgress * 0.12) * width
+        const guideX = (0.4 + streamProgress * streamProgress * 0.45) * width
         const guideWidth =
-          3 +
-          Math.min(width * 0.24, 330) * Math.pow(streamProgress, 2.2)
+          Math.min(width * 0.24, 330) * (0.72 + streamProgress * 0.28)
         const targetX = guideX + particle.streamOffset * guideWidth
-        const curveSlope =
-          (-2 * 0.12 * streamProgress * width) / (1.6 * height)
+        const curveSlope = (2 * 0.45 * streamProgress * width) / (1.6 * height)
         const targetVx = curveSlope * particle.vy
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.0015
         const waveY = Math.cos(elapsed * 1.1 + particle.wave) * 0.001
@@ -145,8 +142,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
             particle.x = fieldCenterX + radialX * fieldRadius
             particle.y = fieldCenterY + radialY * fieldRadius
 
-            const inwardVelocity =
-              particle.vx * radialX + particle.vy * radialY
+            const inwardVelocity = particle.vx * radialX + particle.vy * radialY
 
             if (inwardVelocity < 0) {
               particle.vx -= inwardVelocity * radialX
@@ -157,31 +153,21 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
           // clockwise tangent carries the current upward around it.
-          particle.vx +=
-            (-radialX * radialForce + radialY * orbitForce) * delta
-          particle.vy +=
-            (-radialY * radialForce - radialX * orbitForce) * delta
+          particle.vx += (-radialX * radialForce + radialY * orbitForce) * delta
+          particle.vy += (-radialY * radialForce - radialX * orbitForce) * delta
         }
 
         const exitProgress = Math.max(
           0,
-          Math.min(
-            1,
-            (fieldCenterY - particle.y) / (fieldRadius * 0.9)
-          )
+          Math.min(1, (fieldCenterY - particle.y) / (fieldRadius * 0.9))
         )
         const guideStrength =
           fieldDistance < influenceRadius
             ? 0.08 + exitProgress * exitProgress * 0.92
             : 1
-        const convergence = 1 - streamProgress
-        const positionStrength =
-          0.00016 + convergence * convergence * 0.001
-        const velocityStrength = 0.04 + convergence * 0.08
-
         particle.vx +=
-          ((targetX - particle.x) * positionStrength +
-            (targetVx - particle.vx) * velocityStrength +
+          ((targetX - particle.x) * 0.00016 +
+            (targetVx - particle.vx) * 0.04 +
             waveX) *
           guideStrength *
           delta
