@@ -120,7 +120,7 @@ export default async function PlaybooksInstallPage() {
             variant="secondary"
             nativeButton={false}
             render={<Link href="/mockups/playbooks/library" />}
-            className="mt-8 h-16 rounded-sm px-6"
+            className="mt-10 h-16 rounded-sm px-6"
           >
             See more
             <span className="font-sans" aria-hidden="true">
