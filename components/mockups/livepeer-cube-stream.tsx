@@ -98,7 +98,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           (particle.phase - elapsed * 0.105 * particle.speed + 10) % 1
         const y = (-0.26 + progress * 1.62) * height
         const baseX =
-          (0.4 + progress * progress * 0.45) * width
+          (0.4 + progress * progress * 0.52) * width
         const fieldY = y - fieldCenterY
         const absoluteFieldY = Math.abs(fieldY)
         const circleReach = fieldRadius + transitionBand
@@ -120,10 +120,9 @@ function LivepeerCubeStream({ className }: { className?: string }) {
 
         // Density rises continuously toward the throat, then releases with
         // the same curve. No particles snap and no velocity state accumulates.
-        const throatDistance = fieldY / (fieldRadius * 0.46)
-        const compression = Math.exp(
-          -(throatDistance * throatDistance)
-        )
+        const throatDistance = Math.abs(fieldY) / fieldRadius
+        const compression =
+          1 - smoothstep(0.16, 0.78, throatDistance)
         const widthScale = 1 - compression * 0.965
         const naturalOffset =
           particle.offset * streamWidth * (0.72 + progress * 0.28)
