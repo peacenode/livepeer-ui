@@ -102,13 +102,13 @@ export function LandingMenu() {
       <SheetContent
         side="top"
         showCloseButton={false}
-        overlayClassName="duration-100"
-        className="max-h-dvh overflow-y-auto border-0 shadow-none delay-100 duration-200 ease-out data-ending-style:opacity-100 data-ending-style:delay-0 data-ending-style:duration-150 data-ending-style:ease-in data-[side=top]:border-b-0 motion-reduce:transition-none"
+        overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
+        className="max-h-dvh overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none"
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
             <span
-              className="flex items-center gap-1.5 text-black"
+              className="flex items-center gap-1.5 text-background"
               aria-label="Livepeer"
             >
               <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
@@ -120,7 +120,7 @@ export function LandingMenu() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                className="-mr-2 hover:bg-transparent hover:text-emerald-500"
+                className="-mr-2 text-background hover:bg-transparent hover:text-emerald-500"
               />
             }
           >
@@ -139,8 +139,8 @@ export function LandingMenu() {
                 className={cn(
                   "text-2xl font-light tracking-tight transition-colors hover:text-emerald-500 sm:text-3xl",
                   pathname === item.href
-                    ? "text-foreground underline underline-offset-8"
-                    : "text-muted-foreground"
+                    ? "text-background underline underline-offset-8"
+                    : "text-background/55"
                 )}
               >
                 {item.label}
@@ -159,7 +159,7 @@ export function LandingMenu() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.label}
-                  className="text-muted-foreground transition-colors hover:text-emerald-500"
+                  className="text-background/55 transition-colors hover:text-emerald-500"
                 >
                   <Icon className="size-5" aria-hidden="true" />
                 </a>
@@ -170,7 +170,9 @@ export function LandingMenu() {
           <div className="grid gap-10 sm:grid-cols-3">
             {footerGroups.map((group) => (
               <div key={group.title}>
-                <h2 className="text-sm font-medium">{group.title}</h2>
+                <h2 className="text-sm font-medium text-background">
+                  {group.title}
+                </h2>
                 <div className="mt-4 flex flex-col items-start gap-3">
                   {group.links.map((link) => {
                     const external = link.href.startsWith("http")
@@ -182,7 +184,7 @@ export function LandingMenu() {
                         target={external ? "_blank" : undefined}
                         rel={external ? "noreferrer" : undefined}
                         onClick={() => setOpen(false)}
-                        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
+                        className="inline-flex items-center gap-1 text-sm text-background/55 transition-colors hover:text-emerald-500"
                       >
                         {link.label}
                         {external && (
@@ -199,7 +201,7 @@ export function LandingMenu() {
             ))}
           </div>
 
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-background/55">
             © 2026 Livepeer Foundation. All rights reserved.
           </p>
         </div>
