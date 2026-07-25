@@ -32,7 +32,10 @@ function makeParticles(
     const progress = noise(index + 3)
     const arch = progress * progress
     const centerX = (0.46 + progress * 0.12 + arch * 0.3) * width
-    const spread = (noise(index + 19) * 2 - 1) * Math.min(width * 0.25, 340)
+    const spread =
+      (noise(index + 19) * 2 - 1) *
+      Math.min(width * 0.25, 340) *
+      (0.4 + progress * 0.6)
     const fieldCenterX = width * (width < 640 ? 0.18 : 0.3)
     const fieldCenterY = height * 0.5
     const fieldRadius =
@@ -158,6 +161,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
         const waveY = Math.cos(elapsed * 1.1 + particle.wave) * 0.003
+        const riseProgress = Math.max(0, 1 - particle.y / height)
+        const risingWindForce = windForce * (1 + riseProgress * 1.2)
         const fieldX = particle.x - fieldCenterX
         const fieldY = particle.y - fieldCenterY
         const fieldDistance = Math.max(1, Math.hypot(fieldX, fieldY))
@@ -186,7 +191,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.vy += (-radialY * radialForce - radialX * orbitForce) * delta
         }
 
-        particle.vx += (windForce + waveX) * delta
+        particle.vx += (risingWindForce + waveX) * delta
         particle.vy += (-0.012 * particle.speed + waveY) * delta
         particle.vx *= Math.pow(0.992, delta)
         particle.vy *= Math.pow(0.992, delta)
