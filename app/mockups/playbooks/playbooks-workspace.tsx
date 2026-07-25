@@ -15,8 +15,7 @@ export function PlaybooksWorkspace() {
             <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
               Put your GPUs to work.{" "}
               <span className="text-foreground/45">
-                Power AI and media workloads on Livepeer. Get paid for every
-                job.
+                Power AI and media workloads on Livepeer.
               </span>
             </h1>
             <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
