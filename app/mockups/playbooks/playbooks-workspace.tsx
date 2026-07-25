@@ -9,17 +9,9 @@ export function PlaybooksWorkspace() {
   return (
     <main>
       <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-muted sm:min-h-[76svh]">
-        <Image
-          src="/generated/20260724-194934/livepeer-stream-hero.webp"
-          alt=""
-          fill
-          priority
-          className="object-cover object-[68%_center] sm:object-center"
-          sizes="100vw"
-        />
         <LivepeerCubeStream className="opacity-90" />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/90 to-muted/10 sm:via-muted/75 sm:to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/95 to-transparent sm:via-muted/75"
           aria-hidden="true"
         />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">

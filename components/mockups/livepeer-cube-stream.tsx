@@ -71,15 +71,15 @@ function streamPosition(
   height: number
 ) {
   const lanePosition = (lane - (laneCount - 1) / 2) / ((laneCount - 1) / 2)
-  // Follow the source artwork's accelerating arch: nearly vertical at the
-  // crown, then opening decisively toward the lower-right.
+  // Match the source artwork: enter just right of center, hold a compact
+  // crown, then accelerate into a clean lower-right sweep.
   const arch = progress * progress
-  const spread = (0.035 + progress * 0.09 + arch * 0.025) * lanePosition
-  const center = -0.04 + progress * 0.14 + arch * 0.44
+  const spread = (0.026 + progress * 0.052 + arch * 0.018) * lanePosition
+  const center = 0.13 + progress * 0.025 + arch * 0.245
 
   return {
     x: (center + spread) * width,
-    y: (0.65 - progress * 1.3) * height,
+    y: (0.72 - progress * 1.44) * height,
     z:
       -0.68 +
       Math.sin(progress * Math.PI) * 0.44 +
@@ -250,14 +250,14 @@ function StreamInstances({ reduceMotion }: { reduceMotion: boolean }) {
           nextPosition.y - position.y,
           nextPosition.x - position.x
         )
-        const perspective = 0.42 + progress * 1.05
+        const perspective = 0.34 + progress * 0.72
         const pulse =
           1 + Math.sin(elapsed * 0.85 + seed.spin) * 0.045 * (1 - progress)
 
         dummy.position.set(
           position.x + pointer.x * 0.035 * viewport.width,
           position.y + pointer.y * 0.025 * viewport.height,
-          position.z + seed.jitter * 0.18
+          position.z + seed.jitter * 0.08
         )
         dummy.rotation.set(
           seed.spin + elapsed * 0.08,
