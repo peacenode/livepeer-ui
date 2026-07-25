@@ -10,10 +10,6 @@ export function PlaybooksWorkspace() {
     <main>
       <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-muted sm:min-h-[76svh]">
         <LivepeerCubeStream className="opacity-90" />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-muted via-muted/95 to-transparent sm:via-muted/75"
-          aria-hidden="true"
-        />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-4xl flex-col items-start">
             <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-normal tracking-[-0.045em] text-balance">
