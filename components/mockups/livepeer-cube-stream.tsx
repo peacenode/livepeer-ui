@@ -153,6 +153,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           : Math.max(Math.min(width * 0.42, height * 0.78), heroExclusionRadius)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
       const particleSize = width < 640 ? 2 : 3
+      const windForce = width < 640 ? -0.0015 : -0.0045
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
@@ -185,7 +186,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.vy += (-radialY * radialForce - radialX * orbitForce) * delta
         }
 
-        particle.vx += waveX * delta
+        particle.vx += (windForce + waveX) * delta
         particle.vy += (-0.012 * particle.speed + waveY) * delta
         particle.vx *= Math.pow(0.992, delta)
         particle.vy *= Math.pow(0.992, delta)
