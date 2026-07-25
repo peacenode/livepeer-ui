@@ -18,6 +18,22 @@ const fontDisplay = localFont({
   variable: "--font-favorit",
 })
 
+const fontSans = localFont({
+  src: [
+    {
+      path: "../assets/fonts/InterVariable.woff2",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/InterVariable-Italic.woff2",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-inter",
+})
+
 const fontMono = localFont({
   src: [
     { path: "../assets/fonts/FavoritMono-Regular.woff2", weight: "400" },
@@ -25,6 +41,14 @@ const fontMono = localFont({
     { path: "../assets/fonts/FavoritMono-Bold.woff2", weight: "700" },
   ],
   variable: "--font-mono",
+})
+
+const fontRunner = localFont({
+  src: "../public/fonts/serpentine-medium.otf",
+  weight: "500",
+  style: "normal",
+  variable: "--font-runner-face",
+  adjustFontFallback: false,
 })
 
 export const metadata: Metadata = {
@@ -59,13 +83,11 @@ export default function RootLayout({
       className={cn(
         "font-sans antialiased",
         fontDisplay.variable,
+        fontSans.variable,
         fontMono.variable,
+        fontRunner.variable
       )}
     >
-      <head>
-        <link rel="preconnect" href="https://rsms.me" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-      </head>
       <body>
         <ThemeProvider>
           <TooltipProvider>{children}</TooltipProvider>
