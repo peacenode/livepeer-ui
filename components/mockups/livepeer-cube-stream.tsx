@@ -10,7 +10,6 @@ const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type Particle = {
   color: string
-  opacity: number
   size: number
   speed: number
   wave: number
@@ -52,12 +51,11 @@ function makeParticles(
 
     return {
       color: colors[Math.floor(noise(index + 41) * colors.length)],
-      opacity: 0.18 + noise(index + 7) * 0.7,
       size: 1 + Math.pow(noise(index + 13), 2.4) * 4,
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
-      vy: -(0.22 + noise(index + 79) * 0.34),
+      vy: -(0.9 + noise(index + 79) * 0.85),
       x,
       y,
     }
@@ -126,7 +124,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
           const radialForce = radialError * 0.000035 * proximity
-          const orbitForce = proximity * proximity * 0.026
+          const orbitForce = proximity * proximity * 0.06
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
@@ -136,7 +134,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
         }
 
         particle.vx += waveX * delta
-        particle.vy += (-0.004 * particle.speed + waveY) * delta
+        particle.vy += (-0.012 * particle.speed + waveY) * delta
         particle.vx *= Math.pow(0.992, delta)
         particle.vy *= Math.pow(0.992, delta)
         particle.x += particle.vx * delta
@@ -151,14 +149,14 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x = width * 0.82 + spread
           particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
           particle.vx = -0.04 - noise(particle.wave + 17) * 0.12
-          particle.vy = -(0.24 + particle.speed * 0.22)
+          particle.vy = -(0.9 + particle.speed * 0.58)
         }
 
         const progress = Math.max(0, Math.min(1, particle.y / height))
         const perspective = 0.58 + progress * 0.72
         const size = particle.size * perspective
 
-        context.globalAlpha = particle.opacity * (0.55 + progress * 0.45)
+        context.globalAlpha = 1
         context.fillStyle = particle.color
         context.fillRect(
           Math.round(particle.x - size / 2),
