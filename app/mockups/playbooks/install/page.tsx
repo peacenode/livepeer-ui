@@ -115,6 +115,18 @@ export default async function PlaybooksInstallPage() {
               </Badge>
             ))}
           </div>
+          <Button
+            size="lg"
+            variant="secondary"
+            nativeButton={false}
+            render={<Link href="/mockups/playbooks/library" />}
+            className="mt-8 h-16 rounded-sm px-6"
+          >
+            See more
+            <span className="font-sans" aria-hidden="true">
+              →
+            </span>
+          </Button>
         </div>
       </section>
 
