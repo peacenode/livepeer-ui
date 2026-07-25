@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 export function PlaybooksWorkspace() {
   return (
     <main>
-      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-muted sm:min-h-[76svh]">
+      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-[#f3f3f3] sm:min-h-[76svh]">
         <LivepeerCubeStream />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-3xl flex-col items-start">
