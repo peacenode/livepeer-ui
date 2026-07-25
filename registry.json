@@ -1,14 +1,20 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "livepeer-ui",
-  "homepage": "http://localhost:3000",
+  "homepage": "https://livepeer-ui.vercel.app",
   "items": [
     {
       "name": "theme",
       "type": "registry:theme",
       "title": "Livepeer UI Theme",
-      "description": "Neutral theme for the luma style. Default radius, subtle menu accent.",
+      "description": "Neutral theme for the luma style. Favorit display type, default radius, subtle menu accent.",
       "cssVars": {
+        "theme": {
+          "font-display": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
+          "font-heading": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
+          "font-sans": "InterVariable, Inter, sans-serif",
+          "font-mono": "\"Favorit Mono\", ui-monospace, monospace"
+        },
         "light": {
           "card": "oklch(1 0 0)",
           "card-foreground": "oklch(0.145 0 0)",
@@ -76,7 +82,15 @@
           "sidebar-border": "oklch(1 0 0 / 10%)",
           "sidebar-ring": "oklch(0.556 0 0)"
         }
-      }
+      },
+      "css": {
+        "@layer base": {
+          "h1, h2, h3, h4, h5, h6": {
+            "font-family": "var(--font-heading)"
+          }
+        }
+      },
+      "docs": "Favorit is a licensed local font. Add your licensed Favorit webfont files to the consuming app; Inter remains the fallback."
     },
     {
       "name": "brand",
@@ -156,7 +170,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer-ui.vercel.app/r/button.json"
       ],
       "files": [
         {
@@ -266,7 +280,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer-ui.vercel.app/r/button.json"
       ],
       "files": [
         {
@@ -416,7 +430,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer-ui.vercel.app/r/button.json"
       ],
       "files": [
         {
@@ -565,7 +579,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/toggle.json"
+        "https://livepeer-ui.vercel.app/r/toggle.json"
       ],
       "files": [
         {

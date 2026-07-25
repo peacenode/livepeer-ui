@@ -45,7 +45,12 @@ function extractCssVars(css, selector) {
   return vars
 }
 
+function extractThemeVars(css) {
+  return extractCssVars(css, "@theme inline")
+}
+
 const css = fs.readFileSync(path.join(root, "app/globals.css"), "utf8")
+const themeVars = extractThemeVars(css)
 
 const items = [
   {
@@ -53,11 +58,25 @@ const items = [
     type: "registry:theme",
     title: "Livepeer UI Theme",
     description:
-      "Neutral theme for the luma style. Default radius, subtle menu accent.",
+      "Neutral theme for the luma style. Favorit display type, default radius, subtle menu accent.",
     cssVars: {
+      theme: {
+        "font-display": '"Favorit", "Favorit Pro", Inter, sans-serif',
+        "font-heading": '"Favorit", "Favorit Pro", Inter, sans-serif',
+        "font-sans": themeVars["font-sans"],
+        "font-mono": '"Favorit Mono", ui-monospace, monospace',
+      },
       light: extractCssVars(css, ":root"),
       dark: extractCssVars(css, "\\.dark"),
     },
+    css: {
+      "@layer base": {
+        "h1, h2, h3, h4, h5, h6": {
+          "font-family": "var(--font-heading)",
+        },
+      },
+    },
+    docs: "Favorit is a licensed local font. Add your licensed Favorit webfont files to the consuming app; Inter remains the fallback.",
   },
   {
     name: "brand",
