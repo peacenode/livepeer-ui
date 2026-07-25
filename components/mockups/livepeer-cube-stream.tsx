@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react"
 
 import { cn } from "@/lib/utils"
 
-const desktopParticleCount = 1800
-const mobileParticleCount = 650
+const desktopParticleCount = 5000
+const mobileParticleCount = 1600
 const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type Particle = {
@@ -51,7 +51,7 @@ function makeParticles(count: number, width: number, height: number): Particle[]
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
-      vy: -(0.9 + noise(index + 79) * 0.85),
+      vy: -(1.05 + noise(index + 79) * 0.95),
       x,
       y,
     }
@@ -100,7 +100,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
       const elapsed = reduceMotion ? 2.8 : (time - start) / 1000
       const delta = reduceMotion
         ? 0
-        : Math.min(2, Math.max(0.25, (time - previousTime) / 16.667))
+        : Math.min(1.25, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
       const fieldCenterX = width * (width < 640 ? 0.18 : 0.3) + pointer.x * 18
       const fieldCenterY = height * 0.5 + pointer.y * 12
@@ -109,11 +109,11 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           ? width * 0.92
           : Math.min(width * 0.36, height * 0.54)
       const influenceRadius = fieldRadius + Math.min(width * 0.1, 130)
-      const particleSize = width < 640 ? 2 : 3
+      const particleSize = 2
 
       for (const particle of particles) {
-        const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
-        const waveY = Math.cos(elapsed * 1.1 + particle.wave) * 0.003
+        const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.0015
+        const waveY = Math.cos(elapsed * 1.1 + particle.wave) * 0.001
         const fieldX = particle.x - fieldCenterX
         const fieldY = particle.y - fieldCenterY
         const fieldDistance = Math.max(1, Math.hypot(fieldX, fieldY))
@@ -123,8 +123,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           const radialX = fieldX / fieldDistance
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
-          const radialForce = radialError * 0.000035 * proximity
-          const orbitForce = proximity * proximity * 0.06
+          const radialForce = radialError * 0.000055 * proximity
+          const orbitForce = proximity * proximity * 0.08
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
@@ -137,8 +137,8 @@ function LivepeerCubeStream({ className }: { className?: string }) {
 
         particle.vx += waveX * delta
         particle.vy += (-0.012 * particle.speed + waveY) * delta
-        particle.vx *= Math.pow(0.992, delta)
-        particle.vy *= Math.pow(0.992, delta)
+        particle.vx *= Math.pow(0.996, delta)
+        particle.vy *= Math.pow(0.996, delta)
         particle.x += particle.vx * delta
         particle.y += particle.vy * delta
 
@@ -151,7 +151,7 @@ function LivepeerCubeStream({ className }: { className?: string }) {
           particle.x = width * 0.7 + spread
           particle.y = height * (1.04 + noise(particle.wave + 11) * 0.12)
           particle.vx = -0.08 - noise(particle.wave + 17) * 0.18
-          particle.vy = -(0.9 + particle.speed * 0.58)
+          particle.vy = -(1.05 + particle.speed * 0.68)
         }
 
         context.globalAlpha = 1
