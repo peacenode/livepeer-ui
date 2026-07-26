@@ -658,6 +658,136 @@
       ]
     },
     {
+      "name": "waitlist-signup-form",
+      "type": "registry:component",
+      "title": "Signup Form",
+      "description": "Email capture form with the emerald early-access action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/waitlist-signup-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-status-card",
+      "type": "registry:component",
+      "title": "Status Card",
+      "description": "Shareable waitlist position and referral summary card.",
+      "files": [
+        {
+          "path": "components/mockups/waitlist-status-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-referral-link",
+      "type": "registry:component",
+      "title": "Referral Link",
+      "description": "Copyable referral URL with confirmation feedback.",
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/waitlist-referral-link.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-leaderboard",
+      "type": "registry:component",
+      "title": "Leaderboard",
+      "description": "Ranked referral list with a highlighted current-user row.",
+      "files": [
+        {
+          "path": "components/mockups/waitlist-leaderboard.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-panel",
+      "type": "registry:block",
+      "title": "Waitlist Panel",
+      "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/waitlist-panel.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/waitlist-leaderboard.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/waitlist-referral-link.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/waitlist-signup-form.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/waitlist-status-card.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "waitlist-background-hero",
+      "type": "registry:block",
+      "title": "Background Hero",
+      "description": "Particle-backed Livepeer Agent brand field used behind the waitlist panel.",
+      "files": [
+        {
+          "path": "components/mockups/waitlist-background-hero.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
       "name": "livepeer-agent-page-frame",
       "type": "registry:block",
       "title": "Page Frame",

@@ -38,6 +38,59 @@
   ],
   "catalog": [
     {
+      "title": "Waitlist",
+      "items": [
+        {
+          "name": "waitlist-signup-form",
+          "title": "Signup Form",
+          "description": "Email capture form with the emerald early-access action.",
+          "level": "component",
+          "uses": ["button", "input"],
+          "files": ["components/mockups/waitlist-signup-form.tsx"]
+        },
+        {
+          "name": "waitlist-status-card",
+          "title": "Status Card",
+          "description": "Shareable waitlist position and referral summary card.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/waitlist-status-card.tsx"]
+        },
+        {
+          "name": "waitlist-referral-link",
+          "title": "Referral Link",
+          "description": "Copyable referral URL with confirmation feedback.",
+          "level": "component",
+          "uses": ["button"],
+          "files": ["components/mockups/waitlist-referral-link.tsx"]
+        },
+        {
+          "name": "waitlist-leaderboard",
+          "title": "Leaderboard",
+          "description": "Ranked referral list with a highlighted current-user row.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/waitlist-leaderboard.tsx"]
+        },
+        {
+          "name": "waitlist-panel",
+          "title": "Waitlist Panel",
+          "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
+          "level": "section",
+          "uses": ["waitlist-signup-form", "waitlist-status-card", "waitlist-referral-link", "waitlist-leaderboard"],
+          "files": ["components/mockups/waitlist-panel.tsx"]
+        },
+        {
+          "name": "waitlist-background-hero",
+          "title": "Background Hero",
+          "description": "Particle-backed Livepeer Agent brand field used behind the waitlist panel.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/waitlist-background-hero.tsx"]
+        }
+      ]
+    },
+    {
       "title": "Billing/API",
       "items": [
         {

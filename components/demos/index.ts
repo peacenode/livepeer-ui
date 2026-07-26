@@ -87,6 +87,12 @@ import SubmitEcosystemDialogDemo from "./submit-ecosystem-dialog-demo"
 import UsageWorkspaceSectionDemo from "./usage-workspace-section-demo"
 import UsageMetricsDemo from "./usage-metrics-demo"
 import UserMenuDemo from "./user-menu-demo"
+import WaitlistBackgroundHeroDemo from "./waitlist-background-hero-demo"
+import WaitlistLeaderboardDemo from "./waitlist-leaderboard-demo"
+import WaitlistPanelDemo from "./waitlist-panel-demo"
+import WaitlistReferralLinkDemo from "./waitlist-referral-link-demo"
+import WaitlistSignupFormDemo from "./waitlist-signup-form-demo"
+import WaitlistStatusCardDemo from "./waitlist-status-card-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
 import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
@@ -183,6 +189,12 @@ export const demos: Record<string, ComponentType> = {
   "usage-workspace-section": UsageWorkspaceSectionDemo,
   "usage-metrics": UsageMetricsDemo,
   "user-menu": UserMenuDemo,
+  "waitlist-background-hero": WaitlistBackgroundHeroDemo,
+  "waitlist-leaderboard": WaitlistLeaderboardDemo,
+  "waitlist-panel": WaitlistPanelDemo,
+  "waitlist-referral-link": WaitlistReferralLinkDemo,
+  "waitlist-signup-form": WaitlistSignupFormDemo,
+  "waitlist-status-card": WaitlistStatusCardDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
   "characters-workspace-section": CharactersWorkspaceSectionDemo,

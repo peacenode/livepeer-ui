@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "waitlist-leaderboard",
+  "title": "Leaderboard",
+  "description": "Ranked referral list with a highlighted current-user row.",
+  "files": [
+    {
+      "path": "components/mockups/waitlist-leaderboard.tsx",
+      "content": "export type WaitlistLeader = {\n  name: string\n  referrals: number\n}\n\nexport function WaitlistLeaderboard({\n  leaders,\n  currentUserReferrals = 0,\n}: {\n  leaders: WaitlistLeader[]\n  currentUserReferrals?: number\n}) {\n  return (\n    <section aria-labelledby=\"waitlist-leaders\">\n      <h2 id=\"waitlist-leaders\" className=\"text-sm font-medium\">\n        Leaderboard\n      </h2>\n      <div className=\"mt-3 overflow-hidden rounded-md border\">\n        <div className=\"flex items-center justify-between border-b px-3 py-2 text-xs text-muted-foreground\">\n          <span>Person</span>\n          <span>Referrals</span>\n        </div>\n        <ol className=\"divide-y\">\n          {leaders.map((person, index) => (\n            <li\n              key={`${person.name}-${index}`}\n              className=\"flex items-center justify-between gap-4 px-3 py-2.5 text-sm\"\n            >\n              <span className=\"truncate\">{person.name}</span>\n              <span className=\"font-mono text-xs tabular-nums\">\n                {person.referrals}\n              </span>\n            </li>\n          ))}\n          <li\n            className=\"flex items-center justify-between gap-4 bg-emerald-400/10 px-3 py-3 text-sm\"\n            role=\"status\"\n            aria-live=\"polite\"\n          >\n            <span className=\"truncate font-medium\">You</span>\n            <span className=\"font-mono text-xs text-emerald-400 tabular-nums\">\n              {currentUserReferrals}\n            </span>\n          </li>\n        </ol>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
