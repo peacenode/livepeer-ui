@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "clips-header",
+  "title": "Clips Header",
+  "description": "Clips library heading and upload action.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/clips-header.tsx",
+      "content": "\"use client\"\nimport { useRef } from \"react\"\nimport { PlusIcon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nexport function ClipsHeader({ onUpload }: { onUpload: (files: FileList | null) => void }) {\n  const uploadRef = useRef<HTMLInputElement>(null)\n  return <header className=\"flex items-center justify-between gap-4 py-4\"><h1 className=\"text-xl font-medium\">Clips</h1><Button className=\"h-10 px-5\" onClick={() => uploadRef.current?.click()}><PlusIcon className=\"size-6\" />Upload clips</Button><input ref={uploadRef} type=\"file\" accept=\"video/*\" multiple className=\"sr-only\" onChange={(event) => onUpload(event.target.files)} /></header>\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

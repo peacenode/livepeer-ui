@@ -35,6 +35,32 @@ import ToggleDemo from "./toggle-demo"
 import ToggleGroupDemo from "./toggle-group-demo"
 import TooltipDemo from "./tooltip-demo"
 import AgentCompatibilityDemo from "./agent-compatibility-demo"
+import AgentAccessSectionDemo from "./agent-access-section-demo"
+import AgentCapabilitiesSectionDemo from "./agent-capabilities-section-demo"
+import ApiKeyActionsDemo from "./api-key-actions-demo"
+import ApiKeysSectionDemo from "./api-keys-section-demo"
+import ApiLogsSectionDemo from "./api-logs-section-demo"
+import BillingSummaryCardsDemo from "./billing-summary-cards-demo"
+import BillingWorkspaceSectionDemo from "./billing-workspace-section-demo"
+import ClientApplicationShellDemo from "./client-application-shell-demo"
+import ClientApplicationSidebarDemo from "./client-application-sidebar-demo"
+import ClientEmptyStateDemo from "./client-empty-state-demo"
+import ClientInstallCommandDemo from "./client-install-command-demo"
+import ClientMobileBottomNavigationDemo from "./client-mobile-bottom-navigation-demo"
+import ClipCardDemo from "./clip-card-demo"
+import ClipsHeaderDemo from "./clips-header-demo"
+import ClipsLibraryDemo from "./clips-library-demo"
+import ComputeMetricsDemo from "./compute-metrics-demo"
+import ComputeWorkspaceSectionDemo from "./compute-workspace-section-demo"
+import CopyButtonDemo from "./copy-button-demo"
+import CreditBalanceDemo from "./credit-balance-demo"
+import DailyUsageTableDemo from "./daily-usage-table-demo"
+import DeleteApiKeyDialogDemo from "./delete-api-key-dialog-demo"
+import EcosystemCardDemo from "./ecosystem-card-demo"
+import EcosystemCatalogDemo from "./ecosystem-catalog-demo"
+import InstallAgentFooterDemo from "./install-agent-footer-demo"
+import InvoiceTableDemo from "./invoice-table-demo"
+import LivepeerAgentAuthGateDemo from "./livepeer-agent-auth-gate-demo"
 import LivepeerAgentBillingCardsDemo from "./livepeer-agent-billing-cards-demo"
 import LivepeerAgentHeroDemo from "./livepeer-agent-hero-demo"
 import LivepeerAgentOnboardingSectionDemo from "./livepeer-agent-onboarding-section-demo"
@@ -49,6 +75,18 @@ import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-de
 import LivepeerOrgFooterDemo from "./livepeer-org-footer-demo"
 import LivepeerOrgHeaderDemo from "./livepeer-org-header-demo"
 import LivepeerOrgMenuDemo from "./livepeer-org-menu-demo"
+import PlaybookCardDemo from "./playbook-card-demo"
+import PlaybookCatalogDemo from "./playbook-catalog-demo"
+import PlaybookLibraryHeaderDemo from "./playbook-library-header-demo"
+import PlaybooksCtaSectionDemo from "./playbooks-cta-section-demo"
+import ProtocolFlowSectionDemo from "./protocol-flow-section-demo"
+import ProtocolHeaderSectionDemo from "./protocol-header-section-demo"
+import ProtocolPropertiesSectionDemo from "./protocol-properties-section-demo"
+import ProtocolRequestFlowSectionDemo from "./protocol-request-flow-section-demo"
+import ResourceUsageTableDemo from "./resource-usage-table-demo"
+import SubmitEcosystemDialogDemo from "./submit-ecosystem-dialog-demo"
+import UsageWorkspaceSectionDemo from "./usage-workspace-section-demo"
+import UserMenuDemo from "./user-menu-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
 import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
@@ -93,6 +131,32 @@ export const demos: Record<string, ComponentType> = {
   "toggle-group": ToggleGroupDemo,
   tooltip: TooltipDemo,
   "agent-compatibility": AgentCompatibilityDemo,
+  "agent-access-section": AgentAccessSectionDemo,
+  "agent-capabilities-section": AgentCapabilitiesSectionDemo,
+  "api-key-actions": ApiKeyActionsDemo,
+  "api-keys-section": ApiKeysSectionDemo,
+  "api-logs-section": ApiLogsSectionDemo,
+  "billing-summary-cards": BillingSummaryCardsDemo,
+  "billing-workspace-section": BillingWorkspaceSectionDemo,
+  "client-application-shell": ClientApplicationShellDemo,
+  "client-application-sidebar": ClientApplicationSidebarDemo,
+  "client-empty-state": ClientEmptyStateDemo,
+  "client-install-command": ClientInstallCommandDemo,
+  "client-mobile-bottom-navigation": ClientMobileBottomNavigationDemo,
+  "clip-card": ClipCardDemo,
+  "clips-header": ClipsHeaderDemo,
+  "clips-library": ClipsLibraryDemo,
+  "compute-metrics": ComputeMetricsDemo,
+  "compute-workspace-section": ComputeWorkspaceSectionDemo,
+  "copy-button": CopyButtonDemo,
+  "credit-balance": CreditBalanceDemo,
+  "daily-usage-table": DailyUsageTableDemo,
+  "delete-api-key-dialog": DeleteApiKeyDialogDemo,
+  "ecosystem-card": EcosystemCardDemo,
+  "ecosystem-catalog": EcosystemCatalogDemo,
+  "install-agent-footer": InstallAgentFooterDemo,
+  "invoice-table": InvoiceTableDemo,
+  "livepeer-agent-auth-gate": LivepeerAgentAuthGateDemo,
   "livepeer-agent-billing-cards": LivepeerAgentBillingCardsDemo,
   "livepeer-agent-hero": LivepeerAgentHeroDemo,
   "livepeer-agent-onboarding-section": LivepeerAgentOnboardingSectionDemo,
@@ -107,6 +171,18 @@ export const demos: Record<string, ComponentType> = {
   "livepeer-org-footer": LivepeerOrgFooterDemo,
   "livepeer-org-header": LivepeerOrgHeaderDemo,
   "livepeer-org-menu": LivepeerOrgMenuDemo,
+  "playbook-card": PlaybookCardDemo,
+  "playbook-catalog": PlaybookCatalogDemo,
+  "playbook-library-header": PlaybookLibraryHeaderDemo,
+  "playbooks-cta-section": PlaybooksCtaSectionDemo,
+  "protocol-flow-section": ProtocolFlowSectionDemo,
+  "protocol-header-section": ProtocolHeaderSectionDemo,
+  "protocol-properties-section": ProtocolPropertiesSectionDemo,
+  "protocol-request-flow-section": ProtocolRequestFlowSectionDemo,
+  "resource-usage-table": ResourceUsageTableDemo,
+  "submit-ecosystem-dialog": SubmitEcosystemDialogDemo,
+  "usage-workspace-section": UsageWorkspaceSectionDemo,
+  "user-menu": UserMenuDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
   "characters-workspace-section": CharactersWorkspaceSectionDemo,

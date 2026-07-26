@@ -728,6 +728,286 @@
       ]
     },
     {
+      "name": "user-menu",
+      "type": "registry:component",
+      "title": "User Menu",
+      "description": "Account, theme, settings, and sign-out menu used by the Billing/API sidebar.",
+      "dependencies": [
+        "lucide-react",
+        "next",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/toggle-group.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/user-menu.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-agent-auth-gate",
+      "type": "registry:block",
+      "title": "Authentication Gate",
+      "description": "Authentication overlay with the Billing/API sign-in card and contained preview support.",
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/platform-auth-gate.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-agent-sign-in-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand-social-icons.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "api-key-actions",
+      "type": "registry:component",
+      "title": "API Key Creation Dialog",
+      "description": "Controlled API-key creation dialog with validation and responsive actions.",
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/label.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/api-key-actions.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "delete-api-key-dialog",
+      "type": "registry:component",
+      "title": "Delete API Key Dialog",
+      "description": "Destructive API-key confirmation dialog with key metadata and warning state.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/alert-dialog.json",
+        "http://localhost:3000/r/alert.json",
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/delete-api-key-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "api-keys-section",
+      "type": "registry:block",
+      "title": "API Keys",
+      "description": "Searchable API-key management table with status and destructive actions.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/alert-dialog.json",
+        "http://localhost:3000/r/alert.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/api-keys-section.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/delete-api-key-dialog.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "api-logs-section",
+      "type": "registry:block",
+      "title": "API Logs",
+      "description": "Search, error filtering, and request log table for Billing/API activity.",
+      "registryDependencies": [
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/label.json",
+        "http://localhost:3000/r/switch.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/api-logs-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "credit-balance",
+      "type": "registry:component",
+      "title": "Credit Balance",
+      "description": "Current plan allocation, remaining credits, and refresh date.",
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/credit-balance.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "daily-usage-table",
+      "type": "registry:component",
+      "title": "Daily Usage Table",
+      "description": "Daily workflow, compute, and credit consumption table.",
+      "registryDependencies": [
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/daily-usage-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "resource-usage-table",
+      "type": "registry:component",
+      "title": "Resource Usage Table",
+      "description": "Resource-level workflow and compute usage breakdown.",
+      "registryDependencies": [
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/resource-usage-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "usage-workspace-section",
+      "type": "registry:block",
+      "title": "Usage Workspace",
+      "description": "Complete overview and activity workspace composed from reusable usage components.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json",
+        "http://localhost:3000/r/table.json",
+        "http://localhost:3000/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/usage-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/credit-balance.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/daily-usage-table.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-agent-billing-cards.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-agent-promo-cards.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/resource-usage-table.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "billing-summary-cards",
+      "type": "registry:component",
+      "title": "Billing Summary Cards",
+      "description": "Current-period and payment-method summaries from the Billing workspace.",
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/billing-summary-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "invoice-table",
+      "type": "registry:component",
+      "title": "Invoice Table",
+      "description": "Reusable invoice history with status and download actions.",
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/invoice-table.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "billing-workspace-section",
+      "type": "registry:block",
+      "title": "Billing Workspace",
+      "description": "Complete billing workspace composed from summary cards and invoice history.",
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/billing-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/billing-summary-cards.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/invoice-table.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
       "name": "livepeer-agent-billing-cards",
       "type": "registry:component",
       "title": "Billing Cards",
@@ -808,6 +1088,70 @@
         {
           "path": "lib/livepeer.ts",
           "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "compute-metrics",
+      "type": "registry:component",
+      "title": "Compute Metrics",
+      "description": "Network payout and active orchestrator metric cards.",
+      "registryDependencies": [
+        "http://localhost:3000/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/compute-metrics.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "compute-workspace-section",
+      "type": "registry:block",
+      "title": "Compute Workspace",
+      "description": "Compute overview composed from network metrics and orchestrator results.",
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json",
+        "http://localhost:3000/r/progress.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/compute-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/compute-metrics.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/orchestrator-table.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/livepeer.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:component",
+      "title": "Copy Button",
+      "description": "Clipboard action with copied confirmation used across Livepeer.org installation interfaces.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/copy-button.tsx",
+          "type": "registry:component"
         }
       ]
     },
@@ -931,7 +1275,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/docs/copy-button.tsx",
+          "path": "components/copy-button.tsx",
           "type": "registry:block"
         },
         {
@@ -940,6 +1284,223 @@
         },
         {
           "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "agent-access-section",
+      "type": "registry:block",
+      "title": "Agent Access",
+      "description": "Two-up agent compatibility and API-key access section from the Livepeer Agent page.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/agent-access-section.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "agent-capabilities-section",
+      "type": "registry:block",
+      "title": "Agent Capabilities",
+      "description": "Capability explanation, generated badge cloud, and library action.",
+      "dependencies": [
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/agent-capabilities-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "playbooks-cta-section",
+      "type": "registry:block",
+      "title": "Playbooks CTA",
+      "description": "Responsive image-backed call to action for ready-to-run playbooks.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/playbooks-cta-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "playbook-library-header",
+      "type": "registry:block",
+      "title": "Playbook Library Header",
+      "description": "Centered heading and introduction for the playbook library.",
+      "files": [
+        {
+          "path": "components/mockups/playbook-library-header.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "playbook-card",
+      "type": "registry:component",
+      "title": "Playbook Card",
+      "description": "Responsive image and title card for a Livepeer Agent playbook.",
+      "dependencies": [
+        "next"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/playbook-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "playbook-catalog",
+      "type": "registry:block",
+      "title": "Playbook Catalog",
+      "description": "Searchable responsive playbook card catalog with empty state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/playbooks/source-catalog.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/playbook-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/playbooks/daydream-source.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "install-agent-footer",
+      "type": "registry:block",
+      "title": "Install Agent Footer",
+      "description": "Animated installation footer with configurable title and copy action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/install-agent-footer.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/copy-button.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "submit-ecosystem-dialog",
+      "type": "registry:component",
+      "title": "Submit Ecosystem Dialog",
+      "description": "Submission workflow dialog with repository guidance and copy action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dialog.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/playbooks/ecosystem/submit-ecosystem-dialog.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/copy-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ecosystem-card",
+      "type": "registry:component",
+      "title": "Ecosystem Card",
+      "description": "Ecosystem application card with image, tags, description, and external action.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/ecosystem-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ecosystem-catalog",
+      "type": "registry:block",
+      "title": "Ecosystem Catalog",
+      "description": "Searchable and filterable ecosystem catalog composed from reusable cards.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/playbooks/ecosystem/ecosystem-catalog.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/ecosystem-card.tsx",
           "type": "registry:block"
         }
       ]
@@ -1045,6 +1606,260 @@
         },
         {
           "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "client-application-sidebar",
+      "type": "registry:component",
+      "title": "Application Sidebar",
+      "description": "Expandable desktop navigation rail for the Client application.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/client-application-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/client-navigation-items.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "client-mobile-bottom-navigation",
+      "type": "registry:component",
+      "title": "Mobile Bottom Navigation",
+      "description": "Five-tab mobile navigation bar shared across Client routes.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/client-mobile-bottom-navigation.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/client-navigation-items.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "client-application-shell",
+      "type": "registry:block",
+      "title": "Application Shell",
+      "description": "Responsive Client shell composed from desktop and mobile navigation.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/client-application-shell.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-application-sidebar.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-mobile-bottom-navigation.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-navigation-items.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "client-install-command",
+      "type": "registry:component",
+      "title": "Install Command",
+      "description": "Copyable Livepeer Agent CLI installation command.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/client-install-command.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "protocol-header-section",
+      "type": "registry:block",
+      "title": "Protocol Header",
+      "description": "Introductory statement for the Livepeer Agent protocol architecture.",
+      "files": [
+        {
+          "path": "components/mockups/protocol-header-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "protocol-flow-section",
+      "type": "registry:block",
+      "title": "Protocol Flow",
+      "description": "Three connected layers describing agent, workflow, and compute responsibilities.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/protocol-flow-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "protocol-request-flow-section",
+      "type": "registry:block",
+      "title": "Protocol Request Flow",
+      "description": "Four-step sequence showing how a Livepeer Agent request moves.",
+      "files": [
+        {
+          "path": "components/mockups/protocol-request-flow-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "protocol-properties-section",
+      "type": "registry:block",
+      "title": "Protocol Properties",
+      "description": "Two-up explanation of agent access and network payment behavior.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/protocol-properties-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "client-empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "Configurable empty state shared by Client media and project views.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/client-empty-state.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "clips-header",
+      "type": "registry:component",
+      "title": "Clips Header",
+      "description": "Clips library heading and upload action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/clips-header.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "clip-card",
+      "type": "registry:component",
+      "title": "Clip Card",
+      "description": "Playable clip row with duration, metadata, and media actions.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/clip-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/client-clip.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "clips-library",
+      "type": "registry:block",
+      "title": "Clips Library",
+      "description": "Focused playable clip collection with a reusable empty state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/clips-library.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-empty-state.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/clip-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-clip.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
           "type": "registry:block"
         }
       ]
@@ -1221,6 +2036,30 @@
         },
         {
           "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/footage/clips-components.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/clips-header.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/clip-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/clips-library.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-clip.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/client-empty-state.tsx",
           "type": "registry:block"
         }
       ]

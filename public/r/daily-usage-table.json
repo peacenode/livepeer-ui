@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "daily-usage-table",
+  "title": "Daily Usage Table",
+  "description": "Daily workflow, compute, and credit consumption table.",
+  "registryDependencies": [
+    "http://localhost:3000/r/table.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/daily-usage-table.tsx",
+      "content": "import {\n  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,\n} from \"@/components/ui/table\"\n\nconst dailyUsage = [\n  { date: \"Jul 23\", workflowRuns: \"182.4K\", compute: \"284 GPU min\", credits: \"24.8\" },\n  { date: \"Jul 22\", workflowRuns: \"168.1K\", compute: \"261 GPU min\", credits: \"22.4\" },\n  { date: \"Jul 21\", workflowRuns: \"155.7K\", compute: \"249 GPU min\", credits: \"21.1\" },\n  { date: \"Jul 20\", workflowRuns: \"149.2K\", compute: \"238 GPU min\", credits: \"19.7\" },\n]\n\nexport function DailyUsageTable() {\n  return (\n    <section className=\"flex flex-col gap-3\">\n      <h2 className=\"font-sans text-sm font-medium\">Daily usage</h2>\n      <Table>\n        <TableHeader><TableRow>\n          <TableHead>Date</TableHead><TableHead>Workflow runs</TableHead>\n          <TableHead>Compute</TableHead><TableHead className=\"text-right\">Credits</TableHead>\n        </TableRow></TableHeader>\n        <TableBody>{dailyUsage.map((day) => (\n          <TableRow key={day.date}>\n            <TableCell className=\"font-medium\">{day.date}</TableCell>\n            <TableCell className=\"font-sans text-xs tabular-nums\">{day.workflowRuns}</TableCell>\n            <TableCell className=\"font-sans text-xs tabular-nums\">{day.compute}</TableCell>\n            <TableCell className=\"text-right font-sans text-xs tabular-nums\">{day.credits}</TableCell>\n          </TableRow>\n        ))}</TableBody>\n      </Table>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

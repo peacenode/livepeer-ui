@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "credit-balance",
+  "title": "Credit Balance",
+  "description": "Current plan allocation, remaining credits, and refresh date.",
+  "registryDependencies": [
+    "http://localhost:3000/r/badge.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/credit-balance.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\n\nexport function CreditBalance() {\n  return (\n    <section className=\"grid gap-4 md:grid-cols-2\">\n      <div className=\"flex flex-col gap-8\">\n        <div className=\"flex items-center gap-2\">\n          <h2 className=\"font-sans text-sm font-medium\">Credit balance</h2>\n          <Badge variant=\"outline\">Free</Badge>\n        </div>\n        <div>\n          <p className=\"text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl\">\n            32{\" \"}\n            <span className=\"text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl\">\n              / 50 credits\n            </span>\n          </p>\n          <div className=\"mt-8 flex items-center gap-2\">\n            <span className=\"text-sm text-muted-foreground\">Credits refresh</span>\n            <Badge variant=\"secondary\" className=\"rounded-sm\">Aug 1, 2026</Badge>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}
