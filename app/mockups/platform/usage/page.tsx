@@ -109,7 +109,9 @@ export default function MockupUsagePage() {
                     <span className="text-sm text-muted-foreground">
                       Credits refresh
                     </span>
-                    <Badge variant="secondary">AUG 01 26</Badge>
+                    <Badge variant="secondary" className="rounded-sm">
+                      AUG 01 26
+                    </Badge>
                   </div>
                 </div>
               </div>
