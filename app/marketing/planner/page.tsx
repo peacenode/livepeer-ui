@@ -57,18 +57,15 @@ export default function MarketingPlannerPage() {
                 <time dateTime={week.startsAt}>{week.displayDate}</time>
               </AccordionTrigger>
               <AccordionContent className="px-5 pb-10 sm:px-8">
-                <div className="flex flex-col gap-10">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-x-12 gap-y-10">
                   {week.groups.map((group) => (
-                    <section
-                      key={group.title}
-                      className="grid gap-4 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8"
-                    >
+                    <section key={group.title}>
                       {group.title && (
-                        <h2 className="font-sans text-sm font-medium text-muted-foreground">
+                        <h2 className="mb-5 font-sans text-sm font-medium text-muted-foreground">
                           {group.title}
                         </h2>
                       )}
-                      <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2 xl:grid-cols-3">
+                      <div className="flex flex-col gap-6">
                         {group.deliverables.map((deliverable) => (
                           <div
                             key={deliverable.title}
