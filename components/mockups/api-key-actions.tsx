@@ -55,7 +55,7 @@ function ApiKeyActions() {
         >
           Create key
         </DialogTrigger>
-        <DialogContent className="gap-6 rounded-sm sm:max-w-lg">
+        <DialogContent className="gap-6 rounded-sm p-6 sm:max-w-lg sm:p-8">
           <DialogHeader className="gap-2">
             <DialogTitle className="font-sans text-3xl leading-none font-light tracking-[-0.04em]">
               Create API key
@@ -83,8 +83,8 @@ function ApiKeyActions() {
                 render={
                   <Button
                     type="button"
-                    variant="outline"
-                    className="h-10 rounded-sm px-4"
+                    variant="ghost"
+                    className="h-16 rounded-sm px-4"
                   />
                 }
               >
@@ -93,7 +93,7 @@ function ApiKeyActions() {
               <Button
                 type="submit"
                 disabled={!name.trim()}
-                className="h-10 rounded-sm px-4"
+                className="h-16 rounded-sm px-4"
               >
                 Generate key
               </Button>
