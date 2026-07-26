@@ -3,7 +3,12 @@ import Link from "next/link"
 import { ArrowUpRightIcon, FileClockIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
-import { Badge } from "@/components/ui/badge"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import { Separator } from "@/components/ui/separator"
 import { marketingWeeks } from "@/lib/marketing-plan"
 
@@ -16,7 +21,7 @@ export default function MarketingPlannerPage() {
   return (
     <main className="min-h-svh bg-background text-foreground">
       <nav className="border-b">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-3 px-5 sm:px-8">
+        <div className="mx-auto flex h-16 w-full max-w-5xl items-center px-5 sm:px-8">
           <Link
             href="/"
             aria-label="Livepeer UI home"
@@ -24,81 +29,34 @@ export default function MarketingPlannerPage() {
           >
             <LivepeerLockup className="h-3.5 w-auto" />
           </Link>
-          <span className="h-4 w-px bg-border" aria-hidden="true" />
-          <span className="text-sm font-medium">Marketing Planner</span>
-          <div className="ml-auto hidden items-center gap-5 sm:flex">
-            {marketingWeeks.map((week) => (
-              <a
-                key={week.week}
-                href={`#week-${week.week}`}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Week {week.week}
-              </a>
-            ))}
-          </div>
         </div>
       </nav>
 
-      <div className="mx-auto w-full max-w-7xl px-5 pb-24 sm:px-8">
-        <header className="grid gap-8 border-b py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-end lg:gap-16">
-          <div>
-            <p className="text-sm text-muted-foreground">
-              July 27 – August 16, 2026
-            </p>
-            <h1 className="mt-4 max-w-3xl text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.94] font-normal tracking-[-0.045em] text-balance">
-              From mockup to production.
-            </h1>
-          </div>
-          <p className="max-w-xl text-base leading-7 text-pretty text-muted-foreground">
-            Weekly outcomes mapped to the mockups and working materials that
-            support them. Production links replace the pending state as files
-            are approved.
-          </p>
-        </header>
-
-        <div>
+      <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 sm:py-16">
+        <Accordion className="rounded-lg">
           {marketingWeeks.map((week) => (
-            <section
+            <AccordionItem
               key={week.week}
-              aria-labelledby={`week-${week.week}`}
-              className="grid scroll-mt-6 gap-8 border-b py-12 last:border-b-0 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-16 lg:py-16"
+              value={week.startsAt}
+              className="data-open:bg-transparent"
             >
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  Week {week.week}
-                </p>
-                <h2
-                  id={`week-${week.week}`}
-                  className="mt-1 text-xl font-medium"
-                >
-                  <time dateTime={week.startsAt}>{week.displayDate}</time>
-                </h2>
-                <Badge variant="outline" className="mt-3 font-normal">
-                  Planned
-                </Badge>
-              </div>
-
-              <div className="min-w-0">
-                {week.outcome && (
-                  <p className="mb-8 max-w-2xl text-xl leading-8 text-balance">
-                    {week.outcome}
-                  </p>
-                )}
-
-                <div className="flex flex-col gap-9">
+              <AccordionTrigger className="items-center px-5 py-5 text-base hover:no-underline sm:px-6">
+                <time dateTime={week.startsAt}>{week.displayDate}</time>
+              </AccordionTrigger>
+              <AccordionContent className="px-1 pb-2 sm:px-2">
+                <div className="flex flex-col gap-8">
                   {week.groups.map((group) => (
-                    <div key={group.title}>
+                    <section key={group.title}>
                       {group.title && (
-                        <h3 className="mb-3 text-sm font-medium">
+                        <h2 className="mb-2 px-4 text-sm font-medium text-muted-foreground">
                           {group.title}
-                        </h3>
+                        </h2>
                       )}
-                      <div className="border-y">
+                      <div>
                         {group.deliverables.map((deliverable, index) => (
                           <div key={deliverable.title}>
                             {index > 0 && <Separator />}
-                            <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                            <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                               <p className="max-w-xl text-sm leading-6">
                                 {deliverable.title}
                               </p>
@@ -128,19 +86,19 @@ export default function MarketingPlannerPage() {
                           </div>
                         ))}
                       </div>
-                    </div>
+                    </section>
                   ))}
                 </div>
 
                 {week.note && (
-                  <p className="mt-6 max-w-2xl text-xs leading-5 text-muted-foreground">
+                  <p className="mt-8 max-w-2xl px-4 text-xs leading-5 text-muted-foreground">
                     {week.note}
                   </p>
                 )}
-              </div>
-            </section>
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </main>
   )
