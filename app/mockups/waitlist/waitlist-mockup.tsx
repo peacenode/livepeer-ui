@@ -64,8 +64,8 @@ export function WaitlistMockup() {
             The Open Video Agent
           </h1>
           <p className="mt-6 text-pretty text-sm leading-6 text-muted-foreground">
-            A video agent harness for multimodal media generation, from right
-            within Claude. Running on Livepeer&apos;s open network.
+            Livepeer agent is a harness for multimodal media generation, from
+            right within Claude. Running on Livepeer&apos;s open network.
           </p>
         </div>
 
