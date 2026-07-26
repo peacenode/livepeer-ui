@@ -87,7 +87,6 @@ export function WaitlistMockup() {
                   onChange={(event) => setEmail(event.target.value)}
                   required
                   autoComplete="email"
-                  aria-describedby="waitlist-note"
                   className="h-full min-w-0 flex-1 border-0 bg-transparent px-3 text-base text-black shadow-none placeholder:text-black/45 focus-visible:ring-0"
                 />
                 <Button
@@ -103,12 +102,6 @@ export function WaitlistMockup() {
                   <ArrowRight aria-hidden="true" />
                 </Button>
               </div>
-              <p
-                id="waitlist-note"
-                className="mt-3 text-xs leading-5 text-muted-foreground"
-              >
-                Product updates and early-access invites only.
-              </p>
             </form>
           ) : (
             <div className="space-y-6">
