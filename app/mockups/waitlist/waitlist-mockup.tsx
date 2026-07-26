@@ -158,8 +158,7 @@ export function WaitlistMockup() {
               </section>
 
               <div>
-                <p className="text-xs font-medium">Your referral link</p>
-                <div className="mt-2 flex items-center gap-2 rounded-full border bg-white/[0.04] p-1.5 pl-4">
+                <div className="flex items-center gap-2 rounded-md border bg-white/[0.04] p-1.5 pl-4">
                   <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
                     {inviteUrl}
                   </p>
@@ -175,6 +174,10 @@ export function WaitlistMockup() {
                   </Button>
                 </div>
               </div>
+
+              <p className="text-center text-sm text-muted-foreground">
+                Climb the leaderboard by referring friends.
+              </p>
 
               <section aria-labelledby="waitlist-leaders">
                 <h2 id="waitlist-leaders" className="text-sm font-medium">
