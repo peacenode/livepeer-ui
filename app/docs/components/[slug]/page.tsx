@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { InstallCommand } from "@/components/docs/install-command"
-import { ScaledComponentPreview } from "@/components/docs/scaled-component-preview"
+import { ProductComponentPreview } from "@/components/docs/product-component-preview"
 import { Badge } from "@/components/ui/badge"
 import { components, getComponentDoc, registryItemUrl } from "@/lib/docs"
 
@@ -45,7 +45,7 @@ export default async function ComponentPage({
       {doc.level === "primitive" ? (
         <ComponentPreview name={slug} className="mt-8" />
       ) : doc.previewPath ? (
-        <ScaledComponentPreview
+        <ProductComponentPreview
           path={doc.previewPath}
           title={doc.title}
           className="mt-8"
