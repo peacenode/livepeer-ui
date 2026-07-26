@@ -84,7 +84,7 @@ export function PlaybooksWorkspace() {
               aria-hidden="true"
             />
             <span
-              className="font-runner text-5xl leading-none font-medium tracking-tight sm:text-6xl"
+              className="font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
               aria-hidden="true"
             >
               AGENT
