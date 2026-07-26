@@ -3,21 +3,33 @@
 import { type ReactNode, useEffect, useState } from "react"
 
 import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
+import { cn } from "@/lib/utils"
 
-function PlatformAuthGate({ children }: { children: ReactNode }) {
+function PlatformAuthGate({
+  children,
+  contained = false,
+}: {
+  children: ReactNode
+  contained?: boolean
+}) {
   const [authenticated, setAuthenticated] = useState(false)
 
   useEffect(() => {
-    if (window.self !== window.top) {
+    if (!contained && window.self !== window.top) {
       setAuthenticated(true)
     }
-  }, [])
+  }, [contained])
 
   return (
     <>
       {children}
       {!authenticated && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/75 px-4 py-10 backdrop-blur-[2px] sm:px-6">
+        <div
+          className={cn(
+            "inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/75 px-4 py-10 backdrop-blur-[2px] sm:px-6",
+            contained ? "absolute" : "fixed"
+          )}
+        >
           <div
             className="pointer-events-none absolute inset-0"
             aria-hidden="true"

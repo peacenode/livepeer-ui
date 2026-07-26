@@ -12,7 +12,7 @@ export type InferenceContainer = {
 
 export const inferenceContainers: InferenceContainer[] = [
   {
-    slug: "ai-runner",
+    slug: "livepeer-agent",
     creator: "Livepeer",
     image: "/container-thumbnails/20260724-002929/ai-runner.webp",
     github: "livepeer/ai-runner",
