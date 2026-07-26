@@ -42,9 +42,13 @@ export function DocsNav({
       items: [
         { title: "Waitlist", href: "/mockups/waitlist" },
         { title: "Livepeer Agent", href: "/mockups/livepeer-agent" },
-        { title: "Client", href: "/mockups/client" },
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
+    },
+    {
+      title: "Archive",
+      external: true,
+      items: [{ title: "Client", href: "/mockups/client" }],
     },
     {
       title: "Components",
