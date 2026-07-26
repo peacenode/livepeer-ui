@@ -3,13 +3,13 @@ import Image from "next/image"
 import {
   ArrowUpRightIcon,
   BrainCircuitIcon,
+  CableIcon,
   CheckIcon,
   CircleDollarSignIcon,
   CpuIcon,
   NetworkIcon,
   ServerCogIcon,
   ServerIcon,
-  UsersRoundIcon,
 } from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
@@ -32,7 +32,7 @@ const paths = [
   {
     title: "Join a pool",
     fit: "Fastest path",
-    icon: UsersRoundIcon,
+    icon: CableIcon,
     gradientId: "pool-path-gradient",
     description:
       "Connect as a worker behind an existing Orchestrator. The operator handles registration, LPT, routing, and payouts; you provide GPU compute and receive off-chain earnings under the pool’s terms.",
@@ -208,7 +208,8 @@ export default async function EarnWithGpuPage() {
                             dur="2s"
                             begin={`${path.gradientId}-target.mouseenter`}
                             end={`${path.gradientId}-target.mouseleave`}
-                            repeatCount="indefinite"
+                            repeatCount="1"
+                            fill="freeze"
                           />
                         </linearGradient>
                       </defs>
