@@ -203,11 +203,11 @@ export function WaitlistMockup() {
             aria-label="Livepeer Agent"
           >
             <LivepeerGradientLockup
-              className="h-[clamp(2.25rem,6vw,6rem)] w-auto"
+              className="h-[clamp(2rem,4.5vw,4.5rem)] w-auto"
               aria-hidden="true"
             />
             <span
-              className="translate-y-[0.12em] font-runner text-[clamp(2.25rem,6vw,6rem)] leading-none font-medium tracking-[-0.045em]"
+              className="translate-y-[0.12em] font-runner text-[clamp(2rem,4.5vw,4.5rem)] leading-none font-medium tracking-[-0.045em]"
               aria-hidden="true"
             >
               AGENT
