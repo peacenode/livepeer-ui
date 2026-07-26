@@ -28,20 +28,6 @@ export default function MarketingPlannerPage() {
           >
             <LivepeerLockup className="h-3.5 w-auto" />
           </Link>
-          <div className="ml-auto flex items-center gap-4">
-            <Link
-              href="/docs"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              UI Registry
-            </Link>
-            <Link
-              href="/design.md"
-              className="font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
-            >
-              design.md
-            </Link>
-          </div>
         </div>
       </nav>
 
