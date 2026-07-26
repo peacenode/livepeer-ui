@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 
 export default function MarketingPlannerPage() {
   return (
-    <main className="min-h-svh bg-background text-foreground">
+    <main className="min-h-svh bg-background font-sans text-foreground">
       <nav className="border-b">
-        <div className="mx-auto flex h-16 w-full max-w-5xl items-center px-5 sm:px-8">
+        <div className="flex h-16 w-full items-center px-5 sm:px-8">
           <Link
             href="/"
             aria-label="Livepeer UI home"
@@ -32,23 +32,23 @@ export default function MarketingPlannerPage() {
         </div>
       </nav>
 
-      <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 sm:py-16">
-        <Accordion className="overflow-visible rounded-none border-0 border-t [&_[data-slot=accordion-content]]:px-0">
+      <div className="w-full">
+        <Accordion className="overflow-visible rounded-none border-0 [&_[data-slot=accordion-content]]:px-0">
           {marketingWeeks.map((week) => (
             <AccordionItem
               key={week.week}
               value={week.startsAt}
               className="border-b data-open:bg-transparent"
             >
-              <AccordionTrigger className="items-center px-0 py-6 text-xl font-normal hover:no-underline sm:text-2xl">
+              <AccordionTrigger className="items-center px-5 py-6 font-sans text-base font-normal hover:no-underline sm:px-8">
                 <time dateTime={week.startsAt}>{week.displayDate}</time>
               </AccordionTrigger>
-              <AccordionContent className="px-0 pb-8">
+              <AccordionContent className="px-5 pb-8 sm:px-8">
                 <div className="flex flex-col gap-8">
                   {week.groups.map((group) => (
                     <section key={group.title}>
                       {group.title && (
-                        <h2 className="mb-2 text-sm font-medium text-muted-foreground">
+                        <h2 className="mb-2 font-sans text-sm font-medium text-muted-foreground">
                           {group.title}
                         </h2>
                       )}
@@ -57,7 +57,7 @@ export default function MarketingPlannerPage() {
                           <div key={deliverable.title}>
                             {index > 0 && <Separator />}
                             <div className="flex flex-col gap-3 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-                              <p className="max-w-xl text-sm leading-6">
+                              <p className="text-sm leading-6">
                                 {deliverable.title}
                               </p>
                               {deliverable.links?.length ? (
@@ -86,7 +86,7 @@ export default function MarketingPlannerPage() {
                 </div>
 
                 {week.note && (
-                  <p className="mt-8 max-w-2xl text-xs leading-5 text-muted-foreground">
+                  <p className="mt-8 text-xs leading-5 text-muted-foreground">
                     {week.note}
                   </p>
                 )}
