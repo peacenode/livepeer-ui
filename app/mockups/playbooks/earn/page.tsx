@@ -177,7 +177,6 @@ export default async function EarnWithGpuPage() {
 
               return (
                 <article
-                  id={`${path.gradientId}-target`}
                   key={path.title}
                   className={[
                     "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
@@ -191,23 +190,17 @@ export default async function EarnWithGpuPage() {
                   >
                     <defs>
                       <linearGradient
+                        className="path-icon-gradient"
                         id={path.gradientId}
                         x1="0"
                         y1="0"
-                        x2="1"
-                        y2="1"
+                        x2="24"
+                        y2="24"
+                        gradientUnits="userSpaceOnUse"
                         spreadMethod="reflect"
                       >
                         <stop offset="0" stopColor="#059669" />
                         <stop offset="1" stopColor="#d1fae5" />
-                        <animateTransform
-                          attributeName="gradientTransform"
-                          type="translate"
-                          values="0 0; 2 0"
-                          dur="900ms"
-                          begin={`${path.gradientId}-target.mouseenter`}
-                          repeatCount="1"
-                        />
                       </linearGradient>
                     </defs>
                   </Icon>
