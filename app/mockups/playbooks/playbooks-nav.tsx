@@ -2,7 +2,7 @@ import { DiscordIcon, GitHubIcon } from "@/components/brand-social-icons"
 
 export function PlaybooksNav() {
   return (
-    <nav className="flex items-center gap-1 text-sm">
+    <nav className="hidden items-center gap-1 text-sm md:flex">
       <a
         href="https://github.com/livepeer"
         target="_blank"
