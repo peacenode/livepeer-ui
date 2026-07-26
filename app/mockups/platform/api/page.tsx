@@ -80,12 +80,12 @@ export default function MockupApiPage() {
                   </code>
                 </TableCell>
                 <TableCell>
-                  <Badge variant="outline" className="px-0.5">
+                  <Badge variant="outline" className="gap-0 px-0.5">
                     <CircleCheckIcon
                       className="size-3 text-emerald-500"
                       aria-hidden="true"
                     />
-                    {key.status}
+                    <span className="px-1.5">{key.status}</span>
                   </Badge>
                 </TableCell>
                 <TableCell className="text-muted-foreground">
