@@ -28,7 +28,6 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="console-sign-in-title"
-        aria-describedby="console-sign-in-description"
         className="relative z-10 w-full max-w-md rounded-sm border bg-background/95 p-6 text-center shadow-xl backdrop-blur-sm sm:p-8"
       >
         <div
@@ -50,14 +49,8 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             id="console-sign-in-title"
             className="text-2xl font-medium tracking-tight text-balance"
           >
-            Sign in to Livepeer Agent
+            Sign in to continue
           </h1>
-          <p
-            id="console-sign-in-description"
-            className="mt-2 text-sm leading-relaxed text-muted-foreground"
-          >
-            Continue to Livepeer Agent.
-          </p>
         </div>
 
         <div className="mt-7 grid gap-2 sm:grid-cols-2">
