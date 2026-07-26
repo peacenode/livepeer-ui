@@ -25,7 +25,7 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
-                render={<Link href="/mockups/livepeer-org/earn" />}
+                render={<Link href="/mockups/livepeer-agent" />}
                 className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
                 style={{
                   backgroundImage:
@@ -42,7 +42,7 @@ export function PlaybooksWorkspace() {
                 render={<Link href="/mockups/livepeer-agent" />}
                 className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
-                Sign up with GitHub
+                Sign in with Discord
               </Button>
             </div>
           </div>
