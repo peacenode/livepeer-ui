@@ -5,12 +5,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/mockups/runner/:path*",
-        destination: "/mockups/livepeer-agent/:path*",
+        destination: "/mockups/client/:path*",
         permanent: true,
       },
       {
         source: "/mockups/agent/:path*",
-        destination: "/mockups/livepeer-agent/:path*",
+        destination: "/mockups/client/:path*",
         permanent: true,
       },
       {
@@ -20,7 +20,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/mockups/platform/:path*",
-        destination: "/mockups/api-console/:path*",
+        destination: "/mockups/livepeer-agent/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/api-console/:path*",
+        destination: "/mockups/livepeer-agent/:path*",
         permanent: true,
       },
     ]
@@ -29,11 +34,11 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         {
-          source: "/mockups/livepeer-agent/:path*",
+          source: "/mockups/client/:path*",
           destination: "/mockups/videobuddy/:path*",
         },
         {
-          source: "/mockups/api-console/:path*",
+          source: "/mockups/livepeer-agent/:path*",
           destination: "/mockups/platform/:path*",
         },
       ],

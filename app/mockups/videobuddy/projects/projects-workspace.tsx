@@ -582,7 +582,7 @@ export function ProjectsWorkspace() {
                       variant="outline"
                       onClick={() =>
                         window.location.assign(
-                          `/mockups/livepeer-agent?project=${encodeURIComponent(project.name)}`
+                          `/mockups/client?project=${encodeURIComponent(project.name)}`
                         )
                       }
                     >

@@ -144,7 +144,7 @@ export default function MockupUsagePage() {
                     size="lg"
                     nativeButton={false}
                     render={
-                      <Link href="/mockups/api-console/organization?tab=billing" />
+                      <Link href="/mockups/livepeer-agent/organization?tab=billing" />
                     }
                     className="mt-auto h-16 w-full rounded-sm px-4"
                   >
@@ -171,7 +171,7 @@ export default function MockupUsagePage() {
                     variant="secondary"
                     nativeButton={false}
                     render={
-                      <Link href="/mockups/api-console/organization?tab=billing" />
+                      <Link href="/mockups/livepeer-agent/organization?tab=billing" />
                     }
                     className="mt-auto h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
                     style={{

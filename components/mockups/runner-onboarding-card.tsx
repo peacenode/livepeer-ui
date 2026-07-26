@@ -12,7 +12,7 @@ const steps = [
   },
   {
     label: "Add credits",
-    href: "/mockups/api-console/billing",
+    href: "/mockups/livepeer-agent/billing",
     complete: false,
   },
 ]

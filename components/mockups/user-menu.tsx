@@ -75,7 +75,7 @@ export function UserMenu() {
           </ToggleGroup>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem render={<Link href="/mockups/api-console/account" />}>
+        <DropdownMenuItem render={<Link href="/mockups/livepeer-agent/account" />}>
           <CircleUserRoundIcon />
           Manage profile
         </DropdownMenuItem>

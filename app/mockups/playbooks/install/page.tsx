@@ -67,13 +67,13 @@ export default async function PlaybooksInstallPage() {
           </div>
           <nav className="flex items-center gap-5 text-sm" aria-label="Account">
             <Link
-              href="/mockups/api-console"
+              href="/mockups/livepeer-agent"
               className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
             >
               Sign in
             </Link>
             <Link
-              href="/mockups/api-console"
+              href="/mockups/livepeer-agent"
               className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
             >
               Create account
@@ -98,7 +98,7 @@ export default async function PlaybooksInstallPage() {
             size="lg"
             variant="outline"
             nativeButton={false}
-            render={<Link href="/mockups/api-console/api" />}
+            render={<Link href="/mockups/livepeer-agent/api" />}
             className="mt-7 h-16 rounded-sm bg-background px-6"
           >
             Create an API key

@@ -26,7 +26,7 @@ export default function MockupsLayout({
         <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <div className="flex items-center justify-between gap-3 px-4 pt-4 md:hidden">
             <Link
-              href="/mockups/api-console"
+              href="/mockups/livepeer-agent"
               aria-label="Livepeer home"
               className="inline-flex"
             >
