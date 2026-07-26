@@ -90,24 +90,17 @@ export default function MockupUsagePage() {
         </TabsList>
         <TabsContent value="overview">
           <div className="flex flex-col gap-10">
-            <section className="border-y py-6 sm:py-8">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-sm font-medium">Credit balance</h2>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Credits pay for every workflow run.
-                  </p>
+            <section className="grid gap-4 md:grid-cols-2">
+              <div className="flex min-h-64 flex-col justify-between rounded-sm border p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-sm font-medium">Credit balance</h2>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Credits pay for every workflow run.
+                    </p>
+                  </div>
+                  <Badge variant="outline">Free</Badge>
                 </div>
-                <Link
-                  href="/mockups/api-console/organization?tab=billing"
-                  className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                >
-                  Manage billing
-                  <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="mt-10 flex items-start justify-between gap-6">
                 <div>
                   <p className="text-sm text-muted-foreground">
                     Credits remaining
@@ -122,8 +115,35 @@ export default function MockupUsagePage() {
                     Credits refresh Aug 01 26
                   </p>
                 </div>
-                <Badge variant="outline">Free</Badge>
               </div>
+              <Link
+                href="/mockups/api-console/organization?tab=billing"
+                className="group min-h-64 rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              >
+                <Card
+                  size="sm"
+                  className="h-full rounded-sm transition-colors group-hover:bg-accent"
+                >
+                  <CardHeader className="flex h-full flex-col justify-between">
+                    <div className="flex flex-col gap-1.5">
+                      <CardDescription>Default payment method</CardDescription>
+                      <p className="font-sans text-2xl font-medium tabular-nums">
+                        Visa ···· 4242
+                      </p>
+                      <p className="font-sans text-xs text-muted-foreground tabular-nums">
+                        Expires 08/2029
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <CardTitle>Billing</CardTitle>
+                      <ArrowUpRightIcon
+                        className="size-4 text-muted-foreground"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </CardHeader>
+                </Card>
+              </Link>
             </section>
 
             <section>
