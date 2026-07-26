@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/breadcrumb"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../../daydream-source"
-import { InstallRunnerFooter } from "../../install-runner-footer"
+import { InstallAgentFooter } from "../../install-agent-footer"
 import { PlaybookBriefForm } from "../../playbook-brief-form"
 
 type PageProps = {
@@ -211,7 +211,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           />
         </div>
       </div>
-      <InstallRunnerFooter />
+      <InstallAgentFooter />
     </main>
   )
 }

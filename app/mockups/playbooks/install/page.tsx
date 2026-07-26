@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Install Livepeer Agent to use inference playbooks from your coding agent.",
 }
 
-const installCommand = "npm install -g @livepeer/runner"
+const installCommand = "npm install -g @livepeer/agent"
 
 export default async function PlaybooksInstallPage() {
   const playbooks = await getSourcePlaybooks()
@@ -91,8 +91,8 @@ export default async function PlaybooksInstallPage() {
             Install Livepeer Agent in your app today
           </h2>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-balance text-muted-foreground">
-            Create an API key to add Runner’s image and video workflows to your
-            own product.
+            Create an API key to add Livepeer Agent’s image and video workflows
+            to your own product.
           </p>
           <Button
             size="lg"
@@ -154,8 +154,8 @@ export default async function PlaybooksInstallPage() {
           </h2>
           <p className="mt-5 max-w-md text-base leading-relaxed text-balance text-muted-foreground">
             Start from a complete recipe for image, video, or audio generation.
-            Copy it into Runner, customize the inputs, and create from your
-            agent.
+            Copy it into Livepeer Agent, customize the inputs, and create from
+            your agent.
           </p>
           <Button
             size="lg"
