@@ -1,7 +1,7 @@
 "use client"
 
 import { type FormEvent, useState } from "react"
-import { ArrowRight, Check, Copy, Share2, TrendingUp } from "lucide-react"
+import { ArrowRight, Check, Copy, Share2 } from "lucide-react"
 import { toast } from "sonner"
 
 import { LivepeerGradientLockup } from "@/components/brand"
@@ -144,13 +144,7 @@ export function WaitlistMockup() {
                 aria-labelledby="share-card-title"
               >
                 <div className="pointer-events-none absolute -top-24 -right-20 -z-10 size-56 rounded-full bg-emerald-400/25 blur-3xl" />
-                <div className="flex items-start justify-between gap-4">
-                  <LivepeerGradientLockup className="h-4 w-auto" />
-                  <span className="flex items-center gap-1 text-[10px] font-medium tracking-[0.12em] text-emerald-400 uppercase">
-                    <TrendingUp className="size-3" aria-hidden="true" />
-                    Early access
-                  </span>
-                </div>
+                <LivepeerGradientLockup className="h-4 w-auto" />
 
                 <div className="mt-8 grid grid-cols-[1fr_auto] items-end gap-4">
                   <div>
@@ -177,34 +171,35 @@ export function WaitlistMockup() {
                 <p className="mt-7 max-w-64 text-sm leading-5 text-white/70">
                   I&apos;m joining the open video agent.
                 </p>
+              </section>
 
-                <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/15 pt-4">
-                  <p className="min-w-0 truncate font-mono text-[10px] text-white/55">
+              <div>
+                <p className="text-xs font-medium">Your referral link</p>
+                <div className="mt-2 flex items-center gap-2 rounded-md border bg-white/[0.04] p-1.5 pl-3">
+                  <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
                     {inviteUrl}
                   </p>
-                  <div className="flex shrink-0 gap-1.5">
-                    <Button
-                      type="button"
-                      size="icon-sm"
-                      variant="secondary"
-                      aria-label="Copy invite link"
-                      onClick={copyInvite}
-                      className="rounded-sm"
-                    >
-                      {copied ? <Check /> : <Copy />}
-                    </Button>
-                    <Button
-                      type="button"
-                      size="icon-sm"
-                      aria-label="Share invite"
-                      onClick={shareInvite}
-                      className="rounded-sm bg-emerald-500 text-white hover:bg-emerald-400"
-                    >
-                      <Share2 />
-                    </Button>
-                  </div>
+                  <Button
+                    type="button"
+                    size="icon-sm"
+                    variant="ghost"
+                    aria-label="Copy referral link"
+                    onClick={copyInvite}
+                    className="shrink-0 rounded-sm"
+                  >
+                    {copied ? <Check /> : <Copy />}
+                  </Button>
+                  <Button
+                    type="button"
+                    size="icon-sm"
+                    aria-label="Share referral link"
+                    onClick={shareInvite}
+                    className="shrink-0 rounded-sm bg-emerald-500 text-white hover:bg-emerald-400"
+                  >
+                    <Share2 />
+                  </Button>
                 </div>
-              </section>
+              </div>
 
               <section aria-labelledby="waitlist-leaders">
                 <div className="flex items-center justify-between">
