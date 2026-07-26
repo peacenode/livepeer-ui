@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
 import { CopyButton } from "@/components/docs/copy-button"
+import { LivepeerWordmark } from "@/components/brand"
 import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
 import { RunnerDeltaStream } from "@/components/mockups/runner-delta-stream"
 import { Badge } from "@/components/ui/badge"
@@ -12,9 +13,9 @@ import { Button } from "@/components/ui/button"
 import { getPlaybookDocument, getSourcePlaybooks } from "../daydream-source"
 
 export const metadata: Metadata = {
-  title: "Runner",
+  title: "Livepeer Agent",
   description:
-    "Install Runner to use Livepeer inference playbooks from your coding agent.",
+    "Install Livepeer Agent to use inference playbooks from your coding agent.",
 }
 
 const installCommand = "npm install -g @livepeer/runner"
@@ -33,9 +34,21 @@ export default async function PlaybooksInstallPage() {
       <section className="relative flex items-center overflow-hidden bg-white px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
         <RunnerDeltaStream />
         <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
-          <p className="font-runner text-5xl font-medium tracking-tight sm:text-6xl">
-            RUNNER
-          </p>
+          <div
+            className="flex items-end gap-3 text-foreground sm:gap-4"
+            aria-label="Livepeer Agent"
+          >
+            <LivepeerWordmark
+              className="h-8 w-auto sm:h-10"
+              aria-hidden="true"
+            />
+            <span
+              className="font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+              aria-hidden="true"
+            >
+              AGENT
+            </span>
+          </div>
           <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
             Create and edit images and video with your agent.
           </h1>

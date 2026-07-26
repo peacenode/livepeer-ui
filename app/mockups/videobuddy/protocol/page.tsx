@@ -19,7 +19,7 @@ const layers = [
     description:
       "Runner is the interface between people, agents, applications, and Livepeer. It accepts a task, authenticates the caller, and starts the right workflow.",
     detail: "CLI · MCP with OAuth · API",
-    href: "/mockups/livepeer-org/install",
+    href: "/mockups/livepeer-org/agent",
     icon: PlayIcon,
   },
   {

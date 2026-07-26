@@ -61,7 +61,7 @@ export default async function MockupHomePage() {
             </div>
           </a>
           <Link
-            href="/mockups/livepeer-org/install"
+            href="/mockups/livepeer-org/agent"
             className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">

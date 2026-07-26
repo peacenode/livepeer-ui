@@ -19,31 +19,31 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   {
-    href: "/mockups/agent",
+    href: "/mockups/livepeer-agent",
     label: "Create",
     icon: LivepeerSymbol,
     brand: true,
   },
   {
-    href: "/mockups/agent/storyboards",
+    href: "/mockups/livepeer-agent/storyboards",
     label: "Storyboards",
     icon: Grid2X2Icon,
     brand: false,
   },
   {
-    href: "/mockups/agent/characters",
+    href: "/mockups/livepeer-agent/characters",
     label: "Characters",
     icon: ApertureIcon,
     brand: false,
   },
   {
-    href: "/mockups/agent/footage",
+    href: "/mockups/livepeer-agent/footage",
     label: "Clips",
     icon: FilmIcon,
     brand: false,
   },
   {
-    href: "/mockups/agent/projects",
+    href: "/mockups/livepeer-agent/projects",
     label: "Projects",
     icon: FolderIcon,
     brand: false,
@@ -51,7 +51,7 @@ const navItems = [
 ]
 
 function isActiveRoute(href: string, pathname: string) {
-  return href === "/mockups/agent"
+  return href === "/mockups/livepeer-agent"
     ? pathname === href
     : pathname.startsWith(href)
 }
@@ -112,20 +112,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             )
           })}
           <Link
-            href="/mockups/agent/install"
-            data-active={pathname.startsWith("/mockups/agent/install")}
+            href="/mockups/livepeer-agent/install"
+            data-active={pathname.startsWith("/mockups/livepeer-agent/install")}
             onClick={() => setExpanded(false)}
             className={cn(
               "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
               expanded &&
-                pathname.startsWith("/mockups/agent/install") &&
+                pathname.startsWith("/mockups/livepeer-agent/install") &&
                 "bg-muted font-medium text-foreground"
             )}
           >
             <span
               className={cn(
                 "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-                pathname.startsWith("/mockups/agent/install") &&
+                pathname.startsWith("/mockups/livepeer-agent/install") &&
                   !expanded &&
                   "bg-muted"
               )}
@@ -144,20 +144,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         <Link
-          href="/mockups/agent/protocol"
-          data-active={pathname.startsWith("/mockups/agent/protocol")}
+          href="/mockups/livepeer-agent/protocol"
+          data-active={pathname.startsWith("/mockups/livepeer-agent/protocol")}
           onClick={() => setExpanded(false)}
           className={cn(
             "mx-2 flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
             expanded &&
-              pathname.startsWith("/mockups/agent/protocol") &&
+              pathname.startsWith("/mockups/livepeer-agent/protocol") &&
               "bg-muted font-medium text-foreground"
           )}
         >
           <span
             className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-              pathname.startsWith("/mockups/agent/protocol") &&
+              pathname.startsWith("/mockups/livepeer-agent/protocol") &&
                 !expanded &&
                 "bg-muted"
             )}

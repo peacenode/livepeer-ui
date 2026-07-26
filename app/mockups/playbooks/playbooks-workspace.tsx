@@ -99,7 +99,7 @@ export function PlaybooksWorkspace() {
               size="lg"
               variant="secondary"
               nativeButton={false}
-              render={<Link href="/mockups/livepeer-org/install" />}
+              render={<Link href="/mockups/livepeer-org/agent" />}
               className="h-16 rounded-sm border-foreground/10 bg-muted px-4 text-foreground transition-[filter] hover:bg-muted hover:brightness-[0.97]"
               style={{
                 backgroundImage:

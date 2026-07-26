@@ -7,7 +7,7 @@ import { Card, CardTitle } from "@/components/ui/card"
 const steps = [
   {
     label: "Install Runner",
-    href: "/mockups/livepeer-org/install",
+    href: "/mockups/livepeer-org/agent",
     complete: false,
   },
   {
