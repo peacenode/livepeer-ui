@@ -22,10 +22,10 @@ import {
 import { cn } from "@/lib/utils"
 
 const siteLinks = [
-  { label: "Home", href: "/mockups/playbooks" },
-  { label: "GPU", href: "/mockups/playbooks/earn" },
-  { label: "Livepeer Agent", href: "/mockups/playbooks/install" },
-  { label: "Playbooks", href: "/mockups/playbooks/library" },
+  { label: "Home", href: "/mockups/livepeer-org" },
+  { label: "GPU", href: "/mockups/livepeer-org/earn" },
+  { label: "Livepeer Agent", href: "/mockups/livepeer-org/install" },
+  { label: "Playbooks", href: "/mockups/livepeer-org/library" },
 ]
 
 const footerGroups = [

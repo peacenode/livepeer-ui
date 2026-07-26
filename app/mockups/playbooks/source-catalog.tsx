@@ -45,7 +45,7 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
         {visible.map((playbook) => (
           <Link
             key={playbook.slug}
-            href={`/mockups/playbooks/library/${playbook.slug}`}
+            href={`/mockups/livepeer-org/library/${playbook.slug}`}
             className="group block rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
             <article>

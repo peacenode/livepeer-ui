@@ -16,7 +16,7 @@ const groups = [
       },
       {
         label: "Provide GPUs",
-        href: "/mockups/playbooks/earn",
+        href: "/mockups/livepeer-org/earn",
         external: true,
       },
       {
@@ -92,7 +92,7 @@ export function SiteFooter() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <a
-              href="/mockups/playbooks"
+              href="/mockups/livepeer-org"
               className="inline-flex items-center gap-1.5 text-black"
               aria-label="Livepeer home"
             >

@@ -87,7 +87,7 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink
-                render={<Link href="/mockups/playbooks/library" />}
+                render={<Link href="/mockups/livepeer-org/library" />}
               >
                 Playbooks
               </BreadcrumbLink>

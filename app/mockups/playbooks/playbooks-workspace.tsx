@@ -25,7 +25,7 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
-                render={<Link href="/mockups/playbooks/earn" />}
+                render={<Link href="/mockups/livepeer-org/earn" />}
                 className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
                 style={{
                   backgroundImage:
@@ -91,15 +91,15 @@ export function PlaybooksWorkspace() {
             </span>
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-balance text-foreground/65">
-            Your agent companion, ready to create images, video, and audio with
-            the latest workflows purpose built into your agent.
+            A video agent harness for multimodal media generation, from right
+            within Claude. Running on Livepeer&apos;s open network.
           </p>
           <div className="mt-2 flex flex-wrap justify-center gap-2 sm:justify-start">
             <Button
               size="lg"
               variant="secondary"
               nativeButton={false}
-              render={<Link href="/mockups/playbooks/install" />}
+              render={<Link href="/mockups/livepeer-org/install" />}
               className="h-16 rounded-sm border-foreground/10 bg-muted px-4 text-foreground transition-[filter] hover:bg-muted hover:brightness-[0.97]"
               style={{
                 backgroundImage:
@@ -113,7 +113,7 @@ export function PlaybooksWorkspace() {
               size="lg"
               variant="outline"
               nativeButton={false}
-              render={<Link href="/mockups/playbooks/library" />}
+              render={<Link href="/mockups/livepeer-org/library" />}
               className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground"
             >
               Browse Playbooks
@@ -148,7 +148,7 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
-                render={<Link href="/mockups/playbooks/earn" />}
+                render={<Link href="/mockups/livepeer-org/earn" />}
                 className="h-16 rounded-sm border-background/10 px-4"
               >
                 Get Started

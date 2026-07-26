@@ -7,7 +7,7 @@ import { Card, CardTitle } from "@/components/ui/card"
 const steps = [
   {
     label: "Install Runner",
-    href: "/mockups/playbooks/install",
+    href: "/mockups/livepeer-org/install",
     complete: false,
   },
   {
@@ -17,7 +17,7 @@ const steps = [
   },
   {
     label: "Test a playbook",
-    href: "/mockups/playbooks",
+    href: "/mockups/livepeer-org",
     complete: false,
   },
 ]

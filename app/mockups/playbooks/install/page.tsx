@@ -119,7 +119,7 @@ export default async function PlaybooksInstallPage() {
             size="lg"
             variant="secondary"
             nativeButton={false}
-            render={<Link href="/mockups/playbooks/library" />}
+            render={<Link href="/mockups/livepeer-org/library" />}
             className="mt-10 h-16 rounded-sm px-6"
           >
             See more
@@ -151,7 +151,7 @@ export default async function PlaybooksInstallPage() {
             size="lg"
             variant="outline"
             nativeButton={false}
-            render={<Link href="/mockups/playbooks/library" />}
+            render={<Link href="/mockups/livepeer-org/library" />}
             className="mt-7 h-16 rounded-sm border-foreground/20 bg-white px-4 transition-opacity hover:bg-white hover:opacity-80"
           >
             Browse Playbooks

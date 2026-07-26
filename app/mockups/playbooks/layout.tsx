@@ -24,7 +24,7 @@ export default function PlaybooksLayout({
       <header className="absolute inset-x-0 top-0 z-20">
         <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <Link
-            href="/mockups/playbooks"
+            href="/mockups/livepeer-org"
             className="flex shrink-0 items-center gap-3"
             aria-label="Landing home"
           >
