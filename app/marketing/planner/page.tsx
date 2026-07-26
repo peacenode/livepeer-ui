@@ -39,7 +39,7 @@ export default function MarketingPlannerPage() {
               value={week.startsAt}
               className="border-b data-open:bg-transparent"
             >
-              <AccordionTrigger className="items-center px-5 py-6 font-sans text-base font-normal hover:no-underline sm:px-8">
+              <AccordionTrigger className="items-center px-5 py-6 font-sans text-base font-semibold hover:no-underline sm:px-8">
                 <time dateTime={week.startsAt}>{week.displayDate}</time>
               </AccordionTrigger>
               <AccordionContent className="px-5 pb-10 sm:px-8">
