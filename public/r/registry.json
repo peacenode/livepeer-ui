@@ -731,9 +731,8 @@
       "name": "livepeer-agent-billing-cards",
       "type": "registry:component",
       "title": "Billing Cards",
-      "description": "Current-period and credit-balance summary cards from Livepeer Agent organization billing.",
+      "description": "Workflow-run and compute-time metric cards from the Billing/API usage activity view.",
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
         "http://localhost:3000/r/card.json"
       ],
       "files": [

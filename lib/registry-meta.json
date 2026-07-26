@@ -76,9 +76,9 @@
         {
           "name": "livepeer-agent-billing-cards",
           "title": "Billing Cards",
-          "description": "Current-period and credit-balance summary cards from Livepeer Agent organization billing.",
+          "description": "Workflow-run and compute-time metric cards from the Billing/API usage activity view.",
           "level": "component",
-          "uses": ["button", "card"],
+          "uses": ["card"],
           "files": ["components/mockups/livepeer-agent-billing-cards.tsx"]
         },
         {

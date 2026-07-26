@@ -1,12 +1,13 @@
 import type { Metadata } from "next"
 
-import { LivepeerAgentBillingCards } from "@/components/mockups/livepeer-agent-billing-cards"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
+  CardAction,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -169,7 +170,39 @@ export default async function MockupOrganizationPage({
         </TabsContent>
         <TabsContent value="billing">
           <div className="flex flex-col gap-8">
-            <LivepeerAgentBillingCards />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card className="gap-2 rounded-sm">
+                <CardHeader>
+                  <CardDescription>Current period</CardDescription>
+                  <CardTitle className="text-2xl font-medium tabular-nums">
+                    $2,148.90
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">
+                    July 1 – July 23 · next invoice August 1
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="gap-2 rounded-sm">
+                <CardHeader>
+                  <CardDescription>Credit balance</CardDescription>
+                  <CardTitle className="text-2xl font-medium tabular-nums">
+                    $500.00
+                  </CardTitle>
+                  <CardAction>
+                    <Button variant="outline" size="sm">
+                      Add credits
+                    </Button>
+                  </CardAction>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-xs text-muted-foreground">
+                    Applied before charging the default payment method.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between gap-4">
                 <h2 className="text-sm font-medium">Payment methods</h2>
