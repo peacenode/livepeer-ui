@@ -113,11 +113,22 @@
       "title": "Livepeer.org",
       "items": [
         {
+          "name": "livepeer-org-menu",
+          "title": "Dropdown Menu",
+          "description": "Full-width Livepeer.org navigation dropdown with primary links, resource groups, social links, and active-route state.",
+          "level": "component",
+          "uses": ["button", "sheet"],
+          "files": [
+            "components/mockups/livepeer-org-menu.tsx",
+            "components/brand-social-icons.tsx"
+          ]
+        },
+        {
           "name": "livepeer-org-header",
           "title": "Header",
           "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
           "level": "component",
-          "uses": ["button", "sheet"],
+          "uses": ["livepeer-org-menu"],
           "files": [
             "components/mockups/livepeer-org-header.tsx",
             "components/mockups/livepeer-org-menu.tsx"

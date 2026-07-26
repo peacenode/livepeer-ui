@@ -813,6 +813,34 @@
       ]
     },
     {
+      "name": "livepeer-org-menu",
+      "type": "registry:component",
+      "title": "Dropdown Menu",
+      "description": "Full-width Livepeer.org navigation dropdown with primary links, resource groups, social links, and active-route state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand-social-icons.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "livepeer-org-header",
       "type": "registry:component",
       "title": "Header",

@@ -48,6 +48,7 @@ import ProjectPickerDemo from "./project-picker-demo"
 import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-demo"
 import LivepeerOrgFooterDemo from "./livepeer-org-footer-demo"
 import LivepeerOrgHeaderDemo from "./livepeer-org-header-demo"
+import LivepeerOrgMenuDemo from "./livepeer-org-menu-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
 import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
@@ -105,6 +106,7 @@ export const demos: Record<string, ComponentType> = {
   "livepeer-agent-feature-section": LivepeerAgentFeatureSectionDemo,
   "livepeer-org-footer": LivepeerOrgFooterDemo,
   "livepeer-org-header": LivepeerOrgHeaderDemo,
+  "livepeer-org-menu": LivepeerOrgMenuDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
   "characters-workspace-section": CharactersWorkspaceSectionDemo,
