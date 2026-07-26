@@ -225,7 +225,7 @@ export function EcosystemCatalog() {
               href={app.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex min-h-72 flex-col rounded-sm border p-6 transition-colors hover:border-foreground/30 hover:bg-muted/40"
+              className="group flex min-h-72 flex-col rounded-sm p-6 transition-colors hover:bg-muted/50"
             >
               <Image
                 src={app.image}

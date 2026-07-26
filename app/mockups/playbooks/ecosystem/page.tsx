@@ -15,10 +15,7 @@ export default function EcosystemPage() {
       <div className="mx-auto w-full max-w-screen-2xl">
         <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase text-muted-foreground">
-              Ecosystem
-            </p>
-            <h1 className="mt-4 text-5xl leading-none font-light tracking-tight text-balance sm:text-7xl">
+            <h1 className="text-5xl leading-none font-light tracking-tight text-balance sm:text-7xl">
               Built on Livepeer
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
