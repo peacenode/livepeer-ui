@@ -32,7 +32,7 @@ export default async function PlaybooksInstallPage() {
   return (
     <main>
       <section className="relative flex items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
-        <RunnerDeltaStream />
+        <RunnerDeltaStream className="-translate-y-10 sm:-translate-y-8" />
         <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
           <div
             className="flex items-end gap-3 text-foreground sm:gap-4"
