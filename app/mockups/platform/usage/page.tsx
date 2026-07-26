@@ -84,8 +84,8 @@ export default function MockupUsagePage() {
           <TabsTrigger value="overview" className="flex-none">
             Overview
           </TabsTrigger>
-          <TabsTrigger value="resources" className="flex-none">
-            Resources
+          <TabsTrigger value="activity" className="flex-none">
+            Activity
           </TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
@@ -213,9 +213,14 @@ export default function MockupUsagePage() {
                 </div>
               </div>
             </section>
-
+          </div>
+        </TabsContent>
+        <TabsContent value="activity">
+          <div className="flex flex-col gap-10">
             <section className="flex flex-col gap-3">
-              <h2 className="font-sans text-sm font-medium">Activity</h2>
+              <h2 className="font-sans text-sm font-medium">
+                Activity overview
+              </h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Card variant="metric">
                   <CardHeader>
@@ -235,7 +240,7 @@ export default function MockupUsagePage() {
                 </Card>
               </div>
             </section>
-            <div className="flex flex-col gap-3">
+            <section className="flex flex-col gap-3">
               <h2 className="font-sans text-sm font-medium">Daily usage</h2>
               <Table>
                 <TableHeader>
@@ -263,36 +268,39 @@ export default function MockupUsagePage() {
                   ))}
                 </TableBody>
               </Table>
-            </div>
+            </section>
+            <section className="flex flex-col gap-3">
+              <h2 className="font-sans text-sm font-medium">
+                Usage by resource
+              </h2>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Resource</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Usage</TableHead>
+                    <TableHead className="text-right">Credits</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {resourceUsage.map((resource) => (
+                    <TableRow key={resource.resource}>
+                      <TableCell className="font-mono text-xs font-medium">
+                        {resource.resource}
+                      </TableCell>
+                      <TableCell>{resource.type}</TableCell>
+                      <TableCell className="font-sans text-xs tabular-nums">
+                        {resource.usage}
+                      </TableCell>
+                      <TableCell className="text-right font-sans text-xs tabular-nums">
+                        {resource.credits}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </section>
           </div>
-        </TabsContent>
-        <TabsContent value="resources">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Resource</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Usage</TableHead>
-                <TableHead className="text-right">Credits</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {resourceUsage.map((resource) => (
-                <TableRow key={resource.resource}>
-                  <TableCell className="font-mono text-xs font-medium">
-                    {resource.resource}
-                  </TableCell>
-                  <TableCell>{resource.type}</TableCell>
-                  <TableCell className="font-sans text-xs tabular-nums">
-                    {resource.usage}
-                  </TableCell>
-                  <TableCell className="text-right font-sans text-xs tabular-nums">
-                    {resource.credits}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
         </TabsContent>
       </Tabs>
     </PlatformPage>
