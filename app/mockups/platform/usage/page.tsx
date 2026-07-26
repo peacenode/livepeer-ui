@@ -110,15 +110,18 @@ export default function MockupUsagePage() {
               <div className="mt-10 flex items-start justify-between gap-6">
                 <div>
                   <p className="text-sm text-muted-foreground">
-                    Available balance
+                    Free plan allowance
                   </p>
                   <p className="mt-3 text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
-                    50/250{" "}
+                    50{" "}
                     <span className="text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl">
                       credits
                     </span>
                   </p>
-                  <p className="mt-4 text-sm text-muted-foreground">
+                  <p className="mt-4 text-sm text-muted-foreground tabular-nums">
+                    32/50 credits remaining
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
                     Credits refresh Aug 01 26
                   </p>
                 </div>
