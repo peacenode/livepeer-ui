@@ -3,7 +3,6 @@ import { notFound } from "next/navigation"
 
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { InstallCommand } from "@/components/docs/install-command"
-import { ProductComponentPreview } from "@/components/docs/product-component-preview"
 import { Badge } from "@/components/ui/badge"
 import { components, getComponentDoc, registryItemUrl } from "@/lib/docs"
 
@@ -42,15 +41,7 @@ export default async function ComponentPage({
       <p className="mt-2 text-muted-foreground text-balance">
         {doc.description}
       </p>
-      {doc.level === "primitive" ? (
-        <ComponentPreview name={slug} className="mt-8" />
-      ) : doc.previewPath ? (
-        <ProductComponentPreview
-          path={doc.previewPath}
-          title={doc.title}
-          className="mt-8"
-        />
-      ) : null}
+      <ComponentPreview name={slug} className="mt-8" />
       <h2 className="mt-10 text-xl font-semibold tracking-tight">
         Installation
       </h2>

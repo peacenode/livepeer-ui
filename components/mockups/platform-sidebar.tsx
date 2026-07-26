@@ -15,11 +15,16 @@ export const platformNavItems = [
   { title: "Logs", href: "/mockups/livepeer-agent/api-logs" },
 ]
 
-export function PlatformSidebar() {
+export function PlatformSidebar({ className }: { className?: string }) {
   const pathname = usePathname()
 
   return (
-    <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-background md:flex">
+    <aside
+      className={cn(
+        "sticky top-0 hidden h-full w-64 shrink-0 flex-col bg-background md:flex",
+        className
+      )}
+    >
       <div className="px-5 pt-6 pb-1">
         <Link
           href="/mockups/livepeer-agent"
