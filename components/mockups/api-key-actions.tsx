@@ -57,7 +57,7 @@ function ApiKeyActions() {
         </DialogTrigger>
         <DialogContent className="gap-6 rounded-sm p-6 sm:max-w-lg sm:p-8">
           <DialogHeader className="gap-2">
-            <DialogTitle className="font-sans text-3xl leading-none font-light tracking-[-0.04em]">
+            <DialogTitle className="font-sans text-2xl font-medium tracking-tight">
               Create API key
             </DialogTitle>
             <DialogDescription className="leading-relaxed">
