@@ -84,7 +84,7 @@ export function WaitlistMockup() {
               : "mt-16 max-w-full sm:mt-24 md:mt-28"
           }
         >
-          <h1 className="mt-4 font-display text-[clamp(2.5rem,3vw,3rem)] leading-[0.96] font-medium tracking-[-0.045em] text-balance">
+          <h1 className="mt-4 font-display text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
             The Open Video Agent
           </h1>
           <p className="mt-6 text-sm leading-6 text-pretty text-muted-foreground">
