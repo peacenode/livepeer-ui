@@ -180,43 +180,37 @@ export default async function EarnWithGpuPage() {
                   id={`${path.gradientId}-target`}
                   key={path.title}
                   className={[
-                    "group/path flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
+                    "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
                     index === 0 ? "md:mt-48" : index === 1 ? "md:mt-24" : "",
                   ].join(" ")}
                 >
-                  <div className="relative mb-5 size-6" aria-hidden="true">
-                    <Icon className="absolute inset-0 size-6 stroke-[1.5] text-emerald-600 transition-opacity duration-300 group-hover/path:opacity-0" />
-                    <Icon
-                      className="absolute inset-0 size-6 stroke-[1.5] opacity-0 transition-opacity duration-300 group-hover/path:opacity-100"
-                      stroke={`url(#${path.gradientId})`}
-                    >
-                      <defs>
-                        <linearGradient
-                          id={path.gradientId}
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stopColor="#059669" />
-                          <stop offset="24%" stopColor="#d1fae5" />
-                          <stop offset="50%" stopColor="#10b981" />
-                          <stop offset="74%" stopColor="#a7f3d0" />
-                          <stop offset="100%" stopColor="#059669" />
-                          <animateTransform
-                            attributeName="gradientTransform"
-                            type="translate"
-                            values="-1 0; 1 0"
-                            dur="900ms"
-                            begin={`${path.gradientId}-target.mouseenter`}
-                            end={`${path.gradientId}-target.mouseleave`}
-                            repeatCount="1"
-                            fill="freeze"
-                          />
-                        </linearGradient>
-                      </defs>
-                    </Icon>
-                  </div>
+                  <Icon
+                    className="mb-5 size-6 stroke-[1.5]"
+                    stroke={`url(#${path.gradientId})`}
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient
+                        id={path.gradientId}
+                        x1="0"
+                        y1="0"
+                        x2="1"
+                        y2="1"
+                        spreadMethod="reflect"
+                      >
+                        <stop offset="0" stopColor="#059669" />
+                        <stop offset="1" stopColor="#d1fae5" />
+                        <animateTransform
+                          attributeName="gradientTransform"
+                          type="translate"
+                          values="0 0; 2 0"
+                          dur="900ms"
+                          begin={`${path.gradientId}-target.mouseenter`}
+                          repeatCount="1"
+                        />
+                      </linearGradient>
+                    </defs>
+                  </Icon>
                   <p className="border-t border-emerald-500 pt-3 text-xs font-medium text-muted-foreground">
                     {path.fit}
                   </p>
