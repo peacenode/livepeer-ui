@@ -116,7 +116,7 @@ export function LandingMenu() {
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="max-h-dvh overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none"
+        className="h-dvh max-h-none overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none sm:h-auto sm:max-h-dvh"
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
