@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
-import { CircleCheckIcon, Trash2Icon } from "lucide-react"
+import { CircleCheckIcon } from "lucide-react"
 
 import { ApiKeyActions } from "@/components/mockups/api-key-actions"
+import { DeleteApiKeyDialog } from "@/components/mockups/delete-api-key-dialog"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -95,14 +95,10 @@ export default function MockupApiPage() {
                   {key.lastUsed}
                 </TableCell>
                 <TableCell>
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    className="hover:text-red-500"
-                    aria-label={`Delete ${key.name} API key`}
-                  >
-                    <Trash2Icon aria-hidden="true" />
-                  </Button>
+                  <DeleteApiKeyDialog
+                    name={key.name}
+                    createdAt={key.createdAt}
+                  />
                 </TableCell>
               </TableRow>
             ))}
