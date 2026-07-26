@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowUpRightIcon, GlobeIcon, MenuIcon, XIcon } from "lucide-react"
+import { ArrowUpRightIcon, GlobeIcon, XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import {
@@ -81,6 +81,19 @@ const socials = [
   },
 ]
 
+function LivepeerMenuIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 16"
+      fill="currentColor"
+      aria-hidden="true"
+      className="size-4"
+    >
+      <path d="M2 2h16v4H2zM2 10h12v4H2z" />
+    </svg>
+  )
+}
+
 export function LandingMenu() {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
@@ -96,7 +109,7 @@ export function LandingMenu() {
           />
         }
       >
-        <MenuIcon />
+        <LivepeerMenuIcon />
         <span className="sr-only">Open site navigation</span>
       </SheetTrigger>
       <SheetContent
