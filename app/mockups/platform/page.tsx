@@ -111,7 +111,7 @@ export default async function MockupHomePage() {
               className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-emerald-500"
             >
               <div className="min-w-0 flex-1">
-                <h3 className="line-clamp-2 font-medium text-foreground">
+                <h3 className="line-clamp-2 font-sans font-medium text-foreground">
                   {topic.title}
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
