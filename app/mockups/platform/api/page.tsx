@@ -85,7 +85,7 @@ export default function MockupApiPage() {
                       className="size-3 text-emerald-500"
                       aria-hidden="true"
                     />
-                    <span className="px-1.5">{key.status}</span>
+                    <span className="px-1">{key.status}</span>
                   </Badge>
                 </TableCell>
                 <TableCell className="text-muted-foreground">
