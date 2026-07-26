@@ -217,10 +217,7 @@ export default function MockupUsagePage() {
         </TabsContent>
         <TabsContent value="activity">
           <div className="flex flex-col gap-10">
-            <section className="flex flex-col gap-3">
-              <h2 className="font-sans text-sm font-medium">
-                Activity overview
-              </h2>
+            <section>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Card variant="metric">
                   <CardHeader>
