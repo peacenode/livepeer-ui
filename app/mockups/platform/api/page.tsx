@@ -5,6 +5,7 @@ import { ApiKeyActions } from "@/components/mockups/api-key-actions"
 import { DeleteApiKeyDialog } from "@/components/mockups/delete-api-key-dialog"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -52,11 +53,16 @@ const keys = [
 export default function MockupApiPage() {
   return (
     <PlatformPage
-      title="API"
+      title="API Keys"
+      description="Create and manage the keys used to authenticate API requests."
       action={<ApiKeyActions />}
     >
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Keys</h2>
+      <div className="flex flex-col gap-4">
+        <Input
+          aria-label="Filter API keys by name"
+          placeholder="Filter by name…"
+          className="max-w-sm rounded-sm"
+        />
         <Table>
           <TableHeader>
             <TableRow>
@@ -104,6 +110,9 @@ export default function MockupApiPage() {
             ))}
           </TableBody>
         </Table>
+        <p className="text-sm text-muted-foreground">
+          Page 1 · Showing {keys.length} of {keys.length}
+        </p>
       </div>
     </PlatformPage>
   )
