@@ -65,7 +65,9 @@ export default function MockupApiPage() {
               <TableHead>Status</TableHead>
               <TableHead>Created at</TableHead>
               <TableHead>Last used</TableHead>
-              <TableHead className="w-12">Actions</TableHead>
+              <TableHead className="w-12">
+                <span className="sr-only">Actions</span>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
