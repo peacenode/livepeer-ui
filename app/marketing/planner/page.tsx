@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowUpRightIcon, FileClockIcon } from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { LivepeerLockup } from "@/components/brand"
 import {
@@ -33,22 +33,22 @@ export default function MarketingPlannerPage() {
       </nav>
 
       <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 sm:py-16">
-        <Accordion className="rounded-lg">
+        <Accordion className="overflow-visible rounded-none border-0 border-t [&_[data-slot=accordion-content]]:px-0">
           {marketingWeeks.map((week) => (
             <AccordionItem
               key={week.week}
               value={week.startsAt}
-              className="data-open:bg-transparent"
+              className="border-b data-open:bg-transparent"
             >
-              <AccordionTrigger className="items-center px-5 py-5 text-base hover:no-underline sm:px-6">
+              <AccordionTrigger className="items-center px-0 py-6 text-xl font-normal hover:no-underline sm:text-2xl">
                 <time dateTime={week.startsAt}>{week.displayDate}</time>
               </AccordionTrigger>
-              <AccordionContent className="px-1 pb-2 sm:px-2">
+              <AccordionContent className="px-0 pb-8">
                 <div className="flex flex-col gap-8">
                   {week.groups.map((group) => (
                     <section key={group.title}>
                       {group.title && (
-                        <h2 className="mb-2 px-4 text-sm font-medium text-muted-foreground">
+                        <h2 className="mb-2 text-sm font-medium text-muted-foreground">
                           {group.title}
                         </h2>
                       )}
@@ -56,32 +56,27 @@ export default function MarketingPlannerPage() {
                         {group.deliverables.map((deliverable, index) => (
                           <div key={deliverable.title}>
                             {index > 0 && <Separator />}
-                            <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                            <div className="flex flex-col gap-3 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                               <p className="max-w-xl text-sm leading-6">
                                 {deliverable.title}
                               </p>
-                              <div className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 sm:max-w-72 sm:justify-end">
-                                {deliverable.links?.map((link) => (
-                                  <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                                  >
-                                    {link.label}
-                                    <ArrowUpRightIcon
-                                      className="size-3.5"
-                                      aria-hidden="true"
-                                    />
-                                  </Link>
-                                ))}
-                                <span className="inline-flex items-center gap-1 text-xs text-muted-foreground/70">
-                                  <FileClockIcon
-                                    className="size-3.5"
-                                    aria-hidden="true"
-                                  />
-                                  Production pending
-                                </span>
-                              </div>
+                              {deliverable.links?.length ? (
+                                <div className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 sm:max-w-72 sm:justify-end">
+                                  {deliverable.links.map((link) => (
+                                    <Link
+                                      key={link.href}
+                                      href={link.href}
+                                      className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                                    >
+                                      {link.label}
+                                      <ArrowUpRightIcon
+                                        className="size-3.5"
+                                        aria-hidden="true"
+                                      />
+                                    </Link>
+                                  ))}
+                                </div>
+                              ) : null}
                             </div>
                           </div>
                         ))}
@@ -91,7 +86,7 @@ export default function MarketingPlannerPage() {
                 </div>
 
                 {week.note && (
-                  <p className="mt-8 max-w-2xl px-4 text-xs leading-5 text-muted-foreground">
+                  <p className="mt-8 max-w-2xl text-xs leading-5 text-muted-foreground">
                     {week.note}
                   </p>
                 )}
