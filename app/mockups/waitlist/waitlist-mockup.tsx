@@ -50,7 +50,7 @@ export function WaitlistMockup() {
 
   return (
     <main className="relative flex min-h-svh justify-end overflow-hidden bg-black p-3 sm:p-4">
-      <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/15 bg-black/20 px-6 py-6 text-foreground shadow-2xl shadow-black/30 backdrop-blur-3xl sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
+      <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/20 bg-white/[0.055] px-6 py-6 text-foreground shadow-2xl shadow-black/30 backdrop-blur-xl backdrop-saturate-150 sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
         <LivepeerLockup className="h-4 w-auto self-start" />
 
         <div
@@ -60,15 +60,12 @@ export function WaitlistMockup() {
               : "mt-16 max-w-full sm:mt-24 md:mt-28"
           }
         >
-          <p className="text-sm font-medium text-muted-foreground">
-            Livepeer Agent
-          </p>
           <h1 className="mt-4 text-balance text-[clamp(2.5rem,3vw,3rem)] leading-[0.96] font-medium tracking-[-0.045em]">
-            Open media infrastructure, ready for your agent.
+            Livepeer Agent
           </h1>
           <p className="mt-6 text-pretty text-sm leading-6 text-muted-foreground">
-            Generate, edit, and stream image, video, and audio from the tools
-            you already use. Join the waitlist for early access.
+            A video agent harness for multimodal media generation, from right
+            within Claude. Running on Livepeer&apos;s open network.
           </p>
         </div>
 
