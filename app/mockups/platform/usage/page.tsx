@@ -1,9 +1,10 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowUpRightIcon } from "lucide-react"
+import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
@@ -30,25 +31,25 @@ const dailyUsage = [
     date: "Jul 23",
     workflowRuns: "182.4K",
     compute: "284 GPU min",
-    cost: "$91.20",
+    credits: "24.8",
   },
   {
     date: "Jul 22",
     workflowRuns: "168.1K",
     compute: "261 GPU min",
-    cost: "$84.05",
+    credits: "22.4",
   },
   {
     date: "Jul 21",
     workflowRuns: "155.7K",
     compute: "249 GPU min",
-    cost: "$79.63",
+    credits: "21.1",
   },
   {
     date: "Jul 20",
     workflowRuns: "149.2K",
     compute: "238 GPU min",
-    cost: "$75.18",
+    credits: "19.7",
   },
 ]
 
@@ -57,19 +58,19 @@ const resourceUsage = [
     resource: "text-to-image",
     type: "Workflow",
     usage: "612.8K requests",
-    cost: "$821.40",
+    credits: "86.4",
   },
   {
     resource: "live-video-to-video",
     type: "Workflow",
     usage: "396.1K requests",
-    cost: "$604.75",
+    credits: "64.8",
   },
   {
     resource: "us-east",
     type: "Compute",
     usage: "1,188 GPU min",
-    cost: "$472.10",
+    credits: "48.8",
   },
 ]
 
@@ -93,9 +94,9 @@ export default function MockupUsagePage() {
             <section className="border-y py-6 sm:py-8">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <h2 className="text-sm font-medium">Billing and usage</h2>
+                  <h2 className="text-sm font-medium">Credit balance</h2>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    July 1–23, 2026
+                    Credits pay for every workflow run.
                   </p>
                 </div>
                 <Link
@@ -107,65 +108,104 @@ export default function MockupUsagePage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-10 flex items-start justify-between gap-6">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm text-muted-foreground">
-                      Available credits
-                    </p>
-                    <Badge variant="outline">Credit</Badge>
-                  </div>
-                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
-                    $500.00
+                  <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                    Available balance
                   </p>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    Applied before card charges
+                  <p className="mt-3 text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
+                    50{" "}
+                    <span className="text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl">
+                      credits
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    Free credits refresh August 1.
+                  </p>
+                  <p className="mt-2 font-mono text-xs tracking-wide text-muted-foreground uppercase">
+                    ≈ 40 min of video generation
                   </p>
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">
-                    Current period
-                  </p>
-                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
-                    $1,898.25
-                  </p>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    63% of project budget
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Next invoice</p>
-                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
-                    Aug 1
-                  </p>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    Pay as you go
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">
-                    Payment method
-                  </p>
-                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
-                    ···· 4242
-                  </p>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    Visa · expires 08/2029
-                  </p>
-                </div>
+                <Badge variant="outline">Free</Badge>
               </div>
 
-              <div className="mt-8 border-t pt-6">
+              <div className="mt-10 border-t pt-6">
                 <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="font-medium">Monthly project budget</span>
+                  <span className="font-medium">July allocation</span>
                   <span className="text-muted-foreground tabular-nums">
-                    $1,898.25 / $3,000
+                    200 / 250 credits used
                   </span>
                 </div>
-                <Progress value={63} className="mt-3" />
+                <Progress value={80} className="mt-3" />
                 <p className="mt-2 text-xs text-muted-foreground">
-                  $1,101.75 remaining. Alerts are sent at 75%, 90%, and 100%.
+                  50 credits remain in the current monthly allocation.
                 </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-medium tracking-tight">
+                Get more credits
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Start with 250 free credits. Upgrade for a larger allocation
+                that refreshes every month.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="flex min-h-64 flex-col rounded-sm border p-6">
+                  <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                    Pro
+                  </p>
+                  <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
+                    500{" "}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      credits/mo
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    For regular creative sessions and production workflows.
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    nativeButton={false}
+                    render={
+                      <Link href="/mockups/api-console/organization?tab=billing" />
+                    }
+                    className="mt-auto h-16 w-full rounded-sm px-4"
+                  >
+                    Subscribe to Pro
+                    <ArrowRightIcon aria-hidden="true" />
+                  </Button>
+                </div>
+                <div className="flex min-h-64 flex-col rounded-sm border border-foreground p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                      Max
+                    </p>
+                    <Badge>Recommended</Badge>
+                  </div>
+                  <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
+                    1,750{" "}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      credits/mo
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    For teams that generate and iterate throughout the week.
+                  </p>
+                  <Button
+                    size="lg"
+                    nativeButton={false}
+                    render={
+                      <Link href="/mockups/api-console/organization?tab=billing" />
+                    }
+                    className="mt-auto h-16 w-full rounded-sm px-4"
+                  >
+                    Subscribe to Max
+                    <ArrowRightIcon aria-hidden="true" />
+                  </Button>
+                </div>
               </div>
             </section>
 
@@ -198,7 +238,7 @@ export default function MockupUsagePage() {
                     <TableHead>Date</TableHead>
                     <TableHead>Workflow runs</TableHead>
                     <TableHead>Compute</TableHead>
-                    <TableHead className="text-right">Cost</TableHead>
+                    <TableHead className="text-right">Credits</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -212,7 +252,7 @@ export default function MockupUsagePage() {
                         {day.compute}
                       </TableCell>
                       <TableCell className="text-right font-sans text-xs tabular-nums">
-                        {day.cost}
+                        {day.credits}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -228,7 +268,7 @@ export default function MockupUsagePage() {
                 <TableHead>Resource</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Usage</TableHead>
-                <TableHead className="text-right">Cost</TableHead>
+                <TableHead className="text-right">Credits</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -242,7 +282,7 @@ export default function MockupUsagePage() {
                     {resource.usage}
                   </TableCell>
                   <TableCell className="text-right font-sans text-xs tabular-nums">
-                    {resource.cost}
+                    {resource.credits}
                   </TableCell>
                 </TableRow>
               ))}
