@@ -28,6 +28,15 @@ export function DocsNav({
       ],
     },
     {
+      title: "Marketing",
+      items: [
+        { title: "Planner", href: "/marketing/planner" },
+        { title: "Press Kit", href: "/marketing/press-kit" },
+        { title: "Brand Kit", href: "/marketing/brand-kit" },
+        { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
+      ],
+    },
+    {
       title: "Mockups",
       external: true,
       items: [
