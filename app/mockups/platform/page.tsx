@@ -90,7 +90,7 @@ export default async function MockupHomePage() {
       </div>
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-sm font-medium">Research</h2>
+          <h2 className="font-sans text-sm font-medium">Research</h2>
           <a
             href={RESEARCH_FORUM_URL}
             target="_blank"
