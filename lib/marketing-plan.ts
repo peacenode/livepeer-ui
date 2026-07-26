@@ -69,7 +69,13 @@ export const marketingWeeks: MarketingWeek[] = [
           {
             title:
               "Partner outreach to Anthropic, Blockchain Capital & CoinFund",
-            links: [{ label: "Social Kit", href: "/marketing/press-kit" }],
+            links: [
+              {
+                label: "Livepeer.org mockup",
+                href: "/mockups/livepeer-org",
+              },
+              { label: "Social Kit", href: "/marketing/press-kit" },
+            ],
           },
         ],
       },
