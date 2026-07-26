@@ -69,12 +69,12 @@
           ]
         },
         {
-          "name": "runner-onboarding-section",
-          "title": "Runner Onboarding",
-          "description": "Complete onboarding section with progress, setup steps, and links into billing and installation.",
+          "name": "livepeer-agent-onboarding-section",
+          "title": "Livepeer Agent Onboarding",
+          "description": "Complete Livepeer Agent onboarding section with progress, setup steps, and links into billing and installation.",
           "level": "section",
           "previewPath": "/mockups/livepeer-agent",
-          "files": ["components/mockups/runner-onboarding-card.tsx"]
+          "files": ["components/mockups/livepeer-agent-onboarding-section.tsx"]
         },
         {
           "name": "orchestrator-table-section",

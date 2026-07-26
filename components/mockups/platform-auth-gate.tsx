@@ -1,6 +1,6 @@
 "use client"
 
-import { type FormEvent, type ReactNode, useState } from "react"
+import { type FormEvent, type ReactNode, useEffect, useState } from "react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GoogleIcon } from "@/components/brand-social-icons"
@@ -9,6 +9,12 @@ import { Input } from "@/components/ui/input"
 
 function PlatformAuthGate({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false)
+
+  useEffect(() => {
+    if (window.self !== window.top) {
+      setAuthenticated(true)
+    }
+  }, [])
 
   function enterConsole(event?: FormEvent<HTMLFormElement>) {
     event?.preventDefault()

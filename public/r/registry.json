@@ -686,10 +686,10 @@
       ]
     },
     {
-      "name": "runner-onboarding-section",
+      "name": "livepeer-agent-onboarding-section",
       "type": "registry:block",
-      "title": "Runner Onboarding",
-      "description": "Complete onboarding section with progress, setup steps, and links into billing and installation.",
+      "title": "Livepeer Agent Onboarding",
+      "description": "Complete Livepeer Agent onboarding section with progress, setup steps, and links into billing and installation.",
       "dependencies": [
         "lucide-react",
         "next"
@@ -699,7 +699,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/runner-onboarding-card.tsx",
+          "path": "components/mockups/livepeer-agent-onboarding-section.tsx",
           "type": "registry:block"
         },
         {

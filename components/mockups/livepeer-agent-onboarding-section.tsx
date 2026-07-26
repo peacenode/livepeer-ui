@@ -17,7 +17,7 @@ const steps = [
   },
 ]
 
-export function RunnerOnboardingCard() {
+export function LivepeerAgentOnboardingSection() {
   return (
     <Card className="relative min-h-64 rounded-sm py-0">
       <LivepeerCubeStream variant="card" className="opacity-80" />

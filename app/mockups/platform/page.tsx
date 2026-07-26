@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
-import { RunnerOnboardingCard } from "@/components/mockups/runner-onboarding-card"
+import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-agent-onboarding-section"
 import { CardTitle } from "@/components/ui/card"
 import {
   getForumTopicUrl,
@@ -29,7 +29,7 @@ export default async function MockupHomePage() {
   return (
     <PlatformPage title="Home" variant="plain">
       <div className="flex flex-col gap-6">
-        <RunnerOnboardingCard />
+        <LivepeerAgentOnboardingSection />
         <div className="grid gap-4 sm:grid-cols-2">
           <a
             href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"

@@ -151,11 +151,11 @@ Current source: `app/mockups/platform/page.tsx`
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
 | Page frame | `LivepeerAgentHomePage` assembly | `LivepeerAgentPageFrame` | — |
-| Onboarding | `RunnerOnboardingSection` | onboarding steps, compatibility row | `Card`, `Button` |
+| Onboarding | `LivepeerAgentOnboardingSection` | onboarding steps, compatibility row | `Card`, `Button` |
 | Product entry points | `ProductEntryGridSection` | `ProductEntryCard` | `Card`, `Button` |
 | Quick links | `DeveloperLinksSection` | `DeveloperLink` | `Button`/link |
 
-The existing `RunnerOnboardingCard` should become a section only if it continues
+The existing `LivepeerAgentOnboardingSection` should remain a section only if it continues
 to own the full-width onboarding zone. Otherwise split it into
 `OnboardingProgress` and `OnboardingStep`.
 
