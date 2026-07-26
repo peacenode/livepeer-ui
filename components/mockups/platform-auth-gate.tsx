@@ -1,7 +1,6 @@
 "use client"
 
 import { type FormEvent, type ReactNode, useState } from "react"
-import { MailIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import {
@@ -105,7 +104,6 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             size="lg"
             className="mt-4 h-16 w-full rounded-sm px-4"
           >
-            <MailIcon aria-hidden="true" />
             Continue with email
           </Button>
         </form>
