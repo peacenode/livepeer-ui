@@ -104,10 +104,7 @@ export default function MockupUsagePage() {
                   <Badge variant="outline">Free</Badge>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">
-                    Credits remaining
-                  </p>
-                  <p className="mt-3 text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
+                  <p className="text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
                     32{" "}
                     <span className="text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl">
                       / 50 credits
