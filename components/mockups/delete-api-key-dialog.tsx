@@ -76,7 +76,7 @@ function DeleteApiKeyDialog({
           </div>
           <div className="flex items-center justify-between gap-6">
             <dt className="text-muted-foreground">Created at</dt>
-            <dd className="text-right">{createdAt}</dd>
+            <dd className="text-right font-medium">{createdAt}</dd>
           </div>
         </dl>
 
