@@ -16,13 +16,7 @@ export function SiteHeader() {
         >
           <LivepeerLockup className="h-3.5 w-auto" />
         </Link>
-        <div className="ml-auto flex items-center gap-2">
-          <Link
-            href="/design.md"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            design.md
-          </Link>
+        <div className="ml-auto flex items-center">
           <ThemeToggle />
         </div>
       </div>
