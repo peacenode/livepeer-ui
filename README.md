@@ -25,6 +25,11 @@ npm run start      # serve production build
 sources in `components/ui/`. Dependencies and cross-component references are
 derived from imports.
 
+The agent-facing design guide is served from `/design.md`. Its component
+inventory is generated directly from `lib/registry-meta.json`, so it stays in
+sync when the site is built for a push. Edit `lib/design-md.ts` only when the
+registry's design guidance or workflow changes.
+
 ```bash
 npm run registry:build   # regenerate registry.json + public/r/*.json
 ```
