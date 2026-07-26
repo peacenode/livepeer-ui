@@ -66,12 +66,19 @@ export const marketingWeeks: MarketingWeek[] = [
         title: "Outreach",
         deliverables: [
           {
-            title: "Outreach material",
+            title:
+              "Partner outreach to Anthropic, Blockchain Capital & CoinFund",
             links: [{ label: "Press Kit", href: "/marketing/press-kit" }],
           },
+        ],
+      },
+      {
+        title: "User Interviews",
+        deliverables: [
+          { title: "Complete eight post-install web interviews" },
           {
             title:
-              "Steph reaches out with website and game mechanics for video creation and trailer",
+              "Recruit interview participants around video creation, trailers & game mechanics",
             links: [
               {
                 label: "Livepeer.org mockup",
@@ -80,10 +87,6 @@ export const marketingWeeks: MarketingWeek[] = [
             ],
           },
         ],
-      },
-      {
-        title: "User Interviews",
-        deliverables: [{ title: "Complete eight post-install web interviews" }],
       },
     ],
   },
