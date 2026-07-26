@@ -7,7 +7,7 @@ const groups = [
   {
     title: "Network",
     links: [
-      { label: "Ecosystem", href: "https://livepeer.org/ecosystem" },
+      { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
       { label: "Livepeer Token", href: "https://livepeer.org/token" },
       {
         label: "Delegate LPT",

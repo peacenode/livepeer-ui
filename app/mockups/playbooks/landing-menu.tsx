@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils"
 
 const siteLinks = [
   { label: "Home", href: "/mockups/livepeer-org" },
+  { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
   { label: "GPU", href: "/mockups/livepeer-org/earn" },
   { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
   { label: "Playbooks", href: "/mockups/livepeer-org/library" },
