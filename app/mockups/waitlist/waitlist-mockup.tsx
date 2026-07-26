@@ -4,7 +4,7 @@ import { type FormEvent, useState } from "react"
 import { ArrowRight, Check, Copy, Share2, TrendingUp } from "lucide-react"
 import { toast } from "sonner"
 
-import { LivepeerGradientLockup, LivepeerLockup } from "@/components/brand"
+import { LivepeerGradientLockup } from "@/components/brand"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -78,7 +78,21 @@ export function WaitlistMockup() {
   return (
     <main className="relative flex min-h-svh justify-end overflow-hidden bg-black p-3 sm:p-4">
       <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/20 bg-white/[0.055] px-6 py-6 text-foreground shadow-2xl shadow-black/30 backdrop-blur-md backdrop-saturate-150 sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
-        <LivepeerLockup className="h-4 w-auto self-start" />
+        <div
+          className="flex items-end gap-2 self-start text-white"
+          aria-label="Livepeer Agent"
+        >
+          <LivepeerGradientLockup
+            className="h-4 w-auto"
+            aria-hidden="true"
+          />
+          <span
+            className="translate-y-[0.08em] font-runner text-base leading-none font-medium tracking-[-0.04em]"
+            aria-hidden="true"
+          >
+            AGENT
+          </span>
+        </div>
 
         <div
           className={
@@ -129,67 +143,6 @@ export function WaitlistMockup() {
             </form>
           ) : (
             <div className="space-y-6">
-              <div
-                className="flex items-start gap-3 border-t pt-4"
-                role="status"
-                aria-live="polite"
-              >
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-foreground text-background">
-                  <Check className="size-3.5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-sm font-medium">You’re number 2,419.</p>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                    Share your link to move up the list.
-                  </p>
-                </div>
-              </div>
-
-              <section aria-labelledby="waitlist-leaders">
-                <div className="flex items-center justify-between">
-                  <h2 id="waitlist-leaders" className="text-sm font-medium">
-                    Waitlist
-                  </h2>
-                  <span className="text-xs text-muted-foreground">
-                    Top referrals
-                  </span>
-                </div>
-                <div className="mt-3 overflow-hidden rounded-md border">
-                  <ol
-                    className={
-                      showTopHundred
-                        ? "max-h-72 divide-y overflow-y-auto overscroll-contain"
-                        : "divide-y"
-                    }
-                  >
-                    {leaders
-                      .slice(0, showTopHundred ? 100 : 5)
-                      .map((person, index) => (
-                        <li
-                          key={`${person.name}-${index}`}
-                          className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 bg-background px-3 py-2.5 text-sm"
-                        >
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {index + 1}
-                          </span>
-                          <span className="truncate">{person.name}</span>
-                          <span className="font-mono text-xs tabular-nums">
-                            {person.referrals}
-                          </span>
-                        </li>
-                      ))}
-                  </ol>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="h-10 w-full rounded-none border-t text-xs"
-                    onClick={() => setShowTopHundred((visible) => !visible)}
-                  >
-                    {showTopHundred ? "Show top 5" : "Load top 100"}
-                  </Button>
-                </div>
-              </section>
-
               <section
                 className="relative isolate overflow-hidden rounded-md border border-emerald-400/30 bg-black p-5 text-white"
                 aria-labelledby="share-card-title"
@@ -254,6 +207,64 @@ export function WaitlistMockup() {
                       <Share2 />
                     </Button>
                   </div>
+                </div>
+              </section>
+
+              <section aria-labelledby="waitlist-leaders">
+                <div className="flex items-center justify-between">
+                  <h2 id="waitlist-leaders" className="text-sm font-medium">
+                    Waitlist
+                  </h2>
+                  <span className="text-xs text-muted-foreground">
+                    Top referrals
+                  </span>
+                </div>
+                <div className="mt-3 overflow-hidden rounded-md border">
+                  <ol
+                    className={
+                      showTopHundred
+                        ? "max-h-72 divide-y overflow-y-auto overscroll-contain"
+                        : "divide-y"
+                    }
+                  >
+                    <li
+                      className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 border-b border-emerald-400/20 bg-emerald-400/10 px-3 py-3 text-sm"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <span className="grid size-5 place-items-center rounded-full bg-emerald-400 text-black">
+                        <Check className="size-3" aria-hidden="true" />
+                      </span>
+                      <span className="truncate font-medium">You</span>
+                      <span className="font-mono text-xs text-emerald-400 tabular-nums">
+                        #2,419
+                      </span>
+                    </li>
+                    {leaders
+                      .slice(0, showTopHundred ? 100 : 5)
+                      .map((person, index) => (
+                        <li
+                          key={`${person.name}-${index}`}
+                          className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 bg-background px-3 py-2.5 text-sm"
+                        >
+                          <span className="font-mono text-xs text-muted-foreground">
+                            {index + 1}
+                          </span>
+                          <span className="truncate">{person.name}</span>
+                          <span className="font-mono text-xs tabular-nums">
+                            {person.referrals}
+                          </span>
+                        </li>
+                      ))}
+                  </ol>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="h-10 w-full rounded-none border-t text-xs"
+                    onClick={() => setShowTopHundred((visible) => !visible)}
+                  >
+                    {showTopHundred ? "Show top 5" : "Load top 100"}
+                  </Button>
                 </div>
               </section>
             </div>
