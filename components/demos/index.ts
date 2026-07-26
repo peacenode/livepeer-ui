@@ -35,10 +35,11 @@ import ToggleDemo from "./toggle-demo"
 import ToggleGroupDemo from "./toggle-group-demo"
 import TooltipDemo from "./tooltip-demo"
 import AgentCompatibilityDemo from "./agent-compatibility-demo"
+import LivepeerAgentBillingCardsDemo from "./livepeer-agent-billing-cards-demo"
 import LivepeerAgentHeroDemo from "./livepeer-agent-hero-demo"
-import LivepeerAgentMobileNavDemo from "./livepeer-agent-mobile-nav-demo"
 import LivepeerAgentOnboardingSectionDemo from "./livepeer-agent-onboarding-section-demo"
 import LivepeerAgentPageFrameDemo from "./livepeer-agent-page-frame-demo"
+import LivepeerAgentPromoCardsDemo from "./livepeer-agent-promo-cards-demo"
 import LivepeerAgentSidebarDemo from "./livepeer-agent-sidebar-demo"
 import LivepeerAgentSignInCardDemo from "./livepeer-agent-sign-in-card-demo"
 import MediaContextMenuDemo from "./media-context-menu-demo"
@@ -91,10 +92,11 @@ export const demos: Record<string, ComponentType> = {
   "toggle-group": ToggleGroupDemo,
   tooltip: TooltipDemo,
   "agent-compatibility": AgentCompatibilityDemo,
+  "livepeer-agent-billing-cards": LivepeerAgentBillingCardsDemo,
   "livepeer-agent-hero": LivepeerAgentHeroDemo,
-  "livepeer-agent-mobile-nav": LivepeerAgentMobileNavDemo,
   "livepeer-agent-onboarding-section": LivepeerAgentOnboardingSectionDemo,
   "livepeer-agent-page-frame": LivepeerAgentPageFrameDemo,
+  "livepeer-agent-promo-cards": LivepeerAgentPromoCardsDemo,
   "livepeer-agent-sidebar": LivepeerAgentSidebarDemo,
   "livepeer-agent-sign-in-card": LivepeerAgentSignInCardDemo,
   "media-context-menu": MediaContextMenuDemo,

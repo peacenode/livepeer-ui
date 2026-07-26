@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "livepeer-agent-billing-cards",
+  "title": "Billing Cards",
+  "description": "Current-period and credit-balance summary cards from Livepeer Agent organization billing.",
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/livepeer-agent-billing-cards.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\n\nexport function LivepeerAgentBillingCards() {\n  return (\n    <div className=\"grid gap-4 sm:grid-cols-2\">\n      <Card className=\"gap-2 rounded-sm\">\n        <CardHeader>\n          <CardDescription>Current period</CardDescription>\n          <CardTitle className=\"text-2xl font-medium tabular-nums\">\n            $2,148.90\n          </CardTitle>\n        </CardHeader>\n        <CardContent>\n          <p className=\"text-xs text-muted-foreground\">\n            July 1 – July 23 · next invoice August 1\n          </p>\n        </CardContent>\n      </Card>\n      <Card className=\"gap-2 rounded-sm\">\n        <CardHeader>\n          <CardDescription>Credit balance</CardDescription>\n          <CardTitle className=\"text-2xl font-medium tabular-nums\">\n            $500.00\n          </CardTitle>\n          <CardAction>\n            <Button variant=\"outline\" size=\"sm\">\n              Add credits\n            </Button>\n          </CardAction>\n        </CardHeader>\n        <CardContent>\n          <p className=\"text-xs text-muted-foreground\">\n            Applied before charging the default payment method.\n          </p>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

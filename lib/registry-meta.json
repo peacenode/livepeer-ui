@@ -74,16 +74,20 @@
           ]
         },
         {
-          "name": "livepeer-agent-mobile-nav",
-          "title": "Mobile Navigation",
-          "description": "Sheet-based mobile navigation using the Livepeer Agent navigation model.",
+          "name": "livepeer-agent-billing-cards",
+          "title": "Billing Cards",
+          "description": "Current-period and credit-balance summary cards from Livepeer Agent organization billing.",
           "level": "component",
-          "uses": ["button", "sheet", "livepeer-agent-sidebar"],
-          "previewPath": "/mockups/livepeer-agent",
-          "files": [
-            "components/mockups/platform-mobile-nav.tsx",
-            "components/mockups/platform-sidebar.tsx"
-          ]
+          "uses": ["button", "card"],
+          "files": ["components/mockups/livepeer-agent-billing-cards.tsx"]
+        },
+        {
+          "name": "livepeer-agent-promo-cards",
+          "title": "Promo Cards",
+          "description": "Pro and Max credit subscription cards with the recommended plan treatment.",
+          "level": "component",
+          "uses": ["badge", "button"],
+          "files": ["components/mockups/livepeer-agent-promo-cards.tsx"]
         },
         {
           "name": "livepeer-agent-onboarding-section",

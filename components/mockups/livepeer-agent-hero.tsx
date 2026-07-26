@@ -10,8 +10,8 @@ export function LivepeerAgentHero({
   serverUrl?: string
 }) {
   return (
-    <section className="relative flex min-h-[38rem] items-center overflow-hidden bg-background px-4 py-20 sm:px-6">
-      <LivepeerAgentDeltaStream className="-translate-y-8" />
+    <section className="relative flex w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
+      <LivepeerAgentDeltaStream className="-translate-y-10 sm:-translate-y-8" />
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
         <div
           className="flex items-end gap-3 text-foreground sm:gap-4"
@@ -36,14 +36,23 @@ export function LivepeerAgentHero({
             <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
               {serverUrl}
             </code>
-            <CopyButton value={serverUrl} className="size-8 shrink-0" />
+            <CopyButton
+              value={serverUrl}
+              className="size-8 shrink-0 rounded-none bg-transparent text-secondary-foreground/40 transition-colors hover:bg-transparent hover:text-secondary-foreground"
+            />
           </div>
         </div>
         <nav className="flex items-center gap-5 text-sm" aria-label="Account">
-          <Link href="/mockups/livepeer-agent" className="underline underline-offset-4">
+          <Link
+            href="/mockups/livepeer-agent"
+            className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
+          >
             Sign in
           </Link>
-          <Link href="/mockups/livepeer-agent" className="underline underline-offset-4">
+          <Link
+            href="/mockups/livepeer-agent"
+            className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
+          >
             Create account
           </Link>
         </nav>

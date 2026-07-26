@@ -14,6 +14,7 @@ export function ComponentPreview({
   className?: string
 }) {
   const Demo = demos[name]
+  const isFullHero = name === "livepeer-agent-hero"
   const code = fs.readFileSync(
     path.join(process.cwd(), "components/demos", `${name}-demo.tsx`),
     "utf8"
@@ -26,7 +27,12 @@ export function ComponentPreview({
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
       <TabsContent value="preview">
-        <div className="flex min-h-[350px] w-full items-center justify-center rounded-lg border p-6 sm:p-10">
+        <div
+          className={cn(
+            "flex min-h-[350px] w-full justify-center overflow-hidden rounded-lg border",
+            isFullHero ? "items-start p-0" : "items-center p-6 sm:p-10"
+          )}
+        >
           <Demo />
         </div>
       </TabsContent>

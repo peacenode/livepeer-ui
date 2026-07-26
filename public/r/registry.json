@@ -728,37 +728,37 @@
       ]
     },
     {
-      "name": "livepeer-agent-mobile-nav",
+      "name": "livepeer-agent-billing-cards",
       "type": "registry:component",
-      "title": "Mobile Navigation",
-      "description": "Sheet-based mobile navigation using the Livepeer Agent navigation model.",
-      "dependencies": [
-        "lucide-react",
-        "next",
-        "next-themes"
-      ],
+      "title": "Billing Cards",
+      "description": "Current-period and credit-balance summary cards from Livepeer Agent organization billing.",
       "registryDependencies": [
-        "http://localhost:3000/r/avatar.json",
         "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/sheet.json",
-        "http://localhost:3000/r/toggle-group.json"
+        "http://localhost:3000/r/card.json"
       ],
       "files": [
         {
-          "path": "components/mockups/platform-mobile-nav.tsx",
+          "path": "components/mockups/livepeer-agent-billing-cards.tsx",
           "type": "registry:component"
-        },
+        }
+      ]
+    },
+    {
+      "name": "livepeer-agent-promo-cards",
+      "type": "registry:component",
+      "title": "Promo Cards",
+      "description": "Pro and Max credit subscription cards with the recommended plan treatment.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
         {
-          "path": "components/mockups/platform-sidebar.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "components/brand.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "components/mockups/user-menu.tsx",
+          "path": "components/mockups/livepeer-agent-promo-cards.tsx",
           "type": "registry:component"
         }
       ]
