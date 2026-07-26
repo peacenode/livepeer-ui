@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { getSourcePlaybooks } from "../daydream-source"
-import { InstallRunnerFooter } from "../install-runner-footer"
+import { InstallAgentFooter } from "../install-agent-footer"
 import { SourceCatalog } from "../source-catalog"
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default async function PlaybooksLibraryPage() {
           <SourceCatalog playbooks={playbooks} />
         </div>
       </div>
-      <InstallRunnerFooter title="Run any playbook with Runner." />
+      <InstallAgentFooter title="Run any playbook with Livepeer Agent." />
     </main>
   )
 }

@@ -7,7 +7,7 @@
     "theme": {
       "font-display": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
       "font-heading": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
-      "font-sans": "InterVariable, Inter, sans-serif",
+      "font-sans": "var(--font-inter), sans-serif",
       "font-mono": "\"Favorit Mono\", ui-monospace, monospace"
     },
     "light": {

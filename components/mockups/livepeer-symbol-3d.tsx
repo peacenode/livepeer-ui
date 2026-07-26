@@ -38,6 +38,31 @@ function StudioEnvironment() {
   return null
 }
 
+function CanvasResizer() {
+  const { gl, setSize } = useThree()
+
+  useEffect(() => {
+    const container = gl.domElement.parentElement
+    if (!container) return
+
+    const resize = () => {
+      const bounds = container.getBoundingClientRect()
+      if (bounds.width > 0 && bounds.height > 0) {
+        setSize(bounds.width, bounds.height)
+        gl.setSize(bounds.width, bounds.height, true)
+      }
+    }
+    const observer = new ResizeObserver(resize)
+
+    observer.observe(container)
+    resize()
+
+    return () => observer.disconnect()
+  }, [gl, setSize])
+
+  return null
+}
+
 function Symbol({ reduceMotion }: { reduceMotion: boolean }) {
   const group = useRef<Group>(null)
   const { size, viewport } = useThree()
@@ -125,14 +150,19 @@ function LivepeerSymbol3D({
 
   return (
     <div
-      className={cn("absolute inset-0 overflow-hidden rounded-4xl", className)}
+      className={cn(
+        "absolute inset-0 overflow-hidden rounded-4xl [&_canvas]:!size-full",
+        className
+      )}
       aria-hidden="true"
     >
       <Canvas
+        className="size-full"
         camera={{ position: [0, 0, 5.3], fov: 36 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
       >
+        <CanvasResizer />
         <StudioEnvironment />
         <ambientLight intensity={0.3} />
         <directionalLight

@@ -84,7 +84,7 @@ function ContainerPostCard({
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
         <Link
-          href={`/mockups/platform/inference/${slug}`}
+          href={`/mockups/livepeer-agent/inference/${slug}`}
           className="absolute inset-0 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset"
         >
           <span className="sr-only">Open {slug}</span>
@@ -112,7 +112,7 @@ function ContainerPostCard({
       <CardContent className="px-0 pt-3 pb-5">
         <div className="flex flex-col gap-1.5">
           <Link
-            href={`/mockups/platform/inference/${slug}`}
+            href={`/mockups/livepeer-agent/inference/${slug}`}
             className="w-fit rounded-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
           >
             <CardTitle className="text-base">{slug}</CardTitle>

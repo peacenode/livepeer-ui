@@ -3,11 +3,10 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { MenuIcon } from "lucide-react"
+import { ArrowUpRightIcon, MenuIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { platformNavItems } from "@/components/mockups/platform-sidebar"
-import { ProjectMenu } from "@/components/mockups/project-menu"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { Button } from "@/components/ui/button"
 import {
@@ -43,17 +42,14 @@ export function PlatformMobileNav() {
             </span>
           </SheetTitle>
         </SheetHeader>
-        <div className="px-3 py-3">
-          <ProjectMenu />
-        </div>
-        <nav className="flex flex-col items-start gap-1 overflow-y-auto px-3 pt-2">
+        <nav className="flex flex-col items-start gap-1 overflow-y-auto px-3 pt-4">
           {platformNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+                "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
                 pathname === item.href
                   ? "bg-muted font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -62,6 +58,14 @@ export function PlatformMobileNav() {
               {item.title}
             </Link>
           ))}
+          <Link
+            href="/mockups/livepeer-org/library"
+            onClick={() => setOpen(false)}
+            className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            Learn
+            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+          </Link>
         </nav>
         <div className="mt-auto px-3 py-3">
           <UserMenu />

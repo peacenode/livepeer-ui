@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowUpRightIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import {
   Table,
   TableBody,
@@ -29,25 +30,25 @@ const dailyUsage = [
     date: "Jul 23",
     workflowRuns: "182.4K",
     compute: "284 GPU min",
-    cost: "$91.20",
+    credits: "24.8",
   },
   {
     date: "Jul 22",
     workflowRuns: "168.1K",
     compute: "261 GPU min",
-    cost: "$84.05",
+    credits: "22.4",
   },
   {
     date: "Jul 21",
     workflowRuns: "155.7K",
     compute: "249 GPU min",
-    cost: "$79.63",
+    credits: "21.1",
   },
   {
     date: "Jul 20",
     workflowRuns: "149.2K",
     compute: "238 GPU min",
-    cost: "$75.18",
+    credits: "19.7",
   },
 ]
 
@@ -56,25 +57,25 @@ const resourceUsage = [
     resource: "text-to-image",
     type: "Workflow",
     usage: "612.8K requests",
-    cost: "$821.40",
+    credits: "86.4",
   },
   {
     resource: "live-video-to-video",
     type: "Workflow",
     usage: "396.1K requests",
-    cost: "$604.75",
+    credits: "64.8",
   },
   {
     resource: "us-east",
     type: "Compute",
     usage: "1,188 GPU min",
-    cost: "$472.10",
+    credits: "48.8",
   },
 ]
 
 export default function MockupUsagePage() {
   return (
-    <PlatformPage title="Usage">
+    <PlatformPage title="Usage" variant="plain">
       <Tabs defaultValue="overview" className="gap-8">
         <TabsList
           variant="line"
@@ -83,89 +84,140 @@ export default function MockupUsagePage() {
           <TabsTrigger value="overview" className="flex-none">
             Overview
           </TabsTrigger>
-          <TabsTrigger value="resources" className="flex-none">
-            Resources
+          <TabsTrigger value="activity" className="flex-none">
+            Activity
           </TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <div className="flex flex-col gap-8">
-            <div className="grid gap-3 sm:grid-cols-3">
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Project spend</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    $1,898.25
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Workflow runs</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    1.2M
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Compute time</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    2,431 GPU min
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2 md:items-start">
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="font-medium">Monthly project budget</span>
-                  <span className="font-sans text-muted-foreground tabular-nums">
-                    $1,898.25 / $3,000
-                  </span>
+          <div className="flex flex-col gap-10">
+            <section className="grid gap-4 md:grid-cols-2">
+              <div className="flex flex-col gap-8">
+                <div className="flex items-center gap-2">
+                  <h2 className="font-sans text-sm font-medium">
+                    Credit balance
+                  </h2>
+                  <Badge variant="outline">Free</Badge>
                 </div>
-                <Progress value={63} />
-                <p className="text-xs text-muted-foreground">
-                  Alerts are sent at 75%, 90%, and 100% of the project budget.
-                </p>
+                <div>
+                  <p className="text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
+                    32{" "}
+                    <span className="text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl">
+                      / 50 credits
+                    </span>
+                  </p>
+                  <div className="mt-8 flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">
+                      Credits refresh
+                    </span>
+                    <Badge variant="secondary" className="rounded-sm">
+                      Aug 1, 2026
+                    </Badge>
+                  </div>
+                </div>
               </div>
-              <Link
-                href="/mockups/platform/organization?tab=billing"
-                className="group w-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
-              >
-                <Card
-                  size="sm"
-                  className="h-full rounded-sm transition-colors group-hover:bg-accent"
-                >
-                  <CardHeader className="flex h-full flex-col justify-between">
-                    <div className="flex flex-col gap-1.5">
-                      <CardDescription>Default payment method</CardDescription>
-                      <p className="font-sans text-2xl font-medium tabular-nums">
-                        Visa ···· 4242
-                      </p>
-                      <p className="font-sans text-xs text-muted-foreground tabular-nums">
-                        Expires 08/2029
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <CardTitle>Billing</CardTitle>
-                      <ArrowUpRightIcon
-                        className="size-4 text-muted-foreground"
-                        aria-hidden="true"
-                      />
-                    </div>
+            </section>
+
+            <section>
+              <h2 className="font-sans text-2xl font-medium tracking-tight">
+                Get more credits
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                Upgrade for a larger credit allocation that refreshes every
+                month.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="flex min-h-64 flex-col rounded-sm border p-6">
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Pro
+                  </p>
+                  <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
+                    500{" "}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      credits/mo
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    For regular creative sessions and production workflows.
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    nativeButton={false}
+                    render={
+                      <Link href="/mockups/livepeer-agent/organization?tab=billing" />
+                    }
+                    className="mt-auto h-16 w-full rounded-sm px-4"
+                  >
+                    Subscribe to Pro
+                    <ArrowRightIcon aria-hidden="true" />
+                  </Button>
+                </div>
+                <div className="relative flex min-h-64 flex-col rounded-sm border border-emerald-500 p-6">
+                  <Badge className="absolute top-0 right-6 -translate-y-1/2 bg-emerald-500 text-white">
+                    Recommended
+                  </Badge>
+                  <p className="text-sm font-medium text-emerald-700">Max</p>
+                  <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
+                    1,750{" "}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      credits/mo
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    For teams that generate and iterate throughout the week.
+                  </p>
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    nativeButton={false}
+                    render={
+                      <Link href="/mockups/livepeer-agent/organization?tab=billing" />
+                    }
+                    className="mt-auto h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+                    }}
+                  >
+                    Subscribe to Max
+                    <ArrowRightIcon aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </TabsContent>
+        <TabsContent value="activity">
+          <div className="flex flex-col gap-10">
+            <section>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Card variant="metric">
+                  <CardHeader>
+                    <CardDescription>Workflow runs</CardDescription>
+                    <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                      1.2M
+                    </CardTitle>
                   </CardHeader>
                 </Card>
-              </Link>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-medium">Daily usage</h2>
+                <Card variant="metric">
+                  <CardHeader>
+                    <CardDescription>Compute time</CardDescription>
+                    <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                      2,431 GPU min
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </div>
+            </section>
+            <section className="flex flex-col gap-3">
+              <h2 className="font-sans text-sm font-medium">Daily usage</h2>
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Date</TableHead>
                     <TableHead>Workflow runs</TableHead>
                     <TableHead>Compute</TableHead>
-                    <TableHead className="text-right">Cost</TableHead>
+                    <TableHead className="text-right">Credits</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -179,42 +231,45 @@ export default function MockupUsagePage() {
                         {day.compute}
                       </TableCell>
                       <TableCell className="text-right font-sans text-xs tabular-nums">
-                        {day.cost}
+                        {day.credits}
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
-            </div>
+            </section>
+            <section className="flex flex-col gap-3">
+              <h2 className="font-sans text-sm font-medium">
+                Usage by resource
+              </h2>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Resource</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Usage</TableHead>
+                    <TableHead className="text-right">Credits</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {resourceUsage.map((resource) => (
+                    <TableRow key={resource.resource}>
+                      <TableCell className="font-mono text-xs font-medium">
+                        {resource.resource}
+                      </TableCell>
+                      <TableCell>{resource.type}</TableCell>
+                      <TableCell className="font-sans text-xs tabular-nums">
+                        {resource.usage}
+                      </TableCell>
+                      <TableCell className="text-right font-sans text-xs tabular-nums">
+                        {resource.credits}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </section>
           </div>
-        </TabsContent>
-        <TabsContent value="resources">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Resource</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Usage</TableHead>
-                <TableHead className="text-right">Cost</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {resourceUsage.map((resource) => (
-                <TableRow key={resource.resource}>
-                  <TableCell className="font-mono text-xs font-medium">
-                    {resource.resource}
-                  </TableCell>
-                  <TableCell>{resource.type}</TableCell>
-                  <TableCell className="font-sans text-xs tabular-nums">
-                    {resource.usage}
-                  </TableCell>
-                  <TableCell className="text-right font-sans text-xs tabular-nums">
-                    {resource.cost}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
         </TabsContent>
       </Tabs>
     </PlatformPage>

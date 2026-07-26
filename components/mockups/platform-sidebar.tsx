@@ -2,17 +2,17 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import { ProjectMenu } from "@/components/mockups/project-menu"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
 export const platformNavItems = [
-  { title: "Home", href: "/mockups/platform" },
-  { title: "API", href: "/mockups/platform/api" },
-  { title: "Usage", href: "/mockups/platform/usage" },
-  { title: "Settings", href: "/mockups/platform/settings" },
+  { title: "Home", href: "/mockups/livepeer-agent" },
+  { title: "Usage", href: "/mockups/livepeer-agent/usage" },
+  { title: "API Keys", href: "/mockups/livepeer-agent/api" },
+  { title: "Logs", href: "/mockups/livepeer-agent/api-logs" },
 ]
 
 export function PlatformSidebar() {
@@ -22,26 +22,29 @@ export function PlatformSidebar() {
     <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-background md:flex">
       <div className="px-5 pt-6 pb-1">
         <Link
-          href="/mockups/platform"
-          aria-label="Livepeer home"
+          href="/mockups/livepeer-agent"
+          aria-label="Livepeer Agent home"
           className="inline-flex h-9 items-center"
         >
-          <span className="flex items-center gap-1.5 text-black">
+          <span className="flex items-end gap-1.5 text-black">
             <LivepeerGradientSymbol className="h-4 w-auto" />
             <LivepeerWordmark className="h-4 w-auto" />
+            <span
+              className="translate-y-[0.17em] font-runner text-sm leading-none font-medium tracking-tight"
+              aria-hidden="true"
+            >
+              AGENT
+            </span>
           </span>
         </Link>
       </div>
-      <div className="px-3 pt-3 pb-4">
-        <ProjectMenu />
-      </div>
-      <nav className="flex flex-col items-start gap-1 px-3">
+      <nav className="flex flex-col items-start gap-1 px-3 pt-5">
         {platformNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
-              "rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+              "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
               pathname === item.href
                 ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -50,6 +53,13 @@ export function PlatformSidebar() {
             {item.title}
           </Link>
         ))}
+        <Link
+          href="/mockups/livepeer-org/library"
+          className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          Learn
+          <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+        </Link>
       </nav>
       <div className="mt-auto px-3 py-3">
         <UserMenu />

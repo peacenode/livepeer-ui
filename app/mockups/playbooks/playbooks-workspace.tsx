@@ -4,27 +4,28 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
+import { LivepeerWordmark } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 
 export function PlaybooksWorkspace() {
   return (
     <main>
-      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-white sm:min-h-[76svh]">
+      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-background sm:min-h-[76svh]">
         <LivepeerCubeStream />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-3xl flex-col items-start">
-            <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
+            <h1 className="max-w-[70%] text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-none sm:text-[clamp(2.5rem,4.5vw,4rem)]">
               The open inference network.{" "}
               <span className="text-foreground/45">
                 Connect GPUs, power AI and media workloads on Livepeer.
               </span>
             </h1>
-            <div className="mt-9 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+            <div className="mt-12 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
               <Button
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
-                render={<Link href="/mockups/playbooks/earn" />}
+                render={<Link href="/mockups/livepeer-agent" />}
                 className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
                 style={{
                   backgroundImage:
@@ -38,22 +39,22 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="outline"
                 nativeButton={false}
-                render={<Link href="/mockups/platform" />}
+                render={<Link href="/mockups/livepeer-agent" />}
                 className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
-                Sign up with GitHub
+                Sign in with Discord
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f3f3f3] sm:min-h-[56rem]">
+      <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
         <Image
           src="/playbooks/20260725-031450/runner-background.jpg"
           alt=""
           fill
-          className="hidden object-cover object-center sm:block"
+          className="hidden object-cover object-center dark:opacity-20 dark:mix-blend-luminosity sm:block"
           sizes="100vw"
         />
         <div className="relative z-10 flex flex-col items-center gap-5 px-6 py-12 text-center sm:absolute sm:inset-0 sm:items-start sm:justify-center sm:p-10 sm:text-left">
@@ -74,19 +75,31 @@ export function PlaybooksWorkspace() {
               className="h-5 w-2.5 object-contain opacity-50"
             />
           </div>
-          <h2 className="font-runner text-5xl font-medium tracking-tight">
-            RUNNER
+          <h2
+            className="flex items-end gap-3 text-foreground sm:gap-4"
+            aria-label="Livepeer Agent"
+          >
+            <LivepeerWordmark
+              className="h-8 w-auto sm:h-10"
+              aria-hidden="true"
+            />
+            <span
+              className="translate-y-[0.17em] font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+              aria-hidden="true"
+            >
+              AGENT
+            </span>
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-balance text-foreground/65">
-            Your agent companion, ready to create images, video, and audio with
-            the latest workflows purpose built into your agent.
+            A video agent harness for multimodal media generation, from right
+            within Claude. Running on Livepeer&apos;s open network.
           </p>
           <div className="mt-2 flex flex-wrap justify-center gap-2 sm:justify-start">
             <Button
               size="lg"
               variant="secondary"
               nativeButton={false}
-              render={<Link href="/mockups/playbooks/install" />}
+              render={<Link href="/mockups/livepeer-org/agent" />}
               className="h-16 rounded-sm border-foreground/10 bg-muted px-4 text-foreground transition-[filter] hover:bg-muted hover:brightness-[0.97]"
               style={{
                 backgroundImage:
@@ -100,7 +113,7 @@ export function PlaybooksWorkspace() {
               size="lg"
               variant="outline"
               nativeButton={false}
-              render={<Link href="/mockups/playbooks/library" />}
+              render={<Link href="/mockups/livepeer-org/library" />}
               className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground"
             >
               Browse Playbooks
@@ -113,7 +126,7 @@ export function PlaybooksWorkspace() {
             src="/playbooks/20260725-031450/runner-background.jpg"
             alt=""
             fill
-            className="object-cover object-[65%_center]"
+            className="object-cover object-[65%_center] dark:opacity-20 dark:mix-blend-luminosity"
             sizes="100vw"
           />
         </div>
@@ -135,7 +148,7 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="secondary"
                 nativeButton={false}
-                render={<Link href="/mockups/playbooks/earn" />}
+                render={<Link href="/mockups/livepeer-org/earn" />}
                 className="h-16 rounded-sm border-background/10 px-4"
               >
                 Get Started

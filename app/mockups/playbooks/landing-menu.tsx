@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowUpRightIcon, GlobeIcon, MenuIcon, XIcon } from "lucide-react"
+import { ArrowUpRightIcon, GlobeIcon, XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import {
@@ -22,10 +22,11 @@ import {
 import { cn } from "@/lib/utils"
 
 const siteLinks = [
-  { label: "Home", href: "/mockups/playbooks" },
-  { label: "GPU", href: "/mockups/playbooks/earn" },
-  { label: "Runner", href: "/mockups/playbooks/install" },
-  { label: "Playbooks", href: "/mockups/playbooks/library" },
+  { label: "Home", href: "/mockups/livepeer-org" },
+  { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
+  { label: "GPU", href: "/mockups/livepeer-org/earn" },
+  { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
+  { label: "Agent Playbooks", href: "/mockups/livepeer-org/library" },
 ]
 
 const footerGroups = [
@@ -44,7 +45,7 @@ const footerGroups = [
       { label: "Research", href: "https://forum.livepeer.org/c/research/15" },
       { label: "Docs", href: "https://docs.livepeer.org/" },
       { label: "Blog", href: "https://blog.livepeer.org/" },
-      { label: "API Console", href: "/mockups/platform/api" },
+      { label: "Agent", href: "/mockups/livepeer-org/agent" },
     ],
   },
   {
@@ -81,6 +82,19 @@ const socials = [
   },
 ]
 
+function LivepeerMenuIcon() {
+  return (
+    <svg
+      viewBox="0 0 32 16"
+      fill="currentColor"
+      aria-hidden="true"
+      className="size-4 w-8"
+    >
+      <path d="M1 2h30v4H1zM9 10h22v4H9z" />
+    </svg>
+  )
+}
+
 export function LandingMenu() {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
@@ -92,18 +106,18 @@ export function LandingMenu() {
           <Button
             variant="ghost"
             size="icon-sm"
-            className="-mr-2 hover:bg-transparent hover:text-emerald-500"
+            className="hover:bg-transparent hover:text-emerald-500"
           />
         }
       >
-        <MenuIcon />
+        <LivepeerMenuIcon />
         <span className="sr-only">Open site navigation</span>
       </SheetTrigger>
       <SheetContent
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="max-h-dvh overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none"
+        className="h-dvh max-h-none overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none sm:h-auto sm:max-h-dvh"
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
@@ -120,7 +134,7 @@ export function LandingMenu() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                className="-mr-2 text-background hover:bg-transparent hover:text-emerald-500"
+                className="text-background hover:bg-transparent hover:text-emerald-500"
               />
             }
           >

@@ -40,9 +40,6 @@ export default function MockupSettingsPage() {
           <TabsTrigger value="members" className="flex-none">
             Members
           </TabsTrigger>
-          <TabsTrigger value="webhooks" className="flex-none">
-            Webhooks
-          </TabsTrigger>
         </TabsList>
         <TabsContent value="general">
           <form className="flex max-w-xl flex-col gap-8">
@@ -82,7 +79,10 @@ export default function MockupSettingsPage() {
               <Switch id="project-api-keys" defaultChecked />
               <Label htmlFor="project-api-keys">Allow project API keys</Label>
             </div>
-            <Button type="submit" className="self-start">
+            <Button
+              type="submit"
+              className="h-10 self-start rounded-sm px-4"
+            >
               Save
             </Button>
           </form>
@@ -93,7 +93,9 @@ export default function MockupSettingsPage() {
               <p className="text-sm text-muted-foreground">
                 Add organization members to this project.
               </p>
-              <Button>Add member</Button>
+              <Button className="h-10 rounded-sm px-4">
+                Add member
+              </Button>
             </div>
             <Table>
               <TableHeader>
@@ -109,35 +111,6 @@ export default function MockupSettingsPage() {
                   <TableCell>Owner</TableCell>
                   <TableCell className="text-right text-muted-foreground">
                     Organization
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-        </TabsContent>
-        <TabsContent value="webhooks">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-sm text-muted-foreground">
-                Deliver project events to external services.
-              </p>
-              <Button>Add webhook</Button>
-            </div>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Endpoint</TableHead>
-                  <TableHead>Events</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell
-                    colSpan={3}
-                    className="h-24 text-center text-muted-foreground"
-                  >
-                    No webhooks configured
                   </TableCell>
                 </TableRow>
               </TableBody>

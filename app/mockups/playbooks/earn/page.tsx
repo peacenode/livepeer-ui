@@ -2,11 +2,14 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import {
   ArrowUpRightIcon,
+  CableIcon,
   CheckIcon,
   CircleDollarSignIcon,
   CpuIcon,
   NetworkIcon,
+  ServerCogIcon,
   ServerIcon,
+  SparklesIcon,
 } from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
@@ -29,6 +32,8 @@ const paths = [
   {
     title: "Join a pool",
     fit: "Fastest path",
+    icon: CableIcon,
+    gradientId: "pool-path-gradient",
     description:
       "Connect as a worker behind an existing Orchestrator. The operator handles registration, LPT, routing, and payouts; you provide GPU compute and receive off-chain earnings under the pool’s terms.",
     requirements: [
@@ -43,6 +48,8 @@ const paths = [
   {
     title: "Run AI-first",
     fit: "Best with 24 GB+ VRAM",
+    icon: SparklesIcon,
+    gradientId: "ai-path-gradient",
     description:
       "Serve inference workloads where capability, price, latency, and uptime matter more than active-set stake.",
     requirements: ["CUDA 12+", "Docker", "NVIDIA Container Toolkit"],
@@ -53,6 +60,8 @@ const paths = [
   {
     title: "Run a solo node",
     fit: "Full operator path",
+    icon: ServerCogIcon,
+    gradientId: "solo-path-gradient",
     description:
       "Operate go-livepeer, publish your service address, manage the wallet, set prices, and monitor rewards.",
     requirements: ["Arbitrum ETH", "LPT for video", "Public service URI"],
@@ -163,51 +172,76 @@ export default async function EarnWithGpuPage() {
             </p>
           </div>
           <div className="mt-10 grid md:grid-cols-3">
-            {paths.map((path, index) => (
-              <article
-                key={path.title}
-                className={[
-                  "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
-                  index === 0 ? "md:mt-48" : index === 1 ? "md:mt-24" : "",
-                ].join(" ")}
-              >
-                <p className="border-t border-emerald-500 pt-3 text-xs font-medium text-muted-foreground">
-                  {path.fit}
-                </p>
-                <h3 className="mt-3 text-xl font-light">{path.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {path.description}
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {path.requirements.map((requirement) => (
-                    <li
-                      key={requirement}
-                      className="flex items-center gap-3 text-sm"
-                    >
-                      <CheckIcon
-                        className="size-4 text-muted-foreground"
-                        aria-hidden="true"
-                      />
-                      {requirement}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex flex-col items-start gap-3">
-                  <span className="text-xs text-muted-foreground">
-                    {path.note}
-                  </span>
-                  <a
-                    href={path.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
+            {paths.map((path, index) => {
+              const Icon = path.icon
+
+              return (
+                <article
+                  key={path.title}
+                  className={[
+                    "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
+                    index === 0 ? "md:mt-48" : index === 1 ? "md:mt-24" : "",
+                  ].join(" ")}
+                >
+                  <Icon
+                    className="mb-5 size-6 stroke-[1.5]"
+                    stroke={`url(#${path.gradientId})`}
+                    aria-hidden="true"
                   >
-                    {path.action}
-                    <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-                  </a>
-                </div>
-              </article>
-            ))}
+                    <defs>
+                      <linearGradient
+                        className="path-icon-gradient"
+                        id={path.gradientId}
+                        x1="0"
+                        y1="0"
+                        x2="24"
+                        y2="24"
+                        gradientUnits="userSpaceOnUse"
+                        spreadMethod="reflect"
+                      >
+                        <stop offset="0" stopColor="#059669" />
+                        <stop offset="1" stopColor="#d1fae5" />
+                      </linearGradient>
+                    </defs>
+                  </Icon>
+                  <p className="border-t border-emerald-500 pt-3 text-xs font-medium text-muted-foreground">
+                    {path.fit}
+                  </p>
+                  <h3 className="mt-3 text-xl font-light">{path.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {path.description}
+                  </p>
+                  <ul className="mt-6 space-y-3">
+                    {path.requirements.map((requirement) => (
+                      <li
+                        key={requirement}
+                        className="flex items-center gap-3 text-sm"
+                      >
+                        <CheckIcon
+                          className="size-4 text-muted-foreground"
+                          aria-hidden="true"
+                        />
+                        {requirement}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-col items-start gap-3">
+                    <span className="text-xs text-muted-foreground">
+                      {path.note}
+                    </span>
+                    <a
+                      href={path.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
+                    >
+                      {path.action}
+                      <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+                    </a>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
-import { ArrowUpRightIcon } from "lucide-react"
+import { CircleCheckIcon } from "lucide-react"
 
+import { ApiKeyActions } from "@/components/mockups/api-key-actions"
+import { DeleteApiKeyDialog } from "@/components/mockups/delete-api-key-dialog"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -20,30 +22,30 @@ export const metadata: Metadata = {
 const keys = [
   {
     name: "production-server",
-    token: "lp_sk_····9f2a",
-    scope: "Full access",
-    created: "Jul 23, 2026",
+    apiKey: "lp_sk_9f2a••••••••••••••••",
+    status: "Active",
+    createdAt: "Jul 23, 2026",
     lastUsed: "2 min ago",
   },
   {
     name: "staging",
-    token: "lp_sk_····c481",
-    scope: "Full access",
-    created: "Jun 4, 2026",
+    apiKey: "lp_sk_c481••••••••••••••••",
+    status: "Active",
+    createdAt: "Jun 4, 2026",
     lastUsed: "1 hour ago",
   },
   {
     name: "analytics-readonly",
-    token: "lp_sk_····07de",
-    scope: "Read only",
-    created: "Mar 18, 2026",
+    apiKey: "lp_sk_07de••••••••••••••••",
+    status: "Active",
+    createdAt: "Mar 18, 2026",
     lastUsed: "3 days ago",
   },
   {
     name: "local-dev",
-    token: "lp_sk_····b3a9",
-    scope: "Read only",
-    created: "Jan 9, 2026",
+    apiKey: "lp_sk_b3a9••••••••••••••••",
+    status: "Active",
+    createdAt: "Jan 9, 2026",
     lastUsed: "Never",
   },
 ]
@@ -51,60 +53,66 @@ const keys = [
 export default function MockupApiPage() {
   return (
     <PlatformPage
-      title="API"
-      action={
-        <div className="flex items-center gap-4">
-          <a
-            href="https://docs.livepeer.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
-          >
-            Docs
-            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
-          </a>
-          <Button>Create key</Button>
-        </div>
-      }
+      title="API Keys"
+      description="Create and manage the keys used to authenticate API requests."
+      action={<ApiKeyActions />}
     >
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium">Keys</h2>
+      <div className="flex flex-col gap-4">
+        <Input
+          aria-label="Filter API keys by name"
+          placeholder="Filter by name…"
+          className="max-w-sm rounded-sm"
+        />
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Token</TableHead>
-              <TableHead>Scope</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead className="text-right">Last used</TableHead>
+              <TableHead>API key</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Created at</TableHead>
+              <TableHead>Last used</TableHead>
+              <TableHead className="w-12">
+                <span className="sr-only">Actions</span>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {keys.map((key) => (
               <TableRow key={key.name}>
                 <TableCell className="font-medium">{key.name}</TableCell>
-                <TableCell className="font-mono text-xs text-muted-foreground">
-                  {key.token}
+                <TableCell>
+                  <code className="rounded-sm bg-muted px-2 py-1.5 font-mono text-xs text-muted-foreground">
+                    {key.apiKey}
+                  </code>
                 </TableCell>
                 <TableCell>
-                  <Badge
-                    variant={
-                      key.scope === "Full access" ? "secondary" : "outline"
-                    }
-                  >
-                    {key.scope}
+                  <Badge variant="outline" className="gap-0 px-0.5">
+                    <CircleCheckIcon
+                      className="size-3 text-emerald-500"
+                      aria-hidden="true"
+                    />
+                    <span className="px-1">{key.status}</span>
                   </Badge>
                 </TableCell>
                 <TableCell className="text-muted-foreground">
-                  {key.created}
+                  {key.createdAt}
                 </TableCell>
-                <TableCell className="text-right text-muted-foreground">
+                <TableCell className="text-muted-foreground">
                   {key.lastUsed}
+                </TableCell>
+                <TableCell>
+                  <DeleteApiKeyDialog
+                    name={key.name}
+                    createdAt={key.createdAt}
+                  />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        <p className="text-sm text-muted-foreground">
+          Page 1 · Showing {keys.length} of {keys.length}
+        </p>
       </div>
     </PlatformPage>
   )

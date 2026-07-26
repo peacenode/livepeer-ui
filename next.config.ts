@@ -1,13 +1,59 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: "/mockups/runner/:path*",
-        destination: "/mockups/videobuddy/:path*",
+        destination: "/mockups/client/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/agent/:path*",
+        destination: "/mockups/client/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/livepeer-org/install/:path*",
+        destination: "/mockups/livepeer-org/agent/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/platform/:path*",
+        destination: "/mockups/livepeer-agent/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/api-console/:path*",
+        destination: "/mockups/livepeer-agent/:path*",
+        permanent: true,
       },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/mockups/client/:path*",
+          destination: "/mockups/videobuddy/:path*",
+        },
+        {
+          source: "/mockups/livepeer-agent/:path*",
+          destination: "/mockups/platform/:path*",
+        },
+      ],
+      afterFiles: [
+        {
+          source: "/mockups/livepeer-org/agent/:path*",
+          destination: "/mockups/playbooks/install/:path*",
+        },
+        {
+          source: "/mockups/livepeer-org/:path*",
+          destination: "/mockups/playbooks/:path*",
+        },
+      ],
+      fallback: [],
+    }
   },
 }
 

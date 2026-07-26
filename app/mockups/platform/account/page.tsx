@@ -1,114 +1,118 @@
 import type { Metadata } from "next"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Textarea } from "@/components/ui/textarea"
 
 export const metadata: Metadata = {
-  title: "Account settings",
+  title: "Manage profile",
 }
 
 export default function MockupAccountPage() {
   return (
-    <PlatformPage title="Account settings">
-      <Tabs defaultValue="profile" className="gap-8">
-        <TabsList
-          variant="line"
-          className="w-full justify-start overflow-x-auto border-b px-0 pb-1"
-        >
-          <TabsTrigger value="profile" className="flex-none">
-            Profile
-          </TabsTrigger>
-          <TabsTrigger value="security" className="flex-none">
-            Security
-          </TabsTrigger>
-          <TabsTrigger value="preferences" className="flex-none">
-            Preferences
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="profile">
-          <form className="flex max-w-xl flex-col gap-8">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="account-name">Name</Label>
-              <Input id="account-name" defaultValue="Username" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="account-email">Email</Label>
-              <Input
-                id="account-email"
-                type="email"
-                defaultValue="username@example.com"
-              />
-              <p className="text-xs text-muted-foreground">
-                Used for sign-in, security alerts, and account recovery.
+    <PlatformPage
+      title="Manage profile"
+      description="Update the profile information associated with your Livepeer account."
+    >
+      <form className="flex max-w-2xl flex-col gap-10">
+        <section className="flex flex-col gap-5">
+          <div>
+            <h2 className="text-lg font-medium">Profile details</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Keep this information current so collaborators can identify you.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Avatar className="size-16">
+              <AvatarFallback className="bg-foreground text-xl text-background">
+                P
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="h-16 rounded-sm px-4"
+              >
+                Upload new
+              </Button>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Upload a square image, ideally 512×512.
               </p>
             </div>
-            <Button type="submit" className="self-start">
-              Save
-            </Button>
-          </form>
-        </TabsContent>
-        <TabsContent value="security">
-          <div className="flex max-w-xl flex-col gap-8">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium">Password</span>
-                <span className="text-xs text-muted-foreground">
-                  Last changed 3 months ago
-                </span>
-              </div>
-              <Button variant="outline">Change password</Button>
-            </div>
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex flex-col gap-1">
-                <Label htmlFor="account-mfa">Two-factor authentication</Label>
-                <span className="text-xs text-muted-foreground">
-                  Require a verification code when signing in.
-                </span>
-              </div>
-              <Switch id="account-mfa" />
-            </div>
           </div>
-        </TabsContent>
-        <TabsContent value="preferences">
-          <div className="flex max-w-xl flex-col gap-8">
+
+          <div className="grid gap-5 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="account-timezone">Time zone</Label>
-              <Select defaultValue="Eastern Time">
-                <SelectTrigger id="account-timezone" className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Eastern Time">Eastern Time</SelectItem>
-                  <SelectItem value="Central Time">Central Time</SelectItem>
-                  <SelectItem value="Pacific Time">Pacific Time</SelectItem>
-                  <SelectItem value="UTC">UTC</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label htmlFor="profile-username">Username</Label>
+              <Input
+                id="profile-username"
+                defaultValue="peace-node"
+                className="rounded-sm"
+              />
+              <p className="text-xs text-muted-foreground">
+                Letters, numbers, underscores, and hyphens only.
+              </p>
             </div>
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex flex-col gap-1">
-                <Label htmlFor="account-emails">Product emails</Label>
-                <span className="text-xs text-muted-foreground">
-                  Receive product updates and platform announcements.
-                </span>
-              </div>
-              <Switch id="account-emails" defaultChecked />
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="profile-display-name">Display name</Label>
+              <Input
+                id="profile-display-name"
+                defaultValue="Peace Node"
+                className="rounded-sm"
+              />
             </div>
-            <Button className="self-start">Save</Button>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="profile-role">Role</Label>
+              <Input
+                id="profile-role"
+                placeholder="Developer, operator, creator…"
+                className="rounded-sm"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="profile-location">Location</Label>
+              <Input
+                id="profile-location"
+                placeholder="City, Country"
+                className="rounded-sm"
+              />
+            </div>
           </div>
-        </TabsContent>
-      </Tabs>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="profile-bio">Bio</Label>
+            <Textarea
+              id="profile-bio"
+              placeholder="Tell people about your work."
+              className="min-h-28 rounded-sm"
+            />
+          </div>
+        </section>
+
+        <div className="flex justify-end gap-2">
+          <Button
+            type="reset"
+            variant="secondary"
+            size="lg"
+            className="h-16 rounded-sm px-4"
+          >
+            Reset
+          </Button>
+          <Button
+            type="submit"
+            size="lg"
+            className="h-16 rounded-sm px-4"
+          >
+            Save changes
+          </Button>
+        </div>
+      </form>
     </PlatformPage>
   )
 }

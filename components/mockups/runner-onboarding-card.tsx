@@ -6,18 +6,13 @@ import { Card, CardTitle } from "@/components/ui/card"
 
 const steps = [
   {
-    label: "Install Runner",
-    href: "/mockups/playbooks/install",
+    label: "Install Livepeer Agent",
+    href: "/mockups/livepeer-org/agent",
     complete: false,
   },
   {
     label: "Add credits",
-    href: "/mockups/platform/billing",
-    complete: false,
-  },
-  {
-    label: "Test a playbook",
-    href: "/mockups/playbooks",
+    href: "/mockups/livepeer-agent/billing",
     complete: false,
   },
 ]
@@ -32,7 +27,7 @@ export function RunnerOnboardingCard() {
           className="flex w-full flex-col justify-center px-4 py-4 sm:px-6 sm:py-6 md:w-1/2"
         >
           <CardTitle className="text-xl font-normal">
-            Try Livepeer&apos;s Runner
+            Get started with Livepeer Agent
           </CardTitle>
           <ol className="mt-6 flex w-full flex-col">
             {steps.map((step, index) => (

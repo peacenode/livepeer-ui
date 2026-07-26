@@ -5,7 +5,6 @@ import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { SiteFooter } from "@/components/site-footer"
 
 import { LandingMenu } from "./landing-menu"
-import { PlaybooksNav } from "./playbooks-nav"
 
 export const metadata: Metadata = {
   title: {
@@ -24,19 +23,16 @@ export default function PlaybooksLayout({
       <header className="absolute inset-x-0 top-0 z-20">
         <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <Link
-            href="/mockups/playbooks"
+            href="/mockups/livepeer-org"
             className="flex shrink-0 items-center gap-3"
             aria-label="Landing home"
           >
-            <span className="flex items-center gap-1.5 text-black">
+            <span className="flex items-center gap-1.5 text-foreground">
               <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
               <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
             </span>
           </Link>
-          <div className="flex items-center gap-1">
-            <PlaybooksNav />
-            <LandingMenu />
-          </div>
+          <LandingMenu />
         </div>
       </header>
       <div className="flex-1">{children}</div>

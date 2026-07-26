@@ -1,10 +1,8 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
 import {
   BookOpenIcon,
-  Building2Icon,
   CircleUserRoundIcon,
   LifeBuoyIcon,
   LogOutIcon,
@@ -20,12 +18,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
@@ -38,7 +31,6 @@ const themes = [
 
 export function UserMenu() {
   const { theme, setTheme } = useTheme()
-  const [organization, setOrganization] = React.useState("personal")
 
   return (
     <DropdownMenu>
@@ -54,7 +46,7 @@ export function UserMenu() {
         </Avatar>
         <div className="flex flex-col text-sm leading-tight">
           <span className="font-medium">Username</span>
-          <span className="text-muted-foreground">Organization</span>
+          <span className="text-muted-foreground">Account</span>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="top" sideOffset={8} className="w-60">
@@ -83,44 +75,9 @@ export function UserMenu() {
           </ToggleGroup>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="gap-3">
-            <Avatar className="size-8">
-              <AvatarFallback className="bg-foreground text-xs text-background">
-                P
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col leading-tight">
-              <span className="font-medium">Personal</span>
-              <span className="text-xs text-muted-foreground">
-                Organization
-              </span>
-            </div>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup
-              value={organization}
-              onValueChange={setOrganization}
-            >
-              <DropdownMenuRadioItem value="personal">
-                Personal
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="acme">
-                Acme Inc
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          render={<Link href="/mockups/platform/organization" />}
-        >
-          <Building2Icon />
-          Organization settings
-        </DropdownMenuItem>
-        <DropdownMenuItem render={<Link href="/mockups/platform/account" />}>
+        <DropdownMenuItem render={<Link href="/mockups/livepeer-agent/account" />}>
           <CircleUserRoundIcon />
-          Account settings
+          Manage profile
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

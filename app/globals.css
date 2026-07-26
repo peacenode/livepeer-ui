@@ -4,6 +4,22 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes path-icon-gradient-sweep {
+  to {
+    transform: translateX(48px);
+  }
+}
+
+#choose-a-path article:hover .path-icon-gradient {
+  animation: path-icon-gradient-sweep 900ms ease-in-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #choose-a-path article:hover .path-icon-gradient {
+    animation: none;
+  }
+}
+
 @theme inline {
   --font-display: var(--font-favorit), var(--font-inter), sans-serif;
   --font-heading: var(--font-favorit), var(--font-inter), sans-serif;

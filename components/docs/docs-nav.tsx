@@ -28,13 +28,27 @@ export function DocsNav({
       ],
     },
     {
+      title: "Marketing",
+      items: [
+        { title: "Planner", href: "/marketing/planner" },
+        { title: "Social Kit", href: "/marketing/press-kit" },
+        { title: "Brand Kit", href: "/marketing/brand-kit" },
+        { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
+      ],
+    },
+    {
       title: "Mockups",
       external: true,
       items: [
-        { title: "Console", href: "/mockups/platform" },
-        { title: "Runner", href: "/mockups/runner" },
-        { title: "Landing", href: "/mockups/playbooks" },
+        { title: "Waitlist", href: "/mockups/waitlist" },
+        { title: "Livepeer Agent", href: "/mockups/livepeer-agent" },
+        { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
+    },
+    {
+      title: "Archive",
+      external: true,
+      items: [{ title: "Client", href: "/mockups/client" }],
     },
     {
       title: "Components",

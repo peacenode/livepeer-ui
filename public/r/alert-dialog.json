@@ -7,7 +7,7 @@
     "@base-ui/react"
   ],
   "registryDependencies": [
-    "https://livepeer-ui.vercel.app/r/button.json"
+    "http://localhost:3000/r/button.json"
   ],
   "files": [
     {

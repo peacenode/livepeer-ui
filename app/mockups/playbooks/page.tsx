@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { PlaybooksWorkspace } from "./playbooks-workspace"
 
 export const metadata: Metadata = {
-  title: "Landing",
+  title: "Livepeer.org",
 }
 
 export default function PlaybooksPage() {

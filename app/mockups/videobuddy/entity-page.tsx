@@ -98,7 +98,7 @@ export function EntityPage({ type }: { type: EntityType }) {
             {data.description}
           </p>
         </div>
-        <Link href="/mockups/runner" className={buttonVariants({ size: "sm" })}>
+        <Link href="/mockups/client" className={buttonVariants({ size: "sm" })}>
           <PlusIcon />
           {data.action}
         </Link>
@@ -108,7 +108,7 @@ export function EntityPage({ type }: { type: EntityType }) {
         {data.items.map((item) => (
           <Link
             key={item.name}
-            href="/mockups/runner"
+            href="/mockups/client"
             className="group flex items-center gap-4 py-5"
           >
             <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-muted text-sm font-medium">
