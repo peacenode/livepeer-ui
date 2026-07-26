@@ -40,7 +40,7 @@ import AgentCapabilitiesSectionDemo from "./agent-capabilities-section-demo"
 import ApiKeyActionsDemo from "./api-key-actions-demo"
 import ApiKeysSectionDemo from "./api-keys-section-demo"
 import ApiLogsSectionDemo from "./api-logs-section-demo"
-import BillingSummaryCardsDemo from "./billing-summary-cards-demo"
+import BillingPageSummaryDemo from "./billing-page-summary-demo"
 import BillingWorkspaceSectionDemo from "./billing-workspace-section-demo"
 import ClientApplicationShellDemo from "./client-application-shell-demo"
 import ClientApplicationSidebarDemo from "./client-application-sidebar-demo"
@@ -61,7 +61,6 @@ import EcosystemCatalogDemo from "./ecosystem-catalog-demo"
 import InstallAgentFooterDemo from "./install-agent-footer-demo"
 import InvoiceTableDemo from "./invoice-table-demo"
 import LivepeerAgentAuthGateDemo from "./livepeer-agent-auth-gate-demo"
-import LivepeerAgentBillingCardsDemo from "./livepeer-agent-billing-cards-demo"
 import LivepeerAgentHeroDemo from "./livepeer-agent-hero-demo"
 import LivepeerAgentOnboardingSectionDemo from "./livepeer-agent-onboarding-section-demo"
 import LivepeerAgentPageFrameDemo from "./livepeer-agent-page-frame-demo"
@@ -86,6 +85,7 @@ import ProtocolRequestFlowSectionDemo from "./protocol-request-flow-section-demo
 import ResourceUsageTableDemo from "./resource-usage-table-demo"
 import SubmitEcosystemDialogDemo from "./submit-ecosystem-dialog-demo"
 import UsageWorkspaceSectionDemo from "./usage-workspace-section-demo"
+import UsageMetricsDemo from "./usage-metrics-demo"
 import UserMenuDemo from "./user-menu-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
@@ -136,7 +136,7 @@ export const demos: Record<string, ComponentType> = {
   "api-key-actions": ApiKeyActionsDemo,
   "api-keys-section": ApiKeysSectionDemo,
   "api-logs-section": ApiLogsSectionDemo,
-  "billing-summary-cards": BillingSummaryCardsDemo,
+  "billing-page-summary": BillingPageSummaryDemo,
   "billing-workspace-section": BillingWorkspaceSectionDemo,
   "client-application-shell": ClientApplicationShellDemo,
   "client-application-sidebar": ClientApplicationSidebarDemo,
@@ -157,7 +157,6 @@ export const demos: Record<string, ComponentType> = {
   "install-agent-footer": InstallAgentFooterDemo,
   "invoice-table": InvoiceTableDemo,
   "livepeer-agent-auth-gate": LivepeerAgentAuthGateDemo,
-  "livepeer-agent-billing-cards": LivepeerAgentBillingCardsDemo,
   "livepeer-agent-hero": LivepeerAgentHeroDemo,
   "livepeer-agent-onboarding-section": LivepeerAgentOnboardingSectionDemo,
   "livepeer-agent-page-frame": LivepeerAgentPageFrameDemo,
@@ -182,6 +181,7 @@ export const demos: Record<string, ComponentType> = {
   "resource-usage-table": ResourceUsageTableDemo,
   "submit-ecosystem-dialog": SubmitEcosystemDialogDemo,
   "usage-workspace-section": UsageWorkspaceSectionDemo,
+  "usage-metrics": UsageMetricsDemo,
   "user-menu": UserMenuDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,

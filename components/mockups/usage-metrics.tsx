@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-export function LivepeerAgentBillingCards() {
+export function UsageMetrics() {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       <Card variant="metric">

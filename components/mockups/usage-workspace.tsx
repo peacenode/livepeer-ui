@@ -1,8 +1,8 @@
 import { CreditBalance } from "@/components/mockups/credit-balance"
 import { DailyUsageTable } from "@/components/mockups/daily-usage-table"
-import { LivepeerAgentBillingCards } from "@/components/mockups/livepeer-agent-billing-cards"
 import { LivepeerAgentPromoCards } from "@/components/mockups/livepeer-agent-promo-cards"
 import { ResourceUsageTable } from "@/components/mockups/resource-usage-table"
+import { UsageMetrics } from "@/components/mockups/usage-metrics"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function UsageWorkspace() {
@@ -23,7 +23,7 @@ export function UsageWorkspace() {
         </section>
       </div></TabsContent>
       <TabsContent value="activity"><div className="flex flex-col gap-10">
-        <section><LivepeerAgentBillingCards /></section>
+        <section><UsageMetrics /></section>
         <DailyUsageTable />
         <ResourceUsageTable />
       </div></TabsContent>
