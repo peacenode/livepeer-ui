@@ -33,9 +33,18 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
         aria-describedby="console-sign-in-description"
         className="relative z-10 w-full max-w-md rounded-xl border bg-background/95 p-6 shadow-xl backdrop-blur-sm sm:p-8"
       >
-        <div className="flex items-center gap-2 text-foreground">
-          <LivepeerGradientSymbol className="h-5 w-auto" />
-          <LivepeerWordmark className="h-5 w-auto" />
+        <div
+          className="flex items-end gap-2 text-foreground"
+          aria-label="Livepeer Agent"
+        >
+          <LivepeerGradientSymbol className="h-5 w-auto" aria-hidden="true" />
+          <LivepeerWordmark className="h-5 w-auto" aria-hidden="true" />
+          <span
+            className="translate-y-[0.17em] font-runner text-lg leading-none font-medium tracking-tight"
+            aria-hidden="true"
+          >
+            AGENT
+          </span>
         </div>
 
         <div className="mt-8">
@@ -43,13 +52,13 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             id="console-sign-in-title"
             className="text-2xl font-medium tracking-tight text-balance"
           >
-            Sign in to Livepeer
+            Sign in to Livepeer Agent
           </h1>
           <p
             id="console-sign-in-description"
             className="mt-2 text-sm leading-relaxed text-muted-foreground"
           >
-            Continue to the Livepeer Console.
+            Continue to Livepeer Agent.
           </p>
         </div>
 
