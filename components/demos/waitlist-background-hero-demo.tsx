@@ -2,7 +2,7 @@ import { WaitlistBackgroundHero } from "@/components/mockups/waitlist-background
 
 export default function WaitlistBackgroundHeroDemo() {
   return (
-    <div className="relative min-h-[calc(100svh-3.5rem)] w-full overflow-hidden">
+    <div className="relative aspect-video w-full overflow-hidden">
       <WaitlistBackgroundHero />
     </div>
   )
