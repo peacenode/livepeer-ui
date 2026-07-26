@@ -155,9 +155,6 @@ export function WaitlistMockup() {
                   </div>
                 </div>
 
-                <p className="mt-7 max-w-64 text-sm leading-5 text-white/70">
-                  I&apos;m joining the open video agent.
-                </p>
               </section>
 
               <div>
