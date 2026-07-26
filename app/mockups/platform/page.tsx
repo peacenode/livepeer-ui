@@ -61,7 +61,7 @@ export default async function MockupHomePage() {
             </div>
           </a>
           <Link
-            href="/mockups/livepeer-org/agent"
+            href="/mockups/livepeer-org/library"
             className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
@@ -75,7 +75,7 @@ export default async function MockupHomePage() {
             </div>
             <div className="mt-4 flex max-w-sm flex-col gap-1.5">
               <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
-                Install Runner
+                Explore playbooks
                 <ArrowUpRightIcon
                   className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
