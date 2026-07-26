@@ -80,7 +80,7 @@ export default function MockupApiPage() {
                   </code>
                 </TableCell>
                 <TableCell>
-                  <Badge variant="outline">
+                  <Badge variant="outline" className="px-0.5">
                     <CircleCheckIcon
                       className="size-3 text-emerald-500"
                       aria-hidden="true"
