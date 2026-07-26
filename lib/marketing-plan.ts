@@ -112,7 +112,7 @@ export const marketingWeeks: MarketingWeek[] = [
             title: "Integrations fixed",
             links: [
               {
-                label: "Livepeer Agent mockup",
+                label: "Billing/API mockup",
                 href: "/mockups/livepeer-agent",
               },
             ],
@@ -199,7 +199,7 @@ export const marketingWeeks: MarketingWeek[] = [
             title: "Have a minimum of three organizations running Livepeer 2.0",
             links: [
               {
-                label: "Livepeer Agent mockup",
+                label: "Billing/API mockup",
                 href: "/mockups/livepeer-agent",
               },
             ],
