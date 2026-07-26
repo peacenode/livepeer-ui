@@ -14,7 +14,8 @@ export function ComponentPreview({
   className?: string
 }) {
   const Demo = demos[name]
-  const isFullHero = name === "livepeer-agent-hero"
+  const isFullBleed =
+    name === "livepeer-agent-hero" || name === "install-agent-footer"
   const code = fs.readFileSync(
     path.join(process.cwd(), "components/demos", `${name}-demo.tsx`),
     "utf8"
@@ -30,7 +31,7 @@ export function ComponentPreview({
         <div
           className={cn(
             "flex min-h-[350px] w-full justify-center overflow-hidden rounded-lg border",
-            isFullHero ? "items-start p-0" : "items-center p-6 sm:p-10"
+            isFullBleed ? "items-start p-0" : "items-center p-6 sm:p-10"
           )}
         >
           <Demo />
