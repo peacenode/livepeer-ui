@@ -49,11 +49,11 @@ export default async function PlaybooksInstallPage() {
               AGENT
             </span>
           </div>
-          <h1 className="max-w-[70%] text-3xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-3xl sm:text-6xl">
+          <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
             Create and edit images and video with your agent.
           </h1>
 
-          <div className="mt-5 inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
             <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap sm:text-sm">
               <span className="mr-2 text-background/40" aria-hidden="true">
                 $
