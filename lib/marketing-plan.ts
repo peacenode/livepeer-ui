@@ -29,7 +29,7 @@ export const marketingWeeks: MarketingWeek[] = [
     displayDate: "July 27, 2026",
     groups: [
       {
-        title: "End-of-week outcomes",
+        title: "Outcomes",
         deliverables: [
           {
             title: "Socials revamped",
@@ -74,7 +74,6 @@ export const marketingWeeks: MarketingWeek[] = [
               "Steph reaches out to Anthropic, Blockchain Capital, and CoinFund",
             links: [{ label: "Press Kit", href: "/marketing/press-kit" }],
           },
-          { title: "Complete eight post-install web interviews" },
           {
             title:
               "Steph reaches out with website and game mechanics for video creation and trailer",
@@ -87,6 +86,10 @@ export const marketingWeeks: MarketingWeek[] = [
           },
         ],
       },
+      {
+        title: "User Interviews",
+        deliverables: [{ title: "Complete eight post-install web interviews" }],
+      },
     ],
   },
   {
@@ -95,7 +98,7 @@ export const marketingWeeks: MarketingWeek[] = [
     displayDate: "August 3, 2026",
     groups: [
       {
-        title: "End-of-week outcomes",
+        title: "Outcomes",
         deliverables: [
           {
             title: "Waitlist goes live",
@@ -122,7 +125,7 @@ export const marketingWeeks: MarketingWeek[] = [
     outcome: "Scale the full beta and creative AI.",
     groups: [
       {
-        title: "End-of-week outcomes",
+        title: "Outcomes",
         deliverables: [
           { title: "Steph: scaling full beta and creative AI" },
           {
