@@ -126,7 +126,7 @@ export function WaitlistMockup() {
             </form>
           ) : (
             <div className="space-y-6">
-              <div className="space-y-3">
+              <div className="space-y-1">
                 <section
                   className="relative isolate overflow-hidden rounded-md border border-emerald-400/30 bg-black p-5 text-white"
                   aria-labelledby="share-card-title"
@@ -153,7 +153,7 @@ export function WaitlistMockup() {
                   </div>
                 </section>
 
-                <div className="flex items-center gap-2 rounded-md border border-emerald-400/50 bg-white/[0.04] p-1.5 pl-4">
+                <div className="flex items-center gap-2 rounded-md border border-emerald-400/30 bg-white/[0.04] p-1.5 pl-4">
                   <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
                     {inviteUrl}
                   </p>
