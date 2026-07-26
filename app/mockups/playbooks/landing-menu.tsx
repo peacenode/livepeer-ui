@@ -26,7 +26,7 @@ const siteLinks = [
   { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
   { label: "GPU", href: "/mockups/livepeer-org/earn" },
   { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
-  { label: "Playbooks", href: "/mockups/livepeer-org/library" },
+  { label: "Agent Playbooks", href: "/mockups/livepeer-org/library" },
 ]
 
 const footerGroups = [
