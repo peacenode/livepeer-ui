@@ -32,7 +32,6 @@ import ToggleDemo from "./toggle-demo"
 import ToggleGroupDemo from "./toggle-group-demo"
 import TooltipDemo from "./tooltip-demo"
 import AgentCompatibilityDemo from "./agent-compatibility-demo"
-import ContainerCardDemo from "./container-card-demo"
 import LivepeerAgentHeroDemo from "./livepeer-agent-hero-demo"
 import LivepeerAgentMobileNavDemo from "./livepeer-agent-mobile-nav-demo"
 import LivepeerAgentOnboardingSectionDemo from "./livepeer-agent-onboarding-section-demo"
@@ -78,7 +77,6 @@ export const demos: Record<string, ComponentType> = {
   "toggle-group": ToggleGroupDemo,
   tooltip: TooltipDemo,
   "agent-compatibility": AgentCompatibilityDemo,
-  "container-card": ContainerCardDemo,
   "livepeer-agent-hero": LivepeerAgentHeroDemo,
   "livepeer-agent-mobile-nav": LivepeerAgentMobileNavDemo,
   "livepeer-agent-onboarding-section": LivepeerAgentOnboardingSectionDemo,

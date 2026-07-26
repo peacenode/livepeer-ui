@@ -93,14 +93,6 @@
           "level": "section",
           "previewPath": "/mockups/livepeer-agent/compute",
           "files": ["components/mockups/orchestrator-table.tsx"]
-        },
-        {
-          "name": "container-card",
-          "title": "Container Card",
-          "description": "Inference container card with image, metadata, endpoints, and navigation into container details.",
-          "level": "component",
-          "previewPath": "/mockups/livepeer-agent/inference/ai-runner",
-          "files": ["components/mockups/container-post-card.tsx"]
         }
       ]
     },

@@ -759,31 +759,6 @@
       ]
     },
     {
-      "name": "container-card",
-      "type": "registry:component",
-      "title": "Container Card",
-      "description": "Inference container card with image, metadata, endpoints, and navigation into container details.",
-      "dependencies": [
-        "lucide-react",
-        "next"
-      ],
-      "registryDependencies": [
-        "http://localhost:3000/r/avatar.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/card.json"
-      ],
-      "files": [
-        {
-          "path": "components/mockups/container-post-card.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "lib/livepeer.ts",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "agent-compatibility",
       "type": "registry:component",
       "title": "Agent Compatibility",
