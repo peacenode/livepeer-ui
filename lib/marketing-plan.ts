@@ -32,10 +32,15 @@ export const marketingWeeks: MarketingWeek[] = [
         title: "Outcomes",
         deliverables: [
           {
-            title: "Socials revamped",
+            title:
+              "Socials revamped with new assets & supported by agent playbooks for content",
             links: [
               { label: "Press Kit", href: "/marketing/press-kit" },
               { label: "Brand Kit", href: "/marketing/brand-kit" },
+              {
+                label: "Agent Playbooks",
+                href: "/marketing/agent-playbooks",
+              },
             ],
           },
           {
@@ -54,15 +59,6 @@ export const marketingWeeks: MarketingWeek[] = [
           {
             title: "Waitlist ready to go live",
             links: [{ label: "Waitlist mockup", href: "/mockups/waitlist" }],
-          },
-          {
-            title: "Agent playbooks supporting socials",
-            links: [
-              {
-                label: "Agent Playbooks",
-                href: "/marketing/agent-playbooks",
-              },
-            ],
           },
         ],
       },
