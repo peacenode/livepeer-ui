@@ -1,21 +1,20 @@
 "use client"
 
-import { type FormEvent, type ReactNode, useState } from "react"
+import { type ReactNode, useState } from "react"
+import { CopyIcon } from "lucide-react"
+import { toast } from "sonner"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import {
-  DiscordIcon,
-  GoogleIcon,
-} from "@/components/brand-social-icons"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
 function PlatformAuthGate({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false)
 
-  function enterConsole(event?: FormEvent<HTMLFormElement>) {
-    event?.preventDefault()
-    setAuthenticated(true)
+  async function copyDesignGuide() {
+    const response = await fetch("/design.md")
+    const markdown = await response.text()
+    await navigator.clipboard.writeText(markdown)
+    toast.success("design.md copied")
   }
 
   return (
@@ -46,82 +45,51 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
           <section
             role="dialog"
             aria-modal="true"
-            aria-labelledby="console-sign-in-title"
-            className="relative z-10 w-full max-w-md rounded-sm border bg-background p-6 text-center shadow-xl sm:p-8"
+            aria-labelledby="console-gate-title"
+            className="relative z-10 flex w-full max-w-lg flex-col items-center text-center"
           >
             <div
-              className="flex items-end justify-center gap-2 text-foreground"
-              aria-label="Livepeer Agent"
+              className="flex items-center justify-center gap-3 text-foreground"
+              aria-label="Livepeer"
             >
               <LivepeerGradientSymbol
-                className="h-5 w-auto"
+                className="h-12 w-auto sm:h-14"
                 aria-hidden="true"
               />
-              <LivepeerWordmark className="h-5 w-auto" aria-hidden="true" />
-              <span
-                className="translate-y-[0.17em] font-runner text-lg leading-none font-medium tracking-tight"
+              <LivepeerWordmark
+                className="h-8 w-auto sm:h-9"
                 aria-hidden="true"
-              >
-                AGENT
-              </span>
+              />
             </div>
 
-            <div className="mt-8">
-              <h1
-                id="console-sign-in-title"
-                className="text-2xl font-medium tracking-tight text-balance"
-              >
-                Sign in to continue
-              </h1>
-            </div>
+            <h1 id="console-gate-title" className="sr-only">
+              Continue to Livepeer
+            </h1>
 
-            <div className="mt-7 grid gap-2 sm:grid-cols-2">
+            <div className="mt-10 grid w-full max-w-md gap-3 sm:grid-cols-2">
               <Button
                 type="button"
-                variant="outline"
                 size="lg"
-                className="h-16 w-full rounded-sm px-4"
+                className="h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-5 text-white hover:bg-emerald-500"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+                }}
                 onClick={() => setAuthenticated(true)}
               >
-                <GoogleIcon className="size-5" />
-                Google
+                Continue
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 size="lg"
-                className="h-16 w-full rounded-sm px-4"
-                onClick={() => setAuthenticated(true)}
+                className="h-16 w-full rounded-sm px-5"
+                onClick={copyDesignGuide}
               >
-                <DiscordIcon className="size-5" />
-                Discord
+                design.md
+                <CopyIcon data-icon="inline-end" aria-hidden="true" />
               </Button>
             </div>
-
-            <div className="my-6 flex items-center gap-3">
-              <div className="h-px flex-1 bg-border" />
-              <span className="text-xs text-muted-foreground">
-                Or continue with email
-              </span>
-              <div className="h-px flex-1 bg-border" />
-            </div>
-
-            <form onSubmit={enterConsole}>
-              <Input
-                id="console-email"
-                type="email"
-                aria-label="Email"
-                placeholder="you@example.com"
-                className="h-12 rounded-sm"
-              />
-              <Button
-                type="submit"
-                size="lg"
-                className="mt-4 h-16 w-full rounded-sm px-4"
-              >
-                Continue with email
-              </Button>
-            </form>
           </section>
         </div>
       )}
