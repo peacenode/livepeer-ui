@@ -110,9 +110,9 @@ export default async function PlaybooksInstallPage() {
       <section className="bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-10">
         <div className="mx-auto flex max-w-screen-2xl flex-col items-center text-center">
           <h2 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
-            Runner gives your agent one interface for image, video, audio, 3D,
-            editing, rendering, and production tools across the Livepeer
-            network.
+            Livepeer Agent brings image, video, audio, 3D, editing, rendering,
+            and production tools across the Livepeer network into one
+            interface.
           </h2>
           <div className="mt-10 flex max-w-5xl flex-wrap justify-center gap-2">
             {capabilities.map((capability) => (
