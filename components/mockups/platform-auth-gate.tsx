@@ -22,7 +22,7 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
     <>
       {children}
       {!authenticated && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-muted-foreground/25 px-4 py-10 backdrop-blur-[2px] sm:px-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/75 px-4 py-10 backdrop-blur-[2px] sm:px-6">
           <section
             role="dialog"
             aria-modal="true"
