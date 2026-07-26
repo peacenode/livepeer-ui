@@ -50,7 +50,7 @@ export function WaitlistMockup() {
 
   return (
     <main className="relative flex min-h-svh justify-end overflow-hidden bg-black p-3 sm:p-4">
-      <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/15 bg-background/65 px-6 py-6 text-foreground shadow-2xl shadow-black/40 backdrop-blur-2xl sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
+      <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/15 bg-black/20 px-6 py-6 text-foreground shadow-2xl shadow-black/30 backdrop-blur-3xl sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
         <LivepeerLockup className="h-4 w-auto self-start" />
 
         <div
