@@ -57,7 +57,7 @@ function ApiKeyActions() {
         </DialogTrigger>
         <DialogContent className="gap-6 rounded-sm sm:max-w-lg">
           <DialogHeader className="gap-2">
-            <DialogTitle className="text-2xl tracking-tight">
+            <DialogTitle className="font-sans text-3xl leading-none font-light tracking-[-0.04em]">
               Create API key
             </DialogTitle>
             <DialogDescription className="leading-relaxed">
@@ -75,7 +75,7 @@ function ApiKeyActions() {
                 placeholder="Production, staging, local development…"
                 autoComplete="off"
                 autoFocus
-                className="mt-2 h-12 rounded-sm"
+                className="mt-3 h-12 rounded-sm"
               />
             </div>
             <DialogFooter className="mt-8">
