@@ -180,12 +180,14 @@ export default function MockupUsagePage() {
                     <ArrowRightIcon aria-hidden="true" />
                   </Button>
                 </div>
-                <div className="flex min-h-64 flex-col rounded-sm border border-foreground p-6">
+                <div className="flex min-h-64 flex-col rounded-sm border border-emerald-500 p-6">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-muted-foreground">
+                    <p className="text-sm font-medium text-emerald-700">
                       Max
                     </p>
-                    <Badge>Recommended</Badge>
+                    <Badge className="bg-emerald-500 text-white">
+                      Recommended
+                    </Badge>
                   </div>
                   <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
                     1,750{" "}
@@ -198,11 +200,16 @@ export default function MockupUsagePage() {
                   </p>
                   <Button
                     size="lg"
+                    variant="secondary"
                     nativeButton={false}
                     render={
                       <Link href="/mockups/api-console/organization?tab=billing" />
                     }
-                    className="mt-auto h-16 w-full rounded-sm px-4"
+                    className="mt-auto h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+                    }}
                   >
                     Subscribe to Max
                     <ArrowRightIcon aria-hidden="true" />
