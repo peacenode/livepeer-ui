@@ -220,13 +220,7 @@ export function WaitlistMockup() {
                   </span>
                 </div>
                 <div className="mt-3 overflow-hidden rounded-md border">
-                  <ol
-                    className={
-                      showTopHundred
-                        ? "max-h-72 divide-y overflow-y-auto overscroll-contain"
-                        : "divide-y"
-                    }
-                  >
+                  <ol className="divide-y">
                     <li
                       className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 border-b border-emerald-400/20 bg-emerald-400/10 px-3 py-3 text-sm"
                       role="status"
