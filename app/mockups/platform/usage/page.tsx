@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import {
   Table,
   TableBody,
@@ -110,36 +109,20 @@ export default function MockupUsagePage() {
 
               <div className="mt-10 flex items-start justify-between gap-6">
                 <div>
-                  <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                  <p className="text-sm text-muted-foreground">
                     Available balance
                   </p>
                   <p className="mt-3 text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
-                    50{" "}
+                    50/250{" "}
                     <span className="text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl">
                       credits
                     </span>
                   </p>
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Free credits refresh August 1.
-                  </p>
-                  <p className="mt-2 font-mono text-xs tracking-wide text-muted-foreground uppercase">
-                    ≈ 40 min of video generation
+                    Credits refresh Aug 01 26
                   </p>
                 </div>
                 <Badge variant="outline">Free</Badge>
-              </div>
-
-              <div className="mt-10 border-t pt-6">
-                <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="font-medium">July allocation</span>
-                  <span className="text-muted-foreground tabular-nums">
-                    200 / 250 credits used
-                  </span>
-                </div>
-                <Progress value={80} className="mt-3" />
-                <p className="mt-2 text-xs text-muted-foreground">
-                  50 credits remain in the current monthly allocation.
-                </p>
               </div>
             </section>
 
@@ -153,7 +136,7 @@ export default function MockupUsagePage() {
               </p>
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="flex min-h-64 flex-col rounded-sm border p-6">
-                  <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                  <p className="text-sm font-medium text-muted-foreground">
                     Pro
                   </p>
                   <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
@@ -180,7 +163,7 @@ export default function MockupUsagePage() {
                 </div>
                 <div className="flex min-h-64 flex-col rounded-sm border border-foreground p-6">
                   <div className="flex items-center justify-between gap-4">
-                    <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+                    <p className="text-sm font-medium text-muted-foreground">
                       Max
                     </p>
                     <Badge>Recommended</Badge>
