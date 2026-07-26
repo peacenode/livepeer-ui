@@ -1,7 +1,7 @@
 "use client"
 
 import { type FormEvent, useState } from "react"
-import { ArrowRight, Check, Copy, Share2 } from "lucide-react"
+import { ArrowRight, Check, Copy, Share2, TrendingUp } from "lucide-react"
 import { toast } from "sonner"
 
 import { LivepeerGradientLockup, LivepeerLockup } from "@/components/brand"
@@ -9,16 +9,43 @@ import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-const leaders = [
-  { name: "Maya Chen", referrals: 142 },
-  { name: "Owen Park", referrals: 118 },
-  { name: "Priya Shah", referrals: 96 },
+const firstNames = [
+  "Maya",
+  "Owen",
+  "Priya",
+  "Noah",
+  "Avery",
+  "Theo",
+  "Sofia",
+  "Eli",
+  "Nia",
+  "Leo",
 ]
+const lastNames = [
+  "Chen",
+  "Park",
+  "Shah",
+  "Williams",
+  "Kim",
+  "Martinez",
+  "Okafor",
+  "Nguyen",
+  "Patel",
+  "Rivera",
+]
+
+const leaders = Array.from({ length: 100 }, (_, index) => ({
+  name: `${firstNames[index % firstNames.length]} ${
+    lastNames[Math.floor(index / firstNames.length) % lastNames.length]
+  }`,
+  referrals: Math.max(3, Math.round(142 * Math.pow(0.965, index))),
+}))
 
 export function WaitlistMockup() {
   const [email, setEmail] = useState("")
   const [joined, setJoined] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [showTopHundred, setShowTopHundred] = useState(false)
   const inviteId = email.split("@")[0].replace(/[^a-z0-9]/gi, "") || "invite"
   const inviteUrl = `livepeer.org/agent/${inviteId.toLowerCase()}`
 
@@ -127,59 +154,102 @@ export function WaitlistMockup() {
                     Top referrals
                   </span>
                 </div>
-                <ol className="mt-3 divide-y border-y">
-                  {leaders.map((person, index) => (
-                    <li
-                      key={person.name}
-                      className="grid grid-cols-[1.25rem_1fr_auto] items-center gap-2 py-2.5 text-sm"
-                    >
-                      <span className="font-mono text-xs text-muted-foreground">
-                        {index + 1}
-                      </span>
-                      <span className="truncate">{person.name}</span>
-                      <span className="font-mono text-xs tabular-nums">
-                        {person.referrals}
-                      </span>
-                    </li>
-                  ))}
-                  <li className="grid grid-cols-[1.25rem_1fr_auto] items-center gap-2 py-2.5 text-sm">
-                    <span className="font-mono text-xs text-muted-foreground">
-                      —
-                    </span>
-                    <span className="truncate font-medium">You</span>
-                    <span className="font-mono text-xs tabular-nums">0</span>
-                  </li>
-                </ol>
+                <div className="mt-3 overflow-hidden rounded-md border">
+                  <ol
+                    className={
+                      showTopHundred
+                        ? "max-h-72 divide-y overflow-y-auto overscroll-contain"
+                        : "divide-y"
+                    }
+                  >
+                    {leaders
+                      .slice(0, showTopHundred ? 100 : 5)
+                      .map((person, index) => (
+                        <li
+                          key={`${person.name}-${index}`}
+                          className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 bg-background px-3 py-2.5 text-sm"
+                        >
+                          <span className="font-mono text-xs text-muted-foreground">
+                            {index + 1}
+                          </span>
+                          <span className="truncate">{person.name}</span>
+                          <span className="font-mono text-xs tabular-nums">
+                            {person.referrals}
+                          </span>
+                        </li>
+                      ))}
+                  </ol>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="h-10 w-full rounded-none border-t text-xs"
+                    onClick={() => setShowTopHundred((visible) => !visible)}
+                  >
+                    {showTopHundred ? "Show top 5" : "Load top 100"}
+                  </Button>
+                </div>
               </section>
 
-              <section className="bg-foreground p-4 text-background">
-                <p className="text-xs text-background/60">Share card</p>
-                <p className="mt-3 max-w-52 text-xl leading-tight font-medium text-balance">
-                  I’m early to Livepeer Agent.
-                </p>
-                <div className="mt-5 flex items-end justify-between gap-3 border-t border-background/20 pt-3">
-                  <div className="min-w-0">
-                    <p className="text-[10px] text-background/60">
-                      Join with my invite
+              <section
+                className="relative isolate overflow-hidden rounded-md border border-emerald-400/30 bg-black p-5 text-white"
+                aria-labelledby="share-card-title"
+              >
+                <div className="pointer-events-none absolute -top-24 -right-20 -z-10 size-56 rounded-full bg-emerald-400/25 blur-3xl" />
+                <div className="flex items-start justify-between gap-4">
+                  <LivepeerGradientLockup className="h-4 w-auto" />
+                  <span className="flex items-center gap-1 text-[10px] font-medium tracking-[0.12em] text-emerald-400 uppercase">
+                    <TrendingUp className="size-3" aria-hidden="true" />
+                    Early access
+                  </span>
+                </div>
+
+                <div className="mt-8 grid grid-cols-[1fr_auto] items-end gap-4">
+                  <div>
+                    <p className="text-[10px] tracking-[0.12em] text-white/50 uppercase">
+                      Waitlist position
                     </p>
-                    <p className="mt-1 truncate text-xs">{inviteUrl}</p>
+                    <p
+                      id="share-card-title"
+                      className="mt-1 text-5xl leading-none font-semibold tracking-[-0.06em] text-emerald-400 tabular-nums"
+                    >
+                      #2,419
+                    </p>
                   </div>
-                  <div className="flex shrink-0 gap-1">
+                  <div className="text-right">
+                    <p className="text-[10px] tracking-[0.12em] text-white/50 uppercase">
+                      Referrals
+                    </p>
+                    <p className="mt-1 text-2xl leading-none font-medium tabular-nums">
+                      0
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-7 max-w-64 text-sm leading-5 text-white/70">
+                  I&apos;m joining the open video agent.
+                </p>
+
+                <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/15 pt-4">
+                  <p className="min-w-0 truncate font-mono text-[10px] text-white/55">
+                    {inviteUrl}
+                  </p>
+                  <div className="flex shrink-0 gap-1.5">
                     <Button
                       type="button"
                       size="icon-sm"
                       variant="secondary"
                       aria-label="Copy invite link"
                       onClick={copyInvite}
+                      className="rounded-sm"
                     >
                       {copied ? <Check /> : <Copy />}
                     </Button>
                     <Button
                       type="button"
                       size="icon-sm"
-                      variant="secondary"
                       aria-label="Share invite"
                       onClick={shareInvite}
+                      className="rounded-sm bg-emerald-500 text-white hover:bg-emerald-400"
                     >
                       <Share2 />
                     </Button>
