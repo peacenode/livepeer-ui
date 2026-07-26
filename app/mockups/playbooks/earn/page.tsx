@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import {
   ArrowUpRightIcon,
-  BrainCircuitIcon,
   CableIcon,
   CheckIcon,
   CircleDollarSignIcon,
@@ -10,6 +9,7 @@ import {
   NetworkIcon,
   ServerCogIcon,
   ServerIcon,
+  SparklesIcon,
 } from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
@@ -48,7 +48,7 @@ const paths = [
   {
     title: "Run AI-first",
     fit: "Best with 24 GB+ VRAM",
-    icon: BrainCircuitIcon,
+    icon: SparklesIcon,
     gradientId: "ai-path-gradient",
     description:
       "Serve inference workloads where capability, price, latency, and uptime matter more than active-set stake.",
