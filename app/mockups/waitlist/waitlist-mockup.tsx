@@ -4,7 +4,7 @@ import { type FormEvent, useState } from "react"
 import { ArrowRight, Check, Copy, Share2 } from "lucide-react"
 import { toast } from "sonner"
 
-import { LivepeerLockup } from "@/components/brand"
+import { LivepeerGradientLockup, LivepeerLockup } from "@/components/brand"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -197,12 +197,12 @@ export function WaitlistMockup() {
       <section className="absolute inset-0 isolate overflow-hidden bg-black">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_42%,rgba(255,255,255,0.1)_0%,transparent_48%)]" />
         <LivepeerCubeStream inverted className="opacity-90" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-8 z-10 px-6 sm:bottom-10 sm:px-10 md:pr-[27rem]">
+        <div className="pointer-events-none absolute inset-y-0 inset-x-0 z-10 flex items-center px-6 sm:px-10 md:pr-[27rem]">
           <h2
-            className="flex items-end gap-[clamp(0.75rem,1.6vw,2rem)] text-white/90"
+            className="flex w-full items-end justify-center gap-[clamp(0.75rem,1.6vw,2rem)] text-white/90"
             aria-label="Livepeer Agent"
           >
-            <LivepeerLockup
+            <LivepeerGradientLockup
               className="h-[clamp(2.25rem,6vw,6rem)] w-auto"
               aria-hidden="true"
             />
