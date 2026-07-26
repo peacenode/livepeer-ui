@@ -87,11 +87,8 @@ export default async function PlaybooksInstallPage() {
           <AgentCompatibility inverted large />
         </div>
         <div className="flex aspect-square flex-col items-center justify-center bg-muted px-6 text-center sm:px-10">
-          <h2 className="text-[clamp(1.5rem,3.2vw,2.25rem)] leading-tight font-light tracking-tight">
-            <span className="block whitespace-nowrap">Build your own app</span>
-            <span className="block whitespace-nowrap">
-              with Livepeer&apos;s Runner
-            </span>
+          <h2 className="max-w-xl text-[clamp(1.5rem,3.2vw,2.25rem)] leading-tight font-light tracking-tight text-balance">
+            Install Livepeer Agent in your app today
           </h2>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-balance text-muted-foreground">
             Create an API key to add Runner’s image and video workflows to your
