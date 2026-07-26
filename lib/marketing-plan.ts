@@ -56,7 +56,7 @@ export const marketingWeeks: MarketingWeek[] = [
             links: [{ label: "Waitlist mockup", href: "/mockups/waitlist" }],
           },
           {
-            title: "Joe producing automation and teaser content",
+            title: "Agent playbooks supporting socials",
             links: [
               {
                 label: "Agent Playbooks",
