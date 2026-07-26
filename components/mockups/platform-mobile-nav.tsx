@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ArrowUpRightIcon, MenuIcon } from "lucide-react"
+import { MenuIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { platformNavItems } from "@/components/mockups/platform-sidebar"
@@ -58,15 +58,13 @@ export function PlatformMobileNav() {
               {item.title}
             </Link>
           ))}
-          <a
-            href="https://docs.livepeer.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          <Link
+            href="/mockups/livepeer-org/library"
+            onClick={() => setOpen(false)}
+            className="inline-flex w-fit rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             Learn
-            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
-          </a>
+          </Link>
         </nav>
         <div className="mt-auto px-3 py-3">
           <UserMenu />
