@@ -84,7 +84,7 @@ function ApiKeyActions() {
                   <Button
                     type="button"
                     variant="ghost"
-                    className="h-16 rounded-sm px-4"
+                    className="h-16 w-full flex-1 rounded-sm px-4"
                   />
                 }
               >
@@ -93,7 +93,7 @@ function ApiKeyActions() {
               <Button
                 type="submit"
                 disabled={!name.trim()}
-                className="h-16 rounded-sm px-4"
+                className="h-16 w-full flex-1 rounded-sm px-4"
               >
                 Generate key
               </Button>
