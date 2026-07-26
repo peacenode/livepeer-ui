@@ -92,15 +92,10 @@ export default function MockupUsagePage() {
           <div className="flex flex-col gap-10">
             <section className="grid gap-4 md:grid-cols-2">
               <div className="flex flex-col gap-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="font-sans text-sm font-medium">
-                      Credit balance
-                    </h2>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Credits pay for every workflow run.
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <h2 className="font-sans text-sm font-medium">
+                    Credit balance
+                  </h2>
                   <Badge variant="outline">Free</Badge>
                 </div>
                 <div>
