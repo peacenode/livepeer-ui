@@ -57,18 +57,7 @@ export function PlatformSidebar() {
           <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
         </a>
       </nav>
-      <div className="mt-auto space-y-1 px-3 py-3">
-        <Link
-          href="/mockups/api-console/account"
-          className={cn(
-            "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
-            pathname === "/mockups/api-console/account"
-              ? "bg-muted font-medium text-foreground"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          Manage profile
-        </Link>
+      <div className="mt-auto px-3 py-3">
         <UserMenu />
       </div>
     </aside>
