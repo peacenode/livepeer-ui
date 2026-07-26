@@ -84,12 +84,12 @@ const socials = [
 function LivepeerMenuIcon() {
   return (
     <svg
-      viewBox="0 0 24 16"
+      viewBox="0 0 32 16"
       fill="currentColor"
       aria-hidden="true"
-      className="size-4 w-6"
+      className="size-4 w-8"
     >
-      <path d="M1 2h22v4H1zM7 10h16v4H7z" />
+      <path d="M1 2h30v4H1zM9 10h22v4H9z" />
     </svg>
   )
 }
