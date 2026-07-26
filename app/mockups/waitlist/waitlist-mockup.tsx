@@ -78,7 +78,7 @@ export function WaitlistMockup() {
               <label htmlFor="waitlist-email" className="text-sm font-medium">
                 Get early access
               </label>
-              <div className="mt-3 flex gap-2">
+              <div className="mt-3 flex h-16 gap-1.5 rounded-sm border border-white/15 bg-white p-1.5 text-black shadow-lg shadow-black/20 transition-shadow focus-within:ring-2 focus-within:ring-white/40">
                 <Input
                   id="waitlist-email"
                   type="email"
@@ -88,12 +88,17 @@ export function WaitlistMockup() {
                   required
                   autoComplete="email"
                   aria-describedby="waitlist-note"
-                  className="h-10 min-w-0 flex-1"
+                  className="h-full min-w-0 flex-1 border-0 bg-transparent px-3 text-base text-black shadow-none placeholder:text-black/45 focus-visible:ring-0"
                 />
                 <Button
                   type="submit"
                   size="icon-lg"
                   aria-label="Join the waitlist"
+                  className="h-full w-14 rounded-sm border border-emerald-500 bg-emerald-500 text-white hover:bg-emerald-500"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+                  }}
                 >
                   <ArrowRight aria-hidden="true" />
                 </Button>
@@ -200,9 +205,21 @@ export function WaitlistMockup() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_42%,rgba(255,255,255,0.1)_0%,transparent_48%)]" />
         <LivepeerCubeStream inverted className="opacity-90" />
         <div className="pointer-events-none absolute inset-x-0 bottom-8 z-10 px-6 sm:bottom-10 sm:px-10 md:pr-[27rem]">
-          <p className="text-left font-display text-[clamp(2.5rem,8vw,8.5rem)] leading-none font-medium tracking-[-0.06em] text-white/90 text-balance">
-            LIVEPEER AGENT
-          </p>
+          <h2
+            className="flex items-end gap-[clamp(0.75rem,1.6vw,2rem)] text-white/90"
+            aria-label="Livepeer Agent"
+          >
+            <LivepeerLockup
+              className="h-[clamp(2.25rem,6vw,6rem)] w-auto"
+              aria-hidden="true"
+            />
+            <span
+              className="translate-y-[0.12em] font-runner text-[clamp(2.25rem,6vw,6rem)] leading-none font-medium tracking-[-0.045em]"
+              aria-hidden="true"
+            >
+              AGENT
+            </span>
+          </h2>
         </div>
       </section>
     </main>
