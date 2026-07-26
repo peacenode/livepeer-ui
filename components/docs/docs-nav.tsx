@@ -45,11 +45,6 @@ export function DocsNav({
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
     },
-    {
-      title: "Archive",
-      external: true,
-      items: [{ title: "Client", href: "/mockups/client" }],
-    },
     ...componentGroups.map((group) => ({
       title: group.title,
       items: group.items.map((component) => ({
@@ -63,6 +58,11 @@ export function DocsNav({
         title: component.title,
         href: `/docs/components/${component.name}`,
       })),
+    },
+    {
+      title: "Archive",
+      external: true,
+      items: [{ title: "Client", href: "/mockups/client" }],
     },
   ]
 
