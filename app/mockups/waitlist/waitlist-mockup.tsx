@@ -170,7 +170,7 @@ export function WaitlistMockup() {
                 </div>
               </div>
 
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-center text-lg leading-snug text-muted-foreground text-balance">
                 Climb the leaderboard by referring friends.
               </p>
 
