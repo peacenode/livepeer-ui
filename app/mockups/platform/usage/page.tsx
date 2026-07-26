@@ -180,15 +180,11 @@ export default function MockupUsagePage() {
                     <ArrowRightIcon aria-hidden="true" />
                   </Button>
                 </div>
-                <div className="flex min-h-64 flex-col rounded-sm border border-emerald-500 p-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="text-sm font-medium text-emerald-700">
-                      Max
-                    </p>
-                    <Badge className="bg-emerald-500 text-white">
-                      Recommended
-                    </Badge>
-                  </div>
+                <div className="relative flex min-h-64 flex-col rounded-sm border border-emerald-500 p-6">
+                  <Badge className="absolute top-0 right-6 -translate-y-1/2 bg-emerald-500 text-white">
+                    Recommended
+                  </Badge>
+                  <p className="text-sm font-medium text-emerald-700">Max</p>
                   <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
                     1,750{" "}
                     <span className="text-lg font-normal text-muted-foreground">
