@@ -54,7 +54,7 @@ export default async function PlaybooksInstallPage() {
           </h1>
 
           <div className="flex max-w-full flex-col items-center">
-            <p className="mb-3 text-sm text-muted-foreground">
+            <p className="mb-7 text-sm text-muted-foreground">
               In your agent&apos;s MCP / connector settings, add this server:
             </p>
             <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground">
