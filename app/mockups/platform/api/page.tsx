@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
-import { ArrowUpRightIcon } from "lucide-react"
 
+import { ApiKeyActions } from "@/components/mockups/api-key-actions"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -52,29 +51,7 @@ export default function MockupApiPage() {
   return (
     <PlatformPage
       title="API"
-      action={
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="lg"
-            nativeButton={false}
-            render={
-              <a
-                href="https://docs.livepeer.org/"
-                target="_blank"
-                rel="noreferrer"
-              />
-            }
-            className="h-16 rounded-sm px-4"
-          >
-            Docs
-            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
-          </Button>
-          <Button size="lg" className="h-16 rounded-sm px-4">
-            Create key
-          </Button>
-        </div>
-      }
+      action={<ApiKeyActions />}
     >
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-medium">Keys</h2>
