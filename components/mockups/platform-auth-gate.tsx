@@ -11,7 +11,6 @@ import {
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 function PlatformAuthGate({ children }: { children: ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false)
@@ -94,14 +93,12 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
         </div>
 
         <form onSubmit={enterConsole}>
-          <Label htmlFor="console-email" className="justify-center">
-            Email
-          </Label>
           <Input
             id="console-email"
             type="email"
+            aria-label="Email"
             placeholder="you@example.com"
-            className="mt-2 h-12 rounded-sm text-center"
+            className="h-12 rounded-sm"
           />
           <Button
             type="submit"
