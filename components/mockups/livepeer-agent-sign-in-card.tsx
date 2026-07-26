@@ -26,7 +26,7 @@ export function LivepeerAgentSignInCard({
         <LivepeerGradientSymbol className="h-5 w-auto" aria-hidden="true" />
         <LivepeerWordmark className="h-5 w-auto" aria-hidden="true" />
         <span
-          className="translate-y-[0.17em] font-runner text-lg leading-none font-medium tracking-tight"
+          className="translate-y-[0.17em] font-agent text-lg leading-none font-medium tracking-tight"
           aria-hidden="true"
         >
           AGENT

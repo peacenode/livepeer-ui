@@ -24,30 +24,11 @@ export const primitives: ComponentDoc[] = registryMeta.components.map(
   (component) => ({ ...component, level: "primitive" as const })
 )
 
-export const componentGroups: ComponentGroup[] = registryMeta.catalog.flatMap(
-  (group) => {
-    const components = group.items.filter((item) => item.level === "component")
-    const sections = group.items.filter((item) => item.level === "section")
-
-    return [
-      ...(components.length
-        ? [
-            {
-              title: `${group.title} Components`,
-              items: components as ComponentDoc[],
-            },
-          ]
-        : []),
-      ...(sections.length
-        ? [
-            {
-              title: `${group.title} Page Sections`,
-              items: sections as ComponentDoc[],
-            },
-          ]
-        : []),
-    ]
-  }
+export const componentGroups: ComponentGroup[] = registryMeta.catalog.map(
+  (group) => ({
+    title: group.title,
+    items: group.items as ComponentDoc[],
+  })
 )
 
 export const components: ComponentDoc[] = [

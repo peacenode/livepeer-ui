@@ -844,13 +844,13 @@
       ]
     },
     {
-      "name": "runner-delta-stream",
+      "name": "livepeer-agent-delta-stream",
       "type": "registry:component",
-      "title": "Runner Delta Stream",
-      "description": "Animated runner delta field used in install and call-to-action sections.",
+      "title": "Livepeer Agent Delta Stream",
+      "description": "Animated Livepeer Agent delta field used in install and call-to-action sections.",
       "files": [
         {
-          "path": "components/mockups/runner-delta-stream.tsx",
+          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
           "type": "registry:component"
         },
         {
@@ -877,7 +877,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/runner-delta-stream.tsx",
+          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
           "type": "registry:block"
         },
         {

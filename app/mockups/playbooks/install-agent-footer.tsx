@@ -1,6 +1,6 @@
 import { CopyButton } from "@/components/docs/copy-button"
 import { LivepeerWordmark } from "@/components/brand"
-import { RunnerDeltaStream } from "@/components/mockups/runner-delta-stream"
+import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
 import { cn } from "@/lib/utils"
 
 const mcpServerUrl = "https://storyboard.daydream.monster/api/mcp"
@@ -19,7 +19,7 @@ export function InstallAgentFooter({
         className
       )}
     >
-      <RunnerDeltaStream />
+      <LivepeerAgentDeltaStream />
       <div className="absolute inset-x-4 top-[calc(25.5%+1.75rem)] z-10 mx-auto flex max-w-4xl flex-col items-center text-center sm:inset-x-6 sm:top-[calc(39%+1.75rem)]">
         <div
           className="flex items-end gap-3 text-foreground sm:gap-4"
@@ -30,7 +30,7 @@ export function InstallAgentFooter({
             aria-hidden="true"
           />
           <span
-            className="translate-y-[0.17em] font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+            className="translate-y-[0.17em] font-agent text-3xl leading-none font-medium tracking-tight sm:text-4xl"
             aria-hidden="true"
           >
             AGENT

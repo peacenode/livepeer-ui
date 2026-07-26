@@ -34,7 +34,7 @@ export default function MockupsLayout({
                 <LivepeerGradientSymbol className="h-4 w-auto" />
                 <LivepeerWordmark className="h-4 w-auto" />
                 <span
-                  className="translate-y-[0.17em] font-runner text-sm leading-none font-medium tracking-tight"
+                  className="translate-y-[0.17em] font-agent text-sm leading-none font-medium tracking-tight"
                   aria-hidden="true"
                 >
                   AGENT

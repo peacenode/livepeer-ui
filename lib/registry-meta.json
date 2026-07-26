@@ -127,23 +127,23 @@
           "files": ["components/mockups/livepeer-cube-stream.tsx"]
         },
         {
-          "name": "runner-delta-stream",
-          "title": "Runner Delta Stream",
-          "description": "Animated runner delta field used in install and call-to-action sections.",
+          "name": "livepeer-agent-delta-stream",
+          "title": "Livepeer Agent Delta Stream",
+          "description": "Animated Livepeer Agent delta field used in install and call-to-action sections.",
           "level": "component",
           "uses": [],
           "previewPath": "/mockups/livepeer-org/agent",
-          "files": ["components/mockups/runner-delta-stream.tsx"]
+          "files": ["components/mockups/livepeer-agent-delta-stream.tsx"]
         },
         {
           "name": "livepeer-agent-hero",
           "title": "Livepeer Agent Hero",
           "description": "Standalone Livepeer Agent installation hero with animated field, connector URL, and account actions.",
           "level": "section",
-          "uses": ["button", "runner-delta-stream"],
+          "uses": ["button", "livepeer-agent-delta-stream"],
           "files": [
             "components/mockups/livepeer-agent-hero.tsx",
-            "components/mockups/runner-delta-stream.tsx"
+            "components/mockups/livepeer-agent-delta-stream.tsx"
           ]
         },
         {

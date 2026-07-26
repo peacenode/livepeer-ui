@@ -45,7 +45,7 @@ import LivepeerCubeStreamDemo from "./livepeer-cube-stream-demo"
 import MediaContextMenuDemo from "./media-context-menu-demo"
 import OrchestratorTableSectionDemo from "./orchestrator-table-section-demo"
 import ProjectPickerDemo from "./project-picker-demo"
-import RunnerDeltaStreamDemo from "./runner-delta-stream-demo"
+import LivepeerAgentDeltaStreamDemo from "./livepeer-agent-delta-stream-demo"
 import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
@@ -101,7 +101,7 @@ export const demos: Record<string, ComponentType> = {
   "media-context-menu": MediaContextMenuDemo,
   "orchestrator-table-section": OrchestratorTableSectionDemo,
   "project-picker": ProjectPickerDemo,
-  "runner-delta-stream": RunnerDeltaStreamDemo,
+  "livepeer-agent-delta-stream": LivepeerAgentDeltaStreamDemo,
   "livepeer-agent-feature-section": LivepeerAgentFeatureSectionDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,

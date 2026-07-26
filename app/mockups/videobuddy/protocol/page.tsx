@@ -9,15 +9,15 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Runner, workflows, and compute",
+  title: "Livepeer Agent, workflows, and compute",
 }
 
 const layers = [
   {
     number: "01",
-    title: "Runner",
+    title: "Livepeer Agent",
     description:
-      "Runner is the interface between people, agents, applications, and Livepeer. It accepts a task, authenticates the caller, and starts the right workflow.",
+      "Livepeer Agent is the interface between people, agents, applications, and Livepeer. It accepts a task, authenticates the caller, and starts the right workflow.",
     detail: "CLI · MCP with OAuth · API",
     href: "/mockups/livepeer-org/agent",
     icon: PlayIcon,
@@ -35,7 +35,7 @@ const layers = [
     number: "03",
     title: "Compute",
     description:
-      "Orchestrators provide the GPUs that execute workflows. The network matches each run with available compute and returns the result to Runner.",
+      "Orchestrators provide the GPUs that execute workflows. The network matches each run with available compute and returns the result to Livepeer Agent.",
     detail: "Orchestrators · GPUs · rewards",
     href: "/mockups/livepeer-agent/compute",
     icon: CpuIcon,
@@ -46,11 +46,12 @@ const requestSteps = [
   {
     title: "Intent",
     description:
-      "A person, agent, or application asks Runner to create or transform media.",
+      "A person, agent, or application asks Livepeer Agent to create or transform media.",
   },
   {
     title: "Workflow",
-    description: "Runner selects the saved workflow and validates its inputs.",
+    description:
+      "Livepeer Agent selects the saved workflow and validates its inputs.",
   },
   {
     title: "Execution",
@@ -60,7 +61,7 @@ const requestSteps = [
   {
     title: "Result",
     description:
-      "Runner returns the output to the CLI, connected agent, or application.",
+      "Livepeer Agent returns the output to the CLI, connected agent, or application.",
   },
 ]
 
@@ -71,11 +72,11 @@ export default function ProtocolPage() {
         <header className="max-w-3xl">
           <p className="text-sm text-muted-foreground">Livepeer</p>
           <h1 className="mt-2 text-3xl font-medium text-balance">
-            Runner connects applications and agents to media workflows. Compute
+            Livepeer Agent connects applications and agents to media workflows. Compute
             runs them.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Workflows define what happens. Runner makes them available through
+            Workflows define what happens. Livepeer Agent makes them available through
             the CLI, MCP, and API. The Livepeer network supplies the compute
             that executes every run.
           </p>
@@ -99,7 +100,9 @@ export default function ProtocolPage() {
         </section>
 
         <section className="mt-14">
-          <h2 className="text-lg font-medium">How a Runner request moves</h2>
+          <h2 className="text-lg font-medium">
+            How a Livepeer Agent request moves
+          </h2>
           <div className="mt-4 border-y">
             {requestSteps.map((step, index) => (
               <div
@@ -122,10 +125,10 @@ export default function ProtocolPage() {
           <div>
             <PlayIcon className="size-5" aria-hidden="true" />
             <h2 className="mt-3 text-lg font-medium">
-              Any agent can use Runner
+              Any agent can use Livepeer Agent
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Connect the Runner MCP and authorize it with OAuth. The agent gets
+              Connect the Livepeer Agent MCP and authorize it with OAuth. The agent gets
               access to this project&rsquo;s workflows without handling a
               long-lived API credential.
             </p>

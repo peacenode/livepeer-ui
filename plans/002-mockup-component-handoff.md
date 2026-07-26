@@ -308,7 +308,7 @@ components/livepeer-org/shell/
   marketing-footer.tsx
 components/livepeer-org/components/
   agent-compatibility.tsx
-  runner-lockup.tsx
+  livepeer-agent-lockup.tsx
   playbook-card.tsx
   reliability-rating.tsx
 components/livepeer-org/sections/
@@ -368,7 +368,7 @@ Current source: `app/mockups/playbooks/install/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
-| Install hero | `AgentInstallHeroSection` | runner stream, lockup, compatibility | `Button` |
+| Install hero | `AgentInstallHeroSection` | Livepeer Agent stream, lockup, compatibility | `Button` |
 | Install steps | `AgentInstallStepsSection` | numbered step, command block | `Card`, `Button` |
 | Requirements | `AgentRequirementsSection` | requirement row | `Badge` |
 

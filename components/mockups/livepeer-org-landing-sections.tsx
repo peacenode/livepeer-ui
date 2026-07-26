@@ -58,7 +58,7 @@ export function LivepeerAgentFeatureSection() {
       <div className="relative z-10 flex min-h-[38rem] flex-col items-start justify-center p-6 sm:min-h-[56rem] sm:p-10">
         <h2 className="flex items-end gap-3" aria-label="Livepeer Agent">
           <LivepeerWordmark className="h-8 w-auto sm:h-10" aria-hidden="true" />
-          <span className="translate-y-[0.17em] font-runner text-3xl leading-none font-medium sm:text-4xl">
+          <span className="translate-y-[0.17em] font-agent text-3xl leading-none font-medium sm:text-4xl">
             AGENT
           </span>
         </h2>

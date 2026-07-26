@@ -70,7 +70,7 @@ export function WaitlistMockup() {
         >
           <LivepeerGradientLockup className="h-4 w-auto" aria-hidden="true" />
           <span
-            className="translate-y-[0.08em] font-runner text-base leading-none font-medium tracking-[-0.04em]"
+            className="translate-y-[0.08em] font-agent text-base leading-none font-medium tracking-[-0.04em]"
             aria-hidden="true"
           >
             AGENT
@@ -226,7 +226,7 @@ export function WaitlistMockup() {
               aria-hidden="true"
             />
             <span
-              className="translate-y-[0.12em] font-runner text-[clamp(2rem,4.5vw,4.5rem)] leading-none font-medium tracking-[-0.045em]"
+              className="translate-y-[0.12em] font-agent text-[clamp(2rem,4.5vw,4.5rem)] leading-none font-medium tracking-[-0.045em]"
               aria-hidden="true"
             >
               AGENT

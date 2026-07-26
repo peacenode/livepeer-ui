@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { CopyButton } from "@/components/docs/copy-button"
 import { LivepeerWordmark } from "@/components/brand"
-import { RunnerDeltaStream } from "@/components/mockups/runner-delta-stream"
+import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
 
 export function LivepeerAgentHero({
   serverUrl = "https://storyboard.daydream.monster/api/mcp",
@@ -11,7 +11,7 @@ export function LivepeerAgentHero({
 }) {
   return (
     <section className="relative flex min-h-[38rem] items-center overflow-hidden bg-background px-4 py-20 sm:px-6">
-      <RunnerDeltaStream className="-translate-y-8" />
+      <LivepeerAgentDeltaStream className="-translate-y-8" />
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
         <div
           className="flex items-end gap-3 text-foreground sm:gap-4"
@@ -19,7 +19,7 @@ export function LivepeerAgentHero({
         >
           <LivepeerWordmark className="h-8 w-auto sm:h-10" aria-hidden="true" />
           <span
-            className="translate-y-[0.17em] font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+            className="translate-y-[0.17em] font-agent text-3xl leading-none font-medium tracking-tight sm:text-4xl"
             aria-hidden="true"
           >
             AGENT

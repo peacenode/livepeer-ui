@@ -31,7 +31,7 @@ function makeParticles(count: number): DeltaParticle[] {
   }))
 }
 
-function RunnerDeltaStream({ className }: { className?: string }) {
+function LivepeerAgentDeltaStream({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -190,4 +190,4 @@ function RunnerDeltaStream({ className }: { className?: string }) {
   )
 }
 
-export { RunnerDeltaStream }
+export { LivepeerAgentDeltaStream }
