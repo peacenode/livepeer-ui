@@ -53,17 +53,26 @@ export default function MockupApiPage() {
     <PlatformPage
       title="API"
       action={
-        <div className="flex items-center gap-4">
-          <a
-            href="https://docs.livepeer.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="lg"
+            nativeButton={false}
+            render={
+              <a
+                href="https://docs.livepeer.org/"
+                target="_blank"
+                rel="noreferrer"
+              />
+            }
+            className="h-16 rounded-sm px-4"
           >
             Docs
             <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
-          </a>
-          <Button>Create key</Button>
+          </Button>
+          <Button size="lg" className="h-16 rounded-sm px-4">
+            Create key
+          </Button>
         </div>
       }
     >

@@ -82,7 +82,11 @@ export default function MockupSettingsPage() {
               <Switch id="project-api-keys" defaultChecked />
               <Label htmlFor="project-api-keys">Allow project API keys</Label>
             </div>
-            <Button type="submit" className="self-start">
+            <Button
+              type="submit"
+              size="lg"
+              className="h-16 self-start rounded-sm px-6"
+            >
               Save
             </Button>
           </form>
@@ -93,7 +97,9 @@ export default function MockupSettingsPage() {
               <p className="text-sm text-muted-foreground">
                 Add organization members to this project.
               </p>
-              <Button>Add member</Button>
+              <Button size="lg" className="h-16 rounded-sm px-6">
+                Add member
+              </Button>
             </div>
             <Table>
               <TableHeader>
@@ -121,7 +127,9 @@ export default function MockupSettingsPage() {
               <p className="text-sm text-muted-foreground">
                 Deliver project events to external services.
               </p>
-              <Button>Add webhook</Button>
+              <Button size="lg" className="h-16 rounded-sm px-6">
+                Add webhook
+              </Button>
             </div>
             <Table>
               <TableHeader>

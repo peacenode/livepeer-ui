@@ -116,7 +116,11 @@ export default async function MockupOrganizationPage({
                 className="font-mono"
               />
             </div>
-            <Button type="submit" className="self-start">
+            <Button
+              type="submit"
+              size="lg"
+              className="h-16 self-start rounded-sm px-6"
+            >
               Save
             </Button>
           </form>
@@ -128,7 +132,9 @@ export default async function MockupOrganizationPage({
                 Members can be assigned to projects after joining the
                 organization.
               </p>
-              <Button>Invite member</Button>
+              <Button size="lg" className="h-16 rounded-sm px-6">
+                Invite member
+              </Button>
             </div>
             <Table>
               <TableHeader>

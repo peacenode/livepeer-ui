@@ -53,7 +53,11 @@ export default function MockupAccountPage() {
                 Used for sign-in, security alerts, and account recovery.
               </p>
             </div>
-            <Button type="submit" className="self-start">
+            <Button
+              type="submit"
+              size="lg"
+              className="h-16 self-start rounded-sm px-6"
+            >
               Save
             </Button>
           </form>
@@ -67,7 +71,13 @@ export default function MockupAccountPage() {
                   Last changed 3 months ago
                 </span>
               </div>
-              <Button variant="outline">Change password</Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="h-16 rounded-sm px-6"
+              >
+                Change password
+              </Button>
             </div>
             <div className="flex items-center justify-between gap-4">
               <div className="flex flex-col gap-1">
@@ -105,7 +115,12 @@ export default function MockupAccountPage() {
               </div>
               <Switch id="account-emails" defaultChecked />
             </div>
-            <Button className="self-start">Save</Button>
+            <Button
+              size="lg"
+              className="h-16 self-start rounded-sm px-6"
+            >
+              Save
+            </Button>
           </div>
         </TabsContent>
       </Tabs>
