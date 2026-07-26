@@ -98,6 +98,7 @@ export default function MockupApiPage() {
                   <Button
                     variant="ghost"
                     size="icon-sm"
+                    className="hover:text-destructive"
                     aria-label={`Delete ${key.name} API key`}
                   >
                     <Trash2Icon aria-hidden="true" />
