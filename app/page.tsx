@@ -1,6 +1,7 @@
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerGradientLockup } from "@/components/brand"
 import { SiteHeader } from "@/components/docs/site-header"
 import { RegistryHomeActions } from "@/components/registry-home-actions"
+import { components } from "@/lib/docs"
 
 export default function Page() {
   return (
@@ -8,20 +9,15 @@ export default function Page() {
       <SiteHeader />
       <main className="flex flex-1 items-center justify-center">
         <section className="flex w-full flex-col items-center px-5 py-16 text-center sm:px-8">
-          <h1
-            className="flex items-center justify-center gap-3 text-foreground"
-            aria-label="Livepeer"
-          >
-            <LivepeerGradientSymbol
-              className="h-12 w-auto sm:h-14"
-              aria-hidden="true"
-            />
-            <LivepeerWordmark
-              className="h-8 w-auto sm:h-9"
-              aria-hidden="true"
-            />
+          <h1 className="text-foreground">
+            <LivepeerGradientLockup className="h-12 w-auto sm:h-16" />
           </h1>
-          <div className="mt-10 w-full">
+          <p className="mt-6 max-w-2xl text-base leading-7 text-balance text-muted-foreground sm:text-lg">
+            A shadcn component registry built on the luma style. Neutral
+            palette, Favorit. {components.length} components, installable with
+            the shadcn CLI.
+          </p>
+          <div className="mt-8 w-full">
             <div className="mx-auto flex justify-center">
               <RegistryHomeActions />
             </div>
