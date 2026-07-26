@@ -28,7 +28,7 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             aria-hidden="true"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 48% 42% at 100% 0%, color-mix(in oklab, var(--color-emerald-500) 52%, white) 0%, color-mix(in oklab, var(--color-emerald-500) 26%, white) 30%, color-mix(in oklab, var(--color-emerald-500) 10%, transparent) 62%, transparent 100%)",
+                "radial-gradient(ellipse 48% 42% at 100% 0%, color-mix(in oklab, var(--color-emerald-500) 60%, white) 0%, color-mix(in oklab, var(--color-emerald-500) 32%, white) 30%, color-mix(in oklab, var(--color-emerald-500) 13%, transparent) 62%, transparent 100%)",
             }}
           />
           <div
@@ -36,7 +36,7 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             aria-hidden="true"
             style={{
               backgroundImage:
-                "conic-gradient(from 0deg at 100% 0%, transparent 188deg, color-mix(in oklab, var(--color-emerald-400) 10%, transparent) 204deg, color-mix(in oklab, var(--color-emerald-400) 34%, white) 224deg, color-mix(in oklab, var(--color-emerald-500) 12%, transparent) 242deg, transparent 260deg)",
+                "conic-gradient(from 0deg at 100% 0%, transparent 188deg, color-mix(in oklab, var(--color-emerald-400) 13%, transparent) 204deg, color-mix(in oklab, var(--color-emerald-400) 40%, white) 224deg, color-mix(in oklab, var(--color-emerald-500) 15%, transparent) 242deg, transparent 260deg)",
               maskImage:
                 "radial-gradient(ellipse 105% 105% at 100% 0%, black 0%, black 42%, transparent 80%)",
               WebkitMaskImage:
