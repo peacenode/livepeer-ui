@@ -32,7 +32,7 @@ export default async function PlaybooksInstallPage() {
   return (
     <main>
       <section className="relative flex items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
-        <RunnerDeltaStream />
+        <RunnerDeltaStream className="-translate-y-10 sm:-translate-y-8" />
         <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
           <div
             className="flex items-end gap-3 text-foreground sm:gap-4"
@@ -54,16 +54,16 @@ export default async function PlaybooksInstallPage() {
           </h1>
 
           <div className="flex max-w-full flex-col items-center">
-            <p className="mb-3 text-sm text-muted-foreground">
+            <p className="mb-7 text-sm text-muted-foreground">
               In your agent&apos;s MCP / connector settings, add this server:
             </p>
-            <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+            <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground">
               <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
                 {mcpServerUrl}
               </code>
               <CopyButton
                 value={mcpServerUrl}
-                className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
+                className="size-8 shrink-0 rounded-none bg-transparent text-secondary-foreground/40 transition-colors hover:bg-transparent hover:text-secondary-foreground"
               />
             </div>
           </div>
