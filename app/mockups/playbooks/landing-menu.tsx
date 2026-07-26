@@ -105,7 +105,7 @@ export function LandingMenu() {
           <Button
             variant="ghost"
             size="icon-sm"
-            className="-mr-2 hover:bg-transparent hover:text-emerald-500"
+            className="hover:bg-transparent hover:text-emerald-500"
           />
         }
       >
@@ -133,7 +133,7 @@ export function LandingMenu() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                className="-mr-2 text-background hover:bg-transparent hover:text-emerald-500"
+                className="text-background hover:bg-transparent hover:text-emerald-500"
               />
             }
           >

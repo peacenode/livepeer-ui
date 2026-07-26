@@ -32,9 +32,7 @@ export default function PlaybooksLayout({
               <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
             </span>
           </Link>
-          <div className="flex items-center gap-1">
-            <LandingMenu />
-          </div>
+          <LandingMenu />
         </div>
       </header>
       <div className="flex-1">{children}</div>
