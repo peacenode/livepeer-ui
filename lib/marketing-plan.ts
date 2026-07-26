@@ -51,7 +51,7 @@ export const marketingWeeks: MarketingWeek[] = [
               },
               {
                 label: "Marketing page mockup",
-                href: "/mockups/livepeer-org/agent",
+                href: "http://localhost:3300/mockups/livepeer-org/agent",
               },
               { label: "UI Registry", href: "/docs" },
               { label: "design.md", href: "/design.md" },
