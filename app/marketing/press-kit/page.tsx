@@ -1,13 +1,17 @@
 import type { Metadata } from "next"
-import { ArrowUpRight } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
-import { pressAssets, destinationCount, type PressAsset } from "@/lib/press-kit"
+import {
+  destinationCount,
+  pressDeliverables,
+  requiredExportCount,
+  type PressDeliverable,
+} from "@/lib/press-kit"
 
 export const metadata: Metadata = {
-  title: "Press Kit · Asset Inventory",
+  title: "Press Kit · Deliverables",
   description:
-    "The unique image sizes required across Livepeer's public channels.",
+    "The brand asset deliverables and export requirements for Livepeer's public channels.",
 }
 
 export default function PressKitPage() {
@@ -15,63 +19,62 @@ export default function PressKitPage() {
     <div className="mx-auto w-full max-w-6xl pb-20">
       <header className="border-b pb-10">
         <p className="mb-3 text-sm font-medium text-muted-foreground">
-          Press kit / Asset inventory
+          Press kit / Deliverables
         </p>
         <h1 className="max-w-4xl text-pretty text-4xl font-medium tracking-tight sm:text-5xl">
-          Every canvas Livepeer needs to produce
+          Brand asset deliverables
         </h1>
         <p className="mt-4 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-          Unique export sizes, shown at their native aspect ratios and tagged
-          with every place they appear.
+          The master assets to design, with every required export size grouped
+          beneath its deliverable.
         </p>
       </header>
 
       <section className="grid border-b sm:grid-cols-3">
-        <Metric label="Unique export sizes" value={pressAssets.length} />
-        <Metric label="Destination surfaces" value={destinationCount} />
-        <Metric
-          label="Reusable square masters"
-          value={pressAssets.filter((asset) => asset.width === asset.height).length}
-        />
+        <Metric label="Deliverables" value={pressDeliverables.length} />
+        <Metric label="Required exports" value={requiredExportCount} />
+        <Metric label="Destination groups" value={destinationCount} />
       </section>
 
       <section className="py-10">
         <div className="mb-8">
-          <div>
-            <h2 className="text-2xl font-medium tracking-tight">
-              Production inventory
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-              The preview area preserves each file’s actual proportions. Visual
-              size is normalized only enough to keep extremely wide and tall
-              formats readable on this page.
-            </p>
-          </div>
+          <h2 className="text-2xl font-medium tracking-tight">
+            Deliverables sheet
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+            Design each master once, then use the listed requirements to prepare
+            platform-ready exports.
+          </p>
           <p className="mt-3 text-xs text-muted-foreground">
             Specifications checked July 26, 2026
           </p>
         </div>
 
         <div className="divide-y border-y">
-          {pressAssets.map((asset, index) => (
-            <AssetRow key={asset.id} asset={asset} index={index + 1} />
+          {pressDeliverables.map((deliverable, index) => (
+            <DeliverableRow
+              key={deliverable.id}
+              deliverable={deliverable}
+              index={index + 1}
+            />
           ))}
         </div>
       </section>
 
       <footer className="border-t pt-6 text-xs leading-5 text-muted-foreground">
-        “Production standard” marks a consolidated working size where the
-        platform does not publish a strict recommendation. Recheck platform
-        specifications before each major brand export.
+        Recheck platform specifications before each major brand export.
       </footer>
     </div>
   )
 }
 
-function AssetRow({ asset, index }: { asset: PressAsset; index: number }) {
-  const ratio = asset.width / asset.height
-  const ratioLabel = getRatioLabel(asset.width, asset.height)
-
+function DeliverableRow({
+  deliverable,
+  index,
+}: {
+  deliverable: PressDeliverable
+  index: number
+}) {
   return (
     <article className="grid gap-6 py-8 lg:grid-cols-[2.5rem_minmax(15rem,0.8fr)_minmax(0,1.2fr)] lg:gap-8">
       <span className="text-xs tabular-nums text-muted-foreground">
@@ -80,100 +83,68 @@ function AssetRow({ asset, index }: { asset: PressAsset; index: number }) {
 
       <div>
         <div className="mb-4 flex items-start justify-between gap-3">
-          <div>
-            <h3 className="text-lg font-medium">{asset.name}</h3>
-            <p className="mt-1 font-mono text-sm text-muted-foreground">
-              {asset.width} × {asset.height} px · {ratioLabel}
-            </p>
-          </div>
-          <Badge variant="outline">{asset.format}</Badge>
+          <h3 className="text-lg font-medium">{deliverable.name}</h3>
+          <Badge variant="outline">{deliverable.format}</Badge>
         </div>
-
-        <NativeRatioPreview asset={asset} ratio={ratio} />
+        <DeliverablePreview deliverable={deliverable} />
+        <p className="mt-4 text-sm leading-6 text-muted-foreground">
+          {deliverable.guidance}
+        </p>
       </div>
 
-      <div className="flex flex-col justify-center">
+      <div>
         <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          Goes to
+          Size requirements
         </p>
-        <div className="flex flex-wrap gap-2">
-          {asset.destinations.map((destination) => (
-            <Badge
-              key={`${destination.surface}-${destination.placement}`}
-              variant="secondary"
-              className="h-auto max-w-full py-1 whitespace-normal"
+        <div className="divide-y border-y">
+          {deliverable.requirements.map((requirement) => (
+            <div
+              key={`${requirement.platform}-${requirement.width}-${requirement.height}`}
+              className="grid gap-2 py-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-6"
             >
-              <span className="font-medium">{destination.surface}</span>
-              <span className="text-muted-foreground">
-                · {destination.placement}
-              </span>
-            </Badge>
+              <div>
+                <p className="text-sm font-medium">{requirement.platform}</p>
+                <p className="mt-1 text-sm leading-5 text-muted-foreground">
+                  {requirement.placement}
+                </p>
+                {requirement.note ? (
+                  <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                    {requirement.note}
+                  </p>
+                ) : null}
+              </div>
+              <p className="font-mono text-sm whitespace-nowrap tabular-nums sm:text-right">
+                {requirement.width} × {requirement.height} px
+              </p>
+            </div>
           ))}
         </div>
-
-        {asset.safeArea ? (
-          <p className="mt-5 border-l-2 pl-3 text-sm leading-6">
-            {asset.safeArea}
-          </p>
-        ) : null}
-        {asset.guidance ? (
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
-            {asset.guidance}
-          </p>
-        ) : null}
-
-        <a
-          href={asset.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-4 inline-flex w-fit items-center gap-1 text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-        >
-          {asset.source}
-          <ArrowUpRight className="size-3" />
-        </a>
       </div>
     </article>
   )
 }
 
-function NativeRatioPreview({
-  asset,
-  ratio,
+function DeliverablePreview({
+  deliverable,
 }: {
-  asset: PressAsset
-  ratio: number
+  deliverable: PressDeliverable
 }) {
-  const maxWidth =
-    ratio >= 6 ? "100%" : ratio >= 2.5 ? "92%" : ratio < 0.8 ? "42%" : "72%"
+  const ratio = deliverable.previewWidth / deliverable.previewHeight
+  const maxWidth = ratio >= 2.5 ? "92%" : ratio < 0.8 ? "42%" : "72%"
 
   return (
     <div className="flex min-h-44 items-center justify-center overflow-hidden rounded-md bg-muted p-5 sm:min-h-56">
       <div
-        className="relative grid place-items-center border border-foreground/30 bg-background"
+        className="grid place-items-center border border-foreground/30 bg-background"
         style={{
-          aspectRatio: `${asset.width} / ${asset.height}`,
+          aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
           maxWidth,
           width: ratio > 1 ? "100%" : "auto",
           height: ratio <= 1 ? "13rem" : "auto",
         }}
       >
-        {asset.safeArea?.includes("1235") ? (
-          <div
-            className="absolute border border-dashed border-foreground/40"
-            style={{
-              width: `${(1235 / asset.width) * 100}%`,
-              height: `${(338 / asset.height) * 100}%`,
-            }}
-          />
-        ) : null}
-        {asset.safeArea?.includes("top 48") ? (
-          <div
-            className="absolute inset-x-0 top-0 border-b border-dashed border-foreground/40 bg-muted/60"
-            style={{ height: `${(48 / asset.height) * 100}%` }}
-          />
-        ) : null}
-        <span className="relative bg-background/80 px-2 py-1 font-mono text-[10px] tabular-nums sm:text-xs">
-          {asset.width} × {asset.height}
+        <span className="bg-background/80 px-2 py-1 text-center text-xs text-muted-foreground">
+          {deliverable.name} master
         </span>
       </div>
     </div>
@@ -187,13 +158,4 @@ function Metric({ label, value }: { label: string; value: number }) {
       <div className="mt-1 text-sm text-muted-foreground">{label}</div>
     </div>
   )
-}
-
-function getRatioLabel(width: number, height: number) {
-  const divisor = greatestCommonDivisor(width, height)
-  return `${width / divisor}:${height / divisor}`
-}
-
-function greatestCommonDivisor(a: number, b: number): number {
-  return b === 0 ? a : greatestCommonDivisor(b, a % b)
 }
