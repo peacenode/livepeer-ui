@@ -46,7 +46,7 @@ export function InstallAgentFooter({
           <p className="mb-3 text-sm text-muted-foreground">
             In your agent&apos;s MCP / connector settings, add this server:
           </p>
-          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground shadow-sm">
+          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground">
             <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
               {mcpServerUrl}
             </code>
