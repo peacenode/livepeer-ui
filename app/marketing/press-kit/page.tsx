@@ -52,11 +52,8 @@ function Deliverable({
   return (
     <article>
       <DeliverablePreview deliverable={deliverable} />
-      <div className="mt-4 flex items-baseline justify-between gap-4">
+      <div className="mt-4">
         <h2 className="text-lg font-medium">{deliverable.name}</h2>
-        <span className="text-xs text-muted-foreground">
-          {deliverable.format}
-        </span>
       </div>
 
       <div className="mt-4">

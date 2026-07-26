@@ -7,7 +7,6 @@ export type PressRequirement = {
 export type PressDeliverable = {
   id: string
   name: string
-  format: string
   previewWidth: number
   previewHeight: number
   requirements: PressRequirement[]
@@ -17,7 +16,6 @@ export const pressDeliverables: PressDeliverable[] = [
   {
     id: "avatar",
     name: "Avatar",
-    format: "PNG",
     previewWidth: 1,
     previewHeight: 1,
     requirements: [
@@ -47,7 +45,6 @@ export const pressDeliverables: PressDeliverable[] = [
   {
     id: "banners-headers",
     name: "Banners and headers",
-    format: "JPG / PNG",
     previewWidth: 3,
     previewHeight: 1,
     requirements: [
@@ -86,7 +83,6 @@ export const pressDeliverables: PressDeliverable[] = [
   {
     id: "social-preview",
     name: "Social preview",
-    format: "JPG / PNG",
     previewWidth: 1200,
     previewHeight: 630,
     requirements: [
@@ -105,7 +101,6 @@ export const pressDeliverables: PressDeliverable[] = [
   {
     id: "vertical-social-cover",
     name: "Vertical social cover",
-    format: "JPG",
     previewWidth: 9,
     previewHeight: 16,
     requirements: [
