@@ -55,7 +55,7 @@ export default function MarketingPlannerPage() {
                         {group.deliverables.map((deliverable) => (
                           <div
                             key={deliverable.title}
-                            className="flex min-w-0 flex-col gap-1"
+                            className="flex min-w-0 flex-col gap-1 rounded-md bg-muted p-4"
                           >
                             <p className="text-sm leading-6">
                               {deliverable.title}
