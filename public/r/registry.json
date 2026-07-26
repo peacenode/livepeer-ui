@@ -180,6 +180,25 @@
       ]
     },
     {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Displays an attached file with media, metadata, and actions.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/ui/attachment.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
@@ -271,6 +290,21 @@
       ]
     },
     {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Displays actions when the user opens the context menu on a target.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "components/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
@@ -316,6 +350,26 @@
       "files": [
         {
           "path": "components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Groups an input with inline or block-level controls and adornments.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/textarea.json"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -841,6 +895,111 @@
       ]
     },
     {
+      "name": "network-hero-section",
+      "type": "registry:block",
+      "title": "Network Hero",
+      "description": "Livepeer.org network hero with the particle field and primary account actions.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-agent-feature-section",
+      "type": "registry:block",
+      "title": "Livepeer Agent Feature",
+      "description": "Livepeer Agent product feature section with install actions and agent compatibility.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "orchestrator-cta-section",
+      "type": "registry:block",
+      "title": "Orchestrator CTA",
+      "description": "Dark orchestrator call-to-action section with an inverted particle field.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
       "name": "media-context-menu",
       "type": "registry:component",
       "title": "Media Context Menu",
@@ -874,6 +1033,177 @@
         {
           "path": "app/mockups/videobuddy/project-picker.tsx",
           "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "generation-workspace-section",
+      "type": "registry:block",
+      "title": "Generation Workspace",
+      "description": "Generation composer and searchable media history section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/attachment.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input-group.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/agent-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "storyboards-workspace-section",
+      "type": "registry:block",
+      "title": "Storyboards Workspace",
+      "description": "Storyboard collections, frame actions, upload, and project assignment section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/project-picker.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "characters-workspace-section",
+      "type": "registry:block",
+      "title": "Characters Workspace",
+      "description": "Character reference collections, detail, upload, and project assignment section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/characters/characters-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/project-picker.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "clips-library-section",
+      "type": "registry:block",
+      "title": "Clips Library",
+      "description": "Clips library with upload action, playable media cards, context actions, and empty state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/footage/footage-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "projects-workspace-section",
+      "type": "registry:block",
+      "title": "Projects Workspace",
+      "description": "Project index and detail section with storyboards, characters, renders, finals, and creation dialogs.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/projects/projects-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
         }
       ]
     }

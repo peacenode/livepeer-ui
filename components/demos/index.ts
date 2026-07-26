@@ -4,14 +4,17 @@ import AccordionDemo from "./accordion-demo"
 import AlertDemo from "./alert-demo"
 import AlertDialogDemo from "./alert-dialog-demo"
 import AvatarDemo from "./avatar-demo"
+import AttachmentDemo from "./attachment-demo"
 import BadgeDemo from "./badge-demo"
 import BreadcrumbDemo from "./breadcrumb-demo"
 import ButtonDemo from "./button-demo"
 import CardDemo from "./card-demo"
 import CheckboxDemo from "./checkbox-demo"
+import ContextMenuDemo from "./context-menu-demo"
 import DialogDemo from "./dialog-demo"
 import DropdownMenuDemo from "./dropdown-menu-demo"
 import InputDemo from "./input-demo"
+import InputGroupDemo from "./input-group-demo"
 import KbdDemo from "./kbd-demo"
 import LabelDemo from "./label-demo"
 import PopoverDemo from "./popover-demo"
@@ -43,20 +46,31 @@ import MediaContextMenuDemo from "./media-context-menu-demo"
 import OrchestratorTableSectionDemo from "./orchestrator-table-section-demo"
 import ProjectPickerDemo from "./project-picker-demo"
 import RunnerDeltaStreamDemo from "./runner-delta-stream-demo"
+import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-demo"
+import NetworkHeroSectionDemo from "./network-hero-section-demo"
+import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
+import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
+import ClipsLibrarySectionDemo from "./clips-library-section-demo"
+import GenerationWorkspaceSectionDemo from "./generation-workspace-section-demo"
+import ProjectsWorkspaceSectionDemo from "./projects-workspace-section-demo"
+import StoryboardsWorkspaceSectionDemo from "./storyboards-workspace-section-demo"
 
 export const demos: Record<string, ComponentType> = {
   accordion: AccordionDemo,
   alert: AlertDemo,
   "alert-dialog": AlertDialogDemo,
   avatar: AvatarDemo,
+  attachment: AttachmentDemo,
   badge: BadgeDemo,
   breadcrumb: BreadcrumbDemo,
   button: ButtonDemo,
   card: CardDemo,
   checkbox: CheckboxDemo,
+  "context-menu": ContextMenuDemo,
   dialog: DialogDemo,
   "dropdown-menu": DropdownMenuDemo,
   input: InputDemo,
+  "input-group": InputGroupDemo,
   kbd: KbdDemo,
   label: LabelDemo,
   popover: PopoverDemo,
@@ -88,4 +102,12 @@ export const demos: Record<string, ComponentType> = {
   "orchestrator-table-section": OrchestratorTableSectionDemo,
   "project-picker": ProjectPickerDemo,
   "runner-delta-stream": RunnerDeltaStreamDemo,
+  "livepeer-agent-feature-section": LivepeerAgentFeatureSectionDemo,
+  "network-hero-section": NetworkHeroSectionDemo,
+  "orchestrator-cta-section": OrchestratorCtaSectionDemo,
+  "characters-workspace-section": CharactersWorkspaceSectionDemo,
+  "clips-library-section": ClipsLibrarySectionDemo,
+  "generation-workspace-section": GenerationWorkspaceSectionDemo,
+  "projects-workspace-section": ProjectsWorkspaceSectionDemo,
+  "storyboards-workspace-section": StoryboardsWorkspaceSectionDemo,
 }

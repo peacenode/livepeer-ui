@@ -4,15 +4,18 @@
     { "name": "accordion", "title": "Accordion", "description": "A vertically stacked set of interactive headings that each reveal a section of content." },
     { "name": "alert", "title": "Alert", "description": "Displays a callout for user attention." },
     { "name": "alert-dialog", "title": "Alert Dialog", "description": "A modal dialog that interrupts the user with important content and expects a response." },
+    { "name": "attachment", "title": "Attachment", "description": "Displays an attached file with media, metadata, and actions." },
     { "name": "avatar", "title": "Avatar", "description": "An image element with a fallback for representing the user." },
     { "name": "badge", "title": "Badge", "description": "Displays a badge or a component that looks like a badge." },
     { "name": "breadcrumb", "title": "Breadcrumb", "description": "Displays the path to the current resource using a hierarchy of links." },
     { "name": "button", "title": "Button", "description": "Displays a button or a component that looks like a button." },
     { "name": "card", "title": "Card", "description": "Displays a card with header, content, and footer." },
     { "name": "checkbox", "title": "Checkbox", "description": "A control that allows the user to toggle between checked and not checked." },
+    { "name": "context-menu", "title": "Context Menu", "description": "Displays actions when the user opens the context menu on a target." },
     { "name": "dialog", "title": "Dialog", "description": "A window overlaid on either the primary window or another dialog window." },
     { "name": "dropdown-menu", "title": "Dropdown Menu", "description": "Displays a menu to the user, triggered by a button." },
     { "name": "input", "title": "Input", "description": "Displays a form input field or a component that looks like an input field." },
+    { "name": "input-group", "title": "Input Group", "description": "Groups an input with inline or block-level controls and adornments." },
     { "name": "kbd", "title": "Kbd", "description": "Displays keyboard input or shortcuts." },
     { "name": "label", "title": "Label", "description": "Renders an accessible label associated with controls." },
     { "name": "popover", "title": "Popover", "description": "Displays rich content in a portal, triggered by a button." },
@@ -42,6 +45,7 @@
           "title": "Page Frame",
           "description": "Page-level frame with a responsive heading, description, action slot, and optional bordered panel.",
           "level": "section",
+          "uses": [],
           "previewPath": "/mockups/livepeer-agent",
           "files": ["components/mockups/platform-page.tsx"]
         },
@@ -50,6 +54,7 @@
           "title": "Sign In Card",
           "description": "Standalone Livepeer Agent sign-in card with provider and email actions.",
           "level": "component",
+          "uses": ["button", "input"],
           "files": [
             "components/mockups/livepeer-agent-sign-in-card.tsx",
             "components/brand-social-icons.tsx"
@@ -60,6 +65,7 @@
           "title": "Sidebar",
           "description": "Desktop application sidebar with project navigation, account controls, and product links.",
           "level": "component",
+          "uses": ["avatar", "dropdown-menu", "toggle-group"],
           "previewPath": "/mockups/livepeer-agent",
           "files": [
             "components/mockups/platform-sidebar.tsx",
@@ -72,6 +78,7 @@
           "title": "Mobile Navigation",
           "description": "Sheet-based mobile navigation using the Livepeer Agent navigation model.",
           "level": "component",
+          "uses": ["button", "sheet", "livepeer-agent-sidebar"],
           "previewPath": "/mockups/livepeer-agent",
           "files": [
             "components/mockups/platform-mobile-nav.tsx",
@@ -83,6 +90,7 @@
           "title": "Livepeer Agent Onboarding",
           "description": "Complete Livepeer Agent onboarding section with progress, setup steps, and links into billing and installation.",
           "level": "section",
+          "uses": ["card", "livepeer-cube-stream"],
           "previewPath": "/mockups/livepeer-agent",
           "files": ["components/mockups/livepeer-agent-onboarding-section.tsx"]
         },
@@ -91,6 +99,7 @@
           "title": "Orchestrator Table",
           "description": "Installable orchestrator results section with literal addresses, status, stake, and pricing columns.",
           "level": "section",
+          "uses": ["badge", "button", "progress", "table"],
           "previewPath": "/mockups/livepeer-agent/compute",
           "files": ["components/mockups/orchestrator-table.tsx"]
         }
@@ -104,6 +113,7 @@
           "title": "Agent Compatibility",
           "description": "Responsive compatibility strip for supported AI coding agents.",
           "level": "component",
+          "uses": [],
           "previewPath": "/mockups/livepeer-org/agent",
           "files": ["components/mockups/agent-compatibility.tsx"]
         },
@@ -112,6 +122,7 @@
           "title": "Livepeer Cube Stream",
           "description": "Animated Livepeer particle field used as a section background.",
           "level": "component",
+          "uses": [],
           "previewPath": "/mockups/livepeer-org",
           "files": ["components/mockups/livepeer-cube-stream.tsx"]
         },
@@ -120,6 +131,7 @@
           "title": "Runner Delta Stream",
           "description": "Animated runner delta field used in install and call-to-action sections.",
           "level": "component",
+          "uses": [],
           "previewPath": "/mockups/livepeer-org/agent",
           "files": ["components/mockups/runner-delta-stream.tsx"]
         },
@@ -128,10 +140,35 @@
           "title": "Livepeer Agent Hero",
           "description": "Standalone Livepeer Agent installation hero with animated field, connector URL, and account actions.",
           "level": "section",
+          "uses": ["button", "runner-delta-stream"],
           "files": [
             "components/mockups/livepeer-agent-hero.tsx",
             "components/mockups/runner-delta-stream.tsx"
           ]
+        },
+        {
+          "name": "network-hero-section",
+          "title": "Network Hero",
+          "description": "Livepeer.org network hero with the particle field and primary account actions.",
+          "level": "section",
+          "uses": ["button", "livepeer-cube-stream"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
+        },
+        {
+          "name": "livepeer-agent-feature-section",
+          "title": "Livepeer Agent Feature",
+          "description": "Livepeer Agent product feature section with install actions and agent compatibility.",
+          "level": "section",
+          "uses": ["agent-compatibility", "button"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
+        },
+        {
+          "name": "orchestrator-cta-section",
+          "title": "Orchestrator CTA",
+          "description": "Dark orchestrator call-to-action section with an inverted particle field.",
+          "level": "section",
+          "uses": ["button", "livepeer-cube-stream"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
         }
       ]
     },
@@ -143,6 +180,7 @@
           "title": "Media Context Menu",
           "description": "Reusable media context menu for opening, downloading, duplicating, rerolling, and removing media.",
           "level": "component",
+          "uses": ["context-menu"],
           "previewPath": "/mockups/client",
           "files": ["app/mockups/videobuddy/media-context-menu.tsx"]
         },
@@ -151,8 +189,73 @@
           "title": "Project Picker",
           "description": "Compact project selector with a project creation action.",
           "level": "component",
+          "uses": ["button", "dropdown-menu"],
           "previewPath": "/mockups/client/storyboards",
           "files": ["app/mockups/videobuddy/project-picker.tsx"]
+        },
+        {
+          "name": "generation-workspace-section",
+          "title": "Generation Workspace",
+          "description": "Generation composer and searchable media history section.",
+          "level": "section",
+          "uses": ["attachment", "badge", "button", "dropdown-menu", "input-group", "media-context-menu"],
+          "files": [
+            "app/mockups/videobuddy/agent-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "storyboards-workspace-section",
+          "title": "Storyboards Workspace",
+          "description": "Storyboard collections, frame actions, upload, and project assignment section.",
+          "level": "section",
+          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "files": [
+            "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "characters-workspace-section",
+          "title": "Characters Workspace",
+          "description": "Character reference collections, detail, upload, and project assignment section.",
+          "level": "section",
+          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "files": [
+            "app/mockups/videobuddy/characters/characters-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "clips-library-section",
+          "title": "Clips Library",
+          "description": "Clips library with upload action, playable media cards, context actions, and empty state.",
+          "level": "section",
+          "uses": ["button", "media-context-menu"],
+          "files": [
+            "app/mockups/videobuddy/footage/footage-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "projects-workspace-section",
+          "title": "Projects Workspace",
+          "description": "Project index and detail section with storyboards, characters, renders, finals, and creation dialogs.",
+          "level": "section",
+          "uses": ["badge", "button", "dialog", "dropdown-menu", "input", "tabs"],
+          "files": [
+            "app/mockups/videobuddy/projects/projects-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts"
+          ]
         }
       ]
     }
