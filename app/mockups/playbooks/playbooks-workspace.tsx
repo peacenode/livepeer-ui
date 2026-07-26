@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
+import { LivepeerWordmark } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 
 export function PlaybooksWorkspace() {
@@ -74,8 +75,20 @@ export function PlaybooksWorkspace() {
               className="h-5 w-2.5 object-contain opacity-50"
             />
           </div>
-          <h2 className="font-runner text-5xl font-medium tracking-tight">
-            RUNNER
+          <h2
+            className="flex items-center gap-3 text-foreground sm:gap-4"
+            aria-label="Livepeer Agent"
+          >
+            <LivepeerWordmark
+              className="h-8 w-auto sm:h-10"
+              aria-hidden="true"
+            />
+            <span
+              className="font-runner text-5xl leading-none font-medium tracking-tight sm:text-6xl"
+              aria-hidden="true"
+            >
+              AGENT
+            </span>
           </h2>
           <p className="max-w-md text-sm leading-relaxed text-balance text-foreground/65">
             Your agent companion, ready to create images, video, and audio with

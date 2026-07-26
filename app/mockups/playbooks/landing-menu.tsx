@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils"
 const siteLinks = [
   { label: "Home", href: "/mockups/playbooks" },
   { label: "GPU", href: "/mockups/playbooks/earn" },
-  { label: "Runner", href: "/mockups/playbooks/install" },
+  { label: "Livepeer Agent", href: "/mockups/playbooks/install" },
   { label: "Playbooks", href: "/mockups/playbooks/library" },
 ]
 
