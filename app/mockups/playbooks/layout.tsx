@@ -5,7 +5,6 @@ import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { SiteFooter } from "@/components/site-footer"
 
 import { LandingMenu } from "./landing-menu"
-import { PlaybooksNav } from "./playbooks-nav"
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +33,6 @@ export default function PlaybooksLayout({
             </span>
           </Link>
           <div className="flex items-center gap-1">
-            <PlaybooksNav />
             <LandingMenu />
           </div>
         </div>
