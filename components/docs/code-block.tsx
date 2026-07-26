@@ -1,7 +1,7 @@
 import { codeToHtml } from "shiki"
 
 import { cn } from "@/lib/utils"
-import { CopyButton } from "@/components/docs/copy-button"
+import { CopyButton } from "@/components/copy-button"
 
 export async function CodeBlock({
   code,
