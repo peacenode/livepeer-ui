@@ -1,10 +1,7 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowUpRightIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 
 import { EcosystemCatalog } from "./ecosystem-catalog"
+import { SubmitEcosystemDialog } from "./submit-ecosystem-dialog"
 
 export const metadata: Metadata = {
   title: "Ecosystem",
@@ -29,22 +26,7 @@ export default function EcosystemPage() {
               video inference on Livepeer.
             </p>
           </div>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            render={
-              <Link
-                href="https://livepeer.org/ecosystem/submit"
-                target="_blank"
-                rel="noreferrer"
-              />
-            }
-            className="h-16 rounded-sm px-5"
-          >
-            Submit app
-            <ArrowUpRightIcon aria-hidden="true" />
-          </Button>
+          <SubmitEcosystemDialog />
         </div>
 
         <div className="mt-16 sm:mt-20">
