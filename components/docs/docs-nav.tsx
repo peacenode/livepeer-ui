@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { components } from "@/lib/docs"
+import { componentGroups, primitives } from "@/lib/docs"
 
 export function DocsNav({
   onNavigate,
@@ -50,9 +50,16 @@ export function DocsNav({
       external: true,
       items: [{ title: "Client", href: "/mockups/client" }],
     },
+    ...componentGroups.map((group) => ({
+      title: group.title,
+      items: group.items.map((component) => ({
+        title: component.title,
+        href: `/docs/components/${component.name}`,
+      })),
+    })),
     {
-      title: "Components",
-      items: components.map((component) => ({
+      title: "Primitives",
+      items: primitives.map((component) => ({
         title: component.title,
         href: `/docs/components/${component.name}`,
       })),

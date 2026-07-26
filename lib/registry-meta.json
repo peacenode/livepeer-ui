@@ -32,5 +32,204 @@
     { "name": "toggle", "title": "Toggle", "description": "A two-state button that can be either on or off." },
     { "name": "toggle-group", "title": "Toggle Group", "description": "A set of two-state buttons that can be toggled on or off." },
     { "name": "tooltip", "title": "Tooltip", "description": "A popup that displays information related to an element on hover or focus." }
+  ],
+  "catalog": [
+    {
+      "title": "Livepeer Agent",
+      "items": [
+        {
+          "name": "livepeer-agent-page-frame",
+          "title": "Page Frame",
+          "description": "Page-level frame with a responsive heading, description, action slot, and optional bordered panel.",
+          "level": "section",
+          "previewPath": "/mockups/livepeer-agent",
+          "files": ["components/mockups/platform-page.tsx"]
+        },
+        {
+          "name": "livepeer-agent-sidebar",
+          "title": "Sidebar",
+          "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-agent",
+          "files": [
+            "components/mockups/platform-sidebar.tsx",
+            "components/mockups/project-menu.tsx",
+            "components/mockups/user-menu.tsx"
+          ]
+        },
+        {
+          "name": "livepeer-agent-mobile-nav",
+          "title": "Mobile Navigation",
+          "description": "Sheet-based mobile navigation using the Livepeer Agent navigation model.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-agent",
+          "files": [
+            "components/mockups/platform-mobile-nav.tsx",
+            "components/mockups/platform-sidebar.tsx"
+          ]
+        },
+        {
+          "name": "runner-onboarding-section",
+          "title": "Runner Onboarding",
+          "description": "Complete onboarding section with progress, setup steps, and links into billing and installation.",
+          "level": "section",
+          "previewPath": "/mockups/livepeer-agent",
+          "files": ["components/mockups/runner-onboarding-card.tsx"]
+        },
+        {
+          "name": "orchestrator-table-section",
+          "title": "Orchestrator Table",
+          "description": "Installable orchestrator results section with literal addresses, status, stake, and pricing columns.",
+          "level": "section",
+          "previewPath": "/mockups/livepeer-agent/compute",
+          "files": ["components/mockups/orchestrator-table.tsx"]
+        },
+        {
+          "name": "container-card",
+          "title": "Container Card",
+          "description": "Inference container card with image, metadata, endpoints, and navigation into container details.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-agent/inference/ai-runner",
+          "files": ["components/mockups/container-post-card.tsx"]
+        }
+      ]
+    },
+    {
+      "title": "Livepeer.org",
+      "items": [
+        {
+          "name": "agent-compatibility",
+          "title": "Agent Compatibility",
+          "description": "Responsive compatibility strip for supported AI coding agents.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-org/agent",
+          "files": ["components/mockups/agent-compatibility.tsx"]
+        },
+        {
+          "name": "livepeer-cube-stream",
+          "title": "Livepeer Cube Stream",
+          "description": "Animated Livepeer particle field used as a section background.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-org",
+          "files": ["components/mockups/livepeer-cube-stream.tsx"]
+        },
+        {
+          "name": "runner-delta-stream",
+          "title": "Runner Delta Stream",
+          "description": "Animated runner delta field used in install and call-to-action sections.",
+          "level": "component",
+          "previewPath": "/mockups/livepeer-org/agent",
+          "files": ["components/mockups/runner-delta-stream.tsx"]
+        },
+        {
+          "name": "network-landing-sections",
+          "title": "Network Landing Sections",
+          "description": "Complete network hero, Livepeer Agent feature, and orchestrator call-to-action page sections.",
+          "level": "section",
+          "previewPath": "/mockups/livepeer-org",
+          "files": [
+            "app/mockups/playbooks/playbooks-workspace.tsx",
+            "components/mockups/agent-compatibility.tsx",
+            "components/mockups/livepeer-cube-stream.tsx"
+          ]
+        },
+        {
+          "name": "playbook-catalog-section",
+          "title": "Playbook Catalog",
+          "description": "Searchable playbook catalog section with responsive result cards and an empty state.",
+          "level": "section",
+          "previewPath": "/mockups/livepeer-org/library",
+          "files": [
+            "app/mockups/playbooks/source-catalog.tsx",
+            "app/mockups/playbooks/daydream-source.ts"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Client",
+      "items": [
+        {
+          "name": "media-context-menu",
+          "title": "Media Context Menu",
+          "description": "Reusable media context menu for opening, downloading, duplicating, rerolling, and removing media.",
+          "level": "component",
+          "previewPath": "/mockups/client",
+          "files": ["app/mockups/videobuddy/media-context-menu.tsx"]
+        },
+        {
+          "name": "project-picker",
+          "title": "Project Picker",
+          "description": "Compact project selector with a project creation action.",
+          "level": "component",
+          "previewPath": "/mockups/client/storyboards",
+          "files": ["app/mockups/videobuddy/project-picker.tsx"]
+        },
+        {
+          "name": "generation-workspace-section",
+          "title": "Generation Workspace",
+          "description": "Complete generation composer, searchable history, media results, and render detail section.",
+          "level": "section",
+          "previewPath": "/mockups/client",
+          "files": [
+            "app/mockups/videobuddy/agent-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "storyboards-workspace-section",
+          "title": "Storyboards Workspace",
+          "description": "Complete storyboard collection, frame actions, upload, and project assignment section.",
+          "level": "section",
+          "previewPath": "/mockups/client/storyboards",
+          "files": [
+            "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "characters-workspace-section",
+          "title": "Characters Workspace",
+          "description": "Complete character reference collection, detail, upload, and project assignment section.",
+          "level": "section",
+          "previewPath": "/mockups/client/characters",
+          "files": [
+            "app/mockups/videobuddy/characters/characters-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "clips-library-section",
+          "title": "Clips Library",
+          "description": "Complete clips library with upload action, playable media cards, context actions, and empty state.",
+          "level": "section",
+          "previewPath": "/mockups/client/footage",
+          "files": [
+            "app/mockups/videobuddy/footage/footage-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "projects-workspace-section",
+          "title": "Projects Workspace",
+          "description": "Complete project index and detail workspace with storyboards, characters, renders, finals, and creation dialogs.",
+          "level": "section",
+          "previewPath": "/mockups/client/projects",
+          "files": [
+            "app/mockups/videobuddy/projects/projects-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts"
+          ]
+        }
+      ]
+    }
   ]
 }

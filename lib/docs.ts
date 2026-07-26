@@ -11,9 +11,30 @@ export interface ComponentDoc {
   name: string
   title: string
   description: string
+  level?: "primitive" | "component" | "section"
+  previewPath?: string
 }
 
-export const components: ComponentDoc[] = registryMeta.components
+export interface ComponentGroup {
+  title: string
+  items: ComponentDoc[]
+}
+
+export const primitives: ComponentDoc[] = registryMeta.components.map(
+  (component) => ({ ...component, level: "primitive" as const })
+)
+
+export const componentGroups: ComponentGroup[] = registryMeta.catalog.map(
+  (group) => ({
+    title: group.title,
+    items: group.items as ComponentDoc[],
+  })
+)
+
+export const components: ComponentDoc[] = [
+  ...primitives,
+  ...componentGroups.flatMap((group) => group.items),
+]
 
 export function getComponentDoc(name: string) {
   return components.find((component) => component.name === name)

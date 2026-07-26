@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "agent-compatibility",
+  "title": "Agent Compatibility",
+  "description": "Responsive compatibility strip for supported AI coding agents.",
+  "dependencies": [
+    "next"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/agent-compatibility.tsx",
+      "content": "import Image from \"next/image\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst agents = [\n  {\n    name: \"Claude\",\n    src: \"/compatibility/20260725-000727/claude.svg\",\n  },\n  {\n    name: \"Claude Code\",\n    src: \"/compatibility/20260724-2055/claude-code.png\",\n  },\n  {\n    name: \"Codex\",\n    src: \"/compatibility/20260725-103200-openai/OAI_OpenAI-Blossom_White.svg\",\n    monochrome: true,\n    opticalScale: true,\n  },\n  {\n    name: \"Hermes\",\n    src: \"/compatibility/20260725-000727/hermes.svg\",\n    monochrome: true,\n  },\n  {\n    name: \"OpenClaw\",\n    src: \"/compatibility/20260725-000727/openclaw.svg\",\n  },\n  {\n    name: \"Pi\",\n    src: \"/compatibility/20260725-000727/pi.svg\",\n    monochrome: true,\n  },\n]\n\nfunction AgentCompatibility({\n  className,\n  inverted = false,\n  large = false,\n  responsiveAlignment = false,\n}: {\n  className?: string\n  inverted?: boolean\n  large?: boolean\n  responsiveAlignment?: boolean\n}) {\n  return (\n    <div\n      className={cn(\n        \"text-center\",\n        responsiveAlignment && \"sm:text-left\",\n        className\n      )}\n    >\n      <p\n        className={cn(\n          \"text-sm\",\n          inverted ? \"text-background/45\" : \"text-foreground/45\"\n        )}\n      >\n        Compatible with\n      </p>\n      <ul\n        className={cn(\n          large\n            ? \"mt-8 grid grid-cols-3 place-items-center gap-8\"\n            : \"mt-4 flex flex-wrap items-center justify-center gap-6\",\n          responsiveAlignment && \"sm:justify-start\"\n        )}\n      >\n        {agents.map((agent) => (\n          <li key={agent.name}>\n            <Image\n              src={agent.src}\n              alt={agent.name}\n              width={large ? 64 : 32}\n              height={large ? 64 : 32}\n              className={cn(\n                \"size-8 object-contain\",\n                large && \"size-16\",\n                agent.opticalScale && \"scale-[1.75]\",\n                !inverted && agent.monochrome && \"brightness-0\"\n              )}\n            />\n          </li>\n        ))}\n      </ul>\n    </div>\n  )\n}\n\nexport { AgentCompatibility }\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

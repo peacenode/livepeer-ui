@@ -602,6 +602,475 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "livepeer-agent-page-frame",
+      "type": "registry:block",
+      "title": "Page Frame",
+      "description": "Page-level frame with a responsive heading, description, action slot, and optional bordered panel.",
+      "files": [
+        {
+          "path": "components/mockups/platform-page.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-agent-sidebar",
+      "type": "registry:component",
+      "title": "Sidebar",
+      "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+      "dependencies": [
+        "lucide-react",
+        "next",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/toggle-group.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/platform-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/project-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/user-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-agent-mobile-nav",
+      "type": "registry:component",
+      "title": "Mobile Navigation",
+      "description": "Sheet-based mobile navigation using the Livepeer Agent navigation model.",
+      "dependencies": [
+        "lucide-react",
+        "next",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/sheet.json",
+        "http://localhost:3000/r/toggle-group.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/platform-mobile-nav.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/platform-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/user-menu.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "runner-onboarding-section",
+      "type": "registry:block",
+      "title": "Runner Onboarding",
+      "description": "Complete onboarding section with progress, setup steps, and links into billing and installation.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/runner-onboarding-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "orchestrator-table-section",
+      "type": "registry:block",
+      "title": "Orchestrator Table",
+      "description": "Installable orchestrator results section with literal addresses, status, stake, and pricing columns.",
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/progress.json",
+        "http://localhost:3000/r/table.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/orchestrator-table.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/livepeer.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "container-card",
+      "type": "registry:component",
+      "title": "Container Card",
+      "description": "Inference container card with image, metadata, endpoints, and navigation into container details.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/avatar.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/card.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/container-post-card.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/livepeer.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "agent-compatibility",
+      "type": "registry:component",
+      "title": "Agent Compatibility",
+      "description": "Responsive compatibility strip for supported AI coding agents.",
+      "dependencies": [
+        "next"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-cube-stream",
+      "type": "registry:component",
+      "title": "Livepeer Cube Stream",
+      "description": "Animated Livepeer particle field used as a section background.",
+      "files": [
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "runner-delta-stream",
+      "type": "registry:component",
+      "title": "Runner Delta Stream",
+      "description": "Animated runner delta field used in install and call-to-action sections.",
+      "files": [
+        {
+          "path": "components/mockups/runner-delta-stream.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "network-landing-sections",
+      "type": "registry:block",
+      "title": "Network Landing Sections",
+      "description": "Complete network hero, Livepeer Agent feature, and orchestrator call-to-action page sections.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/playbooks/playbooks-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/agent-compatibility.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "lib/canvas-theme.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "playbook-catalog-section",
+      "type": "registry:block",
+      "title": "Playbook Catalog",
+      "description": "Searchable playbook catalog section with responsive result cards and an empty state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/playbooks/source-catalog.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/playbooks/daydream-source.ts",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "media-context-menu",
+      "type": "registry:component",
+      "title": "Media Context Menu",
+      "description": "Reusable media context menu for opening, downloading, duplicating, rerolling, and removing media.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "project-picker",
+      "type": "registry:component",
+      "title": "Project Picker",
+      "description": "Compact project selector with a project creation action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dropdown-menu.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/project-picker.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "generation-workspace-section",
+      "type": "registry:block",
+      "title": "Generation Workspace",
+      "description": "Complete generation composer, searchable history, media results, and render detail section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/attachment.json",
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input-group.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/agent-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "storyboards-workspace-section",
+      "type": "registry:block",
+      "title": "Storyboards Workspace",
+      "description": "Complete storyboard collection, frame actions, upload, and project assignment section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/project-picker.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "characters-workspace-section",
+      "type": "registry:block",
+      "title": "Characters Workspace",
+      "description": "Complete character reference collection, detail, upload, and project assignment section.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/characters/characters-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/project-picker.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "clips-library-section",
+      "type": "registry:block",
+      "title": "Clips Library",
+      "description": "Complete clips library with upload action, playable media cards, context actions, and empty state.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/context-menu.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/footage/footage-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "projects-workspace-section",
+      "type": "registry:block",
+      "title": "Projects Workspace",
+      "description": "Complete project index and detail workspace with storyboards, characters, renders, finals, and creation dialogs.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/badge.json",
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/dialog.json",
+        "http://localhost:3000/r/dropdown-menu.json",
+        "http://localhost:3000/r/input.json",
+        "http://localhost:3000/r/tabs.json"
+      ],
+      "files": [
+        {
+          "path": "app/mockups/videobuddy/projects/projects-workspace.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/image-grid-utils.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        }
+      ]
     }
   ]
 }
