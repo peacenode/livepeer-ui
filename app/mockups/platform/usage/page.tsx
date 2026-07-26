@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardDescription,
@@ -88,75 +89,107 @@ export default function MockupUsagePage() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <div className="flex flex-col gap-8">
-            <div className="grid gap-3 sm:grid-cols-3">
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Project spend</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+          <div className="flex flex-col gap-10">
+            <section className="border-y py-6 sm:py-8">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-sm font-medium">Billing and usage</h2>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    July 1–23, 2026
+                  </p>
+                </div>
+                <Link
+                  href="/mockups/api-console/organization?tab=billing"
+                  className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                >
+                  Manage billing
+                  <ArrowUpRightIcon className="size-4" aria-hidden="true" />
+                </Link>
+              </div>
+
+              <div className="mt-8 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-muted-foreground">
+                      Available credits
+                    </p>
+                    <Badge variant="outline">Credit</Badge>
+                  </div>
+                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
+                    $500.00
+                  </p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Applied before card charges
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">
+                    Current period
+                  </p>
+                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
                     $1,898.25
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Workflow runs</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    1.2M
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-              <Card variant="metric">
-                <CardHeader>
-                  <CardDescription>Compute time</CardDescription>
-                  <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
-                    2,431 GPU min
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2 md:items-start">
-              <div className="flex flex-col gap-3">
+                  </p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    63% of project budget
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Next invoice</p>
+                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
+                    Aug 1
+                  </p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Pay as you go
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">
+                    Payment method
+                  </p>
+                  <p className="mt-2 text-3xl font-medium tracking-tight tabular-nums">
+                    ···· 4242
+                  </p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Visa · expires 08/2029
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t pt-6">
                 <div className="flex items-center justify-between gap-4 text-sm">
                   <span className="font-medium">Monthly project budget</span>
-                  <span className="font-sans text-muted-foreground tabular-nums">
+                  <span className="text-muted-foreground tabular-nums">
                     $1,898.25 / $3,000
                   </span>
                 </div>
-                <Progress value={63} />
-                <p className="text-xs text-muted-foreground">
-                  Alerts are sent at 75%, 90%, and 100% of the project budget.
+                <Progress value={63} className="mt-3" />
+                <p className="mt-2 text-xs text-muted-foreground">
+                  $1,101.75 remaining. Alerts are sent at 75%, 90%, and 100%.
                 </p>
               </div>
-              <Link
-                href="/mockups/api-console/organization?tab=billing"
-                className="group w-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
-              >
-                <Card
-                  size="sm"
-                  className="h-full rounded-sm transition-colors group-hover:bg-accent"
-                >
-                  <CardHeader className="flex h-full flex-col justify-between">
-                    <div className="flex flex-col gap-1.5">
-                      <CardDescription>Default payment method</CardDescription>
-                      <p className="font-sans text-2xl font-medium tabular-nums">
-                        Visa ···· 4242
-                      </p>
-                      <p className="font-sans text-xs text-muted-foreground tabular-nums">
-                        Expires 08/2029
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <CardTitle>Billing</CardTitle>
-                      <ArrowUpRightIcon
-                        className="size-4 text-muted-foreground"
-                        aria-hidden="true"
-                      />
-                    </div>
+            </section>
+
+            <section className="flex flex-col gap-3">
+              <h2 className="text-sm font-medium">Activity</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Card variant="metric">
+                  <CardHeader>
+                    <CardDescription>Workflow runs</CardDescription>
+                    <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                      1.2M
+                    </CardTitle>
                   </CardHeader>
                 </Card>
-              </Link>
-            </div>
+                <Card variant="metric">
+                  <CardHeader>
+                    <CardDescription>Compute time</CardDescription>
+                    <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                      2,431 GPU min
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </div>
+            </section>
             <div className="flex flex-col gap-3">
               <h2 className="text-sm font-medium">Daily usage</h2>
               <Table>
