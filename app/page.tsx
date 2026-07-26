@@ -1,36 +1,29 @@
-import Link from "next/link"
-
-import { LivepeerLockup } from "@/components/brand"
-import { Button } from "@/components/ui/button"
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { SiteHeader } from "@/components/docs/site-header"
-import { components } from "@/lib/docs"
+import { RegistryHomeActions } from "@/components/registry-home-actions"
 
 export default function Page() {
   return (
     <div className="flex min-h-svh flex-col">
       <SiteHeader />
-      <main className="flex flex-1 items-center">
-        <section className="mx-auto w-full max-w-screen-2xl px-4 py-16 md:px-8">
-          <div className="mx-auto flex max-w-2xl flex-col items-start gap-4">
-            <h1>
-              <LivepeerLockup className="h-8 w-auto sm:h-10" aria-label="Livepeer UI" />
-            </h1>
-            <p className="text-base text-muted-foreground text-balance sm:text-lg">
-              A shadcn component registry built on the luma style. Neutral
-              palette, Favorit. {components.length} components, installable
-              with the shadcn CLI.
-            </p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              <Button nativeButton={false} render={<Link href="/docs" />}>
-                Get Started
-              </Button>
-              <Button
-                variant="outline"
-                nativeButton={false}
-                render={<Link href="/docs/components/accordion" />}
-              >
-                Browse Components
-              </Button>
+      <main className="flex flex-1 items-center justify-center">
+        <section className="flex w-full flex-col items-center px-5 py-16 text-center sm:px-8">
+          <h1
+            className="flex items-center justify-center gap-3 text-foreground"
+            aria-label="Livepeer"
+          >
+            <LivepeerGradientSymbol
+              className="h-12 w-auto sm:h-14"
+              aria-hidden="true"
+            />
+            <LivepeerWordmark
+              className="h-8 w-auto sm:h-9"
+              aria-hidden="true"
+            />
+          </h1>
+          <div className="mt-10 w-full">
+            <div className="mx-auto flex justify-center">
+              <RegistryHomeActions />
             </div>
           </div>
         </section>
