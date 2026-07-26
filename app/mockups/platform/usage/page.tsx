@@ -75,7 +75,7 @@ const resourceUsage = [
 
 export default function MockupUsagePage() {
   return (
-    <PlatformPage title="Usage">
+    <PlatformPage title="Usage" variant="plain">
       <Tabs defaultValue="overview" className="gap-8">
         <TabsList
           variant="line"

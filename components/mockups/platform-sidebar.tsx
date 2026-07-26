@@ -2,17 +2,32 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import {
+  ChartColumnIcon,
+  CircleUserRoundIcon,
+  GraduationCapIcon,
+  HomeIcon,
+  KeyRoundIcon,
+  ScrollTextIcon,
+} from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import { ProjectMenu } from "@/components/mockups/project-menu"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
 export const platformNavItems = [
-  { title: "Home", href: "/mockups/api-console" },
-  { title: "API", href: "/mockups/api-console/api" },
-  { title: "Usage", href: "/mockups/api-console/usage" },
-  { title: "Settings", href: "/mockups/api-console/settings" },
+  { title: "Home", href: "/mockups/api-console", icon: HomeIcon },
+  {
+    title: "Usage",
+    href: "/mockups/api-console/usage",
+    icon: ChartColumnIcon,
+  },
+  { title: "Keys", href: "/mockups/api-console/api", icon: KeyRoundIcon },
+  {
+    title: "Logs",
+    href: "/mockups/api-console/api-logs",
+    icon: ScrollTextIcon,
+  },
 ]
 
 export function PlatformSidebar() {
@@ -32,26 +47,45 @@ export function PlatformSidebar() {
           </span>
         </Link>
       </div>
-      <div className="px-3 pt-3 pb-4">
-        <ProjectMenu />
-      </div>
-      <nav className="flex flex-col items-start gap-1 px-3">
-        {platformNavItems.map((item) => (
+      <nav className="flex flex-col gap-1 px-3 pt-5">
+        {platformNavItems.map(({ icon: Icon, ...item }) => (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
-              "rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+              "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
               pathname === item.href
                 ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
+            <Icon className="size-4" aria-hidden="true" />
             {item.title}
           </Link>
         ))}
+        <a
+          href="https://docs.livepeer.org/"
+          target="_blank"
+          rel="noreferrer"
+          className="flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <GraduationCapIcon className="size-4" aria-hidden="true" />
+          Learn
+        </a>
       </nav>
-      <div className="mt-auto px-3 py-3">
+      <div className="mt-auto space-y-1 px-3 py-3">
+        <Link
+          href="/mockups/api-console/account"
+          className={cn(
+            "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+            pathname === "/mockups/api-console/account"
+              ? "bg-muted font-medium text-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <CircleUserRoundIcon className="size-4" aria-hidden="true" />
+          Manage profile
+        </Link>
         <UserMenu />
       </div>
     </aside>

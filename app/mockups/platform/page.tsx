@@ -27,7 +27,7 @@ export default async function MockupHomePage() {
   const forumTopics = await getLatestResearchTopics()
 
   return (
-    <PlatformPage title="Home">
+    <PlatformPage title="Home" variant="plain">
       <div className="flex flex-col gap-6">
         <RunnerOnboardingCard />
         <div className="grid gap-4 sm:grid-cols-2">
