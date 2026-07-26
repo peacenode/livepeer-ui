@@ -43,8 +43,8 @@ function DeleteApiKeyDialog({
         <Trash2Icon aria-hidden="true" />
       </AlertDialogTrigger>
       <AlertDialogContent className="gap-6 rounded-sm p-6 sm:max-w-lg sm:p-8">
-        <AlertDialogHeader className="block text-left">
-          <AlertDialogTitle className="font-sans text-2xl font-medium tracking-tight">
+        <AlertDialogHeader className="flex flex-col items-start text-left!">
+          <AlertDialogTitle className="w-full text-left font-sans text-2xl font-medium tracking-tight">
             Delete API key
           </AlertDialogTitle>
           <AlertDialogDescription className="sr-only">
