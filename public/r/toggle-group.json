@@ -8,7 +8,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "https://livepeer-ui.vercel.app/r/toggle.json"
+    "http://localhost:3000/r/toggle.json"
   ],
   "files": [
     {

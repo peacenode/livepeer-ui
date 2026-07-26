@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "livepeer-ui",
-  "homepage": "https://livepeer-ui.vercel.app",
+  "homepage": "http://localhost:3000",
   "items": [
     {
       "name": "theme",
@@ -12,7 +12,7 @@
         "theme": {
           "font-display": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
           "font-heading": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
-          "font-sans": "InterVariable, Inter, sans-serif",
+          "font-sans": "var(--font-inter), sans-serif",
           "font-mono": "\"Favorit Mono\", ui-monospace, monospace"
         },
         "light": {
@@ -170,7 +170,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "https://livepeer-ui.vercel.app/r/button.json"
+        "http://localhost:3000/r/button.json"
       ],
       "files": [
         {
@@ -280,7 +280,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://livepeer-ui.vercel.app/r/button.json"
+        "http://localhost:3000/r/button.json"
       ],
       "files": [
         {
@@ -430,7 +430,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://livepeer-ui.vercel.app/r/button.json"
+        "http://localhost:3000/r/button.json"
       ],
       "files": [
         {
@@ -579,7 +579,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "https://livepeer-ui.vercel.app/r/toggle.json"
+        "http://localhost:3000/r/toggle.json"
       ],
       "files": [
         {
