@@ -83,7 +83,7 @@ function ApiKeyActions() {
                 render={
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="secondary"
                     className="h-16 w-full shrink-0 rounded-sm px-4 sm:flex-1"
                   />
                 }
