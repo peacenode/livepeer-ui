@@ -1,7 +1,7 @@
 "use client"
 
 import { type FormEvent, useState } from "react"
-import { ArrowRight, Check, Copy, Share2 } from "lucide-react"
+import { ArrowRight, Check, Copy } from "lucide-react"
 import { toast } from "sonner"
 
 import { LivepeerGradientLockup } from "@/components/brand"
@@ -59,19 +59,6 @@ export function WaitlistMockup() {
     setCopied(true)
     toast.success("Invite link copied")
     window.setTimeout(() => setCopied(false), 1600)
-  }
-
-  async function shareInvite() {
-    if (navigator.share) {
-      await navigator.share({
-        title: "Livepeer Agent",
-        text: "Join me on the Livepeer Agent waitlist.",
-        url: `https://${inviteUrl}`,
-      })
-      return
-    }
-
-    await copyInvite()
   }
 
   return (
@@ -175,7 +162,7 @@ export function WaitlistMockup() {
 
               <div>
                 <p className="text-xs font-medium">Your referral link</p>
-                <div className="mt-2 flex items-center gap-2 rounded-md border bg-white/[0.04] p-1.5 pl-3">
+                <div className="mt-2 flex items-center gap-2 rounded-full border bg-white/[0.04] p-1.5 pl-4">
                   <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
                     {inviteUrl}
                   </p>
@@ -185,18 +172,9 @@ export function WaitlistMockup() {
                     variant="ghost"
                     aria-label="Copy referral link"
                     onClick={copyInvite}
-                    className="shrink-0 rounded-sm"
+                    className="shrink-0 rounded-full"
                   >
                     {copied ? <Check /> : <Copy />}
-                  </Button>
-                  <Button
-                    type="button"
-                    size="icon-sm"
-                    aria-label="Share referral link"
-                    onClick={shareInvite}
-                    className="shrink-0 rounded-sm bg-emerald-500 text-white hover:bg-emerald-400"
-                  >
-                    <Share2 />
                   </Button>
                 </div>
               </div>
