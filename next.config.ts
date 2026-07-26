@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         destination: "/mockups/livepeer-org/agent/:path*",
         permanent: true,
       },
+      {
+        source: "/mockups/platform/:path*",
+        destination: "/mockups/api-console/:path*",
+        permanent: true,
+      },
     ]
   },
   async rewrites() {
@@ -26,6 +31,10 @@ const nextConfig: NextConfig = {
         {
           source: "/mockups/livepeer-agent/:path*",
           destination: "/mockups/videobuddy/:path*",
+        },
+        {
+          source: "/mockups/api-console/:path*",
+          destination: "/mockups/platform/:path*",
         },
       ],
       afterFiles: [

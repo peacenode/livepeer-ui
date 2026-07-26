@@ -71,7 +71,7 @@ export default async function ContainerDetailPage({
           size="sm"
           className="self-start"
           nativeButton={false}
-          render={<Link href="/mockups/platform/inference" />}
+          render={<Link href="/mockups/api-console/inference" />}
         >
           <ArrowLeftIcon data-icon="inline-start" />
           Inference
@@ -88,7 +88,7 @@ export default async function ContainerDetailPage({
             </div>
             <Button
               nativeButton={false}
-              render={<Link href="/mockups/platform/inference" />}
+              render={<Link href="/mockups/api-console/inference" />}
             >
               Deploy
             </Button>

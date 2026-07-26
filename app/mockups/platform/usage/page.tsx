@@ -129,7 +129,7 @@ export default function MockupUsagePage() {
                 </p>
               </div>
               <Link
-                href="/mockups/platform/organization?tab=billing"
+                href="/mockups/api-console/organization?tab=billing"
                 className="group w-full rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none md:aspect-[3/2]"
               >
                 <Card

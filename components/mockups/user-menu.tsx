@@ -113,12 +113,12 @@ export function UserMenu() {
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          render={<Link href="/mockups/platform/organization" />}
+          render={<Link href="/mockups/api-console/organization" />}
         >
           <Building2Icon />
           Organization settings
         </DropdownMenuItem>
-        <DropdownMenuItem render={<Link href="/mockups/platform/account" />}>
+        <DropdownMenuItem render={<Link href="/mockups/api-console/account" />}>
           <CircleUserRoundIcon />
           Account settings
         </DropdownMenuItem>

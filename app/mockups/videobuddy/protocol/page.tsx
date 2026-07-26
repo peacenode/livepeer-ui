@@ -28,7 +28,7 @@ const layers = [
     description:
       "Inference containers define the models, inputs, and runtime needed to produce a result on the network.",
     detail: "Select · run · measure usage",
-    href: "/mockups/platform/inference/ai-runner",
+    href: "/mockups/api-console/inference/ai-runner",
     icon: BlocksIcon,
   },
   {
@@ -37,7 +37,7 @@ const layers = [
     description:
       "Orchestrators provide the GPUs that execute workflows. The network matches each run with available compute and returns the result to Runner.",
     detail: "Orchestrators · GPUs · rewards",
-    href: "/mockups/platform/compute",
+    href: "/mockups/api-console/compute",
     icon: CpuIcon,
   },
 ]

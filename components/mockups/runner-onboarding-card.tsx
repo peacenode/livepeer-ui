@@ -12,7 +12,7 @@ const steps = [
   },
   {
     label: "Add credits",
-    href: "/mockups/platform/billing",
+    href: "/mockups/api-console/billing",
     complete: false,
   },
   {

@@ -36,7 +36,7 @@ export function PlaybooksNav() {
           </span>
         </a>
         <a
-          href="/mockups/platform/api"
+          href="/mockups/api-console/api"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-1 rounded-sm px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"

@@ -39,7 +39,7 @@ export function PlaybooksWorkspace() {
                 size="lg"
                 variant="outline"
                 nativeButton={false}
-                render={<Link href="/mockups/platform" />}
+                render={<Link href="/mockups/api-console" />}
                 className="h-16 rounded-sm border-foreground/20 bg-transparent px-4 transition-none hover:border-emerald-600 hover:bg-transparent"
               >
                 Sign up with GitHub

@@ -44,7 +44,7 @@ const footerGroups = [
       { label: "Research", href: "https://forum.livepeer.org/c/research/15" },
       { label: "Docs", href: "https://docs.livepeer.org/" },
       { label: "Blog", href: "https://blog.livepeer.org/" },
-      { label: "API Console", href: "/mockups/platform/api" },
+      { label: "API Console", href: "/mockups/api-console/api" },
     ],
   },
   {
