@@ -94,7 +94,9 @@ export default function MockupUsagePage() {
               <div className="flex min-h-64 flex-col justify-between rounded-sm border p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h2 className="text-sm font-medium">Credit balance</h2>
+                    <h2 className="font-sans text-sm font-medium">
+                      Credit balance
+                    </h2>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Credits pay for every workflow run.
                     </p>
@@ -135,7 +137,7 @@ export default function MockupUsagePage() {
                       </p>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CardTitle>Billing</CardTitle>
+                      <CardTitle className="font-sans">Billing</CardTitle>
                       <ArrowUpRightIcon
                         className="size-4 text-muted-foreground"
                         aria-hidden="true"
@@ -147,12 +149,12 @@ export default function MockupUsagePage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-medium tracking-tight">
+              <h2 className="font-sans text-2xl font-medium tracking-tight">
                 Get more credits
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                Start with 250 free credits. Upgrade for a larger allocation
-                that refreshes every month.
+                Upgrade for a larger credit allocation that refreshes every
+                month.
               </p>
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="flex min-h-64 flex-col rounded-sm border p-6">
@@ -213,7 +215,7 @@ export default function MockupUsagePage() {
             </section>
 
             <section className="flex flex-col gap-3">
-              <h2 className="text-sm font-medium">Activity</h2>
+              <h2 className="font-sans text-sm font-medium">Activity</h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Card variant="metric">
                   <CardHeader>
@@ -234,7 +236,7 @@ export default function MockupUsagePage() {
               </div>
             </section>
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-medium">Daily usage</h2>
+              <h2 className="font-sans text-sm font-medium">Daily usage</h2>
               <Table>
                 <TableHeader>
                   <TableRow>
