@@ -32,7 +32,7 @@ export function DocsNav({
       external: true,
       items: [
         { title: "Console", href: "/mockups/api-console" },
-        { title: "Livepeer Agent", href: "/mockups/livepeer-agent" },
+        { title: "Client", href: "/mockups/livepeer-agent" },
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
     },
