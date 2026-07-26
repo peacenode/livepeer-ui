@@ -66,8 +66,7 @@ export const marketingWeeks: MarketingWeek[] = [
         title: "Outreach",
         deliverables: [
           {
-            title:
-              "Steph reaches out to Anthropic, Blockchain Capital, and CoinFund",
+            title: "Outreach material",
             links: [{ label: "Press Kit", href: "/marketing/press-kit" }],
           },
           {
