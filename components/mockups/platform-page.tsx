@@ -15,7 +15,7 @@ export function PlatformPage({
   action,
   children,
   description,
-  variant = "panel",
+  variant = "plain",
 }: PlatformPageProps) {
   const header = (
     <header className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">

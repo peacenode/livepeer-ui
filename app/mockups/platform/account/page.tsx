@@ -33,7 +33,12 @@ export default function MockupAccountPage() {
               </AvatarFallback>
             </Avatar>
             <div>
-              <Button type="button" variant="outline" className="rounded-sm">
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="h-16 rounded-sm px-4"
+              >
                 Upload new
               </Button>
               <p className="mt-2 text-xs text-muted-foreground">
@@ -91,10 +96,19 @@ export default function MockupAccountPage() {
         </section>
 
         <div className="flex justify-end gap-2">
-          <Button type="reset" variant="secondary" className="rounded-sm">
+          <Button
+            type="reset"
+            variant="secondary"
+            size="lg"
+            className="h-16 rounded-sm px-4"
+          >
             Reset
           </Button>
-          <Button type="submit" className="rounded-sm">
+          <Button
+            type="submit"
+            size="lg"
+            className="h-16 rounded-sm px-4"
+          >
             Save changes
           </Button>
         </div>

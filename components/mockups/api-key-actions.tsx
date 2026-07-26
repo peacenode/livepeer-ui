@@ -29,7 +29,9 @@ function ApiKeyActions() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button className="rounded-sm px-4" />}>
+      <DialogTrigger
+        render={<Button size="lg" className="h-16 rounded-sm px-4" />}
+      >
         New API key
       </DialogTrigger>
       <DialogContent className="gap-6 rounded-sm p-6 sm:max-w-lg sm:p-8">
