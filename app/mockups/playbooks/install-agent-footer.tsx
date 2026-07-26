@@ -46,13 +46,13 @@ export function InstallAgentFooter({
           <p className="mb-3 text-sm text-muted-foreground">
             In your agent&apos;s MCP / connector settings, add this server:
           </p>
-          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground shadow-sm">
             <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
               {mcpServerUrl}
             </code>
             <CopyButton
               value={mcpServerUrl}
-              className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
+              className="size-8 shrink-0 rounded-none bg-transparent text-secondary-foreground/40 transition-colors hover:bg-transparent hover:text-secondary-foreground"
             />
           </div>
         </div>
