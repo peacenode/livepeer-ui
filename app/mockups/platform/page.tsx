@@ -114,11 +114,6 @@ export default async function MockupHomePage() {
                 <h3 className="line-clamp-2 font-sans font-medium text-foreground">
                   {topic.title}
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {topic.replyCount}{" "}
-                  {topic.replyCount === 1 ? "reply" : "replies"} · Latest by{" "}
-                  {topic.lastPosterUsername}
-                </p>
               </div>
               <time
                 dateTime={topic.lastPostedAt}
