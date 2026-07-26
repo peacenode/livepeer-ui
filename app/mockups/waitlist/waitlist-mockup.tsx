@@ -5,7 +5,7 @@ import { ArrowRight, Check, Copy, Share2 } from "lucide-react"
 import { toast } from "sonner"
 
 import { LivepeerLockup } from "@/components/brand"
-import { LivepeerSymbol3D } from "@/components/mockups/livepeer-symbol-3d"
+import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -49,21 +49,21 @@ export function WaitlistMockup() {
   }
 
   return (
-    <main className="grid min-h-svh bg-background text-foreground md:grid-cols-[23rem_minmax(0,1fr)]">
-      <aside className="relative z-10 flex min-h-[34rem] flex-col overflow-y-auto border-b bg-background px-6 py-6 sm:px-8 sm:py-8 md:h-svh md:border-r md:border-b-0">
+    <main className="relative flex min-h-svh justify-end overflow-hidden bg-black p-3 sm:p-4">
+      <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/15 bg-background/65 px-6 py-6 text-foreground shadow-2xl shadow-black/40 backdrop-blur-2xl sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
         <LivepeerLockup className="h-4 w-auto self-start" />
 
         <div
           className={
             joined
-              ? "mt-10 max-w-[18rem] sm:mt-12"
-              : "mt-16 max-w-[18rem] sm:mt-24 md:mt-28"
+              ? "mt-10 max-w-full sm:mt-12"
+              : "mt-16 max-w-full sm:mt-24 md:mt-28"
           }
         >
           <p className="text-sm font-medium text-muted-foreground">
             Livepeer Agent
           </p>
-          <h1 className="mt-4 text-balance text-[clamp(2.5rem,4vw,3.75rem)] leading-[0.96] font-medium tracking-[-0.045em]">
+          <h1 className="mt-4 text-balance text-[clamp(2.5rem,3vw,3rem)] leading-[0.96] font-medium tracking-[-0.045em]">
             Open media infrastructure, ready for your agent.
           </h1>
           <p className="mt-6 text-pretty text-sm leading-6 text-muted-foreground">
@@ -196,14 +196,11 @@ export function WaitlistMockup() {
         </div>
       </aside>
 
-      <section className="relative isolate min-h-[34rem] overflow-hidden bg-muted md:min-h-svh">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_55%_45%,var(--background)_0%,transparent_58%)] opacity-70" />
-        <LivepeerSymbol3D
-          showOnMobile
-          className="rounded-none opacity-95"
-        />
-        <div className="pointer-events-none absolute inset-x-0 bottom-7 z-10 px-6 sm:bottom-10 sm:px-10">
-          <p className="text-center font-display text-[clamp(2.5rem,8vw,8.5rem)] leading-none font-medium tracking-[-0.06em] text-foreground/90 text-balance">
+      <section className="absolute inset-0 isolate overflow-hidden bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_42%,rgba(255,255,255,0.1)_0%,transparent_48%)]" />
+        <LivepeerCubeStream inverted className="opacity-90" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-8 z-10 px-6 sm:bottom-10 sm:px-10 md:pr-[27rem]">
+          <p className="text-left font-display text-[clamp(2.5rem,8vw,8.5rem)] leading-none font-medium tracking-[-0.06em] text-white/90 text-balance">
             LIVEPEER AGENT
           </p>
         </div>
