@@ -11,7 +11,7 @@ export default function Page() {
           <h1 className="text-foreground">
             <LivepeerGradientLockup className="h-9 w-auto sm:h-11" />
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-balance text-muted-foreground sm:text-lg">
+          <p className="mt-6 max-w-lg text-base leading-7 text-balance text-muted-foreground sm:text-lg">
             A component registry for marketing &amp; product. Installable with
             the shadcn CLI.
           </p>
