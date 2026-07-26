@@ -23,11 +23,19 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
       {children}
       {!authenticated && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-background/75 px-4 py-10 backdrop-blur-[2px] sm:px-6">
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              backgroundImage:
+                "linear-gradient(115deg, transparent 20%, color-mix(in oklab, var(--color-emerald-500) 18%, transparent) 46%, transparent 68%)",
+            }}
+          />
           <section
             role="dialog"
             aria-modal="true"
             aria-labelledby="console-sign-in-title"
-            className="w-full max-w-md rounded-sm border bg-background p-6 text-center shadow-xl sm:p-8"
+            className="relative z-10 w-full max-w-md rounded-sm border bg-background p-6 text-center shadow-xl sm:p-8"
           >
             <div
               className="flex items-end justify-center gap-2 text-foreground"
