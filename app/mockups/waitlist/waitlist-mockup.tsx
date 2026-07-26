@@ -61,7 +61,7 @@ export function WaitlistMockup() {
           }
         >
           <h1 className="mt-4 text-balance text-[clamp(2.5rem,3vw,3rem)] leading-[0.96] font-medium tracking-[-0.045em]">
-            Livepeer Agent
+            The Open Video Agent
           </h1>
           <p className="mt-6 text-pretty text-sm leading-6 text-muted-foreground">
             A video agent harness for multimodal media generation, from right
