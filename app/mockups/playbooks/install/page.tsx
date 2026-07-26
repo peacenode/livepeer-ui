@@ -31,7 +31,7 @@ export default async function PlaybooksInstallPage() {
 
   return (
     <main>
-      <section className="relative flex items-center overflow-hidden bg-white px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
+      <section className="relative flex items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
         <RunnerDeltaStream />
         <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
           <div
@@ -142,12 +142,12 @@ export default async function PlaybooksInstallPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f3f3f3] sm:min-h-[56rem]">
+      <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
         <Image
           src="/playbooks/20260725-031450/runner-background.jpg"
           alt=""
           fill
-          className="hidden object-cover object-center sm:block"
+          className="hidden object-cover object-center dark:opacity-20 dark:mix-blend-luminosity sm:block"
           sizes="100vw"
         />
         <div className="relative z-10 flex flex-col items-center px-6 py-20 text-center sm:absolute sm:inset-0 sm:items-start sm:justify-center sm:p-10 sm:text-left">
@@ -164,7 +164,7 @@ export default async function PlaybooksInstallPage() {
             variant="outline"
             nativeButton={false}
             render={<Link href="/mockups/livepeer-org/library" />}
-            className="mt-7 h-16 rounded-sm border-foreground/20 bg-white px-4 transition-opacity hover:bg-white hover:opacity-80"
+            className="mt-7 h-16 rounded-sm border-foreground/20 bg-background px-4 transition-opacity hover:bg-background hover:opacity-80"
           >
             Browse Playbooks
             <ArrowRightIcon className="size-4" aria-hidden="true" />
@@ -175,7 +175,7 @@ export default async function PlaybooksInstallPage() {
             src="/playbooks/20260725-031450/runner-background.jpg"
             alt=""
             fill
-            className="object-cover object-[65%_center]"
+            className="object-cover object-[65%_center] dark:opacity-20 dark:mix-blend-luminosity"
             sizes="100vw"
           />
         </div>

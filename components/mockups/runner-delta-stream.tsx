@@ -2,14 +2,14 @@
 
 import { useEffect, useRef } from "react"
 
+import { getCanvasThemePalette } from "@/lib/canvas-theme"
 import { cn } from "@/lib/utils"
 
 const desktopParticleCount = 1400
 const mobileParticleCount = 600
-const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
 
 type DeltaParticle = {
-  color: string
+  colorIndex: number
   offset: number
   phase: number
   speed: number
@@ -23,7 +23,7 @@ function noise(seed: number) {
 
 function makeParticles(count: number): DeltaParticle[] {
   return Array.from({ length: count }, (_, index) => ({
-    color: colors[Math.floor(noise(index + 41) * colors.length)],
+    colorIndex: Math.floor(noise(index + 41) * 5),
     offset: noise(index + 19) * 2 - 1,
     phase: (index + noise(index + 3)) / count,
     speed: 0.78 + noise(index + 29) * 0.4,
@@ -49,6 +49,7 @@ function RunnerDeltaStream({ className }: { className?: string }) {
     let resizeFrame = 0
     let width = 0
     let particles: DeltaParticle[] = []
+    let palette = getCanvasThemePalette()
     let start = performance.now()
 
     const resize = () => {
@@ -140,7 +141,7 @@ function RunnerDeltaStream({ className }: { className?: string }) {
         y += repulsionY
         y = Math.min(y, sourceY)
 
-        context.fillStyle = particle.color
+        context.fillStyle = palette[particle.colorIndex]
         context.fillRect(
           Math.round(x - particleSize / 2),
           Math.round(y - particleSize / 2),
@@ -156,7 +157,15 @@ function RunnerDeltaStream({ className }: { className?: string }) {
       cancelAnimationFrame(resizeFrame)
       resizeFrame = requestAnimationFrame(resize)
     })
+    const themeObserver = new MutationObserver(() => {
+      palette = getCanvasThemePalette()
+      if (reduceMotion) draw(performance.now())
+    })
     observer.observe(canvas)
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style"],
+    })
     resize()
     start = performance.now()
     frame = requestAnimationFrame(draw)
@@ -165,6 +174,7 @@ function RunnerDeltaStream({ className }: { className?: string }) {
       cancelAnimationFrame(frame)
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
+      themeObserver.disconnect()
     }
   }, [])
 

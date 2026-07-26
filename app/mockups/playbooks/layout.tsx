@@ -27,7 +27,7 @@ export default function PlaybooksLayout({
             className="flex shrink-0 items-center gap-3"
             aria-label="Landing home"
           >
-            <span className="flex items-center gap-1.5 text-black">
+            <span className="flex items-center gap-1.5 text-foreground">
               <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
               <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
             </span>

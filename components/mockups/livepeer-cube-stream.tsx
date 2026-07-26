@@ -2,15 +2,14 @@
 
 import { useEffect, useRef } from "react"
 
+import { getCanvasThemePalette } from "@/lib/canvas-theme"
 import { cn } from "@/lib/utils"
 
 const desktopParticleCount = 1800
 const mobileParticleCount = 650
-const colors = ["#15191a", "#596164", "#9ca5a2", "#cbd2ce", "#00a86b"]
-const invertedColors = ["#ffffff", "#d8ddda", "#9ca5a2", "#596164", "#00c982"]
 
 type Particle = {
-  color: string
+  colorIndex: number
   speed: number
   wave: number
   vx: number
@@ -28,7 +27,6 @@ function makeParticles(
   count: number,
   width: number,
   height: number,
-  palette: string[],
   variant: "card" | "default"
 ): Particle[] {
   return Array.from({ length: count }, (_, index) => {
@@ -60,7 +58,7 @@ function makeParticles(
     }
 
     return {
-      color: palette[Math.floor(noise(index + 41) * palette.length)],
+      colorIndex: Math.floor(noise(index + 41) * 5),
       speed: 0.72 + noise(index + 29) * 0.72,
       wave: noise(index + 67) * Math.PI * 2,
       vx: (noise(index + 73) - 0.5) * 0.18,
@@ -98,6 +96,7 @@ function LivepeerCubeStream({
     let resizeFrame = 0
     let width = 0
     let particles: Particle[] = []
+    let palette = getCanvasThemePalette(inverted)
     let start = performance.now()
     let previousTime = start
 
@@ -145,7 +144,6 @@ function LivepeerCubeStream({
           width < 640 ? mobileParticleCount : desktopParticleCount,
           width,
           height,
-          inverted ? invertedColors : colors,
           variant
         )
         return
@@ -264,7 +262,7 @@ function LivepeerCubeStream({
         }
 
         context.globalAlpha = 1
-        context.fillStyle = particle.color
+        context.fillStyle = palette[particle.colorIndex]
         context.fillRect(
           Math.round(particle.x - particleSize / 2),
           Math.round(particle.y - particleSize / 2),
@@ -281,7 +279,15 @@ function LivepeerCubeStream({
       cancelAnimationFrame(resizeFrame)
       resizeFrame = requestAnimationFrame(resize)
     })
+    const themeObserver = new MutationObserver(() => {
+      palette = getCanvasThemePalette(inverted)
+      if (reduceMotion) draw(performance.now())
+    })
     observer.observe(canvas)
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style"],
+    })
     resize()
     start = performance.now()
     frame = requestAnimationFrame(draw)
@@ -290,6 +296,7 @@ function LivepeerCubeStream({
       cancelAnimationFrame(frame)
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
+      themeObserver.disconnect()
     }
   }, [inverted, variant])
 

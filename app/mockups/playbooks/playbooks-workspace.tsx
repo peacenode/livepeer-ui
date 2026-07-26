@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button"
 export function PlaybooksWorkspace() {
   return (
     <main>
-      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-white sm:min-h-[76svh]">
+      <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-background sm:min-h-[76svh]">
         <LivepeerCubeStream />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-3xl flex-col items-start">
@@ -49,12 +49,12 @@ export function PlaybooksWorkspace() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f3f3f3] sm:min-h-[56rem]">
+      <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
         <Image
           src="/playbooks/20260725-031450/runner-background.jpg"
           alt=""
           fill
-          className="hidden object-cover object-center sm:block"
+          className="hidden object-cover object-center dark:opacity-20 dark:mix-blend-luminosity sm:block"
           sizes="100vw"
         />
         <div className="relative z-10 flex flex-col items-center gap-5 px-6 py-12 text-center sm:absolute sm:inset-0 sm:items-start sm:justify-center sm:p-10 sm:text-left">
@@ -126,7 +126,7 @@ export function PlaybooksWorkspace() {
             src="/playbooks/20260725-031450/runner-background.jpg"
             alt=""
             fill
-            className="object-cover object-[65%_center]"
+            className="object-cover object-[65%_center] dark:opacity-20 dark:mix-blend-luminosity"
             sizes="100vw"
           />
         </div>

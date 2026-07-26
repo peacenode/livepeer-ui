@@ -15,7 +15,7 @@ export function InstallAgentFooter({
   return (
     <section
       className={cn(
-        "relative mt-20 min-h-[42rem] overflow-hidden bg-white px-4 text-foreground sm:min-h-[48rem] sm:px-6",
+        "relative mt-20 min-h-[42rem] overflow-hidden bg-background px-4 text-foreground sm:min-h-[48rem] sm:px-6",
         className
       )}
     >

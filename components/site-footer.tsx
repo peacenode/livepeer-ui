@@ -93,7 +93,7 @@ export function SiteFooter() {
           <div className="sm:col-span-2 lg:col-span-1">
             <a
               href="/mockups/livepeer-org"
-              className="inline-flex items-center gap-1.5 text-black"
+              className="inline-flex items-center gap-1.5 text-foreground"
               aria-label="Livepeer home"
             >
               <LivepeerGradientSymbol className="h-4 w-auto" />
