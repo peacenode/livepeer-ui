@@ -12,9 +12,15 @@ export function ComputeMetrics({ stats }: { stats: ComputeMetric[] }) {
           <CardHeader>
             <CardDescription className="flex w-full items-baseline gap-1.5">
               <span>{stat.label}</span>
-              {stat.period && <span className="shrink-0 text-muted-foreground tabular-nums">{stat.period}</span>}
+              {stat.period && (
+                <span className="shrink-0 font-sans text-muted-foreground tabular-nums">
+                  {stat.period}
+                </span>
+              )}
             </CardDescription>
-            <CardTitle className="text-3xl leading-none font-medium tracking-tight tabular-nums">{stat.value}</CardTitle>
+            <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+              {stat.value}
+            </CardTitle>
           </CardHeader>
         </Card>
       ))}
