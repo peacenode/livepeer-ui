@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react"
+import { ArrowRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Badge } from "@/components/ui/badge"
@@ -115,34 +115,6 @@ export default function MockupUsagePage() {
                   </Badge>
                 </div>
               </div>
-              <Link
-                href="/mockups/api-console/organization?tab=billing"
-                className="group min-h-64 rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              >
-                <Card
-                  size="sm"
-                  className="h-full rounded-sm transition-colors group-hover:bg-accent"
-                >
-                  <CardHeader className="flex h-full flex-col justify-between">
-                    <div className="flex flex-col gap-1.5">
-                      <CardDescription>Default payment method</CardDescription>
-                      <p className="font-sans text-2xl font-medium tabular-nums">
-                        Visa ···· 4242
-                      </p>
-                      <p className="font-sans text-xs text-muted-foreground tabular-nums">
-                        Expires 08/2029
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <CardTitle className="font-sans">Billing</CardTitle>
-                      <ArrowUpRightIcon
-                        className="size-4 text-muted-foreground"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </CardHeader>
-                </Card>
-              </Link>
             </section>
 
             <section>
