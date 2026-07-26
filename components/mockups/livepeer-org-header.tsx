@@ -5,7 +5,7 @@ import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
 
 export function LivepeerOrgHeader() {
   return (
-    <header className="relative z-20 w-full bg-background">
+    <header className="relative z-20 w-full bg-transparent">
       <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
         <Link
           href="/mockups/livepeer-org"
