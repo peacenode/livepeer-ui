@@ -60,7 +60,6 @@ function Deliverable({
       </div>
 
       <div className="mt-4">
-        <p className="mb-2 text-xs font-medium text-muted-foreground">Sizes</p>
         <div className="flex flex-wrap gap-1.5">
           {sizes.map((size) => (
             <Badge key={size} variant="secondary" className="rounded-sm">
@@ -70,13 +69,10 @@ function Deliverable({
         </div>
       </div>
 
-      <div className="mt-4">
-        <p className="mb-2 text-xs font-medium text-muted-foreground">
-          Used on
-        </p>
+      <div className="mt-2">
         <div className="flex flex-wrap gap-1.5">
           {[...new Set(platforms)].map((platform) => (
-            <Badge key={platform} variant="outline" className="rounded-sm">
+            <Badge key={platform} className="rounded-sm">
               {platform}
             </Badge>
           ))}
