@@ -75,7 +75,7 @@ export function WaitlistMockup() {
               <label htmlFor="waitlist-email" className="text-sm font-medium">
                 Get early access
               </label>
-              <div className="mt-3 flex h-16 gap-1.5 rounded-sm border border-white/20 bg-white/[0.08] p-1.5 text-white shadow-lg shadow-black/20 backdrop-blur-md transition-shadow focus-within:border-white/35 focus-within:ring-2 focus-within:ring-white/20">
+              <div className="mt-3 flex h-16 gap-1.5 rounded-sm border border-white/25 bg-transparent p-1.5 text-white transition-shadow focus-within:border-white/45 focus-within:ring-2 focus-within:ring-white/20">
                 <Input
                   id="waitlist-email"
                   type="email"
