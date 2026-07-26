@@ -1,13 +1,13 @@
 "use client"
 
 import { type FormEvent, type ReactNode, useState } from "react"
-import {
-  CircleIcon,
-  MailIcon,
-  MessageCircleIcon,
-} from "lucide-react"
+import { MailIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import {
+  DiscordIcon,
+  GoogleIcon,
+} from "@/components/brand-social-icons"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -31,10 +31,10 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
         aria-modal="true"
         aria-labelledby="console-sign-in-title"
         aria-describedby="console-sign-in-description"
-        className="relative z-10 w-full max-w-md rounded-xl border bg-background/95 p-6 shadow-xl backdrop-blur-sm sm:p-8"
+        className="relative z-10 w-full max-w-md rounded-sm border bg-background/95 p-6 text-center shadow-xl backdrop-blur-sm sm:p-8"
       >
         <div
-          className="flex items-end gap-2 text-foreground"
+          className="flex items-end justify-center gap-2 text-foreground"
           aria-label="Livepeer Agent"
         >
           <LivepeerGradientSymbol className="h-5 w-auto" aria-hidden="true" />
@@ -67,20 +67,20 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             type="button"
             variant="outline"
             size="lg"
-            className="w-full"
+            className="h-16 w-full rounded-sm px-4"
             onClick={() => setAuthenticated(true)}
           >
-            <CircleIcon aria-hidden="true" />
+            <GoogleIcon className="size-5" />
             Google
           </Button>
           <Button
             type="button"
             variant="outline"
             size="lg"
-            className="w-full"
+            className="h-16 w-full rounded-sm px-4"
             onClick={() => setAuthenticated(true)}
           >
-            <MessageCircleIcon aria-hidden="true" />
+            <DiscordIcon className="size-5" />
             Discord
           </Button>
         </div>
@@ -94,14 +94,20 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
         </div>
 
         <form onSubmit={enterConsole}>
-          <Label htmlFor="console-email">Email</Label>
+          <Label htmlFor="console-email" className="justify-center">
+            Email
+          </Label>
           <Input
             id="console-email"
             type="email"
             placeholder="you@example.com"
-            className="mt-2"
+            className="mt-2 h-12 rounded-sm text-center"
           />
-          <Button type="submit" size="lg" className="mt-4 w-full">
+          <Button
+            type="submit"
+            size="lg"
+            className="mt-4 h-16 w-full rounded-sm px-4"
+          >
             <MailIcon aria-hidden="true" />
             Continue with email
           </Button>

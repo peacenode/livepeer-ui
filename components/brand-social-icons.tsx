@@ -15,6 +15,19 @@ function DiscordIcon(props: IconProps) {
   )
 }
 
+function GoogleIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M21.35 11.1h-9.18v2.98h5.28c-.26 1.56-1.8 4.58-5.28 4.58-3.18 0-5.77-2.63-5.77-5.86s2.59-5.86 5.77-5.86c1.81 0 3.02.78 3.71 1.45l2.54-2.48C16.79 4.36 14.67 3.4 12.17 3.4c-5.09 0-9.22 4.21-9.22 9.4s4.13 9.4 9.22 9.4c5.32 0 8.85-3.81 8.85-9.18 0-.62-.07-1.3-.17-1.92Z" />
+    </svg>
+  )
+}
+
 function GitHubIcon(props: IconProps) {
   return (
     <svg
@@ -41,4 +54,4 @@ function XIcon(props: IconProps) {
   )
 }
 
-export { DiscordIcon, GitHubIcon, XIcon }
+export { DiscordIcon, GitHubIcon, GoogleIcon, XIcon }
