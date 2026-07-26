@@ -1,17 +1,31 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: "/mockups/runner/:path*",
-        destination: "/mockups/videobuddy/:path*",
-      },
-      {
-        source: "/mockups/livepeer-org/:path*",
-        destination: "/mockups/playbooks/:path*",
+        destination: "/mockups/agent/:path*",
+        permanent: true,
       },
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/mockups/agent/:path*",
+          destination: "/mockups/videobuddy/:path*",
+        },
+      ],
+      afterFiles: [
+        {
+          source: "/mockups/livepeer-org/:path*",
+          destination: "/mockups/playbooks/:path*",
+        },
+      ],
+      fallback: [],
+    }
   },
 }
 

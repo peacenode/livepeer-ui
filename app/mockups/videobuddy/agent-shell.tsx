@@ -19,31 +19,31 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   {
-    href: "/mockups/runner",
+    href: "/mockups/agent",
     label: "Create",
     icon: LivepeerSymbol,
     brand: true,
   },
   {
-    href: "/mockups/runner/storyboards",
+    href: "/mockups/agent/storyboards",
     label: "Storyboards",
     icon: Grid2X2Icon,
     brand: false,
   },
   {
-    href: "/mockups/runner/characters",
+    href: "/mockups/agent/characters",
     label: "Characters",
     icon: ApertureIcon,
     brand: false,
   },
   {
-    href: "/mockups/runner/footage",
+    href: "/mockups/agent/footage",
     label: "Clips",
     icon: FilmIcon,
     brand: false,
   },
   {
-    href: "/mockups/runner/projects",
+    href: "/mockups/agent/projects",
     label: "Projects",
     icon: FolderIcon,
     brand: false,
@@ -51,7 +51,7 @@ const navItems = [
 ]
 
 function isActiveRoute(href: string, pathname: string) {
-  return href === "/mockups/runner"
+  return href === "/mockups/agent"
     ? pathname === href
     : pathname.startsWith(href)
 }
@@ -71,7 +71,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         onMouseLeave={() => setExpanded(false)}
       >
         <nav
-          aria-label="Runner"
+          aria-label="Livepeer Agent"
           className="flex flex-1 flex-col gap-1 px-2 py-2"
         >
           {navItems.map((item) => {
@@ -112,20 +112,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
             )
           })}
           <Link
-            href="/mockups/runner/install"
-            data-active={pathname.startsWith("/mockups/runner/install")}
+            href="/mockups/agent/install"
+            data-active={pathname.startsWith("/mockups/agent/install")}
             onClick={() => setExpanded(false)}
             className={cn(
               "flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
               expanded &&
-                pathname.startsWith("/mockups/runner/install") &&
+                pathname.startsWith("/mockups/agent/install") &&
                 "bg-muted font-medium text-foreground"
             )}
           >
             <span
               className={cn(
                 "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-                pathname.startsWith("/mockups/runner/install") &&
+                pathname.startsWith("/mockups/agent/install") &&
                   !expanded &&
                   "bg-muted"
               )}
@@ -144,20 +144,20 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         <Link
-          href="/mockups/runner/protocol"
-          data-active={pathname.startsWith("/mockups/runner/protocol")}
+          href="/mockups/agent/protocol"
+          data-active={pathname.startsWith("/mockups/agent/protocol")}
           onClick={() => setExpanded(false)}
           className={cn(
             "mx-2 flex h-10 w-40 shrink-0 items-center gap-3 rounded-xl text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
             expanded &&
-              pathname.startsWith("/mockups/runner/protocol") &&
+              pathname.startsWith("/mockups/agent/protocol") &&
               "bg-muted font-medium text-foreground"
           )}
         >
           <span
             className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-xl text-foreground",
-              pathname.startsWith("/mockups/runner/protocol") &&
+              pathname.startsWith("/mockups/agent/protocol") &&
                 !expanded &&
                 "bg-muted"
             )}
@@ -211,7 +211,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
       <div>{children}</div>
 
       <nav
-        aria-label="Runner"
+        aria-label="Livepeer Agent"
         className="fixed inset-x-0 bottom-0 z-40 grid h-16 grid-cols-5 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {navItems.map((item) => {

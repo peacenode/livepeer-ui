@@ -76,7 +76,7 @@ export function PlaybooksWorkspace() {
             />
           </div>
           <h2
-            className="flex items-center gap-3 text-foreground sm:gap-4"
+            className="flex items-end gap-3 text-foreground sm:gap-4"
             aria-label="Livepeer Agent"
           >
             <LivepeerWordmark

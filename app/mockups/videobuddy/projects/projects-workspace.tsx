@@ -582,7 +582,7 @@ export function ProjectsWorkspace() {
                       variant="outline"
                       onClick={() =>
                         window.location.assign(
-                          `/mockups/runner?project=${encodeURIComponent(project.name)}`
+                          `/mockups/agent?project=${encodeURIComponent(project.name)}`
                         )
                       }
                     >
