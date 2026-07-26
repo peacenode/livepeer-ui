@@ -91,7 +91,7 @@ export default function MockupUsagePage() {
         <TabsContent value="overview">
           <div className="flex flex-col gap-10">
             <section className="grid gap-4 md:grid-cols-2">
-              <div className="flex min-h-64 flex-col justify-between rounded-sm border p-6">
+              <div className="flex flex-col gap-8">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h2 className="font-sans text-sm font-medium">
