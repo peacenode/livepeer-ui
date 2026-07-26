@@ -2,32 +2,16 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  ChartColumnIcon,
-  CircleUserRoundIcon,
-  GraduationCapIcon,
-  HomeIcon,
-  KeyRoundIcon,
-  ScrollTextIcon,
-} from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 
 export const platformNavItems = [
-  { title: "Home", href: "/mockups/api-console", icon: HomeIcon },
-  {
-    title: "Usage",
-    href: "/mockups/api-console/usage",
-    icon: ChartColumnIcon,
-  },
-  { title: "Keys", href: "/mockups/api-console/api", icon: KeyRoundIcon },
-  {
-    title: "Logs",
-    href: "/mockups/api-console/api-logs",
-    icon: ScrollTextIcon,
-  },
+  { title: "Home", href: "/mockups/api-console" },
+  { title: "Usage", href: "/mockups/api-console/usage" },
+  { title: "Keys", href: "/mockups/api-console/api" },
+  { title: "Logs", href: "/mockups/api-console/api-logs" },
 ]
 
 export function PlatformSidebar() {
@@ -47,19 +31,18 @@ export function PlatformSidebar() {
           </span>
         </Link>
       </div>
-      <nav className="flex flex-col gap-1 px-3 pt-5">
-        {platformNavItems.map(({ icon: Icon, ...item }) => (
+      <nav className="flex flex-col items-start gap-1 px-3 pt-5">
+        {platformNavItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
-              "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+              "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
               pathname === item.href
                 ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <Icon className="size-4" aria-hidden="true" />
             {item.title}
           </Link>
         ))}
@@ -67,9 +50,8 @@ export function PlatformSidebar() {
           href="https://docs.livepeer.org/"
           target="_blank"
           rel="noreferrer"
-          className="flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="inline-flex w-fit rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
-          <GraduationCapIcon className="size-4" aria-hidden="true" />
           Learn
         </a>
       </nav>
@@ -77,13 +59,12 @@ export function PlatformSidebar() {
         <Link
           href="/mockups/api-console/account"
           className={cn(
-            "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+            "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
             pathname === "/mockups/api-console/account"
               ? "bg-muted font-medium text-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
-          <CircleUserRoundIcon className="size-4" aria-hidden="true" />
           Manage profile
         </Link>
         <UserMenu />

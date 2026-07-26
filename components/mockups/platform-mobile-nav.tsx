@@ -3,11 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  CircleUserRoundIcon,
-  GraduationCapIcon,
-  MenuIcon,
-} from "lucide-react"
+import { MenuIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { platformNavItems } from "@/components/mockups/platform-sidebar"
@@ -46,20 +42,19 @@ export function PlatformMobileNav() {
             </span>
           </SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col gap-1 overflow-y-auto px-3 pt-4">
-          {platformNavItems.map(({ icon: Icon, ...item }) => (
+        <nav className="flex flex-col items-start gap-1 overflow-y-auto px-3 pt-4">
+          {platformNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+                "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
                 pathname === item.href
                   ? "bg-muted font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              <Icon className="size-4" aria-hidden="true" />
               {item.title}
             </Link>
           ))}
@@ -67,9 +62,8 @@ export function PlatformMobileNav() {
             href="https://docs.livepeer.org/"
             target="_blank"
             rel="noreferrer"
-            className="flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="inline-flex w-fit rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
-            <GraduationCapIcon className="size-4" aria-hidden="true" />
             Learn
           </a>
         </nav>
@@ -78,13 +72,12 @@ export function PlatformMobileNav() {
             href="/mockups/api-console/account"
             onClick={() => setOpen(false)}
             className={cn(
-              "flex w-full items-center gap-2 rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+              "inline-flex w-fit rounded-sm px-2 py-2.5 text-sm transition-colors hover:bg-muted",
               pathname === "/mockups/api-console/account"
                 ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <CircleUserRoundIcon className="size-4" aria-hidden="true" />
             Manage profile
           </Link>
           <UserMenu />
