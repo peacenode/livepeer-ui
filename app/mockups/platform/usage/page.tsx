@@ -110,7 +110,7 @@ export default function MockupUsagePage() {
                       Credits refresh
                     </span>
                     <Badge variant="secondary" className="rounded-sm">
-                      AUG 01 26
+                      Aug 1, 2026
                     </Badge>
                   </div>
                 </div>
