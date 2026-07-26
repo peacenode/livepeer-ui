@@ -2,11 +2,17 @@
 
 ## Scope
 
-This inventory covers the three product mockups:
+This inventory covers the three current public mockup namespaces:
 
-1. **Platform** — `app/mockups/platform`
-2. **Livepeer.org / Playbooks** — `app/mockups/playbooks`
-3. **VideoBuddy** — `app/mockups/videobuddy`
+1. **Livepeer Agent** — `/mockups/livepeer-agent`
+2. **Livepeer.org** — `/mockups/livepeer-org`
+3. **Client** — `/mockups/client`
+
+The source directories still use the older internal names
+`app/mockups/platform`, `app/mockups/playbooks`, and
+`app/mockups/videobuddy`. `next.config.ts` rewrites the current public routes to
+those backing implementations. In this document, **route** always means the
+canonical public URL; **source** means the current backing filesystem path.
 
 The waitlist experiment is not included. It is a separate single-page concept and
 does not share the information architecture of these three products.
@@ -56,15 +62,15 @@ components/
     media/
     metric/
     page-header/
-  platform/
+  livepeer-agent/
     components/
     sections/
     shell/
-  playbooks/
+  livepeer-org/
     components/
     sections/
     shell/
-  videobuddy/
+  client/
     components/
     sections/
     shell/
@@ -93,12 +99,16 @@ Potential shared composites, to extract only with stable APIs:
 | `PageHeader` | `title`, `description?`, `actions?`, `backHref?` | Repeated in all three products |
 | `MetricCard` | `label`, `value`, `detail?`, `progress?` | Platform compute, usage, billing |
 | `ResponsiveDataTable` | semantic table plus mobile overflow policy | Platform API, logs, billing, members |
-| `MediaThumbnail` | `src`, `alt`, `duration?`, `onOpen?`, overlay slot | VideoBuddy create, footage, projects |
-| `MediaLightbox` | media preview plus metadata/actions aside | VideoBuddy create, characters, projects |
-| `MediaUploadDropzone` | file policy, selected files, drop callbacks | VideoBuddy storyboards, characters, projects |
-| `EmptyState` | `icon`, `title`, `description?`, `action?` | VideoBuddy collections and platform tables |
+| `MediaThumbnail` | `src`, `alt`, `duration?`, `onOpen?`, overlay slot | Client create, footage, projects |
+| `MediaLightbox` | media preview plus metadata/actions aside | Client create, characters, projects |
+| `MediaUploadDropzone` | file policy, selected files, drop callbacks | Client storyboards, characters, projects |
+| `EmptyState` | `icon`, `title`, `description?`, `action?` | Client collections and Livepeer Agent tables |
 
-## Mockup 1: Platform
+## Mockup 1: Livepeer Agent
+
+Public route: `/mockups/livepeer-agent`
+
+Backing source: `app/mockups/platform`
 
 ### Shell zones
 
@@ -115,30 +125,32 @@ Current sources:
 Target organization:
 
 ```text
-components/platform/shell/
-  platform-shell.tsx
-  platform-auth-gate.tsx
-  platform-sidebar.tsx
-  platform-mobile-nav.tsx
-components/platform/components/
+components/livepeer-agent/shell/
+  livepeer-agent-shell.tsx
+  livepeer-agent-auth-gate.tsx
+  livepeer-agent-sidebar.tsx
+  livepeer-agent-mobile-nav.tsx
+components/livepeer-agent/components/
   project-switcher.tsx
   user-menu.tsx
-  platform-page-header.tsx
-components/platform/sections/
-  platform-page-frame.tsx
+  livepeer-agent-page-header.tsx
+components/livepeer-agent/sections/
+  livepeer-agent-page-frame.tsx
 ```
 
-`PlatformShell` owns the fixed desktop sidebar, mobile header, content viewport,
-and max-width. `PlatformPageFrame` owns the page header and optional panel
+`LivepeerAgentShell` owns the fixed desktop sidebar, mobile header, content
+viewport, and max-width. `LivepeerAgentPageFrame` owns the page header and optional panel
 variant. Route sections render inside that frame.
 
 ### Home
 
-Current route: `app/mockups/platform/page.tsx`
+Public route: `/mockups/livepeer-agent`
+
+Current source: `app/mockups/platform/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
-| Page frame | `PlatformHomePage` assembly | `PlatformPageFrame` | — |
+| Page frame | `LivepeerAgentHomePage` assembly | `LivepeerAgentPageFrame` | — |
 | Onboarding | `RunnerOnboardingSection` | onboarding steps, compatibility row | `Card`, `Button` |
 | Product entry points | `ProductEntryGridSection` | `ProductEntryCard` | `Card`, `Button` |
 | Quick links | `DeveloperLinksSection` | `DeveloperLink` | `Button`/link |
@@ -149,7 +161,9 @@ to own the full-width onboarding zone. Otherwise split it into
 
 ### Compute
 
-Current route: `app/mockups/platform/compute/page.tsx`
+Public route: `/mockups/livepeer-agent/compute`
+
+Current source: `app/mockups/platform/compute/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -158,12 +172,14 @@ Current route: `app/mockups/platform/compute/page.tsx`
 | Orchestrators | `OrchestratorTableSection` | address cell, status cell | `Table`, `Badge` |
 
 Current reusable implementation: `components/mockups/orchestrator-table.tsx`.
-Move it under `components/platform/sections` and pass rows, loading state, error,
-and refresh callback as props.
+Move it under `components/livepeer-agent/sections` and pass rows, loading state,
+error, and refresh callback as props.
 
 ### Inference container detail
 
-Current route: `app/mockups/platform/inference/[container]/page.tsx`
+Public route: `/mockups/livepeer-agent/inference/[container]`
+
+Current source: `app/mockups/platform/inference/[container]/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -178,7 +194,9 @@ The page keeps `generateStaticParams`, `generateMetadata`, lookup, and
 
 ### API keys
 
-Current route: `app/mockups/platform/api/page.tsx`
+Public route: `/mockups/livepeer-agent/api`
+
+Current source: `app/mockups/platform/api/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -192,7 +210,9 @@ whose ownership is unclear.
 
 ### API logs
 
-Current route: `app/mockups/platform/api-logs/page.tsx`
+Public route: `/mockups/livepeer-agent/api-logs`
+
+Current source: `app/mockups/platform/api-logs/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -202,7 +222,9 @@ Current route: `app/mockups/platform/api-logs/page.tsx`
 
 ### Usage
 
-Current route: `app/mockups/platform/usage/page.tsx`
+Public route: `/mockups/livepeer-agent/usage`
+
+Current source: `app/mockups/platform/usage/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -215,7 +237,9 @@ Current route: `app/mockups/platform/usage/page.tsx`
 
 ### Billing
 
-Current route: `app/mockups/platform/billing/page.tsx`
+Public route: `/mockups/livepeer-agent/billing`
+
+Current source: `app/mockups/platform/billing/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -224,7 +248,9 @@ Current route: `app/mockups/platform/billing/page.tsx`
 
 ### Project settings
 
-Current route: `app/mockups/platform/settings/page.tsx`
+Public route: `/mockups/livepeer-agent/settings`
+
+Current source: `app/mockups/platform/settings/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -234,7 +260,9 @@ Current route: `app/mockups/platform/settings/page.tsx`
 
 ### Organization settings
 
-Current route: `app/mockups/platform/organization/page.tsx`
+Public route: `/mockups/livepeer-agent/organization`
+
+Current source: `app/mockups/platform/organization/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -247,14 +275,20 @@ Current route: `app/mockups/platform/organization/page.tsx`
 
 ### Account
 
-Current route: `app/mockups/platform/account/page.tsx`
+Public route: `/mockups/livepeer-agent/account`
+
+Current source: `app/mockups/platform/account/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
 | Profile | `AccountProfileFormSection` | avatar upload, profile fields | `Avatar`, form primitives |
 | Session actions | `AccountSessionActionsSection` | save, sign out | `Button` |
 
-## Mockup 2: Livepeer.org / Playbooks
+## Mockup 2: Livepeer.org
+
+Public route: `/mockups/livepeer-org`
+
+Backing source: `app/mockups/playbooks`
 
 ### Shell zones
 
@@ -267,17 +301,17 @@ Current sources:
 Target organization:
 
 ```text
-components/playbooks/shell/
+components/livepeer-org/shell/
   marketing-shell.tsx
   marketing-header.tsx
   marketing-mobile-menu.tsx
   marketing-footer.tsx
-components/playbooks/components/
+components/livepeer-org/components/
   agent-compatibility.tsx
   runner-lockup.tsx
   playbook-card.tsx
   reliability-rating.tsx
-components/playbooks/sections/
+components/livepeer-org/sections/
   ...
 ```
 
@@ -286,6 +320,8 @@ behavior. Split it into `MarketingNav` and `MarketingMobileMenu`, with a shared
 navigation data model.
 
 ### Landing page
+
+Public route: `/mockups/livepeer-org`
 
 Current source: `app/mockups/playbooks/playbooks-workspace.tsx`
 
@@ -300,6 +336,11 @@ render these three sections directly. `LivepeerCubeStream` remains a product
 visual component, not a primitive.
 
 ### Playbook library
+
+Public routes:
+
+- `/mockups/livepeer-org/library`
+- `/mockups/livepeer-org/library/[slug]`
 
 Current sources:
 
@@ -321,7 +362,9 @@ Current sources:
 
 ### Agent install
 
-Current route: `app/mockups/playbooks/install/page.tsx`
+Public route: `/mockups/livepeer-org/agent`
+
+Current source: `app/mockups/playbooks/install/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -330,6 +373,8 @@ Current route: `app/mockups/playbooks/install/page.tsx`
 | Requirements | `AgentRequirementsSection` | requirement row | `Badge` |
 
 ### Ecosystem
+
+Public route: `/mockups/livepeer-org/ecosystem`
 
 Current sources:
 
@@ -346,7 +391,9 @@ Current sources:
 
 ### Earn
 
-Current route: `app/mockups/playbooks/earn/page.tsx`
+Public route: `/mockups/livepeer-org/earn`
+
+Current source: `app/mockups/playbooks/earn/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -355,7 +402,11 @@ Current route: `app/mockups/playbooks/earn/page.tsx`
 | Requirements | `OrchestratorRequirementsSection` | requirement rows | `Table`/list |
 | Start CTA | `EarnStartSection` | final action | `Button` |
 
-## Mockup 3: VideoBuddy
+## Mockup 3: Client
+
+Public route: `/mockups/client`
+
+Backing source: `app/mockups/videobuddy`
 
 ### Shell zones
 
@@ -364,11 +415,11 @@ Current source: `app/mockups/videobuddy/agent-shell.tsx`
 Target organization:
 
 ```text
-components/videobuddy/shell/
-  videobuddy-shell.tsx
+components/client/shell/
+  client-shell.tsx
   desktop-sidebar.tsx
   mobile-tab-bar.tsx
-components/videobuddy/components/
+components/client/components/
   media-context-menu.tsx
   media-thumbnail.tsx
   media-lightbox.tsx
@@ -376,16 +427,19 @@ components/videobuddy/components/
   project-picker.tsx
   collection-heading.tsx
   generation-composer.tsx
-components/videobuddy/sections/
+components/client/sections/
   ...
 ```
 
 `AgentShell` contains two separately handoffable navigation zones:
 `DesktopSidebar` and `MobileTabBar`. Both consume one `navigationItems` model.
-Routes in that model must use the actual `/mockups/videobuddy` base or receive a
-base path; the current `/mockups/client` links are stale.
+The existing `/mockups/client` links are the canonical public routes and should
+remain stable even while the backing source stays under
+`app/mockups/videobuddy`.
 
 ### Create
+
+Public route: `/mockups/client`
 
 Current source: `app/mockups/videobuddy/agent-workspace.tsx`
 
@@ -418,6 +472,8 @@ in a page-level hook such as `useGenerationWorkspace`.
 
 ### Storyboards
 
+Public route: `/mockups/client/storyboards`
+
 Current source:
 `app/mockups/videobuddy/storyboards/storyboards-workspace.tsx`
 
@@ -430,6 +486,8 @@ Current source:
 | Project creation | shared `CreateProjectDialog` | name field | `Dialog`, `Input`, `Button` |
 
 ### Characters
+
+Public route: `/mockups/client/characters`
 
 Current source: `app/mockups/videobuddy/characters/characters-workspace.tsx`
 
@@ -448,6 +506,8 @@ product-specific.
 
 ### Clips
 
+Public route: `/mockups/client/footage`
+
 Current source: `app/mockups/videobuddy/footage/footage-workspace.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
@@ -457,6 +517,8 @@ Current source: `app/mockups/videobuddy/footage/footage-workspace.tsx`
 | Empty state | part of library | icon/message | shared `EmptyState` |
 
 ### Projects
+
+Public route: `/mockups/client/projects`
 
 Current source: `app/mockups/videobuddy/projects/projects-workspace.tsx`
 
@@ -481,6 +543,8 @@ This file should be split before adding behavior. `ProjectImageCollections` and
 
 ### Install
 
+Public route: `/mockups/client/install`
+
 Current sources:
 
 - `app/mockups/videobuddy/install/page.tsx`
@@ -488,12 +552,14 @@ Current sources:
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
-| Intro | `VideoBuddyInstallHeaderSection` | — | — |
-| Command | `VideoBuddyInstallCommandSection` | copy action | `Button` |
+| Intro | `ClientInstallHeaderSection` | — | — |
+| Command | `ClientInstallCommandSection` | copy action | `Button` |
 
 ### Protocol
 
-Current route: `app/mockups/videobuddy/protocol/page.tsx`
+Public route: `/mockups/client/protocol`
+
+Current source: `app/mockups/videobuddy/protocol/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |
@@ -534,17 +600,17 @@ passing.
 1. **Create product folders and move existing named components without changing
    behavior.** Fix imports only. Do not introduce barrel exports across entire
    products.
-2. **Extract shells.** Platform shell, marketing shell, and VideoBuddy desktop
-   and mobile navigation become stable boundaries.
+2. **Extract shells.** Livepeer Agent shell, Livepeer.org marketing shell, and
+   Client desktop and mobile navigation become stable boundaries.
 3. **Extract high-reuse composites.** `PageHeader`, `MetricCard`,
    `MediaThumbnail`, `MediaUploadDropzone`, `MediaLightbox`,
    `CreateProjectDialog`.
-4. **Split VideoBuddy workspaces.** Start with Create, then Projects, then
+4. **Split Client workspaces.** Start with Create, then Projects, then
    Storyboards/Characters. Move state into page hooks and pass typed records and
    callbacks to sections.
-5. **Split Platform routes.** Compute/API/usage first because their tables and
-   metrics establish the reusable contracts; settings and account follow.
-6. **Split Playbooks routes.** Landing page first, then catalog/detail,
+5. **Split Livepeer Agent routes.** Compute/API/usage first because their tables
+   and metrics establish the reusable contracts; settings and account follow.
+6. **Split Livepeer.org routes.** Landing page first, then catalog/detail,
    ecosystem, install, and earn.
 7. **Add isolated section fixtures/tests.** Verify every section at narrow mobile
    width, `sm`, and `md`, with long labels and empty data.
