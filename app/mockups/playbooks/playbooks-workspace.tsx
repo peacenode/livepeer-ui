@@ -14,13 +14,13 @@ export function PlaybooksWorkspace() {
         <LivepeerCubeStream />
         <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
           <div className="flex max-w-3xl flex-col items-start">
-            <h1 className="max-w-[70%] text-3xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-none sm:text-[clamp(2.5rem,4.5vw,4rem)]">
+            <h1 className="max-w-[70%] text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-none sm:text-[clamp(2.5rem,4.5vw,4rem)]">
               The open inference network.{" "}
               <span className="text-foreground/45">
                 Connect GPUs, power AI and media workloads on Livepeer.
               </span>
             </h1>
-            <div className="mt-10 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+            <div className="mt-12 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
               <Button
                 size="lg"
                 variant="secondary"
