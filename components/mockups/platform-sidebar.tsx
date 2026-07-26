@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { UserMenu } from "@/components/mockups/user-menu"
@@ -54,9 +55,10 @@ export function PlatformSidebar() {
         ))}
         <Link
           href="/mockups/livepeer-org/library"
-          className="inline-flex w-fit rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           Learn
+          <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
         </Link>
       </nav>
       <div className="mt-auto px-3 py-3">
