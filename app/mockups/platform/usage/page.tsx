@@ -105,9 +105,12 @@ export default function MockupUsagePage() {
                       / 50 credits
                     </span>
                   </p>
-                  <Badge variant="secondary" className="mt-8">
-                    Aug 01 26
-                  </Badge>
+                  <div className="mt-8 flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">
+                      Credits refresh
+                    </span>
+                    <Badge variant="secondary">AUG 01 26</Badge>
+                  </div>
                 </div>
               </div>
             </section>
