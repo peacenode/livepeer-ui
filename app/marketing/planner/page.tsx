@@ -9,7 +9,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Separator } from "@/components/ui/separator"
 import { marketingWeeks } from "@/lib/marketing-plan"
 
 export const metadata: Metadata = {
@@ -43,41 +42,44 @@ export default function MarketingPlannerPage() {
               <AccordionTrigger className="items-center px-5 py-6 font-sans text-base font-normal hover:no-underline sm:px-8">
                 <time dateTime={week.startsAt}>{week.displayDate}</time>
               </AccordionTrigger>
-              <AccordionContent className="px-5 pb-8 sm:px-8">
-                <div className="flex flex-col gap-8">
+              <AccordionContent className="px-5 pb-10 sm:px-8">
+                <div className="flex flex-col gap-10">
                   {week.groups.map((group) => (
-                    <section key={group.title}>
+                    <section
+                      key={group.title}
+                      className="grid gap-4 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8"
+                    >
                       {group.title && (
-                        <h2 className="mb-2 font-sans text-sm font-medium text-muted-foreground">
+                        <h2 className="font-sans text-sm font-medium text-muted-foreground">
                           {group.title}
                         </h2>
                       )}
-                      <div>
-                        {group.deliverables.map((deliverable, index) => (
-                          <div key={deliverable.title}>
-                            {index > 0 && <Separator />}
-                            <div className="flex flex-col gap-3 py-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-                              <p className="text-sm leading-6">
-                                {deliverable.title}
-                              </p>
-                              {deliverable.links?.length ? (
-                                <div className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 sm:max-w-72 sm:justify-end">
-                                  {deliverable.links.map((link) => (
-                                    <Link
-                                      key={link.href}
-                                      href={link.href}
-                                      className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                                    >
-                                      {link.label}
-                                      <ArrowUpRightIcon
-                                        className="size-3.5"
-                                        aria-hidden="true"
-                                      />
-                                    </Link>
-                                  ))}
-                                </div>
-                              ) : null}
-                            </div>
+                      <div className="grid gap-x-10 gap-y-7 sm:grid-cols-2 xl:grid-cols-3">
+                        {group.deliverables.map((deliverable) => (
+                          <div
+                            key={deliverable.title}
+                            className="flex min-w-0 flex-col gap-2"
+                          >
+                            <p className="text-sm leading-6">
+                              {deliverable.title}
+                            </p>
+                            {deliverable.links?.length ? (
+                              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                                {deliverable.links.map((link) => (
+                                  <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                                  >
+                                    {link.label}
+                                    <ArrowUpRightIcon
+                                      className="size-3"
+                                      aria-hidden="true"
+                                    />
+                                  </Link>
+                                ))}
+                              </div>
+                            ) : null}
                           </div>
                         ))}
                       </div>
