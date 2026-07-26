@@ -180,43 +180,36 @@ export function WaitlistMockup() {
               </div>
 
               <section aria-labelledby="waitlist-leaders">
-                <div className="flex items-center justify-between">
-                  <h2 id="waitlist-leaders" className="text-sm font-medium">
-                    Waitlist
-                  </h2>
-                  <span className="text-xs text-muted-foreground">
-                    Top referrals
-                  </span>
-                </div>
+                <h2 id="waitlist-leaders" className="text-sm font-medium">
+                  Leaderboard
+                </h2>
                 <div className="mt-3 overflow-hidden rounded-md border">
+                  <div className="flex items-center justify-between border-b px-3 py-2 text-xs text-muted-foreground">
+                    <span>Person</span>
+                    <span>Referrals</span>
+                  </div>
                   <ol className="divide-y">
-                    <li
-                      className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 border-b border-emerald-400/20 bg-emerald-400/10 px-3 py-3 text-sm"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      <span className="grid size-5 place-items-center rounded-full bg-emerald-400 text-black">
-                        <Check className="size-3" aria-hidden="true" />
-                      </span>
-                      <span className="truncate font-medium">You</span>
-                      <span className="font-mono text-xs text-emerald-400 tabular-nums">
-                        #2,419
-                      </span>
-                    </li>
                     {leaders.map((person, index) => (
                       <li
                         key={`${person.name}-${index}`}
-                        className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 px-3 py-2.5 text-sm"
+                        className="flex items-center justify-between gap-4 px-3 py-2.5 text-sm"
                       >
-                        <span className="font-mono text-xs text-muted-foreground">
-                          {index + 1}
-                        </span>
                         <span className="truncate">{person.name}</span>
                         <span className="font-mono text-xs tabular-nums">
                           {person.referrals}
                         </span>
                       </li>
                     ))}
+                    <li
+                      className="flex items-center justify-between gap-4 bg-emerald-400/10 px-3 py-3 text-sm"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <span className="truncate font-medium">You</span>
+                      <span className="font-mono text-xs text-emerald-400 tabular-nums">
+                        0
+                      </span>
+                    </li>
                   </ol>
                 </div>
               </section>
