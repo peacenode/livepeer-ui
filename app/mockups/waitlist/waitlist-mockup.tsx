@@ -45,7 +45,6 @@ export function WaitlistMockup() {
   const [email, setEmail] = useState("")
   const [joined, setJoined] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [showTopHundred, setShowTopHundred] = useState(false)
   const inviteId = email.split("@")[0].replace(/[^a-z0-9]/gi, "") || "invite"
   const inviteUrl = `livepeer.org/agent/${inviteId.toLowerCase()}`
 
@@ -82,10 +81,7 @@ export function WaitlistMockup() {
           className="flex items-end gap-2 self-start text-white"
           aria-label="Livepeer Agent"
         >
-          <LivepeerGradientLockup
-            className="h-4 w-auto"
-            aria-hidden="true"
-          />
+          <LivepeerGradientLockup className="h-4 w-auto" aria-hidden="true" />
           <span
             className="translate-y-[0.08em] font-runner text-base leading-none font-medium tracking-[-0.04em]"
             aria-hidden="true"
@@ -104,7 +100,7 @@ export function WaitlistMockup() {
           <h1 className="mt-4 font-display text-[clamp(2.5rem,3vw,3rem)] leading-[0.96] font-medium tracking-[-0.045em] text-balance">
             The Open Video Agent
           </h1>
-          <p className="mt-6 text-pretty text-sm leading-6 text-muted-foreground">
+          <p className="mt-6 text-sm leading-6 text-pretty text-muted-foreground">
             Livepeer agent is a harness for multimodal media generation, from
             right within Claude. Running on Livepeer&apos;s open network.
           </p>
@@ -234,31 +230,21 @@ export function WaitlistMockup() {
                         #2,419
                       </span>
                     </li>
-                    {leaders
-                      .slice(0, showTopHundred ? 100 : 5)
-                      .map((person, index) => (
-                        <li
-                          key={`${person.name}-${index}`}
-                          className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 bg-background px-3 py-2.5 text-sm"
-                        >
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {index + 1}
-                          </span>
-                          <span className="truncate">{person.name}</span>
-                          <span className="font-mono text-xs tabular-nums">
-                            {person.referrals}
-                          </span>
-                        </li>
-                      ))}
+                    {leaders.map((person, index) => (
+                      <li
+                        key={`${person.name}-${index}`}
+                        className="grid grid-cols-[1.5rem_1fr_auto] items-center gap-2 px-3 py-2.5 text-sm"
+                      >
+                        <span className="font-mono text-xs text-muted-foreground">
+                          {index + 1}
+                        </span>
+                        <span className="truncate">{person.name}</span>
+                        <span className="font-mono text-xs tabular-nums">
+                          {person.referrals}
+                        </span>
+                      </li>
+                    ))}
                   </ol>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="h-10 w-full rounded-none border-t text-xs"
-                    onClick={() => setShowTopHundred((visible) => !visible)}
-                  >
-                    {showTopHundred ? "Show top 5" : "Load top 100"}
-                  </Button>
                 </div>
               </section>
             </div>
@@ -269,7 +255,7 @@ export function WaitlistMockup() {
       <section className="absolute inset-0 isolate overflow-hidden bg-black">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_42%,rgba(255,255,255,0.1)_0%,transparent_48%)]" />
         <LivepeerCubeStream inverted className="opacity-90" />
-        <div className="pointer-events-none absolute inset-y-0 inset-x-0 z-10 flex items-center px-6 sm:px-10 md:pr-[27rem]">
+        <div className="pointer-events-none absolute inset-x-0 inset-y-0 z-10 flex items-center px-6 sm:px-10 md:pr-[27rem]">
           <h2
             className="flex w-full items-end justify-center gap-[clamp(0.75rem,1.6vw,2rem)] text-white/90"
             aria-label="Livepeer Agent"
