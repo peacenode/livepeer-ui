@@ -69,11 +69,15 @@ function DeleteApiKeyDialog({
           </AlertDescription>
         </Alert>
 
-        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 text-sm">
-          <dt className="text-muted-foreground">Key name</dt>
-          <dd className="font-medium">{name}</dd>
-          <dt className="text-muted-foreground">Created at</dt>
-          <dd>{createdAt}</dd>
+        <dl className="space-y-3 text-sm">
+          <div className="flex items-center justify-between gap-6">
+            <dt className="text-muted-foreground">Key name</dt>
+            <dd className="text-right font-medium">{name}</dd>
+          </div>
+          <div className="flex items-center justify-between gap-6">
+            <dt className="text-muted-foreground">Created at</dt>
+            <dd className="text-right">{createdAt}</dd>
+          </div>
         </dl>
 
         <AlertDialogFooter className="mt-2">
