@@ -35,7 +35,7 @@ export const marketingWeeks: MarketingWeek[] = [
             title:
               "Socials revamped with new assets & supported by agent playbooks for content",
             links: [
-              { label: "Press Kit", href: "/marketing/press-kit" },
+              { label: "Social Kit", href: "/marketing/press-kit" },
               { label: "Brand Kit", href: "/marketing/brand-kit" },
               {
                 label: "Agent Playbooks",
@@ -70,7 +70,7 @@ export const marketingWeeks: MarketingWeek[] = [
           {
             title:
               "Partner outreach to Anthropic, Blockchain Capital & CoinFund",
-            links: [{ label: "Press Kit", href: "/marketing/press-kit" }],
+            links: [{ label: "Social Kit", href: "/marketing/press-kit" }],
           },
         ],
       },

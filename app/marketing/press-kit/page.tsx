@@ -7,7 +7,7 @@ import {
 } from "@/lib/press-kit"
 
 export const metadata: Metadata = {
-  title: "Press Kit · Deliverables",
+  title: "Social Kit · Deliverables",
   description:
     "The brand asset deliverables and export requirements for Livepeer's public channels.",
 }
@@ -17,7 +17,7 @@ export default function PressKitPage() {
     <div className="mx-auto w-full max-w-5xl pb-20">
       <header className="pb-10">
         <p className="mb-3 text-sm font-medium text-muted-foreground">
-          Press kit / Deliverables
+          Social kit / Deliverables
         </p>
         <h1 className="max-w-4xl text-pretty text-4xl font-medium tracking-tight sm:text-5xl">
           Brand asset deliverables
