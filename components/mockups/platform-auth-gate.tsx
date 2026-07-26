@@ -28,7 +28,7 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             aria-hidden="true"
             style={{
               backgroundImage:
-                "linear-gradient(115deg, transparent 20%, color-mix(in oklab, var(--color-emerald-500) 18%, transparent) 46%, transparent 68%)",
+                "radial-gradient(ellipse 110% 95% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 24%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 14%, transparent) 38%, transparent 78%)",
             }}
           />
           <section
