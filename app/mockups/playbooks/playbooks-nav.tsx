@@ -36,15 +36,10 @@ export function PlaybooksNav() {
           </span>
         </a>
         <a
-          href="/mockups/api-console/api"
-          target="_blank"
-          rel="noreferrer"
+          href="/mockups/livepeer-org/agent"
           className="flex items-center gap-1 rounded-sm px-2 py-2 text-xs text-muted-foreground transition-colors hover:text-emerald-500 md:px-3 md:text-sm"
         >
-          API Console
-          <span className="font-sans" aria-hidden="true">
-            ↗
-          </span>
+          Agent
         </a>
       </div>
     </nav>
