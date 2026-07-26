@@ -15,7 +15,9 @@ export function ComponentPreview({
 }) {
   const Demo = demos[name]
   const isFullBleed =
-    name === "livepeer-agent-hero" || name === "install-agent-footer"
+    name === "livepeer-agent-hero" ||
+    name === "install-agent-footer" ||
+    name === "waitlist-background-hero"
   const code = fs.readFileSync(
     path.join(process.cwd(), "components/demos", `${name}-demo.tsx`),
     "utf8"
