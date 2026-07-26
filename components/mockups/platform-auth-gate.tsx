@@ -28,7 +28,19 @@ function PlatformAuthGate({ children }: { children: ReactNode }) {
             aria-hidden="true"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse 110% 95% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 24%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 14%, transparent) 38%, transparent 78%)",
+                "radial-gradient(ellipse 42% 36% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 22%, white) 0%, color-mix(in oklab, var(--color-emerald-500) 10%, transparent) 48%, transparent 100%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute inset-0 blur-xl"
+            aria-hidden="true"
+            style={{
+              backgroundImage:
+                "conic-gradient(from 0deg at 0% 0%, transparent 100deg, color-mix(in oklab, var(--color-emerald-400) 10%, transparent) 116deg, color-mix(in oklab, var(--color-emerald-400) 34%, white) 136deg, color-mix(in oklab, var(--color-emerald-500) 12%, transparent) 154deg, transparent 172deg)",
+              maskImage:
+                "radial-gradient(ellipse 105% 105% at 0% 0%, black 0%, black 42%, transparent 80%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 105% 105% at 0% 0%, black 0%, black 42%, transparent 80%)",
             }}
           />
           <section
