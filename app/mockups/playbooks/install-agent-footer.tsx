@@ -3,7 +3,7 @@ import { LivepeerWordmark } from "@/components/brand"
 import { RunnerDeltaStream } from "@/components/mockups/runner-delta-stream"
 import { cn } from "@/lib/utils"
 
-const command = "npm install -g @livepeer/agent"
+const mcpServerUrl = "https://storyboard.daydream.monster/api/mcp"
 
 export function InstallAgentFooter({
   title = "Create and edit images and video with your agent.",
@@ -42,17 +42,19 @@ export function InstallAgentFooter({
           </h2>
         </div>
 
-        <div className="mt-9 inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
-          <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap sm:text-sm">
-            <span className="mr-2 text-background/40" aria-hidden="true">
-              $
-            </span>
-            {command}
-          </code>
-          <CopyButton
-            value={command}
-            className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
-          />
+        <div className="mt-9 flex max-w-full flex-col items-center">
+          <p className="mb-3 text-sm text-muted-foreground">
+            In your agent&apos;s MCP / connector settings, add this server:
+          </p>
+          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+            <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
+              {mcpServerUrl}
+            </code>
+            <CopyButton
+              value={mcpServerUrl}
+              className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
+            />
+          </div>
         </div>
       </div>
     </section>

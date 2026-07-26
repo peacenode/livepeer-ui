@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Install Livepeer Agent to use inference playbooks from your coding agent.",
 }
 
-const installCommand = "npm install -g @livepeer/agent"
+const mcpServerUrl = "https://storyboard.daydream.monster/api/mcp"
 
 export default async function PlaybooksInstallPage() {
   const playbooks = await getSourcePlaybooks()
@@ -53,17 +53,19 @@ export default async function PlaybooksInstallPage() {
             Create and edit images and video with your agent.
           </h1>
 
-          <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
-            <code className="min-w-0 overflow-x-auto font-mono text-xs whitespace-nowrap sm:text-sm">
-              <span className="mr-2 text-background/40" aria-hidden="true">
-                $
-              </span>
-              {installCommand}
-            </code>
-            <CopyButton
-              value={installCommand}
-              className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
-            />
+          <div className="flex max-w-full flex-col items-center">
+            <p className="mb-3 text-sm text-muted-foreground">
+              In your agent&apos;s MCP / connector settings, add this server:
+            </p>
+            <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-foreground px-5 py-4 text-left text-background shadow-sm">
+              <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
+                {mcpServerUrl}
+              </code>
+              <CopyButton
+                value={mcpServerUrl}
+                className="size-8 shrink-0 rounded-none bg-transparent text-background/40 transition-colors hover:bg-transparent hover:text-background"
+              />
+            </div>
           </div>
           <nav className="flex items-center gap-5 text-sm" aria-label="Account">
             <Link
