@@ -43,7 +43,7 @@ export default async function PlaybooksInstallPage() {
               aria-hidden="true"
             />
             <span
-              className="font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+              className="translate-y-[0.17em] font-runner text-3xl leading-none font-medium tracking-tight sm:text-4xl"
               aria-hidden="true"
             >
               AGENT
