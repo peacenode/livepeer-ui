@@ -193,19 +193,21 @@ export default async function EarnWithGpuPage() {
                       <defs>
                         <linearGradient
                           id={path.gradientId}
-                          x1="-100%"
+                          x1="0%"
                           y1="0%"
-                          x2="0%"
+                          x2="100%"
                           y2="100%"
                         >
-                          <stop offset="0%" stopColor="#10b981" />
-                          <stop offset="50%" stopColor="#22d3ee" />
-                          <stop offset="100%" stopColor="#6366f1" />
+                          <stop offset="0%" stopColor="#059669" />
+                          <stop offset="24%" stopColor="#d1fae5" />
+                          <stop offset="50%" stopColor="#10b981" />
+                          <stop offset="74%" stopColor="#a7f3d0" />
+                          <stop offset="100%" stopColor="#059669" />
                           <animateTransform
                             attributeName="gradientTransform"
                             type="translate"
-                            values="0 0; 1 0; 0 0"
-                            dur="2s"
+                            values="-1 0; 1 0"
+                            dur="900ms"
                             begin={`${path.gradientId}-target.mouseenter`}
                             end={`${path.gradientId}-target.mouseleave`}
                             repeatCount="1"
