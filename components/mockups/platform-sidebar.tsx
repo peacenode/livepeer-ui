@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { UserMenu } from "@/components/mockups/user-menu"
@@ -50,9 +51,10 @@ export function PlatformSidebar() {
           href="https://docs.livepeer.org/"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex w-fit rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           Learn
+          <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
         </a>
       </nav>
       <div className="mt-auto space-y-1 px-3 py-3">
