@@ -27,12 +27,18 @@ export default function MockupsLayout({
           <div className="flex items-center justify-between gap-3 px-4 pt-4 md:hidden">
             <Link
               href="/mockups/livepeer-agent"
-              aria-label="Livepeer home"
+              aria-label="Livepeer Agent home"
               className="inline-flex"
             >
-              <span className="flex items-center gap-1.5 text-black">
+              <span className="flex items-end gap-1.5 text-black">
                 <LivepeerGradientSymbol className="h-4 w-auto" />
                 <LivepeerWordmark className="h-4 w-auto" />
+                <span
+                  className="translate-y-[0.17em] font-runner text-sm leading-none font-medium tracking-tight"
+                  aria-hidden="true"
+                >
+                  AGENT
+                </span>
               </span>
             </Link>
             <PlatformMobileNav />
