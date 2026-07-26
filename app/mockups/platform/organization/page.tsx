@@ -118,8 +118,7 @@ export default async function MockupOrganizationPage({
             </div>
             <Button
               type="submit"
-              size="lg"
-              className="h-16 self-start rounded-sm px-6"
+              className="h-10 self-start rounded-sm px-4"
             >
               Save
             </Button>
@@ -132,7 +131,7 @@ export default async function MockupOrganizationPage({
                 Members can be assigned to projects after joining the
                 organization.
               </p>
-              <Button size="lg" className="h-16 rounded-sm px-6">
+              <Button className="h-10 rounded-sm px-4">
                 Invite member
               </Button>
             </div>

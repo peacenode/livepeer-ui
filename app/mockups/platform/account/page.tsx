@@ -55,8 +55,7 @@ export default function MockupAccountPage() {
             </div>
             <Button
               type="submit"
-              size="lg"
-              className="h-16 self-start rounded-sm px-6"
+              className="h-10 self-start rounded-sm px-4"
             >
               Save
             </Button>
@@ -73,8 +72,7 @@ export default function MockupAccountPage() {
               </div>
               <Button
                 variant="outline"
-                size="lg"
-                className="h-16 rounded-sm px-6"
+                className="h-10 rounded-sm px-4"
               >
                 Change password
               </Button>
@@ -116,8 +114,7 @@ export default function MockupAccountPage() {
               <Switch id="account-emails" defaultChecked />
             </div>
             <Button
-              size="lg"
-              className="h-16 self-start rounded-sm px-6"
+              className="h-10 self-start rounded-sm px-4"
             >
               Save
             </Button>

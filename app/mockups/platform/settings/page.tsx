@@ -84,8 +84,7 @@ export default function MockupSettingsPage() {
             </div>
             <Button
               type="submit"
-              size="lg"
-              className="h-16 self-start rounded-sm px-6"
+              className="h-10 self-start rounded-sm px-4"
             >
               Save
             </Button>
@@ -97,7 +96,7 @@ export default function MockupSettingsPage() {
               <p className="text-sm text-muted-foreground">
                 Add organization members to this project.
               </p>
-              <Button size="lg" className="h-16 rounded-sm px-6">
+              <Button className="h-10 rounded-sm px-4">
                 Add member
               </Button>
             </div>
@@ -127,7 +126,7 @@ export default function MockupSettingsPage() {
               <p className="text-sm text-muted-foreground">
                 Deliver project events to external services.
               </p>
-              <Button size="lg" className="h-16 rounded-sm px-6">
+              <Button className="h-10 rounded-sm px-4">
                 Add webhook
               </Button>
             </div>
