@@ -41,12 +41,12 @@ import LivepeerAgentOnboardingSectionDemo from "./livepeer-agent-onboarding-sect
 import LivepeerAgentPageFrameDemo from "./livepeer-agent-page-frame-demo"
 import LivepeerAgentSidebarDemo from "./livepeer-agent-sidebar-demo"
 import LivepeerAgentSignInCardDemo from "./livepeer-agent-sign-in-card-demo"
-import LivepeerCubeStreamDemo from "./livepeer-cube-stream-demo"
 import MediaContextMenuDemo from "./media-context-menu-demo"
 import OrchestratorTableSectionDemo from "./orchestrator-table-section-demo"
 import ProjectPickerDemo from "./project-picker-demo"
-import LivepeerAgentDeltaStreamDemo from "./livepeer-agent-delta-stream-demo"
 import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-demo"
+import LivepeerOrgFooterDemo from "./livepeer-org-footer-demo"
+import LivepeerOrgHeaderDemo from "./livepeer-org-header-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
 import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
@@ -97,12 +97,12 @@ export const demos: Record<string, ComponentType> = {
   "livepeer-agent-page-frame": LivepeerAgentPageFrameDemo,
   "livepeer-agent-sidebar": LivepeerAgentSidebarDemo,
   "livepeer-agent-sign-in-card": LivepeerAgentSignInCardDemo,
-  "livepeer-cube-stream": LivepeerCubeStreamDemo,
   "media-context-menu": MediaContextMenuDemo,
   "orchestrator-table-section": OrchestratorTableSectionDemo,
   "project-picker": ProjectPickerDemo,
-  "livepeer-agent-delta-stream": LivepeerAgentDeltaStreamDemo,
   "livepeer-agent-feature-section": LivepeerAgentFeatureSectionDemo,
+  "livepeer-org-footer": LivepeerOrgFooterDemo,
+  "livepeer-org-header": LivepeerOrgHeaderDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
   "characters-workspace-section": CharactersWorkspaceSectionDemo,

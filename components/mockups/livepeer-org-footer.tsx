@@ -85,7 +85,7 @@ const socials = [
   },
 ]
 
-export function SiteFooter() {
+export function LivepeerOrgFooter() {
   return (
     <footer className="bg-background">
       <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">

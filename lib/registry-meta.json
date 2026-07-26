@@ -90,7 +90,7 @@
           "title": "Livepeer Agent Onboarding",
           "description": "Complete Livepeer Agent onboarding section with progress, setup steps, and links into billing and installation.",
           "level": "section",
-          "uses": ["card", "livepeer-cube-stream"],
+          "uses": ["card"],
           "previewPath": "/mockups/livepeer-agent",
           "files": ["components/mockups/livepeer-agent-onboarding-section.tsx"]
         },
@@ -109,6 +109,25 @@
       "title": "Livepeer.org",
       "items": [
         {
+          "name": "livepeer-org-header",
+          "title": "Header",
+          "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
+          "level": "component",
+          "uses": ["button", "sheet"],
+          "files": [
+            "components/mockups/livepeer-org-header.tsx",
+            "components/mockups/livepeer-org-menu.tsx"
+          ]
+        },
+        {
+          "name": "livepeer-org-footer",
+          "title": "Footer",
+          "description": "Livepeer.org footer with network, resource, community, and social navigation.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/livepeer-org-footer.tsx"]
+        },
+        {
           "name": "agent-compatibility",
           "title": "Agent Compatibility",
           "description": "Responsive compatibility strip for supported AI coding agents.",
@@ -118,29 +137,11 @@
           "files": ["components/mockups/agent-compatibility.tsx"]
         },
         {
-          "name": "livepeer-cube-stream",
-          "title": "Livepeer Cube Stream",
-          "description": "Animated Livepeer particle field used as a section background.",
-          "level": "component",
-          "uses": [],
-          "previewPath": "/mockups/livepeer-org",
-          "files": ["components/mockups/livepeer-cube-stream.tsx"]
-        },
-        {
-          "name": "livepeer-agent-delta-stream",
-          "title": "Livepeer Agent Delta Stream",
-          "description": "Animated Livepeer Agent delta field used in install and call-to-action sections.",
-          "level": "component",
-          "uses": [],
-          "previewPath": "/mockups/livepeer-org/agent",
-          "files": ["components/mockups/livepeer-agent-delta-stream.tsx"]
-        },
-        {
           "name": "livepeer-agent-hero",
           "title": "Livepeer Agent Hero",
           "description": "Standalone Livepeer Agent installation hero with animated field, connector URL, and account actions.",
           "level": "section",
-          "uses": ["button", "livepeer-agent-delta-stream"],
+          "uses": ["button"],
           "files": [
             "components/mockups/livepeer-agent-hero.tsx",
             "components/mockups/livepeer-agent-delta-stream.tsx"
@@ -151,7 +152,7 @@
           "title": "Network Hero",
           "description": "Livepeer.org network hero with the particle field and primary account actions.",
           "level": "section",
-          "uses": ["button", "livepeer-cube-stream"],
+          "uses": ["button"],
           "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
         },
         {
@@ -167,7 +168,7 @@
           "title": "Orchestrator CTA",
           "description": "Dark orchestrator call-to-action section with an inverted particle field.",
           "level": "section",
-          "uses": ["button", "livepeer-cube-stream"],
+          "uses": ["button"],
           "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
         }
       ]

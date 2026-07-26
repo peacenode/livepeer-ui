@@ -813,6 +813,61 @@
       ]
     },
     {
+      "name": "livepeer-org-header",
+      "type": "registry:component",
+      "title": "Header",
+      "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "http://localhost:3000/r/button.json",
+        "http://localhost:3000/r/sheet.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-header.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/livepeer-org-menu.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand-social-icons.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "livepeer-org-footer",
+      "type": "registry:component",
+      "title": "Footer",
+      "description": "Livepeer.org footer with network, resource, community, and social navigation.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/livepeer-org-footer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand-social-icons.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "agent-compatibility",
       "type": "registry:component",
       "title": "Agent Compatibility",
@@ -823,38 +878,6 @@
       "files": [
         {
           "path": "components/mockups/agent-compatibility.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "livepeer-cube-stream",
-      "type": "registry:component",
-      "title": "Livepeer Cube Stream",
-      "description": "Animated Livepeer particle field used as a section background.",
-      "files": [
-        {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "lib/canvas-theme.ts",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "livepeer-agent-delta-stream",
-      "type": "registry:component",
-      "title": "Livepeer Agent Delta Stream",
-      "description": "Animated Livepeer Agent delta field used in install and call-to-action sections.",
-      "files": [
-        {
-          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "lib/canvas-theme.ts",
           "type": "registry:component"
         }
       ]

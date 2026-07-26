@@ -95,7 +95,7 @@ function LivepeerMenuIcon() {
   )
 }
 
-export function LandingMenu() {
+export function LivepeerOrgMenu() {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
 
