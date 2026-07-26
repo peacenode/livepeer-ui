@@ -89,18 +89,20 @@ export default async function MockupHomePage() {
         </div>
       </div>
       <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-xl font-normal">Research</h2>
+        <h2 className="text-xl font-normal">
           <a
             href={RESEARCH_FORUM_URL}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
+            className="group inline-flex items-center gap-1.5"
           >
-            View forum
-            <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+            Research
+            <ArrowUpRightIcon
+              className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
           </a>
-        </div>
+        </h2>
         <div className="border-y">
           {forumTopics.map((topic) => (
             <a
