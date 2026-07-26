@@ -147,7 +147,7 @@ export default async function PlaybooksInstallPage() {
           src="/playbooks/20260725-031450/runner-background.jpg"
           alt=""
           fill
-          className="hidden object-cover object-center sm:block"
+          className="hidden object-cover object-center dark:opacity-20 dark:mix-blend-luminosity sm:block"
           sizes="100vw"
         />
         <div className="relative z-10 flex flex-col items-center px-6 py-20 text-center sm:absolute sm:inset-0 sm:items-start sm:justify-center sm:p-10 sm:text-left">
@@ -175,7 +175,7 @@ export default async function PlaybooksInstallPage() {
             src="/playbooks/20260725-031450/runner-background.jpg"
             alt=""
             fill
-            className="object-cover object-[65%_center]"
+            className="object-cover object-[65%_center] dark:opacity-20 dark:mix-blend-luminosity"
             sizes="100vw"
           />
         </div>
