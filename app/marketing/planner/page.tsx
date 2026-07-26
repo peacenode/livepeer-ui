@@ -66,6 +66,8 @@ export default function MarketingPlannerPage() {
                                   <Link
                                     key={link.href}
                                     href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
                                   >
                                     {link.label}
