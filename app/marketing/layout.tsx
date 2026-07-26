@@ -1,3 +1,7 @@
+"use client"
+
+import { usePathname } from "next/navigation"
+
 import { DocsNav } from "@/components/docs/docs-nav"
 import { SiteHeader } from "@/components/docs/site-header"
 
@@ -6,6 +10,12 @@ export default function MarketingLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+
+  if (pathname === "/marketing/planner") {
+    return children
+  }
+
   return (
     <div className="flex min-h-svh flex-col">
       <SiteHeader />
