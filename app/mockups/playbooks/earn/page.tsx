@@ -33,6 +33,7 @@ const paths = [
     title: "Join a pool",
     fit: "Fastest path",
     icon: UsersRoundIcon,
+    gradientId: "pool-path-gradient",
     description:
       "Connect as a worker behind an existing Orchestrator. The operator handles registration, LPT, routing, and payouts; you provide GPU compute and receive off-chain earnings under the pool’s terms.",
     requirements: [
@@ -48,6 +49,7 @@ const paths = [
     title: "Run AI-first",
     fit: "Best with 24 GB+ VRAM",
     icon: BrainCircuitIcon,
+    gradientId: "ai-path-gradient",
     description:
       "Serve inference workloads where capability, price, latency, and uptime matter more than active-set stake.",
     requirements: ["CUDA 12+", "Docker", "NVIDIA Container Toolkit"],
@@ -59,6 +61,7 @@ const paths = [
     title: "Run a solo node",
     fit: "Full operator path",
     icon: ServerCogIcon,
+    gradientId: "solo-path-gradient",
     description:
       "Operate go-livepeer, publish your service address, manage the wallet, set prices, and monitor rewards.",
     requirements: ["Arbitrum ETH", "LPT for video", "Public service URI"],
@@ -174,16 +177,43 @@ export default async function EarnWithGpuPage() {
 
               return (
                 <article
+                  id={`${path.gradientId}-target`}
                   key={path.title}
                   className={[
-                    "flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
+                    "group/path flex flex-col py-8 md:px-8 md:first:pl-0 md:last:pr-0",
                     index === 0 ? "md:mt-48" : index === 1 ? "md:mt-24" : "",
                   ].join(" ")}
                 >
-                  <Icon
-                    className="mb-5 size-6 stroke-[1.5] text-emerald-600"
-                    aria-hidden="true"
-                  />
+                  <div className="relative mb-5 size-6" aria-hidden="true">
+                    <Icon className="absolute inset-0 size-6 stroke-[1.5] text-emerald-600 transition-opacity duration-300 group-hover/path:opacity-0" />
+                    <Icon
+                      className="absolute inset-0 size-6 stroke-[1.5] opacity-0 transition-opacity duration-300 group-hover/path:opacity-100"
+                      stroke={`url(#${path.gradientId})`}
+                    >
+                      <defs>
+                        <linearGradient
+                          id={path.gradientId}
+                          x1="-100%"
+                          y1="0%"
+                          x2="0%"
+                          y2="100%"
+                        >
+                          <stop offset="0%" stopColor="#10b981" />
+                          <stop offset="50%" stopColor="#22d3ee" />
+                          <stop offset="100%" stopColor="#6366f1" />
+                          <animateTransform
+                            attributeName="gradientTransform"
+                            type="translate"
+                            values="0 0; 1 0; 0 0"
+                            dur="2s"
+                            begin={`${path.gradientId}-target.mouseenter`}
+                            end={`${path.gradientId}-target.mouseleave`}
+                            repeatCount="indefinite"
+                          />
+                        </linearGradient>
+                      </defs>
+                    </Icon>
+                  </div>
                   <p className="border-t border-emerald-500 pt-3 text-xs font-medium text-muted-foreground">
                     {path.fit}
                   </p>
