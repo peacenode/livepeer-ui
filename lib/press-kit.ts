@@ -1,188 +1,234 @@
-export type SurfaceStatus = "primary" | "secondary" | "legacy" | "verify"
-
-export type PressSurface = {
-  name: string
-  handle: string
-  url: string
-  role: string
-  status: SurfaceStatus
-  evidence: string
-  assets: string[]
-  note?: string
+export type AssetDestination = {
+  surface: string
+  placement: string
 }
 
-export const pressSurfaces: PressSurface[] = [
+export type PressAsset = {
+  id: string
+  name: string
+  width: number
+  height: number
+  format: string
+  destinations: AssetDestination[]
+  guidance?: string
+  safeArea?: string
+  source: string
+  sourceUrl: string
+}
+
+export const pressAssets: PressAsset[] = [
   {
-    name: "Livepeer.org",
-    handle: "livepeer.org",
-    url: "https://livepeer.org",
-    role: "Canonical brand, product, ecosystem, and Field Notes",
-    status: "primary",
-    evidence: "Current website",
-    assets: ["Open Graph image", "Favicon set", "Article covers", "Author avatars"],
+    id: "social-avatar-400",
+    name: "Social avatar",
+    width: 400,
+    height: 400,
+    format: "PNG",
+    destinations: [
+      { surface: "X", placement: "@Livepeer profile image" },
+      { surface: "LinkedIn", placement: "Company Page logo" },
+    ],
+    guidance: "Keep the mark centered with generous padding; both surfaces crop it.",
+    source: "X Help · LinkedIn Help",
+    sourceUrl:
+      "https://help.x.com/en/managing-your-account/common-issues-when-uploading-profile-photo",
   },
   {
-    name: "X",
-    handle: "@Livepeer",
-    url: "https://x.com/Livepeer",
-    role: "Ecosystem announcements, launches, events, and network updates",
-    status: "primary",
-    evidence: "Website and current docs",
-    assets: ["Profile image", "Header image", "Bio", "Link", "Post templates"],
+    id: "github-avatar-500",
+    name: "GitHub avatar",
+    width: 500,
+    height: 500,
+    format: "PNG",
+    destinations: [{ surface: "GitHub", placement: "Organization profile image" }],
+    guidance: "Use a solid or transparent background that survives small circular display.",
+    source: "GitHub Docs",
+    sourceUrl:
+      "https://docs.github.com/en/account-and-profile/reference/profile-reference",
   },
   {
-    name: "GitHub",
-    handle: "livepeer",
-    url: "https://github.com/livepeer",
-    role: "Protocol code, documentation, SDKs, and project governance",
-    status: "primary",
-    evidence: "Verified organization",
-    assets: ["Organization avatar", "Profile README", "Social preview", "Repository templates"],
-    note: "The organization currently exposes more than 200 repositories; pinned repositories and the profile README are part of the public brand surface.",
+    id: "community-avatar-512",
+    name: "Community avatar",
+    width: 512,
+    height: 512,
+    format: "PNG",
+    destinations: [
+      { surface: "Discord", placement: "Server icon" },
+      { surface: "Telegram", placement: "Channel avatar" },
+      { surface: "Reddit", placement: "Community icon" },
+      { surface: "Paragraph", placement: "Publication avatar" },
+      { surface: "Medium", placement: "Publication avatar" },
+      { surface: "Mirror", placement: "Publication avatar" },
+      { surface: "TikTok", placement: "@livepeer_ profile image" },
+      { surface: "Linktree", placement: "Profile image" },
+    ],
+    guidance: "Shared square master. Export platform-specific files only if an uploader rejects it.",
+    source: "Production standard",
+    sourceUrl: "https://livepeer.org",
   },
   {
-    name: "Discord",
-    handle: "Livepeer",
-    url: "https://discord.gg/livepeer",
-    role: "Real-time developer, operator, stakeholder, and AI community",
-    status: "primary",
-    evidence: "Website and current docs",
-    assets: ["Server icon", "Invite splash", "Server banner", "Welcome graphics", "Event covers"],
+    id: "youtube-avatar-800",
+    name: "YouTube avatar",
+    width: 800,
+    height: 800,
+    format: "PNG",
+    destinations: [
+      { surface: "YouTube", placement: "@LivepeerProject channel image" },
+      { surface: "YouTube", placement: "Any retained secondary channel" },
+    ],
+    guidance: "YouTube renders the image as a circle and displays it as small as 98 × 98.",
+    source: "YouTube Help",
+    sourceUrl:
+      "https://support.google.com/youtube/answer/10456525?hl=en",
   },
   {
-    name: "Forum",
-    handle: "forum.livepeer.org",
-    url: "https://forum.livepeer.org",
-    role: "Protocol design, governance, treasury, and long-form discussion",
-    status: "primary",
-    evidence: "Website and current docs",
-    assets: ["Site logo", "Favicon", "Social preview", "Category graphics"],
+    id: "x-header",
+    name: "X header",
+    width: 1500,
+    height: 500,
+    format: "JPG",
+    destinations: [{ surface: "X", placement: "@Livepeer header image" }],
+    safeArea: "Allow for approximately 60 px cropping at the top and bottom.",
+    source: "X Help",
+    sourceUrl:
+      "https://help.x.com/en/managing-your-account/common-issues-when-uploading-profile-photo",
   },
   {
-    name: "YouTube",
-    handle: "@LivepeerProject",
-    url: "https://www.youtube.com/@LivepeerProject",
-    role: "Primary video archive for community calls, education, and demos",
-    status: "primary",
-    evidence: "Current docs",
-    assets: ["Channel avatar", "Channel banner", "Video watermark", "Thumbnail system", "End screen"],
-    note: "Search and docs also expose @livepeer and @LivepeerOrg. Confirm ownership, purpose, and redirect strategy before updating.",
+    id: "linkedin-cover",
+    name: "LinkedIn Page cover",
+    width: 4200,
+    height: 700,
+    format: "JPG",
+    destinations: [{ surface: "LinkedIn", placement: "Company Page cover" }],
+    safeArea: "Keep essential content centered and clear of the lower-right corner.",
+    source: "LinkedIn Help",
+    sourceUrl:
+      "https://www.linkedin.com/help/linkedin/answer/a563309/image-specifications-for-your-linkedin-pages-and-career-pages",
   },
   {
-    name: "LinkedIn",
-    handle: "company/livepeer",
-    url: "https://www.linkedin.com/company/livepeer",
-    role: "Company, hiring, partner, and industry-facing updates",
-    status: "secondary",
-    evidence: "Current docs",
-    assets: ["Company logo", "Cover image", "About copy", "CTA link", "Post templates"],
+    id: "reddit-banner",
+    name: "Reddit banner",
+    width: 1080,
+    height: 128,
+    format: "JPG",
+    destinations: [
+      { surface: "Reddit", placement: "r/livepeer desktop banner" },
+      { surface: "Reddit", placement: "r/livepeer mobile banner" },
+    ],
+    guidance: "Desktop accepts at least 1072 × 128; this single export covers both placements.",
+    source: "Reddit Help",
+    sourceUrl:
+      "https://support.reddithelp.com/hc/en-us/articles/15484339588884-Banner",
   },
   {
-    name: "Telegram",
-    handle: "livepeerorg",
-    url: "https://t.me/livepeerorg",
-    role: "Quick community chat and announcements",
-    status: "secondary",
-    evidence: "Current docs",
-    assets: ["Channel avatar", "Description", "Pinned welcome graphic"],
+    id: "newsletter-header",
+    name: "Publication header",
+    width: 1200,
+    height: 300,
+    format: "PNG",
+    destinations: [
+      { surface: "Paragraph", placement: "Publication and email header" },
+      { surface: "Medium", placement: "Legacy publication header" },
+      { surface: "Mirror", placement: "Legacy publication header" },
+      { surface: "Linktree", placement: "Background crop source" },
+    ],
+    guidance: "Editorial working size; confirm the canonical publishing home before export.",
+    source: "Production standard",
+    sourceUrl: "https://paragraph.com/@livepeer-2",
   },
   {
-    name: "Reddit",
-    handle: "r/livepeer",
-    url: "https://www.reddit.com/r/livepeer/",
-    role: "Community discussion and discovery",
-    status: "secondary",
-    evidence: "Current docs",
-    assets: ["Community icon", "Banner", "Mobile banner", "Description"],
+    id: "social-preview",
+    name: "Social preview",
+    width: 1200,
+    height: 630,
+    format: "JPG / PNG",
+    destinations: [
+      { surface: "Livepeer.org", placement: "Open Graph default" },
+      { surface: "Livepeer.org", placement: "Field Notes article cover" },
+      { surface: "LinkedIn", placement: "Shared-link preview" },
+      { surface: "X", placement: "Shared-link card" },
+      { surface: "Forum", placement: "Topic and site preview" },
+    ],
+    guidance: "Canonical editorial canvas. Keep type and marks inside a centered safe area.",
+    source: "Open Graph · LinkedIn Help",
+    sourceUrl:
+      "https://www.linkedin.com/help/linkedin/answer/a563309/image-specifications-for-your-linkedin-pages-and-career-pages",
   },
   {
-    name: "Paragraph",
-    handle: "@livepeer-2",
-    url: "https://paragraph.com/@livepeer-2",
-    role: "Newsletter archive and earlier long-form publishing",
-    status: "verify",
-    evidence: "Indexed Livepeer publication",
-    assets: ["Publication logo", "Header", "Email header", "Email footer", "Post covers"],
-    note: "No official Livepeer Substack was found. The discoverable newsletter-like surface is Paragraph; confirm account ownership and whether it is still in use.",
+    id: "github-preview",
+    name: "GitHub social preview",
+    width: 1280,
+    height: 640,
+    format: "PNG",
+    destinations: [
+      { surface: "GitHub", placement: "Priority repository social previews" },
+      { surface: "GitHub", placement: "Reusable repository template" },
+    ],
+    guidance: "Under 1 MB. GitHub recommends 1280 × 640 for best display.",
+    source: "GitHub Docs",
+    sourceUrl:
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview",
   },
   {
-    name: "Mirror",
-    handle: "livepeer.eth",
-    url: "https://mirror.xyz/livepeer.eth",
-    role: "Onchain publishing archive",
-    status: "legacy",
-    evidence: "Current docs label it onchain and legacy-adjacent",
-    assets: ["Publication avatar", "Header", "Article covers"],
+    id: "video-landscape",
+    name: "Landscape video cover",
+    width: 1280,
+    height: 720,
+    format: "JPG",
+    destinations: [
+      { surface: "YouTube", placement: "Video thumbnail" },
+      { surface: "Discord", placement: "Event cover source" },
+      { surface: "Livepeer.org", placement: "Video and event embeds" },
+    ],
+    guidance: "One 16:9 thumbnail system with title, subject, and series variants.",
+    source: "YouTube standard",
+    sourceUrl: "https://support.google.com/youtube/answer/72431?hl=en",
   },
   {
-    name: "Medium",
-    handle: "livepeer-blog",
-    url: "https://medium.com/livepeer-blog",
-    role: "Legacy editorial archive",
-    status: "legacy",
-    evidence: "Current docs explicitly label it legacy",
-    assets: ["Publication avatar", "Header", "Article covers"],
+    id: "discord-banner",
+    name: "Discord server banner",
+    width: 960,
+    height: 540,
+    format: "JPG / GIF",
+    destinations: [{ surface: "Discord", placement: "Server banner" }],
+    safeArea: "Keep the top 48 px quiet so the server title remains legible.",
+    source: "Discord Support",
+    sourceUrl:
+      "https://support.discord.com/hc/en-us/articles/360028716472-Server-Banners",
   },
   {
-    name: "TikTok",
-    handle: "@livepeer_",
-    url: "https://www.tiktok.com/@livepeer_",
-    role: "Short-form video and event clips",
-    status: "verify",
-    evidence: "Current Linktree",
-    assets: ["Profile image", "Bio", "Link", "Video cover system"],
-    note: "Linked from the Livepeer Linktree but absent from the current website and docs social directory.",
+    id: "youtube-banner",
+    name: "YouTube channel banner",
+    width: 2560,
+    height: 1440,
+    format: "JPG",
+    destinations: [
+      { surface: "YouTube", placement: "@LivepeerProject channel banner" },
+      { surface: "YouTube", placement: "Any retained secondary channel" },
+    ],
+    safeArea: "Keep all text and logos inside the centered 1235 × 338 safe area.",
+    source: "YouTube Help",
+    sourceUrl:
+      "https://support.google.com/youtube/answer/10456525?hl=en",
   },
   {
-    name: "Linktree",
-    handle: "livepeer",
-    url: "https://linktr.ee/livepeer",
-    role: "Legacy link-in-bio routing page",
-    status: "verify",
-    evidence: "Public profile",
-    assets: ["Profile image", "Background", "Bio", "Link thumbnails"],
-    note: "Its link set is narrower and less current than livepeer.org. Decide whether to refresh it or replace it with a first-party links page.",
+    id: "vertical-video",
+    name: "Vertical video cover",
+    width: 1080,
+    height: 1920,
+    format: "JPG",
+    destinations: [
+      { surface: "TikTok", placement: "Video cover" },
+      { surface: "YouTube", placement: "Shorts cover source" },
+      { surface: "X", placement: "Vertical video poster" },
+    ],
+    guidance: "Keep critical text away from interface overlays and the bottom caption area.",
+    source: "Production standard",
+    sourceUrl: "https://www.tiktok.com/@livepeer_",
   },
 ]
 
-export const sharedAssetGroups = [
-  {
-    name: "Identity master",
-    items: [
-      "Square avatar exports: SVG, 1024px PNG, 512px PNG",
-      "Horizontal and stacked lockups in black, white, and transparent variants",
-      "Safe-area and minimum-size guidance",
-      "Canonical one-line, short, and long descriptions",
-    ],
-  },
-  {
-    name: "Wide social",
-    items: [
-      "X header: 1500 × 500",
-      "LinkedIn cover: 1128 × 191",
-      "YouTube banner: 2560 × 1440 with 1235 × 338 safe area",
-      "Discord banner and invite splash",
-      "Reddit desktop and mobile banners",
-    ],
-  },
-  {
-    name: "Publishing",
-    items: [
-      "1200 × 630 Open Graph and article-cover system",
-      "16:9 YouTube thumbnail system",
-      "9:16 short-form cover system",
-      "Newsletter header, footer, author mark, and email-safe lockup",
-      "Presentation and press-photo download set",
-    ],
-  },
-  {
-    name: "Copy and governance",
-    items: [
-      "Canonical handle, URL, bio, CTA, and account owner for every surface",
-      "Primary, secondary, and legacy channel policy",
-      "Source files, export date, and approval owner",
-      "Quarterly link, access, and visual-consistency review",
-    ],
-  },
-]
+export const destinationCount = new Set(
+  pressAssets.flatMap((asset) =>
+    asset.destinations.map((destination) => destination.surface)
+  )
+).size
 
