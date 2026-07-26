@@ -63,7 +63,7 @@ function DeleteApiKeyDialog({
         <Alert variant="destructive" className="rounded-sm">
           <TriangleAlertIcon aria-hidden="true" />
           <AlertTitle>Are you sure you want to delete this API key?</AlertTitle>
-          <AlertDescription>
+          <AlertDescription className="text-muted-foreground!">
             This action is permanent and cannot be reversed. Any applications
             using this key will immediately lose access to the API.
           </AlertDescription>
