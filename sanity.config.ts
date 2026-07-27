@@ -22,64 +22,80 @@ const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       S.listItem()
-        .title("Marketing planner")
+        .title("Planner")
         .icon(CalendarIcon)
         .child(
           S.documentTypeList("marketingWeek")
             .title("Weeks")
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
-      S.divider(),
       S.listItem()
-        .title("Mockup roundups")
+        .title("Agent Waitlist")
         .icon(GalleryVerticalEndIcon)
         .child(
           S.list()
-            .title("Mockup roundups")
+            .title("Agent Waitlist")
             .items([
               S.listItem()
-                .title("Agent Waitlist")
+                .title("Roundup")
                 .child(
                   S.document()
                     .schemaType("mockupRoundup")
                     .documentId("mockupRoundup-agent-waitlist")
                 ),
+            ])
+        ),
+      S.listItem()
+        .title("Agent Console")
+        .icon(CreditCardIcon)
+        .child(
+          S.list()
+            .title("Agent Console")
+            .items([
               S.listItem()
-                .title("Agent Console")
+                .title("Roundup")
                 .child(
                   S.document()
                     .schemaType("mockupRoundup")
                     .documentId("mockupRoundup-agent-console")
                 ),
               S.listItem()
-                .title("Livepeer.org")
+                .title("Pages")
                 .child(
-                  S.document()
-                    .schemaType("mockupRoundup")
-                    .documentId("mockupRoundup-livepeer-org")
+                  S.list()
+                    .title("Pages")
+                    .items([
+                      S.listItem()
+                        .title("Usage")
+                        .child(
+                          S.document()
+                            .schemaType("agentConsoleEditorialPage")
+                            .documentId("agentConsoleEditorialPage-usage")
+                        ),
+                      S.listItem()
+                        .title("Billing")
+                        .child(
+                          S.document()
+                            .schemaType("agentConsoleEditorialPage")
+                            .documentId("agentConsoleEditorialPage-billing")
+                        ),
+                    ])
                 ),
             ])
         ),
       S.listItem()
-        .title("Agent Console editorial")
-        .icon(CreditCardIcon)
+        .title("Livepeer.org")
+        .icon(GalleryVerticalEndIcon)
         .child(
           S.list()
-            .title("Agent Console editorial")
+            .title("Livepeer.org")
             .items([
               S.listItem()
-                .title("Usage")
+                .title("Roundup")
                 .child(
                   S.document()
-                    .schemaType("agentConsoleEditorialPage")
-                    .documentId("agentConsoleEditorialPage-usage")
-                ),
-              S.listItem()
-                .title("Billing")
-                .child(
-                  S.document()
-                    .schemaType("agentConsoleEditorialPage")
-                    .documentId("agentConsoleEditorialPage-billing")
+                    .schemaType("mockupRoundup")
+                    .documentId("mockupRoundup-livepeer-org")
                 ),
             ])
         ),
