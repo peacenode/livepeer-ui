@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowUpRightIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { getDocumentedDependencies } from "@/lib/component-docs.server"
 import { componentGroups } from "@/lib/docs"
 
 const products = {
@@ -66,73 +64,53 @@ export default async function ProductComponentsPage({
 
   return (
     <article className="max-w-3xl">
-      <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight">
+      <Link
+        href={product.previewHref}
+        target="_blank"
+        aria-label={`View the ${product.title} mockup`}
+        className="mx-auto block max-w-lg rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+      >
+        <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
+          <Image
+            src="/brand/og.png"
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
+            className="scale-90 object-cover"
+          />
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
+            }}
+          />
+          <h1 className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-normal text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
             {product.title}
           </h1>
-          <p className="mt-2 max-w-2xl text-balance text-muted-foreground">
-            {product.description}
-          </p>
         </div>
-        <Button
-          variant="outline"
-          render={
-            <Link href={product.previewHref} target="_blank">
-              View page
-              <ArrowUpRightIcon aria-hidden="true" />
-            </Link>
-          }
-        />
-      </div>
+        <p className="mt-2 px-0.5 text-xs text-muted-foreground">
+          From livepeer-ui
+        </p>
+      </Link>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold tracking-tight">Components</h2>
-        <div className="mt-4 divide-y border-y">
-          {group.items.map((component) => {
-            const dependencies = getDocumentedDependencies(component.name)
-
-            return (
-              <div key={component.name} className="py-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Link
-                    href={`/docs/components/${component.name}`}
-                    className="font-medium underline-offset-4 hover:underline"
-                  >
-                    {component.title}
-                  </Link>
-                  {component.level && (
-                    <Badge variant="secondary" className="capitalize">
-                      {component.level}
-                    </Badge>
-                  )}
-                </div>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {component.description}
-                </p>
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-medium text-muted-foreground">
-                    Uses
-                  </span>
-                  {dependencies.length > 0 ? (
-                    dependencies.map((dependency) => (
-                      <Badge
-                        key={dependency.name}
-                        variant="outline"
-                        render={
-                          <Link href={`/docs/components/${dependency.name}`}>
-                            {dependency.title}
-                          </Link>
-                        }
-                      />
-                    ))
-                  ) : (
-                    <span className="text-xs text-muted-foreground">None</span>
-                  )}
-                </div>
-              </div>
-            )
-          })}
+      <section className="mt-10 text-center">
+        <h2 className="text-sm font-medium">Components</h2>
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
+          {group.items.map((component) => (
+            <Badge
+              key={component.name}
+              variant="secondary"
+              className="h-auto rounded-sm px-3 py-2 font-normal"
+              render={
+                <Link href={`/docs/components/${component.name}`}>
+                  {component.title}
+                </Link>
+              }
+            />
+          ))}
         </div>
       </section>
     </article>
