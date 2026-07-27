@@ -413,12 +413,6 @@ export function AgentFtueFlow() {
               >
                 <div className="min-w-0">
                   <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                    <div className="flex h-9 items-center gap-1.5 border-b bg-muted/40 px-3">
-                      <span className="size-2.5 rounded-full bg-border" />
-                      <span className="size-2.5 rounded-full bg-border" />
-                      <span className="size-2.5 rounded-full bg-border" />
-                      <span className="ml-2 h-4 flex-1 rounded-sm bg-border/60" />
-                    </div>
                     <div className="aspect-video">
                       <ScreenMockup type={screen.mockup} />
                     </div>
