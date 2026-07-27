@@ -142,7 +142,7 @@ const phases: Phase[] = [
     name: "Public beta",
     timing: "livepeer.org",
     summary:
-      "A user discovers the Agent on livepeer.org, learns what it can do, signs in to the Agent Console, and connects the Agent.",
+      "The Agent marketing page moves to livepeer.org/agent, where a user learns what it can do, signs in to the Agent Console, and connects the Agent.",
     screens: [
       {
         title: "Livepeer website",
@@ -156,12 +156,16 @@ const phases: Phase[] = [
         questions: ["Where does the Agent live in the main navigation?"],
       },
       {
-        title: "Agent landing page",
+        title: "livepeer.org/agent",
         description:
-          "Explain what the Agent does and lead users into the Console.",
+          "Publish the Agent marketing page as part of the main Livepeer website and lead users into the Console.",
         action: "Get started",
         mockup: "marketing",
-        needs: ["Plant a flag", "Used as a press kit for outreach"],
+        needs: [
+          "Publish the page at livepeer.org/agent",
+          "Add the Agent to the main website navigation",
+          "Lead users into the Agent Console",
+        ],
         questions: ["When does “Join waitlist” become “Get started”?"],
       },
       {
