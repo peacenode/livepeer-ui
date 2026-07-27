@@ -44,13 +44,15 @@ export function DocsNav({
         { title: "Inter", href: "/docs/inter" },
       ],
     },
-    ...componentGroups.map((group) => ({
-      title: group.title,
-      items: group.items.map((component) => ({
-        title: component.title,
-        href: `/docs/components/${component.name}`,
+    ...componentGroups
+      .filter((group) => group.title !== "Planner")
+      .map((group) => ({
+        title: group.title,
+        items: group.items.map((component) => ({
+          title: component.title,
+          href: `/docs/components/${component.name}`,
+        })),
       })),
-    })),
     {
       title: "Primitives",
       items: primitives.map((component) => ({
