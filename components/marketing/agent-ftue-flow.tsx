@@ -358,10 +358,16 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 
   if (type === "email") {
     return (
-      <div className="flex h-full items-center justify-center bg-muted px-[10%] text-center text-foreground">
-        <h2 className="text-[clamp(1.25rem,4vw,3.5rem)] leading-tight font-light tracking-tight text-balance">
+      <div className="flex h-full flex-col items-center justify-center bg-muted px-[10%] text-center text-foreground">
+        <h2 className="text-[clamp(1.25rem,4vw,3.5rem)] leading-tight font-light tracking-[-0.04em] text-balance">
           Welcome to the private beta
         </h2>
+        <Button
+          size="sm"
+          className="mt-[5%] h-7 rounded-sm px-3 text-[8px] sm:h-9 sm:px-4 sm:text-xs"
+        >
+          Add to Claude
+        </Button>
       </div>
     )
   }
