@@ -24,7 +24,7 @@ import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
 import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
-import type { PlannerPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
 
 type ImageBatch = {
   id: number
@@ -81,7 +81,7 @@ const initialBatches: ImageBatch[] = [
 export function StoryboardsWorkspace({
   content,
 }: {
-  content: PlannerPageContent
+  content: VideoBuddyPageContent
 }) {
   const [batches, setBatches] = useState(initialBatches)
   const [editingId, setEditingId] = useState<number | null>(null)

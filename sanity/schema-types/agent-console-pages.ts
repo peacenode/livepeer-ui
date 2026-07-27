@@ -122,6 +122,7 @@ export const agentConsolePageType = defineType({
       name: "slug",
       title: "Page",
       type: "string",
+      hidden: true,
       options: {
         list: pageSlugs.map((slug) => ({ title: slug, value: slug })),
         layout: "radio",

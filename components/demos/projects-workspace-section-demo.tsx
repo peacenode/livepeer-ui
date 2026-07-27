@@ -1,10 +1,10 @@
 import { ProjectsWorkspace } from "@/app/mockups/videobuddy/projects/projects-workspace"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 export default function ProjectsWorkspaceSectionDemo() {
   return (
     <div className="h-[700px] w-full overflow-hidden">
-      <ProjectsWorkspace content={plannerPageFixture("projects")} />
+      <ProjectsWorkspace content={videoBuddyPageFixture("projects")} />
     </div>
   )
 }

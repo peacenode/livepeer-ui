@@ -1,7 +1,7 @@
 import { ProtocolFlowSection } from "@/components/mockups/protocol-flow-section"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
-const protocol = plannerPageFixture("protocol").protocol!
+const protocol = videoBuddyPageFixture("protocol").protocol!
 
 export default function ProtocolFlowSectionDemo() {
   return <ProtocolFlowSection heading={protocol.flowHeading} />

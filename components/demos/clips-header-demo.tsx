@@ -1,9 +1,9 @@
 "use client"
 
 import { ClipsHeader } from "@/components/mockups/clips-header"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
-const content = plannerPageFixture("footage")
+const content = videoBuddyPageFixture("footage")
 
 export default function ClipsHeaderDemo() {
   return (

@@ -5,9 +5,9 @@ import { useState } from "react"
 import { ClipsLibrary } from "@/components/mockups/clips-library"
 import type { ClientClip as Clip } from "@/components/mockups/client-clip"
 import { storyMedia } from "@/app/mockups/videobuddy/media-assets"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
-const content = plannerPageFixture("footage")
+const content = videoBuddyPageFixture("footage")
 
 const initialClips: Clip[] = [
   {

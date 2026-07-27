@@ -1,7 +1,7 @@
 import { ProtocolHeaderSection } from "@/components/mockups/protocol-header-section"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
-const content = plannerPageFixture("protocol")
+const content = videoBuddyPageFixture("protocol")
 const protocol = content.protocol!
 
 export default function ProtocolHeaderSectionDemo() {

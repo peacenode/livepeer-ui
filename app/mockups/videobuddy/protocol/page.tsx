@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
 import { ArrowRightIcon, BlocksIcon, CpuIcon, PlayIcon } from "lucide-react"
-import {
-  getPlannerPageContent,
-  type PlannerProtocolIcon,
-} from "@/sanity/lib/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import type { VideoBuddyProtocolIcon } from "@/components/mockups/contracts"
 
 import {
   ProtocolFlowSection,
@@ -13,7 +11,7 @@ import {
 } from "./protocol-sections"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPlannerPageContent("protocol")
+  const content = await videoBuddyPageFixture("protocol")
   return { title: content.metadataTitle }
 }
 
@@ -21,14 +19,12 @@ const icons = {
   play: PlayIcon,
   blocks: BlocksIcon,
   cpu: CpuIcon,
-} satisfies Record<PlannerProtocolIcon, typeof PlayIcon>
+} satisfies Record<VideoBuddyProtocolIcon, typeof PlayIcon>
 
 export default async function ProtocolPage() {
-  const content = await getPlannerPageContent("protocol")
+  const content = await videoBuddyPageFixture("protocol")
   if (!content.protocol || !content.heading || !content.description) {
-    throw new Error(
-      'Incomplete required Sanity document "plannerPageContent-protocol"'
-    )
+    throw new Error("Incomplete VideoBuddy protocol fixture")
   }
   const protocol = content.protocol
   const layers = protocol.layers.map((layer) => ({

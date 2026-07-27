@@ -22,7 +22,6 @@ const singletonSchemaTypes = new Set([
   "agentConsolePage",
   "livepeerOrgSite",
   "livepeerOrgPage",
-  "plannerPageContent",
 ])
 
 const plannerStructure: StructureResolver = (S) =>
@@ -72,24 +71,6 @@ const plannerStructure: StructureResolver = (S) =>
             .title("Weeks")
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
-      S.divider(),
-      ...[
-        ["Home", "home"],
-        ["Characters", "characters"],
-        ["Footage", "footage"],
-        ["Install", "install"],
-        ["Projects", "projects"],
-        ["Protocol", "protocol"],
-        ["Storyboards", "storyboards"],
-      ].map(([title, page]) =>
-        S.listItem()
-          .title(title)
-          .child(
-            S.document()
-              .schemaType("plannerPageContent")
-              .documentId(`plannerPageContent-${page}`)
-          )
-      ),
     ])
 
 const waitlistStructure: StructureResolver = (S) =>

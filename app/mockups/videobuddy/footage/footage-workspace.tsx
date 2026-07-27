@@ -5,7 +5,7 @@ import { useState } from "react"
 import { storyMedia } from "../media-assets"
 import { downloadMedia } from "../media-context-menu"
 import { ClipsHeader, ClipsLibrary, type Clip } from "./clips-components"
-import type { PlannerPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
 
 const initialFootage: Clip[] = [
   {
@@ -31,7 +31,7 @@ const initialFootage: Clip[] = [
   },
 ]
 
-export function FootageWorkspace({ content }: { content: PlannerPageContent }) {
+export function FootageWorkspace({ content }: { content: VideoBuddyPageContent }) {
   const [footage, setFootage] = useState(initialFootage)
   function addFootage(files: FileList | null) {
     if (!files?.length) return

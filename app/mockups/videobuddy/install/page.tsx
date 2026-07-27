@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
-import { getPlannerPageContent } from "@/sanity/lib/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 import { InstallCommand } from "./install-command"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPlannerPageContent("install")
+  const content = await videoBuddyPageFixture("install")
   return { title: content.metadataTitle }
 }
 
 export default async function InstallPage() {
-  const content = await getPlannerPageContent("install")
+  const content = await videoBuddyPageFixture("install")
   return (
     <main className="h-[calc(100dvh-4rem)] overflow-y-auto overscroll-none md:h-dvh">
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">

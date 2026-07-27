@@ -11,7 +11,7 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import type { PlannerPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
 import {
   Dialog,
   DialogContent,
@@ -76,7 +76,7 @@ const initialCharacters: Character[] = [
 export function CharactersWorkspace({
   content,
 }: {
-  content: PlannerPageContent
+  content: VideoBuddyPageContent
 }) {
   const [characters, setCharacters] = useState(initialCharacters)
   const [editingId, setEditingId] = useState<number | null>(null)

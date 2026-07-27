@@ -1,10 +1,10 @@
 import { CharactersWorkspace } from "@/app/mockups/videobuddy/characters/characters-workspace"
-import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 export default function CharactersWorkspaceSectionDemo() {
   return (
     <div className="h-[700px] w-full overflow-hidden">
-      <CharactersWorkspace content={plannerPageFixture("characters")} />
+      <CharactersWorkspace content={videoBuddyPageFixture("characters")} />
     </div>
   )
 }

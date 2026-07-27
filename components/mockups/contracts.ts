@@ -30,7 +30,7 @@ export interface AgentConsoleUser {
   email: string
 }
 
-export type PlannerPageName =
+export type VideoBuddyPageName =
   | "home"
   | "characters"
   | "footage"
@@ -39,12 +39,12 @@ export type PlannerPageName =
   | "protocol"
   | "storyboards"
 
-export type PlannerProtocolIcon = "play" | "blocks" | "cpu"
+export type VideoBuddyProtocolIcon = "play" | "blocks" | "cpu"
 
-export interface PlannerPageContent {
+export interface VideoBuddyPageContent {
   _id: string
-  _type: "plannerPageContent"
-  page: PlannerPageName
+  _type: "videoBuddyPageContent"
+  page: VideoBuddyPageName
   metadataTitle: string
   heading?: string
   description?: string
@@ -61,7 +61,7 @@ export interface PlannerPageContent {
       description: string
       detail: string
       href: string
-      icon: PlannerProtocolIcon
+      icon: VideoBuddyProtocolIcon
     }[]
     requestHeading: string
     requestSteps: { _key: string; title: string; description: string }[]

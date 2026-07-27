@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
-import { getPlannerPageContent } from "@/sanity/lib/planner-pages"
+import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 import { FootageWorkspace } from "./footage-workspace"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPlannerPageContent("footage")
+  const content = await videoBuddyPageFixture("footage")
   return { title: content.metadataTitle }
 }
 
 export default async function FootagePage() {
-  const content = await getPlannerPageContent("footage")
+  const content = await videoBuddyPageFixture("footage")
   return <FootageWorkspace content={content} />
 }
