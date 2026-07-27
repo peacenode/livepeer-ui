@@ -42,7 +42,7 @@ const phases: Phase[] = [
     name: "Private beta",
     timing: "External gate",
     summary:
-      "A user joins the waitlist, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
+      "A user joins the waitlist, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
     userFlowDescription:
       "In phase 1, we will reach out to people on the waitlist directly and give them a private link.",
     callout: "Do not share the MCP publicly during the private beta.",
@@ -70,17 +70,17 @@ const phases: Phase[] = [
         questions: ["Who decides which emails get access?"],
       },
       {
-        title: "Open the Agent",
+        title: "Add the MCP to their Agent",
         description:
-          "The user reaches the Agent in Claude or Codex and starts the connection.",
-        action: "Start with the Agent",
+          "The user runs Claude and adds the Livepeer MCP to their Agent.",
+        action: "Run Claude and add the MCP",
         mockup: "agent",
         needs: [
-          "Open the Agent in the user’s client",
-          "Give the user one clear first action",
+          "Give the user the MCP install command or URL",
+          "Show where to add the MCP in Claude",
           "Trigger MCP OAuth when the Agent connects",
         ],
-        questions: ["What is the first prompt we want every beta user to try?"],
+        questions: ["Which Claude clients do we support first?"],
       },
       {
         title: "MCP OAuth",
@@ -128,7 +128,7 @@ const phases: Phase[] = [
     name: "Expanded beta",
     timing: "Agent Console",
     summary:
-      "A user signs in to the Agent Console, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
+      "A user signs in to the Agent Console, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
     screens: [
       {
         title: "Agent landing page",
@@ -152,17 +152,17 @@ const phases: Phase[] = [
         questions: ["Where does approval happen once Console is live?"],
       },
       {
-        title: "Open the Agent",
+        title: "Add the MCP to their Agent",
         description:
-          "The user opens the Agent in their selected client and starts the connection.",
-        action: "Open the Agent",
+          "The user runs Claude and adds the Livepeer MCP to their Agent.",
+        action: "Run Claude and add the MCP",
         mockup: "agent",
         needs: [
-          "Open the correct client",
-          "Carry the user into a clear first action",
+          "Give the user the MCP install command or URL",
+          "Show where to add the MCP in Claude",
           "Trigger MCP OAuth when the Agent connects",
         ],
-        questions: ["What event counts as an activated user?"],
+        questions: ["Which Claude clients do we support first?"],
       },
       {
         title: "MCP OAuth",
