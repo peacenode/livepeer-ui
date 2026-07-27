@@ -5,6 +5,7 @@ import {
 } from "./marketing-week"
 import {
   agentConsoleEditorialPageType,
+  mockupPageType,
   mockupRoundupType,
   registryCtaType,
 } from "./registry-content"
@@ -14,6 +15,7 @@ export const schemaTypes = [
   marketingItemType,
   marketingWeekType,
   registryCtaType,
+  mockupPageType,
   mockupRoundupType,
   agentConsoleEditorialPageType,
 ]

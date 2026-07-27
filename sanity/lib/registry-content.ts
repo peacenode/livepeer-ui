@@ -11,6 +11,14 @@ export interface MockupRoundup {
   title: string
   description: string
   previewHref: string
+  pages: MockupPage[]
+}
+
+export interface MockupPage {
+  _key: string
+  title: string
+  href: string
+  components: string[]
 }
 
 export type AgentConsoleEditorialPageName = "usage" | "billing"
@@ -45,7 +53,16 @@ const mockupRoundupQuery = defineQuery(`
     "slug": slug.current,
     title,
     description,
-    previewHref
+    previewHref,
+    "pages": coalesce(
+      pages[] {
+        _key,
+        title,
+        href,
+        "components": coalesce(components, [])
+      },
+      []
+    )
   }
 `)
 

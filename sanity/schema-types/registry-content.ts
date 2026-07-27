@@ -46,6 +46,40 @@ export const registryCtaType = defineType({
   },
 })
 
+export const mockupPageType = defineType({
+  name: "mockupPage",
+  title: "Mockup page",
+  type: "object",
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "href",
+      title: "Mockup URL or path",
+      type: "string",
+      validation: (rule) => rule.required().custom(relativeOrHttpUrl),
+    }),
+    defineField({
+      name: "components",
+      title: "Components",
+      description: "Registry item slugs used on this page.",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      validation: (rule) => rule.required().min(1).unique(),
+    }),
+  ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "href",
+    },
+  },
+})
+
 export const mockupRoundupType = defineType({
   name: "mockupRoundup",
   title: "Mockup roundup",
@@ -77,6 +111,13 @@ export const mockupRoundupType = defineType({
       title: "Mockup URL or path",
       type: "string",
       validation: (rule) => rule.required().custom(relativeOrHttpUrl),
+    }),
+    defineField({
+      name: "pages",
+      title: "Pages",
+      type: "array",
+      of: [defineArrayMember({ type: "mockupPage" })],
+      validation: (rule) => rule.required().min(1),
     }),
   ],
   preview: {

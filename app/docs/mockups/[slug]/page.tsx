@@ -63,6 +63,19 @@ export default async function MockupRoundupPage({
   )
   if (!group) notFound()
 
+  const componentsByName = new Map(
+    group.items.map((component) => [component.name, component])
+  )
+  const pages = roundup.pages.map((page) => ({
+    ...page,
+    components: page.components.map((name) => {
+      const component = componentsByName.get(name)
+      if (!component) notFound()
+      return component
+    }),
+  }))
+  if (pages.length === 0) notFound()
+
   return (
     <article className="max-w-3xl">
       <Link
@@ -101,34 +114,48 @@ export default async function MockupRoundupPage({
         {roundup.description}
       </p>
 
-      <section className="mt-10 text-center">
-        <h2 className="text-sm font-medium">Components</h2>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {group.items.map((component) => (
-            <Badge
-              key={component.name}
-              variant="secondary"
-              className="h-auto rounded-sm px-3 py-2 font-normal"
-              render={
-                <Link href={`/docs/components/${component.name}`}>
-                  {component.title}
-                </Link>
-              }
-            />
-          ))}
-        </div>
-
-        <h2 className="mt-8 text-sm font-medium">Content</h2>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
+      <section className="mt-10">
+        <div className="flex items-center justify-between gap-4 border-b pb-3">
+          <h2 className="text-sm font-medium">Pages</h2>
           <Badge
             variant="outline"
-            className="h-auto rounded-sm px-3 py-2 font-normal"
+            className="h-auto rounded-sm px-2.5 py-1.5 font-normal"
             render={
               <Link href="/studio" target="_blank">
                 Edit in Sanity Studio
               </Link>
             }
           />
+        </div>
+
+        <div className="divide-y border-b">
+          {pages.map((page) => (
+            <article key={page._key} className="py-6">
+              <h3 className="font-medium">
+                <Link
+                  href={page.href}
+                  target="_blank"
+                  className="hover:underline"
+                >
+                  {page.title}
+                </Link>
+              </h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {page.components.map((component) => (
+                  <Badge
+                    key={component.name}
+                    variant="secondary"
+                    className="h-auto rounded-sm px-2.5 py-1.5 font-normal"
+                    render={
+                      <Link href={`/docs/components/${component.name}`}>
+                        {component.title}
+                      </Link>
+                    }
+                  />
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </article>

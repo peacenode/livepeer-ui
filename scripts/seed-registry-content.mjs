@@ -16,6 +16,26 @@ const cta = (label, href) => ({
   href,
 })
 
+const page = (title, href, components) => ({
+  _key: key(title),
+  _type: "mockupPage",
+  title,
+  href,
+  components,
+})
+
+const consoleShell = [
+  "livepeer-agent-page-frame",
+  "livepeer-agent-sidebar",
+  "user-menu",
+]
+
+const livepeerOrgShell = [
+  "livepeer-org-menu",
+  "livepeer-org-header",
+  "livepeer-org-footer",
+]
+
 const documents = [
   {
     _id: "mockupRoundup-agent-waitlist",
@@ -25,6 +45,16 @@ const documents = [
     description:
       "Signup, referral, status, leaderboard, and branded background components for the Agent Waitlist.",
     previewHref: "/mockups/waitlist",
+    pages: [
+      page("Waitlist", "/mockups/waitlist", [
+        "waitlist-panel",
+        "waitlist-signup-form",
+        "waitlist-status-card",
+        "waitlist-referral-link",
+        "waitlist-leaderboard",
+        "waitlist-background-hero",
+      ]),
+    ],
   },
   {
     _id: "mockupRoundup-agent-console",
@@ -34,6 +64,51 @@ const documents = [
     description:
       "Application shell, account, usage, billing, API, inference, and compute components for the Agent Console.",
     previewHref: "/mockups/livepeer-agent",
+    pages: [
+      page("Home", "/mockups/livepeer-agent", [
+        ...consoleShell,
+        "livepeer-agent-auth-gate",
+        "livepeer-agent-sign-in-card",
+        "livepeer-agent-onboarding-section",
+      ]),
+      page("Usage", "/mockups/livepeer-agent/usage", [
+        ...consoleShell,
+        "usage-workspace-section",
+        "credit-balance",
+        "usage-metrics",
+        "daily-usage-table",
+        "resource-usage-table",
+        "livepeer-agent-promo-cards",
+      ]),
+      page("API Keys", "/mockups/livepeer-agent/api", [
+        ...consoleShell,
+        "api-key-actions",
+        "delete-api-key-dialog",
+        "api-keys-section",
+      ]),
+      page("API Logs", "/mockups/livepeer-agent/api-logs", [
+        ...consoleShell,
+        "api-logs-section",
+      ]),
+      page("Billing", "/mockups/livepeer-agent/billing", [
+        ...consoleShell,
+        "billing-workspace-section",
+        "billing-page-summary",
+        "invoice-table",
+      ]),
+      page("Compute", "/mockups/livepeer-agent/compute", [
+        ...consoleShell,
+        "compute-workspace-section",
+        "compute-metrics",
+        "orchestrator-table-section",
+      ]),
+      page("Account", "/mockups/livepeer-agent/account", consoleShell),
+      page(
+        "Project settings",
+        "/mockups/livepeer-agent/settings",
+        consoleShell
+      ),
+    ],
   },
   {
     _id: "mockupRoundup-livepeer-org",
@@ -43,6 +118,39 @@ const documents = [
     description:
       "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
     previewHref: "/mockups/livepeer-org",
+    pages: [
+      page("Home", "/mockups/livepeer-org", [
+        ...livepeerOrgShell,
+        "network-hero-section",
+        "livepeer-agent-feature-section",
+        "orchestrator-cta-section",
+      ]),
+      page("Livepeer Agent", "/mockups/livepeer-org/agent", [
+        ...livepeerOrgShell,
+        "livepeer-agent-hero",
+        "agent-compatibility",
+        "agent-access-section",
+        "agent-capabilities-section",
+        "playbooks-cta-section",
+      ]),
+      page("Playbook library", "/mockups/livepeer-org/library", [
+        ...livepeerOrgShell,
+        "playbook-library-header",
+        "playbook-card",
+        "playbook-catalog",
+        "install-agent-footer",
+      ]),
+      page("Ecosystem", "/mockups/livepeer-org/ecosystem", [
+        ...livepeerOrgShell,
+        "copy-button",
+        "submit-ecosystem-dialog",
+        "ecosystem-card",
+        "ecosystem-catalog",
+      ]),
+      page("Provide GPU compute", "/mockups/livepeer-org/earn", [
+        ...livepeerOrgShell,
+      ]),
+    ],
   },
   {
     _id: "agentConsoleEditorialPage-usage",
@@ -92,7 +200,11 @@ for (const document of documents) {
 for (const document of documents.filter(
   (document) => document._type === "mockupRoundup"
 )) {
-  await client.patch(document._id).unset(["contentBadges"]).commit()
+  await client
+    .patch(document._id)
+    .set({ pages: document.pages })
+    .unset(["contentBadges"])
+    .commit()
 }
 
 const usageDocument = documents.find(
