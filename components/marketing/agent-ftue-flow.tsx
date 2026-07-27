@@ -301,7 +301,7 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
         </div>
         <div className="grid flex-1 grid-cols-2 items-center gap-[7%] p-[7%]">
           <div>
-            <h2 className="text-[clamp(1rem,3vw,2.25rem)] leading-none font-light">
+            <h2 className="font-sans text-[clamp(1rem,3vw,2.25rem)] leading-none font-light">
               The open inference network.
             </h2>
             <Button
@@ -357,7 +357,7 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   if (type === "email") {
     return (
       <div className="flex h-full flex-col items-center justify-center bg-muted px-[10%] text-center text-foreground">
-        <h2 className="text-[clamp(1.25rem,3.2vw,2.75rem)] leading-tight font-light tracking-[-0.04em] text-balance">
+        <h2 className="font-sans text-[clamp(1.25rem,3.2vw,2.75rem)] leading-tight font-light tracking-[-0.04em] text-balance">
           <span className="block">Welcome to the</span>
           <span className="block">private beta</span>
         </h2>
@@ -431,7 +431,7 @@ function ScreenRow({
       </div>
 
       <aside>
-        <h4 id={headingId} className="text-lg font-medium">
+        <h4 id={headingId} className="font-sans text-lg font-medium">
           {heading}
         </h4>
 
@@ -488,7 +488,7 @@ export function AgentFtueFlow() {
 
         <section className="py-8">
           <div>
-            <h2 className="text-2xl font-normal tracking-tight">
+            <h2 className="font-sans text-2xl font-normal tracking-tight">
               {phase.name}
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
@@ -506,7 +506,7 @@ export function AgentFtueFlow() {
             <section aria-labelledby={`marketing-pages-${activePhase}`}>
               <h3
                 id={`marketing-pages-${activePhase}`}
-                className="text-2xl font-normal tracking-tight"
+                className="font-sans text-2xl font-normal tracking-tight"
               >
                 Marketing pages
               </h3>
@@ -537,7 +537,7 @@ export function AgentFtueFlow() {
             >
               <h3
                 id={`user-flow-${activePhase}`}
-                className="text-2xl font-normal tracking-tight"
+                className="font-sans text-2xl font-normal tracking-tight"
               >
                 User flow
               </h3>
