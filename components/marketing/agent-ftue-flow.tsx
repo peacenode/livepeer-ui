@@ -25,6 +25,7 @@ type Screen = {
     | "results"
     | "console"
     | "website"
+  hasMockup?: boolean
   needs: string[]
   questions: string[]
 }
@@ -103,6 +104,7 @@ const phases: Phase[] = [
           "The user runs Claude and adds the Livepeer MCP to their Agent.",
         action: "Run Claude and add the MCP",
         mockup: "agent",
+        hasMockup: false,
         needs: [
           "User runs install",
           "Submits a prompt to test the MCP",
@@ -177,6 +179,7 @@ const phases: Phase[] = [
           "The user runs Claude and adds the Livepeer MCP to their Agent.",
         action: "Run Claude and add the MCP",
         mockup: "agent",
+        hasMockup: false,
         needs: [
           "User runs install",
           "Submits a prompt to test the MCP",
@@ -384,7 +387,8 @@ function ScreenRow({
   headingId: string
   heading?: string
 }) {
-  const mockupHref = mockupHrefByType[screen.mockup]
+  const mockupHref =
+    screen.hasMockup === false ? undefined : mockupHrefByType[screen.mockup]
 
   return (
     <section
