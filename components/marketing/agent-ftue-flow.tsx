@@ -144,6 +144,7 @@ const phases: Phase[] = [
           "The Agent returns a results link that opens a visual history of the user’s generated media.",
         action: "Open results link",
         mockup: "results",
+        hasMockup: false,
         needs: [
           "Return a stable results link in the Agent",
           "Show generated media with its prompt and context",
@@ -220,6 +221,7 @@ const phases: Phase[] = [
           "The Agent returns a results link that opens a visual history of the user’s generated media.",
         action: "Open results link",
         mockup: "results",
+        hasMockup: false,
         needs: [
           "Return a stable results link in the Agent",
           "Show generated media with its prompt and context",
