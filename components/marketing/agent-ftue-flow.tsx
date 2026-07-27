@@ -359,7 +359,7 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   if (type === "email") {
     return (
       <div className="flex h-full flex-col items-center justify-center bg-muted px-[10%] text-center text-foreground">
-        <h2 className="text-[clamp(1.25rem,4vw,3.5rem)] leading-tight font-light tracking-[-0.04em] text-balance">
+        <h2 className="text-[clamp(1rem,2.5vw,2rem)] leading-tight font-light tracking-[-0.04em] text-balance">
           Welcome to the private beta
         </h2>
         <Button
