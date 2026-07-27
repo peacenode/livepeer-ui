@@ -400,22 +400,20 @@ function ScreenRow({
       </div>
 
       <aside>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <h4 id={headingId} className="font-sans text-lg font-medium">
-            {heading}
-          </h4>
-          {mockupHref && (
-            <a
-              href={mockupHref}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Open mockup
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </a>
-          )}
-        </div>
+        <h4 id={headingId} className="font-sans text-lg font-medium">
+          {heading}
+        </h4>
+        {mockupHref && (
+          <a
+            href={mockupHref}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Open mockup
+            <ArrowUpRight className="size-3" aria-hidden="true" />
+          </a>
+        )}
 
         <div className="mt-5">
           <ul className="mt-3 space-y-3">
