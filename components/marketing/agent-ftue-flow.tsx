@@ -360,11 +360,12 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
     return (
       <div className="flex h-full flex-col items-center justify-center bg-muted px-[10%] text-center text-foreground">
         <h2 className="text-[clamp(1rem,2.5vw,2rem)] leading-tight font-light tracking-[-0.04em] text-balance">
-          Welcome to the private beta
+          <span className="block">Welcome to the</span>
+          <span className="block">private beta</span>
         </h2>
         <Button
-          size="sm"
-          className="mt-[5%] h-7 rounded-sm px-3 text-[8px] sm:h-9 sm:px-4 sm:text-xs"
+          size="lg"
+          className="mt-[5%] h-10 rounded-sm px-5 text-[9px] sm:h-16 sm:px-6 sm:text-sm"
         >
           Add to Claude
         </Button>
