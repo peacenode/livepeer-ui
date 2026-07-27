@@ -106,7 +106,7 @@ export function DocsNav({
                   : undefined
               }
               className={cn(
-                "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
+                "rounded-md px-2 py-2.5 text-sm transition-colors outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                 pathname === item.href
                   ? "bg-muted font-medium text-foreground"
                   : "text-muted-foreground hover:text-foreground"
