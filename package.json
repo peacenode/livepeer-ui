@@ -12,7 +12,9 @@
     "sanity:manage": "sanity manage",
     "sanity:schema": "sanity schema extract --path schema.json",
     "sanity:seed": "sanity exec scripts/seed-marketing-plan.mjs --with-user-token",
+    "sanity:seed-registry": "sanity exec scripts/seed-registry-content.mjs --with-user-token",
     "registry:build": "node scripts/build-registry.mjs && shadcn build",
+    "registry:validate": "node scripts/validate-registry-docs.mjs",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit"
   },
@@ -24,6 +26,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.25.0",
+    "markdown-it": "14.3.0",
     "next": "16.2.6",
     "next-sanity": "^13.0.11",
     "next-themes": "^0.4.6",
@@ -40,6 +43,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/markdown-it": "14.1.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

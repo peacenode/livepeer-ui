@@ -5,9 +5,15 @@ import { LivepeerWordmark } from "@/components/brand"
 import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
 
 export function LivepeerAgentHero({
-  serverUrl = "https://storyboard.daydream.monster/api/mcp",
+  content,
 }: {
-  serverUrl?: string
+  content: {
+    heading: string
+    description: string
+    serverUrl: string
+    signInCta: { label: string; href: string }
+    createAccountCta: { label: string; href: string }
+  }
 }) {
   return (
     <section className="relative flex w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
@@ -26,34 +32,34 @@ export function LivepeerAgentHero({
           </span>
         </div>
         <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
-          Create and edit images and video with your agent.
+          {content.heading}
         </h1>
         <div className="flex max-w-full flex-col items-center">
           <p className="mb-7 text-sm text-muted-foreground">
-            In your agent&apos;s MCP / connector settings, add this server:
+            {content.description}
           </p>
           <div className="inline-flex max-w-full items-center gap-4 rounded-sm bg-secondary px-5 py-4 text-left text-secondary-foreground">
-            <code className="min-w-0 break-all font-mono text-xs leading-relaxed sm:text-sm">
-              {serverUrl}
+            <code className="min-w-0 font-mono text-xs leading-relaxed break-all sm:text-sm">
+              {content.serverUrl}
             </code>
             <CopyButton
-              value={serverUrl}
+              value={content.serverUrl}
               className="size-8 shrink-0 rounded-none bg-transparent text-secondary-foreground/40 transition-colors hover:bg-transparent hover:text-secondary-foreground"
             />
           </div>
         </div>
         <nav className="flex items-center gap-5 text-sm" aria-label="Account">
           <Link
-            href="/mockups/livepeer-agent"
+            href={content.signInCta.href}
             className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
           >
-            Sign in
+            {content.signInCta.label}
           </Link>
           <Link
-            href="/mockups/livepeer-agent"
+            href={content.createAccountCta.href}
             className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-60"
           >
-            Create account
+            {content.createAccountCta.label}
           </Link>
         </nav>
       </div>

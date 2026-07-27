@@ -1,9 +1,14 @@
 import { WaitlistReferralLink } from "@/components/mockups/waitlist-referral-link"
 
+import { waitlistContentFixture } from "./waitlist-content-fixture"
+
 export default function WaitlistReferralLinkDemo() {
   return (
     <div className="dark w-full max-w-sm rounded-xl bg-black p-6 text-foreground">
-      <WaitlistReferralLink inviteUrl="livepeer.org/agent/invite" />
+      <WaitlistReferralLink
+        {...waitlistContentFixture.referralLink}
+        inviteUrl="livepeer.org/agent/invite"
+      />
     </div>
   )
 }

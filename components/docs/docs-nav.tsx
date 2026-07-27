@@ -14,12 +14,6 @@ export function DocsNav({
   className?: string
 }) {
   const pathname = usePathname()
-  const activeComponentGroups = componentGroups.filter(
-    (group) => group.title !== "Client Archived"
-  )
-  const archivedClientGroup = componentGroups.find(
-    (group) => group.title === "Client Archived"
-  )
   const groups = [
     {
       title: "Sprint",
@@ -31,11 +25,12 @@ export function DocsNav({
       ],
     },
     {
-      title: "Pages",
+      title: "Mockups",
       items: [
-        { title: "Agent Waitlist", href: "/docs/products/agent-waitlist" },
-        { title: "Agent Console", href: "/docs/products/agent-console" },
-        { title: "Livepeer.org", href: "/docs/products/livepeer-org" },
+        { title: "Planner", href: "/docs/mockups/planner" },
+        { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
+        { title: "Agent Console", href: "/docs/mockups/agent-console" },
+        { title: "Livepeer.org", href: "/docs/mockups/livepeer-org" },
       ],
     },
     {
@@ -49,7 +44,7 @@ export function DocsNav({
         { title: "Inter", href: "/docs/inter" },
       ],
     },
-    ...activeComponentGroups.map((group) => ({
+    ...componentGroups.map((group) => ({
       title: group.title,
       items: group.items.map((component) => ({
         title: component.title,
@@ -63,25 +58,6 @@ export function DocsNav({
         href: `/docs/components/${component.name}`,
       })),
     },
-    ...(archivedClientGroup
-      ? [
-          {
-            title: archivedClientGroup.title,
-            items: [
-              {
-                title: "Client Archive",
-                href: "/mockups/client",
-                external: true,
-              },
-              ...archivedClientGroup.items.map((component) => ({
-                title: component.title,
-                href: `/docs/components/${component.name}`,
-                external: false,
-              })),
-            ],
-          },
-        ]
-      : []),
   ]
 
   return (

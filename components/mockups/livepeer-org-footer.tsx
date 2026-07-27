@@ -2,97 +2,23 @@ import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GitHubIcon, XIcon } from "@/components/brand-social-icons"
+import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 
-const groups = [
-  {
-    title: "Network",
-    links: [
-      { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
-      { label: "Livepeer Token", href: "https://livepeer.org/token" },
-      {
-        label: "Delegate LPT",
-        href: "https://explorer.livepeer.org/",
-        external: true,
-      },
-      {
-        label: "Provide GPUs",
-        href: "/mockups/livepeer-org/earn",
-        external: true,
-      },
-      {
-        label: "Roadmap",
-        href: "https://roadmap.livepeer.org/roadmap",
-        external: true,
-      },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Primer", href: "https://livepeer.org/primer" },
-      { label: "Blog", href: "https://blog.livepeer.org/" },
-      { label: "Foundation", href: "https://livepeer.org/foundation" },
-      { label: "Brand", href: "https://livepeer.org/brand" },
-      {
-        label: "Documentation",
-        href: "https://docs.livepeer.org/",
-        external: true,
-      },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      {
-        label: "Discord",
-        href: "https://discord.gg/livepeer",
-        external: true,
-      },
-      {
-        label: "X / Twitter",
-        href: "https://x.com/Livepeer",
-        external: true,
-      },
-      {
-        label: "Forum",
-        href: "https://forum.livepeer.org/",
-        external: true,
-      },
-    ],
-  },
-]
+const socialIcons = {
+  discord: DiscordIcon,
+  x: XIcon,
+  github: GitHubIcon,
+  website: GlobeIcon,
+}
 
-const socials = [
-  {
-    label: "Livepeer on Discord",
-    href: "https://discord.gg/livepeer",
-    icon: DiscordIcon,
-  },
-  {
-    label: "Livepeer on X",
-    href: "https://x.com/Livepeer",
-    icon: XIcon,
-  },
-  {
-    label: "Livepeer on GitHub",
-    href: "https://github.com/livepeer",
-    icon: GitHubIcon,
-  },
-  {
-    label: "Livepeer website",
-    href: "https://livepeer.org/",
-    icon: GlobeIcon,
-  },
-]
-
-export function LivepeerOrgFooter() {
+export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
   return (
     <footer className="bg-background">
       <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <a
-              href="/mockups/livepeer-org"
+              href={site.homeHref}
               className="inline-flex items-center gap-1.5 text-foreground"
               aria-label="Livepeer home"
             >
@@ -100,11 +26,11 @@ export function LivepeerOrgFooter() {
               <LivepeerWordmark className="h-4 w-auto" />
             </a>
             <p className="mt-4 text-sm text-muted-foreground">
-              The open inference network.
+              {site.footerTagline}
             </p>
             <div className="mt-7 flex items-center gap-4">
-              {socials.map((social) => {
-                const Icon = social.icon
+              {site.socialLinks.map((social) => {
+                const Icon = socialIcons[social.service]
 
                 return (
                   <a
@@ -122,7 +48,7 @@ export function LivepeerOrgFooter() {
             </div>
           </div>
 
-          {groups.map((group) => (
+          {site.footerGroups.map((group) => (
             <div key={group.title}>
               <h2 className="text-sm font-medium">{group.title}</h2>
               <nav className="mt-4 flex flex-col items-start gap-3">
@@ -137,7 +63,7 @@ export function LivepeerOrgFooter() {
                     className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
                   >
                     {link.label}
-                    {link.external && (
+                    {link.href.startsWith("http") && (
                       <ArrowUpRightIcon
                         className="size-3.5"
                         aria-hidden="true"
@@ -151,9 +77,7 @@ export function LivepeerOrgFooter() {
         </div>
 
         <div className="mt-24">
-          <p className="text-xs text-muted-foreground">
-            © 2026 Livepeer Foundation. All rights reserved.
-          </p>
+          <p className="text-xs text-muted-foreground">{site.copyright}</p>
         </div>
       </div>
     </footer>

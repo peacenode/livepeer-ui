@@ -4,25 +4,32 @@ import { RefreshCwIcon, Trash2Icon } from "lucide-react"
 import { ApiLogsSection } from "@/components/mockups/api-logs-section"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { Button } from "@/components/ui/button"
+import {
+  getAgentConsolePage,
+  type ApiLogsPageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
   title: "API Logs",
 }
 
-export default function MockupApiLogsPage() {
+export default async function MockupApiLogsPage() {
+  const editorial = await getAgentConsolePage<ApiLogsPageContent>("api-logs")
+  if (!editorial?.apiLogs) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-api-logs is missing or incomplete."
+    )
+  }
+
   return (
     <PlatformPage
-      title="API Logs"
-      description="View your 100 most recent API requests and errors."
+      title={editorial.heading}
+      description={editorial.description}
       action={
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="lg"
-            className="h-16 rounded-sm px-4"
-          >
+          <Button variant="outline" size="lg" className="h-16 rounded-sm px-4">
             <RefreshCwIcon aria-hidden="true" />
-            Refresh
+            {editorial.apiLogs.refreshLabel}
           </Button>
           <Button
             variant="outline"
@@ -31,12 +38,16 @@ export default function MockupApiLogsPage() {
             disabled
           >
             <Trash2Icon aria-hidden="true" />
-            Clear logs
+            {editorial.apiLogs.clearLabel}
           </Button>
         </div>
       }
     >
-      <ApiLogsSection />
+      <ApiLogsSection
+        searchPlaceholder={editorial.apiLogs.searchPlaceholder}
+        errorsOnlyLabel={editorial.apiLogs.errorsOnlyLabel}
+        emptyMessage={editorial.apiLogs.emptyMessage}
+      />
     </PlatformPage>
   )
 }

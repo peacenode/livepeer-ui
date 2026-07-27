@@ -742,6 +742,10 @@
           "type": "registry:block"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:block"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:block"
         },
@@ -814,6 +818,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand-social-icons.tsx",
           "type": "registry:component"
         },
@@ -841,6 +849,10 @@
       "files": [
         {
           "path": "components/mockups/platform-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -876,6 +888,10 @@
         {
           "path": "components/mockups/user-menu.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
         }
       ]
     },
@@ -895,6 +911,10 @@
         },
         {
           "path": "components/mockups/livepeer-agent-sign-in-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1041,8 +1061,7 @@
       "title": "Usage Workspace",
       "description": "Complete overview and activity workspace composed from reusable usage components.",
       "dependencies": [
-        "lucide-react",
-        "next"
+        "lucide-react"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/badge.json",
@@ -1158,8 +1177,7 @@
       "title": "Promo Cards",
       "description": "Pro and Max credit subscription cards with the recommended plan treatment.",
       "dependencies": [
-        "lucide-react",
-        "next"
+        "lucide-react"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/badge.json",
@@ -1308,6 +1326,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:component"
         }
@@ -1336,6 +1358,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:component"
         },
@@ -1356,6 +1382,10 @@
       "files": [
         {
           "path": "components/mockups/livepeer-org-footer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -1653,6 +1683,10 @@
           "type": "registry:block"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:block"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:block"
         },
@@ -1688,6 +1722,10 @@
           "type": "registry:block"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:block"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:block"
         },
@@ -1720,6 +1758,10 @@
       "files": [
         {
           "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -2100,6 +2142,10 @@
         {
           "path": "app/mockups/videobuddy/project-picker.tsx",
           "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:block"
         }
       ]
     },
@@ -2139,6 +2185,10 @@
         {
           "path": "app/mockups/videobuddy/project-picker.tsx",
           "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:block"
         }
       ]
     },
@@ -2166,6 +2216,10 @@
         },
         {
           "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -2222,6 +2276,10 @@
         },
         {
           "path": "app/mockups/videobuddy/media-assets.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         }
       ]

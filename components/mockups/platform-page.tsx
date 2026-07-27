@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 
 type PlatformPageProps = {
   title: string
+  showHeader?: boolean
   action?: ReactNode
   children: ReactNode
   description?: string
@@ -12,6 +13,7 @@ type PlatformPageProps = {
 
 export function PlatformPage({
   title,
+  showHeader = true,
   action,
   children,
   description,
@@ -39,11 +41,9 @@ export function PlatformPage({
         )}
       >
         <div
-          className={cn(
-            variant === "panel" && "border-b px-4 py-6 sm:px-6"
-          )}
+          className={cn(variant === "panel" && "border-b px-4 py-6 sm:px-6")}
         >
-          {header}
+          {showHeader ? header : null}
         </div>
         <div
           className={cn(

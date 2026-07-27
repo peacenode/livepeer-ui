@@ -26,6 +26,10 @@ import {
   getContainerHubInfo,
   getGithubRepoInfo,
 } from "@/lib/livepeer"
+import {
+  getAgentConsolePage,
+  type InferencePageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export function generateStaticParams() {
   return inferenceContainers.map((container) => ({ container: container.slug }))
@@ -48,6 +52,13 @@ export default async function ContainerDetailPage({
   const { container: slug } = await params
   const container = getInferenceContainer(slug)
   if (!container) notFound()
+  const page = await getAgentConsolePage<InferencePageContent>("inference")
+  if (!page?.inference) {
+    throw new Error(
+      'Required Sanity document "agentConsolePage-inference" is missing or incomplete.'
+    )
+  }
+  const content = page.inference
 
   const [hub, github] = await Promise.all([
     getContainerHubInfo(container.slug, container.tags),
@@ -55,10 +66,16 @@ export default async function ContainerDetailPage({
   ])
 
   const stats = [
-    { label: "Pulls", value: hub ? formatCompact(hub.pullCount) : "—" },
-    { label: "Stars", value: github ? formatCompact(github.stars) : "—" },
     {
-      label: "Last push",
+      label: content.pullsLabel,
+      value: hub ? formatCompact(hub.pullCount) : "—",
+    },
+    {
+      label: content.starsLabel,
+      value: github ? formatCompact(github.stars) : "—",
+    },
+    {
+      label: content.lastPushLabel,
       value: hub?.updatedAt ? hub.updatedAt.slice(0, 10) : "—",
     },
   ]
@@ -74,7 +91,7 @@ export default async function ContainerDetailPage({
           render={<Link href="/mockups/livepeer-agent/inference" />}
         >
           <ArrowLeftIcon data-icon="inline-start" />
-          Inference
+          {content.breadcrumbLabel}
         </Button>
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between gap-4">
@@ -90,7 +107,7 @@ export default async function ContainerDetailPage({
               nativeButton={false}
               render={<Link href="/mockups/livepeer-agent/inference" />}
             >
-              Deploy
+              {content.deployLabel}
             </Button>
           </div>
           <p className="max-w-xl text-sm text-balance text-muted-foreground">
@@ -126,13 +143,17 @@ export default async function ContainerDetailPage({
       </div>
       {hub && hub.images.length > 0 && (
         <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium">Images</h2>
+          <h2 className="text-sm font-medium">{content.imagesTitle}</h2>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Tag</TableHead>
-                <TableHead className="text-right">Size</TableHead>
-                <TableHead className="text-right">Pushed</TableHead>
+                <TableHead>{content.tagColumnLabel}</TableHead>
+                <TableHead className="text-right">
+                  {content.sizeColumnLabel}
+                </TableHead>
+                <TableHead className="text-right">
+                  {content.pushedColumnLabel}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -155,7 +176,7 @@ export default async function ContainerDetailPage({
       )}
       {container.endpoints && (
         <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-medium">Endpoints</h2>
+          <h2 className="text-sm font-medium">{content.endpointsTitle}</h2>
           <div className="flex flex-wrap gap-2">
             {container.endpoints.map((endpoint) => (
               <Badge key={endpoint} variant="secondary" className="font-mono">
@@ -167,10 +188,8 @@ export default async function ContainerDetailPage({
       )}
       <Card className="gap-4 rounded-sm">
         <CardHeader>
-          <CardTitle className="text-sm">Run locally</CardTitle>
-          <CardDescription>
-            Start the container and ping it to verify it&rsquo;s serving.
-          </CardDescription>
+          <CardTitle className="text-sm">{content.runLocallyTitle}</CardTitle>
+          <CardDescription>{content.runLocallyDescription}</CardDescription>
         </CardHeader>
         <CardContent>
           <pre className="overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs leading-relaxed">
@@ -178,9 +197,7 @@ export default async function ContainerDetailPage({
           </pre>
         </CardContent>
       </Card>
-      <p className="text-xs text-muted-foreground">
-        Live from Docker Hub and GitHub, cached for an hour.
-      </p>
+      <p className="text-xs text-muted-foreground">{content.dataNote}</p>
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
+import { livepeerOrgSiteFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function LivepeerOrgFooterDemo() {
   return (
     <div className="w-full overflow-hidden border">
-      <LivepeerOrgFooter />
+      <LivepeerOrgFooter site={livepeerOrgSiteFixture} />
     </div>
   )
 }

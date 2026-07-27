@@ -1,9 +1,13 @@
 import { LivepeerGradientLockup } from "@/components/brand"
 
 export function WaitlistStatusCard({
+  positionLabel,
+  referralsLabel,
   position = 2419,
   referrals = 0,
 }: {
+  positionLabel: string
+  referralsLabel: string
   position?: number
   referrals?: number
 }) {
@@ -16,7 +20,7 @@ export function WaitlistStatusCard({
       <LivepeerGradientLockup className="h-4 w-auto" />
       <div className="mt-8 grid grid-cols-[1fr_auto] items-end gap-4">
         <div>
-          <p className="text-xs text-white/50">Waitlist position</p>
+          <p className="text-xs text-white/50">{positionLabel}</p>
           <p
             id="share-card-title"
             className="mt-1 font-sans text-5xl leading-none font-semibold tracking-[-0.06em] text-emerald-400 tabular-nums"
@@ -25,7 +29,7 @@ export function WaitlistStatusCard({
           </p>
         </div>
         <div className="text-right">
-          <p className="text-xs text-white/50">Referrals</p>
+          <p className="text-xs text-white/50">{referralsLabel}</p>
           <p className="mt-1 font-sans text-2xl leading-none font-medium tabular-nums">
             {referrals}
           </p>

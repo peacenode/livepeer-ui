@@ -6,13 +6,21 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 
-export function WaitlistReferralLink({ inviteUrl }: { inviteUrl: string }) {
+export function WaitlistReferralLink({
+  inviteUrl,
+  copyAriaLabel,
+  copiedToast,
+}: {
+  inviteUrl: string
+  copyAriaLabel: string
+  copiedToast: string
+}) {
   const [copied, setCopied] = useState(false)
 
   async function copyInvite() {
     await navigator.clipboard?.writeText(`https://${inviteUrl}`)
     setCopied(true)
-    toast.success("Invite link copied")
+    toast.success(copiedToast)
     window.setTimeout(() => setCopied(false), 1600)
   }
 
@@ -25,7 +33,7 @@ export function WaitlistReferralLink({ inviteUrl }: { inviteUrl: string }) {
         type="button"
         size="icon-sm"
         variant="ghost"
-        aria-label="Copy referral link"
+        aria-label={copyAriaLabel}
         onClick={copyInvite}
         className="shrink-0 rounded-full"
       >

@@ -1,7 +1,13 @@
 import { LivepeerGradientLockup } from "@/components/brand"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 
-export function WaitlistBackgroundHero() {
+export function WaitlistBackgroundHero({
+  brandAriaLabel,
+  agentLabel,
+}: {
+  brandAriaLabel: string
+  agentLabel: string
+}) {
   return (
     <section className="@container absolute inset-0 isolate overflow-hidden bg-black">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_42%,rgba(255,255,255,0.1)_0%,transparent_48%)]" />
@@ -9,7 +15,7 @@ export function WaitlistBackgroundHero() {
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center px-6 sm:px-10 md:pr-[27rem]">
         <h2
           className="flex w-full items-end justify-center gap-[clamp(0.75rem,1.6cqw,2rem)] text-white/90"
-          aria-label="Livepeer Agent"
+          aria-label={brandAriaLabel}
         >
           <LivepeerGradientLockup
             className="h-[clamp(2rem,4.5cqw,4.5rem)] w-auto"
@@ -20,7 +26,7 @@ export function WaitlistBackgroundHero() {
             style={{ fontFamily: "var(--font-agent, Inter, sans-serif)" }}
             aria-hidden="true"
           >
-            AGENT
+            {agentLabel}
           </span>
         </h2>
       </div>

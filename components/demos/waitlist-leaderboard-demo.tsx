@@ -3,6 +3,8 @@ import {
   type WaitlistLeader,
 } from "@/components/mockups/waitlist-leaderboard"
 
+import { waitlistContentFixture } from "./waitlist-content-fixture"
+
 const leaders: WaitlistLeader[] = [
   { name: "Maya Chen", referrals: 142 },
   { name: "Owen Chen", referrals: 137 },
@@ -13,7 +15,10 @@ const leaders: WaitlistLeader[] = [
 export default function WaitlistLeaderboardDemo() {
   return (
     <div className="dark w-full max-w-sm rounded-xl bg-black p-6 text-foreground">
-      <WaitlistLeaderboard leaders={leaders} />
+      <WaitlistLeaderboard
+        {...waitlistContentFixture.leaderboard}
+        leaders={leaders}
+      />
     </div>
   )
 }

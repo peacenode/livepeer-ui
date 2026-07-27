@@ -1,32 +1,110 @@
-import { CreditBalance } from "@/components/mockups/credit-balance"
-import { DailyUsageTable } from "@/components/mockups/daily-usage-table"
-import { LivepeerAgentPromoCards } from "@/components/mockups/livepeer-agent-promo-cards"
-import { ResourceUsageTable } from "@/components/mockups/resource-usage-table"
-import { UsageMetrics } from "@/components/mockups/usage-metrics"
+"use client"
+
+import type { JSX } from "react"
+
+import {
+  CreditBalance,
+  type CreditBalanceProps,
+} from "@/components/mockups/credit-balance"
+import {
+  DailyUsageTable,
+  type DailyUsageRow,
+} from "@/components/mockups/daily-usage-table"
+import {
+  LivepeerAgentPromoCards,
+  type LivepeerAgentPromoPlan,
+} from "@/components/mockups/livepeer-agent-promo-cards"
+import {
+  ResourceUsageTable,
+  type ResourceUsageRow,
+} from "@/components/mockups/resource-usage-table"
+import {
+  UsageMetrics,
+  type UsageMetric,
+} from "@/components/mockups/usage-metrics"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-export function UsageWorkspace() {
+export type UsageWorkspaceContent = {
+  overviewTabLabel: string
+  activityTabLabel: string
+  upgradeTitle: string
+  upgradeDescription: string
+  dailyUsageTitle: string
+  dailyUsageEmptyMessage: string
+  resourceUsageTitle: string
+  resourceUsageEmptyMessage: string
+}
+
+export type UsageWorkspaceProps = {
+  content: UsageWorkspaceContent
+  balance: CreditBalanceProps
+  metrics: readonly UsageMetric[]
+  dailyRows: readonly DailyUsageRow[]
+  resourceRows: readonly ResourceUsageRow[]
+  plans: readonly LivepeerAgentPromoPlan[]
+  onPlanSelect?: (plan: LivepeerAgentPromoPlan) => void
+}
+
+export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
+  const {
+    content,
+    balance,
+    metrics,
+    dailyRows,
+    resourceRows,
+    plans,
+    onPlanSelect,
+  } = props
+
   return (
     <Tabs defaultValue="overview" className="gap-8">
-      <TabsList variant="line" className="w-full justify-start overflow-x-auto border-b px-0 pb-1">
-        <TabsTrigger value="overview" className="flex-none">Overview</TabsTrigger>
-        <TabsTrigger value="activity" className="flex-none">Activity</TabsTrigger>
+      <TabsList
+        variant="line"
+        className="w-full justify-start overflow-x-auto border-b px-0 pb-1"
+      >
+        <TabsTrigger value="overview" className="flex-none">
+          {content.overviewTabLabel}
+        </TabsTrigger>
+        <TabsTrigger value="activity" className="flex-none">
+          {content.activityTabLabel}
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="overview"><div className="flex flex-col gap-10">
-        <CreditBalance />
-        <section>
-          <h2 className="font-sans text-2xl font-medium tracking-tight">Get more credits</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Upgrade for a larger credit allocation that refreshes every month.
-          </p>
-          <div className="mt-6"><LivepeerAgentPromoCards /></div>
-        </section>
-      </div></TabsContent>
-      <TabsContent value="activity"><div className="flex flex-col gap-10">
-        <section><UsageMetrics /></section>
-        <DailyUsageTable />
-        <ResourceUsageTable />
-      </div></TabsContent>
+      <TabsContent value="overview">
+        <div className="flex flex-col gap-10">
+          <CreditBalance {...balance} />
+          <section>
+            <h2 className="font-sans text-2xl font-medium tracking-tight">
+              {content.upgradeTitle}
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {content.upgradeDescription}
+            </p>
+            <div className="mt-6">
+              <LivepeerAgentPromoCards
+                plans={plans}
+                onPlanSelect={onPlanSelect}
+              />
+            </div>
+          </section>
+        </div>
+      </TabsContent>
+      <TabsContent value="activity">
+        <div className="flex flex-col gap-10">
+          <section>
+            <UsageMetrics metrics={metrics} />
+          </section>
+          <DailyUsageTable
+            title={content.dailyUsageTitle}
+            rows={dailyRows}
+            emptyMessage={content.dailyUsageEmptyMessage}
+          />
+          <ResourceUsageTable
+            title={content.resourceUsageTitle}
+            rows={resourceRows}
+            emptyMessage={content.resourceUsageEmptyMessage}
+          />
+        </div>
+      </TabsContent>
     </Tabs>
   )
 }

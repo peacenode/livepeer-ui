@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import type { PlannerPageContent } from "@/components/mockups/contracts"
 import {
   Dialog,
   DialogContent,
@@ -22,10 +23,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
-import {
-  downloadMedia,
-  MediaContextMenu,
-} from "../media-context-menu"
+import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
 
 const characterProperties = [
@@ -75,7 +73,11 @@ const initialCharacters: Character[] = [
   },
 ]
 
-export function CharactersWorkspace() {
+export function CharactersWorkspace({
+  content,
+}: {
+  content: PlannerPageContent
+}) {
   const [characters, setCharacters] = useState(initialCharacters)
   const [editingId, setEditingId] = useState<number | null>(null)
   const [isCreateOpen, setIsCreateOpen] = useState(false)
@@ -158,13 +160,10 @@ export function CharactersWorkspace() {
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
-            <h1 className="text-xl font-medium">Characters</h1>
-            <Button
-              className="h-10 px-5"
-              onClick={() => setIsCreateOpen(true)}
-            >
+            <h1 className="text-xl font-medium">{content.heading}</h1>
+            <Button className="h-10 px-5" onClick={() => setIsCreateOpen(true)}>
               <PlusIcon className="size-6" />
-              New character
+              {content.primaryActionLabel}
             </Button>
           </header>
 
@@ -172,46 +171,46 @@ export function CharactersWorkspace() {
             <section key={character.id} className="py-6">
               <div className="mb-4 flex min-h-9 items-center justify-between gap-3">
                 <div className="flex min-w-0 flex-wrap items-center gap-3">
-                {editingId === character.id ? (
-                  <div className="flex min-w-0 flex-1 items-center gap-2">
-                    <Input
-                      value={character.name}
-                      aria-label="Character name"
-                      className="max-w-sm"
-                      onChange={(event) =>
-                        renameCharacter(character.id, event.target.value)
-                      }
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter") setEditingId(null)
-                      }}
-                      autoFocus
-                    />
-                    <Button
-                      size="icon-sm"
-                      variant="ghost"
-                      aria-label="Save name"
-                      onClick={() => setEditingId(null)}
-                    >
-                      <CheckIcon />
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="group flex min-w-0 items-center gap-2"
-                      onClick={() => setEditingId(character.id)}
-                    >
-                      <h2 className="truncate text-sm font-medium">
-                        {character.name}
-                      </h2>
-                      <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    </button>
-                    <span className="text-xs text-muted-foreground">
-                      {character.images.length} images · {character.updated}
-                    </span>
-                  </>
-                )}
+                  {editingId === character.id ? (
+                    <div className="flex min-w-0 flex-1 items-center gap-2">
+                      <Input
+                        value={character.name}
+                        aria-label="Character name"
+                        className="max-w-sm"
+                        onChange={(event) =>
+                          renameCharacter(character.id, event.target.value)
+                        }
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") setEditingId(null)
+                        }}
+                        autoFocus
+                      />
+                      <Button
+                        size="icon-sm"
+                        variant="ghost"
+                        aria-label="Save name"
+                        onClick={() => setEditingId(null)}
+                      >
+                        <CheckIcon />
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="group flex min-w-0 items-center gap-2"
+                        onClick={() => setEditingId(character.id)}
+                      >
+                        <h2 className="truncate text-sm font-medium">
+                          {character.name}
+                        </h2>
+                        <PencilIcon className="size-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      </button>
+                      <span className="text-xs text-muted-foreground">
+                        {character.images.length} images · {character.updated}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <ProjectPicker
                   value={character.project}
@@ -352,7 +351,7 @@ export function CharactersWorkspace() {
       {characters.length === 0 && (
         <div className="flex flex-1 flex-col items-center justify-center gap-2 text-center">
           <ApertureIcon className="size-5 text-muted-foreground" />
-          <p className="text-sm font-medium">No characters yet</p>
+          <p className="text-sm font-medium">{content.emptyStateTitle}</p>
         </div>
       )}
 
@@ -458,7 +457,7 @@ export function CharactersWorkspace() {
           {selectedImage && (
             <div className="grid min-h-0 overflow-y-auto md:grid-cols-[minmax(0,1fr)_300px]">
               <div className="flex min-h-80 items-center bg-background">
-                <div className="relative aspect-square w-full max-h-[70dvh]">
+                <div className="relative aspect-square max-h-[70dvh] w-full">
                   <Image
                     src={frameAt(
                       characters.find(
@@ -500,9 +499,9 @@ export function CharactersWorkspace() {
                   <div className="flex flex-wrap gap-2">
                     {characterProperties.map((property) => {
                       const key = `${selectedImage.characterId}-${selectedImage.imageId}`
-                      const isSelected = (
-                        imageProperties[key] ?? []
-                      ).includes(property)
+                      const isSelected = (imageProperties[key] ?? []).includes(
+                        property
+                      )
                       return (
                         <Button
                           key={property}

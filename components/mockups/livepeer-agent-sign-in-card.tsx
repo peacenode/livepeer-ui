@@ -6,10 +6,13 @@ import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GoogleIcon } from "@/components/brand-social-icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import type { AgentConsoleShell } from "@/components/mockups/contracts"
 
 export function LivepeerAgentSignInCard({
+  content,
   onContinue,
 }: {
+  content: AgentConsoleShell["auth"]
   onContinue?: () => void
 }) {
   function submit(event: FormEvent<HTMLFormElement>) {
@@ -33,8 +36,11 @@ export function LivepeerAgentSignInCard({
         </span>
       </div>
       <h2 className="mt-8 text-2xl font-medium tracking-tight text-balance">
-        Sign in to continue
+        {content.title}
       </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {content.description}
+      </p>
       <div className="mt-7 grid gap-2 sm:grid-cols-2">
         <Button
           type="button"
@@ -44,7 +50,7 @@ export function LivepeerAgentSignInCard({
           onClick={onContinue}
         >
           <GoogleIcon className="size-5" />
-          Google
+          {content.googleLabel}
         </Button>
         <Button
           type="button"
@@ -54,21 +60,21 @@ export function LivepeerAgentSignInCard({
           onClick={onContinue}
         >
           <DiscordIcon className="size-5" />
-          Discord
+          {content.discordLabel}
         </Button>
       </div>
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
         <span className="text-xs text-muted-foreground">
-          Or continue with email
+          {content.emailDividerLabel}
         </span>
         <div className="h-px flex-1 bg-border" />
       </div>
       <form onSubmit={submit}>
         <Input
           type="email"
-          aria-label="Email"
-          placeholder="you@example.com"
+          aria-label={content.emailInputLabel}
+          placeholder={content.emailPlaceholder}
           className="h-12 rounded-sm"
         />
         <Button
@@ -76,7 +82,7 @@ export function LivepeerAgentSignInCard({
           size="lg"
           className="mt-4 h-16 w-full rounded-sm px-4"
         >
-          Continue with email
+          {content.continueLabel}
         </Button>
       </form>
     </section>

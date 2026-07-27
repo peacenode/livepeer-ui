@@ -7,15 +7,24 @@ import { ArrowUpRightIcon } from "lucide-react"
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
+import type {
+  AgentConsoleShell,
+  AgentConsoleUser,
+} from "@/components/mockups/contracts"
 
-export const platformNavItems = [
-  { title: "Home", href: "/mockups/livepeer-agent" },
-  { title: "Usage", href: "/mockups/livepeer-agent/usage" },
-  { title: "API Keys", href: "/mockups/livepeer-agent/api" },
-  { title: "Logs", href: "/mockups/livepeer-agent/api-logs" },
-]
-
-export function PlatformSidebar({ className }: { className?: string }) {
+export function PlatformSidebar({
+  className,
+  homeAriaLabel,
+  navigation,
+  userMenuContent,
+  user,
+}: {
+  className?: string
+  homeAriaLabel: string
+  navigation: AgentConsoleShell["navigation"]
+  userMenuContent: AgentConsoleShell["userMenu"]
+  user: AgentConsoleUser
+}) {
   const pathname = usePathname()
 
   return (
@@ -28,7 +37,7 @@ export function PlatformSidebar({ className }: { className?: string }) {
       <div className="px-5 pt-6 pb-1">
         <Link
           href="/mockups/livepeer-agent"
-          aria-label="Livepeer Agent home"
+          aria-label={homeAriaLabel}
           className="inline-flex h-9 items-center"
         >
           <span className="flex items-end gap-1.5 text-black">
@@ -44,7 +53,7 @@ export function PlatformSidebar({ className }: { className?: string }) {
         </Link>
       </div>
       <nav className="flex flex-col items-start gap-1 px-3 pt-5">
-        {platformNavItems.map((item) => (
+        {navigation.map((item) => (
           <Link
             key={item.href}
             href={item.href}
@@ -55,19 +64,15 @@ export function PlatformSidebar({ className }: { className?: string }) {
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            {item.title}
+            {item.label}
+            {item.external && (
+              <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
+            )}
           </Link>
         ))}
-        <Link
-          href="/mockups/livepeer-org/library"
-          className="inline-flex w-fit items-center gap-1 rounded-sm px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-        >
-          Learn
-          <ArrowUpRightIcon className="size-3.5" aria-hidden="true" />
-        </Link>
       </nav>
       <div className="mt-auto px-3 py-3">
-        <UserMenu />
+        <UserMenu content={userMenuContent} user={user} />
       </div>
     </aside>
   )

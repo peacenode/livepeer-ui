@@ -8,33 +8,44 @@ import {
   getNetworkStats,
   getOrchestratorsPage,
 } from "@/lib/livepeer"
+import {
+  getAgentConsolePage,
+  type ComputePageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
   title: "Compute",
 }
 
 export default async function MockupComputePage() {
-  const [network, orchestratorPage] = await Promise.all([
+  const [editorial, network, orchestratorPage] = await Promise.all([
+    getAgentConsolePage<ComputePageContent>("compute"),
     getNetworkStats(),
     getOrchestratorsPage(),
   ])
+  if (!editorial?.compute) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-compute is missing or incomplete."
+    )
+  }
 
   const stats = [
     {
-      label: "Service payouts (USD)",
+      label: editorial.compute.servicePayoutsLabel,
       value: network ? `$${formatCompact(network.payoutsUsd24h)}` : "—",
-      period: "24h",
+      period: editorial.compute.periodLabel,
     },
     {
-      label: "Protocol rewards (USD)",
+      label: editorial.compute.protocolRewardsLabel,
       value: network ? `$${formatCompact(network.rewardsUsd24h)}` : "—",
-      period: "24h",
+      period: editorial.compute.periodLabel,
     },
   ]
 
   return (
     <PlatformPage
-      title="Compute"
+      title={editorial.heading}
+      description={editorial.description}
       action={
         <Button
           size="lg"
@@ -42,13 +53,13 @@ export default async function MockupComputePage() {
           nativeButton={false}
           render={
             <a
-              href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
+              href={editorial.compute.actionHref}
               target="_blank"
               rel="noreferrer"
             />
           }
         >
-          Run an Orchestrator
+          {editorial.compute.actionLabel}
           <span aria-hidden="true">↗</span>
         </Button>
       }
@@ -57,6 +68,7 @@ export default async function MockupComputePage() {
         stats={stats}
         orchestrators={orchestratorPage?.orchestrators ?? []}
         initialCursor={orchestratorPage?.nextCursor ?? null}
+        dataNote={editorial.compute.dataNote}
       />
     </PlatformPage>
   )

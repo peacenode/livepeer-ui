@@ -16,7 +16,17 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-function ApiKeyActions() {
+export type ApiKeyActionsContent = {
+  newKeyLabel: string
+  dialogTitle: string
+  dialogDescription: string
+  keyNameLabel: string
+  keyNamePlaceholder: string
+  cancelLabel: string
+  generateLabel: string
+}
+
+function ApiKeyActions({ content }: { content: ApiKeyActionsContent }) {
   const [name, setName] = useState("")
   const [open, setOpen] = useState(false)
 
@@ -32,26 +42,25 @@ function ApiKeyActions() {
       <DialogTrigger
         render={<Button size="lg" className="h-16 rounded-sm px-4" />}
       >
-        New API key
+        {content.newKeyLabel}
       </DialogTrigger>
       <DialogContent className="gap-6 rounded-sm p-6 sm:max-w-lg sm:p-8">
         <DialogHeader className="gap-2">
           <DialogTitle className="font-sans text-2xl font-medium tracking-tight">
-            Create API key
+            {content.dialogTitle}
           </DialogTitle>
           <DialogDescription className="leading-relaxed">
-            Name this key so you can identify where it is being used. Keep
-            generated keys secure and never share them publicly.
+            {content.dialogDescription}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={generateKey}>
           <div>
-            <Label htmlFor="api-key-name">Key name</Label>
+            <Label htmlFor="api-key-name">{content.keyNameLabel}</Label>
             <Input
               id="api-key-name"
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="Production, staging, local development…"
+              placeholder={content.keyNamePlaceholder}
               autoComplete="off"
               autoFocus
               className="mt-3 h-12 rounded-sm"
@@ -67,7 +76,7 @@ function ApiKeyActions() {
                 />
               }
             >
-              Cancel
+              {content.cancelLabel}
             </DialogClose>
             <Button
               type="submit"
@@ -79,7 +88,7 @@ function ApiKeyActions() {
                   "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
               }}
             >
-              Generate key
+              {content.generateLabel}
             </Button>
           </DialogFooter>
         </form>

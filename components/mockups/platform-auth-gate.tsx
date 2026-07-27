@@ -4,19 +4,23 @@ import { type ReactNode, useEffect, useState } from "react"
 
 import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
 import { cn } from "@/lib/utils"
+import type { AgentConsoleShell } from "@/components/mockups/contracts"
 
 function PlatformAuthGate({
   children,
   contained = false,
+  content,
 }: {
   children: ReactNode
   contained?: boolean
+  content: AgentConsoleShell["auth"]
 }) {
   const [authenticated, setAuthenticated] = useState(false)
 
   useEffect(() => {
     if (!contained && window.self !== window.top) {
-      setAuthenticated(true)
+      const frame = window.requestAnimationFrame(() => setAuthenticated(true))
+      return () => window.cancelAnimationFrame(frame)
     }
   }, [contained])
 
@@ -53,10 +57,11 @@ function PlatformAuthGate({
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Sign in to Livepeer Agent"
+            aria-label={content.dialogLabel}
             className="relative z-10 w-full max-w-md"
           >
             <LivepeerAgentSignInCard
+              content={content}
               onContinue={() => setAuthenticated(true)}
             />
           </div>

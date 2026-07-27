@@ -1,9 +1,10 @@
 import { LivepeerAgentHero } from "@/components/mockups/livepeer-agent-hero"
+import { livepeerOrgAgentFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function LivepeerAgentHeroDemo() {
   return (
     <div className="w-full overflow-hidden">
-      <LivepeerAgentHero />
+      <LivepeerAgentHero content={livepeerOrgAgentFixture.hero} />
     </div>
   )
 }

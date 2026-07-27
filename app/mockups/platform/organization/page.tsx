@@ -23,6 +23,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  getAgentConsolePage,
+  type OrganizationPageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
   title: "Organization settings",
@@ -83,32 +87,44 @@ export default async function MockupOrganizationPage({
     ["general", "members", "billing"].includes(requestedTab)
       ? requestedTab
       : "general"
+  const editorial =
+    await getAgentConsolePage<OrganizationPageContent>("organization")
+  if (!editorial?.organization) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-organization is missing or incomplete."
+    )
+  }
+  const content = editorial.organization
 
   return (
-    <PlatformPage title="Organization settings">
+    <PlatformPage title={editorial.heading} description={editorial.description}>
       <Tabs defaultValue={defaultTab} className="gap-8">
         <TabsList
           variant="line"
           className="w-full justify-start overflow-x-auto border-b px-0 pb-1"
         >
           <TabsTrigger value="general" className="flex-none">
-            General
+            {content.generalTabLabel}
           </TabsTrigger>
           <TabsTrigger value="members" className="flex-none">
-            Members
+            {content.membersTabLabel}
           </TabsTrigger>
           <TabsTrigger value="billing" className="flex-none">
-            Billing
+            {content.billingTabLabel}
           </TabsTrigger>
         </TabsList>
         <TabsContent value="general">
           <form className="flex max-w-xl flex-col gap-8">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="organization-name">Organization name</Label>
+              <Label htmlFor="organization-name">
+                {content.organizationNameLabel}
+              </Label>
               <Input id="organization-name" defaultValue="Personal" />
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="organization-id">Organization ID</Label>
+              <Label htmlFor="organization-id">
+                {content.organizationIdLabel}
+              </Label>
               <Input
                 id="organization-id"
                 defaultValue="org_personal"
@@ -116,11 +132,8 @@ export default async function MockupOrganizationPage({
                 className="font-mono"
               />
             </div>
-            <Button
-              type="submit"
-              className="h-10 self-start rounded-sm px-4"
-            >
-              Save
+            <Button type="submit" className="h-10 self-start rounded-sm px-4">
+              {content.saveLabel}
             </Button>
           </form>
         </TabsContent>
@@ -128,19 +141,20 @@ export default async function MockupOrganizationPage({
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between gap-4">
               <p className="text-sm text-muted-foreground">
-                Members can be assigned to projects after joining the
-                organization.
+                {content.membersDescription}
               </p>
               <Button className="h-10 rounded-sm px-4">
-                Invite member
+                {content.inviteMemberLabel}
               </Button>
             </div>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Member</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead className="text-right">Role</TableHead>
+                  <TableHead>{content.memberColumnLabel}</TableHead>
+                  <TableHead>{content.emailColumnLabel}</TableHead>
+                  <TableHead className="text-right">
+                    {content.roleColumnLabel}
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -173,7 +187,9 @@ export default async function MockupOrganizationPage({
             <div className="grid gap-4 sm:grid-cols-2">
               <Card className="gap-2 rounded-sm">
                 <CardHeader>
-                  <CardDescription>Current period</CardDescription>
+                  <CardDescription>
+                    {content.currentPeriodLabel}
+                  </CardDescription>
                   <CardTitle className="text-2xl font-medium tabular-nums">
                     $2,148.90
                   </CardTitle>
@@ -186,36 +202,42 @@ export default async function MockupOrganizationPage({
               </Card>
               <Card className="gap-2 rounded-sm">
                 <CardHeader>
-                  <CardDescription>Credit balance</CardDescription>
+                  <CardDescription>
+                    {content.creditBalanceLabel}
+                  </CardDescription>
                   <CardTitle className="text-2xl font-medium tabular-nums">
                     $500.00
                   </CardTitle>
                   <CardAction>
                     <Button variant="outline" size="sm">
-                      Add credits
+                      {content.addCreditsLabel}
                     </Button>
                   </CardAction>
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-muted-foreground">
-                    Applied before charging the default payment method.
+                    {content.creditBalanceDescription}
                   </p>
                 </CardContent>
               </Card>
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between gap-4">
-                <h2 className="text-sm font-medium">Payment methods</h2>
+                <h2 className="text-sm font-medium">
+                  {content.paymentMethodsTitle}
+                </h2>
                 <Button variant="outline" size="sm">
-                  Add payment method
+                  {content.addPaymentMethodLabel}
                 </Button>
               </div>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Method</TableHead>
-                    <TableHead>Expires</TableHead>
-                    <TableHead className="text-right">Role</TableHead>
+                    <TableHead>{content.methodColumnLabel}</TableHead>
+                    <TableHead>{content.expiresColumnLabel}</TableHead>
+                    <TableHead className="text-right">
+                      {content.roleColumnLabel}
+                    </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -242,14 +264,16 @@ export default async function MockupOrganizationPage({
               </Table>
             </div>
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm font-medium">Invoices</h2>
+              <h2 className="text-sm font-medium">{content.invoicesTitle}</h2>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Invoice</TableHead>
-                    <TableHead>Period</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>{content.invoiceColumnLabel}</TableHead>
+                    <TableHead>{content.periodColumnLabel}</TableHead>
+                    <TableHead className="text-right">
+                      {content.amountColumnLabel}
+                    </TableHead>
+                    <TableHead>{content.statusColumnLabel}</TableHead>
                     <TableHead className="text-right" />
                   </TableRow>
                 </TableHeader>
@@ -268,7 +292,7 @@ export default async function MockupOrganizationPage({
                       </TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="xs">
-                          Download
+                          {content.downloadLabel}
                         </Button>
                       </TableCell>
                     </TableRow>
