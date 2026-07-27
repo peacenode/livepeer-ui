@@ -28,7 +28,7 @@ type Phase = {
   name: string
   timing: string
   summary: string
-  flow: string
+  callout?: string
   screens: Screen[]
 }
 
@@ -38,8 +38,8 @@ const phases: Phase[] = [
     name: "Private beta",
     timing: "External gate",
     summary:
-      "Use the external waitlist as a temporary gate. Do not share the MCP publicly.",
-    flow: "Marketing page → Waitlist → MCP OAuth → Agent",
+      "A user visits the Agent marketing page, joins the waitlist, authenticates with an approved email, and opens the Agent.",
+    callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
         title: "Agent marketing page",
@@ -100,8 +100,7 @@ const phases: Phase[] = [
     name: "Expanded beta",
     timing: "Agent Console",
     summary:
-      "Replace the waitlist handoff with an owned access and onboarding surface.",
-    flow: "Marketing page → Agent Console → MCP OAuth → Agent",
+      "A user visits the Agent marketing page, signs in to the Agent Console, authorizes the MCP, and opens the Agent.",
     screens: [
       {
         title: "Agent marketing page",
@@ -161,8 +160,7 @@ const phases: Phase[] = [
     name: "Public beta",
     timing: "livepeer.org",
     summary:
-      "Make the Agent a first-class Livepeer product once the onboarding path is ready.",
-    flow: "livepeer.org → Agent page → Agent Console → Agent",
+      "A user discovers the Agent on livepeer.org, learns what it can do, signs in to the Agent Console, and connects the Agent.",
     screens: [
       {
         title: "Livepeer website",
@@ -339,18 +337,18 @@ export function AgentFtueFlow() {
         </Tabs>
 
         <section className="py-8">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <h2 className="text-2xl font-normal tracking-tight">
-                {phase.name}
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-                {phase.summary}
-              </p>
-            </div>
-            <p className="font-mono text-xs text-muted-foreground">
-              {phase.flow}
+          <div>
+            <h2 className="text-2xl font-normal tracking-tight">
+              {phase.name}
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+              {phase.summary}
             </p>
+            {phase.callout && (
+              <div className="mt-4 max-w-3xl rounded-md border border-foreground/20 bg-muted px-4 py-3 text-sm font-medium">
+                {phase.callout}
+              </div>
+            )}
           </div>
 
           <div className="mt-10 space-y-16">
