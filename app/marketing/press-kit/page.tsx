@@ -1,10 +1,7 @@
 import type { Metadata } from "next"
 
 import { Badge } from "@/components/ui/badge"
-import {
-  pressDeliverables,
-  type PressDeliverable,
-} from "@/lib/press-kit"
+import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 
 export const metadata: Metadata = {
   title: "Social Kit · Deliverables",
@@ -14,30 +11,25 @@ export const metadata: Metadata = {
 
 export default function PressKitPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl pb-20">
-      <header className="pb-10">
-        <p className="mb-3 text-sm font-medium text-muted-foreground">
-          Social kit / Deliverables
+    <article className="w-full max-w-5xl pb-20">
+      <header className="max-w-3xl">
+        <h1 className="text-3xl font-semibold tracking-tight">Social Kit</h1>
+        <p className="mt-2 text-balance text-muted-foreground">
+          The brand asset deliverables and export requirements for
+          Livepeer&apos;s public channels.
         </p>
-        <h1 className="max-w-4xl text-pretty text-4xl font-medium tracking-tight sm:text-5xl">
-          Brand asset deliverables
-        </h1>
       </header>
 
-      <div className="grid gap-x-8 gap-y-14 md:grid-cols-2">
+      <div className="mt-8 grid gap-x-8 gap-y-14 md:grid-cols-2">
         {pressDeliverables.map((deliverable) => (
           <Deliverable key={deliverable.id} deliverable={deliverable} />
         ))}
       </div>
-    </div>
+    </article>
   )
 }
 
-function Deliverable({
-  deliverable,
-}: {
-  deliverable: PressDeliverable
-}) {
+function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
   const sizes = [
     ...new Set(
       deliverable.requirements.map(
@@ -93,7 +85,13 @@ function DeliverablePreview({
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
           width:
-            ratio >= 2.5 ? "100%" : ratio >= 1.1 ? "90%" : ratio >= 1 ? "60%" : "auto",
+            ratio >= 2.5
+              ? "100%"
+              : ratio >= 1.1
+                ? "90%"
+                : ratio >= 1
+                  ? "60%"
+                  : "auto",
           height: ratio < 1 ? "100%" : "auto",
         }}
         aria-label={`${deliverable.name} aspect ratio`}
