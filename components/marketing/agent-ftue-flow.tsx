@@ -117,15 +117,15 @@ const phases: Phase[] = [
         questions: ["Does OAuth preserve the active Agent session?"],
       },
       {
-        title: "Open generated results",
+        title: "Preview generations",
         description:
-          "The Agent returns a link where the user can review and download the generated images.",
+          "The Agent returns a results link that opens a visual history of the user’s generated media.",
         action: "Open results link",
         mockup: "results",
         needs: [
           "Return a stable results link in the Agent",
-          "Show every generated image",
-          "Make images easy to open or download",
+          "Show generated media with its prompt and context",
+          "Make each result easy to preview or open",
         ],
         questions: ["How long should a results link remain available?"],
       },
@@ -203,15 +203,15 @@ const phases: Phase[] = [
         questions: ["Does the Console record the generation automatically?"],
       },
       {
-        title: "Open generated results",
+        title: "Preview generations",
         description:
-          "The Agent returns a link where the user can review and download the generated images.",
+          "The Agent returns a results link that opens a visual history of the user’s generated media.",
         action: "Open results link",
         mockup: "results",
         needs: [
           "Return a stable results link in the Agent",
           "Associate the results with the Console user",
-          "Make images easy to open or download",
+          "Show generated media with its prompt and context",
         ],
         questions: ["Do results also appear inside the Agent Console?"],
       },
@@ -396,55 +396,15 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   }
 
   if (type === "results") {
-    const resultImages = [
-      "/playbooks/20260726-2311-campaign-video/generate.png",
-      "/playbooks/20260726-2311-campaign-video/edit.png",
-      "/playbooks/20260726-2311-campaign-video/augment.png",
-    ]
-
     return (
-      <div className="flex h-full flex-col bg-background">
-        <div className="flex items-center justify-between border-b px-[5%] py-[3%]">
-          <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
-          <span className="font-mono text-[7px] text-muted-foreground sm:text-[10px]">
-            Generation results
-          </span>
-        </div>
-        <div className="flex-1 p-[5%]">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-[7px] text-muted-foreground sm:text-[10px]">
-                Completed
-              </p>
-              <h2 className="mt-1 text-sm font-medium sm:text-xl">
-                Your generated images
-              </h2>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-6 rounded-sm px-2 text-[8px] sm:h-8 sm:text-xs"
-            >
-              Download all
-            </Button>
-          </div>
-          <div className="mt-[4%] grid grid-cols-3 gap-[2%]">
-            {resultImages.map((src, index) => (
-              <div
-                key={src}
-                className="relative aspect-video overflow-hidden rounded-sm border bg-muted"
-              >
-                <Image
-                  src={src}
-                  alt={`Generated result ${index + 1}`}
-                  fill
-                  sizes="20vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="relative h-full overflow-hidden bg-white">
+        <Image
+          src="/flow-references/20260727-184759/generation-preview.png"
+          alt="Generation history with video previews and prompts"
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="object-contain"
+        />
       </div>
     )
   }
