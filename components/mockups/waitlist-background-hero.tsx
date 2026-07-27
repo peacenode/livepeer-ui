@@ -16,7 +16,8 @@ export function WaitlistBackgroundHero() {
             aria-hidden="true"
           />
           <span
-            className="translate-y-[0.08em] font-agent text-[clamp(1.625rem,3.6cqw,3.625rem)] leading-none font-medium tracking-[-0.045em]"
+            className="translate-y-[0.08em] text-[clamp(1.625rem,3.6cqw,3.625rem)] leading-none font-medium tracking-[-0.045em]"
+            style={{ fontFamily: "var(--font-agent, Inter, sans-serif)" }}
             aria-hidden="true"
           >
             AGENT
