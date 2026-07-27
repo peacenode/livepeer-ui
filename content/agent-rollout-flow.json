@@ -4,6 +4,71 @@
   "subtitle": "Livepeer Agent beta stages",
   "phases": [
     {
+      "_key": "internal-testing",
+      "name": "Internal testing",
+      "summary": "An internal tester visits the Agent landing page, installs the MCP with preloaded credits, submits a generation, and receives a stable link to the results.",
+      "primaryCta": "Install the Agent",
+      "screens": [
+        {
+          "_key": "internal-marketing",
+          "section": "marketing",
+          "title": "Agent landing page",
+          "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
+          "imageAlt": "Livepeer Agent landing page",
+          "needs": [
+            "Explain what the Agent does",
+            "Give internal testers one clear install action"
+          ]
+        },
+        {
+          "_key": "install-with-credits",
+          "section": "userFlow",
+          "title": "Install MCP with preloaded credits",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Claude Code session running the Livepeer MCP",
+          "needs": [
+            "Install the MCP in the tester’s Agent",
+            "Give the tester preloaded credits",
+            "Confirm the MCP is connected"
+          ]
+        },
+        {
+          "_key": "submit-generation",
+          "section": "userFlow",
+          "title": "Submit generation",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Agent session submitting a generation prompt",
+          "needs": [
+            "Submit a generation prompt",
+            "Show progress while the generation runs"
+          ]
+        },
+        {
+          "_key": "stable-link",
+          "section": "userFlow",
+          "title": "Receive stable link",
+          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imageAlt": "Stable results link showing generated media",
+          "needs": [
+            "Return a stable results link in the Agent",
+            "Open the generated media from the link"
+          ]
+        },
+        {
+          "_key": "user-interview",
+          "section": "userFlow",
+          "title": "User interview",
+          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imageAlt": "Generation results reviewed during the user interview",
+          "needs": [
+            "Schedule a follow-up with the tester",
+            "Review the install and generation experience",
+            "Capture feedback on the results link and remaining friction"
+          ]
+        }
+      ]
+    },
+    {
       "_key": "private-beta",
       "name": "Private beta",
       "summary": "A user joins the waitlist, receives an access email, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
