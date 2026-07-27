@@ -17,6 +17,7 @@ type Screen = {
   action: string
   mockup:
     | "marketing"
+    | "public-marketing"
     | "waitlist"
     | "email"
     | "oauth"
@@ -160,7 +161,7 @@ const phases: Phase[] = [
         description:
           "Publish the Agent marketing page as part of the main Livepeer website and lead users into the Console.",
         action: "Get started",
-        mockup: "marketing",
+        mockup: "public-marketing",
         needs: [
           "Publish the page at livepeer.org/agent",
           "Add the Agent to the main website navigation",
@@ -205,6 +206,20 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
         <Image
           src="/flow-references/20260727-184956/agent-marketing-page.png"
           alt="Livepeer Agent marketing page"
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="object-contain"
+        />
+      </div>
+    )
+  }
+
+  if (type === "public-marketing") {
+    return (
+      <div className="relative h-full overflow-hidden bg-white">
+        <Image
+          src="/flow-references/20260727-192146/public-agent-marketing-page.png"
+          alt="Public Livepeer Agent marketing page"
           fill
           sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-contain"
@@ -379,7 +394,8 @@ export function AgentFtueFlow() {
   const [activePhase, setActivePhase] = useState(0)
   const phase = phases[activePhase]
   const marketingScreen = phase.screens.find(
-    (screen) => screen.mockup === "marketing"
+    (screen) =>
+      screen.mockup === "marketing" || screen.mockup === "public-marketing"
   )
   const waitlistScreen = phase.screens.find(
     (screen) => screen.mockup === "waitlist"
