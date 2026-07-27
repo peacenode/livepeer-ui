@@ -51,7 +51,8 @@
           "imageAlt": "Stable results link showing generated media",
           "needs": [
             "Return a stable results link in the Agent",
-            "Open the generated media from the link"
+            "Open the generated media from the link",
+            "Download assets & generate more"
           ]
         },
         {
