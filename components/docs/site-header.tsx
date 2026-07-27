@@ -15,7 +15,10 @@ export function SiteHeader() {
           className="flex items-center gap-2"
         >
           <LivepeerLockup className="h-3.5 w-auto" />
-          <RegistryUiMark className="h-[7px] w-auto" aria-hidden="true" />
+          <RegistryUiMark
+            className="h-[9px] w-auto self-end"
+            aria-hidden="true"
+          />
         </Link>
         <div className="ml-auto flex items-center">
           <ThemeToggle />

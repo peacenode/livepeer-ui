@@ -29,7 +29,10 @@ export function MobileNav() {
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2 text-left">
             <LivepeerLockup className="h-3 w-auto" aria-label="Livepeer UI" />
-            <RegistryUiMark className="h-1.5 w-auto" aria-hidden="true" />
+            <RegistryUiMark
+              className="h-2 w-auto self-end"
+              aria-hidden="true"
+            />
           </SheetTitle>
         </SheetHeader>
         <div className="overflow-y-auto px-4 pb-8">
