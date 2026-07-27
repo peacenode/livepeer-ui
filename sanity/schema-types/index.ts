@@ -4,6 +4,11 @@ import {
   marketingWeekType,
 } from "./marketing-week"
 import {
+  plannerConstraintType,
+  plannerMarkdownDocumentType,
+  plannerOutreachType,
+} from "./planner-content"
+import {
   agentConsoleEditorialPageType,
   mockupPageType,
   mockupRoundupType,
@@ -25,6 +30,9 @@ export const schemaTypes = [
   marketingLinkType,
   marketingItemType,
   marketingWeekType,
+  plannerOutreachType,
+  plannerConstraintType,
+  plannerMarkdownDocumentType,
   registryCtaType,
   mockupPageType,
   mockupRoundupType,

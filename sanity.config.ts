@@ -3,7 +3,10 @@
 import {
   CalendarIcon,
   CreditCardIcon,
+  FileTextIcon,
   GalleryVerticalEndIcon,
+  MessageSquareTextIcon,
+  ShieldAlertIcon,
 } from "lucide-react"
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
@@ -26,6 +29,41 @@ const plannerStructure: StructureResolver = (S) =>
   S.list()
     .title("Planner")
     .items([
+      S.listItem()
+        .title("Outreach")
+        .icon(MessageSquareTextIcon)
+        .child(S.documentTypeList("plannerOutreach").title("Outreach")),
+      S.listItem()
+        .title("Constraints")
+        .icon(ShieldAlertIcon)
+        .child(S.documentTypeList("plannerConstraint").title("Constraints")),
+      S.listItem()
+        .title("Internal meetings")
+        .icon(FileTextIcon)
+        .child(
+          S.documentList()
+            .title("Internal meetings")
+            .schemaType("plannerMarkdownDocument")
+            .filter('_type == "plannerMarkdownDocument" && kind == $kind')
+            .params({ kind: "internal-meeting" })
+            .initialValueTemplates([
+              S.initialValueTemplateItem("planner-markdown-internal-meeting"),
+            ])
+        ),
+      S.listItem()
+        .title("User interviews")
+        .icon(FileTextIcon)
+        .child(
+          S.documentList()
+            .title("User interviews")
+            .schemaType("plannerMarkdownDocument")
+            .filter('_type == "plannerMarkdownDocument" && kind == $kind')
+            .params({ kind: "user-interview" })
+            .initialValueTemplates([
+              S.initialValueTemplateItem("planner-markdown-user-interview"),
+            ])
+        ),
+      S.divider(),
       S.listItem()
         .title("Weeks")
         .icon(CalendarIcon)
@@ -236,10 +274,25 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
-    templates: (templates) =>
-      templates.filter(
-        (template) => !singletonSchemaTypes.has(template.schemaType)
+    templates: (templates) => [
+      ...templates.filter(
+        (template) =>
+          !singletonSchemaTypes.has(template.schemaType) &&
+          template.schemaType !== "plannerMarkdownDocument"
       ),
+      {
+        id: "planner-markdown-internal-meeting",
+        title: "Internal meeting",
+        schemaType: "plannerMarkdownDocument",
+        value: { kind: "internal-meeting" },
+      },
+      {
+        id: "planner-markdown-user-interview",
+        title: "User interview",
+        schemaType: "plannerMarkdownDocument",
+        value: { kind: "user-interview" },
+      },
+    ],
   },
   document: {
     actions: (actions, context) =>
