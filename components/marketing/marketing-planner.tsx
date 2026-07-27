@@ -119,7 +119,7 @@ export function MarketingWeeks({ weeks }: { weeks: MarketingWeek[] }) {
         <AccordionItem
           key={week._id}
           value={week.startsAt}
-          className="relative border-0 after:absolute after:bottom-0 after:left-1/2 after:w-screen after:-translate-x-1/2 after:border-b data-open:bg-transparent"
+          className="relative border-0 not-last:border-b-0 after:absolute after:bottom-0 after:left-1/2 after:w-screen after:-translate-x-1/2 after:border-b after:border-border data-open:bg-transparent"
         >
           <AccordionTrigger className="items-center px-0 py-6 font-sans text-base font-semibold hover:no-underline">
             <time dateTime={week.startsAt}>{displayDate(week.startsAt)}</time>
