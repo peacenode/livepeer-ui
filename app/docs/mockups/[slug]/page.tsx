@@ -11,14 +11,12 @@ import {
 } from "@/sanity/lib/registry-content"
 
 const mockupRoundupSlugs = [
-  "planner",
   "agent-waitlist",
   "agent-console",
   "livepeer-org",
 ] as const satisfies readonly MockupRoundupSlug[]
 
 const componentGroupTitles: Record<MockupRoundupSlug, string> = {
-  planner: "Planner",
   "agent-waitlist": "Agent Waitlist",
   "agent-console": "Agent Console",
   "livepeer-org": "Livepeer.org",

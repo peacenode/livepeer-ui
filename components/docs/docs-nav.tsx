@@ -27,7 +27,6 @@ export function DocsNav({
     {
       title: "Mockups",
       items: [
-        { title: "Planner", href: "/docs/mockups/planner" },
         { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
         { title: "Agent Console", href: "/docs/mockups/agent-console" },
         { title: "Livepeer.org", href: "/docs/mockups/livepeer-org" },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { PlannerContent } from "@/components/marketing/planner-content"
-import { getPlannerContent } from "@/sanity/lib/planner-content"
+import { MarketingPlanner } from "@/components/marketing/marketing-planner"
+import { getMarketingWeeks } from "@/sanity/lib/marketing-plan"
 
 export const metadata: Metadata = {
   title: "Marketing Planner",
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 }
 
 export default async function MarketingPlannerPage() {
-  const content = await getPlannerContent()
-
-  return <PlannerContent {...content} />
+  const weeks = await getMarketingWeeks()
+  return <MarketingPlanner weeks={weeks} />
 }

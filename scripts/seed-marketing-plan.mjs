@@ -40,34 +40,13 @@ const weeks = [
       ),
       item("Agent website", "Agent website revamp", [
         link("Agent Console", "/mockups/livepeer-agent"),
-        link(
-          "Marketing Page",
-          "/mockups/livepeer-org/agent"
-        ),
+        link("Marketing Page", "/mockups/livepeer-org/agent"),
         link("UI Registry", "/docs"),
         link("design.md", "/design.md"),
       ]),
-      item(
-        "Waitlist launch readiness",
-        "Waitlist ready to go live",
-        [link("Agent Waitlist", "/mockups/waitlist")]
-      ),
-    ],
-    outreach: [
-      item("Partner outreach", "Partner outreach", [
-        link("Livepeer.org", "/mockups/livepeer-org"),
+      item("Waitlist launch readiness", "Waitlist ready to go live", [
+        link("Agent Waitlist", "/mockups/waitlist"),
       ]),
-    ],
-    sources: [
-      item(
-        "Post-install interviews",
-        "Complete eight post-install web interviews"
-      ),
-      item(
-        "Creative video interviews",
-        "Recruit interview participants around video creation, trailers & game mechanics",
-        [link("Livepeer.org", "/mockups/livepeer-org")]
-      ),
     ],
   },
   {
@@ -83,8 +62,6 @@ const weeks = [
         link("Agent Console", "/mockups/livepeer-agent"),
       ]),
     ],
-    outreach: [],
-    sources: [],
   },
   {
     _id: "marketingWeek-2026-08-10",
@@ -95,14 +72,10 @@ const weeks = [
         "Full beta and creative AI",
         "Steph: scaling full beta and creative AI"
       ),
-      item(
-        "First generations",
-        "20 people can have their first generations",
-        [
-          link("Client", "/mockups/client"),
-          link("Agent Playbooks", "/marketing/agent-playbooks"),
-        ]
-      ),
+      item("First generations", "20 people can have their first generations", [
+        link("Client", "/mockups/client"),
+        link("Agent Playbooks", "/marketing/agent-playbooks"),
+      ]),
       item("Week-seed planning", "Plan basics to go in on week seed"),
       item("Development", "Joe / Mehrdad development"),
       item("Website scope", "Decide what needs to be on the website", [
@@ -130,8 +103,6 @@ const weeks = [
         [link("Agent Console", "/mockups/livepeer-agent")]
       ),
     ],
-    outreach: [],
-    sources: [],
     note: "Transcribed from a photographed planning board. Several phrases are difficult to read and should be checked against the original.",
   },
 ]

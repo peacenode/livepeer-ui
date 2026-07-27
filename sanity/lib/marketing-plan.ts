@@ -19,16 +19,25 @@ export interface MarketingWeek {
   _id: string
   startsAt: string
   outcomes: MarketingPlanItem[]
-  outreach: MarketingPlanItem[]
-  sources: MarketingPlanItem[]
+  constraints: MarketingPlanItem[]
+  internalMeetings: MarketingWeekDocument[]
+  userInterviews: MarketingWeekDocument[]
   note?: string
+}
+
+export interface MarketingWeekDocument {
+  _id: string
+  title: string
+  slug: string
+  occurredAt?: string
+  summary?: string
 }
 
 const marketingWeeksQuery = defineQuery(`
   *[_type == "marketingWeek"] | order(startsAt asc) {
     _id,
     startsAt,
-    outcomes[] {
+    "outcomes": coalesce(outcomes[] {
       _key,
       title,
       description,
@@ -37,9 +46,9 @@ const marketingWeeksQuery = defineQuery(`
         label,
         href
       }
-    },
-    outreach[] {
-      _key,
+    }, []),
+    "constraints": coalesce(constraints[]-> {
+      "_key": _id,
       title,
       description,
       links[] {
@@ -47,17 +56,13 @@ const marketingWeeksQuery = defineQuery(`
         label,
         href
       }
-    },
-    sources[] {
-      _key,
-      title,
-      description,
-      links[] {
-        _key,
-        label,
-        href
-      }
-    },
+    }, []),
+    "internalMeetings": coalesce(internalMeetings[]-> {
+      _id, title, "slug": slug.current, occurredAt, summary
+    }, []),
+    "userInterviews": coalesce(userInterviews[]-> {
+      _id, title, "slug": slug.current, occurredAt, summary
+    }, []),
     note
   }
 `)

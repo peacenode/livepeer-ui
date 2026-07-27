@@ -81,7 +81,7 @@ const plannerListField = ({
   title,
   description,
 }: {
-  name: "outcomes" | "outreach" | "sources"
+  name: "outcomes"
   title: string
   description: string
 }) =>
@@ -91,6 +91,35 @@ const plannerListField = ({
     description,
     type: "array",
     of: [defineArrayMember({ type: "marketingItem" })],
+  })
+
+const plannerReferenceField = ({
+  name,
+  title,
+  schemaType,
+  kind,
+}: {
+  name: "constraints" | "internalMeetings" | "userInterviews"
+  title: string
+  schemaType: "plannerConstraint" | "plannerMarkdownDocument"
+  kind?: "internal-meeting" | "user-interview"
+}) =>
+  defineField({
+    name,
+    title,
+    type: "array",
+    of: [
+      defineArrayMember({
+        type: "reference",
+        to: [{ type: schemaType }],
+        options: kind
+          ? {
+              filter: "kind == $kind",
+              filterParams: { kind },
+            }
+          : undefined,
+      }),
+    ],
   })
 
 export const marketingWeekType = defineType({
@@ -110,15 +139,22 @@ export const marketingWeekType = defineType({
       title: "Outcomes",
       description: "Results and deliverables planned for this week.",
     }),
-    plannerListField({
-      name: "outreach",
-      title: "Outreach",
-      description: "Partner and community outreach planned for this week.",
+    plannerReferenceField({
+      name: "constraints",
+      title: "Constraints",
+      schemaType: "plannerConstraint",
     }),
-    plannerListField({
-      name: "sources",
-      title: "Sources",
-      description: "Interviews and other source material informing the work.",
+    plannerReferenceField({
+      name: "internalMeetings",
+      title: "Internal meetings",
+      schemaType: "plannerMarkdownDocument",
+      kind: "internal-meeting",
+    }),
+    plannerReferenceField({
+      name: "userInterviews",
+      title: "User interviews",
+      schemaType: "plannerMarkdownDocument",
+      kind: "user-interview",
     }),
     defineField({
       name: "note",
