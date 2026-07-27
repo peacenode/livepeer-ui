@@ -282,39 +282,14 @@ const phases: Phase[] = [
 function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   if (type === "marketing") {
     return (
-      <div className="flex h-full flex-col bg-background">
-        <div className="flex items-center justify-between border-b px-[5%] py-[2.5%]">
-          <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
-          <div className="flex items-center gap-4 text-[8px] text-muted-foreground sm:text-[10px]">
-            <span>About</span>
-            <span>Playbooks</span>
-            <span>Docs</span>
-          </div>
-        </div>
-        <div className="grid flex-1 grid-cols-[1.1fr_0.9fr] items-center gap-[7%] p-[7%]">
-          <div>
-            <p className="font-agent text-[9px] tracking-wide text-muted-foreground sm:text-xs">
-              LIVEPEER AGENT
-            </p>
-            <h2 className="mt-[4%] max-w-xl text-[clamp(1rem,3.2vw,2.5rem)] leading-[0.98] font-light tracking-tight">
-              Create and edit video with your agent.
-            </h2>
-            <p className="mt-[5%] max-w-md text-[8px] leading-relaxed text-muted-foreground sm:text-xs">
-              Multimodal media generation powered by Livepeer&apos;s open
-              network.
-            </p>
-            <Button
-              size="sm"
-              className="mt-[6%] h-7 rounded-sm px-3 text-[9px] sm:h-8 sm:text-xs"
-            >
-              Join the waitlist
-            </Button>
-          </div>
-          <div className="relative aspect-video overflow-hidden rounded-md border bg-black">
-            <div className="absolute inset-[10%] rounded-sm border border-white/20 bg-white/5" />
-            <div className="absolute right-[16%] bottom-[18%] left-[16%] h-[12%] rounded-sm bg-white/15" />
-          </div>
-        </div>
+      <div className="relative h-full overflow-hidden bg-white">
+        <Image
+          src="/flow-references/20260727-184956/agent-marketing-page.png"
+          alt="Livepeer Agent marketing page"
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="object-contain"
+        />
       </div>
     )
   }
