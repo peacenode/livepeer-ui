@@ -39,10 +39,10 @@ const weeks = [
         ]
       ),
       item("Agent website", "Agent website revamp", [
-        link("Billing/API mockup", "/mockups/livepeer-agent"),
+        link("Agent Console", "/mockups/livepeer-agent"),
         link(
-          "Marketing page mockup",
-          "http://localhost:3300/mockups/livepeer-org/agent"
+          "Marketing Page",
+          "/mockups/livepeer-org/agent"
         ),
         link("UI Registry", "/docs"),
         link("design.md", "/design.md"),
@@ -50,12 +50,12 @@ const weeks = [
       item(
         "Waitlist launch readiness",
         "Waitlist ready to go live",
-        [link("Waitlist mockup", "/mockups/waitlist")]
+        [link("Waitlist", "/mockups/waitlist")]
       ),
     ],
     outreach: [
       item("Partner outreach", "Partner outreach", [
-        link("Livepeer.org mockup", "/mockups/livepeer-org"),
+        link("Livepeer.org", "/mockups/livepeer-org"),
       ]),
     ],
     sources: [
@@ -66,7 +66,7 @@ const weeks = [
       item(
         "Creative video interviews",
         "Recruit interview participants around video creation, trailers & game mechanics",
-        [link("Livepeer.org mockup", "/mockups/livepeer-org")]
+        [link("Livepeer.org", "/mockups/livepeer-org")]
       ),
     ],
   },
@@ -76,11 +76,11 @@ const weeks = [
     startsAt: "2026-08-03",
     outcomes: [
       item("Waitlist launch", "Waitlist goes live", [
-        link("Waitlist mockup", "/mockups/waitlist"),
+        link("Waitlist", "/mockups/waitlist"),
       ]),
       item("Pitch-form tracking", "Inbound pitch forms are tracked"),
       item("Integration fixes", "Integrations fixed", [
-        link("Billing/API mockup", "/mockups/livepeer-agent"),
+        link("Agent Console", "/mockups/livepeer-agent"),
       ]),
     ],
     outreach: [],
@@ -99,23 +99,23 @@ const weeks = [
         "First generations",
         "20 people can have their first generations",
         [
-          link("Client mockup", "/mockups/client"),
+          link("Client", "/mockups/client"),
           link("Agent Playbooks", "/marketing/agent-playbooks"),
         ]
       ),
       item("Week-seed planning", "Plan basics to go in on week seed"),
       item("Development", "Joe / Mehrdad development"),
       item("Website scope", "Decide what needs to be on the website", [
-        link("Livepeer.org mockup", "/mockups/livepeer-org"),
+        link("Livepeer.org", "/mockups/livepeer-org"),
       ]),
       item("Livepeer positioning", "Livepeer: “why?”", [
-        link("Livepeer.org mockup", "/mockups/livepeer-org"),
+        link("Livepeer.org", "/mockups/livepeer-org"),
       ]),
       item(
         "Livepeer history",
         "Livepeer’s history, including GIFs and videos",
         [
-          link("Livepeer.org mockup", "/mockups/livepeer-org"),
+          link("Livepeer.org", "/mockups/livepeer-org"),
           link("Brand Kit", "/marketing/brand-kit"),
         ]
       ),
@@ -127,7 +127,7 @@ const weeks = [
       item(
         "Livepeer 2.0 organizations",
         "Have a minimum of three organizations running Livepeer 2.0",
-        [link("Billing/API mockup", "/mockups/livepeer-agent")]
+        [link("Agent Console", "/mockups/livepeer-agent")]
       ),
     ],
     outreach: [],

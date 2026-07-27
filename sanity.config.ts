@@ -4,6 +4,7 @@ import { CalendarIcon } from "lucide-react"
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
 
+import { StudioNavbar } from "@/components/sanity/studio-navbar"
 import { dataset, projectId } from "@/sanity/env"
 import { schemaTypes } from "@/sanity/schema-types"
 
@@ -28,6 +29,11 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [structureTool({ structure })],
+  studio: {
+    components: {
+      navbar: StudioNavbar,
+    },
+  },
   schema: {
     types: schemaTypes,
   },

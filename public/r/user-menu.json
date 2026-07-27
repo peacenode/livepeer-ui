@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "user-menu",
   "title": "User Menu",
-  "description": "Account, theme, settings, and sign-out menu used by the Billing/API sidebar.",
+  "description": "Account, theme, settings, and sign-out menu used by the Agent Console sidebar.",
   "dependencies": [
     "lucide-react",
     "next",
