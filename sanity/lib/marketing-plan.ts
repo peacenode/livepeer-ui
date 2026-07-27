@@ -8,23 +8,19 @@ export interface MarketingPlanLink {
   href: string
 }
 
-export interface MarketingPlanDeliverable {
+export interface MarketingPlanItem {
   _key: string
   title: string
+  description: string
   links?: MarketingPlanLink[]
-}
-
-export interface MarketingPlanGroup {
-  _key: string
-  title?: string
-  deliverables: MarketingPlanDeliverable[]
 }
 
 export interface MarketingWeek {
   _id: string
   startsAt: string
-  outcome?: string
-  groups: MarketingPlanGroup[]
+  outcomes: MarketingPlanItem[]
+  outreach: MarketingPlanItem[]
+  sources: MarketingPlanItem[]
   note?: string
 }
 
@@ -32,18 +28,34 @@ const marketingWeeksQuery = defineQuery(`
   *[_type == "marketingWeek"] | order(startsAt asc) {
     _id,
     startsAt,
-    outcome,
-    groups[] {
+    outcomes[] {
       _key,
       title,
-      deliverables[] {
+      description,
+      links[] {
         _key,
-        title,
-        links[] {
-          _key,
-          label,
-          href
-        }
+        label,
+        href
+      }
+    },
+    outreach[] {
+      _key,
+      title,
+      description,
+      links[] {
+        _key,
+        label,
+        href
+      }
+    },
+    sources[] {
+      _key,
+      title,
+      description,
+      links[] {
+        _key,
+        label,
+        href
       }
     },
     note

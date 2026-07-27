@@ -8,7 +8,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import type { MarketingWeek } from "@/sanity/lib/marketing-plan"
+import type {
+  MarketingPlanItem,
+  MarketingWeek,
+} from "@/sanity/lib/marketing-plan"
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "long",
@@ -17,6 +20,41 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 
 const displayDate = (date: string) =>
   dateFormatter.format(new Date(`${date}T00:00:00Z`))
+
+const sections = [
+  { key: "outcomes", title: "Outcomes" },
+  { key: "outreach", title: "Outreach" },
+  { key: "sources", title: "Sources" },
+] as const
+
+function PlannerItem({ item }: { item: MarketingPlanItem }) {
+  return (
+    <div className="flex min-w-0 flex-col gap-2 rounded-md bg-muted p-4">
+      <div className="flex flex-col gap-1">
+        <h3 className="text-sm font-medium leading-6">{item.title}</h3>
+        <p className="text-sm leading-6 text-muted-foreground">
+          {item.description}
+        </p>
+      </div>
+      {item.links?.length ? (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          {item.links.map((link) => (
+            <Link
+              key={link._key}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+              <ArrowUpRightIcon className="size-3" aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  )
+}
 
 export function MarketingPlanner({ weeks }: { weeks: MarketingWeek[] }) {
   return (
@@ -48,46 +86,22 @@ export function MarketingPlanner({ weeks }: { weeks: MarketingWeek[] }) {
               </AccordionTrigger>
               <AccordionContent className="px-5 pb-10 sm:px-8">
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-x-12 gap-y-10">
-                  {week.groups.map((group) => (
-                    <section key={group._key}>
-                      {group.title && (
+                  {sections.map((section) => {
+                    const items = week[section.key] ?? []
+
+                    return (
+                      <section key={section.key}>
                         <h2 className="mb-5 font-sans text-sm font-medium text-muted-foreground">
-                          {group.title}
+                          {section.title}
                         </h2>
-                      )}
                       <div className="flex flex-col gap-6">
-                        {group.deliverables.map((deliverable) => (
-                          <div
-                            key={deliverable._key}
-                            className="flex min-w-0 flex-col gap-1 rounded-md bg-muted p-4"
-                          >
-                            <p className="text-sm leading-6">
-                              {deliverable.title}
-                            </p>
-                            {deliverable.links?.length ? (
-                              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                                {deliverable.links.map((link) => (
-                                  <Link
-                                    key={link._key}
-                                    href={link.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
-                                  >
-                                    {link.label}
-                                    <ArrowUpRightIcon
-                                      className="size-3"
-                                      aria-hidden="true"
-                                    />
-                                  </Link>
-                                ))}
-                              </div>
-                            ) : null}
-                          </div>
+                        {items.map((item) => (
+                          <PlannerItem key={item._key} item={item} />
                         ))}
                       </div>
-                    </section>
-                  ))}
+                      </section>
+                    )
+                  })}
                 </div>
 
                 {week.note && (

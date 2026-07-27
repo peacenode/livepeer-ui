@@ -16,18 +16,12 @@ const link = (label, href) => ({
   href,
 })
 
-const deliverable = (title, links = []) => ({
+const item = (title, description, links = []) => ({
   _key: key(title),
-  _type: "marketingDeliverable",
+  _type: "marketingItem",
   title,
+  description,
   ...(links.length ? { links } : {}),
-})
-
-const group = (title, deliverables) => ({
-  _key: key(title),
-  _type: "marketingGroup",
-  title,
-  deliverables,
 })
 
 const weeks = [
@@ -35,97 +29,109 @@ const weeks = [
     _id: "marketingWeek-2026-07-27",
     _type: "marketingWeek",
     startsAt: "2026-07-27",
-    groups: [
-      group("Outcomes", [
-        deliverable(
-          "Socials revamped with new assets & supported by agent playbooks for content",
-          [
-            link("Social Kit", "/marketing/press-kit"),
-            link("Agent Playbooks", "/marketing/agent-playbooks"),
-          ]
+    outcomes: [
+      item(
+        "Social content system",
+        "Socials revamped with new assets & supported by agent playbooks for content",
+        [
+          link("Social Kit", "/marketing/press-kit"),
+          link("Agent Playbooks", "/marketing/agent-playbooks"),
+        ]
+      ),
+      item("Agent website", "Agent website revamp", [
+        link("Billing/API mockup", "/mockups/livepeer-agent"),
+        link(
+          "Marketing page mockup",
+          "http://localhost:3300/mockups/livepeer-org/agent"
         ),
-        deliverable("Agent website revamp", [
-          link("Billing/API mockup", "/mockups/livepeer-agent"),
-          link(
-            "Marketing page mockup",
-            "http://localhost:3300/mockups/livepeer-org/agent"
-          ),
-          link("UI Registry", "/docs"),
-          link("design.md", "/design.md"),
-        ]),
-        deliverable("Waitlist ready to go live", [
-          link("Waitlist mockup", "/mockups/waitlist"),
-        ]),
+        link("UI Registry", "/docs"),
+        link("design.md", "/design.md"),
       ]),
-      group("Outreach", [
-        deliverable("Partner outreach", [
-          link("Livepeer.org mockup", "/mockups/livepeer-org"),
-        ]),
+      item(
+        "Waitlist launch readiness",
+        "Waitlist ready to go live",
+        [link("Waitlist mockup", "/mockups/waitlist")]
+      ),
+    ],
+    outreach: [
+      item("Partner outreach", "Partner outreach", [
+        link("Livepeer.org mockup", "/mockups/livepeer-org"),
       ]),
-      group("User Interviews", [
-        deliverable("Complete eight post-install web interviews"),
-        deliverable(
-          "Recruit interview participants around video creation, trailers & game mechanics",
-          [link("Livepeer.org mockup", "/mockups/livepeer-org")]
-        ),
-      ]),
+    ],
+    sources: [
+      item(
+        "Post-install interviews",
+        "Complete eight post-install web interviews"
+      ),
+      item(
+        "Creative video interviews",
+        "Recruit interview participants around video creation, trailers & game mechanics",
+        [link("Livepeer.org mockup", "/mockups/livepeer-org")]
+      ),
     ],
   },
   {
     _id: "marketingWeek-2026-08-03",
     _type: "marketingWeek",
     startsAt: "2026-08-03",
-    groups: [
-      group("Outcomes", [
-        deliverable("Waitlist goes live", [
-          link("Waitlist mockup", "/mockups/waitlist"),
-        ]),
-        deliverable("Inbound pitch forms are tracked"),
-        deliverable("Integrations fixed", [
-          link("Billing/API mockup", "/mockups/livepeer-agent"),
-        ]),
+    outcomes: [
+      item("Waitlist launch", "Waitlist goes live", [
+        link("Waitlist mockup", "/mockups/waitlist"),
+      ]),
+      item("Pitch-form tracking", "Inbound pitch forms are tracked"),
+      item("Integration fixes", "Integrations fixed", [
+        link("Billing/API mockup", "/mockups/livepeer-agent"),
       ]),
     ],
+    outreach: [],
+    sources: [],
   },
   {
     _id: "marketingWeek-2026-08-10",
     _type: "marketingWeek",
     startsAt: "2026-08-10",
-    outcome: "Scale the full beta and creative AI.",
-    groups: [
-      group("Outcomes", [
-        deliverable("Steph: scaling full beta and creative AI"),
-        deliverable("20 people can have their first generations", [
+    outcomes: [
+      item(
+        "Full beta and creative AI",
+        "Steph: scaling full beta and creative AI"
+      ),
+      item(
+        "First generations",
+        "20 people can have their first generations",
+        [
           link("Client mockup", "/mockups/client"),
           link("Agent Playbooks", "/marketing/agent-playbooks"),
-        ]),
+        ]
+      ),
+      item("Week-seed planning", "Plan basics to go in on week seed"),
+      item("Development", "Joe / Mehrdad development"),
+      item("Website scope", "Decide what needs to be on the website", [
+        link("Livepeer.org mockup", "/mockups/livepeer-org"),
       ]),
-      group("Base", [
-        deliverable("Plan basics to go in on week seed"),
-        deliverable("Joe / Mehrdad development"),
+      item("Livepeer positioning", "Livepeer: “why?”", [
+        link("Livepeer.org mockup", "/mockups/livepeer-org"),
       ]),
-      group("Website", [
-        deliverable("Decide what needs to be on the website", [
-          link("Livepeer.org mockup", "/mockups/livepeer-org"),
-        ]),
-        deliverable("Livepeer: “why?”", [
-          link("Livepeer.org mockup", "/mockups/livepeer-org"),
-        ]),
-        deliverable("Livepeer’s history, including GIFs and videos", [
+      item(
+        "Livepeer history",
+        "Livepeer’s history, including GIFs and videos",
+        [
           link("Livepeer.org mockup", "/mockups/livepeer-org"),
           link("Brand Kit", "/marketing/brand-kit"),
-        ]),
-      ]),
-      group("Closed beta", [
-        deliverable("Livepeer Automations machine for closed beta group", [
-          link("Agent Playbooks", "/marketing/agent-playbooks"),
-        ]),
-        deliverable(
-          "Have a minimum of three organizations running Livepeer 2.0",
-          [link("Billing/API mockup", "/mockups/livepeer-agent")]
-        ),
-      ]),
+        ]
+      ),
+      item(
+        "Closed-beta automations",
+        "Livepeer Automations machine for closed beta group",
+        [link("Agent Playbooks", "/marketing/agent-playbooks")]
+      ),
+      item(
+        "Livepeer 2.0 organizations",
+        "Have a minimum of three organizations running Livepeer 2.0",
+        [link("Billing/API mockup", "/mockups/livepeer-agent")]
+      ),
     ],
+    outreach: [],
+    sources: [],
     note: "Transcribed from a photographed planning board. Several phrases are difficult to read and should be checked against the original.",
   },
 ]
