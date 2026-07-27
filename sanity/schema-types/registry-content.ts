@@ -73,6 +73,14 @@ export const mockupRoundupType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "contentBadges",
+      title: "Content",
+      description: "Hosted content represented on the mockup roundup.",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
       name: "previewHref",
       title: "Mockup URL or path",
       type: "string",

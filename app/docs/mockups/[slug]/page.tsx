@@ -117,6 +117,19 @@ export default async function MockupRoundupPage({
             />
           ))}
         </div>
+
+        <h2 className="mt-8 text-sm font-medium">Content</h2>
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
+          {roundup.contentBadges.map((label) => (
+            <Badge
+              key={label}
+              variant="outline"
+              className="h-auto rounded-sm px-3 py-2 font-normal"
+            >
+              {label}
+            </Badge>
+          ))}
+        </div>
       </section>
     </article>
   )
