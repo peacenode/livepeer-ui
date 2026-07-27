@@ -31,6 +31,7 @@ type Phase = {
   name: string
   timing: string
   summary: string
+  userFlowDescription?: string
   callout?: string
   screens: Screen[]
 }
@@ -42,6 +43,8 @@ const phases: Phase[] = [
     timing: "External gate",
     summary:
       "A user joins the waitlist, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
+    userFlowDescription:
+      "In phase 1, we will reach out to people on the waitlist directly and give them a private link.",
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
@@ -510,6 +513,11 @@ export function AgentFtueFlow() {
               >
                 User flow
               </h3>
+              {phase.userFlowDescription && (
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+                  {phase.userFlowDescription}
+                </p>
+              )}
 
               <div className="mt-8 space-y-10">
                 {userFlowScreens.map((screen, index) => (
