@@ -7,6 +7,7 @@ import { Check, TriangleAlert } from "lucide-react"
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
 import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -45,7 +46,7 @@ const phases: Phase[] = [
     timing: "External gate",
     summary:
       "A user joins the waitlist, receives an access email, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
-    primaryCta: "Sign up for early-access",
+    primaryCta: "Join the waitlist",
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
@@ -415,9 +416,10 @@ export function AgentFtueFlow() {
               {phase.summary}
             </p>
             {phase.primaryCta && (
-              <p className="mt-4 text-sm font-medium">
-                Primary CTA: {phase.primaryCta}
-              </p>
+              <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+                <span>Primary CTA</span>
+                <Badge>{phase.primaryCta}</Badge>
+              </div>
             )}
             {phase.callout && (
               <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
