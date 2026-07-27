@@ -45,7 +45,7 @@ const phases: Phase[] = [
     timing: "External gate",
     summary:
       "A user joins the waitlist, receives an access email, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
-    primaryCta: "Join the waitlist",
+    primaryCta: "Sign up for early-access",
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
