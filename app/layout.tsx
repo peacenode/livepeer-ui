@@ -43,11 +43,11 @@ const fontMono = localFont({
   variable: "--font-mono",
 })
 
-const fontRunner = localFont({
+const fontAgent = localFont({
   src: "../public/fonts/serpentine-medium.otf",
   weight: "500",
   style: "normal",
-  variable: "--font-runner-face",
+  variable: "--font-agent-face",
   adjustFontFallback: false,
 })
 
@@ -85,7 +85,7 @@ export default function RootLayout({
         fontDisplay.variable,
         fontSans.variable,
         fontMono.variable,
-        fontRunner.variable
+        fontAgent.variable
       )}
     >
       <body>

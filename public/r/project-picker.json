@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "project-picker",
+  "title": "Project Picker",
+  "description": "Compact project selector with a project creation action.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/dropdown-menu.json"
+  ],
+  "files": [
+    {
+      "path": "app/mockups/videobuddy/project-picker.tsx",
+      "content": "\"use client\"\n\nimport { ChevronDownIcon, PlusIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\nexport function ProjectPicker({\n  value,\n  projects,\n  onChange,\n  onNew,\n}: {\n  value: string\n  projects: string[]\n  onChange: (project: string) => void\n  onNew: () => void\n}) {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger\n        render={<Button variant=\"ghost\" size=\"sm\" className=\"max-w-44\" />}\n      >\n        <span className=\"truncate\">{value}</span>\n        <ChevronDownIcon />\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\">\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Project</DropdownMenuLabel>\n          {projects.map((project) => (\n            <DropdownMenuItem\n              key={project}\n              onClick={() => onChange(project)}\n            >\n              {project}\n            </DropdownMenuItem>\n          ))}\n          <DropdownMenuItem onClick={onNew}>\n            <PlusIcon />\n            New project\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

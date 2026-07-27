@@ -1,0 +1,62 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "clips-library-section",
+  "title": "Clips Library",
+  "description": "Clips library with upload action, playable media cards, context actions, and empty state.",
+  "dependencies": [
+    "lucide-react",
+    "next"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/context-menu.json"
+  ],
+  "files": [
+    {
+      "path": "app/mockups/videobuddy/footage/footage-workspace.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\n\nimport { storyMedia } from \"../media-assets\"\nimport { downloadMedia } from \"../media-context-menu\"\nimport { ClipsHeader, ClipsLibrary, type Clip } from \"./clips-components\"\n\nconst initialFootage: Clip[] = [\n  { id: 3, name: \"salt-flats-wind-test-04.mp4\", duration: \"0:18\", uploaded: \"Today, 3:08 PM\", imageUrl: storyMedia.saltSignal.wide },\n  { id: 2, name: \"lighthouse-weather-reference.mov\", duration: \"0:12\", uploaded: \"Yesterday\", imageUrl: storyMedia.blackTide.wide },\n  { id: 1, name: \"pool-rehearsal-wide.mp4\", duration: \"0:24\", uploaded: \"Jul 21\", imageUrl: storyMedia.afterHours.wide },\n]\n\nexport function FootageWorkspace() {\n  const [footage, setFootage] = useState(initialFootage)\n  function addFootage(files: FileList | null) {\n    if (!files?.length) return\n    const additions = Array.from(files)\n      .filter((file) => file.type.startsWith(\"video/\"))\n      .map((file, index) => ({\n        id: (footage[0]?.id ?? 0) + index + 1,\n        name: file.name,\n        duration: \"0:00\",\n        uploaded: \"Just now\",\n        imageUrl: storyMedia.saltSignal.wide,\n      }))\n    setFootage((current) => [...additions.reverse(), ...current])\n  }\n  return (\n    <main className=\"flex h-[calc(100dvh-4rem)] flex-col overflow-hidden md:h-dvh\">\n      <section className=\"min-h-0 flex-1 overflow-y-auto overscroll-none\">\n        <div className=\"mx-auto max-w-6xl px-4 pb-10 sm:px-6\">\n          <ClipsHeader onUpload={addFootage} />\n          <ClipsLibrary\n            clips={footage}\n            onDownload={(clip) => downloadMedia(clip.imageUrl, clip.name)}\n            onDuplicate={(clip) =>\n              setFootage((current) => [\n                { ...clip, id: Math.max(...current.map((entry) => entry.id)) + 1, name: `Copy of ${clip.name}`, uploaded: \"Just now\" },\n                ...current,\n              ])\n            }\n            onRemove={(clip) => setFootage((current) => current.filter((entry) => entry.id !== clip.id))}\n          />\n        </div>\n      </section>\n    </main>\n  )\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "app/mockups/videobuddy/media-assets.ts",
+      "content": "const assetRoot = \"/generated/2026-07-24-004043\"\nconst slugGangAssetRoot = \"/generated/2026-07-24-142500-slug-gang\"\n\nexport const storyMedia = {\n  saltSignal: {\n    wide: `${assetRoot}/salt-signal-wide.webp`,\n    character: `${assetRoot}/mara-portrait.webp`,\n  },\n  blackTide: {\n    wide: `${assetRoot}/black-tide-wide.webp`,\n    character: `${assetRoot}/june-portrait.webp`,\n  },\n  afterHours: {\n    wide: `${assetRoot}/after-hours-wide.webp`,\n    character: `${assetRoot}/eli-portrait.webp`,\n  },\n} as const\n\nexport const storyboardFrames = {\n  slugGang: [\n    `${slugGangAssetRoot}/scene-01.png`,\n    `${slugGangAssetRoot}/scene-02.png`,\n    `${slugGangAssetRoot}/scene-03.png`,\n    `${slugGangAssetRoot}/scene-04.png`,\n    `${slugGangAssetRoot}/scene-05.png`,\n    `${slugGangAssetRoot}/scene-06.png`,\n    `${slugGangAssetRoot}/scene-07.png`,\n    `${slugGangAssetRoot}/scene-08.png`,\n  ],\n  saltSignal: [\n    storyMedia.saltSignal.wide,\n    storyMedia.saltSignal.character,\n    storyMedia.saltSignal.wide,\n    storyMedia.saltSignal.wide,\n  ],\n  blackTide: [\n    storyMedia.blackTide.wide,\n    storyMedia.blackTide.character,\n    storyMedia.blackTide.wide,\n    storyMedia.blackTide.character,\n  ],\n  afterHours: [\n    storyMedia.afterHours.wide,\n    storyMedia.afterHours.character,\n    storyMedia.afterHours.wide,\n    storyMedia.afterHours.character,\n  ],\n} as const\n\nexport function frameAt(frames: readonly string[], index: number) {\n  return frames[index % frames.length]\n}\n\nexport function framesForName(name: string) {\n  const normalized = name.toLowerCase()\n  if (normalized.includes(\"tide\") || normalized.includes(\"june\")) {\n    return storyboardFrames.blackTide\n  }\n  if (\n    normalized.includes(\"after\") ||\n    normalized.includes(\"rehearsal\") ||\n    normalized.includes(\"eli\")\n  ) {\n    return storyboardFrames.afterHours\n  }\n  return storyboardFrames.saltSignal\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "app/mockups/videobuddy/media-context-menu.tsx",
+      "content": "\"use client\"\n\nimport type { ComponentProps, ReactNode } from \"react\"\nimport {\n  ArrowDownToLineIcon,\n  CopyIcon,\n  ExternalLinkIcon,\n  RotateCwIcon,\n  Trash2Icon,\n} from \"lucide-react\"\n\nimport {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuSeparator,\n  ContextMenuTrigger,\n} from \"@/components/ui/context-menu\"\nimport { cn } from \"@/lib/utils\"\n\ntype MediaContextMenuProps = {\n  children: ReactNode\n  className?: string\n  triggerProps?: Omit<ComponentProps<\"div\">, \"children\" | \"className\">\n  onOpen?: () => void\n  openLabel?: string\n  onDownload?: () => void\n  onDuplicate?: () => void\n  duplicateLabel?: string\n  onRemove?: () => void\n  removeLabel?: string\n}\n\nexport function MediaContextMenu({\n  children,\n  className,\n  triggerProps,\n  onOpen,\n  openLabel = \"Open\",\n  onDownload,\n  onDuplicate,\n  duplicateLabel = \"Duplicate\",\n  onRemove,\n  removeLabel = \"Remove\",\n}: MediaContextMenuProps) {\n  return (\n    <ContextMenu>\n      <ContextMenuTrigger\n        className={cn(\"min-w-0\", className)}\n        {...triggerProps}\n      >\n        {children}\n      </ContextMenuTrigger>\n      <ContextMenuContent>\n        {onOpen && (\n          <ContextMenuItem onClick={onOpen}>\n            <ExternalLinkIcon />\n            {openLabel}\n          </ContextMenuItem>\n        )}\n        {onDownload && (\n          <ContextMenuItem onClick={onDownload}>\n            <ArrowDownToLineIcon />\n            Download\n          </ContextMenuItem>\n        )}\n        {onDuplicate && (\n          <ContextMenuItem onClick={onDuplicate}>\n            {duplicateLabel.toLowerCase().includes(\"reroll\") ? (\n              <RotateCwIcon />\n            ) : (\n              <CopyIcon />\n            )}\n            {duplicateLabel}\n          </ContextMenuItem>\n        )}\n        {onRemove && (\n          <>\n            <ContextMenuSeparator />\n            <ContextMenuItem variant=\"destructive\" onClick={onRemove}>\n              <Trash2Icon />\n              {removeLabel}\n            </ContextMenuItem>\n          </>\n        )}\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport function downloadMedia(url: string, filename: string) {\n  const anchor = document.createElement(\"a\")\n  anchor.href = url\n  anchor.download = filename\n  anchor.click()\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "app/mockups/videobuddy/footage/clips-components.tsx",
+      "content": "export { ClipsHeader } from \"@/components/mockups/clips-header\"\nexport { ClipCard } from \"@/components/mockups/clip-card\"\nexport { ClipsLibrary } from \"@/components/mockups/clips-library\"\nexport type { ClientClip as Clip } from \"@/components/mockups/client-clip\"\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "components/mockups/clips-header.tsx",
+      "content": "\"use client\"\nimport { useRef } from \"react\"\nimport { PlusIcon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nexport function ClipsHeader({ onUpload }: { onUpload: (files: FileList | null) => void }) {\n  const uploadRef = useRef<HTMLInputElement>(null)\n  return <header className=\"flex items-center justify-between gap-4 py-4\"><h1 className=\"text-xl font-medium\">Clips</h1><Button className=\"h-10 px-5\" onClick={() => uploadRef.current?.click()}><PlusIcon className=\"size-6\" />Upload clips</Button><input ref={uploadRef} type=\"file\" accept=\"video/*\" multiple className=\"sr-only\" onChange={(event) => onUpload(event.target.files)} /></header>\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "components/mockups/clip-card.tsx",
+      "content": "import Image from \"next/image\"\nimport { PlayIcon } from \"lucide-react\"\nimport { MediaContextMenu } from \"@/app/mockups/videobuddy/media-context-menu\"\nimport type { ClientClip } from \"./client-clip\"\nexport function ClipCard({ clip, onDownload, onDuplicate, onRemove }: { clip: ClientClip; onDownload: () => void; onDuplicate: () => void; onRemove: () => void }) {\n  return <article className=\"grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6\">\n    <MediaContextMenu className=\"relative aspect-video overflow-hidden rounded-xl bg-muted\" onOpen={() => undefined} openLabel=\"Play clip\" onDownload={onDownload} onDuplicate={onDuplicate} duplicateLabel=\"Duplicate clip\" onRemove={onRemove} removeLabel=\"Remove clip\">\n      <button type=\"button\" className=\"group relative size-full text-left outline-none focus-visible:ring-2 focus-visible:ring-ring\"><Image src={clip.imageUrl} alt=\"\" fill className=\"object-cover transition-transform group-hover:scale-105\" /><span className=\"absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20\"><span className=\"flex size-11 items-center justify-center rounded-full bg-background/90\"><PlayIcon className=\"ml-0.5 size-5 fill-current\" /></span></span><span className=\"absolute right-2 bottom-2 rounded-md bg-black/75 px-1.5 py-0.5 text-[11px] text-white\">{clip.duration}</span></button>\n    </MediaContextMenu>\n    <div className=\"flex min-w-0 flex-col py-1\"><p className=\"truncate text-sm font-medium\">{clip.name}</p><p className=\"mt-2 text-xs text-muted-foreground lg:mt-auto\">{clip.uploaded}</p></div>\n  </article>\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "components/mockups/clips-library.tsx",
+      "content": "import { FilmIcon } from \"lucide-react\"\nimport { ClientEmptyState } from \"./client-empty-state\"\nimport { ClipCard } from \"./clip-card\"\nimport type { ClientClip } from \"./client-clip\"\nexport function ClipsLibrary({ clips, onDownload, onDuplicate, onRemove }: { clips: ClientClip[]; onDownload: (clip: ClientClip) => void; onDuplicate: (clip: ClientClip) => void; onRemove: (clip: ClientClip) => void }) {\n  if (!clips.length) return <ClientEmptyState icon={FilmIcon} title=\"No clips yet\" />\n  return <div className=\"space-y-2 py-6\">{clips.map((clip) => <ClipCard key={clip.id} clip={clip} onDownload={() => onDownload(clip)} onDuplicate={() => onDuplicate(clip)} onRemove={() => onRemove(clip)} />)}</div>\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "components/mockups/client-clip.ts",
+      "content": "export type ClientClip = {\n  id: number\n  name: string\n  duration: string\n  uploaded: string\n  imageUrl: string\n}\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "components/mockups/client-empty-state.tsx",
+      "content": "import type { LucideIcon } from \"lucide-react\"\n\nexport function ClientEmptyState({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description?: string }) {\n  return (\n    <div className=\"flex min-h-80 flex-col items-center justify-center text-center\">\n      <Icon className=\"size-5 text-muted-foreground\" aria-hidden=\"true\" />\n      <p className=\"mt-3 text-sm font-medium\">{title}</p>\n      {description ? <p className=\"mt-1 max-w-sm text-sm text-muted-foreground\">{description}</p> : null}\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

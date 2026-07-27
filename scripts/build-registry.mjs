@@ -35,6 +35,92 @@ function parseImports(source) {
   }
 }
 
+function resolveLocalImport(fromFile, specifier) {
+  if (specifier === "@/lib/utils") return null
+  if (specifier.startsWith("@/components/ui/")) return null
+
+  const unresolved = specifier.startsWith("@/")
+    ? path.join(root, specifier.slice(2))
+    : specifier.startsWith(".")
+      ? path.resolve(root, path.dirname(fromFile), specifier)
+      : null
+
+  if (!unresolved) return null
+
+  const candidates = [
+    unresolved,
+    `${unresolved}.tsx`,
+    `${unresolved}.ts`,
+    `${unresolved}.jsx`,
+    `${unresolved}.js`,
+    path.join(unresolved, "index.tsx"),
+    path.join(unresolved, "index.ts"),
+  ]
+
+  const resolved = candidates.find(
+    (candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile(),
+  )
+
+  return resolved ? path.relative(root, resolved) : null
+}
+
+function expandLocalFiles(initialFiles) {
+  const files = new Set(initialFiles)
+  const queue = [...initialFiles]
+
+  while (queue.length) {
+    const file = queue.shift()
+    const source = fs.readFileSync(path.join(root, file), "utf8")
+    const specifiers = [...source.matchAll(/from\s+"([^"]+)"/g)].map(
+      (match) => match[1],
+    )
+
+    for (const specifier of specifiers) {
+      const dependency = resolveLocalImport(file, specifier)
+      if (!dependency || files.has(dependency)) continue
+      files.add(dependency)
+      queue.push(dependency)
+    }
+  }
+
+  return [...files]
+}
+
+function registryItemFromMeta(component) {
+  const dependencies = new Set()
+  const registryDependencies = new Set()
+  const files = expandLocalFiles(component.files)
+
+  for (const file of files) {
+    const source = fs.readFileSync(path.join(root, file), "utf8")
+    const parsed = parseImports(source)
+    parsed.dependencies.forEach((dependency) => dependencies.add(dependency))
+    parsed.registryDependencies.forEach((dependency) =>
+      registryDependencies.add(dependency),
+    )
+  }
+
+  return {
+    name: component.name,
+    type: component.level === "section" ? "registry:block" : "registry:component",
+    title: component.title,
+    description: component.description,
+    ...(dependencies.size
+      ? { dependencies: [...dependencies].sort() }
+      : {}),
+    ...(registryDependencies.size
+      ? { registryDependencies: [...registryDependencies].sort() }
+      : {}),
+    files: files.map((file) => ({
+      path: file,
+      type:
+        component.level === "section"
+          ? "registry:block"
+          : "registry:component",
+    })),
+  }
+}
+
 function extractCssVars(css, selector) {
   const block = css.match(new RegExp(`${selector}\\s*{([^}]+)}`))
   if (!block) return {}
@@ -125,6 +211,12 @@ for (const component of meta.components) {
     ...(registryDependencies.length ? { registryDependencies } : {}),
     files: [{ path: file, type: "registry:ui" }],
   })
+}
+
+for (const group of meta.catalog) {
+  for (const component of group.items) {
+    items.push(registryItemFromMeta(component))
+  }
 }
 
 const registry = {

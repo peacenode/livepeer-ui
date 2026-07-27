@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "compute-metrics",
+  "title": "Compute Metrics",
+  "description": "Network payout and active orchestrator metric cards.",
+  "registryDependencies": [
+    "http://localhost:3000/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/compute-metrics.tsx",
+      "content": "import {\n  Card, CardDescription, CardHeader, CardTitle,\n} from \"@/components/ui/card\"\n\nexport type ComputeMetric = { label: string; value: string; period?: string }\n\nexport function ComputeMetrics({ stats }: { stats: ComputeMetric[] }) {\n  return (\n    <div className=\"grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]\">\n      {stats.map((stat) => (\n        <Card key={stat.label} variant=\"metric\">\n          <CardHeader>\n            <CardDescription className=\"flex w-full items-baseline gap-1.5\">\n              <span>{stat.label}</span>\n              {stat.period && (\n                <span className=\"shrink-0 font-sans text-muted-foreground tabular-nums\">\n                  {stat.period}\n                </span>\n              )}\n            </CardDescription>\n            <CardTitle className=\"font-sans text-3xl leading-none font-medium tracking-tight tabular-nums\">\n              {stat.value}\n            </CardTitle>\n          </CardHeader>\n        </Card>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

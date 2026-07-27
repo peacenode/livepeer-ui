@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "waitlist-referral-link",
+  "title": "Referral Link",
+  "description": "Copyable referral URL with confirmation feedback.",
+  "dependencies": [
+    "lucide-react",
+    "sonner"
+  ],
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/waitlist-referral-link.tsx",
+      "content": "\"use client\"\n\nimport { useState } from \"react\"\nimport { Check, Copy } from \"lucide-react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\n\nexport function WaitlistReferralLink({ inviteUrl }: { inviteUrl: string }) {\n  const [copied, setCopied] = useState(false)\n\n  async function copyInvite() {\n    await navigator.clipboard?.writeText(`https://${inviteUrl}`)\n    setCopied(true)\n    toast.success(\"Invite link copied\")\n    window.setTimeout(() => setCopied(false), 1600)\n  }\n\n  return (\n    <div className=\"flex items-center gap-2 rounded-md border border-emerald-400/30 bg-white/[0.04] p-1.5 pl-4\">\n      <p className=\"min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground\">\n        {inviteUrl}\n      </p>\n      <Button\n        type=\"button\"\n        size=\"icon-sm\"\n        variant=\"ghost\"\n        aria-label=\"Copy referral link\"\n        onClick={copyInvite}\n        className=\"shrink-0 rounded-full\"\n      >\n        {copied ? <Check /> : <Copy />}\n      </Button>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

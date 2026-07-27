@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "billing-page-summary",
+  "title": "Billing Page Summary",
+  "description": "Current-period and payment-method summaries from the separate Billing page.",
+  "registryDependencies": [
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/billing-page-summary.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport {\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\n\nexport function BillingPageSummary() {\n  return (\n    <div className=\"grid gap-4 sm:grid-cols-2\">\n      <Card className=\"gap-2 rounded-sm\">\n        <CardHeader>\n          <CardDescription>Current period</CardDescription>\n          <CardTitle className=\"text-2xl font-medium tabular-nums\">\n            $2,148.90\n          </CardTitle>\n        </CardHeader>\n        <CardContent>\n          <p className=\"text-xs text-muted-foreground\">\n            July 1 – July 23 · next invoice August 1\n          </p>\n        </CardContent>\n      </Card>\n      <Card className=\"gap-2 rounded-sm\">\n        <CardHeader>\n          <CardDescription>Payment method</CardDescription>\n          <CardTitle className=\"text-2xl font-medium\">\n            Visa ···· 4242\n          </CardTitle>\n          <CardAction>\n            <Button variant=\"outline\" size=\"sm\">\n              Update\n            </Button>\n          </CardAction>\n        </CardHeader>\n        <CardContent>\n          <p className=\"text-xs text-muted-foreground\">Expires 08/2029</p>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -4,15 +4,18 @@
     { "name": "accordion", "title": "Accordion", "description": "A vertically stacked set of interactive headings that each reveal a section of content." },
     { "name": "alert", "title": "Alert", "description": "Displays a callout for user attention." },
     { "name": "alert-dialog", "title": "Alert Dialog", "description": "A modal dialog that interrupts the user with important content and expects a response." },
+    { "name": "attachment", "title": "Attachment", "description": "Displays an attached file with media, metadata, and actions." },
     { "name": "avatar", "title": "Avatar", "description": "An image element with a fallback for representing the user." },
     { "name": "badge", "title": "Badge", "description": "Displays a badge or a component that looks like a badge." },
     { "name": "breadcrumb", "title": "Breadcrumb", "description": "Displays the path to the current resource using a hierarchy of links." },
     { "name": "button", "title": "Button", "description": "Displays a button or a component that looks like a button." },
     { "name": "card", "title": "Card", "description": "Displays a card with header, content, and footer." },
     { "name": "checkbox", "title": "Checkbox", "description": "A control that allows the user to toggle between checked and not checked." },
+    { "name": "context-menu", "title": "Context Menu", "description": "Displays actions when the user opens the context menu on a target." },
     { "name": "dialog", "title": "Dialog", "description": "A window overlaid on either the primary window or another dialog window." },
     { "name": "dropdown-menu", "title": "Dropdown Menu", "description": "Displays a menu to the user, triggered by a button." },
     { "name": "input", "title": "Input", "description": "Displays a form input field or a component that looks like an input field." },
+    { "name": "input-group", "title": "Input Group", "description": "Groups an input with inline or block-level controls and adornments." },
     { "name": "kbd", "title": "Kbd", "description": "Displays keyboard input or shortcuts." },
     { "name": "label", "title": "Label", "description": "Renders an accessible label associated with controls." },
     { "name": "popover", "title": "Popover", "description": "Displays rich content in a portal, triggered by a button." },
@@ -32,5 +35,613 @@
     { "name": "toggle", "title": "Toggle", "description": "A two-state button that can be either on or off." },
     { "name": "toggle-group", "title": "Toggle Group", "description": "A set of two-state buttons that can be toggled on or off." },
     { "name": "tooltip", "title": "Tooltip", "description": "A popup that displays information related to an element on hover or focus." }
+  ],
+  "catalog": [
+    {
+      "title": "Waitlist",
+      "items": [
+        {
+          "name": "waitlist-signup-form",
+          "title": "Signup Form",
+          "description": "Email capture form with the emerald early-access action.",
+          "level": "component",
+          "uses": ["button", "input"],
+          "files": ["components/mockups/waitlist-signup-form.tsx"]
+        },
+        {
+          "name": "waitlist-status-card",
+          "title": "Status Card",
+          "description": "Shareable waitlist position and referral summary card.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/waitlist-status-card.tsx"]
+        },
+        {
+          "name": "waitlist-referral-link",
+          "title": "Referral Link",
+          "description": "Copyable referral URL with confirmation feedback.",
+          "level": "component",
+          "uses": ["button"],
+          "files": ["components/mockups/waitlist-referral-link.tsx"]
+        },
+        {
+          "name": "waitlist-leaderboard",
+          "title": "Leaderboard",
+          "description": "Ranked referral list with a highlighted current-user row.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/waitlist-leaderboard.tsx"]
+        },
+        {
+          "name": "waitlist-panel",
+          "title": "Waitlist Panel",
+          "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
+          "level": "section",
+          "uses": ["waitlist-signup-form", "waitlist-status-card", "waitlist-referral-link", "waitlist-leaderboard"],
+          "files": ["components/mockups/waitlist-panel.tsx"]
+        },
+        {
+          "name": "waitlist-background-hero",
+          "title": "Background Hero",
+          "description": "Particle-backed Livepeer Agent brand field used behind the waitlist panel.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/waitlist-background-hero.tsx"]
+        }
+      ]
+    },
+    {
+      "title": "Billing/API",
+      "items": [
+        {
+          "name": "livepeer-agent-page-frame",
+          "title": "Page Frame",
+          "description": "Page-level frame with a responsive heading, description, action slot, and optional bordered panel.",
+          "level": "section",
+          "uses": [],
+          "previewPath": "/mockups/livepeer-agent",
+          "files": ["components/mockups/platform-page.tsx"]
+        },
+        {
+          "name": "livepeer-agent-sign-in-card",
+          "title": "Sign In Card",
+          "description": "Standalone Livepeer Agent sign-in card with provider and email actions.",
+          "level": "component",
+          "uses": ["button", "input"],
+          "files": [
+            "components/mockups/livepeer-agent-sign-in-card.tsx",
+            "components/brand-social-icons.tsx"
+          ]
+        },
+        {
+          "name": "livepeer-agent-sidebar",
+          "title": "Sidebar",
+          "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+          "level": "component",
+          "uses": ["avatar", "dropdown-menu", "toggle-group"],
+          "previewPath": "/mockups/livepeer-agent",
+          "files": [
+            "components/mockups/platform-sidebar.tsx",
+            "components/mockups/project-menu.tsx",
+            "components/mockups/user-menu.tsx"
+          ]
+        },
+        {
+          "name": "user-menu",
+          "title": "User Menu",
+          "description": "Account, theme, settings, and sign-out menu used by the Billing/API sidebar.",
+          "level": "component",
+          "uses": ["avatar", "dropdown-menu", "toggle-group"],
+          "files": ["components/mockups/user-menu.tsx"]
+        },
+        {
+          "name": "livepeer-agent-auth-gate",
+          "title": "Authentication Gate",
+          "description": "Authentication overlay with the Billing/API sign-in card and contained preview support.",
+          "level": "section",
+          "uses": ["livepeer-agent-sign-in-card"],
+          "files": [
+            "components/mockups/platform-auth-gate.tsx",
+            "components/mockups/livepeer-agent-sign-in-card.tsx"
+          ]
+        },
+        {
+          "name": "api-key-actions",
+          "title": "API Key Creation Dialog",
+          "description": "Controlled API-key creation dialog with validation and responsive actions.",
+          "level": "component",
+          "uses": ["button", "dialog", "input", "label"],
+          "files": ["components/mockups/api-key-actions.tsx"]
+        },
+        {
+          "name": "delete-api-key-dialog",
+          "title": "Delete API Key Dialog",
+          "description": "Destructive API-key confirmation dialog with key metadata and warning state.",
+          "level": "component",
+          "uses": ["alert", "alert-dialog", "button"],
+          "files": ["components/mockups/delete-api-key-dialog.tsx"]
+        },
+        {
+          "name": "api-keys-section",
+          "title": "API Keys",
+          "description": "Searchable API-key management table with status and destructive actions.",
+          "level": "section",
+          "uses": ["badge", "delete-api-key-dialog", "input", "table"],
+          "files": ["components/mockups/api-keys-section.tsx"]
+        },
+        {
+          "name": "api-logs-section",
+          "title": "API Logs",
+          "description": "Search, error filtering, and request log table for Billing/API activity.",
+          "level": "section",
+          "uses": ["input", "label", "switch", "table"],
+          "files": ["components/mockups/api-logs-section.tsx"]
+        },
+        {
+          "name": "credit-balance",
+          "title": "Credit Balance",
+          "description": "Current plan allocation, remaining credits, and refresh date.",
+          "level": "component",
+          "uses": ["badge"],
+          "files": ["components/mockups/credit-balance.tsx"]
+        },
+        {
+          "name": "daily-usage-table",
+          "title": "Daily Usage Table",
+          "description": "Daily workflow, compute, and credit consumption table.",
+          "level": "component",
+          "uses": ["table"],
+          "files": ["components/mockups/daily-usage-table.tsx"]
+        },
+        {
+          "name": "resource-usage-table",
+          "title": "Resource Usage Table",
+          "description": "Resource-level workflow and compute usage breakdown.",
+          "level": "component",
+          "uses": ["table"],
+          "files": ["components/mockups/resource-usage-table.tsx"]
+        },
+        {
+          "name": "usage-workspace-section",
+          "title": "Usage Workspace",
+          "description": "Complete overview and activity workspace composed from reusable usage components.",
+          "level": "section",
+          "uses": ["tabs", "credit-balance", "livepeer-agent-promo-cards", "usage-metrics", "daily-usage-table", "resource-usage-table"],
+          "files": ["components/mockups/usage-workspace.tsx"]
+        },
+        {
+          "name": "billing-page-summary",
+          "title": "Billing Page Summary",
+          "description": "Current-period and payment-method summaries from the separate Billing page.",
+          "level": "component",
+          "uses": ["button", "card"],
+          "files": ["components/mockups/billing-page-summary.tsx"]
+        },
+        {
+          "name": "invoice-table",
+          "title": "Invoice Table",
+          "description": "Reusable invoice history with status and download actions.",
+          "level": "component",
+          "uses": ["badge", "button", "table"],
+          "files": ["components/mockups/invoice-table.tsx"]
+        },
+        {
+          "name": "billing-workspace-section",
+          "title": "Billing Workspace",
+          "description": "Complete billing workspace composed from summary cards and invoice history.",
+          "level": "section",
+          "uses": ["billing-page-summary", "invoice-table"],
+          "files": ["components/mockups/billing-workspace.tsx"]
+        },
+        {
+          "name": "usage-metrics",
+          "title": "Usage Metrics",
+          "description": "Workflow-run and compute-time metric cards from the Usage activity view.",
+          "level": "component",
+          "uses": ["card"],
+          "files": ["components/mockups/usage-metrics.tsx"]
+        },
+        {
+          "name": "livepeer-agent-promo-cards",
+          "title": "Promo Cards",
+          "description": "Pro and Max credit subscription cards with the recommended plan treatment.",
+          "level": "component",
+          "uses": ["badge", "button"],
+          "files": ["components/mockups/livepeer-agent-promo-cards.tsx"]
+        },
+        {
+          "name": "livepeer-agent-onboarding-section",
+          "title": "Livepeer Agent Onboarding",
+          "description": "Complete Livepeer Agent onboarding section with progress, setup steps, and links into billing and installation.",
+          "level": "section",
+          "uses": ["card"],
+          "previewPath": "/mockups/livepeer-agent",
+          "files": ["components/mockups/livepeer-agent-onboarding-section.tsx"]
+        },
+        {
+          "name": "orchestrator-table-section",
+          "title": "Orchestrator Table",
+          "description": "Installable orchestrator results section with literal addresses, status, stake, and pricing columns.",
+          "level": "section",
+          "uses": ["badge", "button", "progress", "table"],
+          "previewPath": "/mockups/livepeer-agent/compute",
+          "files": ["components/mockups/orchestrator-table.tsx"]
+        },
+        {
+          "name": "compute-metrics",
+          "title": "Compute Metrics",
+          "description": "Network payout and active orchestrator metric cards.",
+          "level": "component",
+          "uses": ["card"],
+          "files": ["components/mockups/compute-metrics.tsx"]
+        },
+        {
+          "name": "compute-workspace-section",
+          "title": "Compute Workspace",
+          "description": "Compute overview composed from network metrics and orchestrator results.",
+          "level": "section",
+          "uses": ["compute-metrics", "orchestrator-table-section"],
+          "files": ["components/mockups/compute-workspace.tsx"]
+        }
+      ]
+    },
+    {
+      "title": "Livepeer.org",
+      "items": [
+        {
+          "name": "copy-button",
+          "title": "Copy Button",
+          "description": "Clipboard action with copied confirmation used across Livepeer.org installation interfaces.",
+          "level": "component",
+          "uses": ["button"],
+          "files": ["components/copy-button.tsx"]
+        },
+        {
+          "name": "livepeer-org-menu",
+          "title": "Dropdown Menu",
+          "description": "Full-width Livepeer.org navigation dropdown with primary links, resource groups, social links, and active-route state.",
+          "level": "component",
+          "uses": ["button", "sheet"],
+          "files": [
+            "components/mockups/livepeer-org-menu.tsx",
+            "components/brand-social-icons.tsx"
+          ]
+        },
+        {
+          "name": "livepeer-org-header",
+          "title": "Header",
+          "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
+          "level": "component",
+          "uses": ["livepeer-org-menu"],
+          "files": [
+            "components/mockups/livepeer-org-header.tsx",
+            "components/mockups/livepeer-org-menu.tsx"
+          ]
+        },
+        {
+          "name": "livepeer-org-footer",
+          "title": "Footer",
+          "description": "Livepeer.org footer with network, resource, community, and social navigation.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/livepeer-org-footer.tsx"]
+        },
+        {
+          "name": "agent-compatibility",
+          "title": "Agent Compatibility",
+          "description": "Responsive compatibility strip for supported AI coding agents.",
+          "level": "component",
+          "uses": [],
+          "previewPath": "/mockups/livepeer-org/agent",
+          "files": ["components/mockups/agent-compatibility.tsx"]
+        },
+        {
+          "name": "livepeer-agent-hero",
+          "title": "Livepeer Agent Hero",
+          "description": "Standalone Livepeer Agent installation hero with animated field, connector URL, and account actions.",
+          "level": "section",
+          "uses": ["copy-button"],
+          "files": [
+            "components/mockups/livepeer-agent-hero.tsx",
+            "components/mockups/livepeer-agent-delta-stream.tsx"
+          ]
+        },
+        {
+          "name": "agent-access-section",
+          "title": "Agent Access",
+          "description": "Two-up agent compatibility and API-key access section from the Livepeer Agent page.",
+          "level": "section",
+          "uses": ["agent-compatibility", "button"],
+          "files": ["components/mockups/agent-access-section.tsx"]
+        },
+        {
+          "name": "agent-capabilities-section",
+          "title": "Agent Capabilities",
+          "description": "Capability explanation, generated badge cloud, and library action.",
+          "level": "section",
+          "uses": ["badge", "button"],
+          "files": ["components/mockups/agent-capabilities-section.tsx"]
+        },
+        {
+          "name": "playbooks-cta-section",
+          "title": "Playbooks CTA",
+          "description": "Responsive image-backed call to action for ready-to-run playbooks.",
+          "level": "section",
+          "uses": ["button"],
+          "files": ["components/mockups/playbooks-cta-section.tsx"]
+        },
+        {
+          "name": "playbook-library-header",
+          "title": "Playbook Library Header",
+          "description": "Centered heading and introduction for the playbook library.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/playbook-library-header.tsx"]
+        },
+        {
+          "name": "playbook-card",
+          "title": "Playbook Card",
+          "description": "Responsive image and title card for a Livepeer Agent playbook.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/playbook-card.tsx"]
+        },
+        {
+          "name": "playbook-catalog",
+          "title": "Playbook Catalog",
+          "description": "Searchable responsive playbook card catalog with empty state.",
+          "level": "section",
+          "uses": ["input", "playbook-card"],
+          "files": [
+            "app/mockups/playbooks/source-catalog.tsx",
+            "components/mockups/playbook-card.tsx"
+          ]
+        },
+        {
+          "name": "install-agent-footer",
+          "title": "Install Agent Footer",
+          "description": "Animated installation footer with configurable title and copy action.",
+          "level": "section",
+          "uses": ["copy-button"],
+          "files": ["components/mockups/install-agent-footer.tsx"]
+        },
+        {
+          "name": "submit-ecosystem-dialog",
+          "title": "Submit Ecosystem Dialog",
+          "description": "Submission workflow dialog with repository guidance and copy action.",
+          "level": "component",
+          "uses": ["button", "copy-button", "dialog"],
+          "files": ["app/mockups/playbooks/ecosystem/submit-ecosystem-dialog.tsx"]
+        },
+        {
+          "name": "ecosystem-card",
+          "title": "Ecosystem Card",
+          "description": "Ecosystem application card with image, tags, description, and external action.",
+          "level": "component",
+          "uses": ["badge"],
+          "files": ["components/mockups/ecosystem-card.tsx"]
+        },
+        {
+          "name": "ecosystem-catalog",
+          "title": "Ecosystem Catalog",
+          "description": "Searchable and filterable ecosystem catalog composed from reusable cards.",
+          "level": "section",
+          "uses": ["button", "dropdown-menu", "ecosystem-card", "input"],
+          "files": ["app/mockups/playbooks/ecosystem/ecosystem-catalog.tsx"]
+        },
+        {
+          "name": "network-hero-section",
+          "title": "Network Hero",
+          "description": "Livepeer.org network hero with the particle field and primary account actions.",
+          "level": "section",
+          "uses": ["button"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
+        },
+        {
+          "name": "livepeer-agent-feature-section",
+          "title": "Livepeer Agent Feature",
+          "description": "Livepeer Agent product feature section with install actions and agent compatibility.",
+          "level": "section",
+          "uses": ["agent-compatibility", "button"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
+        },
+        {
+          "name": "orchestrator-cta-section",
+          "title": "Orchestrator CTA",
+          "description": "Dark orchestrator call-to-action section with an inverted particle field.",
+          "level": "section",
+          "uses": ["button"],
+          "files": ["components/mockups/livepeer-org-landing-sections.tsx"]
+        }
+      ]
+    },
+    {
+      "title": "Client Archived",
+      "items": [
+        {
+          "name": "client-application-sidebar",
+          "title": "Application Sidebar",
+          "description": "Expandable desktop navigation rail for the Client application.",
+          "level": "component",
+          "uses": ["avatar"],
+          "files": ["components/mockups/client-application-sidebar.tsx"]
+        },
+        {
+          "name": "client-mobile-bottom-navigation",
+          "title": "Mobile Bottom Navigation",
+          "description": "Five-tab mobile navigation bar shared across Client routes.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/client-mobile-bottom-navigation.tsx"]
+        },
+        {
+          "name": "client-application-shell",
+          "title": "Application Shell",
+          "description": "Responsive Client shell composed from desktop and mobile navigation.",
+          "level": "section",
+          "uses": ["client-application-sidebar", "client-mobile-bottom-navigation"],
+          "files": [
+            "components/mockups/client-application-shell.tsx"
+          ]
+        },
+        {
+          "name": "client-install-command",
+          "title": "Install Command",
+          "description": "Copyable Livepeer Agent CLI installation command.",
+          "level": "component",
+          "uses": ["button"],
+          "files": ["components/mockups/client-install-command.tsx"]
+        },
+        {
+          "name": "protocol-header-section",
+          "title": "Protocol Header",
+          "description": "Introductory statement for the Livepeer Agent protocol architecture.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/protocol-header-section.tsx"]
+        },
+        {
+          "name": "protocol-flow-section",
+          "title": "Protocol Flow",
+          "description": "Three connected layers describing agent, workflow, and compute responsibilities.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/protocol-flow-section.tsx"]
+        },
+        {
+          "name": "protocol-request-flow-section",
+          "title": "Protocol Request Flow",
+          "description": "Four-step sequence showing how a Livepeer Agent request moves.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/protocol-request-flow-section.tsx"]
+        },
+        {
+          "name": "protocol-properties-section",
+          "title": "Protocol Properties",
+          "description": "Two-up explanation of agent access and network payment behavior.",
+          "level": "section",
+          "uses": [],
+          "files": ["components/mockups/protocol-properties-section.tsx"]
+        },
+        {
+          "name": "client-empty-state",
+          "title": "Empty State",
+          "description": "Configurable empty state shared by Client media and project views.",
+          "level": "component",
+          "uses": [],
+          "files": ["components/mockups/client-empty-state.tsx"]
+        },
+        {
+          "name": "clips-header",
+          "title": "Clips Header",
+          "description": "Clips library heading and upload action.",
+          "level": "component",
+          "uses": ["button"],
+          "files": ["components/mockups/clips-header.tsx"]
+        },
+        {
+          "name": "clip-card",
+          "title": "Clip Card",
+          "description": "Playable clip row with duration, metadata, and media actions.",
+          "level": "component",
+          "uses": ["media-context-menu"],
+          "files": [
+            "components/mockups/clip-card.tsx",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "clips-library",
+          "title": "Clips Library",
+          "description": "Focused playable clip collection with a reusable empty state.",
+          "level": "section",
+          "uses": ["clip-card", "client-empty-state"],
+          "files": ["components/mockups/clips-library.tsx"]
+        },
+        {
+          "name": "media-context-menu",
+          "title": "Media Context Menu",
+          "description": "Reusable media context menu for opening, downloading, duplicating, rerolling, and removing media.",
+          "level": "component",
+          "uses": ["context-menu"],
+          "previewPath": "/mockups/client",
+          "files": ["app/mockups/videobuddy/media-context-menu.tsx"]
+        },
+        {
+          "name": "project-picker",
+          "title": "Project Picker",
+          "description": "Compact project selector with a project creation action.",
+          "level": "component",
+          "uses": ["button", "dropdown-menu"],
+          "previewPath": "/mockups/client/storyboards",
+          "files": ["app/mockups/videobuddy/project-picker.tsx"]
+        },
+        {
+          "name": "generation-workspace-section",
+          "title": "Generation Workspace",
+          "description": "Generation composer and searchable media history section.",
+          "level": "section",
+          "uses": ["attachment", "badge", "button", "dropdown-menu", "input-group", "media-context-menu"],
+          "files": [
+            "app/mockups/videobuddy/agent-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "storyboards-workspace-section",
+          "title": "Storyboards Workspace",
+          "description": "Storyboard collections, frame actions, upload, and project assignment section.",
+          "level": "section",
+          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "files": [
+            "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "characters-workspace-section",
+          "title": "Characters Workspace",
+          "description": "Character reference collections, detail, upload, and project assignment section.",
+          "level": "section",
+          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "files": [
+            "app/mockups/videobuddy/characters/characters-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx",
+            "app/mockups/videobuddy/project-picker.tsx"
+          ]
+        },
+        {
+          "name": "clips-library-section",
+          "title": "Clips Library",
+          "description": "Clips library with upload action, playable media cards, context actions, and empty state.",
+          "level": "section",
+          "uses": ["button", "media-context-menu"],
+          "files": [
+            "app/mockups/videobuddy/footage/footage-workspace.tsx",
+            "app/mockups/videobuddy/media-assets.ts",
+            "app/mockups/videobuddy/media-context-menu.tsx"
+          ]
+        },
+        {
+          "name": "projects-workspace-section",
+          "title": "Projects Workspace",
+          "description": "Project index and detail section with storyboards, characters, renders, finals, and creation dialogs.",
+          "level": "section",
+          "uses": ["badge", "button", "dialog", "dropdown-menu", "input", "tabs"],
+          "files": [
+            "app/mockups/videobuddy/projects/projects-workspace.tsx",
+            "app/mockups/videobuddy/image-grid-utils.ts",
+            "app/mockups/videobuddy/media-assets.ts"
+          ]
+        }
+      ]
+    }
   ]
 }
