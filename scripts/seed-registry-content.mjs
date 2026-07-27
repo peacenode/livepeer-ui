@@ -51,6 +51,17 @@ const documents = [
     heading: "Usage",
     description:
       "Review credit availability and activity across your Agent Console projects.",
+    usageContent: {
+      overviewTabLabel: "Overview",
+      activityTabLabel: "Activity",
+      upgradeTitle: "Get more credits",
+      upgradeDescription:
+        "Upgrade for a larger credit allocation that refreshes every month.",
+      dailyUsageTitle: "Daily usage",
+      dailyUsageEmptyMessage: "No daily usage recorded yet.",
+      resourceUsageTitle: "Usage by resource",
+      resourceUsageEmptyMessage: "No resource usage recorded yet.",
+    },
     ctas: [
       cta(
         "Get more credits",
@@ -77,5 +88,13 @@ const documents = [
 for (const document of documents) {
   await client.createIfNotExists(document)
 }
+
+const usageDocument = documents.find(
+  (document) => document._id === "agentConsoleEditorialPage-usage"
+)
+await client
+  .patch(usageDocument._id)
+  .setIfMissing({ usageContent: usageDocument.usageContent })
+  .commit()
 
 console.log(`Registry content ready with ${documents.length} documents.`)

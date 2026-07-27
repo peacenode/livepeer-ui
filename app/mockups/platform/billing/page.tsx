@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
 import {
-  demoBillingContent,
   demoBillingInvoices,
   demoBillingPeriod,
   demoInvoiceLabels,
@@ -9,14 +8,19 @@ import {
 } from "@/components/demos/fixtures/billing"
 import { BillingWorkspace } from "@/components/mockups/billing-workspace"
 import { PlatformPage } from "@/components/mockups/platform-page"
+import { notFound } from "next/navigation"
+import { getAgentConsoleEditorialPage } from "@/sanity/lib/registry-content"
 
 export const metadata: Metadata = { title: "Billing" }
 
-export default function MockupBillingPage() {
+export default async function MockupBillingPage() {
+  const editorial = await getAgentConsoleEditorialPage("billing")
+  if (!editorial) notFound()
+
   return (
-    <PlatformPage title="Billing">
+    <PlatformPage title={editorial.heading} showHeader={false}>
       <BillingWorkspace
-        content={demoBillingContent}
+        content={editorial}
         period={demoBillingPeriod}
         paymentMethod={demoPaymentMethod}
         invoices={demoBillingInvoices}

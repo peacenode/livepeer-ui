@@ -27,6 +27,16 @@ export interface AgentConsoleEditorialPage {
   heading: string
   description: string
   ctas: RegistryCta[]
+  usageContent: {
+    overviewTabLabel: string
+    activityTabLabel: string
+    upgradeTitle: string
+    upgradeDescription: string
+    dailyUsageTitle: string
+    dailyUsageEmptyMessage: string
+    resourceUsageTitle: string
+    resourceUsageEmptyMessage: string
+  } | null
 }
 
 const mockupRoundupQuery = defineQuery(`
@@ -35,6 +45,16 @@ const mockupRoundupQuery = defineQuery(`
     "slug": slug.current,
     title,
     description,
+    usageContent {
+      overviewTabLabel,
+      activityTabLabel,
+      upgradeTitle,
+      upgradeDescription,
+      dailyUsageTitle,
+      dailyUsageEmptyMessage,
+      resourceUsageTitle,
+      resourceUsageEmptyMessage
+    },
     previewHref
   }
 `)

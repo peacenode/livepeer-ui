@@ -1041,8 +1041,7 @@
       "title": "Usage Workspace",
       "description": "Complete overview and activity workspace composed from reusable usage components.",
       "dependencies": [
-        "lucide-react",
-        "next"
+        "lucide-react"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/badge.json",
@@ -1158,8 +1157,7 @@
       "title": "Promo Cards",
       "description": "Pro and Max credit subscription cards with the recommended plan treatment.",
       "dependencies": [
-        "lucide-react",
-        "next"
+        "lucide-react"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/badge.json",

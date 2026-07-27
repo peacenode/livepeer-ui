@@ -120,6 +120,35 @@ export const agentConsoleEditorialPageType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "usageContent",
+      title: "Usage workspace copy",
+      type: "object",
+      hidden: ({ parent }) => parent?.page !== "usage",
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          (context.parent as { page?: string })?.page === "usage" && !value
+            ? "Usage workspace copy is required"
+            : true
+        ),
+      fields: [
+        ["overviewTabLabel", "Overview tab label"],
+        ["activityTabLabel", "Activity tab label"],
+        ["upgradeTitle", "Upgrade heading"],
+        ["upgradeDescription", "Upgrade description"],
+        ["dailyUsageTitle", "Daily usage heading"],
+        ["dailyUsageEmptyMessage", "Daily usage empty message"],
+        ["resourceUsageTitle", "Resource usage heading"],
+        ["resourceUsageEmptyMessage", "Resource usage empty message"],
+      ].map(([name, title]) =>
+        defineField({
+          name,
+          title,
+          type: name.endsWith("Description") ? "text" : "string",
+          validation: (rule) => rule.required(),
+        })
+      ),
+    }),
+    defineField({
       name: "ctas",
       title: "Calls to action",
       type: "array",

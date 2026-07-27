@@ -31,11 +31,11 @@ export function DocsNav({
       ],
     },
     {
-      title: "Pages",
+      title: "Mockups",
       items: [
-        { title: "Agent Waitlist", href: "/docs/products/agent-waitlist" },
-        { title: "Agent Console", href: "/docs/products/agent-console" },
-        { title: "Livepeer.org", href: "/docs/products/livepeer-org" },
+        { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
+        { title: "Agent Console", href: "/docs/mockups/agent-console" },
+        { title: "Livepeer.org", href: "/docs/mockups/livepeer-org" },
       ],
     },
     {
