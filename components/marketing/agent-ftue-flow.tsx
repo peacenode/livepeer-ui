@@ -95,14 +95,14 @@ const phases: Phase[] = [
         questions: ["How quickly does an approved email reach the auth gate?"],
       },
       {
-        title: "Generate with the Agent",
+        title: "Connection successful & prompt submitted",
         description:
-          "After OAuth, the user returns to the Agent and asks it to generate.",
-        action: "Enter a generation prompt",
+          "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
+        action: "Submit generation prompt",
         mockup: "agent",
         needs: [
           "Return the user to the same Agent session",
-          "Confirm that the MCP is connected",
+          "Confirm that the MCP connection succeeded",
           "Give progress while the generation runs",
         ],
         questions: ["Does OAuth preserve the active Agent session?"],
@@ -177,14 +177,14 @@ const phases: Phase[] = [
         questions: ["Which clients ship in the first Console release?"],
       },
       {
-        title: "Generate with the Agent",
+        title: "Connection successful & prompt submitted",
         description:
-          "After OAuth, the user returns to the Agent and asks it to generate.",
-        action: "Enter a generation prompt",
+          "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
+        action: "Submit generation prompt",
         mockup: "agent",
         needs: [
           "Return the user to the same Agent session",
-          "Confirm that the MCP is connected",
+          "Confirm that the MCP connection succeeded",
           "Show progress while the generation runs",
         ],
         questions: ["Does the Console record the generation automatically?"],
