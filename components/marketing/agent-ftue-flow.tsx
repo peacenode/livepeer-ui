@@ -476,7 +476,7 @@ export function AgentFtueFlow() {
                 User flow
               </h3>
 
-              <div className="mt-8 space-y-16">
+              <div className="mt-8 space-y-10">
                 {userFlowScreens.map((screen, index) => (
                   <section
                     key={screen.title}
