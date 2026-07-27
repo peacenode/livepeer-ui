@@ -68,7 +68,7 @@ export default async function ProductComponentsPage({
         href={product.previewHref}
         target="_blank"
         aria-label={`View the ${product.title} mockup`}
-        className="mx-auto block max-w-2xl rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="mx-auto block max-w-lg rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
           <Image
@@ -76,8 +76,8 @@ export default async function ProductComponentsPage({
             alt=""
             fill
             priority
-            sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
-            className="scale-[0.72] object-cover"
+            sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
+            className="scale-90 object-cover"
           />
           <div
             className="pointer-events-none absolute inset-0"
