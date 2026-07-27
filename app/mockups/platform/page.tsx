@@ -66,7 +66,7 @@ export default async function MockupHomePage() {
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
               <Image
-                src="/playbooks/20260725-031450/runner-background.jpg"
+                src="/generated/20260726-2326-console-home-playbooks/playbooks.png"
                 alt=""
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
