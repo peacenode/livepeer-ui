@@ -79,7 +79,7 @@ const phases: Phase[] = [
         needs: [
           "Send the email when a waitlisted user is approved",
           "Include the MCP setup instructions",
-          "Give the user one clear next action",
+          "Give the user a single install prompt",
         ],
         questions: ["What triggers the access email?"],
       },
