@@ -144,6 +144,7 @@ const phases: Phase[] = [
     timing: "livepeer.org",
     summary:
       "A user visits livepeer.org/agent, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
+    primaryCta: "Install the Agent",
     screens: [
       {
         title: "livepeer.org/agent",
