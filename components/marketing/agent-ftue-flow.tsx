@@ -9,6 +9,7 @@ import {
   LockKeyhole,
   Mail,
   Monitor,
+  TriangleAlert,
   UserRoundCheck,
 } from "lucide-react"
 
@@ -345,8 +346,9 @@ export function AgentFtueFlow() {
               {phase.summary}
             </p>
             {phase.callout && (
-              <div className="mt-4 max-w-3xl rounded-md border border-foreground/20 bg-muted px-4 py-3 text-sm font-medium">
-                {phase.callout}
+              <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
+                <TriangleAlert className="mt-0.5 size-4 shrink-0" />
+                <span>{phase.callout}</span>
               </div>
             )}
           </div>
