@@ -7,7 +7,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/context-menu.json"
+    "https://livepeer.peaceno.de/r/context-menu.json"
   ],
   "files": [
     {

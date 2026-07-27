@@ -4,7 +4,7 @@
   "title": "Credit Balance",
   "description": "Current plan allocation, remaining credits, and refresh date.",
   "registryDependencies": [
-    "http://localhost:3000/r/badge.json"
+    "https://livepeer.peaceno.de/r/badge.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Compute Metrics",
   "description": "Network payout and active orchestrator metric cards.",
   "registryDependencies": [
-    "http://localhost:3000/r/card.json"
+    "https://livepeer.peaceno.de/r/card.json"
   ],
   "files": [
     {

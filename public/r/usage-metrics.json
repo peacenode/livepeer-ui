@@ -4,7 +4,7 @@
   "title": "Usage Metrics",
   "description": "Workflow-run and compute-time metric cards from the Usage activity view.",
   "registryDependencies": [
-    "http://localhost:3000/r/card.json"
+    "https://livepeer.peaceno.de/r/card.json"
   ],
   "files": [
     {

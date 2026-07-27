@@ -8,7 +8,7 @@
     "next"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/badge.json"
+    "https://livepeer.peaceno.de/r/badge.json"
   ],
   "files": [
     {

@@ -4,8 +4,8 @@
   "title": "Billing Page Summary",
   "description": "Current-period and payment-method summaries from the separate Billing page.",
   "registryDependencies": [
-    "http://localhost:3000/r/button.json",
-    "http://localhost:3000/r/card.json"
+    "https://livepeer.peaceno.de/r/button.json",
+    "https://livepeer.peaceno.de/r/card.json"
   ],
   "files": [
     {

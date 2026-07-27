@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "livepeer-ui",
-  "homepage": "http://localhost:3000",
+  "homepage": "https://livepeer.peaceno.de",
   "items": [
     {
       "name": "theme",
@@ -170,7 +170,7 @@
         "@base-ui/react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -189,7 +189,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -314,7 +314,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -363,9 +363,9 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json",
-        "http://localhost:3000/r/textarea.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/textarea.json"
       ],
       "files": [
         {
@@ -484,7 +484,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -633,7 +633,7 @@
         "class-variance-authority"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/toggle.json"
+        "https://livepeer.peaceno.de/r/toggle.json"
       ],
       "files": [
         {
@@ -666,8 +666,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -702,7 +702,7 @@
         "sonner"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -733,8 +733,8 @@
         "sonner"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -809,8 +809,8 @@
       "title": "Sign In Card",
       "description": "Standalone Livepeer Agent sign-in card with provider and email actions.",
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -842,9 +842,9 @@
         "next-themes"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/avatar.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/toggle-group.json"
+        "https://livepeer.peaceno.de/r/avatar.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/toggle-group.json"
       ],
       "files": [
         {
@@ -880,9 +880,9 @@
         "next-themes"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/avatar.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/toggle-group.json"
+        "https://livepeer.peaceno.de/r/avatar.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/toggle-group.json"
       ],
       "files": [
         {
@@ -901,8 +901,8 @@
       "title": "Authentication Gate",
       "description": "Authentication overlay with the Agent Console sign-in card and contained preview support.",
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -933,10 +933,10 @@
       "title": "API Key Creation Dialog",
       "description": "Controlled API-key creation dialog with validation and responsive actions.",
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dialog.json",
-        "http://localhost:3000/r/input.json",
-        "http://localhost:3000/r/label.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/label.json"
       ],
       "files": [
         {
@@ -954,9 +954,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/alert-dialog.json",
-        "http://localhost:3000/r/alert.json",
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/alert-dialog.json",
+        "https://livepeer.peaceno.de/r/alert.json",
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -974,12 +974,12 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/alert-dialog.json",
-        "http://localhost:3000/r/alert.json",
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/input.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/alert-dialog.json",
+        "https://livepeer.peaceno.de/r/alert.json",
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -998,10 +998,10 @@
       "title": "API Logs",
       "description": "Search, error filtering, and request log table for Agent Console activity.",
       "registryDependencies": [
-        "http://localhost:3000/r/input.json",
-        "http://localhost:3000/r/label.json",
-        "http://localhost:3000/r/switch.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/label.json",
+        "https://livepeer.peaceno.de/r/switch.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1016,7 +1016,7 @@
       "title": "Credit Balance",
       "description": "Current plan allocation, remaining credits, and refresh date.",
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json"
+        "https://livepeer.peaceno.de/r/badge.json"
       ],
       "files": [
         {
@@ -1031,7 +1031,7 @@
       "title": "Daily Usage Table",
       "description": "Daily workflow, compute, and credit consumption table.",
       "registryDependencies": [
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1046,7 +1046,7 @@
       "title": "Resource Usage Table",
       "description": "Resource-level workflow and compute usage breakdown.",
       "registryDependencies": [
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1064,11 +1064,11 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/card.json",
-        "http://localhost:3000/r/table.json",
-        "http://localhost:3000/r/tabs.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/card.json",
+        "https://livepeer.peaceno.de/r/table.json",
+        "https://livepeer.peaceno.de/r/tabs.json"
       ],
       "files": [
         {
@@ -1103,8 +1103,8 @@
       "title": "Billing Page Summary",
       "description": "Current-period and payment-method summaries from the separate Billing page.",
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/card.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/card.json"
       ],
       "files": [
         {
@@ -1119,9 +1119,9 @@
       "title": "Invoice Table",
       "description": "Reusable invoice history with status and download actions.",
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1136,10 +1136,10 @@
       "title": "Billing Workspace",
       "description": "Complete billing workspace composed from summary cards and invoice history.",
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/card.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/card.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1162,7 +1162,7 @@
       "title": "Usage Metrics",
       "description": "Workflow-run and compute-time metric cards from the Usage activity view.",
       "registryDependencies": [
-        "http://localhost:3000/r/card.json"
+        "https://livepeer.peaceno.de/r/card.json"
       ],
       "files": [
         {
@@ -1180,8 +1180,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1200,7 +1200,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/card.json"
+        "https://livepeer.peaceno.de/r/card.json"
       ],
       "files": [
         {
@@ -1223,10 +1223,10 @@
       "title": "Orchestrator Table",
       "description": "Installable orchestrator results section with literal addresses, status, stake, and pricing columns.",
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/progress.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/progress.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1245,7 +1245,7 @@
       "title": "Compute Metrics",
       "description": "Network payout and active orchestrator metric cards.",
       "registryDependencies": [
-        "http://localhost:3000/r/card.json"
+        "https://livepeer.peaceno.de/r/card.json"
       ],
       "files": [
         {
@@ -1260,11 +1260,11 @@
       "title": "Compute Workspace",
       "description": "Compute overview composed from network metrics and orchestrator results.",
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/card.json",
-        "http://localhost:3000/r/progress.json",
-        "http://localhost:3000/r/table.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/card.json",
+        "https://livepeer.peaceno.de/r/progress.json",
+        "https://livepeer.peaceno.de/r/table.json"
       ],
       "files": [
         {
@@ -1294,7 +1294,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1313,8 +1313,8 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/sheet.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/sheet.json"
       ],
       "files": [
         {
@@ -1345,8 +1345,8 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/sheet.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/sheet.json"
       ],
       "files": [
         {
@@ -1423,7 +1423,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1458,7 +1458,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1480,8 +1480,8 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1500,7 +1500,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1546,7 +1546,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -1572,7 +1572,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1606,8 +1606,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dialog.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dialog.json"
       ],
       "files": [
         {
@@ -1630,7 +1630,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json"
+        "https://livepeer.peaceno.de/r/badge.json"
       ],
       "files": [
         {
@@ -1649,10 +1649,10 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -1675,7 +1675,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1714,7 +1714,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1753,7 +1753,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1792,7 +1792,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/avatar.json"
+        "https://livepeer.peaceno.de/r/avatar.json"
       ],
       "files": [
         {
@@ -1843,7 +1843,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/avatar.json"
+        "https://livepeer.peaceno.de/r/avatar.json"
       ],
       "files": [
         {
@@ -1877,7 +1877,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1965,7 +1965,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1984,7 +1984,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/context-menu.json"
+        "https://livepeer.peaceno.de/r/context-menu.json"
       ],
       "files": [
         {
@@ -2011,7 +2011,7 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/context-menu.json"
+        "https://livepeer.peaceno.de/r/context-menu.json"
       ],
       "files": [
         {
@@ -2045,7 +2045,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/context-menu.json"
+        "https://livepeer.peaceno.de/r/context-menu.json"
       ],
       "files": [
         {
@@ -2063,8 +2063,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dropdown-menu.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json"
       ],
       "files": [
         {
@@ -2083,13 +2083,13 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/attachment.json",
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/context-menu.json",
-        "http://localhost:3000/r/dialog.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/input-group.json"
+        "https://livepeer.peaceno.de/r/attachment.json",
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/context-menu.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/input-group.json"
       ],
       "files": [
         {
@@ -2116,11 +2116,11 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/context-menu.json",
-        "http://localhost:3000/r/dialog.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/context-menu.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -2159,11 +2159,11 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/context-menu.json",
-        "http://localhost:3000/r/dialog.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/input.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/context-menu.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/input.json"
       ],
       "files": [
         {
@@ -2202,8 +2202,8 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/context-menu.json"
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/context-menu.json"
       ],
       "files": [
         {
@@ -2258,12 +2258,12 @@
         "next"
       ],
       "registryDependencies": [
-        "http://localhost:3000/r/badge.json",
-        "http://localhost:3000/r/button.json",
-        "http://localhost:3000/r/dialog.json",
-        "http://localhost:3000/r/dropdown-menu.json",
-        "http://localhost:3000/r/input.json",
-        "http://localhost:3000/r/tabs.json"
+        "https://livepeer.peaceno.de/r/badge.json",
+        "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/tabs.json"
       ],
       "files": [
         {
