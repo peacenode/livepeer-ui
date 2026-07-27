@@ -4,104 +4,133 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Favorit Pro",
   description:
-    "The brand sans — sets all interface, product, and marketing text.",
+    "The Livepeer display face — used for page titles, section headings, and expressive brand moments.",
 }
 
-const ALPHABET = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789"
-
-const WEIGHTS = [
-  { label: "Light", value: 300, className: "font-light" },
-  { label: "Regular", value: 400, className: "font-normal" },
-  { label: "Book", value: 450, className: "font-[450]" },
-  { label: "Medium", value: 500, className: "font-medium" },
-  { label: "Bold", value: 700, className: "font-bold" },
-]
-
-const SIZES = [
-  { label: "xs", px: "12px", className: "text-xs" },
-  { label: "sm", px: "14px", className: "text-sm" },
-  { label: "base", px: "16px", className: "text-base" },
-  { label: "lg", px: "18px", className: "text-lg" },
-  { label: "xl", px: "20px", className: "text-xl" },
-  { label: "2xl", px: "24px", className: "text-2xl" },
-  { label: "3xl", px: "30px", className: "text-3xl" },
-  { label: "4xl", px: "36px", className: "text-4xl" },
-  { label: "5xl", px: "48px", className: "text-5xl" },
-  { label: "6xl", px: "60px", className: "text-6xl" },
-  { label: "7xl", px: "72px", className: "text-7xl" },
-  { label: "8xl", px: "96px", className: "text-8xl" },
-  { label: "9xl", px: "128px", className: "text-9xl" },
+const roles = [
+  {
+    token: "font-display",
+    role: "Display",
+    usage: "Brand statements and high-impact marketing copy",
+    sample: "Open video infrastructure",
+    className:
+      "font-display text-5xl leading-[0.95] font-light tracking-[-0.035em] sm:text-7xl",
+  },
+  {
+    token: "font-heading",
+    role: "Page title",
+    usage: "Primary page and workspace headings",
+    sample: "Agent Playbooks",
+    className: "font-heading text-3xl font-semibold tracking-tight",
+  },
+  {
+    token: "font-heading",
+    role: "Section title",
+    usage: "Major sections within a page",
+    sample: "Customize this playbook",
+    className: "font-heading text-2xl font-normal tracking-tight",
+  },
+  {
+    token: "font-heading",
+    role: "Component title",
+    usage: "Cards, dialogs, sheets, and grouped controls",
+    sample: "Generation settings",
+    className: "font-heading text-base font-medium",
+  },
 ]
 
 export default function FavoritProPage() {
   return (
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Favorit Pro</h1>
-      <p className="mt-2 text-muted-foreground text-balance">
-        The brand sans. Favorit is a grotesk by{" "}
-        <a
-          href="https://abcdinamo.com/typefaces/favorit"
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium text-foreground underline underline-offset-4"
-        >
-          Dinamo
-        </a>{" "}
-        with a deliberately plain, almost technical posture — flat curves,
-        even rhythm, no flourish. It sets all interface, product, and
-        marketing text, loaded as{" "}
+      <p className="mt-2 text-balance text-muted-foreground">
+        Favorit Pro is the display and heading face. We use its plain, technical
+        character to establish hierarchy—not for body copy or dense interface
+        text. It is loaded as{" "}
         <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
-          --font-sans
+          font-display
+        </code>{" "}
+        and{" "}
+        <code className="rounded-sm bg-muted px-1 py-0.5 font-mono text-[13px]">
+          font-heading
         </code>
         .
       </p>
 
-      <div className="mt-8 flex flex-col gap-8 rounded-lg border p-6 sm:p-8">
-        <p className="text-5xl font-normal tracking-tight text-balance sm:text-6xl">
-          Open video infrastructure
-        </p>
-        <p className="break-words text-lg text-muted-foreground">{ALPHABET}</p>
-      </div>
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold tracking-tight">Display</h2>
+        <div className="mt-4 rounded-sm bg-muted px-5 py-12 sm:px-8 sm:py-16">
+          <p className="font-display text-5xl leading-[0.92] font-light tracking-[-0.04em] text-balance sm:text-7xl">
+            Video belongs to everyone.
+          </p>
+          <p className="mt-8 max-w-xl font-sans text-sm leading-6 text-muted-foreground">
+            Pair large, light Favorit with restrained tracking and Inter
+            supporting copy. Keep the line length short enough for the letter
+            shapes to carry the composition.
+          </p>
+        </div>
+      </section>
 
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Weights</h2>
-      <div className="mt-4 flex flex-col divide-y rounded-lg border">
-        {WEIGHTS.map((weight) => (
-          <div
-            key={weight.value}
-            className="flex flex-col gap-1 p-6 sm:flex-row sm:items-baseline sm:gap-6"
-          >
-            <span className="w-28 shrink-0 font-mono text-xs text-muted-foreground">
-              {weight.label} · {weight.value}
-            </span>
-            <span className={`text-2xl ${weight.className}`}>
-              The quick brown fox jumps over the lazy dog
-            </span>
-          </div>
-        ))}
-      </div>
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold tracking-tight">
+          Roles in the interface
+        </h2>
+        <div className="mt-4 space-y-3">
+          {roles.map((role) => (
+            <div
+              key={`${role.role}-${role.sample}`}
+              className="rounded-sm bg-muted p-5 sm:p-6"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className="font-sans text-sm font-medium">{role.role}</p>
+                <code className="font-mono text-xs text-muted-foreground">
+                  {role.token}
+                </code>
+              </div>
+              <p className="mt-1 font-sans text-xs text-muted-foreground">
+                {role.usage}
+              </p>
+              <p className={`mt-6 text-balance ${role.className}`}>
+                {role.sample}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <h2 className="mt-10 text-xl font-semibold tracking-tight">Scale</h2>
-      <div className="mt-4 flex flex-col divide-y rounded-lg border">
-        {SIZES.map((sizeStep) => (
-          <div key={sizeStep.label} className="flex flex-col gap-2 overflow-x-auto p-6">
-            <span className="font-mono text-xs text-muted-foreground">
-              {sizeStep.label} · {sizeStep.px}
-            </span>
-            <span className={`leading-none tracking-tight whitespace-nowrap ${sizeStep.className}`}>
-              Livepeer
-            </span>
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold tracking-tight">Usage</h2>
+        <div className="mt-4 rounded-sm bg-muted p-5 sm:p-6">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <h3 className="font-heading text-base font-medium">
+                Use Favorit for
+              </h3>
+              <p className="mt-2 font-sans text-sm leading-6 text-muted-foreground">
+                Display copy, page titles, section headings, card titles, dialog
+                titles, and short brand statements.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-heading text-base font-medium">
+                Use Inter for
+              </h3>
+              <p className="mt-2 font-sans text-sm leading-6 text-muted-foreground">
+                Body copy, navigation, labels, controls, tables, metadata, and
+                other interface text that prioritizes reading.
+              </p>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
 
       <p className="mt-10 text-sm text-muted-foreground">
-        Note that Book (450) is drawn lighter than Regular — that is the
-        typeface&apos;s design, not a loading error. For code and data, see{" "}
+        For the default interface face, see{" "}
         <Link
-          href="/docs/favorit-mono"
+          href="/docs/inter"
           className="font-medium text-foreground underline underline-offset-4"
         >
-          Favorit Mono
+          Inter
         </Link>
         .
       </p>

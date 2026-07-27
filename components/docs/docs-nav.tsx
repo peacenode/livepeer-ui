@@ -46,7 +46,7 @@ export function DocsNav({
         { title: "Assets", href: "/docs/assets" },
         { title: "Colors", href: "/docs/colors" },
         { title: "Favorit Pro", href: "/docs/favorit-pro" },
-        { title: "Favorit Mono", href: "/docs/favorit-mono" },
+        { title: "Inter", href: "/docs/inter" },
       ],
     },
     ...activeComponentGroups.map((group) => ({
