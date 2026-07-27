@@ -442,8 +442,16 @@ export function AgentFtueFlow() {
               <section
                 key={screen.title}
                 aria-labelledby={`screen-${activePhase}-${index}`}
-                className="grid gap-8 lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,2fr)] lg:items-start"
+                className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
               >
+                <div className="min-w-0">
+                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+                    <div className="aspect-video">
+                      <ScreenMockup type={screen.mockup} />
+                    </div>
+                  </div>
+                </div>
+
                 <aside>
                   <h3
                     id={`screen-${activePhase}-${index}`}
@@ -496,14 +504,6 @@ export function AgentFtueFlow() {
                     </ul>
                   </div>
                 </aside>
-
-                <div className="min-w-0">
-                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                    <div className="aspect-video">
-                      <ScreenMockup type={screen.mockup} />
-                    </div>
-                  </div>
-                </div>
               </section>
             ))}
           </div>
