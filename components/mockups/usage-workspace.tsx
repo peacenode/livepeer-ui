@@ -45,9 +45,7 @@ export type UsageWorkspaceProps = {
   onPlanSelect?: (plan: LivepeerAgentPromoPlan) => void
 }
 
-export function UsageWorkspace(): JSX.Element
-export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element
-export function UsageWorkspace(props?: UsageWorkspaceProps) {
+export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
   const {
     content,
     balance,
@@ -56,33 +54,7 @@ export function UsageWorkspace(props?: UsageWorkspaceProps) {
     resourceRows,
     plans,
     onPlanSelect,
-  } = props?.content
-    ? props
-    : {
-        content: {
-          overviewTabLabel: "Overview",
-          activityTabLabel: "Activity",
-          upgradeTitle: "Get more credits",
-          upgradeDescription: "",
-          dailyUsageTitle: "Daily usage",
-          dailyUsageEmptyMessage: "No daily usage recorded yet.",
-          resourceUsageTitle: "Usage by resource",
-          resourceUsageEmptyMessage: "No resource usage recorded yet.",
-        },
-        balance: {
-          title: "Credit balance",
-          planLabel: "",
-          balance: "0",
-          allowance: "0",
-          unitLabel: "credits",
-          refreshLabel: "Credits refresh",
-          refreshDate: "—",
-        },
-        metrics: [],
-        dailyRows: [],
-        resourceRows: [],
-        plans: [],
-      }
+  } = props
 
   return (
     <Tabs defaultValue="overview" className="gap-8">
