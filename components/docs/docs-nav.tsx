@@ -28,18 +28,7 @@ export function DocsNav({
 
   const groups = [
     {
-      title: "Foundations",
-      items: [
-        { title: "Introduction", href: "/docs" },
-        { title: "Brand", href: "/docs/brand" },
-        { title: "Assets", href: "/docs/assets" },
-        { title: "Colors", href: "/docs/colors" },
-        { title: "Favorit Pro", href: "/docs/favorit-pro" },
-        { title: "Favorit Mono", href: "/docs/favorit-mono" },
-      ],
-    },
-    {
-      title: "Marketing",
+      title: "Sprint",
       items: [
         { title: "Planner", href: "/marketing/planner" },
         { title: "Social Kit", href: "/marketing/press-kit" },
@@ -55,6 +44,17 @@ export function DocsNav({
         href: `/docs/components/${component.name}`,
       })),
     })),
+    {
+      title: "Foundations",
+      items: [
+        { title: "Introduction", href: "/docs" },
+        { title: "Brand", href: "/docs/brand" },
+        { title: "Assets", href: "/docs/assets" },
+        { title: "Colors", href: "/docs/colors" },
+        { title: "Favorit Pro", href: "/docs/favorit-pro" },
+        { title: "Favorit Mono", href: "/docs/favorit-mono" },
+      ],
+    },
     {
       title: "Primitives",
       items: primitives.map((component) => ({
