@@ -57,7 +57,7 @@ const phases: Phase[] = [
         title: "Waitlist",
         description:
           "Capture the email we will use to approve access and follow up.",
-        action: "Join the waitlist",
+        action: "Agent Waitlist",
         mockup: "waitlist",
         needs: [
           "Collect an email",
