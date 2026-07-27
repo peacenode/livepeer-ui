@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resource-usage-table",
+  "title": "Resource Usage Table",
+  "description": "Resource-level workflow and compute usage breakdown.",
+  "registryDependencies": [
+    "http://localhost:3000/r/table.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/resource-usage-table.tsx",
+      "content": "import {\n  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,\n} from \"@/components/ui/table\"\n\nconst resourceUsage = [\n  { resource: \"text-to-image\", type: \"Workflow\", usage: \"612.8K requests\", credits: \"86.4\" },\n  { resource: \"live-video-to-video\", type: \"Workflow\", usage: \"396.1K requests\", credits: \"64.8\" },\n  { resource: \"us-east\", type: \"Compute\", usage: \"1,188 GPU min\", credits: \"48.8\" },\n]\n\nexport function ResourceUsageTable() {\n  return (\n    <section className=\"flex flex-col gap-3\">\n      <h2 className=\"font-sans text-sm font-medium\">Usage by resource</h2>\n      <Table>\n        <TableHeader><TableRow>\n          <TableHead>Resource</TableHead><TableHead>Type</TableHead>\n          <TableHead>Usage</TableHead><TableHead className=\"text-right\">Credits</TableHead>\n        </TableRow></TableHeader>\n        <TableBody>{resourceUsage.map((resource) => (\n          <TableRow key={resource.resource}>\n            <TableCell className=\"font-mono text-xs font-medium\">{resource.resource}</TableCell>\n            <TableCell>{resource.type}</TableCell>\n            <TableCell className=\"font-sans text-xs tabular-nums\">{resource.usage}</TableCell>\n            <TableCell className=\"text-right font-sans text-xs tabular-nums\">{resource.credits}</TableCell>\n          </TableRow>\n        ))}</TableBody>\n      </Table>\n    </section>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

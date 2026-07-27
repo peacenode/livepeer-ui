@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "invoice-table",
+  "title": "Invoice Table",
+  "description": "Reusable invoice history with status and download actions.",
+  "registryDependencies": [
+    "http://localhost:3000/r/badge.json",
+    "http://localhost:3000/r/button.json",
+    "http://localhost:3000/r/table.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/invoice-table.tsx",
+      "content": "import { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,\n} from \"@/components/ui/table\"\n\nexport type Invoice = { id: string; period: string; amount: string; status: string }\n\nexport const billingInvoices: Invoice[] = [\n  { id: \"INV-2026-006\", period: \"June 2026\", amount: \"$1,982.44\", status: \"Paid\" },\n  { id: \"INV-2026-005\", period: \"May 2026\", amount: \"$2,204.10\", status: \"Paid\" },\n  { id: \"INV-2026-004\", period: \"April 2026\", amount: \"$1,730.28\", status: \"Paid\" },\n  { id: \"INV-2026-003\", period: \"March 2026\", amount: \"$1,412.90\", status: \"Paid\" },\n  { id: \"INV-2026-002\", period: \"February 2026\", amount: \"$986.55\", status: \"Paid\" },\n]\n\nexport function InvoiceTable({ invoices = billingInvoices }: { invoices?: Invoice[] }) {\n  return (\n    <div className=\"flex flex-col gap-3\">\n      <h2 className=\"text-sm font-medium\">Invoices</h2>\n      <Table>\n        <TableHeader><TableRow>\n          <TableHead>Invoice</TableHead><TableHead>Period</TableHead>\n          <TableHead className=\"text-right\">Amount</TableHead>\n          <TableHead>Status</TableHead><TableHead className=\"text-right\" />\n        </TableRow></TableHeader>\n        <TableBody>{invoices.map((invoice) => (\n          <TableRow key={invoice.id}>\n            <TableCell className=\"font-mono text-xs\">{invoice.id}</TableCell>\n            <TableCell>{invoice.period}</TableCell>\n            <TableCell className=\"text-right text-xs tabular-nums\">{invoice.amount}</TableCell>\n            <TableCell><Badge variant=\"secondary\">{invoice.status}</Badge></TableCell>\n            <TableCell className=\"text-right\"><Button variant=\"ghost\" size=\"xs\">Download</Button></TableCell>\n          </TableRow>\n        ))}</TableBody>\n      </Table>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

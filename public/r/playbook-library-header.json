@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "playbook-library-header",
+  "title": "Playbook Library Header",
+  "description": "Centered heading and introduction for the playbook library.",
+  "files": [
+    {
+      "path": "components/mockups/playbook-library-header.tsx",
+      "content": "export function PlaybookLibraryHeader() {\n  return (\n    <div className=\"flex flex-col items-center text-center\">\n      <h1 className=\"text-4xl font-light tracking-tight text-balance sm:text-5xl\">\n        Playbooks\n      </h1>\n      <p className=\"mt-4 max-w-2xl text-sm leading-relaxed text-balance text-muted-foreground\">\n        Playbooks are step-by-step production recipes for AI agents. Each one\n        brings together the prompts, models, inputs, and workflow needed to\n        produce a specific result. Choose one, customize the brief, then copy\n        it into your agent to run.\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

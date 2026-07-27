@@ -1,10 +1,10 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import Link from "next/link"
 import { SearchIcon } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
+import { PlaybookCard } from "@/components/mockups/playbook-card"
 
 import type { SourcePlaybook } from "./daydream-source"
 
@@ -43,28 +43,7 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
 
       <div className="mt-8 grid gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((playbook) => (
-          <Link
-            key={playbook.slug}
-            href={`/mockups/livepeer-org/library/${playbook.slug}`}
-            className="group block rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <article>
-              <div
-                className="aspect-square overflow-hidden rounded-sm bg-muted bg-cover bg-center"
-                style={
-                  playbook.image
-                    ? { backgroundImage: `url("${playbook.image}")` }
-                    : undefined
-                }
-                aria-hidden="true"
-              />
-              <div className="mt-4 flex max-w-sm flex-col gap-1.5">
-                <h2 className="line-clamp-2 font-heading text-xl font-normal">
-                  {playbook.title}
-                </h2>
-              </div>
-            </article>
-          </Link>
+          <PlaybookCard key={playbook.slug} playbook={playbook} />
         ))}
       </div>
 

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { components } from "@/lib/docs"
+import { componentGroups, primitives } from "@/lib/docs"
 
 export function DocsNav({
   onNavigate,
@@ -14,6 +14,12 @@ export function DocsNav({
   className?: string
 }) {
   const pathname = usePathname()
+  const activeComponentGroups = componentGroups.filter(
+    (group) => group.title !== "Client Archived"
+  )
+  const archivedClientGroup = componentGroups.find(
+    (group) => group.title === "Client Archived"
+  )
 
   const groups = [
     {
@@ -41,22 +47,43 @@ export function DocsNav({
       external: true,
       items: [
         { title: "Waitlist", href: "/mockups/waitlist" },
-        { title: "Livepeer Agent", href: "/mockups/livepeer-agent" },
+        { title: "Billing/API", href: "/mockups/livepeer-agent" },
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
     },
+    ...activeComponentGroups.map((group) => ({
+      title: group.title,
+      items: group.items.map((component) => ({
+        title: component.title,
+        href: `/docs/components/${component.name}`,
+      })),
+    })),
     {
-      title: "Archive",
-      external: true,
-      items: [{ title: "Client", href: "/mockups/client" }],
-    },
-    {
-      title: "Components",
-      items: components.map((component) => ({
+      title: "Primitives",
+      items: primitives.map((component) => ({
         title: component.title,
         href: `/docs/components/${component.name}`,
       })),
     },
+    ...(archivedClientGroup
+      ? [
+          {
+            title: archivedClientGroup.title,
+            items: [
+              {
+                title: "Client Mockup",
+                href: "/mockups/client",
+                external: true,
+              },
+              ...archivedClientGroup.items.map((component) => ({
+                title: component.title,
+                href: `/docs/components/${component.name}`,
+                external: false,
+              })),
+            ],
+          },
+        ]
+      : []),
   ]
 
   return (
@@ -69,7 +96,11 @@ export function DocsNav({
               key={item.href}
               href={item.href}
               onClick={onNavigate}
-              target={group.external ? "_blank" : undefined}
+              target={
+                ("external" in item ? item.external : group.external)
+                  ? "_blank"
+                  : undefined
+              }
               className={cn(
                 "rounded-md px-2 py-2.5 text-sm transition-colors hover:bg-muted",
                 pathname === item.href

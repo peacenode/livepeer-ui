@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "api-logs-section",
+  "title": "API Logs",
+  "description": "Search, error filtering, and request log table for Billing/API activity.",
+  "registryDependencies": [
+    "http://localhost:3000/r/input.json",
+    "http://localhost:3000/r/label.json",
+    "http://localhost:3000/r/switch.json",
+    "http://localhost:3000/r/table.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/api-logs-section.tsx",
+      "content": "import { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Switch } from \"@/components/ui/switch\"\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"@/components/ui/table\"\n\nexport function ApiLogsSection() {\n  return (\n    <div className=\"flex flex-col gap-4\">\n      <div className=\"flex flex-col gap-3 sm:flex-row sm:items-center\">\n        <Input aria-label=\"Search API logs\" placeholder=\"Search logs…\" className=\"max-w-sm rounded-sm\" />\n        <div className=\"flex items-center gap-2\">\n          <Switch id=\"api-log-errors\" />\n          <Label htmlFor=\"api-log-errors\">Errors only</Label>\n        </div>\n      </div>\n      <Table>\n        <TableHeader>\n          <TableRow>\n            <TableHead>Method</TableHead><TableHead>Endpoint</TableHead><TableHead>Status</TableHead>\n            <TableHead>Duration</TableHead><TableHead>Time</TableHead><TableHead>API key</TableHead><TableHead>Error</TableHead>\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            <TableCell colSpan={7} className=\"h-32 text-center text-muted-foreground\">\n              No API logs yet. Make an API request to see it here.\n            </TableCell>\n          </TableRow>\n        </TableBody>\n      </Table>\n    </div>\n  )\n}\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

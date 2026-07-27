@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "usage-metrics",
+  "title": "Usage Metrics",
+  "description": "Workflow-run and compute-time metric cards from the Usage activity view.",
+  "registryDependencies": [
+    "http://localhost:3000/r/card.json"
+  ],
+  "files": [
+    {
+      "path": "components/mockups/usage-metrics.tsx",
+      "content": "import {\n  Card,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\n\nexport function UsageMetrics() {\n  return (\n    <div className=\"grid gap-3 sm:grid-cols-2\">\n      <Card variant=\"metric\">\n        <CardHeader>\n          <CardDescription>Workflow runs</CardDescription>\n          <CardTitle className=\"font-sans text-3xl leading-none font-medium tracking-tight tabular-nums\">\n            1.2M\n          </CardTitle>\n        </CardHeader>\n      </Card>\n      <Card variant=\"metric\">\n        <CardHeader>\n          <CardDescription>Compute time</CardDescription>\n          <CardTitle className=\"font-sans text-3xl leading-none font-medium tracking-tight tabular-nums\">\n            2,431 GPU min\n          </CardTitle>\n        </CardHeader>\n      </Card>\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

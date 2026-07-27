@@ -1,7 +1,7 @@
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CopyButton } from "@/components/docs/copy-button"
+import { CopyButton } from "@/components/copy-button"
 
 const packageManagers = [
   { name: "pnpm", command: "pnpm dlx" },
