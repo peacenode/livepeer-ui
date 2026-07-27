@@ -45,16 +45,6 @@ const mockupRoundupQuery = defineQuery(`
     "slug": slug.current,
     title,
     description,
-    usageContent {
-      overviewTabLabel,
-      activityTabLabel,
-      upgradeTitle,
-      upgradeDescription,
-      dailyUsageTitle,
-      dailyUsageEmptyMessage,
-      resourceUsageTitle,
-      resourceUsageEmptyMessage
-    },
     previewHref
   }
 `)
@@ -65,6 +55,16 @@ const agentConsoleEditorialPageQuery = defineQuery(`
     page,
     heading,
     description,
+    usageContent {
+      overviewTabLabel,
+      activityTabLabel,
+      upgradeTitle,
+      upgradeDescription,
+      dailyUsageTitle,
+      dailyUsageEmptyMessage,
+      resourceUsageTitle,
+      resourceUsageEmptyMessage
+    },
     "ctas": coalesce(
       ctas[] {
         _key,
