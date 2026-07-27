@@ -79,25 +79,31 @@ export default async function ProductComponentsPage({
             sizes="(min-width: 768px) 768px, calc(100vw - 32px)"
             className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
           />
-          <h1 className="absolute bottom-4 left-4 rounded-md bg-black/90 px-3 py-1.5 text-lg font-medium text-white sm:bottom-5 sm:left-5 sm:text-2xl">
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
+            }}
+          />
+          <h1 className="absolute bottom-4 left-4 rounded-md bg-black/70 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
             {product.title}
           </h1>
         </div>
-        <p className="mt-2 px-0.5 text-base text-muted-foreground sm:text-lg">
+        <p className="mt-2 px-0.5 text-xs text-muted-foreground">
           From livepeer-ui
         </p>
       </Link>
 
-      <section className="flex flex-col items-center py-24 text-center sm:py-32">
-        <h2 className="max-w-2xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
-          Components used to build {product.title}.
-        </h2>
-        <div className="mt-10 flex max-w-2xl flex-wrap justify-center gap-2">
+      <section className="mt-10 text-center">
+        <h2 className="text-sm font-medium">Components</h2>
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
           {group.items.map((component) => (
             <Badge
               key={component.name}
               variant="secondary"
-              className="rounded-sm px-3 py-2 font-normal"
+              className="h-auto rounded-sm px-3 py-2 font-normal"
               render={
                 <Link href={`/docs/components/${component.name}`}>
                   {component.title}
