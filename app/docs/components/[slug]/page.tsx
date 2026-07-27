@@ -4,7 +4,10 @@ import { notFound } from "next/navigation"
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { InstallCommand } from "@/components/docs/install-command"
 import { Badge } from "@/components/ui/badge"
-import { getDocumentedDependencies } from "@/lib/component-docs.server"
+import {
+  getComponentDocumentationSource,
+  getDocumentedDependencies,
+} from "@/lib/component-docs.server"
 import { components, getComponentDoc, registryItemUrl } from "@/lib/docs"
 
 export function generateStaticParams() {
@@ -31,6 +34,8 @@ export default async function ComponentPage({
   const doc = getComponentDoc(slug)
   if (!doc) notFound()
   const dependencies = getDocumentedDependencies(slug)
+  const source = getComponentDocumentationSource(slug)
+  if (!source) notFound()
 
   return (
     <article className="max-w-3xl">
@@ -40,10 +45,10 @@ export default async function ComponentPage({
           {doc.level}
         </Badge>
       )}
-      <p className="mt-2 text-muted-foreground text-balance">
+      <p className="mt-2 text-balance text-muted-foreground">
         {doc.description}
       </p>
-      <ComponentPreview name={slug} className="mt-8" />
+      <ComponentPreview name={slug} source={source} className="mt-8" />
       {dependencies.length > 0 && (
         <section className="mt-10">
           <h2 className="text-xl font-semibold tracking-tight">Built with</h2>
