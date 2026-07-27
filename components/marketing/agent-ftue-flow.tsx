@@ -3,7 +3,6 @@
 import Image from "next/image"
 import { useState } from "react"
 import {
-  ArrowRight,
   Check,
   CircleHelp,
   KeyRound,
@@ -338,25 +337,14 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   }
 
   return (
-    <div className="flex h-full gap-[3%] bg-muted/30 p-[5%]">
-      <div className="w-1/5 rounded-md bg-foreground/10 p-[3%]">
-        <div className="h-2 w-14 rounded-sm bg-foreground/40" />
-      </div>
-      <div className="flex flex-1 flex-col justify-between rounded-md border bg-background p-[5%] shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-full bg-foreground text-background">
-            <Check className="size-4" />
-          </div>
-          <div className="space-y-2">
-            <div className="h-3 w-28 rounded-sm bg-foreground" />
-            <div className="h-2 w-44 rounded-sm bg-border" />
-          </div>
-        </div>
-        <div className="flex h-10 items-center justify-between rounded-md border px-4">
-          <div className="h-2 w-40 rounded-sm bg-border" />
-          <ArrowRight className="size-4" />
-        </div>
-      </div>
+    <div className="relative h-full overflow-hidden bg-black">
+      <Image
+        src="/flow-references/20260727-184344/agent-client.png"
+        alt="Livepeer Agent running in Claude Code"
+        fill
+        sizes="(min-width: 1024px) 60vw, 100vw"
+        className="object-contain"
+      />
     </div>
   )
 }
