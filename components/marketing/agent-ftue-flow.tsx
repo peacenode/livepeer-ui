@@ -59,7 +59,7 @@ const phases: Phase[] = [
         questions: ["What is the minimum story this page needs to tell?"],
       },
       {
-        title: "External waitlist",
+        title: "Waitlist",
         description:
           "Capture the email we will use to approve access and follow up.",
         action: "Join the waitlist",
