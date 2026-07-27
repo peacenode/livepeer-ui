@@ -388,14 +388,57 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
   )
 }
 
+function ScreenRow({
+  screen,
+  headingId,
+}: {
+  screen: Screen
+  headingId: string
+}) {
+  return (
+    <section
+      aria-labelledby={headingId}
+      className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
+    >
+      <div className="min-w-0">
+        <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+          <div className="aspect-video">
+            <ScreenMockup type={screen.mockup} />
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <h4 id={headingId} className="text-lg font-medium">
+          {screen.action}
+        </h4>
+
+        <div className="mt-5">
+          <ul className="mt-3 space-y-3">
+            {screen.needs.map((item) => (
+              <li key={item} className="flex gap-2.5 text-sm leading-5">
+                <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </section>
+  )
+}
+
 export function AgentFtueFlow() {
   const [activePhase, setActivePhase] = useState(0)
   const phase = phases[activePhase]
   const marketingScreen = phase.screens.find(
     (screen) => screen.mockup === "marketing"
   )
+  const waitlistScreen = phase.screens.find(
+    (screen) => screen.mockup === "waitlist"
+  )
   const userFlowScreens = phase.screens.filter(
-    (screen) => screen !== marketingScreen
+    (screen) => screen !== marketingScreen && screen !== waitlistScreen
   )
 
   return (
@@ -438,32 +481,50 @@ export function AgentFtueFlow() {
           </div>
 
           <div className="mt-10">
-            {marketingScreen && (
-              <section
-                aria-labelledby={`marketing-page-${activePhase}`}
-                className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)]"
+            <section aria-labelledby={`marketing-pages-${activePhase}`}>
+              <h3
+                id={`marketing-pages-${activePhase}`}
+                className="text-2xl font-normal tracking-tight"
               >
-                <div className="min-w-0">
-                  <header className="max-w-3xl text-left">
-                    <h3
-                      id={`marketing-page-${activePhase}`}
-                      className="text-lg font-medium"
-                    >
-                      {marketingScreen.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      {marketingScreen.description}
-                    </p>
-                  </header>
+                Marketing pages
+              </h3>
 
-                  <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
-                    <div className="aspect-video">
-                      <ScreenMockup type={marketingScreen.mockup} />
+              {marketingScreen && (
+                <section
+                  aria-labelledby={`marketing-page-${activePhase}`}
+                  className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)]"
+                >
+                  <div className="min-w-0">
+                    <header className="max-w-3xl text-left">
+                      <h4
+                        id={`marketing-page-${activePhase}`}
+                        className="text-lg font-medium"
+                      >
+                        {marketingScreen.title}
+                      </h4>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {marketingScreen.description}
+                      </p>
+                    </header>
+
+                    <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
+                      <div className="aspect-video">
+                        <ScreenMockup type={marketingScreen.mockup} />
+                      </div>
                     </div>
                   </div>
+                </section>
+              )}
+
+              {waitlistScreen && (
+                <div className="mt-10">
+                  <ScreenRow
+                    screen={waitlistScreen}
+                    headingId={`waitlist-${activePhase}`}
+                  />
                 </div>
-              </section>
-            )}
+              )}
+            </section>
 
             <section
               aria-labelledby={`user-flow-${activePhase}`}
@@ -478,42 +539,11 @@ export function AgentFtueFlow() {
 
               <div className="mt-8 space-y-10">
                 {userFlowScreens.map((screen, index) => (
-                  <section
+                  <ScreenRow
                     key={screen.title}
-                    aria-labelledby={`screen-${activePhase}-${index}`}
-                    className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
-                  >
-                    <div className="min-w-0">
-                      <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                        <div className="aspect-video">
-                          <ScreenMockup type={screen.mockup} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <aside>
-                      <h4
-                        id={`screen-${activePhase}-${index}`}
-                        className="text-lg font-medium"
-                      >
-                        {screen.action}
-                      </h4>
-
-                      <div className="mt-5">
-                        <ul className="mt-3 space-y-3">
-                          {screen.needs.map((item) => (
-                            <li
-                              key={item}
-                              className="flex gap-2.5 text-sm leading-5"
-                            >
-                              <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </aside>
-                  </section>
+                    screen={screen}
+                    headingId={`screen-${activePhase}-${index}`}
+                  />
                 ))}
               </div>
             </section>
