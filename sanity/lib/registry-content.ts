@@ -10,7 +10,6 @@ export interface MockupRoundup {
   slug: MockupRoundupSlug
   title: string
   description: string
-  contentBadges: string[]
   previewHref: string
 }
 
@@ -46,7 +45,6 @@ const mockupRoundupQuery = defineQuery(`
     "slug": slug.current,
     title,
     description,
-    "contentBadges": coalesce(contentBadges, []),
     previewHref
   }
 `)

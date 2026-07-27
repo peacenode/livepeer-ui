@@ -24,7 +24,6 @@ const documents = [
     title: "Agent Waitlist",
     description:
       "Signup, referral, status, leaderboard, and branded background components for the Agent Waitlist.",
-    contentBadges: ["Overview"],
     previewHref: "/mockups/waitlist",
   },
   {
@@ -34,7 +33,6 @@ const documents = [
     title: "Agent Console",
     description:
       "Application shell, account, usage, billing, API, inference, and compute components for the Agent Console.",
-    contentBadges: ["Overview", "Usage", "Billing"],
     previewHref: "/mockups/livepeer-agent",
   },
   {
@@ -44,7 +42,6 @@ const documents = [
     title: "Livepeer.org",
     description:
       "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
-    contentBadges: ["Overview"],
     previewHref: "/mockups/livepeer-org",
   },
   {
@@ -95,10 +92,7 @@ for (const document of documents) {
 for (const document of documents.filter(
   (document) => document._type === "mockupRoundup"
 )) {
-  await client
-    .patch(document._id)
-    .setIfMissing({ contentBadges: document.contentBadges })
-    .commit()
+  await client.patch(document._id).unset(["contentBadges"]).commit()
 }
 
 const usageDocument = documents.find(
