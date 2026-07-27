@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { Check, TriangleAlert } from "lucide-react"
+import { ArrowUpRight, Check, TriangleAlert } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
@@ -38,6 +38,18 @@ type Phase = {
   primaryCta?: string
   callout?: string
   screens: Screen[]
+}
+
+const mockupHrefByType: Partial<Record<Screen["mockup"], string>> = {
+  marketing: "/flow-references/20260727-184956/agent-marketing-page.png",
+  "public-marketing":
+    "/flow-references/20260727-192146/public-agent-marketing-page.png",
+  waitlist: "/mockups/waitlist",
+  oauth: "/docs/components/livepeer-agent-auth-gate",
+  agent: "/flow-references/20260727-184344/agent-client.png",
+  results: "/flow-references/20260727-184759/generation-preview.png",
+  console: "/mockups/platform",
+  website: "/docs/mockups/livepeer-org",
 }
 
 const phases: Phase[] = [
@@ -372,6 +384,8 @@ function ScreenRow({
   headingId: string
   heading?: string
 }) {
+  const mockupHref = mockupHrefByType[screen.mockup]
+
   return (
     <section
       aria-labelledby={headingId}
@@ -386,9 +400,22 @@ function ScreenRow({
       </div>
 
       <aside>
-        <h4 id={headingId} className="font-sans text-lg font-medium">
-          {heading}
-        </h4>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h4 id={headingId} className="font-sans text-lg font-medium">
+            {heading}
+          </h4>
+          {mockupHref && (
+            <a
+              href={mockupHref}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Open mockup
+              <ArrowUpRight className="size-3" aria-hidden="true" />
+            </a>
+          )}
+        </div>
 
         <div className="mt-5">
           <ul className="mt-3 space-y-3">
