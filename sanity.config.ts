@@ -16,76 +16,65 @@ const singletonSchemaTypes = new Set([
   "agentConsoleEditorialPage",
 ])
 
-const structure: StructureResolver = (S) =>
+const plannerStructure: StructureResolver = (S) =>
   S.list()
-    .title("Content")
+    .title("Planner")
     .items([
       S.listItem()
-        .id("planner")
-        .title("Planner")
+        .title("Weeks")
         .icon(CalendarIcon)
         .child(
           S.documentTypeList("marketingWeek")
             .title("Weeks")
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
+    ])
+
+const waitlistStructure: StructureResolver = (S) =>
+  S.list()
+    .title("Waitlist")
+    .items([
       S.listItem()
-        .id("agent-waitlist")
         .title("Waitlist")
         .icon(GalleryVerticalEndIcon)
         .child(
-          S.list()
-            .title("Waitlist")
-            .items([
-              S.listItem()
-                .title("Waitlist")
-                .child(
-                  S.document()
-                    .schemaType("mockupRoundup")
-                    .documentId("mockupRoundup-agent-waitlist")
-                ),
-            ])
+          S.document()
+            .schemaType("mockupRoundup")
+            .documentId("mockupRoundup-agent-waitlist")
         ),
+    ])
+
+const agentConsoleStructure: StructureResolver = (S) =>
+  S.list()
+    .title("Agent Console")
+    .items([
       S.listItem()
-        .id("agent-console")
-        .title("Agent Console")
-        .icon(CreditCardIcon)
+        .title("Usage")
         .child(
-          S.list()
-            .title("Agent Console")
-            .items([
-              S.listItem()
-                .title("Usage")
-                .child(
-                  S.document()
-                    .schemaType("agentConsoleEditorialPage")
-                    .documentId("agentConsoleEditorialPage-usage")
-                ),
-              S.listItem()
-                .title("Billing")
-                .child(
-                  S.document()
-                    .schemaType("agentConsoleEditorialPage")
-                    .documentId("agentConsoleEditorialPage-billing")
-                ),
-            ])
+          S.document()
+            .schemaType("agentConsoleEditorialPage")
+            .documentId("agentConsoleEditorialPage-usage")
         ),
       S.listItem()
-        .id("livepeer-org")
-        .title("Livepeer.org")
+        .title("Billing")
+        .child(
+          S.document()
+            .schemaType("agentConsoleEditorialPage")
+            .documentId("agentConsoleEditorialPage-billing")
+        ),
+    ])
+
+const livepeerOrgStructure: StructureResolver = (S) =>
+  S.list()
+    .title("Livepeer.org")
+    .items([
+      S.listItem()
+        .title("Home")
         .icon(GalleryVerticalEndIcon)
         .child(
-          S.list()
-            .title("Livepeer.org")
-            .items([
-              S.listItem()
-                .title("Home")
-                .child(
-                  S.document()
-                    .schemaType("mockupRoundup")
-                    .documentId("mockupRoundup-livepeer-org")
-                ),
-            ])
+          S.document()
+            .schemaType("mockupRoundup")
+            .documentId("mockupRoundup-livepeer-org")
         ),
     ])
 
@@ -95,7 +84,32 @@ export default defineConfig({
   basePath: "/studio",
   projectId,
   dataset,
-  plugins: [structureTool({ structure })],
+  plugins: [
+    structureTool({
+      name: "planner",
+      title: "Planner",
+      icon: CalendarIcon,
+      structure: plannerStructure,
+    }),
+    structureTool({
+      name: "waitlist",
+      title: "Waitlist",
+      icon: GalleryVerticalEndIcon,
+      structure: waitlistStructure,
+    }),
+    structureTool({
+      name: "agent-console",
+      title: "Agent Console",
+      icon: CreditCardIcon,
+      structure: agentConsoleStructure,
+    }),
+    structureTool({
+      name: "livepeer-org",
+      title: "Livepeer.org",
+      icon: GalleryVerticalEndIcon,
+      structure: livepeerOrgStructure,
+    }),
+  ],
   schema: {
     types: schemaTypes,
     templates: (templates) =>
