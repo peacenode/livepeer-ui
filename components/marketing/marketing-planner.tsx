@@ -59,7 +59,7 @@ function PlannerItems({ items }: { items: MarketingPlanItem[] }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3">
       {items.map((item) => (
         <PlannerItem key={item._key} item={item} />
       ))}
