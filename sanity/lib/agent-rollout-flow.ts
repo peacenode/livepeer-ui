@@ -18,7 +18,7 @@ export type AgentRolloutPhase = {
   _key: string
   name: string
   summary: string
-  primaryCta: string
+  primaryCta?: string
   callout?: string
   screens: AgentRolloutScreen[]
 }

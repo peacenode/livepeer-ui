@@ -7,7 +7,6 @@
       "_key": "internal-testing",
       "name": "Internal testing",
       "summary": "An internal tester visits the Agent landing page, installs the MCP with preloaded credits, submits a generation, and receives a stable link to the results.",
-      "primaryCta": "Install the Agent",
       "screens": [
         {
           "_key": "internal-marketing",

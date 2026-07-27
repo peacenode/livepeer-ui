@@ -36,7 +36,12 @@ export const agentRolloutFlowType = defineType({
               rows: 3,
               validation: (rule) => rule.required(),
             }),
-            requiredString("primaryCta", "Primary CTA"),
+            defineField({
+              name: "primaryCta",
+              title: "Primary CTA",
+              description: "Leave empty when the phase has no primary CTA.",
+              type: "string",
+            }),
             defineField({
               name: "callout",
               title: "Callout",

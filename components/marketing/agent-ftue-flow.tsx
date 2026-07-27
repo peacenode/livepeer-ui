@@ -118,10 +118,12 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
             {phase.summary}
           </p>
-          <div className="mt-4 flex items-center gap-2 text-sm font-medium">
-            <span>Primary CTA</span>
-            <Badge>{phase.primaryCta}</Badge>
-          </div>
+          {phase.primaryCta && (
+            <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+              <span>Primary CTA</span>
+              <Badge>{phase.primaryCta}</Badge>
+            </div>
+          )}
           {phase.callout && (
             <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
               <TriangleAlert className="mt-0.5 size-4 shrink-0" />
