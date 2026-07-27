@@ -1,6 +1,10 @@
 "use client"
 
-import { CalendarIcon } from "lucide-react"
+import {
+  CalendarIcon,
+  CreditCardIcon,
+  GalleryVerticalEndIcon,
+} from "lucide-react"
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
 
@@ -10,16 +14,23 @@ import { schemaTypes } from "@/sanity/schema-types"
 
 const structure: StructureResolver = (S) =>
   S.list()
-    .title("Marketing Planner")
+    .title("Content")
     .items([
       S.listItem()
-        .title("Weeks")
+        .title("Marketing planner")
         .icon(CalendarIcon)
         .child(
           S.documentTypeList("marketingWeek")
             .title("Weeks")
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
+      S.divider(),
+      S.documentTypeListItem("mockupRoundup")
+        .title("Mockup roundups")
+        .icon(GalleryVerticalEndIcon),
+      S.documentTypeListItem("agentConsoleEditorialPage")
+        .title("Agent Console editorial")
+        .icon(CreditCardIcon),
     ])
 
 export default defineConfig({
