@@ -6,13 +6,17 @@ import {
   Check,
   CircleHelp,
   KeyRound,
-  LockKeyhole,
-  Mail,
   Monitor,
   TriangleAlert,
   UserRoundCheck,
 } from "lucide-react"
 
+import { LivepeerGradientLockup } from "@/components/brand"
+import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
+import { waitlistContentFixture } from "@/components/demos/waitlist-content-fixture"
+import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
+import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
+import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 type Screen = {
@@ -59,7 +63,7 @@ const phases: Phase[] = [
         title: "External waitlist",
         description:
           "Capture the email we will use to approve access and follow up.",
-        action: "Submit email",
+        action: "Join the waitlist",
         mockup: "waitlist",
         needs: [
           "Collect an email",
@@ -219,26 +223,69 @@ const phases: Phase[] = [
 ]
 
 function ScreenMockup({ type }: { type: Screen["mockup"] }) {
-  if (type === "marketing" || type === "website") {
+  if (type === "marketing") {
     return (
-      <div className="flex h-full flex-col">
-        <div className="flex items-center justify-between border-b px-[5%] py-[3%]">
-          <div className="h-2.5 w-24 rounded-sm bg-foreground" />
-          <div className="flex gap-4">
-            <div className="h-2 w-12 rounded-sm bg-border" />
-            <div className="h-2 w-12 rounded-sm bg-border" />
-            <div className="h-2 w-12 rounded-sm bg-border" />
+      <div className="flex h-full flex-col bg-background">
+        <div className="flex items-center justify-between border-b px-[5%] py-[2.5%]">
+          <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
+          <div className="flex items-center gap-4 text-[8px] text-muted-foreground sm:text-[10px]">
+            <span>About</span>
+            <span>Playbooks</span>
+            <span>Docs</span>
           </div>
         </div>
         <div className="grid flex-1 grid-cols-[1.1fr_0.9fr] items-center gap-[7%] p-[7%]">
-          <div className="space-y-[5%]">
-            <div className="h-7 w-4/5 rounded-sm bg-foreground" />
-            <div className="h-7 w-3/5 rounded-sm bg-foreground" />
-            <div className="h-2 w-full rounded-sm bg-border" />
-            <div className="h-2 w-4/5 rounded-sm bg-border" />
-            <div className="h-8 w-32 rounded-full bg-foreground" />
+          <div>
+            <p className="font-agent text-[9px] tracking-wide text-muted-foreground sm:text-xs">
+              LIVEPEER AGENT
+            </p>
+            <h2 className="mt-[4%] max-w-xl text-[clamp(1rem,3.2vw,2.5rem)] leading-[0.98] font-light tracking-tight">
+              Create and edit video with your agent.
+            </h2>
+            <p className="mt-[5%] max-w-md text-[8px] leading-relaxed text-muted-foreground sm:text-xs">
+              Multimodal media generation powered by Livepeer&apos;s open
+              network.
+            </p>
+            <Button
+              size="sm"
+              className="mt-[6%] h-7 rounded-sm px-3 text-[9px] sm:h-8 sm:text-xs"
+            >
+              Join the waitlist
+            </Button>
           </div>
-          <div className="aspect-video rounded-md border bg-foreground/10" />
+          <div className="relative aspect-video overflow-hidden rounded-md border bg-black">
+            <div className="absolute inset-[10%] rounded-sm border border-white/20 bg-white/5" />
+            <div className="absolute right-[16%] bottom-[18%] left-[16%] h-[12%] rounded-sm bg-white/15" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === "website") {
+    return (
+      <div className="flex h-full flex-col">
+        <div className="flex items-center justify-between border-b px-[5%] py-[3%]">
+          <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
+          <div className="flex gap-4 text-[8px] text-muted-foreground sm:text-[10px]">
+            <span>Network</span>
+            <span>Developers</span>
+            <span>Agent</span>
+          </div>
+        </div>
+        <div className="grid flex-1 grid-cols-2 items-center gap-[7%] p-[7%]">
+          <div>
+            <h2 className="text-[clamp(1rem,3vw,2.25rem)] leading-none font-light">
+              The open inference network.
+            </h2>
+            <Button
+              size="sm"
+              className="mt-[7%] h-7 rounded-sm px-3 text-[9px] sm:text-xs"
+            >
+              Explore the Agent
+            </Button>
+          </div>
+          <div className="aspect-video rounded-md border bg-muted/50" />
         </div>
       </div>
     )
@@ -267,20 +314,40 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
     )
   }
 
-  if (type === "waitlist" || type === "oauth") {
-    const Icon = type === "waitlist" ? Mail : LockKeyhole
+  if (type === "waitlist") {
     return (
-      <div className="flex h-full items-center justify-center bg-muted/30">
-        <div className="flex w-[48%] flex-col items-center gap-4 rounded-lg border bg-background p-[6%] text-center shadow-sm">
-          <div className="flex size-12 items-center justify-center rounded-full bg-foreground text-background">
-            <Icon className="size-5" />
+      <div className="dark flex h-full items-center justify-end overflow-hidden bg-black p-[5%] text-white">
+        <div className="mr-[3%] w-[52%] rounded-lg border border-white/20 bg-white/[0.055] p-[5%] shadow-2xl backdrop-blur-md">
+          <div className="flex items-end gap-1.5 text-white">
+            <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
+            <span className="font-agent text-[9px] leading-none sm:text-xs">
+              AGENT
+            </span>
           </div>
-          <div className="h-4 w-2/3 rounded-sm bg-foreground" />
-          <div className="h-2 w-4/5 rounded-sm bg-border" />
-          {type === "waitlist" && (
-            <div className="h-9 w-full rounded-md border bg-muted/30" />
-          )}
-          <div className="h-9 w-full rounded-md bg-foreground" />
+          <h2 className="mt-[9%] text-[clamp(.9rem,2.7vw,2rem)] leading-none font-light">
+            {waitlistContentFixture.panel.heading}
+          </h2>
+          <p className="mt-[5%] line-clamp-2 text-[7px] leading-relaxed text-white/60 sm:text-[10px]">
+            {waitlistContentFixture.panel.description}
+          </p>
+          <div className="mt-[8%] origin-top-left scale-[0.55] sm:scale-75">
+            <div className="w-[180%] sm:w-[133%]">
+              <WaitlistSignupForm
+                {...waitlistContentFixture.signupForm}
+                onJoin={() => undefined}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === "oauth") {
+    return (
+      <div className="relative flex h-full items-center justify-center overflow-hidden bg-muted/30">
+        <div className="origin-center scale-[0.34] sm:scale-50 md:scale-[0.58]">
+          <LivepeerAgentSignInCard content={agentConsoleShellFixture.auth} />
         </div>
       </div>
     )
@@ -374,9 +441,6 @@ export function AgentFtueFlow() {
                   </div>
 
                   <div className="mt-4">
-                    <p className="font-mono text-xs text-muted-foreground">
-                      Screen {index + 1}
-                    </p>
                     <h3
                       id={`screen-${activePhase}-${index}`}
                       className="mt-1 text-lg font-medium"
