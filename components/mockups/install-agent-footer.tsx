@@ -3,7 +3,7 @@ import { LivepeerWordmark } from "@/components/brand"
 import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
 import { cn } from "@/lib/utils"
 
-const mcpServerUrl = "https://storyboard.daydream.monster/api/mcp"
+const mcpServerUrl = "https://livepeer.org/api/mcp"
 
 export function InstallAgentFooter({
   title = "Create and edit images and video with your agent.",
