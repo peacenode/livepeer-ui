@@ -1,0 +1,124 @@
+{
+  "_id": "agentRolloutFlow",
+  "title": "Rollout flows",
+  "subtitle": "Livepeer Agent beta stages",
+  "phases": [
+    {
+      "_key": "private-beta",
+      "name": "Private beta",
+      "summary": "A user joins the waitlist, receives an access email, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
+      "primaryCta": "Join the waitlist",
+      "callout": "Do not share the MCP publicly during the private beta.",
+      "screens": [
+        {
+          "_key": "private-marketing",
+          "section": "marketing",
+          "title": "Agent landing page",
+          "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
+          "imageAlt": "Livepeer Agent early-access marketing page",
+          "needs": ["Plant a flag", "Used as a press kit for outreach"]
+        },
+        {
+          "_key": "waitlist",
+          "section": "marketing",
+          "title": "Waitlist",
+          "imagePath": "/flow-references/20260727-183925/agent-waitlist.png",
+          "imageAlt": "Livepeer Agent early-access waitlist",
+          "mockupHref": "/mockups/waitlist",
+          "needs": ["Collect an email", "Export approved emails for the auth gate", "Send a clear confirmation"]
+        },
+        {
+          "_key": "access-email",
+          "section": "userFlow",
+          "title": "Receive access email",
+          "imagePath": "/flow-references/20260727-201500-sanity/access-email.png",
+          "imageAlt": "Private beta access email with an Add to Claude button",
+          "needs": ["Send the email when a waitlisted user is approved", "Include the MCP setup instructions", "Give the user a single install prompt"]
+        },
+        {
+          "_key": "install",
+          "section": "userFlow",
+          "title": "Add the MCP to their Agent",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Claude Code session running the Livepeer MCP",
+          "needs": ["User runs install", "Submits a prompt to test the MCP", "MCP OAuth is triggered"]
+        },
+        {
+          "_key": "oauth",
+          "section": "userFlow",
+          "title": "OAuth with waitlisted email",
+          "imagePath": "/flow-references/20260727-201500-sanity/oauth.png",
+          "imageAlt": "Livepeer Agent OAuth sign-in screen",
+          "mockupHref": "/docs/components/livepeer-agent-auth-gate",
+          "needs": ["Check the email against the approved list", "Connect authentication to usage tracking"]
+        },
+        {
+          "_key": "return",
+          "section": "userFlow",
+          "title": "Returns to session",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Claude Code session after connecting the Livepeer MCP",
+          "needs": ["Return the user to the same Agent session", "Confirm that the MCP connection succeeded", "Give progress while the generation runs"]
+        },
+        {
+          "_key": "results",
+          "section": "userFlow",
+          "title": "Preview generations",
+          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imageAlt": "Generation history with video previews and prompts",
+          "needs": ["Return a stable results link in the Agent", "Show generated media with its prompt and context", "Make each result easy to preview or open"]
+        }
+      ]
+    },
+    {
+      "_key": "public-beta",
+      "name": "Public beta",
+      "summary": "A user visits livepeer.org/agent, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
+      "primaryCta": "Install the Agent",
+      "screens": [
+        {
+          "_key": "public-marketing",
+          "section": "marketing",
+          "title": "livepeer.org/agent",
+          "imagePath": "/flow-references/20260727-192146/public-agent-marketing-page.png",
+          "imageAlt": "Public Livepeer Agent marketing page",
+          "mockupHref": "/flow-references/20260727-192146/public-agent-marketing-page.png",
+          "needs": ["Publish the page at livepeer.org/agent", "Add the Agent to the main website navigation", "Share the public MCP endpoint"]
+        },
+        {
+          "_key": "install",
+          "section": "userFlow",
+          "title": "Add the MCP to their Agent",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Claude Code session running the Livepeer MCP",
+          "needs": ["User runs install", "Submits a prompt to test the MCP", "MCP OAuth is triggered"]
+        },
+        {
+          "_key": "oauth",
+          "section": "userFlow",
+          "title": "MCP OAuth",
+          "imagePath": "/flow-references/20260727-201500-sanity/oauth.png",
+          "imageAlt": "Livepeer Agent OAuth sign-in screen",
+          "mockupHref": "/docs/components/livepeer-agent-auth-gate",
+          "needs": ["Authenticate the user", "Connect authentication to usage tracking"]
+        },
+        {
+          "_key": "return",
+          "section": "userFlow",
+          "title": "Returns to session",
+          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imageAlt": "Claude Code session after connecting the Livepeer MCP",
+          "needs": ["Return the user to the same Agent session", "Confirm that the MCP connection succeeded", "Give progress while the generation runs"]
+        },
+        {
+          "_key": "results",
+          "section": "userFlow",
+          "title": "Preview generations",
+          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imageAlt": "Generation history with video previews and prompts",
+          "needs": ["Return a stable results link in the Agent", "Show generated media with its prompt and context", "Make each result easy to preview or open"]
+        }
+      ]
+    }
+  ]
+}

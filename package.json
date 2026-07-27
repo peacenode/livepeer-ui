@@ -12,6 +12,7 @@
     "sanity:schema": "sanity schema extract --path schema.json",
     "sanity:seed": "sanity exec scripts/seed-marketing-plan.mjs --with-user-token",
     "sanity:seed-registry": "sanity exec scripts/seed-registry-content.mjs --with-user-token",
+    "sanity:seed-agent-flow": "sanity exec scripts/seed-agent-rollout-flow.mjs --with-user-token",
     "registry:build": "node scripts/build-registry.mjs && shadcn build",
     "registry:validate": "node scripts/validate-registry-docs.mjs",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
