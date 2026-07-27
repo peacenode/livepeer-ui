@@ -87,7 +87,7 @@ export default async function ProductComponentsPage({
                 "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
             }}
           />
-          <h1 className="absolute bottom-4 left-4 rounded-md bg-black/70 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
+          <h1 className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-3 py-1.5 text-sm font-normal text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
             {product.title}
           </h1>
         </div>
