@@ -1,12 +1,12 @@
 "use client"
 
 import { Box, Button, Card, Flex } from "@sanity/ui"
-import { ArrowUpRightIcon } from "lucide-react"
+import { ArrowLeftIcon, ArrowUpRightIcon } from "lucide-react"
 import type { NavbarProps } from "sanity"
 
 const pageLinks = [
   { label: "Agent Console", href: "/mockups/livepeer-agent" },
-  { label: "Marketing Page", href: "/mockups/livepeer-org/agent" },
+  { label: "Livepeer.org", href: "/mockups/livepeer-org" },
 ]
 
 export function StudioNavbar(props: NavbarProps) {
@@ -14,21 +14,33 @@ export function StudioNavbar(props: NavbarProps) {
     <>
       {props.renderDefault(props)}
       <Card borderTop padding={2}>
-        <Flex align="center" justify="flex-end" gap={1}>
-          {pageLinks.map((link) => (
-            <Box key={link.href}>
-              <Button
-                as="a"
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                mode="bleed"
-                padding={2}
-                text={link.label}
-                iconRight={ArrowUpRightIcon}
-              />
-            </Box>
-          ))}
+        <Flex align="center" justify="space-between" gap={2} wrap="wrap">
+          <Box>
+            <Button
+              as="a"
+              href="/docs"
+              mode="bleed"
+              padding={2}
+              text="Back to registry"
+              icon={ArrowLeftIcon}
+            />
+          </Box>
+          <Flex align="center" gap={1} wrap="wrap">
+            {pageLinks.map((link) => (
+              <Box key={link.href}>
+                <Button
+                  as="a"
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  mode="bleed"
+                  padding={2}
+                  text={link.label}
+                  iconRight={ArrowUpRightIcon}
+                />
+              </Box>
+            ))}
+          </Flex>
         </Flex>
       </Card>
     </>
