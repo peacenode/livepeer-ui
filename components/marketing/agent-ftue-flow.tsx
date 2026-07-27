@@ -87,21 +87,21 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
   )
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 md:py-12 lg:px-10">
-        <header className="mb-8">
-          <h1 className="text-3xl font-normal tracking-tight">
-            {content.title}
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {content.subtitle}
-          </p>
-        </header>
+    <article className="w-full">
+      <header className="mb-8">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          {content.title}
+        </h1>
+        <p className="mt-2 text-balance text-muted-foreground">
+          {content.subtitle}
+        </p>
+      </header>
 
-        <Tabs
-          value={String(activePhase)}
-          onValueChange={(value) => setActivePhase(Number(value))}
-        >
+      <Tabs
+        value={String(activePhase)}
+        onValueChange={(value) => setActivePhase(Number(value))}
+      >
+        <div className="max-w-full overflow-x-auto pb-1">
           <TabsList aria-label="Rollout phases">
             {content.phases.map((item, index) => (
               <TabsTrigger key={item._key} value={String(index)}>
@@ -109,75 +109,75 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
               </TabsTrigger>
             ))}
           </TabsList>
-        </Tabs>
+        </div>
+      </Tabs>
 
-        <section className="py-8">
-          <h2 className="font-sans text-2xl font-normal tracking-tight">
-            {phase.name}
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-            {phase.summary}
-          </p>
-          {phase.primaryCta && (
-            <div className="mt-4 flex items-center gap-2 text-sm font-medium">
-              <span>Primary CTA</span>
-              <Badge>{phase.primaryCta}</Badge>
-            </div>
-          )}
-          {phase.callout && (
-            <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0" />
-              <span>{phase.callout}</span>
-            </div>
-          )}
+      <section className="py-8">
+        <h2 className="font-sans text-2xl font-normal tracking-tight">
+          {phase.name}
+        </h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+          {phase.summary}
+        </p>
+        {phase.primaryCta && (
+          <div className="mt-4 flex items-center gap-2 text-sm font-medium">
+            <span>Primary CTA</span>
+            <Badge>{phase.primaryCta}</Badge>
+          </div>
+        )}
+        {phase.callout && (
+          <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
+            <TriangleAlert className="mt-0.5 size-4 shrink-0" />
+            <span>{phase.callout}</span>
+          </div>
+        )}
 
-          {marketingScreens.length > 0 && (
-            <section
-              aria-labelledby={`marketing-pages-${activePhase}`}
-              className="mt-10"
+        {marketingScreens.length > 0 && (
+          <section
+            aria-labelledby={`marketing-pages-${activePhase}`}
+            className="mt-10"
+          >
+            <h3
+              id={`marketing-pages-${activePhase}`}
+              className="font-sans text-2xl font-normal tracking-tight"
             >
-              <h3
-                id={`marketing-pages-${activePhase}`}
-                className="font-sans text-2xl font-normal tracking-tight"
-              >
-                Marketing pages
-              </h3>
-              <div className="mt-8 space-y-10">
-                {marketingScreens.map((screen) => (
-                  <ScreenRow
-                    key={screen._key}
-                    screen={screen}
-                    headingId={`screen-${activePhase}-${screen._key}`}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
+              Marketing pages
+            </h3>
+            <div className="mt-8 space-y-10">
+              {marketingScreens.map((screen) => (
+                <ScreenRow
+                  key={screen._key}
+                  screen={screen}
+                  headingId={`screen-${activePhase}-${screen._key}`}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
-          {userFlowScreens.length > 0 && (
-            <section
-              aria-labelledby={`user-flow-${activePhase}`}
-              className="mt-16"
+        {userFlowScreens.length > 0 && (
+          <section
+            aria-labelledby={`user-flow-${activePhase}`}
+            className="mt-16"
+          >
+            <h3
+              id={`user-flow-${activePhase}`}
+              className="font-sans text-2xl font-normal tracking-tight"
             >
-              <h3
-                id={`user-flow-${activePhase}`}
-                className="font-sans text-2xl font-normal tracking-tight"
-              >
-                User flow
-              </h3>
-              <div className="mt-8 space-y-10">
-                {userFlowScreens.map((screen) => (
-                  <ScreenRow
-                    key={screen._key}
-                    screen={screen}
-                    headingId={`screen-${activePhase}-${screen._key}`}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-        </section>
-      </div>
-    </main>
+              User flow
+            </h3>
+            <div className="mt-8 space-y-10">
+              {userFlowScreens.map((screen) => (
+                <ScreenRow
+                  key={screen._key}
+                  screen={screen}
+                  headingId={`screen-${activePhase}-${screen._key}`}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </section>
+    </article>
   )
 }
