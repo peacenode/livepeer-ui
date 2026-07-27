@@ -109,19 +109,17 @@ function PlannerDocuments({
 export function MarketingWeeks({ weeks }: { weeks: MarketingWeek[] }) {
   if (weeks.length === 0) {
     return (
-      <p className="border-t py-6 text-sm text-muted-foreground">
-        No weeks added yet.
-      </p>
+      <p className="py-6 text-sm text-muted-foreground">No weeks added yet.</p>
     )
   }
 
   return (
-    <Accordion className="overflow-visible rounded-none border-0 border-t [&_[data-slot=accordion-content]]:px-0">
+    <Accordion className="overflow-visible rounded-none border-0 [&_[data-slot=accordion-content]]:px-0">
       {weeks.map((week) => (
         <AccordionItem
           key={week._id}
           value={week.startsAt}
-          className="border-b data-open:bg-transparent"
+          className="relative border-0 after:absolute after:bottom-0 after:left-1/2 after:w-screen after:-translate-x-1/2 after:border-b data-open:bg-transparent"
         >
           <AccordionTrigger className="items-center px-0 py-6 font-sans text-base font-semibold hover:no-underline">
             <time dateTime={week.startsAt}>{displayDate(week.startsAt)}</time>
@@ -174,7 +172,7 @@ export function MarketingWeeks({ weeks }: { weeks: MarketingWeek[] }) {
 
 export function MarketingPlanner({ weeks }: { weeks: MarketingWeek[] }) {
   return (
-    <main className="min-h-svh bg-background font-sans text-foreground">
+    <main className="min-h-svh overflow-x-clip bg-background font-sans text-foreground">
       <nav className="border-b">
         <div className="flex h-16 w-full items-center px-5 sm:px-8">
           <Link
