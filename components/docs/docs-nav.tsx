@@ -20,21 +20,9 @@ export function DocsNav({
   const archivedClientGroup = componentGroups.find(
     (group) => group.title === "Client Archived"
   )
-
   const groups = [
     {
-      title: "Foundations",
-      items: [
-        { title: "Introduction", href: "/docs" },
-        { title: "Brand", href: "/docs/brand" },
-        { title: "Assets", href: "/docs/assets" },
-        { title: "Colors", href: "/docs/colors" },
-        { title: "Favorit Pro", href: "/docs/favorit-pro" },
-        { title: "Favorit Mono", href: "/docs/favorit-mono" },
-      ],
-    },
-    {
-      title: "Marketing",
+      title: "Sprint",
       items: [
         { title: "Planner", href: "/marketing/planner" },
         { title: "Social Kit", href: "/marketing/press-kit" },
@@ -44,11 +32,21 @@ export function DocsNav({
     },
     {
       title: "Pages",
-      external: true,
       items: [
-        { title: "Agent Waitlist", href: "/mockups/waitlist" },
-        { title: "Agent Console", href: "/mockups/livepeer-agent" },
-        { title: "Livepeer.org", href: "/mockups/livepeer-org" },
+        { title: "Agent Waitlist", href: "/docs/products/agent-waitlist" },
+        { title: "Agent Console", href: "/docs/products/agent-console" },
+        { title: "Livepeer.org", href: "/docs/products/livepeer-org" },
+      ],
+    },
+    {
+      title: "Foundations",
+      items: [
+        { title: "Introduction", href: "/docs" },
+        { title: "Brand", href: "/docs/brand" },
+        { title: "Assets", href: "/docs/assets" },
+        { title: "Colors", href: "/docs/colors" },
+        { title: "Favorit Pro", href: "/docs/favorit-pro" },
+        { title: "Favorit Mono", href: "/docs/favorit-mono" },
       ],
     },
     ...activeComponentGroups.map((group) => ({
@@ -97,7 +95,13 @@ export function DocsNav({
               href={item.href}
               onClick={onNavigate}
               target={
-                ("external" in item ? item.external : group.external)
+                (
+                  "external" in item
+                    ? item.external
+                    : "external" in group
+                      ? group.external
+                      : false
+                )
                   ? "_blank"
                   : undefined
               }
