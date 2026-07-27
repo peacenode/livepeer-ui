@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import {
-  ArrowLeft,
   ArrowRight,
   Check,
   CircleHelp,
@@ -13,7 +12,6 @@ import {
   UserRoundCheck,
 } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 type Screen = {
@@ -315,45 +313,26 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 
 export function AgentFtueFlow() {
   const [activePhase, setActivePhase] = useState(0)
-  const [activeScreen, setActiveScreen] = useState(0)
   const phase = phases[activePhase]
-  const screen = phase.screens[activeScreen]
-
-  useEffect(() => {
-    setActiveScreen(0)
-  }, [activePhase])
 
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 md:py-12 lg:px-10">
-        <header className="border-b pb-8">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-            Livepeer Agent
-          </p>
-          <h1 className="mt-3 text-balance text-3xl font-normal tracking-tight sm:text-4xl">
-            Rollout flows
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-            One screen at a time, with the work and decisions beside it.
+        <header className="mb-8">
+          <h1 className="text-3xl font-normal tracking-tight">Rollout flows</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Livepeer Agent beta stages
           </p>
         </header>
 
         <Tabs
           value={String(activePhase)}
           onValueChange={(value) => setActivePhase(Number(value))}
-          className="mt-8"
         >
-          <TabsList
-            aria-label="Rollout phases"
-            className="h-auto w-full rounded-lg p-1"
-          >
+          <TabsList aria-label="Rollout phases">
             {phases.map((item, index) => (
-              <TabsTrigger
-                key={item.number}
-                value={String(index)}
-                className="h-auto min-w-0 rounded-md px-2 py-2.5 sm:px-4"
-              >
-                <span className="text-xs sm:text-sm">{item.name}</span>
+              <TabsTrigger key={item.number} value={String(index)}>
+                {item.name}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -374,106 +353,97 @@ export function AgentFtueFlow() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] lg:items-start">
-            <div className="min-w-0">
-              <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                <div className="flex h-9 items-center gap-1.5 border-b bg-muted/40 px-3">
-                  <span className="size-2.5 rounded-full bg-border" />
-                  <span className="size-2.5 rounded-full bg-border" />
-                  <span className="size-2.5 rounded-full bg-border" />
-                  <span className="ml-2 h-4 flex-1 rounded-sm bg-border/60" />
-                </div>
-                <div className="aspect-video">
-                  <ScreenMockup type={screen.mockup} />
-                </div>
-              </div>
+          <div className="mt-10 space-y-16">
+            {phase.screens.map((screen, index) => (
+              <section
+                key={screen.title}
+                aria-labelledby={`screen-${activePhase}-${index}`}
+                className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] lg:items-start"
+              >
+                <div className="min-w-0">
+                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+                    <div className="flex h-9 items-center gap-1.5 border-b bg-muted/40 px-3">
+                      <span className="size-2.5 rounded-full bg-border" />
+                      <span className="size-2.5 rounded-full bg-border" />
+                      <span className="size-2.5 rounded-full bg-border" />
+                      <span className="ml-2 h-4 flex-1 rounded-sm bg-border/60" />
+                    </div>
+                    <div className="aspect-video">
+                      <ScreenMockup type={screen.mockup} />
+                    </div>
+                  </div>
 
-              <div className="mt-4 flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-mono text-xs text-muted-foreground">
-                    Screen {activeScreen + 1} of {phase.screens.length}
-                  </p>
-                  <h3 className="mt-1 text-lg font-medium">{screen.title}</h3>
-                  <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
-                    {screen.description}
-                  </p>
-                </div>
-                <div className="flex shrink-0 gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="Previous screen"
-                    disabled={activeScreen === 0}
-                    onClick={() => setActiveScreen((value) => value - 1)}
-                  >
-                    <ArrowLeft />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="Next screen"
-                    disabled={activeScreen === phase.screens.length - 1}
-                    onClick={() => setActiveScreen((value) => value + 1)}
-                  >
-                    <ArrowRight />
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <aside className="rounded-lg border p-5 lg:sticky lg:top-6">
-              <div className="flex items-center gap-2">
-                {screen.mockup === "oauth" ? (
-                  <KeyRound className="size-4" />
-                ) : screen.mockup === "console" ? (
-                  <UserRoundCheck className="size-4" />
-                ) : (
-                  <Monitor className="size-4" />
-                )}
-                <h3 className="font-sans text-sm font-medium">Notes</h3>
-              </div>
-
-              <div className="mt-5">
-                <p className="text-xs font-medium text-muted-foreground">
-                  User action
-                </p>
-                <p className="mt-1 text-sm font-medium">{screen.action}</p>
-              </div>
-
-              <div className="mt-6 border-t pt-5">
-                <p className="text-xs font-medium text-muted-foreground">
-                  What needs to happen
-                </p>
-                <ul className="mt-3 space-y-3">
-                  {screen.needs.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-2.5 text-sm leading-5"
+                  <div className="mt-4">
+                    <p className="font-mono text-xs text-muted-foreground">
+                      Screen {index + 1}
+                    </p>
+                    <h3
+                      id={`screen-${activePhase}-${index}`}
+                      className="mt-1 text-lg font-medium"
                     >
-                      <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      {screen.title}
+                    </h3>
+                    <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
+                      {screen.description}
+                    </p>
+                  </div>
+                </div>
 
-              <div className="mt-6 border-t pt-5">
-                <p className="text-xs font-medium text-muted-foreground">
-                  Open questions
-                </p>
-                <ul className="mt-3 space-y-3">
-                  {screen.questions.map((question) => (
-                    <li
-                      key={question}
-                      className="flex gap-2.5 text-sm leading-5"
-                    >
-                      <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                      <span>{question}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </aside>
+                <aside className="rounded-lg border p-5">
+                  <div className="flex items-center gap-2">
+                    {screen.mockup === "oauth" ? (
+                      <KeyRound className="size-4" />
+                    ) : screen.mockup === "console" ? (
+                      <UserRoundCheck className="size-4" />
+                    ) : (
+                      <Monitor className="size-4" />
+                    )}
+                    <h4 className="font-sans text-sm font-medium">Notes</h4>
+                  </div>
+
+                  <div className="mt-5">
+                    <p className="text-xs font-medium text-muted-foreground">
+                      User action
+                    </p>
+                    <p className="mt-1 text-sm font-medium">{screen.action}</p>
+                  </div>
+
+                  <div className="mt-6 border-t pt-5">
+                    <p className="text-xs font-medium text-muted-foreground">
+                      What needs to happen
+                    </p>
+                    <ul className="mt-3 space-y-3">
+                      {screen.needs.map((item) => (
+                        <li
+                          key={item}
+                          className="flex gap-2.5 text-sm leading-5"
+                        >
+                          <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 border-t pt-5">
+                    <p className="text-xs font-medium text-muted-foreground">
+                      Open questions
+                    </p>
+                    <ul className="mt-3 space-y-3">
+                      {screen.questions.map((question) => (
+                        <li
+                          key={question}
+                          className="flex gap-2.5 text-sm leading-5"
+                        >
+                          <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                          <span>{question}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </aside>
+              </section>
+            ))}
           </div>
         </section>
       </div>
