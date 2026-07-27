@@ -5,7 +5,8 @@ const client = getCliClient({ apiVersion: "2026-07-26" })
 const labelReplacements = {
   "Billing/API mockup": "Agent Console",
   "Marketing page mockup": "Marketing Page",
-  "Waitlist mockup": "Waitlist",
+  "Waitlist mockup": "Agent Waitlist",
+  Waitlist: "Agent Waitlist",
   "Livepeer.org mockup": "Livepeer.org",
   "Client mockup": "Client",
 }

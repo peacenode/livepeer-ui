@@ -50,7 +50,7 @@ const weeks = [
       item(
         "Waitlist launch readiness",
         "Waitlist ready to go live",
-        [link("Waitlist", "/mockups/waitlist")]
+        [link("Agent Waitlist", "/mockups/waitlist")]
       ),
     ],
     outreach: [
@@ -76,7 +76,7 @@ const weeks = [
     startsAt: "2026-08-03",
     outcomes: [
       item("Waitlist launch", "Waitlist goes live", [
-        link("Waitlist", "/mockups/waitlist"),
+        link("Agent Waitlist", "/mockups/waitlist"),
       ]),
       item("Pitch-form tracking", "Inbound pitch forms are tracked"),
       item("Integration fixes", "Integrations fixed", [

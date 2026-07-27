@@ -726,7 +726,7 @@
     {
       "name": "waitlist-panel",
       "type": "registry:block",
-      "title": "Waitlist Panel",
+      "title": "Agent Waitlist Panel",
       "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
       "dependencies": [
         "lucide-react",

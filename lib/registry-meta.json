@@ -38,7 +38,7 @@
   ],
   "catalog": [
     {
-      "title": "Waitlist",
+      "title": "Agent Waitlist",
       "items": [
         {
           "name": "waitlist-signup-form",
@@ -74,7 +74,7 @@
         },
         {
           "name": "waitlist-panel",
-          "title": "Waitlist Panel",
+          "title": "Agent Waitlist Panel",
           "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
           "level": "section",
           "uses": ["waitlist-signup-form", "waitlist-status-card", "waitlist-referral-link", "waitlist-leaderboard"],

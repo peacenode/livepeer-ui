@@ -46,7 +46,7 @@ export function DocsNav({
       title: "Pages",
       external: true,
       items: [
-        { title: "Waitlist", href: "/mockups/waitlist" },
+        { title: "Agent Waitlist", href: "/mockups/waitlist" },
         { title: "Agent Console", href: "/mockups/livepeer-agent" },
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
