@@ -726,7 +726,7 @@
     {
       "name": "waitlist-panel",
       "type": "registry:block",
-      "title": "Waitlist Panel",
+      "title": "Agent Waitlist Panel",
       "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
       "dependencies": [
         "lucide-react",
@@ -861,7 +861,7 @@
       "name": "user-menu",
       "type": "registry:component",
       "title": "User Menu",
-      "description": "Account, theme, settings, and sign-out menu used by the Billing/API sidebar.",
+      "description": "Account, theme, settings, and sign-out menu used by the Agent Console sidebar.",
       "dependencies": [
         "lucide-react",
         "next",
@@ -883,7 +883,7 @@
       "name": "livepeer-agent-auth-gate",
       "type": "registry:block",
       "title": "Authentication Gate",
-      "description": "Authentication overlay with the Billing/API sign-in card and contained preview support.",
+      "description": "Authentication overlay with the Agent Console sign-in card and contained preview support.",
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
         "http://localhost:3000/r/input.json"
@@ -976,7 +976,7 @@
       "name": "api-logs-section",
       "type": "registry:block",
       "title": "API Logs",
-      "description": "Search, error filtering, and request log table for Billing/API activity.",
+      "description": "Search, error filtering, and request log table for Agent Console activity.",
       "registryDependencies": [
         "http://localhost:3000/r/input.json",
         "http://localhost:3000/r/label.json",

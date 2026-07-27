@@ -117,10 +117,27 @@ function LivepeerGradientLockup(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+function RegistryUiMark(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 103.11 45.53"
+      fill="currentColor"
+      role="img"
+      aria-label="UI"
+      {...props}
+    >
+      <path d="M1.53,22.64L9.33,0h18.87l-7.97,23.19c-4.08,11.87-.91,16.98,14.18,16.98s21.18-2.62,25.26-14.55L68.43,0h4.81l-8.76,25.62c-5.54,16.07-13.27,19.9-36.34,19.9S-3.88,38.41,1.53,22.64Z" />
+      <path d="M84.79,0h18.32l-15.46,44.92h-18.32L84.79,0Z" />
+    </svg>
+  )
+}
+
 export {
   LivepeerSymbol,
   LivepeerGradientSymbol,
   LivepeerWordmark,
   LivepeerLockup,
   LivepeerGradientLockup,
+  RegistryUiMark,
 }

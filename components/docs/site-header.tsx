@@ -1,6 +1,10 @@
 import Link from "next/link"
 
-import { LivepeerLockup } from "@/components/brand"
+import {
+  LivepeerGradientSymbol,
+  LivepeerWordmark,
+  RegistryUiMark,
+} from "@/components/brand"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { MobileNav } from "@/components/docs/mobile-nav"
 
@@ -12,9 +16,16 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="Livepeer UI home"
-          className="flex items-center"
+          className="flex items-center gap-2"
         >
-          <LivepeerLockup className="h-3.5 w-auto" />
+          <span className="flex items-center gap-1.5 text-foreground">
+            <LivepeerGradientSymbol className="h-3.5 w-auto" />
+            <LivepeerWordmark className="h-3.5 w-auto" />
+          </span>
+          <RegistryUiMark
+            className="h-[9px] w-auto self-end"
+            aria-hidden="true"
+          />
         </Link>
         <div className="ml-auto flex items-center">
           <ThemeToggle />

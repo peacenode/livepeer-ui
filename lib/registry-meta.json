@@ -38,7 +38,7 @@
   ],
   "catalog": [
     {
-      "title": "Waitlist",
+      "title": "Agent Waitlist",
       "items": [
         {
           "name": "waitlist-signup-form",
@@ -74,7 +74,7 @@
         },
         {
           "name": "waitlist-panel",
-          "title": "Waitlist Panel",
+          "title": "Agent Waitlist Panel",
           "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
           "level": "section",
           "uses": ["waitlist-signup-form", "waitlist-status-card", "waitlist-referral-link", "waitlist-leaderboard"],
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "title": "Billing/API",
+      "title": "Agent Console",
       "items": [
         {
           "name": "livepeer-agent-page-frame",
@@ -129,7 +129,7 @@
         {
           "name": "user-menu",
           "title": "User Menu",
-          "description": "Account, theme, settings, and sign-out menu used by the Billing/API sidebar.",
+          "description": "Account, theme, settings, and sign-out menu used by the Agent Console sidebar.",
           "level": "component",
           "uses": ["avatar", "dropdown-menu", "toggle-group"],
           "files": ["components/mockups/user-menu.tsx"]
@@ -137,7 +137,7 @@
         {
           "name": "livepeer-agent-auth-gate",
           "title": "Authentication Gate",
-          "description": "Authentication overlay with the Billing/API sign-in card and contained preview support.",
+          "description": "Authentication overlay with the Agent Console sign-in card and contained preview support.",
           "level": "section",
           "uses": ["livepeer-agent-sign-in-card"],
           "files": [
@@ -172,7 +172,7 @@
         {
           "name": "api-logs-section",
           "title": "API Logs",
-          "description": "Search, error filtering, and request log table for Billing/API activity.",
+          "description": "Search, error filtering, and request log table for Agent Console activity.",
           "level": "section",
           "uses": ["input", "label", "switch", "table"],
           "files": ["components/mockups/api-logs-section.tsx"]

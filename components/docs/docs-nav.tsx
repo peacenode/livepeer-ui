@@ -43,11 +43,11 @@ export function DocsNav({
       ],
     },
     {
-      title: "Mockups",
+      title: "Pages",
       external: true,
       items: [
-        { title: "Waitlist", href: "/mockups/waitlist" },
-        { title: "Billing/API", href: "/mockups/livepeer-agent" },
+        { title: "Agent Waitlist", href: "/mockups/waitlist" },
+        { title: "Agent Console", href: "/mockups/livepeer-agent" },
         { title: "Livepeer.org", href: "/mockups/livepeer-org" },
       ],
     },
@@ -71,7 +71,7 @@ export function DocsNav({
             title: archivedClientGroup.title,
             items: [
               {
-                title: "Client Mockup",
+                title: "Client Archive",
                 href: "/mockups/client",
                 external: true,
               },
