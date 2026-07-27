@@ -21,7 +21,14 @@ type Screen = {
   title: string
   description: string
   action: string
-  mockup: "marketing" | "waitlist" | "oauth" | "agent" | "console" | "website"
+  mockup:
+    | "marketing"
+    | "waitlist"
+    | "oauth"
+    | "agent"
+    | "results"
+    | "console"
+    | "website"
   needs: string[]
   questions: string[]
 }
@@ -41,7 +48,7 @@ const phases: Phase[] = [
     name: "Private beta",
     timing: "External gate",
     summary:
-      "A user visits the Agent marketing page, joins the waitlist, opens the Agent, and authenticates with an approved email when the Agent connects to the MCP.",
+      "A user joins the waitlist, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
@@ -96,6 +103,32 @@ const phases: Phase[] = [
         ],
         questions: ["How quickly does an approved email reach the auth gate?"],
       },
+      {
+        title: "Generate with the Agent",
+        description:
+          "After OAuth, the user returns to the Agent and asks it to generate.",
+        action: "Enter a generation prompt",
+        mockup: "agent",
+        needs: [
+          "Return the user to the same Agent session",
+          "Confirm that the MCP is connected",
+          "Give progress while the generation runs",
+        ],
+        questions: ["Does OAuth preserve the active Agent session?"],
+      },
+      {
+        title: "Open generated results",
+        description:
+          "The Agent returns a link where the user can review and download the generated images.",
+        action: "Open results link",
+        mockup: "results",
+        needs: [
+          "Return a stable results link in the Agent",
+          "Show every generated image",
+          "Make images easy to open or download",
+        ],
+        questions: ["How long should a results link remain available?"],
+      },
     ],
   },
   {
@@ -103,7 +136,7 @@ const phases: Phase[] = [
     name: "Expanded beta",
     timing: "Agent Console",
     summary:
-      "A user visits the Agent marketing page, signs in to the Agent Console, opens the Agent, and completes MCP OAuth when the Agent connects.",
+      "A user signs in to the Agent Console, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
     screens: [
       {
         title: "Agent marketing page",
@@ -155,6 +188,32 @@ const phases: Phase[] = [
           "Confirm a successful connection",
         ],
         questions: ["Which clients ship in the first Console release?"],
+      },
+      {
+        title: "Generate with the Agent",
+        description:
+          "After OAuth, the user returns to the Agent and asks it to generate.",
+        action: "Enter a generation prompt",
+        mockup: "agent",
+        needs: [
+          "Return the user to the same Agent session",
+          "Confirm that the MCP is connected",
+          "Show progress while the generation runs",
+        ],
+        questions: ["Does the Console record the generation automatically?"],
+      },
+      {
+        title: "Open generated results",
+        description:
+          "The Agent returns a link where the user can review and download the generated images.",
+        action: "Open results link",
+        mockup: "results",
+        needs: [
+          "Return a stable results link in the Agent",
+          "Associate the results with the Console user",
+          "Make images easy to open or download",
+        ],
+        questions: ["Do results also appear inside the Agent Console?"],
       },
     ],
   },
@@ -331,6 +390,60 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
       <div className="relative flex h-full items-center justify-center overflow-hidden bg-muted/30">
         <div className="origin-center scale-[0.34] sm:scale-50 md:scale-[0.58]">
           <LivepeerAgentSignInCard content={agentConsoleShellFixture.auth} />
+        </div>
+      </div>
+    )
+  }
+
+  if (type === "results") {
+    const resultImages = [
+      "/playbooks/20260726-2311-campaign-video/generate.png",
+      "/playbooks/20260726-2311-campaign-video/edit.png",
+      "/playbooks/20260726-2311-campaign-video/augment.png",
+    ]
+
+    return (
+      <div className="flex h-full flex-col bg-background">
+        <div className="flex items-center justify-between border-b px-[5%] py-[3%]">
+          <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
+          <span className="font-mono text-[7px] text-muted-foreground sm:text-[10px]">
+            Generation results
+          </span>
+        </div>
+        <div className="flex-1 p-[5%]">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[7px] text-muted-foreground sm:text-[10px]">
+                Completed
+              </p>
+              <h2 className="mt-1 text-sm font-medium sm:text-xl">
+                Your generated images
+              </h2>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-6 rounded-sm px-2 text-[8px] sm:h-8 sm:text-xs"
+            >
+              Download all
+            </Button>
+          </div>
+          <div className="mt-[4%] grid grid-cols-3 gap-[2%]">
+            {resultImages.map((src, index) => (
+              <div
+                key={src}
+                className="relative aspect-video overflow-hidden rounded-sm border bg-muted"
+              >
+                <Image
+                  src={src}
+                  alt={`Generated result ${index + 1}`}
+                  fill
+                  sizes="20vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
