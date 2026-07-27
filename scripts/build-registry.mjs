@@ -7,7 +7,8 @@ const root = process.cwd()
 const meta = JSON.parse(
   fs.readFileSync(path.join(root, "lib/registry-meta.json"), "utf8"),
 )
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL ?? "https://livepeer.peaceno.de"
 
 const IGNORED_DEPS = new Set(["react", "react-dom"])
 

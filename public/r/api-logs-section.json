@@ -4,10 +4,10 @@
   "title": "API Logs",
   "description": "Search, error filtering, and request log table for Agent Console activity.",
   "registryDependencies": [
-    "http://localhost:3000/r/input.json",
-    "http://localhost:3000/r/label.json",
-    "http://localhost:3000/r/switch.json",
-    "http://localhost:3000/r/table.json"
+    "https://livepeer.peaceno.de/r/input.json",
+    "https://livepeer.peaceno.de/r/label.json",
+    "https://livepeer.peaceno.de/r/switch.json",
+    "https://livepeer.peaceno.de/r/table.json"
   ],
   "files": [
     {

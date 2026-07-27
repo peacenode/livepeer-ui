@@ -4,9 +4,9 @@
   "title": "Invoice Table",
   "description": "Reusable invoice history with status and download actions.",
   "registryDependencies": [
-    "http://localhost:3000/r/badge.json",
-    "http://localhost:3000/r/button.json",
-    "http://localhost:3000/r/table.json"
+    "https://livepeer.peaceno.de/r/badge.json",
+    "https://livepeer.peaceno.de/r/button.json",
+    "https://livepeer.peaceno.de/r/table.json"
   ],
   "files": [
     {

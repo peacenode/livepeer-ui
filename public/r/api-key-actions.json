@@ -4,10 +4,10 @@
   "title": "API Key Creation Dialog",
   "description": "Controlled API-key creation dialog with validation and responsive actions.",
   "registryDependencies": [
-    "http://localhost:3000/r/button.json",
-    "http://localhost:3000/r/dialog.json",
-    "http://localhost:3000/r/input.json",
-    "http://localhost:3000/r/label.json"
+    "https://livepeer.peaceno.de/r/button.json",
+    "https://livepeer.peaceno.de/r/dialog.json",
+    "https://livepeer.peaceno.de/r/input.json",
+    "https://livepeer.peaceno.de/r/label.json"
   ],
   "files": [
     {

@@ -7,9 +7,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "http://localhost:3000/r/alert-dialog.json",
-    "http://localhost:3000/r/alert.json",
-    "http://localhost:3000/r/button.json"
+    "https://livepeer.peaceno.de/r/alert-dialog.json",
+    "https://livepeer.peaceno.de/r/alert.json",
+    "https://livepeer.peaceno.de/r/button.json"
   ],
   "files": [
     {

@@ -4,7 +4,7 @@
   "title": "Daily Usage Table",
   "description": "Daily workflow, compute, and credit consumption table.",
   "registryDependencies": [
-    "http://localhost:3000/r/table.json"
+    "https://livepeer.peaceno.de/r/table.json"
   ],
   "files": [
     {
