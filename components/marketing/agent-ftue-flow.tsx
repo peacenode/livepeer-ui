@@ -5,10 +5,7 @@ import { useState } from "react"
 import {
   Check,
   CircleHelp,
-  KeyRound,
-  Monitor,
   TriangleAlert,
-  UserRoundCheck,
 } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
@@ -445,39 +442,18 @@ export function AgentFtueFlow() {
               <section
                 key={screen.title}
                 aria-labelledby={`screen-${activePhase}-${index}`}
-                className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] lg:items-start"
+                className="grid gap-8 lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,2fr)] lg:items-start"
               >
-                <div className="min-w-0">
-                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                    <div className="aspect-video">
-                      <ScreenMockup type={screen.mockup} />
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <h3
-                      id={`screen-${activePhase}-${index}`}
-                      className="mt-1 text-lg font-medium"
-                    >
-                      {screen.title}
-                    </h3>
-                    <p className="mt-1 max-w-2xl text-sm leading-6 text-muted-foreground">
-                      {screen.description}
-                    </p>
-                  </div>
-                </div>
-
-                <aside className="rounded-lg border p-5">
-                  <div className="flex items-center gap-2">
-                    {screen.mockup === "oauth" ? (
-                      <KeyRound className="size-4" />
-                    ) : screen.mockup === "console" ? (
-                      <UserRoundCheck className="size-4" />
-                    ) : (
-                      <Monitor className="size-4" />
-                    )}
-                    <h4 className="font-sans text-sm font-medium">Notes</h4>
-                  </div>
+                <aside>
+                  <h3
+                    id={`screen-${activePhase}-${index}`}
+                    className="text-lg font-medium"
+                  >
+                    {screen.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    {screen.description}
+                  </p>
 
                   <div className="mt-5">
                     <p className="text-xs font-medium text-muted-foreground">
@@ -486,7 +462,7 @@ export function AgentFtueFlow() {
                     <p className="mt-1 text-sm font-medium">{screen.action}</p>
                   </div>
 
-                  <div className="mt-6 border-t pt-5">
+                  <div className="mt-7">
                     <p className="text-xs font-medium text-muted-foreground">
                       What needs to happen
                     </p>
@@ -503,7 +479,7 @@ export function AgentFtueFlow() {
                     </ul>
                   </div>
 
-                  <div className="mt-6 border-t pt-5">
+                  <div className="mt-7">
                     <p className="text-xs font-medium text-muted-foreground">
                       Open questions
                     </p>
@@ -520,6 +496,14 @@ export function AgentFtueFlow() {
                     </ul>
                   </div>
                 </aside>
+
+                <div className="min-w-0">
+                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+                    <div className="aspect-video">
+                      <ScreenMockup type={screen.mockup} />
+                    </div>
+                  </div>
+                </div>
               </section>
             ))}
           </div>
