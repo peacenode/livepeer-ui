@@ -14,7 +14,7 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 type Screen = {
   title: string
@@ -38,7 +38,7 @@ const phases: Phase[] = [
   {
     number: "1",
     name: "Private beta",
-    timing: "Ship first",
+    timing: "External gate",
     summary:
       "Use the external waitlist as a temporary gate. Do not share the MCP publicly.",
     flow: "Marketing page → Waitlist → MCP OAuth → Agent",
@@ -99,8 +99,8 @@ const phases: Phase[] = [
   },
   {
     number: "2",
-    name: "Agent Console",
-    timing: "Get up ASAP",
+    name: "Expanded beta",
+    timing: "Agent Console",
     summary:
       "Replace the waitlist handoff with an owned access and onboarding surface.",
     flow: "Marketing page → Agent Console → MCP OAuth → Agent",
@@ -160,8 +160,8 @@ const phases: Phase[] = [
   },
   {
     number: "3",
-    name: "livepeer.org",
-    timing: "Full website update",
+    name: "Public beta",
+    timing: "livepeer.org",
     summary:
       "Make the Agent a first-class Livepeer product once the onboarding path is ready.",
     flow: "livepeer.org → Agent page → Agent Console → Agent",
@@ -338,31 +338,26 @@ export function AgentFtueFlow() {
           </p>
         </header>
 
-        <nav
-          aria-label="Rollout phases"
-          className="grid border-b sm:grid-cols-3"
+        <Tabs
+          value={String(activePhase)}
+          onValueChange={(value) => setActivePhase(Number(value))}
+          className="mt-8"
         >
-          {phases.map((item, index) => (
-            <button
-              key={item.number}
-              type="button"
-              onClick={() => setActivePhase(index)}
-              className={cn(
-                "border-b-2 px-4 py-5 text-left transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:px-5",
-                index === activePhase
-                  ? "border-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <span className="block font-mono text-xs">
-                Phase {item.number} · {item.timing}
-              </span>
-              <span className="mt-1 block text-sm font-medium">
-                {item.name}
-              </span>
-            </button>
-          ))}
-        </nav>
+          <TabsList
+            aria-label="Rollout phases"
+            className="h-auto w-full rounded-lg p-1"
+          >
+            {phases.map((item, index) => (
+              <TabsTrigger
+                key={item.number}
+                value={String(index)}
+                className="h-auto min-w-0 rounded-md px-2 py-2.5 sm:px-4"
+              >
+                <span className="text-xs sm:text-sm">{item.name}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
 
         <section className="py-8">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
