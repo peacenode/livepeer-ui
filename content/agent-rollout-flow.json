@@ -89,7 +89,7 @@
           "title": "Waitlist",
           "imagePath": "/flow-references/20260727-183925/agent-waitlist.png",
           "imageAlt": "Livepeer Agent early-access waitlist",
-          "mockupHref": "/mockups/waitlist",
+          "mockupHref": "/docs/mockups/agent-waitlist",
           "needs": ["Collect an email", "Export approved emails for the auth gate", "Send a clear confirmation"]
         },
         {
