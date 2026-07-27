@@ -40,7 +40,7 @@ export interface AgentConsoleEditorialPage {
 }
 
 const mockupRoundupQuery = defineQuery(`
-  *[_type == "mockupRoundup" && slug.current == $slug][0] {
+  *[_type == "mockupRoundup" && _id == $id][0] {
     _id,
     "slug": slug.current,
     title,
@@ -50,7 +50,7 @@ const mockupRoundupQuery = defineQuery(`
 `)
 
 const agentConsoleEditorialPageQuery = defineQuery(`
-  *[_type == "agentConsoleEditorialPage" && page == $page][0] {
+  *[_type == "agentConsoleEditorialPage" && _id == $id][0] {
     _id,
     page,
     heading,
@@ -86,7 +86,7 @@ const registryContentFetchOptions = {
 export function getMockupRoundup(slug: MockupRoundupSlug) {
   return sanityClient.fetch<MockupRoundup | null>(
     mockupRoundupQuery,
-    { slug },
+    { id: `mockupRoundup-${slug}` },
     registryContentFetchOptions
   )
 }
@@ -96,7 +96,7 @@ export function getAgentConsoleEditorialPage(
 ) {
   return sanityClient.fetch<AgentConsoleEditorialPage | null>(
     agentConsoleEditorialPageQuery,
-    { page },
+    { id: `agentConsoleEditorialPage-${page}` },
     registryContentFetchOptions
   )
 }
