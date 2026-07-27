@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 import {
   ArrowRight,
@@ -13,9 +14,7 @@ import {
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
-import { waitlistContentFixture } from "@/components/demos/waitlist-content-fixture"
 import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
-import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -316,29 +315,14 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 
   if (type === "waitlist") {
     return (
-      <div className="dark flex h-full items-center justify-end overflow-hidden bg-black p-[5%] text-white">
-        <div className="mr-[3%] w-[52%] rounded-lg border border-white/20 bg-white/[0.055] p-[5%] shadow-2xl backdrop-blur-md">
-          <div className="flex items-end gap-1.5 text-white">
-            <LivepeerGradientLockup className="h-3 w-auto sm:h-4" />
-            <span className="font-agent text-[9px] leading-none sm:text-xs">
-              AGENT
-            </span>
-          </div>
-          <h2 className="mt-[9%] text-[clamp(.9rem,2.7vw,2rem)] leading-none font-light">
-            {waitlistContentFixture.panel.heading}
-          </h2>
-          <p className="mt-[5%] line-clamp-2 text-[7px] leading-relaxed text-white/60 sm:text-[10px]">
-            {waitlistContentFixture.panel.description}
-          </p>
-          <div className="mt-[8%] origin-top-left scale-[0.55] sm:scale-75">
-            <div className="w-[180%] sm:w-[133%]">
-              <WaitlistSignupForm
-                {...waitlistContentFixture.signupForm}
-                onJoin={() => undefined}
-              />
-            </div>
-          </div>
-        </div>
+      <div className="relative h-full overflow-hidden bg-black">
+        <Image
+          src="/flow-references/20260727-183736/agent-waitlist.png"
+          alt="Livepeer Agent early access waitlist"
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="object-contain"
+        />
       </div>
     )
   }
