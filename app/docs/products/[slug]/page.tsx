@@ -77,7 +77,7 @@ export default async function ProductComponentsPage({
             fill
             priority
             sizes="(min-width: 768px) 768px, calc(100vw - 32px)"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+            className="scale-[0.72] object-cover transition-transform duration-300 group-hover:scale-[0.73]"
           />
           <div
             className="pointer-events-none absolute inset-0"
