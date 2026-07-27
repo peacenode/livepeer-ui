@@ -47,7 +47,7 @@
           "_key": "oauth",
           "section": "userFlow",
           "title": "OAuth with waitlisted email",
-          "imagePath": "/flow-references/20260727-201500-sanity/oauth.png",
+          "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
           "needs": ["Check the email against the approved list", "Connect authentication to usage tracking"]
@@ -97,7 +97,7 @@
           "_key": "oauth",
           "section": "userFlow",
           "title": "MCP OAuth",
-          "imagePath": "/flow-references/20260727-201500-sanity/oauth.png",
+          "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
           "needs": ["Authenticate the user", "Connect authentication to usage tracking"]

@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { createHash } from "node:crypto"
 import { fileURLToPath } from "node:url"
 
 import { getCliClient } from "sanity/cli"
@@ -13,10 +14,15 @@ const source = JSON.parse(
     "utf8"
   )
 )
+const replaceExisting = process.argv.includes("--replace")
 
 async function uploadImage(imagePath, alt) {
   const absolutePath = path.join(projectRoot, "public", imagePath)
-  const filename = `agent-rollout-${path.basename(imagePath)}`
+  const digest = createHash("sha1")
+    .update(fs.readFileSync(absolutePath))
+    .digest("hex")
+    .slice(0, 12)
+  const filename = `agent-rollout-${digest}-${path.basename(imagePath)}`
   const existing = await client.fetch(
     `*[_type == "sanity.imageAsset" && originalFilename == $filename][0]._id`,
     { filename }
@@ -59,14 +65,20 @@ for (const phase of source.phases) {
   })
 }
 
-await client.createIfNotExists({
+const document = {
   _id: source._id,
   _type: "agentRolloutFlow",
   title: source.title,
   subtitle: source.subtitle,
   phases,
-})
+}
 
-console.log(
-  "Agent rollout flow is ready. Existing Sanity content was left unchanged."
-)
+if (replaceExisting) {
+  await client.createOrReplace(document)
+  console.log("Agent rollout flow was replaced from the local source.")
+} else {
+  await client.createIfNotExists(document)
+  console.log(
+    "Agent rollout flow is ready. Existing Sanity content was left unchanged."
+  )
+}
