@@ -58,8 +58,8 @@
           "_key": "user-interview",
           "section": "userFlow",
           "title": "User interview",
-          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
-          "imageAlt": "Generation results reviewed during the user interview",
+          "imagePath": "/flow-references/20260727-194600-user-interview/user-interview.png",
+          "imageAlt": "Google Meet link for the user interview",
           "needs": [
             "Schedule a follow-up with the tester",
             "Review the install and generation experience",
