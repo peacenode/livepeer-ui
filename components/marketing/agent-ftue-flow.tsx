@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { Check, TriangleAlert } from "lucide-react"
+import { Check, Mail, TriangleAlert } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
@@ -17,6 +17,7 @@ type Screen = {
   mockup:
     | "marketing"
     | "waitlist"
+    | "email"
     | "oauth"
     | "agent"
     | "results"
@@ -42,7 +43,7 @@ const phases: Phase[] = [
     name: "Private beta",
     timing: "External gate",
     summary:
-      "A user joins the waitlist, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
+      "A user joins the waitlist, receives an access email, runs Claude, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
     userFlowDescription:
       "In phase 1, we will reach out to people on the waitlist directly and give them a private link.",
     callout: "Do not share the MCP publicly during the private beta.",
@@ -68,6 +69,19 @@ const phases: Phase[] = [
           "Send a clear confirmation",
         ],
         questions: ["Who decides which emails get access?"],
+      },
+      {
+        title: "Receive access email",
+        description:
+          "Once approved, the user receives an email telling them that they can access the private beta.",
+        action: "Open access email",
+        mockup: "email",
+        needs: [
+          "Send the email when a waitlisted user is approved",
+          "Include the MCP setup instructions",
+          "Give the user one clear next action",
+        ],
+        questions: ["What triggers the access email?"],
       },
       {
         title: "Add the MCP to their Agent",
@@ -338,6 +352,43 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
           sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-contain"
         />
+      </div>
+    )
+  }
+
+  if (type === "email") {
+    return (
+      <div className="flex h-full items-center justify-center bg-muted/30 p-[7%]">
+        <div className="w-[72%] overflow-hidden rounded-lg border bg-background shadow-sm">
+          <div className="flex items-center gap-3 border-b px-[6%] py-[4%]">
+            <div className="flex size-8 items-center justify-center rounded-full bg-foreground text-background sm:size-10">
+              <Mail className="size-4" />
+            </div>
+            <div>
+              <p className="text-[8px] font-medium sm:text-xs">
+                You have access to Livepeer Agent
+              </p>
+              <p className="mt-1 text-[7px] text-muted-foreground sm:text-[10px]">
+                Livepeer Agent
+              </p>
+            </div>
+          </div>
+          <div className="p-[7%]">
+            <h2 className="text-sm font-medium sm:text-xl">
+              Welcome to the private beta
+            </h2>
+            <p className="mt-[4%] max-w-md text-[8px] leading-relaxed text-muted-foreground sm:text-xs">
+              Your email has been approved. Add the Livepeer MCP to Claude to
+              start creating.
+            </p>
+            <Button
+              size="sm"
+              className="mt-[6%] h-7 rounded-sm px-3 text-[8px] sm:h-8 sm:text-xs"
+            >
+              Add to Claude
+            </Button>
+          </div>
+        </div>
       </div>
     )
   }
