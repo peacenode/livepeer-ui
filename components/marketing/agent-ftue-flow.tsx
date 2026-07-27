@@ -109,7 +109,7 @@ const phases: Phase[] = [
         questions: ["How quickly does an approved email reach the auth gate?"],
       },
       {
-        title: "Connection successful & prompt submitted",
+        title: "Returns to session",
         description:
           "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
         action: "Submit generation prompt",
@@ -191,7 +191,7 @@ const phases: Phase[] = [
         questions: ["Which clients ship in the first Console release?"],
       },
       {
-        title: "Connection successful & prompt submitted",
+        title: "Returns to session",
         description:
           "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
         action: "Submit generation prompt",
