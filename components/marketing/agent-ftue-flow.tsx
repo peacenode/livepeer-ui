@@ -41,7 +41,7 @@ const phases: Phase[] = [
     name: "Private beta",
     timing: "External gate",
     summary:
-      "A user visits the Agent marketing page, joins the waitlist, authenticates with an approved email, and opens the Agent.",
+      "A user visits the Agent marketing page, joins the waitlist, opens the Agent, and authenticates with an approved email when the Agent connects to the MCP.",
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
@@ -71,6 +71,19 @@ const phases: Phase[] = [
         questions: ["Who decides which emails get access?"],
       },
       {
+        title: "Open the Agent",
+        description:
+          "The user reaches the Agent in Claude or Codex and starts the connection.",
+        action: "Start with the Agent",
+        mockup: "agent",
+        needs: [
+          "Open the Agent in the user’s client",
+          "Give the user one clear first action",
+          "Trigger MCP OAuth when the Agent connects",
+        ],
+        questions: ["What is the first prompt we want every beta user to try?"],
+      },
+      {
         title: "MCP OAuth",
         description:
           "Approved emails can authenticate. Everyone else returns to the waitlist.",
@@ -83,19 +96,6 @@ const phases: Phase[] = [
         ],
         questions: ["How quickly does an approved email reach the auth gate?"],
       },
-      {
-        title: "Agent ready",
-        description:
-          "The approved user reaches the Agent in Claude or Codex and can begin.",
-        action: "Start with the Agent",
-        mockup: "agent",
-        needs: [
-          "Confirm that the connection worked",
-          "Give the user one clear first action",
-          "Track usage by authenticated email",
-        ],
-        questions: ["What is the first prompt we want every beta user to try?"],
-      },
     ],
   },
   {
@@ -103,7 +103,7 @@ const phases: Phase[] = [
     name: "Expanded beta",
     timing: "Agent Console",
     summary:
-      "A user visits the Agent marketing page, signs in to the Agent Console, authorizes the MCP, and opens the Agent.",
+      "A user visits the Agent marketing page, signs in to the Agent Console, opens the Agent, and completes MCP OAuth when the Agent connects.",
     screens: [
       {
         title: "Agent marketing page",
@@ -131,7 +131,20 @@ const phases: Phase[] = [
         questions: ["Where does approval happen once Console is live?"],
       },
       {
-        title: "Connect the Agent",
+        title: "Open the Agent",
+        description:
+          "The user opens the Agent in their selected client and starts the connection.",
+        action: "Open the Agent",
+        mockup: "agent",
+        needs: [
+          "Open the correct client",
+          "Carry the user into a clear first action",
+          "Trigger MCP OAuth when the Agent connects",
+        ],
+        questions: ["What event counts as an activated user?"],
+      },
+      {
+        title: "MCP OAuth",
         description:
           "Authorize the MCP and confirm that it is connected to the selected client.",
         action: "Authorize MCP",
@@ -142,19 +155,6 @@ const phases: Phase[] = [
           "Confirm a successful connection",
         ],
         questions: ["Which clients ship in the first Console release?"],
-      },
-      {
-        title: "Agent ready",
-        description:
-          "Authentication, onboarding, and usage now belong to one user.",
-        action: "Open the Agent",
-        mockup: "agent",
-        needs: [
-          "Open the correct client",
-          "Carry the user into a clear first action",
-          "Record activation in Console",
-        ],
-        questions: ["What event counts as an activated user?"],
       },
     ],
   },
