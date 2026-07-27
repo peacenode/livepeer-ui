@@ -364,8 +364,8 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
           <span className="block">private beta</span>
         </h2>
         <Button
-          size="lg"
-          className="mt-[5%] h-10 rounded-sm px-5 text-[9px] sm:h-16 sm:px-6 sm:text-sm"
+          size="sm"
+          className="mt-[5%] h-8 rounded-sm px-3 text-[8px] sm:h-12 sm:px-5 sm:text-xs"
         >
           Add to Claude
         </Button>
