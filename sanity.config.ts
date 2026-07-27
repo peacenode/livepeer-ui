@@ -8,6 +8,7 @@ import {
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
 
+import { StudioLayout } from "@/components/sanity/studio-layout"
 import { dataset, projectId } from "@/sanity/env"
 import { schemaTypes } from "@/sanity/schema-types"
 
@@ -21,6 +22,7 @@ const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       S.listItem()
+        .id("planner")
         .title("Planner")
         .icon(CalendarIcon)
         .child(
@@ -29,6 +31,7 @@ const structure: StructureResolver = (S) =>
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
       S.listItem()
+        .id("agent-waitlist")
         .title("Agent Waitlist")
         .icon(GalleryVerticalEndIcon)
         .child(
@@ -45,6 +48,7 @@ const structure: StructureResolver = (S) =>
             ])
         ),
       S.listItem()
+        .id("agent-console")
         .title("Agent Console")
         .icon(CreditCardIcon)
         .child(
@@ -83,6 +87,7 @@ const structure: StructureResolver = (S) =>
             ])
         ),
       S.listItem()
+        .id("livepeer-org")
         .title("Livepeer.org")
         .icon(GalleryVerticalEndIcon)
         .child(
@@ -107,6 +112,11 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [structureTool({ structure })],
+  studio: {
+    components: {
+      layout: StudioLayout,
+    },
+  },
   schema: {
     types: schemaTypes,
     templates: (templates) =>
