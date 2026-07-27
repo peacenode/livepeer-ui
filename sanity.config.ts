@@ -69,7 +69,7 @@ const plannerStructure: StructureResolver = (S) =>
         .child(
           S.documentTypeList("marketingWeek")
             .title("Weeks")
-            .defaultOrdering([{ field: "startsAt", direction: "desc" }])
+            .defaultOrdering([{ field: "startsAt", direction: "asc" }])
         ),
     ])
 
