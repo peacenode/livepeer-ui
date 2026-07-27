@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { Check, Mail, TriangleAlert } from "lucide-react"
+import { Check, TriangleAlert } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
@@ -358,37 +358,10 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 
   if (type === "email") {
     return (
-      <div className="flex h-full items-center justify-center bg-muted/30 p-[7%]">
-        <div className="w-[72%] overflow-hidden rounded-lg border bg-background shadow-sm">
-          <div className="flex items-center gap-3 border-b px-[6%] py-[4%]">
-            <div className="flex size-8 items-center justify-center rounded-full bg-foreground text-background sm:size-10">
-              <Mail className="size-4" />
-            </div>
-            <div>
-              <p className="text-[8px] font-medium sm:text-xs">
-                You have access to Livepeer Agent
-              </p>
-              <p className="mt-1 text-[7px] text-muted-foreground sm:text-[10px]">
-                Livepeer Agent
-              </p>
-            </div>
-          </div>
-          <div className="p-[7%]">
-            <h2 className="text-sm font-medium sm:text-xl">
-              Welcome to the private beta
-            </h2>
-            <p className="mt-[4%] max-w-md text-[8px] leading-relaxed text-muted-foreground sm:text-xs">
-              Your email has been approved. Add the Livepeer MCP to Claude to
-              start creating.
-            </p>
-            <Button
-              size="sm"
-              className="mt-[6%] h-7 rounded-sm px-3 text-[8px] sm:h-8 sm:text-xs"
-            >
-              Add to Claude
-            </Button>
-          </div>
-        </div>
+      <div className="flex h-full items-center justify-center bg-white px-[10%] text-center text-black">
+        <h2 className="text-[clamp(1.25rem,4vw,3.5rem)] leading-tight font-light tracking-tight text-balance">
+          Welcome to the private beta
+        </h2>
       </div>
     )
   }
