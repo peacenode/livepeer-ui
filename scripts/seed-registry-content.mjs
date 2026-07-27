@@ -42,54 +42,6 @@ const livepeerOrgShell = [
 
 const documents = [
   {
-    _id: "mockupRoundup-planner",
-    _type: "mockupRoundup",
-    slug: { _type: "slug", current: "planner" },
-    title: "Planner",
-    description:
-      "Application shell, media workspace, project, character, storyboard, installation, and protocol components for Planner.",
-    previewHref: "/mockups/videobuddy",
-    pages: [
-      page("Home", "/mockups/videobuddy", [
-        "client-application-shell",
-        "client-application-sidebar",
-        "client-mobile-bottom-navigation",
-        "generation-workspace-section",
-      ]),
-      page("Characters", "/mockups/videobuddy/characters", [
-        "client-application-shell",
-        "characters-workspace-section",
-      ]),
-      page("Footage", "/mockups/videobuddy/footage", [
-        "client-application-shell",
-        "clips-header",
-        "clips-library",
-        "clips-library-section",
-        "clip-card",
-        "media-context-menu",
-      ]),
-      page("Install", "/mockups/videobuddy/install", [
-        "client-application-shell",
-        "client-install-command",
-      ]),
-      page("Projects", "/mockups/videobuddy/projects", [
-        "client-application-shell",
-        "project-picker",
-        "projects-workspace-section",
-      ]),
-      page("Protocol", "/mockups/videobuddy/protocol", [
-        "protocol-header-section",
-        "protocol-flow-section",
-        "protocol-request-flow-section",
-        "protocol-properties-section",
-      ]),
-      page("Storyboards", "/mockups/videobuddy/storyboards", [
-        "client-application-shell",
-        "storyboards-workspace-section",
-      ]),
-    ],
-  },
-  {
     _id: "mockupRoundup-agent-waitlist",
     _type: "mockupRoundup",
     slug: { _type: "slug", current: "agent-waitlist" },
