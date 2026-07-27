@@ -143,57 +143,71 @@ const phases: Phase[] = [
     name: "Public beta",
     timing: "livepeer.org",
     summary:
-      "The Agent marketing page moves to livepeer.org/agent, where a user learns what it can do, signs in to the Agent Console, and connects the Agent.",
+      "A user visits livepeer.org/agent, adds the MCP to their Agent, completes OAuth, returns to the Agent to generate, and opens a link to the results.",
     screens: [
-      {
-        title: "Livepeer website",
-        description: "Add the Agent to the main product story and navigation.",
-        action: "Explore the Agent",
-        mockup: "website",
-        needs: [
-          "Choose the Agent’s place in the site structure",
-          "Add a homepage or navigation entry point",
-        ],
-        questions: ["Where does the Agent live in the main navigation?"],
-      },
       {
         title: "livepeer.org/agent",
         description:
-          "Publish the Agent marketing page as part of the main Livepeer website and lead users into the Console.",
-        action: "Get started",
+          "Publish the Agent marketing page as part of the main Livepeer website with the public MCP endpoint.",
+        action: "Add to Claude",
         mockup: "public-marketing",
         needs: [
           "Publish the page at livepeer.org/agent",
           "Add the Agent to the main website navigation",
-          "Lead users into the Agent Console",
+          "Share the public MCP endpoint",
         ],
-        questions: ["When does “Join waitlist” become “Get started”?"],
+        questions: ["Is the public MCP endpoint ready to share?"],
       },
       {
-        title: "Agent Console",
+        title: "Add the MCP to their Agent",
         description:
-          "Handle sign-in, access, installation, and the ongoing user relationship.",
-        action: "Sign in",
-        mockup: "console",
-        needs: [
-          "Support public website traffic",
-          "Keep onboarding and access status clear",
-        ],
-        questions: ["Is any part of the Console public before sign-in?"],
-      },
-      {
-        title: "Connected Agent",
-        description:
-          "The public website and product experience lead into the same activation path.",
-        action: "Open the Agent",
+          "The user runs Claude and adds the Livepeer MCP to their Agent.",
+        action: "Run Claude and add the MCP",
         mockup: "agent",
         needs: [
-          "Keep the handoff consistent across supported clients",
-          "Connect product usage back to the Console user",
+          "User runs install",
+          "Submits a prompt to test the MCP",
+          "MCP OAuth is triggered",
         ],
-        questions: [
-          "How do we explain the relationship between the Agent and the network?",
+        questions: ["Which Claude clients do we support first?"],
+      },
+      {
+        title: "MCP OAuth",
+        description:
+          "The user authenticates without waiting for email approval.",
+        action: "Continue with email",
+        mockup: "oauth",
+        needs: [
+          "Authenticate the user",
+          "Connect authentication to usage tracking",
         ],
+        questions: ["Can any valid email authenticate?"],
+      },
+      {
+        title: "Returns to session",
+        description:
+          "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
+        action: "Submit generation prompt",
+        mockup: "agent",
+        needs: [
+          "Return the user to the same Agent session",
+          "Confirm that the MCP connection succeeded",
+          "Give progress while the generation runs",
+        ],
+        questions: ["Does OAuth preserve the active Agent session?"],
+      },
+      {
+        title: "Preview generations",
+        description:
+          "The Agent returns a results link that opens a visual history of the user’s generated media.",
+        action: "Open results link",
+        mockup: "results",
+        needs: [
+          "Return a stable results link in the Agent",
+          "Show generated media with its prompt and context",
+          "Make each result easy to preview or open",
+        ],
+        questions: ["How long should a results link remain available?"],
       },
     ],
   },
