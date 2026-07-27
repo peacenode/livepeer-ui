@@ -3,7 +3,11 @@
 import * as React from "react"
 import { MenuIcon } from "lucide-react"
 
-import { LivepeerLockup, RegistryUiMark } from "@/components/brand"
+import {
+  LivepeerGradientSymbol,
+  LivepeerWordmark,
+  RegistryUiMark,
+} from "@/components/brand"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -28,7 +32,13 @@ export function MobileNav() {
       <SheetContent side="left" className="w-72">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2 text-left">
-            <LivepeerLockup className="h-3 w-auto" aria-label="Livepeer UI" />
+            <span
+              className="flex items-center gap-1.5 text-foreground"
+              aria-label="Livepeer UI"
+            >
+              <LivepeerGradientSymbol className="h-3 w-auto" />
+              <LivepeerWordmark className="h-3 w-auto" />
+            </span>
             <RegistryUiMark
               className="h-2 w-auto self-end"
               aria-hidden="true"
