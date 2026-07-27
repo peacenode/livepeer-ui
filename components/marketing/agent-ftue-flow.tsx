@@ -45,16 +45,12 @@ const phases: Phase[] = [
     callout: "Do not share the MCP publicly during the private beta.",
     screens: [
       {
-        title: "Agent marketing page",
+        title: "Agent landing page",
         description:
           "Explain the Agent and collect interest without exposing a public MCP install link.",
         action: "Join the waitlist",
         mockup: "marketing",
-        needs: [
-          "Publish the Agent marketing page",
-          "Keep the MCP install link private",
-          "Send the primary CTA to the external waitlist",
-        ],
+        needs: ["Plant a flag", "Used as a press kit for outreach"],
         questions: ["What is the minimum story this page needs to tell?"],
       },
       {
@@ -132,15 +128,12 @@ const phases: Phase[] = [
       "A user signs in to the Agent Console, opens the Agent, completes MCP OAuth, returns to the Agent to generate, and opens a link to the results.",
     screens: [
       {
-        title: "Agent marketing page",
+        title: "Agent landing page",
         description:
           "Keep the product story, but send users into the Agent Console.",
         action: "Get access",
         mockup: "marketing",
-        needs: [
-          "Replace the external waitlist CTA",
-          "Send users into Console sign-in",
-        ],
+        needs: ["Plant a flag", "Used as a press kit for outreach"],
         questions: ["Do existing waitlist users get imported automatically?"],
       },
       {
@@ -228,16 +221,12 @@ const phases: Phase[] = [
         questions: ["Where does the Agent live in the main navigation?"],
       },
       {
-        title: "Agent product page",
+        title: "Agent landing page",
         description:
           "Explain what the Agent does and lead users into the Console.",
         action: "Get started",
         mockup: "marketing",
-        needs: [
-          "Create the page in Sanity",
-          "Show the core Agent use cases",
-          "Link to the stable Console flow",
-        ],
+        needs: ["Plant a flag", "Used as a press kit for outreach"],
         questions: ["When does “Join waitlist” become “Get started”?"],
       },
       {
@@ -391,9 +380,11 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 function ScreenRow({
   screen,
   headingId,
+  heading = screen.action,
 }: {
   screen: Screen
   headingId: string
+  heading?: string
 }) {
   return (
     <section
@@ -410,7 +401,7 @@ function ScreenRow({
 
       <aside>
         <h4 id={headingId} className="text-lg font-medium">
-          {screen.action}
+          {heading}
         </h4>
 
         <div className="mt-5">
@@ -490,30 +481,13 @@ export function AgentFtueFlow() {
               </h3>
 
               {marketingScreen && (
-                <section
-                  aria-labelledby={`marketing-page-${activePhase}`}
-                  className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)]"
-                >
-                  <div className="min-w-0">
-                    <header className="max-w-3xl text-left">
-                      <h4
-                        id={`marketing-page-${activePhase}`}
-                        className="text-lg font-medium"
-                      >
-                        {marketingScreen.title}
-                      </h4>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                        {marketingScreen.description}
-                      </p>
-                    </header>
-
-                    <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
-                      <div className="aspect-video">
-                        <ScreenMockup type={marketingScreen.mockup} />
-                      </div>
-                    </div>
-                  </div>
-                </section>
+                <div className="mt-8">
+                  <ScreenRow
+                    screen={marketingScreen}
+                    heading={marketingScreen.title}
+                    headingId={`marketing-page-${activePhase}`}
+                  />
+                </div>
               )}
 
               {waitlistScreen && (
