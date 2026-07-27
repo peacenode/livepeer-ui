@@ -69,6 +69,7 @@ const phases: Phase[] = [
           "Explain the Agent and collect interest without exposing a public MCP install link.",
         action: "Join the waitlist",
         mockup: "marketing",
+        hasMockup: false,
         needs: ["Plant a flag", "Used as a press kit for outreach"],
         questions: ["What is the minimum story this page needs to tell?"],
       },
