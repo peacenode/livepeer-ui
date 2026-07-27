@@ -21,6 +21,7 @@ export default async function MockupBillingPage() {
     <PlatformPage title={editorial.heading} showHeader={false}>
       <BillingWorkspace
         content={editorial}
+        headingLevel="h1"
         period={demoBillingPeriod}
         paymentMethod={demoPaymentMethod}
         invoices={demoBillingInvoices}

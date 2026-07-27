@@ -20,6 +20,7 @@ export type BillingWorkspaceEditorialContent = {
 
 export type BillingWorkspaceProps = {
   content: BillingWorkspaceEditorialContent
+  headingLevel?: "h1" | "h2"
   period: BillingPageSummaryProps["period"]
   paymentMethod: BillingPageSummaryProps["paymentMethod"]
   invoices: readonly InvoiceRecord[]
@@ -33,6 +34,7 @@ export type BillingWorkspaceProps = {
 
 export function BillingWorkspace({
   content,
+  headingLevel: Heading = "h2",
   period,
   paymentMethod,
   invoices,
@@ -47,9 +49,9 @@ export function BillingWorkspace({
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-2xl">
-          <h1 className="text-2xl font-semibold text-balance">
+          <Heading className="text-2xl font-semibold text-balance">
             {content.heading}
-          </h1>
+          </Heading>
           <p className="mt-2 text-sm text-balance text-muted-foreground">
             {content.description}
           </p>
