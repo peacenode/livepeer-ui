@@ -130,6 +130,7 @@ const phases: Phase[] = [
           "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
         action: "Submit generation prompt",
         mockup: "agent",
+        hasMockup: false,
         needs: [
           "Return the user to the same Agent session",
           "Confirm that the MCP connection succeeded",
@@ -205,6 +206,7 @@ const phases: Phase[] = [
           "After OAuth, the user returns to the Agent, sees that the connection succeeded, and submits their generation prompt.",
         action: "Submit generation prompt",
         mockup: "agent",
+        hasMockup: false,
         needs: [
           "Return the user to the same Agent session",
           "Confirm that the MCP connection succeeded",
