@@ -439,22 +439,27 @@ export function AgentFtueFlow() {
 
           <div className="mt-10">
             {marketingScreen && (
-              <section aria-labelledby={`marketing-page-${activePhase}`}>
-                <header className="max-w-3xl text-left">
-                  <h3
-                    id={`marketing-page-${activePhase}`}
-                    className="text-lg font-medium"
-                  >
-                    {marketingScreen.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {marketingScreen.description}
-                  </p>
-                </header>
+              <section
+                aria-labelledby={`marketing-page-${activePhase}`}
+                className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)]"
+              >
+                <div className="min-w-0">
+                  <header className="max-w-3xl text-left">
+                    <h3
+                      id={`marketing-page-${activePhase}`}
+                      className="text-lg font-medium"
+                    >
+                      {marketingScreen.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {marketingScreen.description}
+                    </p>
+                  </header>
 
-                <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
-                  <div className="aspect-video">
-                    <ScreenMockup type={marketingScreen.mockup} />
+                  <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
+                    <div className="aspect-video">
+                      <ScreenMockup type={marketingScreen.mockup} />
+                    </div>
                   </div>
                 </div>
               </section>
