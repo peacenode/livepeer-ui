@@ -11,6 +11,7 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import type { PlannerPageContent } from "@/components/mockups/contracts"
 import {
   Dialog,
   DialogContent,
@@ -24,7 +25,6 @@ import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
 import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
-import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
 
 const characterProperties = [
   "Front",

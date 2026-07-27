@@ -39,9 +39,7 @@ export const agentConsoleShellFixture: AgentConsoleShell = {
     },
   ],
   userMenu: {
-    username: "Username",
     accountLabel: "Account",
-    email: "username@example.com",
     manageProfileLabel: "Manage profile",
     developerDocsLabel: "Developer docs",
     termsLabel: "Terms & policies",
@@ -52,6 +50,11 @@ export const agentConsoleShellFixture: AgentConsoleShell = {
     dialogLabel: "Sign in to Livepeer Agent",
     title: "Sign in to Livepeer Agent",
     description: "Continue to manage projects, usage, API keys, and billing.",
+    googleLabel: "Google",
+    discordLabel: "Discord",
+    emailDividerLabel: "Or continue with email",
+    emailInputLabel: "Email",
+    emailPlaceholder: "you@example.com",
     continueLabel: "Continue",
   },
 }

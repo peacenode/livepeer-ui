@@ -20,7 +20,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import type { LivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
+import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 
 const socialIcons = {
   discord: DiscordIcon,

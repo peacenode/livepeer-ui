@@ -22,6 +22,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import type {
+  AgentConsoleShell,
+  AgentConsoleUser,
+} from "@/components/mockups/contracts"
 
 const themes = [
   { value: "system", label: "System theme", icon: MonitorIcon },
@@ -29,7 +33,13 @@ const themes = [
   { value: "dark", label: "Dark theme", icon: MoonIcon },
 ]
 
-export function UserMenu() {
+export function UserMenu({
+  content,
+  user,
+}: {
+  content: AgentConsoleShell["userMenu"]
+  user: AgentConsoleUser
+}) {
   const { theme, setTheme } = useTheme()
 
   return (
@@ -45,14 +55,14 @@ export function UserMenu() {
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col text-sm leading-tight">
-          <span className="font-medium">Username</span>
-          <span className="text-muted-foreground">Account</span>
+          <span className="font-medium">{user.username}</span>
+          <span className="text-muted-foreground">{content.accountLabel}</span>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="top" sideOffset={8} className="w-60">
         <div className="flex flex-col gap-2 px-2 pt-1.5 pb-2">
           <span className="truncate text-sm text-muted-foreground">
-            username@example.com
+            {user.email}
           </span>
           <ToggleGroup
             value={[theme ?? "system"]}
@@ -75,27 +85,29 @@ export function UserMenu() {
           </ToggleGroup>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem render={<Link href="/mockups/livepeer-agent/account" />}>
+        <DropdownMenuItem
+          render={<Link href="/mockups/livepeer-agent/account" />}
+        >
           <CircleUserRoundIcon />
-          Manage profile
+          {content.manageProfileLabel}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <BookOpenIcon />
-          Developer docs
+          {content.developerDocsLabel}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <NotepadTextIcon />
-          Terms &amp; policies
+          {content.termsLabel}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LifeBuoyIcon />
-          Help
+          {content.helpLabel}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOutIcon />
-          Log out
+          {content.logoutLabel}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

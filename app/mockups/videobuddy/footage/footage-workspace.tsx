@@ -5,7 +5,7 @@ import { useState } from "react"
 import { storyMedia } from "../media-assets"
 import { downloadMedia } from "../media-context-menu"
 import { ClipsHeader, ClipsLibrary, type Clip } from "./clips-components"
-import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
+import type { PlannerPageContent } from "@/components/mockups/contracts"
 
 const initialFootage: Clip[] = [
   {

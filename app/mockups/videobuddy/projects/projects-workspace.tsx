@@ -35,7 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, framesForName, storyMedia } from "../media-assets"
-import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
+import type { PlannerPageContent } from "@/components/mockups/contracts"
 
 type Project = {
   id: string

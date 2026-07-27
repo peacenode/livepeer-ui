@@ -1,6 +1,16 @@
 import { defineQuery } from "next-sanity"
 
+import type {
+  AgentConsoleLink,
+  AgentConsoleShell,
+} from "@/components/mockups/contracts"
 import { sanityClient } from "@/sanity/lib/client"
+
+export type {
+  AgentConsoleLink,
+  AgentConsoleShell,
+  AgentConsoleUser,
+} from "@/components/mockups/contracts"
 
 export type AgentConsolePageSlug =
   | "home"
@@ -14,35 +24,12 @@ export type AgentConsolePageSlug =
   | "organization"
   | "inference"
 
-export type AgentConsoleLink = { _key?: string; label: string; href: string }
 export type AgentConsolePage<T extends object = Record<string, never>> = {
   _id: string
   slug: AgentConsolePageSlug
   heading: string
   description: string
 } & T
-
-export interface AgentConsoleShell {
-  _id: string
-  homeAriaLabel: string
-  navigation: (AgentConsoleLink & { external: boolean })[]
-  userMenu: {
-    username: string
-    accountLabel: string
-    email: string
-    manageProfileLabel: string
-    developerDocsLabel: string
-    termsLabel: string
-    helpLabel: string
-    logoutLabel: string
-  }
-  auth: {
-    dialogLabel: string
-    title: string
-    description: string
-    continueLabel: string
-  }
-}
 
 export type HomePageContent = AgentConsolePage<{
   home: {
@@ -250,6 +237,55 @@ export async function getAgentConsolePage<T extends AgentConsolePageDocument>(
   )
 }
 
-export function getAgentConsoleShell(): Promise<AgentConsoleShell | null> {
-  return sanityClient.fetch<AgentConsoleShell | null>(shellQuery, {}, options)
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === "string" && value.length > 0
+}
+
+function isAgentConsoleShell(value: unknown): value is AgentConsoleShell {
+  if (!value || typeof value !== "object") return false
+
+  const shell = value as Partial<AgentConsoleShell>
+  const userMenu = shell.userMenu as
+    Partial<AgentConsoleShell["userMenu"]> | undefined
+  const auth = shell.auth as Partial<AgentConsoleShell["auth"]> | undefined
+  const userMenuFields: (keyof AgentConsoleShell["userMenu"])[] = [
+    "accountLabel",
+    "manageProfileLabel",
+    "developerDocsLabel",
+    "termsLabel",
+    "helpLabel",
+    "logoutLabel",
+  ]
+  const authFields: (keyof AgentConsoleShell["auth"])[] = [
+    "dialogLabel",
+    "title",
+    "description",
+    "googleLabel",
+    "discordLabel",
+    "emailDividerLabel",
+    "emailInputLabel",
+    "emailPlaceholder",
+    "continueLabel",
+  ]
+
+  return Boolean(
+    isNonEmptyString(shell._id) &&
+    isNonEmptyString(shell.homeAriaLabel) &&
+    shell.navigation?.length &&
+    shell.navigation.every(
+      (item) =>
+        isNonEmptyString(item.label) &&
+        isNonEmptyString(item.href) &&
+        typeof item.external === "boolean"
+    ) &&
+    userMenu &&
+    userMenuFields.every((field) => isNonEmptyString(userMenu[field])) &&
+    auth &&
+    authFields.every((field) => isNonEmptyString(auth[field]))
+  )
+}
+
+export async function getAgentConsoleShell(): Promise<AgentConsoleShell | null> {
+  const shell = await sanityClient.fetch<unknown>(shellQuery, {}, options)
+  return isAgentConsoleShell(shell) ? shell : null
 }

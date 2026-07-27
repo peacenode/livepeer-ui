@@ -8,7 +8,7 @@ import { WaitlistLeaderboard } from "@/components/mockups/waitlist-leaderboard"
 import { WaitlistReferralLink } from "@/components/mockups/waitlist-referral-link"
 import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
 import { WaitlistStatusCard } from "@/components/mockups/waitlist-status-card"
-import type { WaitlistPageContent } from "@/sanity/lib/waitlist-content"
+import type { WaitlistPageContent } from "@/components/mockups/contracts"
 
 const firstNames = [
   "Maya",

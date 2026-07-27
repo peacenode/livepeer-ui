@@ -2,7 +2,7 @@ import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GitHubIcon, XIcon } from "@/components/brand-social-icons"
-import type { LivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
+import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 
 const socialIcons = {
   discord: DiscordIcon,

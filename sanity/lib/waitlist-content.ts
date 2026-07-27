@@ -1,45 +1,9 @@
 import { defineQuery } from "next-sanity"
 
+import type { WaitlistPageContent } from "@/components/mockups/contracts"
 import { sanityClient } from "@/sanity/lib/client"
 
-export interface WaitlistPageContent {
-  _id: string
-  metadata: {
-    title: string
-    description: string
-  }
-  backgroundHero: {
-    brandAriaLabel: string
-    agentLabel: string
-  }
-  panel: {
-    brandAriaLabel: string
-    agentLabel: string
-    heading: string
-    description: string
-    joinedToast: string
-    referralPrompt: string
-  }
-  signupForm: {
-    label: string
-    emailPlaceholder: string
-    submitAriaLabel: string
-  }
-  statusCard: {
-    positionLabel: string
-    referralsLabel: string
-  }
-  referralLink: {
-    copyAriaLabel: string
-    copiedToast: string
-  }
-  leaderboard: {
-    heading: string
-    personColumnLabel: string
-    referralsColumnLabel: string
-    currentUserLabel: string
-  }
-}
+export type { WaitlistPageContent } from "@/components/mockups/contracts"
 
 const waitlistPageContentQuery = defineQuery(`
   *[_type == "waitlistPageContent" && _id == "waitlistPageContent-waitlist"][0] {

@@ -3,7 +3,7 @@ import {
   NetworkHeroSection,
   OrchestratorCtaSection,
 } from "@/components/mockups/livepeer-org-landing-sections"
-import type { LivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"
+import type { LivepeerOrgPage } from "@/components/mockups/contracts"
 
 export function PlaybooksWorkspace({
   content,

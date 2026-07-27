@@ -1,51 +1,17 @@
 import { cache } from "react"
 import { defineQuery } from "next-sanity"
 
+import type {
+  PlannerPageContent,
+  PlannerPageName,
+} from "@/components/mockups/contracts"
 import { sanityClient } from "@/sanity/lib/client"
 
-export type PlannerPageName =
-  | "home"
-  | "characters"
-  | "footage"
-  | "install"
-  | "projects"
-  | "protocol"
-  | "storyboards"
-
-export type PlannerProtocolIcon = "play" | "blocks" | "cpu"
-
-export interface PlannerPageContent {
-  _id: string
-  _type: "plannerPageContent"
-  page: PlannerPageName
-  metadataTitle: string
-  heading?: string
-  description?: string
-  primaryActionLabel?: string
-  emptyStateTitle?: string
-  supportingText?: string
-  protocol?: {
-    eyebrow: string
-    flowHeading: string
-    layers: {
-      _key: string
-      number: string
-      title: string
-      description: string
-      detail: string
-      href: string
-      icon: PlannerProtocolIcon
-    }[]
-    requestHeading: string
-    requestSteps: { _key: string; title: string; description: string }[]
-    agentPropertyHeading: string
-    agentPropertyDescription: string
-    paymentPropertyHeading: string
-    paymentPropertyDescription: string
-    architectureLinkLabel: string
-    architectureLinkHref: string
-  }
-}
+export type {
+  PlannerPageContent,
+  PlannerPageName,
+  PlannerProtocolIcon,
+} from "@/components/mockups/contracts"
 
 const query = defineQuery(`
   *[_type == "plannerPageContent" && _id == $id][0] {

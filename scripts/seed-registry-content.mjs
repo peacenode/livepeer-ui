@@ -285,22 +285,4 @@ for (const document of documents) {
     .commit()
 }
 
-for (const document of documents.filter(
-  (document) => document._type === "mockupRoundup"
-)) {
-  await client
-    .patch(document._id)
-    .set({ pages: document.pages })
-    .unset(["contentBadges"])
-    .commit()
-}
-
-const usageDocument = documents.find(
-  (document) => document._id === "agentConsoleEditorialPage-usage"
-)
-await client
-  .patch(usageDocument._id)
-  .setIfMissing({ usageContent: usageDocument.usageContent })
-  .commit()
-
 console.log(`Registry content ready with ${documents.length} documents.`)

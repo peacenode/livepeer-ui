@@ -4,9 +4,9 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
 import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
+import type { LivepeerOrgPage } from "@/components/mockups/contracts"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
-import type { LivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"
 
 type HomeContent = NonNullable<LivepeerOrgPage["homeContent"]>
 

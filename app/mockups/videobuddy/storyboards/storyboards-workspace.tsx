@@ -24,7 +24,7 @@ import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
 import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
-import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
+import type { PlannerPageContent } from "@/components/mockups/contracts"
 
 type ImageBatch = {
   id: number

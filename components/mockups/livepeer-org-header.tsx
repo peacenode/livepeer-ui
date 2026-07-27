@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
-import type { LivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
+import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 
 export function LivepeerOrgHeader({ site }: { site: LivepeerOrgSite }) {
   return (

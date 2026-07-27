@@ -1,6 +1,6 @@
 import { WaitlistBackgroundHero } from "@/components/mockups/waitlist-background-hero"
 import { WaitlistPanel } from "@/components/mockups/waitlist-panel"
-import type { WaitlistPageContent } from "@/sanity/lib/waitlist-content"
+import type { WaitlistPageContent } from "@/components/mockups/contracts"
 
 export function WaitlistMockup({ content }: { content: WaitlistPageContent }) {
   return (

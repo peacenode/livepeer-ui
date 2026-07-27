@@ -730,7 +730,6 @@
       "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
       "dependencies": [
         "lucide-react",
-        "next-sanity",
         "sonner"
       ],
       "registryDependencies": [
@@ -740,6 +739,10 @@
       "files": [
         {
           "path": "components/mockups/waitlist-panel.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -760,18 +763,6 @@
         },
         {
           "path": "components/mockups/waitlist-status-card.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/waitlist-content.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:block"
         }
       ]
@@ -827,6 +818,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand-social-icons.tsx",
           "type": "registry:component"
         },
@@ -854,6 +849,10 @@
       "files": [
         {
           "path": "components/mockups/platform-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -889,6 +888,10 @@
         {
           "path": "components/mockups/user-menu.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
         }
       ]
     },
@@ -908,6 +911,10 @@
         },
         {
           "path": "components/mockups/livepeer-agent-sign-in-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1303,8 +1310,7 @@
       "description": "Full-width Livepeer.org navigation dropdown with primary links, resource groups, social links, and active-route state.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
@@ -1320,19 +1326,11 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:component"
         }
       ]
@@ -1344,8 +1342,7 @@
       "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
@@ -1361,23 +1358,15 @@
           "type": "registry:component"
         },
         {
+          "path": "components/mockups/contracts.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:component"
         },
         {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:component"
-        },
-        {
           "path": "components/brand-social-icons.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:component"
         }
       ]
@@ -1388,12 +1377,15 @@
       "title": "Footer",
       "description": "Livepeer.org footer with network, resource, community, and social navigation.",
       "dependencies": [
-        "lucide-react",
-        "next-sanity"
+        "lucide-react"
       ],
       "files": [
         {
           "path": "components/mockups/livepeer-org-footer.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -1402,18 +1394,6 @@
         },
         {
           "path": "components/brand-social-icons.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:component"
         }
       ]
@@ -1692,8 +1672,7 @@
       "description": "Livepeer.org network hero with the particle field and primary account actions.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json"
@@ -1701,6 +1680,10 @@
       "files": [
         {
           "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1716,19 +1699,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:block"
-        },
-        {
           "path": "lib/canvas-theme.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:block"
         }
       ]
@@ -1740,8 +1711,7 @@
       "description": "Livepeer Agent product feature section with install actions and agent compatibility.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json"
@@ -1749,6 +1719,10 @@
       "files": [
         {
           "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1764,19 +1738,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:block"
-        },
-        {
           "path": "lib/canvas-theme.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:block"
         }
       ]
@@ -1788,8 +1750,7 @@
       "description": "Dark orchestrator call-to-action section with an inverted particle field.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json"
@@ -1797,6 +1758,10 @@
       "files": [
         {
           "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1812,19 +1777,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/livepeer-org-pages.ts",
-          "type": "registry:block"
-        },
-        {
           "path": "lib/canvas-theme.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:block"
         }
       ]
@@ -2160,8 +2113,7 @@
       "description": "Storyboard collections, frame actions, upload, and project assignment section.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
@@ -2192,15 +2144,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/planner-pages.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         }
       ]
@@ -2212,8 +2156,7 @@
       "description": "Character reference collections, detail, upload, and project assignment section.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
@@ -2244,15 +2187,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/planner-pages.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         }
       ]
@@ -2264,8 +2199,7 @@
       "description": "Clips library with upload action, playable media cards, context actions, and empty state.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/button.json",
@@ -2285,11 +2219,11 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/footage/clips-components.tsx",
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/planner-pages.ts",
+          "path": "app/mockups/videobuddy/footage/clips-components.tsx",
           "type": "registry:block"
         },
         {
@@ -2309,15 +2243,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
           "path": "components/mockups/client-empty-state.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
           "type": "registry:block"
         }
       ]
@@ -2329,8 +2255,7 @@
       "description": "Project index and detail section with storyboards, characters, renders, finals, and creation dialogs.",
       "dependencies": [
         "lucide-react",
-        "next",
-        "next-sanity"
+        "next"
       ],
       "registryDependencies": [
         "http://localhost:3000/r/badge.json",
@@ -2354,15 +2279,7 @@
           "type": "registry:block"
         },
         {
-          "path": "sanity/lib/planner-pages.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/lib/client.ts",
-          "type": "registry:block"
-        },
-        {
-          "path": "sanity/env.ts",
+          "path": "components/mockups/contracts.ts",
           "type": "registry:block"
         }
       ]
