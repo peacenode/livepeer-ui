@@ -77,7 +77,7 @@ export const livepeerOrgAgentFixture: NonNullable<
   hero: {
     heading: "Create and edit images and video with your agent.",
     description: "In your agent's MCP / connector settings, add this server:",
-    serverUrl: "https://storyboard.daydream.monster/api/mcp",
+    serverUrl: "https://livepeer.org/api/mcp",
     signInCta: { label: "Sign in", href: "/mockups/livepeer-agent" },
     createAccountCta: {
       label: "Create account",
