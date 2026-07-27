@@ -19,6 +19,7 @@ export function DocsNav({
       title: "Sprint",
       items: [
         { title: "Planner", href: "/marketing/planner" },
+        { title: "Flows", href: "/marketing/agent-ftue-flow" },
         { title: "Social Kit", href: "/marketing/press-kit" },
         { title: "Brand Kit", href: "/marketing/brand-kit" },
         { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
