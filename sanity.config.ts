@@ -8,7 +8,6 @@ import {
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
 
-import { StudioLayout } from "@/components/sanity/studio-layout"
 import { dataset, projectId } from "@/sanity/env"
 import { schemaTypes } from "@/sanity/schema-types"
 
@@ -32,14 +31,14 @@ const structure: StructureResolver = (S) =>
         ),
       S.listItem()
         .id("agent-waitlist")
-        .title("Agent Waitlist")
+        .title("Waitlist")
         .icon(GalleryVerticalEndIcon)
         .child(
           S.list()
-            .title("Agent Waitlist")
+            .title("Waitlist")
             .items([
               S.listItem()
-                .title("Roundup")
+                .title("Waitlist")
                 .child(
                   S.document()
                     .schemaType("mockupRoundup")
@@ -56,33 +55,18 @@ const structure: StructureResolver = (S) =>
             .title("Agent Console")
             .items([
               S.listItem()
-                .title("Roundup")
+                .title("Usage")
                 .child(
                   S.document()
-                    .schemaType("mockupRoundup")
-                    .documentId("mockupRoundup-agent-console")
+                    .schemaType("agentConsoleEditorialPage")
+                    .documentId("agentConsoleEditorialPage-usage")
                 ),
               S.listItem()
-                .title("Pages")
+                .title("Billing")
                 .child(
-                  S.list()
-                    .title("Pages")
-                    .items([
-                      S.listItem()
-                        .title("Usage")
-                        .child(
-                          S.document()
-                            .schemaType("agentConsoleEditorialPage")
-                            .documentId("agentConsoleEditorialPage-usage")
-                        ),
-                      S.listItem()
-                        .title("Billing")
-                        .child(
-                          S.document()
-                            .schemaType("agentConsoleEditorialPage")
-                            .documentId("agentConsoleEditorialPage-billing")
-                        ),
-                    ])
+                  S.document()
+                    .schemaType("agentConsoleEditorialPage")
+                    .documentId("agentConsoleEditorialPage-billing")
                 ),
             ])
         ),
@@ -95,7 +79,7 @@ const structure: StructureResolver = (S) =>
             .title("Livepeer.org")
             .items([
               S.listItem()
-                .title("Roundup")
+                .title("Home")
                 .child(
                   S.document()
                     .schemaType("mockupRoundup")
@@ -112,11 +96,6 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [structureTool({ structure })],
-  studio: {
-    components: {
-      layout: StudioLayout,
-    },
-  },
   schema: {
     types: schemaTypes,
     templates: (templates) =>
