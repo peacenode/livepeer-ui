@@ -24,7 +24,6 @@ import {
   livepeerOrgSiteType,
 } from "./livepeer-org-pages"
 import { waitlistPageContentType } from "./waitlist-content"
-import { plannerPageContentType } from "./planner-pages"
 
 export const schemaTypes = [
   marketingLinkType,
@@ -38,7 +37,6 @@ export const schemaTypes = [
   mockupRoundupType,
   agentConsoleEditorialPageType,
   waitlistPageContentType,
-  plannerPageContentType,
   agentConsoleShellType,
   agentConsolePageType,
   livepeerOrgLinkType,

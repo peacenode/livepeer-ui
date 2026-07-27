@@ -35,7 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, framesForName, storyMedia } from "../media-assets"
-import type { PlannerPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
 
 type Project = {
   id: string
@@ -169,7 +169,7 @@ const initialProjects: Project[] = [
 export function ProjectsWorkspace({
   content,
 }: {
-  content: PlannerPageContent
+  content: VideoBuddyPageContent
 }) {
   const [projects, setProjects] = useState(initialProjects)
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(

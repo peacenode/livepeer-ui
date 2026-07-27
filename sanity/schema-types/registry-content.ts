@@ -138,6 +138,7 @@ export const agentConsoleEditorialPageType = defineType({
       name: "page",
       title: "Page",
       type: "string",
+      hidden: true,
       options: {
         layout: "radio",
         list: [

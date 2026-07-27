@@ -1,16 +1,16 @@
-import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
+import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
 
 const page = (
-  name: PlannerPageContent["page"],
-  content: Omit<PlannerPageContent, "_id" | "_type" | "page">
-): PlannerPageContent => ({
-  _id: `plannerPageContent-${name}`,
-  _type: "plannerPageContent",
+  name: VideoBuddyPageContent["page"],
+  content: Omit<VideoBuddyPageContent, "_id" | "_type" | "page">
+): VideoBuddyPageContent => ({
+  _id: `videoBuddyPageContent-${name}`,
+  _type: "videoBuddyPageContent",
   page: name,
   ...content,
 })
 
-export const plannerPageSeedDocuments: PlannerPageContent[] = [
+export const videoBuddyPageFixtures: VideoBuddyPageContent[] = [
   page("home", { metadataTitle: "Livepeer Agent" }),
   page("characters", {
     metadataTitle: "Characters - Livepeer",
@@ -124,8 +124,8 @@ export const plannerPageSeedDocuments: PlannerPageContent[] = [
   }),
 ]
 
-export function plannerPageFixture(page: PlannerPageContent["page"]) {
-  const content = plannerPageSeedDocuments.find((item) => item.page === page)
-  if (!content) throw new Error(`Missing Planner fixture for ${page}`)
+export function videoBuddyPageFixture(page: VideoBuddyPageContent["page"]) {
+  const content = videoBuddyPageFixtures.find((item) => item.page === page)
+  if (!content) throw new Error(`Missing VideoBuddy fixture for ${page}`)
   return content
 }

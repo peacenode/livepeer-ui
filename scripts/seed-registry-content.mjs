@@ -3,7 +3,6 @@ import { getCliClient } from "sanity/cli"
 import { agentConsoleSeedDocuments } from "../components/demos/fixtures/agent-console-pages.ts"
 import { livepeerOrgSeedDocuments } from "../components/demos/fixtures/livepeer-org.ts"
 import { waitlistContentSeedDocument } from "../components/demos/waitlist-content-fixture.ts"
-import { plannerPageSeedDocuments } from "../components/demos/fixtures/planner-pages.ts"
 
 const client = getCliClient({ apiVersion: "2026-07-26" })
 
@@ -255,7 +254,6 @@ const documents = [
   waitlistContentSeedDocument,
   ...agentConsoleSeedDocuments,
   ...livepeerOrgSeedDocuments,
-  ...plannerPageSeedDocuments,
 ]
 
 function missingFieldPatch(value, prefix = "") {
