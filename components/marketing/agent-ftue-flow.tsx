@@ -317,7 +317,7 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
     return (
       <div className="relative h-full overflow-hidden bg-black">
         <Image
-          src="/flow-references/20260727-183736/agent-waitlist.png"
+          src="/flow-references/20260727-183925/agent-waitlist.png"
           alt="Livepeer Agent early access waitlist"
           fill
           sizes="(min-width: 1024px) 60vw, 100vw"
