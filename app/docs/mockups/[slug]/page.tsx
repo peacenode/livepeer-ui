@@ -123,7 +123,7 @@ export default async function MockupRoundupPage({
         <h2 className="mt-8 text-sm font-medium">Content</h2>
         <div className="mt-4">
           <Badge
-            variant="outline"
+            variant="secondary"
             className="h-auto rounded-sm px-3 py-2 font-normal"
             render={
               <Link href="/studio" target="_blank">
