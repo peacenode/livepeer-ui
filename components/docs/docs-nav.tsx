@@ -20,12 +20,6 @@ export function DocsNav({
   const archivedClientGroup = componentGroups.find(
     (group) => group.title === "Client Archived"
   )
-  const productGroupHrefs: Record<string, string> = {
-    "Agent Waitlist": "/docs/products/agent-waitlist",
-    "Agent Console": "/docs/products/agent-console",
-    "Livepeer.org": "/docs/products/livepeer-org",
-  }
-
   const groups = [
     {
       title: "Sprint",
@@ -36,14 +30,14 @@ export function DocsNav({
         { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
       ],
     },
-    ...activeComponentGroups.map((group) => ({
-      title: group.title,
-      titleHref: productGroupHrefs[group.title],
-      items: group.items.map((component) => ({
-        title: component.title,
-        href: `/docs/components/${component.name}`,
-      })),
-    })),
+    {
+      title: "Pages",
+      items: [
+        { title: "Agent Waitlist", href: "/docs/products/agent-waitlist" },
+        { title: "Agent Console", href: "/docs/products/agent-console" },
+        { title: "Livepeer.org", href: "/docs/products/livepeer-org" },
+      ],
+    },
     {
       title: "Foundations",
       items: [
@@ -55,6 +49,13 @@ export function DocsNav({
         { title: "Favorit Mono", href: "/docs/favorit-mono" },
       ],
     },
+    ...activeComponentGroups.map((group) => ({
+      title: group.title,
+      items: group.items.map((component) => ({
+        title: component.title,
+        href: `/docs/components/${component.name}`,
+      })),
+    })),
     {
       title: "Primitives",
       items: primitives.map((component) => ({
@@ -87,22 +88,7 @@ export function DocsNav({
     <nav className={cn("flex flex-col gap-6", className)}>
       {groups.map((group) => (
         <div key={group.title} className="flex flex-col items-start">
-          <h4 className="text-sm font-medium">
-            {"titleHref" in group && group.titleHref ? (
-              <Link
-                href={group.titleHref}
-                onClick={onNavigate}
-                className={cn(
-                  "block rounded-md px-2 py-1 transition-colors hover:bg-muted",
-                  pathname === group.titleHref && "bg-muted"
-                )}
-              >
-                {group.title}
-              </Link>
-            ) : (
-              <span className="block px-2 py-1">{group.title}</span>
-            )}
-          </h4>
+          <h4 className="px-2 py-1 text-sm font-medium">{group.title}</h4>
           {group.items.map((item) => (
             <Link
               key={item.href}
