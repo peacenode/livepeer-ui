@@ -68,7 +68,7 @@ export default async function ProductComponentsPage({
         href={product.previewHref}
         target="_blank"
         aria-label={`View the ${product.title} mockup`}
-        className="group block rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="mx-auto block max-w-2xl rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
           <Image
@@ -76,8 +76,8 @@ export default async function ProductComponentsPage({
             alt=""
             fill
             priority
-            sizes="(min-width: 768px) 768px, calc(100vw - 32px)"
-            className="scale-[0.72] object-cover transition-transform duration-300 group-hover:scale-[0.73]"
+            sizes="(min-width: 768px) 672px, calc(100vw - 32px)"
+            className="scale-[0.72] object-cover"
           />
           <div
             className="pointer-events-none absolute inset-0"
@@ -87,7 +87,7 @@ export default async function ProductComponentsPage({
                 "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
             }}
           />
-          <h1 className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-3 py-1.5 text-sm font-normal text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
+          <h1 className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-normal text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
             {product.title}
           </h1>
         </div>
