@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { Check, CircleHelp, TriangleAlert } from "lucide-react"
+import { Check, TriangleAlert } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
@@ -496,25 +496,10 @@ export function AgentFtueFlow() {
                         id={`screen-${activePhase}-${index}`}
                         className="text-lg font-medium"
                       >
-                        {screen.title}
+                        {screen.action}
                       </h4>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                        {screen.description}
-                      </p>
 
                       <div className="mt-5">
-                        <p className="text-xs font-medium text-muted-foreground">
-                          User action
-                        </p>
-                        <p className="mt-1 text-sm font-medium">
-                          {screen.action}
-                        </p>
-                      </div>
-
-                      <div className="mt-7">
-                        <p className="text-xs font-medium text-muted-foreground">
-                          What needs to happen
-                        </p>
                         <ul className="mt-3 space-y-3">
                           {screen.needs.map((item) => (
                             <li
@@ -523,23 +508,6 @@ export function AgentFtueFlow() {
                             >
                               <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                               <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="mt-7">
-                        <p className="text-xs font-medium text-muted-foreground">
-                          Open questions
-                        </p>
-                        <ul className="mt-3 space-y-3">
-                          {screen.questions.map((question) => (
-                            <li
-                              key={question}
-                              className="flex gap-2.5 text-sm leading-5"
-                            >
-                              <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                              <span>{question}</span>
                             </li>
                           ))}
                         </ul>
