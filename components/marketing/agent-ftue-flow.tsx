@@ -83,7 +83,7 @@ const phases: Phase[] = [
         questions: ["Which Claude clients do we support first?"],
       },
       {
-        title: "MCP OAuth",
+        title: "OAuth with waitlisted email",
         description:
           "Approved emails can authenticate. Everyone else returns to the waitlist.",
         action: "Continue with approved email",
@@ -91,7 +91,6 @@ const phases: Phase[] = [
         needs: [
           "Check the email against the approved list",
           "Connect authentication to usage tracking",
-          "Show a useful message when access is unavailable",
         ],
         questions: ["How quickly does an approved email reach the auth gate?"],
       },
