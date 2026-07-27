@@ -102,19 +102,7 @@ export default async function MockupRoundupPage({
       </p>
 
       <section className="mt-10 text-center">
-        <div className="flex items-center justify-between gap-4 border-b pb-3">
-          <h2 className="text-sm font-medium">Components</h2>
-          <Badge
-            variant="outline"
-            className="h-auto rounded-sm px-2.5 py-1.5 font-normal"
-            render={
-              <Link href="/studio" target="_blank">
-                Edit content in Sanity
-              </Link>
-            }
-          />
-        </div>
-
+        <h2 className="text-sm font-medium">Components</h2>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {group.items.map((component) => (
             <Badge
@@ -128,6 +116,19 @@ export default async function MockupRoundupPage({
               }
             />
           ))}
+        </div>
+
+        <h2 className="mt-8 text-sm font-medium">Content</h2>
+        <div className="mt-4">
+          <Badge
+            variant="outline"
+            className="h-auto rounded-sm px-3 py-2 font-normal"
+            render={
+              <Link href="/studio" target="_blank">
+                Edit content in Sanity
+              </Link>
+            }
+          />
         </div>
       </section>
     </article>
