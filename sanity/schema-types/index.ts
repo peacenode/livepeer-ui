@@ -24,8 +24,10 @@ import {
   livepeerOrgSiteType,
 } from "./livepeer-org-pages"
 import { waitlistPageContentType } from "./waitlist-content"
+import { agentRolloutFlowType } from "./agent-rollout-flow"
 
 export const schemaTypes = [
+  agentRolloutFlowType,
   marketingLinkType,
   marketingItemType,
   marketingWeekType,

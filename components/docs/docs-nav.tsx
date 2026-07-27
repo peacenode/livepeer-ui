@@ -19,6 +19,7 @@ export function DocsNav({
       title: "Sprint",
       items: [
         { title: "Planner", href: "/marketing/planner" },
+        { title: "Flows", href: "/marketing/agent-ftue-flow" },
         { title: "Social Kit", href: "/marketing/press-kit" },
         { title: "Brand Kit", href: "/marketing/brand-kit" },
         { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
@@ -43,13 +44,15 @@ export function DocsNav({
         { title: "Inter", href: "/docs/inter" },
       ],
     },
-    ...componentGroups.map((group) => ({
-      title: group.title,
-      items: group.items.map((component) => ({
-        title: component.title,
-        href: `/docs/components/${component.name}`,
+    ...componentGroups
+      .filter((group) => group.title !== "Planner")
+      .map((group) => ({
+        title: group.title,
+        items: group.items.map((component) => ({
+          title: component.title,
+          href: `/docs/components/${component.name}`,
+        })),
       })),
-    })),
     {
       title: "Primitives",
       items: primitives.map((component) => ({

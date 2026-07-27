@@ -5,10 +5,11 @@ import { notFound } from "next/navigation"
 
 import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
-import {
-  getMockupRoundup,
-  type MockupRoundupSlug,
-} from "@/sanity/lib/registry-content"
+
+type MockupRoundupSlug =
+  | "agent-waitlist"
+  | "agent-console"
+  | "livepeer-org"
 
 const mockupRoundupSlugs = [
   "agent-waitlist",
@@ -20,6 +21,30 @@ const componentGroupTitles: Record<MockupRoundupSlug, string> = {
   "agent-waitlist": "Agent Waitlist",
   "agent-console": "Agent Console",
   "livepeer-org": "Livepeer.org",
+}
+
+const mockupRoundups: Record<
+  MockupRoundupSlug,
+  { title: string; description: string; previewHref: string }
+> = {
+  "agent-waitlist": {
+    title: "Agent Waitlist",
+    description:
+      "Signup, referral, status, leaderboard, and branded background components for the Agent Waitlist.",
+    previewHref: "/mockups/waitlist",
+  },
+  "agent-console": {
+    title: "Agent Console",
+    description:
+      "Application shell, account, usage, billing, API, inference, and compute components for the Agent Console.",
+    previewHref: "/mockups/livepeer-agent",
+  },
+  "livepeer-org": {
+    title: "Livepeer.org",
+    description:
+      "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
+    previewHref: "/mockups/livepeer-org",
+  },
 }
 
 function isMockupRoundupSlug(slug: string): slug is MockupRoundupSlug {
@@ -38,8 +63,7 @@ export async function generateMetadata({
   const { slug } = await params
   if (!isMockupRoundupSlug(slug)) return {}
 
-  const roundup = await getMockupRoundup(slug)
-  if (!roundup) return {}
+  const roundup = mockupRoundups[slug]
 
   return {
     title: `${roundup.title} Components`,
@@ -55,8 +79,7 @@ export default async function MockupRoundupPage({
   const { slug } = await params
   if (!isMockupRoundupSlug(slug)) notFound()
 
-  const roundup = await getMockupRoundup(slug)
-  if (!roundup) notFound()
+  const roundup = mockupRoundups[slug]
 
   const group = componentGroups.find(
     (candidate) => candidate.title === componentGroupTitles[slug]
@@ -116,19 +139,6 @@ export default async function MockupRoundupPage({
               }
             />
           ))}
-        </div>
-
-        <h2 className="mt-8 text-sm font-medium">Content</h2>
-        <div className="mt-4">
-          <Badge
-            variant="secondary"
-            className="h-auto rounded-sm px-3 py-2 font-normal"
-            render={
-              <Link href="/studio" target="_blank">
-                Edit content in Sanity
-              </Link>
-            }
-          />
         </div>
       </section>
     </article>
