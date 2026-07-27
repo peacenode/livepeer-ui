@@ -20,67 +20,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import type { LivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
 
-const siteLinks = [
-  { label: "Home", href: "/mockups/livepeer-org" },
-  { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
-  { label: "GPU", href: "/mockups/livepeer-org/earn" },
-  { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
-  { label: "Agent Playbooks", href: "/mockups/livepeer-org/library" },
-]
-
-const footerGroups = [
-  {
-    title: "Network",
-    links: [
-      { label: "Ecosystem", href: "https://livepeer.org/ecosystem" },
-      { label: "Livepeer Token", href: "https://livepeer.org/token" },
-      { label: "Delegate LPT", href: "https://explorer.livepeer.org/" },
-      { label: "Roadmap", href: "https://roadmap.livepeer.org/roadmap" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Research", href: "https://forum.livepeer.org/c/research/15" },
-      { label: "Docs", href: "https://docs.livepeer.org/" },
-      { label: "Blog", href: "https://blog.livepeer.org/" },
-      { label: "Agent", href: "/mockups/livepeer-org/agent" },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      { label: "Discord", href: "https://discord.gg/livepeer" },
-      { label: "X / Twitter", href: "https://x.com/Livepeer" },
-      { label: "Forum", href: "https://forum.livepeer.org/" },
-      { label: "GitHub", href: "https://github.com/livepeer" },
-    ],
-  },
-]
-
-const socials = [
-  {
-    label: "Livepeer on Discord",
-    href: "https://discord.gg/livepeer",
-    icon: DiscordIcon,
-  },
-  {
-    label: "Livepeer on X",
-    href: "https://x.com/Livepeer",
-    icon: SocialXIcon,
-  },
-  {
-    label: "Livepeer on GitHub",
-    href: "https://github.com/livepeer",
-    icon: GitHubIcon,
-  },
-  {
-    label: "Livepeer website",
-    href: "https://livepeer.org/",
-    icon: GlobeIcon,
-  },
-]
+const socialIcons = {
+  discord: DiscordIcon,
+  x: SocialXIcon,
+  github: GitHubIcon,
+  website: GlobeIcon,
+}
 
 function LivepeerMenuIcon() {
   return (
@@ -95,7 +42,7 @@ function LivepeerMenuIcon() {
   )
 }
 
-export function LivepeerOrgMenu() {
+export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
 
@@ -145,7 +92,7 @@ export function LivepeerOrgMenu() {
 
         <div className="grid gap-12 px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
           <nav className="flex flex-col items-start gap-4 text-left">
-            {siteLinks.map((item) => (
+            {site.menuLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -163,8 +110,8 @@ export function LivepeerOrgMenu() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {socials.map((social) => {
-              const Icon = social.icon
+            {site.socialLinks.map((social) => {
+              const Icon = socialIcons[social.service]
 
               return (
                 <a
@@ -182,7 +129,7 @@ export function LivepeerOrgMenu() {
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3">
-            {footerGroups.map((group) => (
+            {site.footerGroups.map((group) => (
               <div key={group.title}>
                 <h2 className="text-sm font-medium text-background">
                   {group.title}
@@ -215,9 +162,7 @@ export function LivepeerOrgMenu() {
             ))}
           </div>
 
-          <p className="text-xs text-background/55">
-            © 2026 Livepeer Foundation. All rights reserved.
-          </p>
+          <p className="text-xs text-background/55">{site.copyright}</p>
         </div>
       </SheetContent>
     </Sheet>

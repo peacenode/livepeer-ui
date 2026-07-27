@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "components/mockups/protocol-header-section.tsx",
-      "content": "export function ProtocolHeaderSection() {\n  return (\n    <header className=\"max-w-3xl\">\n      <p className=\"text-sm text-muted-foreground\">Livepeer</p>\n      <h1 className=\"mt-2 text-3xl font-medium text-balance\">Livepeer Agent connects applications and agents to media workflows. Compute runs them.</h1>\n      <p className=\"mt-4 text-base leading-relaxed text-muted-foreground\">Workflows define what happens. Livepeer Agent makes them available through the CLI, MCP, and API. The Livepeer network supplies the compute that executes every run.</p>\n    </header>\n  )\n}\n",
+      "content": "export function ProtocolHeaderSection({\n  eyebrow,\n  heading,\n  description,\n}: {\n  eyebrow: string\n  heading: string\n  description: string\n}) {\n  return (\n    <header className=\"max-w-3xl\">\n      <p className=\"text-sm text-muted-foreground\">{eyebrow}</p>\n      <h1 className=\"mt-2 text-3xl font-medium text-balance\">{heading}</h1>\n      <p className=\"mt-4 text-base leading-relaxed text-muted-foreground\">\n        {description}\n      </p>\n    </header>\n  )\n}\n",
       "type": "registry:block"
     }
   ],

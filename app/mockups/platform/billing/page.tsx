@@ -8,25 +8,35 @@ import {
 } from "@/components/demos/fixtures/billing"
 import { BillingWorkspace } from "@/components/mockups/billing-workspace"
 import { PlatformPage } from "@/components/mockups/platform-page"
-import { notFound } from "next/navigation"
-import { getAgentConsoleEditorialPage } from "@/sanity/lib/registry-content"
+import {
+  getAgentConsolePage,
+  type BillingPageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = { title: "Billing" }
 
 export default async function MockupBillingPage() {
-  const editorial = await getAgentConsoleEditorialPage("billing")
-  if (!editorial) notFound()
+  const editorial = await getAgentConsolePage<BillingPageContent>("billing")
+  if (!editorial?.billing) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-billing is missing or incomplete."
+    )
+  }
 
   return (
     <PlatformPage title={editorial.heading} showHeader={false}>
       <BillingWorkspace
-        content={editorial}
+        content={{
+          heading: editorial.heading,
+          description: editorial.description,
+          ctas: editorial.billing.ctas,
+        }}
         headingLevel="h1"
         period={demoBillingPeriod}
         paymentMethod={demoPaymentMethod}
         invoices={demoBillingInvoices}
         invoiceLabels={demoInvoiceLabels}
-        managePaymentLabel="Update"
+        managePaymentLabel={editorial.billing.managePaymentLabel}
       />
     </PlatformPage>
   )

@@ -1,9 +1,10 @@
 import { OrchestratorCtaSection } from "@/components/mockups/livepeer-org-landing-sections"
+import { livepeerOrgHomeFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function OrchestratorCtaSectionDemo() {
   return (
     <div className="w-full overflow-hidden">
-      <OrchestratorCtaSection />
+      <OrchestratorCtaSection content={livepeerOrgHomeFixture.providerCta} />
     </div>
   )
 }

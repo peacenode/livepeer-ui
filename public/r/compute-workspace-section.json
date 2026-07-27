@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "components/mockups/compute-workspace.tsx",
-      "content": "import { ComputeMetrics, type ComputeMetric } from \"@/components/mockups/compute-metrics\"\nimport { OrchestratorTable } from \"@/components/mockups/orchestrator-table\"\nimport type { Orchestrator } from \"@/lib/livepeer\"\n\nexport function ComputeWorkspace({\n  stats, orchestrators, initialCursor,\n}: {\n  stats: ComputeMetric[]\n  orchestrators: Orchestrator[]\n  initialCursor: string | null\n}) {\n  return (\n    <>\n      <ComputeMetrics stats={stats} />\n      <OrchestratorTable orchestrators={orchestrators} initialCursor={initialCursor} />\n      <p className=\"text-xs text-muted-foreground\">\n        On-chain registry and performance leaderboard data, cached for 10 minutes.\n      </p>\n    </>\n  )\n}\n",
+      "content": "import {\n  ComputeMetrics,\n  type ComputeMetric,\n} from \"@/components/mockups/compute-metrics\"\nimport { OrchestratorTable } from \"@/components/mockups/orchestrator-table\"\nimport type { Orchestrator } from \"@/lib/livepeer\"\n\nexport function ComputeWorkspace({\n  stats,\n  orchestrators,\n  initialCursor,\n  dataNote,\n}: {\n  stats: ComputeMetric[]\n  orchestrators: Orchestrator[]\n  initialCursor: string | null\n  dataNote: string\n}) {\n  return (\n    <>\n      <ComputeMetrics stats={stats} />\n      <OrchestratorTable\n        orchestrators={orchestrators}\n        initialCursor={initialCursor}\n      />\n      <p className=\"text-xs text-muted-foreground\">{dataNote}</p>\n    </>\n  )\n}\n",
       "type": "registry:block"
     },
     {

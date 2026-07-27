@@ -1,4 +1,5 @@
 import { AgentCapabilitiesSection } from "@/components/mockups/agent-capabilities-section"
+import { livepeerOrgAgentFixture } from "@/components/demos/fixtures/livepeer-org"
 
 const capabilities = [
   "Image generation",
@@ -11,5 +12,10 @@ const capabilities = [
 ]
 
 export default function AgentCapabilitiesSectionDemo() {
-  return <AgentCapabilitiesSection capabilities={capabilities} />
+  return (
+    <AgentCapabilitiesSection
+      capabilities={capabilities}
+      content={livepeerOrgAgentFixture.capabilities}
+    />
+  )
 }

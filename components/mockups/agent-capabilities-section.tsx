@@ -5,15 +5,16 @@ import { Button } from "@/components/ui/button"
 
 export function AgentCapabilitiesSection({
   capabilities,
+  content,
 }: {
   capabilities: string[]
+  content: { heading: string; cta: { label: string; href: string } }
 }) {
   return (
     <section className="bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-10">
       <div className="mx-auto flex max-w-screen-2xl flex-col items-center text-center">
         <h2 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
-          Livepeer Agent brings image, video, audio, 3D, editing, rendering, and
-          production tools across the Livepeer network into one interface.
+          {content.heading}
         </h2>
         <div className="mt-10 flex max-w-5xl flex-wrap justify-center gap-2">
           {capabilities.map((capability) => (
@@ -30,10 +31,10 @@ export function AgentCapabilitiesSection({
           size="lg"
           variant="secondary"
           nativeButton={false}
-          render={<Link href="/mockups/livepeer-org/library" />}
+          render={<Link href={content.cta.href} />}
           className="mt-10 h-16 rounded-sm px-6"
         >
-          See more
+          {content.cta.label}
           <span className="font-sans" aria-hidden="true">
             →
           </span>

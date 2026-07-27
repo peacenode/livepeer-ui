@@ -9,14 +9,20 @@ import {
 } from "@/components/demos/fixtures/usage"
 import { UsageWorkspace } from "@/components/mockups/usage-workspace"
 import { PlatformPage } from "@/components/mockups/platform-page"
-import { notFound } from "next/navigation"
-import { getAgentConsoleEditorialPage } from "@/sanity/lib/registry-content"
+import {
+  getAgentConsolePage,
+  type UsagePageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = { title: "Usage" }
 
 export default async function MockupUsagePage() {
-  const editorial = await getAgentConsoleEditorialPage("usage")
-  if (!editorial?.usageContent) notFound()
+  const editorial = await getAgentConsolePage<UsagePageContent>("usage")
+  if (!editorial?.usage) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-usage is missing or incomplete."
+    )
+  }
 
   return (
     <PlatformPage
@@ -25,7 +31,7 @@ export default async function MockupUsagePage() {
       variant="plain"
     >
       <UsageWorkspace
-        content={editorial.usageContent}
+        content={editorial.usage}
         balance={creditBalance}
         metrics={usageMetrics}
         dailyRows={dailyUsageRows}

@@ -1,16 +1,15 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-agent-onboarding-section"
 import { CardTitle } from "@/components/ui/card"
+import { getForumTopicUrl, getLatestResearchTopics } from "@/lib/forum"
 import {
-  getForumTopicUrl,
-  getLatestResearchTopics,
-  RESEARCH_FORUM_URL,
-} from "@/lib/forum"
+  getAgentConsolePage,
+  type HomePageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
   title: "Home",
@@ -24,79 +23,68 @@ const forumDateFormatter = new Intl.DateTimeFormat("en-US", {
 })
 
 export default async function MockupHomePage() {
-  const forumTopics = await getLatestResearchTopics()
+  const [editorial, forumTopics] = await Promise.all([
+    getAgentConsolePage<HomePageContent>("home"),
+    getLatestResearchTopics(),
+  ])
+  if (!editorial?.home) {
+    throw new Error(
+      "Required Sanity document agentConsolePage-home is missing or incomplete."
+    )
+  }
 
   return (
-    <PlatformPage title="Home" variant="plain">
+    <PlatformPage
+      title={editorial.heading}
+      description={editorial.description}
+      variant="plain"
+    >
       <div className="flex flex-col gap-6">
-        <LivepeerAgentOnboardingSection />
+        <LivepeerAgentOnboardingSection
+          title={editorial.home.onboardingTitle}
+          steps={editorial.home.onboardingSteps}
+        />
         <div className="grid gap-4 sm:grid-cols-2">
-          <a
-            href="https://docs.livepeer.org/v1/orchestrators/guides/get-started"
-            target="_blank"
-            rel="noreferrer"
-            className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
-              <Image
-                src="/generated/20260725-101313-console-home-cards/orchestrator.png"
-                alt=""
-                fill
-                sizes="(min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-              />
-            </div>
-            <div className="mt-4 flex max-w-sm flex-col gap-1.5">
-              <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
-                Run an Orchestrator
-                <ArrowUpRightIcon
-                  className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
+          {editorial.home.featureLinks.map((feature) => (
+            <a
+              key={feature._key ?? feature.href}
+              href={feature.href}
+              className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
+                <Image
+                  src={feature.imageSrc}
+                  alt=""
+                  fill
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
                 />
-              </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Provide compute to the network and earn service fees and
-                protocol rewards.
-              </p>
-            </div>
-          </a>
-          <Link
-            href="/mockups/livepeer-org/library"
-            className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
-              <Image
-                src="/generated/20260726-2326-console-home-playbooks/playbooks.png"
-                alt=""
-                fill
-                sizes="(min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-              />
-            </div>
-            <div className="mt-4 flex max-w-sm flex-col gap-1.5">
-              <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
-                Explore playbooks
-                <ArrowUpRightIcon
-                  className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                />
-              </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Create and edit images and video from the agent of your choice.
-              </p>
-            </div>
-          </Link>
+              </div>
+              <div className="mt-4 flex max-w-sm flex-col gap-1.5">
+                <CardTitle className="inline-flex items-center gap-1.5 text-xl font-normal">
+                  {feature.title}
+                  <ArrowUpRightIcon
+                    className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
       <div className="flex flex-col gap-3">
         <h2 className="text-xl font-normal">
           <a
-            href={RESEARCH_FORUM_URL}
+            href={editorial.home.researchHref}
             target="_blank"
             rel="noreferrer"
             className="group inline-flex items-center gap-1.5"
           >
-            Research
+            {editorial.home.researchTitle}
             <ArrowUpRightIcon
               className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               aria-hidden="true"
@@ -131,12 +119,14 @@ export default async function MockupHomePage() {
           ))}
           {forumTopics.length === 0 && (
             <a
-              href={RESEARCH_FORUM_URL}
+              href={editorial.home.researchHref}
               target="_blank"
               rel="noreferrer"
               className="group flex items-center justify-between gap-6 py-5"
             >
-              <span className="font-medium">Visit the Livepeer forum</span>
+              <span className="font-medium">
+                {editorial.home.researchEmptyLabel}
+              </span>
               <ArrowUpRightIcon
                 className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"

@@ -14,6 +14,12 @@ import { schemaTypes } from "@/sanity/schema-types"
 const singletonSchemaTypes = new Set([
   "mockupRoundup",
   "agentConsoleEditorialPage",
+  "waitlistPageContent",
+  "agentConsoleShell",
+  "agentConsolePage",
+  "livepeerOrgSite",
+  "livepeerOrgPage",
+  "plannerPageContent",
 ])
 
 const plannerStructure: StructureResolver = (S) =>
@@ -28,6 +34,24 @@ const plannerStructure: StructureResolver = (S) =>
             .title("Weeks")
             .defaultOrdering([{ field: "startsAt", direction: "desc" }])
         ),
+      S.divider(),
+      ...[
+        ["Home", "home"],
+        ["Characters", "characters"],
+        ["Footage", "footage"],
+        ["Install", "install"],
+        ["Projects", "projects"],
+        ["Protocol", "protocol"],
+        ["Storyboards", "storyboards"],
+      ].map(([title, page]) =>
+        S.listItem()
+          .title(title)
+          .child(
+            S.document()
+              .schemaType("plannerPageContent")
+              .documentId(`plannerPageContent-${page}`)
+          )
+      ),
     ])
 
 const waitlistStructure: StructureResolver = (S) =>
@@ -39,8 +63,8 @@ const waitlistStructure: StructureResolver = (S) =>
         .icon(GalleryVerticalEndIcon)
         .child(
           S.document()
-            .schemaType("mockupRoundup")
-            .documentId("mockupRoundup-agent-waitlist")
+            .schemaType("waitlistPageContent")
+            .documentId("waitlistPageContent-waitlist")
         ),
     ])
 
@@ -49,18 +73,82 @@ const agentConsoleStructure: StructureResolver = (S) =>
     .title("Agent Console")
     .items([
       S.listItem()
+        .title("Shared shell")
+        .child(
+          S.document()
+            .schemaType("agentConsoleShell")
+            .documentId("agentConsoleShell")
+        ),
+      S.divider(),
+      S.listItem()
+        .title("Home")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-home")
+        ),
+      S.listItem()
         .title("Usage")
         .child(
           S.document()
-            .schemaType("agentConsoleEditorialPage")
-            .documentId("agentConsoleEditorialPage-usage")
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-usage")
+        ),
+      S.listItem()
+        .title("API Keys")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-api-keys")
+        ),
+      S.listItem()
+        .title("API Logs")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-api-logs")
         ),
       S.listItem()
         .title("Billing")
         .child(
           S.document()
-            .schemaType("agentConsoleEditorialPage")
-            .documentId("agentConsoleEditorialPage-billing")
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-billing")
+        ),
+      S.listItem()
+        .title("Compute")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-compute")
+        ),
+      S.listItem()
+        .title("Inference")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-inference")
+        ),
+      S.listItem()
+        .title("Account")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-account")
+        ),
+      S.listItem()
+        .title("Project settings")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-project-settings")
+        ),
+      S.listItem()
+        .title("Organization")
+        .child(
+          S.document()
+            .schemaType("agentConsolePage")
+            .documentId("agentConsolePage-organization")
         ),
     ])
 
@@ -69,12 +157,48 @@ const livepeerOrgStructure: StructureResolver = (S) =>
     .title("Livepeer.org")
     .items([
       S.listItem()
+        .title("Shared site")
+        .child(
+          S.document()
+            .schemaType("livepeerOrgSite")
+            .documentId("livepeerOrgSite")
+        ),
+      S.divider(),
+      S.listItem()
         .title("Home")
         .icon(GalleryVerticalEndIcon)
         .child(
           S.document()
-            .schemaType("mockupRoundup")
-            .documentId("mockupRoundup-livepeer-org")
+            .schemaType("livepeerOrgPage")
+            .documentId("livepeerOrgPage-home")
+        ),
+      S.listItem()
+        .title("Livepeer Agent")
+        .child(
+          S.document()
+            .schemaType("livepeerOrgPage")
+            .documentId("livepeerOrgPage-livepeer-agent")
+        ),
+      S.listItem()
+        .title("Playbook library")
+        .child(
+          S.document()
+            .schemaType("livepeerOrgPage")
+            .documentId("livepeerOrgPage-playbook-library")
+        ),
+      S.listItem()
+        .title("Ecosystem")
+        .child(
+          S.document()
+            .schemaType("livepeerOrgPage")
+            .documentId("livepeerOrgPage-ecosystem")
+        ),
+      S.listItem()
+        .title("Provide GPU compute")
+        .child(
+          S.document()
+            .schemaType("livepeerOrgPage")
+            .documentId("livepeerOrgPage-provide-gpu-compute")
         ),
     ])
 

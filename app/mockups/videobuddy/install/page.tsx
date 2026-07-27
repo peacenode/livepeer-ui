@@ -1,28 +1,30 @@
 import type { Metadata } from "next"
+import { getPlannerPageContent } from "@/sanity/lib/planner-pages"
 
 import { InstallCommand } from "./install-command"
 
-export const metadata: Metadata = {
-  title: "Install Livepeer Agent",
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPlannerPageContent("install")
+  return { title: content.metadataTitle }
 }
 
-export default function InstallPage() {
+export default async function InstallPage() {
+  const content = await getPlannerPageContent("install")
   return (
     <main className="h-[calc(100dvh-4rem)] overflow-y-auto overscroll-none md:h-dvh">
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
         <header className="max-w-2xl">
           <h1 className="text-2xl font-medium text-balance">
-            Install Livepeer Agent
+            {content.heading}
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Add Livepeer Agent to Codex or Claude Code with one command.
+            {content.description}
           </p>
         </header>
         <section className="mt-8">
           <InstallCommand />
           <p className="mt-3 text-xs text-muted-foreground">
-            Run this once from your terminal. Livepeer Agent will be available across
-            projects.
+            {content.supportingText}
           </p>
         </section>
       </div>

@@ -5,20 +5,28 @@ export type WaitlistLeader = {
 
 export function WaitlistLeaderboard({
   leaders,
+  heading,
+  personColumnLabel,
+  referralsColumnLabel,
+  currentUserLabel,
   currentUserReferrals = 0,
 }: {
   leaders: WaitlistLeader[]
+  heading: string
+  personColumnLabel: string
+  referralsColumnLabel: string
+  currentUserLabel: string
   currentUserReferrals?: number
 }) {
   return (
     <section aria-labelledby="waitlist-leaders">
       <h2 id="waitlist-leaders" className="text-sm font-medium">
-        Leaderboard
+        {heading}
       </h2>
       <div className="mt-3 overflow-hidden rounded-md border">
         <div className="flex items-center justify-between border-b px-3 py-2 text-xs text-muted-foreground">
-          <span>Person</span>
-          <span>Referrals</span>
+          <span>{personColumnLabel}</span>
+          <span>{referralsColumnLabel}</span>
         </div>
         <ol className="divide-y">
           {leaders.map((person, index) => (
@@ -37,7 +45,7 @@ export function WaitlistLeaderboard({
             role="status"
             aria-live="polite"
           >
-            <span className="truncate font-medium">You</span>
+            <span className="truncate font-medium">{currentUserLabel}</span>
             <span className="font-mono text-xs text-emerald-400 tabular-nums">
               {currentUserReferrals}
             </span>

@@ -35,6 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, framesForName, storyMedia } from "../media-assets"
+import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
 
 type Project = {
   id: string
@@ -165,7 +166,11 @@ const initialProjects: Project[] = [
   },
 ]
 
-export function ProjectsWorkspace() {
+export function ProjectsWorkspace({
+  content,
+}: {
+  content: PlannerPageContent
+}) {
   const [projects, setProjects] = useState(initialProjects)
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
     null
@@ -344,7 +349,7 @@ export function ProjectsWorkspace() {
                 Projects
               </Button>
             ) : (
-              <h1 className="text-xl font-medium">Projects</h1>
+              <h1 className="text-xl font-medium">{content.heading}</h1>
             )}
             {!selectedProjectId && (
               <Button
@@ -352,7 +357,7 @@ export function ProjectsWorkspace() {
                 onClick={() => setIsNewProjectOpen(true)}
               >
                 <PlusIcon className="size-6" />
-                New project
+                {content.primaryActionLabel}
               </Button>
             )}
           </header>
@@ -607,7 +612,9 @@ export function ProjectsWorkspace() {
                   ) : (
                     <div className="flex min-h-64 flex-col items-center justify-center text-center">
                       <FolderIcon className="size-5 text-muted-foreground" />
-                      <p className="mt-3 text-sm font-medium">No finals yet</p>
+                      <p className="mt-3 text-sm font-medium">
+                        {content.emptyStateTitle}
+                      </p>
                       <p className="mt-1 text-xs text-muted-foreground">
                         Open a render and mark it as final.
                       </p>

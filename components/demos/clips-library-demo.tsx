@@ -5,6 +5,9 @@ import { useState } from "react"
 import { ClipsLibrary } from "@/components/mockups/clips-library"
 import type { ClientClip as Clip } from "@/components/mockups/client-clip"
 import { storyMedia } from "@/app/mockups/videobuddy/media-assets"
+import { plannerPageFixture } from "@/components/demos/fixtures/planner-pages"
+
+const content = plannerPageFixture("footage")
 
 const initialClips: Clip[] = [
   {
@@ -29,6 +32,7 @@ export default function ClipsLibraryDemo() {
     <div className="w-full">
       <ClipsLibrary
         clips={clips}
+        emptyStateTitle={content.emptyStateTitle!}
         onDownload={() => undefined}
         onDuplicate={(clip) =>
           setClips((current) => [

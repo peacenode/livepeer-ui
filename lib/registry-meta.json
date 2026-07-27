@@ -1,40 +1,176 @@
 {
   "name": "livepeer-ui",
   "components": [
-    { "name": "accordion", "title": "Accordion", "description": "A vertically stacked set of interactive headings that each reveal a section of content." },
-    { "name": "alert", "title": "Alert", "description": "Displays a callout for user attention." },
-    { "name": "alert-dialog", "title": "Alert Dialog", "description": "A modal dialog that interrupts the user with important content and expects a response." },
-    { "name": "attachment", "title": "Attachment", "description": "Displays an attached file with media, metadata, and actions." },
-    { "name": "avatar", "title": "Avatar", "description": "An image element with a fallback for representing the user." },
-    { "name": "badge", "title": "Badge", "description": "Displays a badge or a component that looks like a badge." },
-    { "name": "breadcrumb", "title": "Breadcrumb", "description": "Displays the path to the current resource using a hierarchy of links." },
-    { "name": "button", "title": "Button", "description": "Displays a button or a component that looks like a button." },
-    { "name": "card", "title": "Card", "description": "Displays a card with header, content, and footer." },
-    { "name": "checkbox", "title": "Checkbox", "description": "A control that allows the user to toggle between checked and not checked." },
-    { "name": "context-menu", "title": "Context Menu", "description": "Displays actions when the user opens the context menu on a target." },
-    { "name": "dialog", "title": "Dialog", "description": "A window overlaid on either the primary window or another dialog window." },
-    { "name": "dropdown-menu", "title": "Dropdown Menu", "description": "Displays a menu to the user, triggered by a button." },
-    { "name": "input", "title": "Input", "description": "Displays a form input field or a component that looks like an input field." },
-    { "name": "input-group", "title": "Input Group", "description": "Groups an input with inline or block-level controls and adornments." },
-    { "name": "kbd", "title": "Kbd", "description": "Displays keyboard input or shortcuts." },
-    { "name": "label", "title": "Label", "description": "Renders an accessible label associated with controls." },
-    { "name": "popover", "title": "Popover", "description": "Displays rich content in a portal, triggered by a button." },
-    { "name": "progress", "title": "Progress", "description": "Displays an indicator showing the completion progress of a task." },
-    { "name": "radio-group", "title": "Radio Group", "description": "A set of checkable buttons where no more than one can be checked at a time." },
-    { "name": "select", "title": "Select", "description": "Displays a list of options for the user to pick from, triggered by a button." },
-    { "name": "separator", "title": "Separator", "description": "Visually or semantically separates content." },
-    { "name": "sheet", "title": "Sheet", "description": "Extends the Dialog component to display content that complements the main content of the screen." },
-    { "name": "skeleton", "title": "Skeleton", "description": "Use to show a placeholder while content is loading." },
-    { "name": "slider", "title": "Slider", "description": "An input where the user selects a value from within a given range." },
-    { "name": "sonner", "title": "Sonner", "description": "An opinionated toast component for React." },
-    { "name": "spinner", "title": "Spinner", "description": "An indicator that shows an in-progress operation." },
-    { "name": "switch", "title": "Switch", "description": "A control that allows the user to toggle between on and off." },
-    { "name": "table", "title": "Table", "description": "A responsive table component." },
-    { "name": "tabs", "title": "Tabs", "description": "A set of layered sections of content displayed one at a time." },
-    { "name": "textarea", "title": "Textarea", "description": "Displays a form textarea or a component that looks like a textarea." },
-    { "name": "toggle", "title": "Toggle", "description": "A two-state button that can be either on or off." },
-    { "name": "toggle-group", "title": "Toggle Group", "description": "A set of two-state buttons that can be toggled on or off." },
-    { "name": "tooltip", "title": "Tooltip", "description": "A popup that displays information related to an element on hover or focus." }
+    {
+      "name": "accordion",
+      "title": "Accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content."
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "description": "Displays a callout for user attention."
+    },
+    {
+      "name": "alert-dialog",
+      "title": "Alert Dialog",
+      "description": "A modal dialog that interrupts the user with important content and expects a response."
+    },
+    {
+      "name": "attachment",
+      "title": "Attachment",
+      "description": "Displays an attached file with media, metadata, and actions."
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "description": "An image element with a fallback for representing the user."
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "description": "Displays a badge or a component that looks like a badge."
+    },
+    {
+      "name": "breadcrumb",
+      "title": "Breadcrumb",
+      "description": "Displays the path to the current resource using a hierarchy of links."
+    },
+    {
+      "name": "button",
+      "title": "Button",
+      "description": "Displays a button or a component that looks like a button."
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "description": "Displays a card with header, content, and footer."
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "description": "A control that allows the user to toggle between checked and not checked."
+    },
+    {
+      "name": "context-menu",
+      "title": "Context Menu",
+      "description": "Displays actions when the user opens the context menu on a target."
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "description": "A window overlaid on either the primary window or another dialog window."
+    },
+    {
+      "name": "dropdown-menu",
+      "title": "Dropdown Menu",
+      "description": "Displays a menu to the user, triggered by a button."
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "description": "Displays a form input field or a component that looks like an input field."
+    },
+    {
+      "name": "input-group",
+      "title": "Input Group",
+      "description": "Groups an input with inline or block-level controls and adornments."
+    },
+    {
+      "name": "kbd",
+      "title": "Kbd",
+      "description": "Displays keyboard input or shortcuts."
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls."
+    },
+    {
+      "name": "popover",
+      "title": "Popover",
+      "description": "Displays rich content in a portal, triggered by a button."
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "description": "Displays an indicator showing the completion progress of a task."
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons where no more than one can be checked at a time."
+    },
+    {
+      "name": "select",
+      "title": "Select",
+      "description": "Displays a list of options for the user to pick from, triggered by a button."
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "description": "Visually or semantically separates content."
+    },
+    {
+      "name": "sheet",
+      "title": "Sheet",
+      "description": "Extends the Dialog component to display content that complements the main content of the screen."
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "description": "Use to show a placeholder while content is loading."
+    },
+    {
+      "name": "slider",
+      "title": "Slider",
+      "description": "An input where the user selects a value from within a given range."
+    },
+    {
+      "name": "sonner",
+      "title": "Sonner",
+      "description": "An opinionated toast component for React."
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "description": "An indicator that shows an in-progress operation."
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "description": "A control that allows the user to toggle between on and off."
+    },
+    {
+      "name": "table",
+      "title": "Table",
+      "description": "A responsive table component."
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "description": "A set of layered sections of content displayed one at a time."
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "description": "Displays a form textarea or a component that looks like a textarea."
+    },
+    {
+      "name": "toggle",
+      "title": "Toggle",
+      "description": "A two-state button that can be either on or off."
+    },
+    {
+      "name": "toggle-group",
+      "title": "Toggle Group",
+      "description": "A set of two-state buttons that can be toggled on or off."
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "description": "A popup that displays information related to an element on hover or focus."
+    }
   ],
   "catalog": [
     {
@@ -77,7 +213,12 @@
           "title": "Agent Waitlist Panel",
           "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
           "level": "section",
-          "uses": ["waitlist-signup-form", "waitlist-status-card", "waitlist-referral-link", "waitlist-leaderboard"],
+          "uses": [
+            "waitlist-signup-form",
+            "waitlist-status-card",
+            "waitlist-referral-link",
+            "waitlist-leaderboard"
+          ],
           "files": ["components/mockups/waitlist-panel.tsx"]
         },
         {
@@ -206,7 +347,14 @@
           "title": "Usage Workspace",
           "description": "Complete overview and activity workspace composed from reusable usage components.",
           "level": "section",
-          "uses": ["tabs", "credit-balance", "livepeer-agent-promo-cards", "usage-metrics", "daily-usage-table", "resource-usage-table"],
+          "uses": [
+            "tabs",
+            "credit-balance",
+            "livepeer-agent-promo-cards",
+            "usage-metrics",
+            "daily-usage-table",
+            "resource-usage-table"
+          ],
           "files": ["components/mockups/usage-workspace.tsx"]
         },
         {
@@ -411,7 +559,9 @@
           "description": "Submission workflow dialog with repository guidance and copy action.",
           "level": "component",
           "uses": ["button", "copy-button", "dialog"],
-          "files": ["app/mockups/playbooks/ecosystem/submit-ecosystem-dialog.tsx"]
+          "files": [
+            "app/mockups/playbooks/ecosystem/submit-ecosystem-dialog.tsx"
+          ]
         },
         {
           "name": "ecosystem-card",
@@ -456,7 +606,7 @@
       ]
     },
     {
-      "title": "Client Archived",
+      "title": "Planner",
       "items": [
         {
           "name": "client-application-sidebar",
@@ -479,10 +629,11 @@
           "title": "Application Shell",
           "description": "Responsive Client shell composed from desktop and mobile navigation.",
           "level": "section",
-          "uses": ["client-application-sidebar", "client-mobile-bottom-navigation"],
-          "files": [
-            "components/mockups/client-application-shell.tsx"
-          ]
+          "uses": [
+            "client-application-sidebar",
+            "client-mobile-bottom-navigation"
+          ],
+          "files": ["components/mockups/client-application-shell.tsx"]
         },
         {
           "name": "client-install-command",
@@ -582,7 +733,14 @@
           "title": "Generation Workspace",
           "description": "Generation composer and searchable media history section.",
           "level": "section",
-          "uses": ["attachment", "badge", "button", "dropdown-menu", "input-group", "media-context-menu"],
+          "uses": [
+            "attachment",
+            "badge",
+            "button",
+            "dropdown-menu",
+            "input-group",
+            "media-context-menu"
+          ],
           "files": [
             "app/mockups/videobuddy/agent-workspace.tsx",
             "app/mockups/videobuddy/media-assets.ts",
@@ -594,7 +752,13 @@
           "title": "Storyboards Workspace",
           "description": "Storyboard collections, frame actions, upload, and project assignment section.",
           "level": "section",
-          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "uses": [
+            "button",
+            "dialog",
+            "input",
+            "media-context-menu",
+            "project-picker"
+          ],
           "files": [
             "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
             "app/mockups/videobuddy/image-grid-utils.ts",
@@ -608,7 +772,13 @@
           "title": "Characters Workspace",
           "description": "Character reference collections, detail, upload, and project assignment section.",
           "level": "section",
-          "uses": ["button", "dialog", "input", "media-context-menu", "project-picker"],
+          "uses": [
+            "button",
+            "dialog",
+            "input",
+            "media-context-menu",
+            "project-picker"
+          ],
           "files": [
             "app/mockups/videobuddy/characters/characters-workspace.tsx",
             "app/mockups/videobuddy/image-grid-utils.ts",
@@ -634,7 +804,14 @@
           "title": "Projects Workspace",
           "description": "Project index and detail section with storyboards, characters, renders, finals, and creation dialogs.",
           "level": "section",
-          "uses": ["badge", "button", "dialog", "dropdown-menu", "input", "tabs"],
+          "uses": [
+            "badge",
+            "button",
+            "dialog",
+            "dropdown-menu",
+            "input",
+            "tabs"
+          ],
           "files": [
             "app/mockups/videobuddy/projects/projects-workspace.tsx",
             "app/mockups/videobuddy/image-grid-utils.ts",

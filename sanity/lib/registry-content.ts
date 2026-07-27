@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity"
 import { sanityClient } from "@/sanity/lib/client"
 
 export type MockupRoundupSlug =
-  "agent-waitlist" | "agent-console" | "livepeer-org"
+  "planner" | "agent-waitlist" | "agent-console" | "livepeer-org"
 
 export interface MockupRoundup {
   _id: string

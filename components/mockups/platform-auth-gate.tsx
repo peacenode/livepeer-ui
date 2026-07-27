@@ -16,7 +16,8 @@ function PlatformAuthGate({
 
   useEffect(() => {
     if (!contained && window.self !== window.top) {
-      setAuthenticated(true)
+      const frame = window.requestAnimationFrame(() => setAuthenticated(true))
+      return () => window.cancelAnimationFrame(frame)
     }
   }, [contained])
 

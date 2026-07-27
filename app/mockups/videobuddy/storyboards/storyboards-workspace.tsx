@@ -24,6 +24,7 @@ import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
 import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
+import type { PlannerPageContent } from "@/sanity/lib/planner-pages"
 
 type ImageBatch = {
   id: number
@@ -77,7 +78,11 @@ const initialBatches: ImageBatch[] = [
   },
 ]
 
-export function StoryboardsWorkspace() {
+export function StoryboardsWorkspace({
+  content,
+}: {
+  content: PlannerPageContent
+}) {
   const [batches, setBatches] = useState(initialBatches)
   const [editingId, setEditingId] = useState<number | null>(null)
   const [isUploadOpen, setIsUploadOpen] = useState(false)
@@ -191,10 +196,10 @@ export function StoryboardsWorkspace() {
       <section className="min-h-0 flex-1 overflow-y-auto overscroll-none">
         <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
           <header className="flex items-center justify-between gap-4 py-4">
-            <h1 className="text-xl font-medium">Storyboards</h1>
+            <h1 className="text-xl font-medium">{content.heading}</h1>
             <Button className="h-10 px-5" onClick={() => setIsUploadOpen(true)}>
               <PlusIcon className="size-6" />
-              New storyboard
+              {content.primaryActionLabel}
             </Button>
           </header>
 
@@ -408,7 +413,7 @@ export function StoryboardsWorkspace() {
       {batches.length === 0 && (
         <div className="flex flex-1 flex-col items-center justify-center gap-2 text-center">
           <ImagesIcon className="size-5 text-muted-foreground" />
-          <p className="text-sm font-medium">No image uploads yet</p>
+          <p className="text-sm font-medium">{content.emptyStateTitle}</p>
         </div>
       )}
 

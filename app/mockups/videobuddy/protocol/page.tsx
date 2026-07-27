@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
-import { ArrowRightIcon } from "lucide-react"
+import { ArrowRightIcon, BlocksIcon, CpuIcon, PlayIcon } from "lucide-react"
+import {
+  getPlannerPageContent,
+  type PlannerProtocolIcon,
+} from "@/sanity/lib/planner-pages"
 
 import {
   ProtocolFlowSection,
@@ -8,32 +12,62 @@ import {
   ProtocolRequestFlowSection,
 } from "./protocol-sections"
 
-export const metadata: Metadata = {
-  title: "Livepeer Agent, workflows, and compute",
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPlannerPageContent("protocol")
+  return { title: content.metadataTitle }
 }
 
-export default function ProtocolPage() {
+const icons = {
+  play: PlayIcon,
+  blocks: BlocksIcon,
+  cpu: CpuIcon,
+} satisfies Record<PlannerProtocolIcon, typeof PlayIcon>
+
+export default async function ProtocolPage() {
+  const content = await getPlannerPageContent("protocol")
+  if (!content.protocol || !content.heading || !content.description) {
+    throw new Error(
+      'Incomplete required Sanity document "plannerPageContent-protocol"'
+    )
+  }
+  const protocol = content.protocol
+  const layers = protocol.layers.map((layer) => ({
+    ...layer,
+    icon: icons[layer.icon],
+  }))
   return (
     <main className="h-[calc(100dvh-4rem)] overflow-y-auto overscroll-none md:h-dvh">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <ProtocolHeaderSection />
+        <ProtocolHeaderSection
+          eyebrow={protocol.eyebrow}
+          heading={content.heading}
+          description={content.description}
+        />
         <div className="mt-12">
-          <ProtocolFlowSection />
+          <ProtocolFlowSection heading={protocol.flowHeading} layers={layers} />
         </div>
         <div className="mt-14">
-          <ProtocolRequestFlowSection />
+          <ProtocolRequestFlowSection
+            heading={protocol.requestHeading}
+            steps={protocol.requestSteps}
+          />
         </div>
         <div className="mt-14">
-          <ProtocolPropertiesSection />
+          <ProtocolPropertiesSection
+            agentHeading={protocol.agentPropertyHeading}
+            agentDescription={protocol.agentPropertyDescription}
+            paymentHeading={protocol.paymentPropertyHeading}
+            paymentDescription={protocol.paymentPropertyDescription}
+          />
         </div>
         <div className="mt-14 border-t pt-6">
           <a
-            href="https://docs.livepeer.org/v2/about/protocol/architecture"
+            href={protocol.architectureLinkHref}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm font-medium hover:underline"
           >
-            Read the protocol architecture
+            {protocol.architectureLinkLabel}
             <ArrowRightIcon className="size-4" aria-hidden="true" />
           </a>
         </div>

@@ -3,7 +3,19 @@ import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-ag
 export default function LivepeerAgentOnboardingSectionDemo() {
   return (
     <div className="w-full">
-      <LivepeerAgentOnboardingSection />
+      <LivepeerAgentOnboardingSection
+        title="Get started with Livepeer Agent"
+        steps={[
+          {
+            label: "Install Livepeer Agent",
+            href: "/mockups/livepeer-org/agent",
+          },
+          {
+            label: "Add credits",
+            href: "/mockups/livepeer-agent/billing",
+          },
+        ]}
+      />
     </div>
   )
 }
