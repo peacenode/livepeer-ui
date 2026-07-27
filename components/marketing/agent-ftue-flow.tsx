@@ -2,11 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import {
-  Check,
-  CircleHelp,
-  TriangleAlert,
-} from "lucide-react"
+import { Check, CircleHelp, TriangleAlert } from "lucide-react"
 
 import { LivepeerGradientLockup } from "@/components/brand"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
@@ -149,8 +145,7 @@ const phases: Phase[] = [
       },
       {
         title: "Agent Console",
-        description:
-          "Own sign-in, access status, and onboarding in one place.",
+        description: "Own sign-in, access status, and onboarding in one place.",
         action: "Sign in",
         mockup: "console",
         needs: [
@@ -223,8 +218,7 @@ const phases: Phase[] = [
     screens: [
       {
         title: "Livepeer website",
-        description:
-          "Add the Agent to the main product story and navigation.",
+        description: "Add the Agent to the main product story and navigation.",
         action: "Explore the Agent",
         mockup: "website",
         needs: [
@@ -397,6 +391,12 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 export function AgentFtueFlow() {
   const [activePhase, setActivePhase] = useState(0)
   const phase = phases[activePhase]
+  const marketingScreen = phase.screens.find(
+    (screen) => screen.mockup === "marketing"
+  )
+  const userFlowScreens = phase.screens.filter(
+    (screen) => screen !== marketingScreen
+  )
 
   return (
     <main className="min-h-screen bg-background">
@@ -437,75 +437,113 @@ export function AgentFtueFlow() {
             )}
           </div>
 
-          <div className="mt-10 space-y-16">
-            {phase.screens.map((screen, index) => (
-              <section
-                key={screen.title}
-                aria-labelledby={`screen-${activePhase}-${index}`}
-                className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
-              >
-                <div className="min-w-0">
-                  <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
-                    <div className="aspect-video">
-                      <ScreenMockup type={screen.mockup} />
-                    </div>
-                  </div>
-                </div>
-
-                <aside>
+          <div className="mt-10">
+            {marketingScreen && (
+              <section aria-labelledby={`marketing-page-${activePhase}`}>
+                <header className="max-w-3xl text-left">
                   <h3
-                    id={`screen-${activePhase}-${index}`}
+                    id={`marketing-page-${activePhase}`}
                     className="text-lg font-medium"
                   >
-                    {screen.title}
+                    {marketingScreen.title}
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {screen.description}
+                    {marketingScreen.description}
                   </p>
+                </header>
 
-                  <div className="mt-5">
-                    <p className="text-xs font-medium text-muted-foreground">
-                      User action
-                    </p>
-                    <p className="mt-1 text-sm font-medium">{screen.action}</p>
+                <div className="mt-6 overflow-hidden rounded-lg border bg-background shadow-sm">
+                  <div className="aspect-video">
+                    <ScreenMockup type={marketingScreen.mockup} />
                   </div>
-
-                  <div className="mt-7">
-                    <p className="text-xs font-medium text-muted-foreground">
-                      What needs to happen
-                    </p>
-                    <ul className="mt-3 space-y-3">
-                      {screen.needs.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-2.5 text-sm leading-5"
-                        >
-                          <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-7">
-                    <p className="text-xs font-medium text-muted-foreground">
-                      Open questions
-                    </p>
-                    <ul className="mt-3 space-y-3">
-                      {screen.questions.map((question) => (
-                        <li
-                          key={question}
-                          className="flex gap-2.5 text-sm leading-5"
-                        >
-                          <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                          <span>{question}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </aside>
+                </div>
               </section>
-            ))}
+            )}
+
+            <section
+              aria-labelledby={`user-flow-${activePhase}`}
+              className="mt-16"
+            >
+              <h3
+                id={`user-flow-${activePhase}`}
+                className="text-2xl font-normal tracking-tight"
+              >
+                User flow
+              </h3>
+
+              <div className="mt-8 space-y-16">
+                {userFlowScreens.map((screen, index) => (
+                  <section
+                    key={screen.title}
+                    aria-labelledby={`screen-${activePhase}-${index}`}
+                    className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
+                  >
+                    <div className="min-w-0">
+                      <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+                        <div className="aspect-video">
+                          <ScreenMockup type={screen.mockup} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <aside>
+                      <h4
+                        id={`screen-${activePhase}-${index}`}
+                        className="text-lg font-medium"
+                      >
+                        {screen.title}
+                      </h4>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {screen.description}
+                      </p>
+
+                      <div className="mt-5">
+                        <p className="text-xs font-medium text-muted-foreground">
+                          User action
+                        </p>
+                        <p className="mt-1 text-sm font-medium">
+                          {screen.action}
+                        </p>
+                      </div>
+
+                      <div className="mt-7">
+                        <p className="text-xs font-medium text-muted-foreground">
+                          What needs to happen
+                        </p>
+                        <ul className="mt-3 space-y-3">
+                          {screen.needs.map((item) => (
+                            <li
+                              key={item}
+                              className="flex gap-2.5 text-sm leading-5"
+                            >
+                              <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mt-7">
+                        <p className="text-xs font-medium text-muted-foreground">
+                          Open questions
+                        </p>
+                        <ul className="mt-3 space-y-3">
+                          {screen.questions.map((question) => (
+                            <li
+                              key={question}
+                              className="flex gap-2.5 text-sm leading-5"
+                            >
+                              <CircleHelp className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                              <span>{question}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </aside>
+                  </section>
+                ))}
+              </div>
+            </section>
           </div>
         </section>
       </div>
