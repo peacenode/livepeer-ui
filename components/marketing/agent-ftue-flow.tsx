@@ -365,7 +365,7 @@ function ScreenMockup({ type }: { type: Screen["mockup"] }) {
 function ScreenRow({
   screen,
   headingId,
-  heading = screen.action,
+  heading = screen.title,
 }: {
   screen: Screen
   headingId: string
