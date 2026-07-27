@@ -28,7 +28,7 @@ export type InvoiceTableLabels = {
   status: string
   download: string
   emptyTitle: string
-  emptyDescription?: string
+  emptyDescription: string
 }
 
 export type InvoiceTableProps = {
@@ -103,11 +103,9 @@ export function InvoiceTable({
       ) : (
         <div className="flex min-h-40 flex-col items-center justify-center border-y px-4 text-center">
           <p className="text-sm font-medium">{labels.emptyTitle}</p>
-          {labels.emptyDescription ? (
-            <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-              {labels.emptyDescription}
-            </p>
-          ) : null}
+          <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+            {labels.emptyDescription}
+          </p>
         </div>
       )}
     </div>

@@ -9,6 +9,7 @@ export default function BillingPageSummaryDemo() {
     <BillingPageSummary
       period={demoBillingPeriod}
       paymentMethod={demoPaymentMethod}
+      managePaymentLabel="Update"
     />
   )
 }

@@ -2,10 +2,22 @@ import type {
   BillingPaymentMethod,
   BillingPeriodSummary,
 } from "@/components/mockups/billing-page-summary"
+import type { BillingWorkspaceEditorialContent } from "@/components/mockups/billing-workspace"
 import type {
   InvoiceRecord,
   InvoiceTableLabels,
 } from "@/components/mockups/invoice-table"
+
+export const demoBillingContent: BillingWorkspaceEditorialContent = {
+  heading: "Billing",
+  description: "Review usage, manage payment details, and download invoices.",
+  ctas: [
+    {
+      label: "Billing support",
+      href: "/contact",
+    },
+  ],
+}
 
 export const demoBillingPeriod: BillingPeriodSummary = {
   label: "Current period",

@@ -26,7 +26,7 @@ export type BillingPaymentMethod = {
 export type BillingPageSummaryProps = {
   period: BillingPeriodSummary
   paymentMethod: BillingPaymentMethod
-  managePaymentLabel?: string
+  managePaymentLabel: string
   managePaymentHref?: string
   onManagePayment?: () => void
 }
@@ -34,7 +34,7 @@ export type BillingPageSummaryProps = {
 export function BillingPageSummary({
   period,
   paymentMethod,
-  managePaymentLabel = "Update",
+  managePaymentLabel,
   managePaymentHref,
   onManagePayment,
 }: BillingPageSummaryProps) {

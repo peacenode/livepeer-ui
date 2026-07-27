@@ -6,37 +6,25 @@ import type {
   InvoiceTableProps,
 } from "@/components/mockups/invoice-table"
 import { InvoiceTable } from "@/components/mockups/invoice-table"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
-const emptyPeriod = {
-  label: "Current period",
-  amount: "—",
-  description: "No billing usage is available.",
-}
-
-const emptyPaymentMethod = {
-  label: "Payment method",
-  name: "Not configured",
-  description: "Add a payment method to pay future invoices.",
-}
-
-const defaultInvoiceLabels: InvoiceTableLabels = {
-  title: "Invoices",
-  invoice: "Invoice",
-  period: "Period",
-  amount: "Amount",
-  status: "Status",
-  download: "Download",
-  emptyTitle: "No invoices yet",
-  emptyDescription:
-    "Invoices will appear here after your first billing period.",
+export type BillingWorkspaceEditorialContent = {
+  heading: string
+  description: string
+  ctas: readonly {
+    label: string
+    href: string
+  }[]
 }
 
 export type BillingWorkspaceProps = {
-  period?: BillingPageSummaryProps["period"]
-  paymentMethod?: BillingPageSummaryProps["paymentMethod"]
-  invoices?: readonly InvoiceRecord[]
-  invoiceLabels?: InvoiceTableLabels
-  managePaymentLabel?: string
+  content: BillingWorkspaceEditorialContent
+  period: BillingPageSummaryProps["period"]
+  paymentMethod: BillingPageSummaryProps["paymentMethod"]
+  invoices: readonly InvoiceRecord[]
+  invoiceLabels: InvoiceTableLabels
+  managePaymentLabel: string
   managePaymentHref?: string
   onManagePayment?: BillingPageSummaryProps["onManagePayment"]
   getInvoiceDownloadHref?: InvoiceTableProps["getDownloadHref"]
@@ -44,10 +32,11 @@ export type BillingWorkspaceProps = {
 }
 
 export function BillingWorkspace({
-  period = emptyPeriod,
-  paymentMethod = emptyPaymentMethod,
-  invoices = [],
-  invoiceLabels = defaultInvoiceLabels,
+  content,
+  period,
+  paymentMethod,
+  invoices,
+  invoiceLabels,
   managePaymentLabel,
   managePaymentHref,
   onManagePayment,
@@ -55,7 +44,30 @@ export function BillingWorkspace({
   onDownloadInvoice,
 }: BillingWorkspaceProps) {
   return (
-    <>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="max-w-2xl">
+          <h1 className="text-2xl font-semibold text-balance">
+            {content.heading}
+          </h1>
+          <p className="mt-2 text-sm text-balance text-muted-foreground">
+            {content.description}
+          </p>
+        </div>
+        {content.ctas.length ? (
+          <div className="flex flex-wrap gap-2">
+            {content.ctas.map((cta) => (
+              <a
+                key={`${cta.label}-${cta.href}`}
+                className={cn(buttonVariants({ variant: "outline" }))}
+                href={cta.href}
+              >
+                {cta.label}
+              </a>
+            ))}
+          </div>
+        ) : null}
+      </div>
       <BillingPageSummary
         period={period}
         paymentMethod={paymentMethod}
@@ -69,6 +81,6 @@ export function BillingWorkspace({
         getDownloadHref={getInvoiceDownloadHref}
         onDownloadInvoice={onDownloadInvoice}
       />
-    </>
+    </div>
   )
 }
