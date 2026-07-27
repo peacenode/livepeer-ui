@@ -24,7 +24,7 @@ const displayDate = (date: string) =>
 
 function PlannerItem({ item }: { item: MarketingPlanItem }) {
   return (
-    <div className="flex min-w-0 flex-col gap-2 rounded-md bg-muted p-4">
+    <div className="flex min-w-0 flex-col gap-3 rounded-md bg-muted p-4">
       <div className="flex flex-col gap-1">
         <h3 className="font-sans text-sm leading-6 font-medium">
           {item.title}
