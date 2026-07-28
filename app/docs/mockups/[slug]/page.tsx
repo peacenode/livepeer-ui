@@ -101,10 +101,6 @@ const privateBetaLandingSurface: PrivateBetaSurface = {
 
 const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   {
-    title: "Playbooks",
-    href: "/mockups/private-beta/landing/console/playbooks",
-  },
-  {
     title: "Agent Console",
     href: "/mockups/private-beta/landing/console",
   },
