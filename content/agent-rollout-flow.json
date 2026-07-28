@@ -15,6 +15,7 @@
           "title": "Agent landing page",
           "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
           "imageAlt": "Livepeer Agent landing page",
+          "mockupHref": "/docs/mockups/agent-landing-page",
           "needs": [
             "Explain what the Agent does",
             "Give internal testers one clear install action"
@@ -82,6 +83,7 @@
           "title": "Agent landing page",
           "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
           "imageAlt": "Livepeer Agent early-access marketing page",
+          "mockupHref": "/docs/mockups/agent-landing-page",
           "needs": ["Plant a flag", "Used as a press kit for outreach"]
         },
         {
@@ -99,6 +101,7 @@
           "title": "Receive access email",
           "imagePath": "/flow-references/20260727-201500-sanity/access-email.png",
           "imageAlt": "Private beta access email with an Add to Claude button",
+          "mockupHref": "/mockups/welcome-email",
           "needs": ["Send the email when a waitlisted user is approved", "Include the MCP setup instructions", "Give the user a single install prompt"]
         },
         {
