@@ -179,6 +179,17 @@ const privateBetaAgentDeployment = {
     "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
 }
 
+const privateBetaPlaybooksSurface: PrivateBetaSurface = {
+  title: "Playbooks",
+  href: "/mockups/private-beta/landing/console/playbooks",
+  components: [
+    "playbook-library-header",
+    "playbook-card",
+    "playbook-catalog",
+    "install-agent-footer",
+  ],
+}
+
 const privateBetaAgentRoutes = [
   { title: "MCP server", path: "/api/mcp" },
   { title: "Project render result", path: "/v/{id}" },
@@ -607,6 +618,10 @@ export default async function MockupPage({
                     />
                   </div>
                   <div className="flex flex-col gap-4">
+                    <ProductSurfaceEmbed
+                      surface={privateBetaPlaybooksSurface}
+                      sourceLabel={`${privateBetaAgentDeployment.hostname}/playbooks`}
+                    />
                     {privateBetaAgentRoutes.map((route) => (
                       <ProductSurfaceEmbed
                         key={route.path}
@@ -622,7 +637,10 @@ export default async function MockupPage({
               )}
               {privateBetaRenderSurface && (
                 <ComponentsInUse
-                  componentNames={privateBetaRenderSurface.components}
+                  componentNames={[
+                    ...privateBetaRenderSurface.components,
+                    ...privateBetaPlaybooksSurface.components,
+                  ]}
                 />
               )}
             </section>
