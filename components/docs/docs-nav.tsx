@@ -30,7 +30,7 @@ export function DocsNav({
       items: [
         {
           title: "Agent Landing Page",
-          href: "/mockups/agent-landing-page",
+          href: "/docs/mockups/agent-landing-page",
         },
         { title: "Welcome Email", href: "/mockups/welcome-email" },
         { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
