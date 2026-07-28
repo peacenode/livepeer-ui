@@ -349,7 +349,7 @@ export default async function MockupPage({
               {privateBetaMarketingDeployment.description}
             </p>
 
-            <div className="mt-5 grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
+            <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
               <div className="w-full max-w-lg">
                 <MockupEmbed
                   title={privateBetaLandingSurface.title}
