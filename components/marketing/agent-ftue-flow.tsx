@@ -24,7 +24,7 @@ function ScreenRow({
       className="grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start lg:gap-8"
     >
       <div className="min-w-0">
-        <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+        <div className="overflow-hidden rounded-lg border bg-background">
           <div className="relative aspect-video">
             <Image
               src={screen.imageUrl}
