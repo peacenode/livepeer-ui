@@ -295,15 +295,23 @@ export default async function MockupPage({
             </section>
           </div>
 
-          <div className="mt-10 grid gap-x-5 gap-y-8 sm:grid-cols-2">
-            {privateBetaAccessSurfaces.map((surface) => (
-              <MockupEmbed
-                key={surface.title}
-                title={surface.title}
-                href={surface.href}
-              />
-            ))}
-          </div>
+          <section aria-labelledby="agent-waitlist-heading" className="mt-10">
+            <h2
+              id="agent-waitlist-heading"
+              className="mb-4 text-center text-sm font-medium"
+            >
+              Agent Waitlist
+            </h2>
+            <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2">
+              {privateBetaAccessSurfaces.map((surface) => (
+                <MockupEmbed
+                  key={surface.title}
+                  title={surface.title}
+                  href={surface.href}
+                />
+              ))}
+            </div>
+          </section>
         </div>
       ) : (
         <>
