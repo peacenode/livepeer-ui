@@ -6,6 +6,10 @@ import { notFound } from "next/navigation"
 import { LivepeerGradientSymbol } from "@/components/brand"
 import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
+import {
+  getMockupRoundup,
+  type MockupPage as SanityMockupPage,
+} from "@/sanity/lib/registry-content"
 
 const mockups = {
   "internal-testing": {
@@ -89,37 +93,6 @@ const mockups = {
 } as const
 
 type MockupSlug = keyof typeof mockups
-type PrivateBetaSurface = {
-  title: string
-  href?: string
-}
-
-const privateBetaLandingSurface: PrivateBetaSurface = {
-  title: "Agent Landing Page",
-  href: "/mockups/private-beta/landing-page",
-}
-
-const privateBetaProductSurfaces: PrivateBetaSurface[] = [
-  {
-    title: "Agent Console",
-    href: "/mockups/private-beta/landing/console",
-  },
-  {
-    title: "Render Result",
-  },
-]
-
-const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
-  {
-    title: "Agent Waitlist",
-    href: "/mockups/waitlist",
-  },
-  {
-    title: "Welcome Email",
-    href: "/mockups/welcome-email",
-  },
-]
-
 function MockupEmbed({
   title,
   href,
@@ -172,7 +145,7 @@ function MockupEmbed({
   )
 }
 
-function ProductSurfaceEmbed({ surface }: { surface: PrivateBetaSurface }) {
+function ProductSurfaceEmbed({ surface }: { surface: SanityMockupPage }) {
   const content = (
     <>
       <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl border bg-black sm:size-24">
@@ -222,6 +195,15 @@ export async function generateMetadata({
   const { slug } = await params
   if (!isMockupSlug(slug)) return {}
 
+  if (slug === "private-beta") {
+    const roundup = await getMockupRoundup("private-beta")
+    if (!roundup) return {}
+    return {
+      title: roundup.title,
+      description: roundup.description,
+    }
+  }
+
   return {
     title: mockups[slug].title,
     description: mockups[slug].description,
@@ -237,13 +219,36 @@ export default async function MockupPage({
   if (!isMockupSlug(slug)) notFound()
 
   const mockup = mockups[slug]
+  const privateBetaRoundup =
+    slug === "private-beta" ? await getMockupRoundup("private-beta") : null
+
+  if (slug === "private-beta" && !privateBetaRoundup) {
+    throw new Error(
+      'Required Sanity document "mockupRoundup-private-beta" is missing.'
+    )
+  }
+
+  const privateBetaLandingSurface = privateBetaRoundup?.pages.find(
+    (page) => page.title === "Agent Landing Page"
+  )
+  const privateBetaProductSurfaces =
+    privateBetaRoundup?.pages.filter((page) =>
+      ["Agent Console", "Render Result"].includes(page.title)
+    ) ?? []
+  const privateBetaAccessSurfaces =
+    privateBetaRoundup?.pages.filter((page) =>
+      ["Agent Waitlist", "Welcome Email"].includes(page.title)
+    ) ?? []
   const group = componentGroups.find(
     (candidate) => candidate.title === mockup.componentGroup
   )
   if (!group) notFound()
 
-  const componentNames: readonly string[] | undefined =
-    "componentNames" in mockup ? mockup.componentNames : undefined
+  const componentNames: readonly string[] | undefined = privateBetaRoundup
+    ? [...new Set(privateBetaRoundup.pages.flatMap((page) => page.components))]
+    : "componentNames" in mockup
+      ? mockup.componentNames
+      : undefined
   const componentItems = componentNames
     ? group.items.filter((component) =>
         componentNames.includes(component.name)
@@ -257,13 +262,15 @@ export default async function MockupPage({
         <div>
           <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
             <div>
-              <MockupEmbed
-                title={privateBetaLandingSurface.title}
-                href={privateBetaLandingSurface.href}
-                priority
-              />
+              {privateBetaLandingSurface && (
+                <MockupEmbed
+                  title={privateBetaLandingSurface.title}
+                  href={privateBetaLandingSurface.href}
+                  priority
+                />
+              )}
               <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-                {mockup.description}
+                {privateBetaRoundup?.description}
               </p>
             </div>
 

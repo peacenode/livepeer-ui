@@ -2,21 +2,27 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { agentConsolePageFixtures } from "@/components/demos/fixtures/agent-console-pages"
 import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-agent-onboarding-section"
 import { PlatformPage } from "@/components/mockups/platform-page"
 import { CardTitle } from "@/components/ui/card"
-import type { HomePageContent } from "@/sanity/lib/agent-console-pages"
+import {
+  getAgentConsolePage,
+  type HomePageContent,
+} from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
   title: "Home",
 }
 
-const editorial = agentConsolePageFixtures.find(
-  (page) => page.slug === "home"
-) as HomePageContent
+export default async function PrivateBetaConsoleHomePage() {
+  const editorial = await getAgentConsolePage<HomePageContent>("home")
 
-export default function PrivateBetaConsoleHomePage() {
+  if (!editorial?.home) {
+    throw new Error(
+      'Required Sanity document "agentConsolePage-home" is missing or incomplete.'
+    )
+  }
+
   return (
     <PlatformPage
       title={editorial.heading}

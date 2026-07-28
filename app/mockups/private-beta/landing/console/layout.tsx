@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 
-import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
 import { agentConsoleUserFixture } from "@/components/mockups/fixtures/agent-console-user"
 import { PlatformAuthGate } from "@/components/mockups/platform-auth-gate"
 import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
@@ -20,7 +19,13 @@ export default async function PrivateBetaConsoleLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const shell = (await getAgentConsoleShell()) ?? agentConsoleShellFixture
+  const shell = await getAgentConsoleShell()
+
+  if (!shell) {
+    throw new Error(
+      'Required Sanity document "agentConsoleShell" is missing or incomplete.'
+    )
+  }
 
   const navigation = shell.navigation.map((item) => {
     if (item._key === "learn" || item.label === "Learn") {
