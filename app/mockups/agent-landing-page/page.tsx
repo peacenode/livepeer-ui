@@ -41,7 +41,7 @@ export default async function AgentLandingPage() {
       </div>
 
       <main className="flex-1">
-        <section className="relative flex min-h-[78svh] w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-24">
+        <section className="relative flex min-h-[78svh] w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:min-h-[68svh] sm:px-6 sm:pt-64 sm:pb-24">
           <LivepeerAgentDeltaStream className="-translate-y-10 sm:-translate-y-8" />
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center sm:-translate-y-12">
             <div
