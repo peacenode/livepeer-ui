@@ -166,7 +166,7 @@ const privateBetaPlatformDeployment = {
 }
 
 const privateBetaAgentDeployment = {
-  title: "Agent deployment",
+  title: "MCP/Render result",
   hostname: "agent.livepeer.org",
   description: "MCP and rendered output surfaces.",
 }
