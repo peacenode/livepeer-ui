@@ -276,6 +276,41 @@ function ProductSurfaceEmbed({
   )
 }
 
+function ComponentsInUse({
+  componentNames,
+}: {
+  componentNames: string[]
+}) {
+  const components = [
+    ...new Map(
+      componentGroups
+        .flatMap((group) => group.items)
+        .filter((component) => componentNames.includes(component.name))
+        .map((component) => [component.name, component])
+    ).values(),
+  ]
+
+  return (
+    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <p className="shrink-0 text-sm font-medium">Components in use</p>
+      <div className="flex flex-wrap gap-2">
+        {components.map((component) => (
+          <Badge
+            key={component.name}
+            variant="secondary"
+            className="h-auto rounded-sm px-3 py-2 font-normal"
+            render={
+              <Link href={`/docs/components/${component.name}`}>
+                {component.title}
+              </Link>
+            }
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function isMockupSlug(slug: string): slug is MockupSlug {
   return slug in mockups
 }
@@ -382,6 +417,12 @@ export default async function MockupPage({
                 )}
               </div>
             </div>
+            <ComponentsInUse
+              componentNames={[
+                privateBetaLandingSurface,
+                ...privateBetaAccessSurfaces,
+              ].flatMap((surface) => surface.components)}
+            />
           </section>
 
           <div className="mt-12 flex flex-col gap-12">
@@ -403,6 +444,11 @@ export default async function MockupPage({
                     sourceLabel={privateBetaPlatformDeployment.hostname}
                   />
                 </div>
+              )}
+              {privateBetaConsoleSurface && (
+                <ComponentsInUse
+                  componentNames={privateBetaConsoleSurface.components}
+                />
               )}
             </section>
 
@@ -436,6 +482,11 @@ export default async function MockupPage({
                   </div>
                 </div>
               )}
+              {privateBetaRenderSurface && (
+                <ComponentsInUse
+                  componentNames={privateBetaRenderSurface.components}
+                />
+              )}
             </section>
           </div>
         </div>
@@ -455,23 +506,35 @@ export default async function MockupPage({
       )}
 
       <section className="mt-10 text-center">
-        <h2 className="text-sm font-medium">Components in use</h2>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {componentItems.map((component) => (
-            <Badge
-              key={component.name}
-              variant="secondary"
-              className="h-auto rounded-sm px-3 py-2 font-normal"
-              render={
-                <Link href={`/docs/components/${component.name}`}>
-                  {component.title}
-                </Link>
-              }
-            />
-          ))}
-        </div>
+        {slug !== "private-beta" && (
+          <>
+            <h2 className="text-sm font-medium">Components in use</h2>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {componentItems.map((component) => (
+                <Badge
+                  key={component.name}
+                  variant="secondary"
+                  className="h-auto rounded-sm px-3 py-2 font-normal"
+                  render={
+                    <Link href={`/docs/components/${component.name}`}>
+                      {component.title}
+                    </Link>
+                  }
+                />
+              ))}
+            </div>
+          </>
+        )}
 
-        <h2 className="mt-8 text-sm font-medium">Content</h2>
+        <h2
+          className={
+            slug === "private-beta"
+              ? "text-sm font-medium"
+              : "mt-8 text-sm font-medium"
+          }
+        >
+          Content
+        </h2>
         <div className="mt-4">
           <Badge
             variant="outline"
