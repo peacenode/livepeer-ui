@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 export type LivepeerAgentPromoPlan = {
   id: string
   name: string
+  price: string
   credits: string
   creditsLabel: string
   description: string
@@ -56,13 +57,14 @@ export function LivepeerAgentPromoCards({
             >
               {plan.name}
             </p>
-            <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
-              {plan.credits}{" "}
-              <span className="text-lg font-normal text-muted-foreground">
-                {plan.creditsLabel}
-              </span>
+            <p className="mt-5 font-sans text-4xl font-medium tracking-tight tabular-nums">
+              {plan.price}
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">
+            <p className="mt-1 font-sans text-lg font-normal text-muted-foreground">
+              <span className="tabular-nums">{plan.credits}</span>{" "}
+              {plan.creditsLabel}
+            </p>
+            <p className="mt-4 mb-6 text-sm text-muted-foreground">
               {plan.description}
             </p>
             <Button

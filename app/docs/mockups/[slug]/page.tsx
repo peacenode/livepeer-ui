@@ -112,7 +112,7 @@ const privateBetaLandingSurface: PrivateBetaSurface = {
 
 const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   {
-    title: "Agent Platform",
+    title: "Agent Console",
     href: "/mockups/private-beta/landing/console",
     components: [
       "livepeer-agent-page-frame",
@@ -163,31 +163,21 @@ const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
 const privateBetaMarketingDeployment = {
   title: "Marketing",
   hostname: "earlyaccess.livepeer.org",
-  description: "Landing page, waitlist, and welcome email cut over together.",
-}
-
-const privateBetaPlatformDeployment = {
-  title: "Auth/Keys/Billing",
-  hostname: "platform.livepeer.org",
-  description: "Billing, credits, API keys, and Playbooks.",
+  description:
+    "The waitlist is the home page. The private beta landing page lives at /about, and the welcome email remains part of the same marketing deployment.",
 }
 
 const privateBetaAgentDeployment = {
-  title: "MCP/Renders",
+  title: "Agent Platform",
   hostname: "agent.livepeer.org",
   description:
-    "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
+    "The root is a locked private beta home with sign-in and waitlist access. Agent Console, MCP, and rendered output routes remain on agent.livepeer.org. Playbooks are available from the console’s Playbooks tab.",
 }
 
-const privateBetaPlaybooksSurface: PrivateBetaSurface = {
-  title: "Playbooks",
-  href: "/mockups/private-beta/landing/console/playbooks",
-  components: [
-    "playbook-library-header",
-    "playbook-card",
-    "playbook-catalog",
-    "install-agent-footer",
-  ],
+const privateBetaAgentHomeSurface: PrivateBetaSurface = {
+  title: "Agent Home",
+  href: "/mockups/private-beta/agent",
+  components: ["livepeer-agent-auth-gate"],
 }
 
 const privateBetaAgentRoutes = [
@@ -228,17 +218,6 @@ const publicBetaInstallSurface: PrivateBetaSurface = {
     "agent-access-section",
     "agent-capabilities-section",
     "playbooks-cta-section",
-  ],
-}
-
-const publicBetaPlaybooksSurface: PrivateBetaSurface = {
-  title: "Playbooks",
-  href: "/mockups/livepeer-org/library",
-  components: [
-    "playbook-library-header",
-    "playbook-card",
-    "playbook-catalog",
-    "install-agent-footer",
   ],
 }
 
@@ -394,7 +373,7 @@ function DeploymentSection({
 }) {
   return (
     <section aria-labelledby={headingId}>
-      <h2 id={headingId} className="text-sm font-medium">
+      <h2 id={headingId} className="font-sans text-sm font-medium">
         {title}
       </h2>
       <p className="mt-1 max-w-xl text-sm text-balance text-muted-foreground">
@@ -471,7 +450,7 @@ export default async function MockupPage({
     (page) => page.title === "Welcome Email"
   )
   const privateBetaConsoleSurface = privateBetaProductSurfaces.find(
-    (page) => page.title === "Agent Platform"
+    (page) => page.title === "Agent Console"
   )
   const privateBetaRenderSurface = privateBetaProductSurfaces.find(
     (page) => page.title === "Render Result"
@@ -511,22 +490,29 @@ export default async function MockupPage({
         <DeploymentSection
           headingId="internal-marketing-deployment-heading"
           title="Marketing"
-          description={mockup.description}
-          primary={internalTestingLandingSurface}
+          description={privateBetaMarketingDeployment.description}
+          primary={privateBetaWaitlistSurface ?? internalTestingLandingSurface}
           primarySourceLabel={privateBetaMarketingDeployment.hostname}
-          secondary={
-            privateBetaWaitlistSurface
+          secondary={[
+            {
+              surface: internalTestingLandingSurface,
+              sourceLabel: `${privateBetaMarketingDeployment.hostname}/about`,
+            },
+            ...(privateBetaWelcomeEmailSurface
               ? [
                   {
-                    surface: privateBetaWaitlistSurface,
-                    sourceLabel: `${privateBetaMarketingDeployment.hostname}/waitlist`,
+                    surface: privateBetaWelcomeEmailSurface,
+                    sourceLabel: privateBetaMarketingDeployment.hostname,
                   },
                 ]
-              : []
-          }
+              : []),
+          ]}
           componentNames={[
             internalTestingLandingSurface,
             ...(privateBetaWaitlistSurface ? [privateBetaWaitlistSurface] : []),
+            ...(privateBetaWelcomeEmailSurface
+              ? [privateBetaWelcomeEmailSurface]
+              : []),
           ].flatMap((surface) => surface.components)}
         />
       ) : slug === "private-beta" ? (
@@ -534,7 +520,7 @@ export default async function MockupPage({
           <section aria-labelledby="marketing-deployment-heading">
             <h2
               id="marketing-deployment-heading"
-              className="text-sm font-medium"
+              className="font-sans text-sm font-medium"
             >
               {privateBetaMarketingDeployment.title}
             </h2>
@@ -543,25 +529,25 @@ export default async function MockupPage({
             </p>
 
             <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
-              <div className="w-full max-w-lg">
-                <MockupEmbed
-                  title={privateBetaLandingSurface.title}
-                  href={privateBetaLandingSurface.href}
-                  priority
-                  sourceLabel={privateBetaMarketingDeployment.hostname}
-                />
-              </div>
-              <div className="flex flex-col gap-4">
-                {privateBetaWaitlistSurface && (
-                  <ProductSurfaceEmbed
-                    surface={privateBetaWaitlistSurface}
-                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
+              {privateBetaWaitlistSurface && (
+                <div className="w-full max-w-lg">
+                  <MockupEmbed
+                    title={privateBetaWaitlistSurface.title}
+                    href={privateBetaWaitlistSurface.href}
+                    priority
+                    sourceLabel={privateBetaMarketingDeployment.hostname}
                   />
-                )}
+                </div>
+              )}
+              <div className="flex flex-col gap-4">
+                <ProductSurfaceEmbed
+                  surface={privateBetaLandingSurface}
+                  sourceLabel={`${privateBetaMarketingDeployment.hostname}/about`}
+                />
                 {privateBetaWelcomeEmailSurface && (
                   <ProductSurfaceEmbed
                     surface={privateBetaWelcomeEmailSurface}
-                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
+                    sourceLabel={privateBetaMarketingDeployment.hostname}
                   />
                 )}
               </div>
@@ -574,35 +560,12 @@ export default async function MockupPage({
             />
           </section>
 
-          <div className="mt-32 flex flex-col gap-32">
-            <section aria-labelledby="platform-deployment-heading">
-              <h3
-                id="platform-deployment-heading"
-                className="text-sm font-medium"
-              >
-                {privateBetaPlatformDeployment.title}
-              </h3>
-              <p className="mt-1 max-w-sm text-sm text-muted-foreground">
-                {privateBetaPlatformDeployment.description}
-              </p>
-              {privateBetaConsoleSurface && (
-                <div className="mt-5 w-full max-w-lg">
-                  <MockupEmbed
-                    title={privateBetaConsoleSurface.title}
-                    href={privateBetaConsoleSurface.href}
-                    sourceLabel={privateBetaPlatformDeployment.hostname}
-                  />
-                </div>
-              )}
-              {privateBetaConsoleSurface && (
-                <ComponentsInUse
-                  componentNames={privateBetaConsoleSurface.components}
-                />
-              )}
-            </section>
-
+          <div className="mt-32">
             <section aria-labelledby="agent-deployment-heading">
-              <h3 id="agent-deployment-heading" className="text-sm font-medium">
+              <h3
+                id="agent-deployment-heading"
+                className="font-sans text-sm font-medium"
+              >
                 {privateBetaAgentDeployment.title}
               </h3>
               <p className="mt-1 max-w-sm text-sm text-muted-foreground">
@@ -612,16 +575,18 @@ export default async function MockupPage({
                 <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
                   <div className="w-full max-w-lg">
                     <MockupEmbed
-                      title={privateBetaRenderSurface.title}
-                      href={privateBetaRenderSurface.href}
-                      sourceLabel={`${privateBetaAgentDeployment.hostname} →→→ ${privateBetaMarketingDeployment.hostname}/waitlist`}
+                      title={privateBetaAgentHomeSurface.title}
+                      href={privateBetaAgentHomeSurface.href}
+                      sourceLabel={privateBetaAgentDeployment.hostname}
                     />
                   </div>
                   <div className="flex flex-col gap-4">
-                    <ProductSurfaceEmbed
-                      surface={privateBetaPlaybooksSurface}
-                      sourceLabel={`${privateBetaAgentDeployment.hostname}/playbooks`}
-                    />
+                    {privateBetaConsoleSurface && (
+                      <ProductSurfaceEmbed
+                        surface={privateBetaConsoleSurface}
+                        sourceLabel={`${privateBetaAgentDeployment.hostname}/console`}
+                      />
+                    )}
                     {privateBetaAgentRoutes.map((route) => (
                       <ProductSurfaceEmbed
                         key={route.path}
@@ -638,8 +603,9 @@ export default async function MockupPage({
               {privateBetaRenderSurface && (
                 <ComponentsInUse
                   componentNames={[
+                    ...privateBetaAgentHomeSurface.components,
+                    ...(privateBetaConsoleSurface?.components ?? []),
                     ...privateBetaRenderSurface.components,
-                    ...privateBetaPlaybooksSurface.components,
                   ]}
                 />
               )}
@@ -657,29 +623,22 @@ export default async function MockupPage({
             componentNames={publicBetaLivepeerSurface.components}
           />
 
-          {privateBetaConsoleSurface && (
-            <DeploymentSection
-              headingId="public-platform-deployment-heading"
-              title={privateBetaPlatformDeployment.title}
-              description={privateBetaPlatformDeployment.description}
-              primary={privateBetaConsoleSurface}
-              primarySourceLabel={privateBetaPlatformDeployment.hostname}
-              componentNames={privateBetaConsoleSurface.components}
-            />
-          )}
-
           {privateBetaRenderSurface && (
             <DeploymentSection
               headingId="public-agent-deployment-heading"
-              title="Agent"
-              description="Install instructions, Playbooks, MCP, and rendered output routes live on agent.livepeer.org."
+              title="Agent Platform"
+              description="Install instructions, Agent Console, MCP, and rendered output routes live on agent.livepeer.org. Playbooks are available from the console’s Playbooks tab."
               primary={publicBetaInstallSurface}
               primarySourceLabel={privateBetaAgentDeployment.hostname}
               secondary={[
-                {
-                  surface: publicBetaPlaybooksSurface,
-                  sourceLabel: `${privateBetaAgentDeployment.hostname}/playbooks`,
-                },
+                ...(privateBetaConsoleSurface
+                  ? [
+                      {
+                        surface: privateBetaConsoleSurface,
+                        sourceLabel: `${privateBetaAgentDeployment.hostname}/console`,
+                      },
+                    ]
+                  : []),
                 ...privateBetaAgentRoutes.map((route) => ({
                   surface: {
                     title: route.title,
@@ -690,7 +649,9 @@ export default async function MockupPage({
               ]}
               componentNames={[
                 publicBetaInstallSurface,
-                publicBetaPlaybooksSurface,
+                ...(privateBetaConsoleSurface
+                  ? [privateBetaConsoleSurface]
+                  : []),
                 privateBetaRenderSurface,
               ].flatMap((surface) => surface.components)}
             />
