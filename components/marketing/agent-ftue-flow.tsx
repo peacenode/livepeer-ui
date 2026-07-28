@@ -21,10 +21,10 @@ function ScreenRow({
   return (
     <section
       aria-labelledby={headingId}
-      className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start"
+      className="grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.8fr)] lg:items-start lg:gap-8"
     >
       <div className="min-w-0">
-        <div className="overflow-hidden rounded-lg border bg-background shadow-sm">
+        <div className="overflow-hidden rounded-lg border bg-background">
           <div className="relative aspect-video">
             <Image
               src={screen.imageUrl}
@@ -166,7 +166,7 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
             >
               User flow
             </h3>
-            <div className="mt-8 space-y-10">
+            <div className="mt-8 space-y-16 sm:space-y-20">
               {userFlowScreens.map((screen) => (
                 <ScreenRow
                   key={screen._key}
