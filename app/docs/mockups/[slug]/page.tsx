@@ -128,49 +128,30 @@ function MockupEmbed({
   title,
   href,
   priority = false,
-  variant = "og",
 }: {
   title: string
   href?: string
   priority?: boolean
-  variant?: "og" | "symbol"
 }) {
   const preview = (
     <>
-      <div
-        className={
-          variant === "symbol"
-            ? "relative aspect-square overflow-hidden rounded-2xl border bg-black"
-            : "relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black"
-        }
-      >
-        {variant === "symbol" ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <LivepeerGradientSymbol
-              className="h-16 w-auto sm:h-20"
-              aria-hidden="true"
-            />
-          </div>
-        ) : (
-          <>
-            <Image
-              src="/brand/og.png"
-              alt=""
-              fill
-              priority={priority}
-              sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
-              className="scale-90 object-cover"
-            />
-            <div
-              className="pointer-events-none absolute inset-0"
-              aria-hidden="true"
-              style={{
-                background:
-                  "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
-              }}
-            />
-          </>
-        )}
+      <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
+        <Image
+          src="/brand/og.png"
+          alt=""
+          fill
+          priority={priority}
+          sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
+          className="scale-90 object-cover"
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
+          }}
+        />
         <span className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-normal text-white backdrop-blur-sm">
           {title}
         </span>
@@ -192,6 +173,43 @@ function MockupEmbed({
     </Link>
   ) : (
     <div>{preview}</div>
+  )
+}
+
+function ProductSurfaceEmbed({ surface }: { surface: PrivateBetaSurface }) {
+  const content = (
+    <>
+      <div className="flex size-20 shrink-0 items-center justify-center rounded-xl border bg-black sm:size-24">
+        <LivepeerGradientSymbol
+          className="h-8 w-auto sm:h-10"
+          aria-hidden="true"
+        />
+      </div>
+      <div className="flex min-w-0 flex-col items-start gap-1.5">
+        <Badge
+          variant="secondary"
+          className="h-auto rounded-sm px-3 py-2 font-normal"
+        >
+          {surface.title}
+        </Badge>
+        {!surface.href && (
+          <span className="text-xs text-muted-foreground">Design pending</span>
+        )}
+      </div>
+    </>
+  )
+
+  return surface.href ? (
+    <Link
+      href={surface.href}
+      target="_blank"
+      aria-label={`Open the ${surface.title} mockup`}
+      className="flex items-center gap-3 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+    >
+      {content}
+    </Link>
+  ) : (
+    <div className="flex items-center gap-3">{content}</div>
   )
 }
 
@@ -266,13 +284,11 @@ export default async function MockupPage({
               >
                 Unlisted product surface area
               </h2>
-              <div className="mx-auto flex max-w-64 flex-col gap-8 text-left">
+              <div className="flex flex-col gap-4 text-left">
                 {privateBetaProductSurfaces.map((surface) => (
-                  <MockupEmbed
+                  <ProductSurfaceEmbed
                     key={surface.title}
-                    title={surface.title}
-                    href={surface.href}
-                    variant="symbol"
+                    surface={surface}
                   />
                 ))}
               </div>
