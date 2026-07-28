@@ -24,7 +24,7 @@ const page = (title, href, components) => ({
   _key: key(title),
   _type: "mockupPage",
   title,
-  href,
+  ...(href ? { href } : {}),
   components,
 })
 
@@ -216,6 +216,20 @@ const documents = [
     ],
   },
   waitlistContentSeedDocument,
+  {
+    _id: "welcomeEmailContent-private-beta",
+    _type: "welcomeEmailContent",
+    heading: "Welcome to the private beta.",
+    paragraphs: [
+      "You're in.",
+      "Livepeer Agent brings image and video generation directly into Claude, so you can create without leaving your session.",
+      "Your account includes limited free credits to help you run your first generation.",
+    ],
+    ctaLabel: "Add to Claude",
+    ctaHref: "/mockups/private-beta/landing-page",
+    signoff: "See you in Claude,",
+    sender: "The Livepeer team",
+  },
   ...agentConsoleSeedDocuments,
   ...livepeerOrgSeedDocuments,
 ]
@@ -239,12 +253,32 @@ function missingFieldPatch(value, prefix = "") {
   }, {})
 }
 
+const replace = process.env.LIVEPEER_SANITY_SEED_MODE === "replace"
+
 for (const document of documents) {
-  await client.createIfNotExists(document)
-  await client
-    .patch(document._id)
-    .setIfMissing(missingFieldPatch(document))
-    .commit()
+  if (replace) {
+    await client.createOrReplace(document)
+  } else {
+    await client.createIfNotExists(document)
+    await client
+      .patch(document._id)
+      .setIfMissing(missingFieldPatch(document))
+      .commit()
+  }
 }
 
-console.log(`Registry content ready with ${documents.length} documents.`)
+console.log(
+  `Registry content ${replace ? "replaced" : "ready"} with ${documents.length} documents in ${client.config().projectId}/${client.config().dataset}.`
+)
+
+const seededDocumentCount = await client.fetch(
+  "count(*[_id in $ids])",
+  { ids: documents.map((document) => document._id) },
+  { perspective: "raw" }
+)
+
+if (seededDocumentCount !== documents.length) {
+  throw new Error(
+    `Seed verification failed: expected ${documents.length} documents, found ${seededDocumentCount}.`
+  )
+}

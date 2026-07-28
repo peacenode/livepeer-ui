@@ -18,12 +18,14 @@ export function PlatformSidebar({
   navigation,
   userMenuContent,
   user,
+  homeHref = "/mockups/livepeer-agent",
 }: {
   className?: string
   homeAriaLabel: string
   navigation: AgentConsoleShell["navigation"]
   userMenuContent: AgentConsoleShell["userMenu"]
   user: AgentConsoleUser
+  homeHref?: string
 }) {
   const pathname = usePathname()
 
@@ -36,7 +38,7 @@ export function PlatformSidebar({
     >
       <div className="px-5 pt-6 pb-1">
         <Link
-          href="/mockups/livepeer-agent"
+          href={homeHref}
           aria-label={homeAriaLabel}
           className="inline-flex h-9 items-center"
         >

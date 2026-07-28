@@ -3,46 +3,52 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { LivepeerGradientSymbol } from "@/components/brand"
 import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
 
-type MockupRoundupSlug =
-  | "agent-landing-page"
-  | "welcome-email"
-  | "agent-waitlist"
-  | "agent-console"
-  | "livepeer-org"
-
-const mockupRoundupSlugs = [
-  "agent-landing-page",
-  "welcome-email",
-  "agent-waitlist",
-  "agent-console",
-  "livepeer-org",
-] as const satisfies readonly MockupRoundupSlug[]
-
-const componentGroupTitles: Record<MockupRoundupSlug, string> = {
-  "agent-landing-page": "Livepeer.org",
-  "welcome-email": "Agent Waitlist",
-  "agent-waitlist": "Agent Waitlist",
-  "agent-console": "Agent Console",
-  "livepeer-org": "Livepeer.org",
-}
-
-const mockupRoundups: Record<
-  MockupRoundupSlug,
-  {
-    title: string
-    description: string
-    previewHref: string
-    componentNames?: readonly string[]
-  }
-> = {
+const mockups = {
+  "internal-testing": {
+    title: "Internal Testing",
+    description:
+      "The Agent landing page is exclusively for private marketing and communications during internal testing.",
+    previewHref: "/mockups/agent-landing-page",
+    componentGroup: "Livepeer.org",
+    componentNames: [
+      "livepeer-org-menu",
+      "livepeer-org-header",
+      "livepeer-org-footer",
+      "playbooks-cta-section",
+      "agent-capabilities-section",
+    ],
+  },
+  "private-beta": {
+    title: "Private Beta",
+    description:
+      "The Agent landing page remains exclusively for private marketing and communications during the private beta.",
+    previewHref: "/mockups/private-beta",
+    componentGroup: "Livepeer.org",
+    componentNames: [
+      "livepeer-org-menu",
+      "livepeer-org-header",
+      "livepeer-org-footer",
+      "playbooks-cta-section",
+      "agent-capabilities-section",
+    ],
+  },
+  "public-beta": {
+    title: "Public Beta",
+    description:
+      "The complete Livepeer.org public experience across the network, Agent, playbooks, ecosystem, and GPU participation.",
+    previewHref: "/mockups/livepeer-org",
+    componentGroup: "Livepeer.org",
+  },
   "agent-landing-page": {
     title: "Agent Landing Page",
     description:
-      "Early-access landing page combining Livepeer.org navigation, Agent branding, playbooks, capabilities, and the complete site footer.",
+      "The Agent landing page is exclusively for private marketing and communications during internal testing.",
     previewHref: "/mockups/agent-landing-page",
+    componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
       "livepeer-org-header",
@@ -56,6 +62,7 @@ const mockupRoundups: Record<
     description:
       "Private beta welcome email with Livepeer Agent branding, onboarding copy, and a single install action.",
     previewHref: "/mockups/welcome-email",
+    componentGroup: "Agent Waitlist",
     componentNames: ["welcome-email"],
   },
   "agent-waitlist": {
@@ -63,27 +70,375 @@ const mockupRoundups: Record<
     description:
       "Signup, referral, status, leaderboard, and branded background components for the Agent Waitlist.",
     previewHref: "/mockups/waitlist",
+    componentGroup: "Agent Waitlist",
   },
   "agent-console": {
     title: "Agent Console",
     description:
       "Application shell, account, usage, billing, API, inference, and compute components for the Agent Console.",
     previewHref: "/mockups/livepeer-agent",
+    componentGroup: "Agent Console",
   },
   "livepeer-org": {
     title: "Livepeer.org",
     description:
       "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
     previewHref: "/mockups/livepeer-org",
+    componentGroup: "Livepeer.org",
   },
+} as const
+
+type MockupSlug = keyof typeof mockups
+type PrivateBetaSurface = {
+  title: string
+  href?: string
+  components: string[]
 }
 
-function isMockupRoundupSlug(slug: string): slug is MockupRoundupSlug {
-  return mockupRoundupSlugs.some((candidate) => candidate === slug)
+const privateBetaLandingSurface: PrivateBetaSurface = {
+  title: "Agent Landing Page",
+  href: "/mockups/private-beta/landing-page",
+  components: [
+    "livepeer-org-menu",
+    "livepeer-org-header",
+    "livepeer-org-footer",
+    "livepeer-agent-hero",
+    "agent-compatibility",
+    "agent-access-section",
+    "agent-capabilities-section",
+    "playbooks-cta-section",
+  ],
+}
+
+const privateBetaProductSurfaces: PrivateBetaSurface[] = [
+  {
+    title: "Agent Platform",
+    href: "/mockups/private-beta/landing/console",
+    components: [
+      "livepeer-agent-page-frame",
+      "livepeer-agent-sidebar",
+      "user-menu",
+      "livepeer-agent-auth-gate",
+      "livepeer-agent-onboarding-section",
+      "api-key-actions",
+      "delete-api-key-dialog",
+      "api-keys-section",
+      "credit-balance",
+      "billing-page-summary",
+      "invoice-table",
+      "billing-workspace-section",
+      "playbook-catalog",
+    ],
+  },
+  {
+    title: "Render Result",
+    components: [
+      "livepeer-agent-page-frame",
+      "livepeer-agent-sidebar",
+      "user-menu",
+    ],
+  },
+]
+
+const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
+  {
+    title: "Agent Waitlist",
+    href: "/mockups/waitlist",
+    components: [
+      "waitlist-panel",
+      "waitlist-signup-form",
+      "waitlist-status-card",
+      "waitlist-referral-link",
+      "waitlist-leaderboard",
+      "waitlist-background-hero",
+    ],
+  },
+  {
+    title: "Welcome Email",
+    href: "/mockups/welcome-email",
+    components: ["welcome-email"],
+  },
+]
+
+const privateBetaMarketingDeployment = {
+  title: "Marketing",
+  hostname: "earlyaccess.livepeer.org",
+  description: "Landing page, waitlist, and welcome email cut over together.",
+}
+
+const privateBetaPlatformDeployment = {
+  title: "Auth/Keys/Billing",
+  hostname: "platform.livepeer.org",
+  description: "Billing, credits, API keys, and Playbooks.",
+}
+
+const privateBetaAgentDeployment = {
+  title: "MCP/Renders",
+  hostname: "agent.livepeer.org",
+  description:
+    "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
+}
+
+const privateBetaPlaybooksSurface: PrivateBetaSurface = {
+  title: "Playbooks",
+  href: "/mockups/private-beta/landing/console/playbooks",
+  components: [
+    "playbook-library-header",
+    "playbook-card",
+    "playbook-catalog",
+    "install-agent-footer",
+  ],
+}
+
+const privateBetaAgentRoutes = [
+  { title: "MCP server", path: "/api/mcp" },
+  { title: "Project render result", path: "/v/{id}" },
+  { title: "Moodboard result", path: "/m/{id}" },
+  { title: "CLI-run result", path: "/preview/{id}" },
+  { title: "Shared-session result", path: "/session/{token}" },
+]
+
+const internalTestingLandingSurface: PrivateBetaSurface = {
+  ...privateBetaLandingSurface,
+  href: "/mockups/agent-landing-page",
+}
+
+const publicBetaLivepeerSurface: PrivateBetaSurface = {
+  title: "Livepeer.org",
+  href: "/mockups/livepeer-org",
+  components: [
+    "livepeer-org-menu",
+    "livepeer-org-header",
+    "livepeer-org-footer",
+    "network-hero-section",
+    "livepeer-agent-feature-section",
+    "orchestrator-cta-section",
+  ],
+}
+
+const publicBetaInstallSurface: PrivateBetaSurface = {
+  title: "Install instructions",
+  href: "/mockups/livepeer-org/agent",
+  components: [
+    "livepeer-org-menu",
+    "livepeer-org-header",
+    "livepeer-org-footer",
+    "livepeer-agent-hero",
+    "agent-compatibility",
+    "agent-access-section",
+    "agent-capabilities-section",
+    "playbooks-cta-section",
+  ],
+}
+
+const publicBetaPlaybooksSurface: PrivateBetaSurface = {
+  title: "Playbooks",
+  href: "/mockups/livepeer-org/library",
+  components: [
+    "playbook-library-header",
+    "playbook-card",
+    "playbook-catalog",
+    "install-agent-footer",
+  ],
+}
+
+function MockupEmbed({
+  title,
+  href,
+  priority = false,
+  sourceLabel,
+}: {
+  title: string
+  href?: string
+  priority?: boolean
+  sourceLabel?: string
+}) {
+  const preview = (
+    <>
+      <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
+        <Image
+          src="/brand/og.png"
+          alt=""
+          fill
+          priority={priority}
+          sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
+          className="scale-90 object-cover"
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
+          }}
+        />
+        <span className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-semibold text-white backdrop-blur-sm">
+          {title}
+        </span>
+      </div>
+      <p className="mt-2 px-0.5 text-xs text-muted-foreground">
+        {sourceLabel ?? (href ? "From livepeer-ui" : "Design pending")}
+      </p>
+    </>
+  )
+
+  return href ? (
+    <Link
+      href={href}
+      target="_blank"
+      aria-label={`Open the ${title} mockup`}
+      className="block rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+    >
+      {preview}
+    </Link>
+  ) : (
+    <div>{preview}</div>
+  )
+}
+
+function ProductSurfaceEmbed({
+  surface,
+  className = "",
+  sourceLabel,
+}: {
+  surface: PrivateBetaSurface
+  className?: string
+  sourceLabel?: string
+}) {
+  const content = (
+    <>
+      <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl border bg-black sm:size-24">
+        <LivepeerGradientSymbol
+          className="h-8 w-auto sm:h-10"
+          aria-hidden="true"
+        />
+      </div>
+      <div className="flex min-w-0 flex-col items-start gap-1.5">
+        <span className="text-sm font-semibold text-foreground">
+          {surface.title}
+        </span>
+        <span className="text-xs text-muted-foreground">
+          {sourceLabel ??
+            (surface.href ? "From livepeer-ui" : "Design pending")}
+        </span>
+      </div>
+    </>
+  )
+
+  return surface.href ? (
+    <Link
+      href={surface.href}
+      target="_blank"
+      aria-label={`Open the ${surface.title} mockup`}
+      className={`flex items-center gap-3 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${className}`}
+    >
+      {content}
+    </Link>
+  ) : (
+    <div className={`flex items-center gap-3 ${className}`}>{content}</div>
+  )
+}
+
+function ComponentsInUse({ componentNames }: { componentNames: string[] }) {
+  const components = [
+    ...new Map(
+      componentGroups
+        .flatMap((group) => group.items)
+        .filter((component) => componentNames.includes(component.name))
+        .map((component) => [component.name, component])
+    ).values(),
+  ]
+
+  return (
+    <div className="mt-6 flex flex-col gap-2">
+      <p className="text-xs font-medium text-muted-foreground">
+        Components in use
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {components.map((component) => (
+          <Badge
+            key={component.name}
+            variant="secondary"
+            className="h-auto rounded-sm px-3 py-2 font-normal"
+            render={
+              <Link href={`/docs/components/${component.name}`}>
+                {component.title}
+              </Link>
+            }
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function DeploymentSection({
+  headingId,
+  title,
+  description,
+  primary,
+  primarySourceLabel,
+  secondary = [],
+  componentNames,
+}: {
+  headingId: string
+  title: string
+  description: string
+  primary: PrivateBetaSurface
+  primarySourceLabel: string
+  secondary?: {
+    surface: PrivateBetaSurface
+    sourceLabel: string
+  }[]
+  componentNames: string[]
+}) {
+  return (
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId} className="text-sm font-medium">
+        {title}
+      </h2>
+      <p className="mt-1 max-w-xl text-sm text-balance text-muted-foreground">
+        {description}
+      </p>
+
+      <div
+        className={
+          secondary.length
+            ? "mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start"
+            : "mt-5 w-full max-w-lg"
+        }
+      >
+        <div className="w-full max-w-lg">
+          <MockupEmbed
+            title={primary.title}
+            href={primary.href}
+            sourceLabel={primarySourceLabel}
+          />
+        </div>
+        {secondary.length > 0 && (
+          <div className="flex flex-col gap-4">
+            {secondary.map(({ surface, sourceLabel }) => (
+              <ProductSurfaceEmbed
+                key={`${surface.title}-${sourceLabel}`}
+                surface={surface}
+                sourceLabel={sourceLabel}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <ComponentsInUse componentNames={componentNames} />
+    </section>
+  )
+}
+
+function isMockupSlug(slug: string): slug is MockupSlug {
+  return slug in mockups
 }
 
 export function generateStaticParams() {
-  return mockupRoundupSlugs.map((slug) => ({ slug }))
+  return Object.keys(mockups).map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -92,91 +447,302 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  if (!isMockupRoundupSlug(slug)) return {}
-
-  const roundup = mockupRoundups[slug]
+  if (!isMockupSlug(slug)) return {}
 
   return {
-    title: `${roundup.title} Components`,
-    description: roundup.description,
+    title: mockups[slug].title,
+    description: mockups[slug].description,
   }
 }
 
-export default async function MockupRoundupPage({
+export default async function MockupPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  if (!isMockupRoundupSlug(slug)) notFound()
+  if (!isMockupSlug(slug)) notFound()
 
-  const roundup = mockupRoundups[slug]
-
+  const mockup = mockups[slug]
+  const privateBetaWaitlistSurface = privateBetaAccessSurfaces.find(
+    (page) => page.title === "Agent Waitlist"
+  )
+  const privateBetaWelcomeEmailSurface = privateBetaAccessSurfaces.find(
+    (page) => page.title === "Welcome Email"
+  )
+  const privateBetaConsoleSurface = privateBetaProductSurfaces.find(
+    (page) => page.title === "Agent Platform"
+  )
+  const privateBetaRenderSurface = privateBetaProductSurfaces.find(
+    (page) => page.title === "Render Result"
+  )
   const group = componentGroups.find(
-    (candidate) => candidate.title === componentGroupTitles[slug]
+    (candidate) => candidate.title === mockup.componentGroup
   )
   if (!group) notFound()
-  const componentItems = roundup.componentNames
-    ? group.items.filter((component) =>
-        roundup.componentNames?.includes(component.name)
-      )
+
+  const componentNames: readonly string[] | undefined =
+    slug === "private-beta"
+      ? [
+          ...new Set(
+            [
+              privateBetaLandingSurface,
+              ...privateBetaProductSurfaces,
+              ...privateBetaAccessSurfaces,
+            ].flatMap((surface) => surface.components)
+          ),
+        ]
+      : "componentNames" in mockup
+        ? mockup.componentNames
+        : undefined
+  const componentItems = componentNames
+    ? group.items.filter((component) => componentNames.includes(component.name))
     : group.items
+  const isRolloutPhase = [
+    "internal-testing",
+    "private-beta",
+    "public-beta",
+  ].includes(slug)
 
   return (
-    <article className="max-w-3xl">
-      <Link
-        href={roundup.previewHref}
-        target="_blank"
-        aria-label={`View the ${roundup.title} mockup`}
-        className="mx-auto block max-w-lg rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
-      >
-        <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
-          <Image
-            src="/brand/og.png"
-            alt=""
-            fill
-            priority
-            sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
-            className="scale-90 object-cover"
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-            style={{
-              background:
-                "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
-            }}
-          />
-          <h1 className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-normal text-white backdrop-blur-sm sm:bottom-5 sm:left-5">
-            {roundup.title}
-          </h1>
+    <article className={isRolloutPhase ? "max-w-5xl" : "max-w-3xl"}>
+      <h1 className="sr-only">{mockup.title}</h1>
+      {slug === "internal-testing" ? (
+        <DeploymentSection
+          headingId="internal-marketing-deployment-heading"
+          title="Marketing"
+          description={mockup.description}
+          primary={internalTestingLandingSurface}
+          primarySourceLabel={privateBetaMarketingDeployment.hostname}
+          secondary={
+            privateBetaWaitlistSurface
+              ? [
+                  {
+                    surface: privateBetaWaitlistSurface,
+                    sourceLabel: `${privateBetaMarketingDeployment.hostname}/waitlist`,
+                  },
+                ]
+              : []
+          }
+          componentNames={[
+            internalTestingLandingSurface,
+            ...(privateBetaWaitlistSurface ? [privateBetaWaitlistSurface] : []),
+          ].flatMap((surface) => surface.components)}
+        />
+      ) : slug === "private-beta" ? (
+        <div>
+          <section aria-labelledby="marketing-deployment-heading">
+            <h2
+              id="marketing-deployment-heading"
+              className="text-sm font-medium"
+            >
+              {privateBetaMarketingDeployment.title}
+            </h2>
+            <p className="mt-1 max-w-xl text-sm text-balance text-muted-foreground">
+              {privateBetaMarketingDeployment.description}
+            </p>
+
+            <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
+              <div className="w-full max-w-lg">
+                <MockupEmbed
+                  title={privateBetaLandingSurface.title}
+                  href={privateBetaLandingSurface.href}
+                  priority
+                  sourceLabel={privateBetaMarketingDeployment.hostname}
+                />
+              </div>
+              <div className="flex flex-col gap-4">
+                {privateBetaWaitlistSurface && (
+                  <ProductSurfaceEmbed
+                    surface={privateBetaWaitlistSurface}
+                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
+                  />
+                )}
+                {privateBetaWelcomeEmailSurface && (
+                  <ProductSurfaceEmbed
+                    surface={privateBetaWelcomeEmailSurface}
+                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
+                  />
+                )}
+              </div>
+            </div>
+            <ComponentsInUse
+              componentNames={[
+                privateBetaLandingSurface,
+                ...privateBetaAccessSurfaces,
+              ].flatMap((surface) => surface.components)}
+            />
+          </section>
+
+          <div className="mt-32 flex flex-col gap-32">
+            <section aria-labelledby="platform-deployment-heading">
+              <h3
+                id="platform-deployment-heading"
+                className="text-sm font-medium"
+              >
+                {privateBetaPlatformDeployment.title}
+              </h3>
+              <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+                {privateBetaPlatformDeployment.description}
+              </p>
+              {privateBetaConsoleSurface && (
+                <div className="mt-5 w-full max-w-lg">
+                  <MockupEmbed
+                    title={privateBetaConsoleSurface.title}
+                    href={privateBetaConsoleSurface.href}
+                    sourceLabel={privateBetaPlatformDeployment.hostname}
+                  />
+                </div>
+              )}
+              {privateBetaConsoleSurface && (
+                <ComponentsInUse
+                  componentNames={privateBetaConsoleSurface.components}
+                />
+              )}
+            </section>
+
+            <section aria-labelledby="agent-deployment-heading">
+              <h3 id="agent-deployment-heading" className="text-sm font-medium">
+                {privateBetaAgentDeployment.title}
+              </h3>
+              <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+                {privateBetaAgentDeployment.description}
+              </p>
+              {privateBetaRenderSurface && (
+                <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
+                  <div className="w-full max-w-lg">
+                    <MockupEmbed
+                      title={privateBetaRenderSurface.title}
+                      href={privateBetaRenderSurface.href}
+                      sourceLabel={`${privateBetaAgentDeployment.hostname} →→→ ${privateBetaMarketingDeployment.hostname}/waitlist`}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <ProductSurfaceEmbed
+                      surface={privateBetaPlaybooksSurface}
+                      sourceLabel={`${privateBetaAgentDeployment.hostname}/playbooks`}
+                    />
+                    {privateBetaAgentRoutes.map((route) => (
+                      <ProductSurfaceEmbed
+                        key={route.path}
+                        surface={{
+                          title: route.title,
+                          components: privateBetaRenderSurface.components,
+                        }}
+                        sourceLabel={`${privateBetaAgentDeployment.hostname}${route.path}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {privateBetaRenderSurface && (
+                <ComponentsInUse
+                  componentNames={[
+                    ...privateBetaRenderSurface.components,
+                    ...privateBetaPlaybooksSurface.components,
+                  ]}
+                />
+              )}
+            </section>
+          </div>
         </div>
-        <p className="mt-2 px-0.5 text-xs text-muted-foreground">
-          From livepeer-ui
-        </p>
-      </Link>
+      ) : slug === "public-beta" ? (
+        <div className="flex flex-col gap-32">
+          <DeploymentSection
+            headingId="public-livepeer-deployment-heading"
+            title="Livepeer.org"
+            description="The public Livepeer.org home, ecosystem, and GPU participation surfaces."
+            primary={publicBetaLivepeerSurface}
+            primarySourceLabel="livepeer.org"
+            componentNames={publicBetaLivepeerSurface.components}
+          />
 
-      <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-        {roundup.description}
-      </p>
+          {privateBetaConsoleSurface && (
+            <DeploymentSection
+              headingId="public-platform-deployment-heading"
+              title={privateBetaPlatformDeployment.title}
+              description={privateBetaPlatformDeployment.description}
+              primary={privateBetaConsoleSurface}
+              primarySourceLabel={privateBetaPlatformDeployment.hostname}
+              componentNames={privateBetaConsoleSurface.components}
+            />
+          )}
 
-      <section className="mt-10 text-center">
-        <h2 className="text-sm font-medium">Components</h2>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {componentItems.map((component) => (
+          {privateBetaRenderSurface && (
+            <DeploymentSection
+              headingId="public-agent-deployment-heading"
+              title="Agent"
+              description="Install instructions, Playbooks, MCP, and rendered output routes live on agent.livepeer.org."
+              primary={publicBetaInstallSurface}
+              primarySourceLabel={privateBetaAgentDeployment.hostname}
+              secondary={[
+                {
+                  surface: publicBetaPlaybooksSurface,
+                  sourceLabel: `${privateBetaAgentDeployment.hostname}/playbooks`,
+                },
+                ...privateBetaAgentRoutes.map((route) => ({
+                  surface: {
+                    title: route.title,
+                    components: privateBetaRenderSurface.components,
+                  },
+                  sourceLabel: `${privateBetaAgentDeployment.hostname}${route.path}`,
+                })),
+              ]}
+              componentNames={[
+                publicBetaInstallSurface,
+                publicBetaPlaybooksSurface,
+                privateBetaRenderSurface,
+              ].flatMap((surface) => surface.components)}
+            />
+          )}
+        </div>
+      ) : (
+        <>
+          <div className="mx-auto max-w-lg">
+            <MockupEmbed
+              title={mockup.title}
+              href={mockup.previewHref}
+              priority
+            />
+          </div>
+          <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
+            {mockup.description}
+          </p>
+        </>
+      )}
+
+      {!isRolloutPhase && (
+        <section className="mt-10 text-center">
+          <h2 className="text-sm font-medium">Components in use</h2>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {componentItems.map((component) => (
+              <Badge
+                key={component.name}
+                variant="secondary"
+                className="h-auto rounded-sm px-3 py-2 font-normal"
+                render={
+                  <Link href={`/docs/components/${component.name}`}>
+                    {component.title}
+                  </Link>
+                }
+              />
+            ))}
+          </div>
+
+          <h2 className="mt-8 text-sm font-medium">Content</h2>
+          <div className="mt-4">
             <Badge
-              key={component.name}
-              variant="secondary"
+              variant="outline"
               className="h-auto rounded-sm px-3 py-2 font-normal"
               render={
-                <Link href={`/docs/components/${component.name}`}>
-                  {component.title}
+                <Link href="/studio" target="_blank">
+                  Edit content in Sanity
                 </Link>
               }
             />
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </article>
   )
 }

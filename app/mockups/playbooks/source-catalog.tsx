@@ -8,7 +8,15 @@ import { PlaybookCard } from "@/components/mockups/playbook-card"
 
 import type { SourcePlaybook } from "./daydream-source"
 
-export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
+export function SourceCatalog({
+  playbooks,
+  searchPlaceholder = "Search playbooks",
+  emptyMessage = "No playbooks match your search.",
+}: {
+  playbooks: SourcePlaybook[]
+  searchPlaceholder?: string
+  emptyMessage?: string
+}) {
   const [query, setQuery] = useState("")
   const visible = useMemo(() => {
     const normalized = query.trim().toLowerCase()
@@ -36,7 +44,7 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
         <Input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search playbooks"
+          placeholder={searchPlaceholder}
           className="rounded-sm pl-9"
         />
       </div>
@@ -49,7 +57,7 @@ export function SourceCatalog({ playbooks }: { playbooks: SourcePlaybook[] }) {
 
       {visible.length === 0 && (
         <p className="py-16 text-center text-sm text-muted-foreground">
-          No playbooks match “{query}”.
+          {emptyMessage}
         </p>
       )}
     </>

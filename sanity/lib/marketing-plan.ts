@@ -47,7 +47,7 @@ const marketingWeeksQuery = defineQuery(`
         href
       }
     }, []),
-    "constraints": coalesce(constraints[]-> {
+    "constraints": coalesce(constraints[defined(@->._id)]-> {
       "_key": _id,
       title,
       description,
@@ -57,10 +57,10 @@ const marketingWeeksQuery = defineQuery(`
         href
       }
     }, []),
-    "internalMeetings": coalesce(internalMeetings[]-> {
+    "internalMeetings": coalesce(internalMeetings[defined(@->._id)]-> {
       _id, title, "slug": slug.current, occurredAt, summary
     }, []),
-    "userInterviews": coalesce(userInterviews[]-> {
+    "userInterviews": coalesce(userInterviews[defined(@->._id)]-> {
       _id, title, "slug": slug.current, occurredAt, summary
     }, []),
     note

@@ -20,7 +20,7 @@ export interface MockupRoundup {
 export interface MockupPage {
   _key: string
   title: string
-  href: string
+  href?: string
   components: string[]
 }
 

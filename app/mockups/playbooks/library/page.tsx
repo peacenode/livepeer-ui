@@ -26,7 +26,11 @@ export default async function PlaybooksLibraryPage() {
           description={page.libraryContent.description}
         />
         <div className="mt-4">
-          <SourceCatalog playbooks={playbooks} />
+          <SourceCatalog
+            playbooks={playbooks}
+            searchPlaceholder={page.libraryContent.searchPlaceholder}
+            emptyMessage={page.libraryContent.emptyMessage}
+          />
         </div>
       </div>
       <InstallAgentFooter title={page.libraryContent.footerHeading} />

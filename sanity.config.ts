@@ -17,6 +17,7 @@ const singletonSchemaTypes = new Set([
   "mockupRoundup",
   "agentConsoleEditorialPage",
   "waitlistPageContent",
+  "welcomeEmailContent",
   "agentConsoleShell",
   "agentConsolePage",
   "livepeerOrgSite",
@@ -62,6 +63,14 @@ const waitlistStructure: StructureResolver = (S) =>
           S.document()
             .schemaType("waitlistPageContent")
             .documentId("waitlistPageContent-waitlist")
+        ),
+      S.listItem()
+        .title("Welcome email")
+        .icon(GalleryVerticalEndIcon)
+        .child(
+          S.document()
+            .schemaType("welcomeEmailContent")
+            .documentId("welcomeEmailContent-private-beta")
         ),
     ])
 

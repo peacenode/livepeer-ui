@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button"
 export function AgentCapabilitiesSection({
   capabilities,
   content,
+  showCta = true,
 }: {
   capabilities: string[]
   content: { heading: string; cta: { label: string; href: string } }
+  showCta?: boolean
 }) {
   return (
     <section className="bg-background px-4 py-24 sm:px-6 sm:py-32 lg:px-10">
@@ -27,18 +29,20 @@ export function AgentCapabilitiesSection({
             </Badge>
           ))}
         </div>
-        <Button
-          size="lg"
-          variant="secondary"
-          nativeButton={false}
-          render={<Link href={content.cta.href} />}
-          className="mt-10 h-16 rounded-sm px-6"
-        >
-          {content.cta.label}
-          <span className="font-sans" aria-hidden="true">
-            →
-          </span>
-        </Button>
+        {showCta && (
+          <Button
+            size="lg"
+            variant="secondary"
+            nativeButton={false}
+            render={<Link href={content.cta.href} />}
+            className="mt-10 h-16 rounded-sm px-6"
+          >
+            {content.cta.label}
+            <span className="font-sans" aria-hidden="true">
+              →
+            </span>
+          </Button>
+        )}
       </div>
     </section>
   )

@@ -61,7 +61,8 @@ export const mockupPageType = defineType({
       name: "href",
       title: "Mockup URL or path",
       type: "string",
-      validation: (rule) => rule.required().custom(relativeOrHttpUrl),
+      description: "Leave empty when the design is still pending.",
+      validation: (rule) => rule.custom(relativeOrHttpUrl),
     }),
     defineField({
       name: "components",
