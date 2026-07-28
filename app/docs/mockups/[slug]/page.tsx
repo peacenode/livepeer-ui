@@ -7,10 +7,6 @@ import { TriangleAlertIcon } from "lucide-react"
 import { LivepeerGradientSymbol } from "@/components/brand"
 import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
-import {
-  getMockupRoundup,
-  type MockupPage as SanityMockupPage,
-} from "@/sanity/lib/registry-content"
 
 const mockups = {
   "internal-testing": {
@@ -94,6 +90,81 @@ const mockups = {
 } as const
 
 type MockupSlug = keyof typeof mockups
+type PrivateBetaSurface = {
+  title: string
+  href?: string
+  components: string[]
+}
+
+const privateBetaLandingSurface: PrivateBetaSurface = {
+  title: "Agent Landing Page",
+  href: "/mockups/private-beta/landing-page",
+  components: [
+    "livepeer-org-menu",
+    "livepeer-org-header",
+    "livepeer-org-footer",
+    "livepeer-agent-hero",
+    "agent-compatibility",
+    "agent-access-section",
+    "agent-capabilities-section",
+    "playbooks-cta-section",
+  ],
+}
+
+const privateBetaProductSurfaces: PrivateBetaSurface[] = [
+  {
+    title: "Agent Console",
+    href: "/mockups/private-beta/landing/console",
+    components: [
+      "livepeer-agent-page-frame",
+      "livepeer-agent-sidebar",
+      "user-menu",
+      "livepeer-agent-auth-gate",
+      "livepeer-agent-onboarding-section",
+      "playbook-catalog",
+    ],
+  },
+  {
+    title: "Render Result",
+    components: [
+      "livepeer-agent-page-frame",
+      "livepeer-agent-sidebar",
+      "user-menu",
+    ],
+  },
+]
+
+const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
+  {
+    title: "Agent Waitlist",
+    href: "/mockups/waitlist",
+    components: [
+      "waitlist-panel",
+      "waitlist-signup-form",
+      "waitlist-status-card",
+      "waitlist-referral-link",
+      "waitlist-leaderboard",
+      "waitlist-background-hero",
+    ],
+  },
+  {
+    title: "Welcome Email",
+    href: "/mockups/welcome-email",
+    components: ["welcome-email"],
+  },
+]
+
+const privateBetaProductSection = {
+  title: "Unlisted product surface area",
+  description:
+    "Available to private beta participants through direct links, but not listed publicly.",
+}
+
+const privateBetaWaitlistSection = {
+  title: "Agent Waitlist",
+  description:
+    "Waitlist signup and the welcome email used to onboard private beta participants.",
+}
 function MockupEmbed({
   title,
   href,
@@ -150,7 +221,7 @@ function ProductSurfaceEmbed({
   surface,
   className = "",
 }: {
-  surface: SanityMockupPage
+  surface: PrivateBetaSurface
   className?: string
 }) {
   const content = (
@@ -202,15 +273,6 @@ export async function generateMetadata({
   const { slug } = await params
   if (!isMockupSlug(slug)) return {}
 
-  if (slug === "private-beta") {
-    const roundup = await getMockupRoundup("private-beta")
-    if (!roundup) return {}
-    return {
-      title: roundup.title,
-      description: roundup.description,
-    }
-  }
-
   return {
     title: mockups[slug].title,
     description: mockups[slug].description,
@@ -226,26 +288,6 @@ export default async function MockupPage({
   if (!isMockupSlug(slug)) notFound()
 
   const mockup = mockups[slug]
-  const privateBetaRoundup =
-    slug === "private-beta" ? await getMockupRoundup("private-beta") : null
-
-  if (slug === "private-beta" && !privateBetaRoundup) {
-    throw new Error(
-      'Required Sanity document "mockupRoundup-private-beta" is missing.'
-    )
-  }
-
-  const privateBetaLandingSurface = privateBetaRoundup?.pages.find(
-    (page) => page.title === "Agent Landing Page"
-  )
-  const privateBetaProductSurfaces =
-    privateBetaRoundup?.pages.filter((page) =>
-      ["Agent Console", "Render Result"].includes(page.title)
-    ) ?? []
-  const privateBetaAccessSurfaces =
-    privateBetaRoundup?.pages.filter((page) =>
-      ["Agent Waitlist", "Welcome Email"].includes(page.title)
-    ) ?? []
   const privateBetaWaitlistSurface = privateBetaAccessSurfaces.find(
     (page) => page.title === "Agent Waitlist"
   )
@@ -257,15 +299,22 @@ export default async function MockupPage({
   )
   if (!group) notFound()
 
-  const componentNames: readonly string[] | undefined = privateBetaRoundup
-    ? [...new Set(privateBetaRoundup.pages.flatMap((page) => page.components))]
-    : "componentNames" in mockup
-      ? mockup.componentNames
-      : undefined
+  const componentNames: readonly string[] | undefined =
+    slug === "private-beta"
+      ? [
+          ...new Set(
+            [
+              privateBetaLandingSurface,
+              ...privateBetaProductSurfaces,
+              ...privateBetaAccessSurfaces,
+            ].flatMap((surface) => surface.components)
+          ),
+        ]
+      : "componentNames" in mockup
+        ? mockup.componentNames
+        : undefined
   const componentItems = componentNames
-    ? group.items.filter((component) =>
-        componentNames.includes(component.name)
-      )
+    ? group.items.filter((component) => componentNames.includes(component.name))
     : group.items
 
   return (
@@ -275,18 +324,14 @@ export default async function MockupPage({
         <div>
           <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
             <div>
-              {privateBetaLandingSurface && (
-                <MockupEmbed
-                  title={privateBetaLandingSurface.title}
-                  href={privateBetaLandingSurface.href}
-                  priority
-                />
-              )}
+              <MockupEmbed
+                title={privateBetaLandingSurface.title}
+                href={privateBetaLandingSurface.href}
+                priority
+              />
             </div>
 
-            <section
-              aria-labelledby="unlisted-products-heading"
-            >
+            <section aria-labelledby="unlisted-products-heading">
               <h2
                 id="unlisted-products-heading"
                 className="mb-4 flex items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400"
@@ -295,21 +340,21 @@ export default async function MockupPage({
                   className="mt-0.5 size-4 shrink-0"
                   aria-hidden="true"
                 />
-                <span>Unlisted product surface area</span>
+                <span>{privateBetaProductSection?.title}</span>
               </h2>
+              <p className="mb-4 text-sm text-muted-foreground">
+                {privateBetaProductSection?.description}
+              </p>
               <div className="flex flex-col gap-4 text-left">
                 {privateBetaProductSurfaces.map((surface) => (
-                  <ProductSurfaceEmbed
-                    key={surface.title}
-                    surface={surface}
-                  />
+                  <ProductSurfaceEmbed key={surface.title} surface={surface} />
                 ))}
               </div>
             </section>
           </div>
 
           <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-            {privateBetaRoundup?.description}
+            {mockup.description}
           </p>
 
           <section aria-labelledby="agent-waitlist-heading" className="mt-10">
@@ -317,8 +362,11 @@ export default async function MockupPage({
               id="agent-waitlist-heading"
               className="mb-4 text-center text-sm font-medium"
             >
-              Agent Waitlist
+              {privateBetaWaitlistSection?.title}
             </h2>
+            <p className="mx-auto mb-5 max-w-xl text-center text-sm text-balance text-muted-foreground">
+              {privateBetaWaitlistSection?.description}
+            </p>
             <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
               {privateBetaWaitlistSurface && (
                 <MockupEmbed
@@ -327,9 +375,7 @@ export default async function MockupPage({
                 />
               )}
               {privateBetaWelcomeEmailSurface && (
-                <ProductSurfaceEmbed
-                  surface={privateBetaWelcomeEmailSurface}
-                />
+                <ProductSurfaceEmbed surface={privateBetaWelcomeEmailSurface} />
               )}
             </div>
           </section>

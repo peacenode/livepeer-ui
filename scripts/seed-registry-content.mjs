@@ -42,49 +42,6 @@ const livepeerOrgShell = [
 
 const documents = [
   {
-    _id: "mockupRoundup-private-beta",
-    _type: "mockupRoundup",
-    slug: { _type: "slug", current: "private-beta" },
-    title: "Private Beta",
-    description:
-      "The Agent landing page remains exclusively for private marketing and communications during the private beta.",
-    previewHref: "/mockups/private-beta/landing-page",
-    pages: [
-      page(
-        "Agent Landing Page",
-        "/mockups/private-beta/landing-page",
-        [
-          ...livepeerOrgShell,
-          "livepeer-agent-hero",
-          "agent-compatibility",
-          "agent-access-section",
-          "agent-capabilities-section",
-          "playbooks-cta-section",
-        ]
-      ),
-      page(
-        "Agent Console",
-        "/mockups/private-beta/landing/console",
-        [
-          ...consoleShell,
-          "livepeer-agent-auth-gate",
-          "livepeer-agent-onboarding-section",
-          "playbook-catalog",
-        ]
-      ),
-      page("Render Result", undefined, consoleShell),
-      page("Agent Waitlist", "/mockups/waitlist", [
-        "waitlist-panel",
-        "waitlist-signup-form",
-        "waitlist-status-card",
-        "waitlist-referral-link",
-        "waitlist-leaderboard",
-        "waitlist-background-hero",
-      ]),
-      page("Welcome Email", "/mockups/welcome-email", ["welcome-email"]),
-    ],
-  },
-  {
     _id: "mockupRoundup-welcome-email",
     _type: "mockupRoundup",
     slug: { _type: "slug", current: "welcome-email" },
