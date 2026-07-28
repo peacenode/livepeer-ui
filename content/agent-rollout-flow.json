@@ -115,7 +115,7 @@
           "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
-          "needs": ["Check the email against the approved list", "Connect authentication to usage tracking"]
+          "needs": ["Check the email against the approved list", "Connect authentication to usage tracking", "Account comes with limited free credits"]
         },
         {
           "_key": "return",
@@ -165,7 +165,7 @@
           "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
-          "needs": ["Authenticate the user", "Connect authentication to usage tracking"]
+          "needs": ["Authenticate the user", "Connect authentication to usage tracking", "Account comes with limited free credits"]
         },
         {
           "_key": "return",
