@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button"
 
 export function PlaybooksCtaSection({
   content,
+  showCta = true,
 }: {
   content: {
     heading: string
     description: string
     cta: { label: string; href: string }
   }
+  showCta?: boolean
 }) {
   return (
     <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
@@ -29,16 +31,18 @@ export function PlaybooksCtaSection({
         <p className="mt-5 max-w-md text-base leading-relaxed text-balance text-muted-foreground">
           {content.description}
         </p>
-        <Button
-          size="lg"
-          variant="outline"
-          nativeButton={false}
-          render={<Link href={content.cta.href} />}
-          className="mt-7 h-16 rounded-sm border-foreground/20 bg-background px-4 transition-opacity hover:bg-background hover:opacity-80"
-        >
-          {content.cta.label}
-          <ArrowRightIcon className="size-4" aria-hidden="true" />
-        </Button>
+        {showCta && (
+          <Button
+            size="lg"
+            variant="outline"
+            nativeButton={false}
+            render={<Link href={content.cta.href} />}
+            className="mt-7 h-16 rounded-sm border-foreground/20 bg-background px-4 transition-opacity hover:bg-background hover:opacity-80"
+          >
+            {content.cta.label}
+            <ArrowRightIcon className="size-4" aria-hidden="true" />
+          </Button>
+        )}
       </div>
       <div className="relative aspect-4/3 w-full sm:hidden">
         <Image

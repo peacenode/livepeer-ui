@@ -1,23 +1,22 @@
 import type { Metadata } from "next"
 
 import {
+  getPlaybookDocument,
+  getSourcePlaybooks,
+} from "@/app/mockups/playbooks/daydream-source"
+import {
   livepeerOrgAgentFixture,
   livepeerOrgSiteFixture,
 } from "@/components/demos/fixtures/livepeer-org"
-import { AgentLandingPage as AgentLandingPageView } from "@/components/mockups/agent-landing-page"
-
-import {
-  getPlaybookDocument,
-  getSourcePlaybooks,
-} from "../playbooks/daydream-source"
+import { AgentLandingPage } from "@/components/mockups/agent-landing-page"
 
 export const metadata: Metadata = {
-  title: "Agent Landing Page",
+  title: "Livepeer Agent — Private Beta",
   description:
-    "Early-access marketing page for Livepeer Agent without public installation instructions.",
+    "Private-beta marketing page for Livepeer Agent with access to Playbooks and the Agent Console.",
 }
 
-export default async function InternalTestingAgentLandingPage() {
+export default async function PrivateBetaPage() {
   const playbooks = await getSourcePlaybooks()
   const documents = await Promise.all(
     playbooks.map(({ slug }) => getPlaybookDocument(slug))
@@ -27,10 +26,11 @@ export default async function InternalTestingAgentLandingPage() {
   ].sort((a, b) => a.localeCompare(b))
 
   return (
-    <AgentLandingPageView
+    <AgentLandingPage
       capabilities={capabilities}
       content={livepeerOrgAgentFixture}
       site={livepeerOrgSiteFixture}
+      privateBeta
     />
   )
 }
