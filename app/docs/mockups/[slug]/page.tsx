@@ -246,6 +246,12 @@ export default async function MockupPage({
     privateBetaRoundup?.pages.filter((page) =>
       ["Agent Waitlist", "Welcome Email"].includes(page.title)
     ) ?? []
+  const privateBetaWaitlistSurface = privateBetaAccessSurfaces.find(
+    (page) => page.title === "Agent Waitlist"
+  )
+  const privateBetaWelcomeEmailSurface = privateBetaAccessSurfaces.find(
+    (page) => page.title === "Welcome Email"
+  )
   const group = componentGroups.find(
     (candidate) => candidate.title === mockup.componentGroup
   )
@@ -313,14 +319,18 @@ export default async function MockupPage({
             >
               Agent Waitlist
             </h2>
-            <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              {privateBetaAccessSurfaces.map((surface) => (
-                <ProductSurfaceEmbed
-                  key={surface.title}
-                  surface={surface}
-                  className="sm:min-w-0 sm:flex-1 sm:basis-0"
+            <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
+              {privateBetaWaitlistSurface && (
+                <MockupEmbed
+                  title={privateBetaWaitlistSurface.title}
+                  href={privateBetaWaitlistSurface.href}
                 />
-              ))}
+              )}
+              {privateBetaWelcomeEmailSurface && (
+                <ProductSurfaceEmbed
+                  surface={privateBetaWelcomeEmailSurface}
+                />
+              )}
             </div>
           </section>
         </div>
