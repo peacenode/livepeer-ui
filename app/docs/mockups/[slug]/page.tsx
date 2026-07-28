@@ -167,7 +167,7 @@ const privateBetaMarketingDeployment = {
 }
 
 const privateBetaPlatformDeployment = {
-  title: "Billing/API Keys",
+  title: "Auth/Keys/Billing",
   hostname: "platform.livepeer.org",
   description: "Billing, credits, API keys, and Playbooks.",
 }
