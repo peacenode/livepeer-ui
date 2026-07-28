@@ -96,17 +96,17 @@ type PrivateBetaSurface = {
 
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
-  href: "/mockups/private-beta",
+  href: "/mockups/private-beta/landing-page",
 }
 
 const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   {
     title: "Playbooks",
-    href: "/mockups/livepeer-org/library",
+    href: "/mockups/private-beta/landing/console/playbooks",
   },
   {
     title: "Agent Console",
-    href: "/mockups/livepeer-agent",
+    href: "/mockups/private-beta/landing/console",
   },
   {
     title: "Render Result",

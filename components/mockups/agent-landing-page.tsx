@@ -30,9 +30,15 @@ export function AgentLandingPage({
         <LivepeerOrgHeader
           site={site}
           playbooksHref={
-            privateBeta ? "/mockups/livepeer-org/library" : undefined
+            privateBeta
+              ? "/mockups/private-beta/landing/console/playbooks"
+              : undefined
           }
-          consoleHref={privateBeta ? "/mockups/livepeer-agent" : undefined}
+          consoleHref={
+            privateBeta
+              ? "/mockups/private-beta/landing/console"
+              : undefined
+          }
           action={{ label: "Join waitlist", href: "/mockups/waitlist" }}
           showMenu={false}
         />
