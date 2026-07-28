@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
+import { LivepeerGradientSymbol } from "@/components/brand"
 import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
 
@@ -127,30 +128,49 @@ function MockupEmbed({
   title,
   href,
   priority = false,
+  variant = "og",
 }: {
   title: string
   href?: string
   priority?: boolean
+  variant?: "og" | "symbol"
 }) {
   const preview = (
     <>
-      <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
-        <Image
-          src="/brand/og.png"
-          alt=""
-          fill
-          priority={priority}
-          sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
-          className="scale-90 object-cover"
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          aria-hidden="true"
-          style={{
-            background:
-              "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
-          }}
-        />
+      <div
+        className={
+          variant === "symbol"
+            ? "relative aspect-square overflow-hidden rounded-2xl border bg-black"
+            : "relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black"
+        }
+      >
+        {variant === "symbol" ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <LivepeerGradientSymbol
+              className="h-16 w-auto sm:h-20"
+              aria-hidden="true"
+            />
+          </div>
+        ) : (
+          <>
+            <Image
+              src="/brand/og.png"
+              alt=""
+              fill
+              priority={priority}
+              sizes="(min-width: 768px) 512px, calc(100vw - 32px)"
+              className="scale-90 object-cover"
+            />
+            <div
+              className="pointer-events-none absolute inset-0"
+              aria-hidden="true"
+              style={{
+                background:
+                  "radial-gradient(circle at bottom left, color-mix(in oklab, var(--color-emerald-500) 65%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 20%, transparent) 22%, transparent 48%)",
+              }}
+            />
+          </>
+        )}
         <span className="absolute bottom-4 left-4 rounded-sm bg-black/60 px-2 py-1 text-sm font-normal text-white backdrop-blur-sm">
           {title}
         </span>
@@ -220,42 +240,44 @@ export default async function MockupPage({
     : group.items
 
   return (
-    <article className="max-w-3xl">
+    <article className={slug === "private-beta" ? "max-w-5xl" : "max-w-3xl"}>
       <h1 className="sr-only">{mockup.title}</h1>
       {slug === "private-beta" ? (
         <div>
-          <div className="mx-auto max-w-lg">
-            <MockupEmbed
-              title={privateBetaLandingSurface.title}
-              href={privateBetaLandingSurface.href}
-              priority
-            />
-          </div>
-          <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-            {mockup.description}
-          </p>
-
-          <section
-            aria-labelledby="unlisted-products-heading"
-            className="mt-10 text-center"
-          >
-            <h2
-              id="unlisted-products-heading"
-              className="mb-4 text-sm font-medium"
-            >
-              Unlisted product surface area
-            </h2>
-            <div className="flex flex-wrap justify-center gap-x-5 gap-y-8 text-left">
-              {privateBetaProductSurfaces.map((surface) => (
-                <div
-                  key={surface.title}
-                  className="w-full sm:w-[calc(50%-0.625rem)]"
-                >
-                  <MockupEmbed title={surface.title} href={surface.href} />
-                </div>
-              ))}
+          <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
+            <div>
+              <MockupEmbed
+                title={privateBetaLandingSurface.title}
+                href={privateBetaLandingSurface.href}
+                priority
+              />
+              <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
+                {mockup.description}
+              </p>
             </div>
-          </section>
+
+            <section
+              aria-labelledby="unlisted-products-heading"
+              className="text-center"
+            >
+              <h2
+                id="unlisted-products-heading"
+                className="mb-4 text-sm font-medium"
+              >
+                Unlisted product surface area
+              </h2>
+              <div className="mx-auto flex max-w-64 flex-col gap-8 text-left">
+                {privateBetaProductSurfaces.map((surface) => (
+                  <MockupEmbed
+                    key={surface.title}
+                    title={surface.title}
+                    href={surface.href}
+                    variant="symbol"
+                  />
+                ))}
+              </div>
+            </section>
+          </div>
 
           <div className="mt-10 grid gap-x-5 gap-y-8 sm:grid-cols-2">
             {privateBetaAccessSurfaces.map((surface) => (
