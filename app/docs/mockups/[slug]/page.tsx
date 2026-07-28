@@ -154,7 +154,7 @@ const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
 ]
 
 const privateBetaMarketingDeployment = {
-  title: "Marketing deployment",
+  title: "Marketing",
   hostname: "earlyaccess.livepeer.org",
   description: "Landing page, waitlist, and welcome email cut over together.",
 }
@@ -166,7 +166,7 @@ const privateBetaPlatformDeployment = {
 }
 
 const privateBetaAgentDeployment = {
-  title: "MCP/Render result",
+  title: "MCP/Renders",
   hostname: "agent.livepeer.org",
   description:
     "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
@@ -354,7 +354,7 @@ export default async function MockupPage({
             >
               {privateBetaMarketingDeployment.title}
             </h2>
-            <p className="mt-3 max-w-xl text-sm text-balance text-muted-foreground">
+            <p className="mt-1 max-w-xl text-sm text-balance text-muted-foreground">
               {privateBetaMarketingDeployment.description}
             </p>
 
@@ -392,7 +392,7 @@ export default async function MockupPage({
               >
                 {privateBetaPlatformDeployment.title}
               </h3>
-              <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+              <p className="mt-1 max-w-sm text-sm text-muted-foreground">
                 {privateBetaPlatformDeployment.description}
               </p>
               {privateBetaConsoleSurface && (
@@ -410,7 +410,7 @@ export default async function MockupPage({
               <h3 id="agent-deployment-heading" className="text-sm font-medium">
                 {privateBetaAgentDeployment.title}
               </h3>
-              <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+              <p className="mt-1 max-w-sm text-sm text-muted-foreground">
                 {privateBetaAgentDeployment.description}
               </p>
               {privateBetaRenderSurface && (
