@@ -373,7 +373,7 @@ export default async function MockupPage({
             </div>
           </section>
 
-          <div className="mt-12 grid gap-10 sm:grid-cols-2">
+          <div className="mt-12 flex flex-col gap-12">
             <section aria-labelledby="platform-deployment-heading">
               <h3
                 id="platform-deployment-heading"
