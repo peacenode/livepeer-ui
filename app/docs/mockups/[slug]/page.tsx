@@ -350,12 +350,14 @@ export default async function MockupPage({
             </p>
 
             <div className="mt-5 grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
-              <MockupEmbed
-                title={privateBetaLandingSurface.title}
-                href={privateBetaLandingSurface.href}
-                priority
-                sourceLabel={privateBetaMarketingDeployment.hostname}
-              />
+              <div className="w-full max-w-lg">
+                <MockupEmbed
+                  title={privateBetaLandingSurface.title}
+                  href={privateBetaLandingSurface.href}
+                  priority
+                  sourceLabel={privateBetaMarketingDeployment.hostname}
+                />
+              </div>
               <div className="flex flex-col gap-4">
                 {privateBetaWaitlistSurface && (
                   <ProductSurfaceEmbed
@@ -385,7 +387,7 @@ export default async function MockupPage({
                 {privateBetaPlatformDeployment.description}
               </p>
               {privateBetaConsoleSurface && (
-                <div className="mt-5">
+                <div className="mt-5 w-full max-w-lg">
                   <MockupEmbed
                     title={privateBetaConsoleSurface.title}
                     href={privateBetaConsoleSurface.href}
@@ -403,7 +405,7 @@ export default async function MockupPage({
                 {privateBetaAgentDeployment.description}
               </p>
               {privateBetaRenderSurface && (
-                <div className="mt-5">
+                <div className="mt-5 w-full max-w-lg">
                   <MockupEmbed
                     title={privateBetaRenderSurface.title}
                     href={privateBetaRenderSurface.href}
