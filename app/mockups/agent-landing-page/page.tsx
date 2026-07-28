@@ -65,11 +65,11 @@ export default async function AgentLandingPage() {
           </div>
         </section>
 
+        <PlaybooksCtaSection content={livepeerOrgAgentFixture.playbooks} />
         <AgentCapabilitiesSection
           capabilities={capabilities}
           content={livepeerOrgAgentFixture.capabilities}
         />
-        <PlaybooksCtaSection content={livepeerOrgAgentFixture.playbooks} />
       </main>
 
       <LivepeerOrgFooter site={livepeerOrgSiteFixture} />
