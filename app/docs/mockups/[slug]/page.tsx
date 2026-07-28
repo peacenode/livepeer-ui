@@ -403,11 +403,13 @@ export default async function MockupPage({
                 {privateBetaAgentDeployment.description}
               </p>
               {privateBetaRenderSurface && (
-                  <ProductSurfaceEmbed
-                    surface={privateBetaRenderSurface}
-                    className="mt-5"
+                <div className="mt-5">
+                  <MockupEmbed
+                    title={privateBetaRenderSurface.title}
+                    href={privateBetaRenderSurface.href}
                     sourceLabel={privateBetaAgentDeployment.hostname}
                   />
+                </div>
               )}
             </section>
           </div>
