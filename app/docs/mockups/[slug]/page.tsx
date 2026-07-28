@@ -112,6 +112,17 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   },
 ]
 
+const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
+  {
+    title: "Agent Waitlist",
+    href: "/mockups/waitlist",
+  },
+  {
+    title: "Welcome Email",
+    href: "/mockups/welcome-email",
+  },
+]
+
 function MockupEmbed({
   title,
   href,
@@ -223,17 +234,6 @@ export default async function MockupPage({
           <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
             {mockup.description}
           </p>
-          <div className="mt-4 flex justify-center">
-            <Badge
-              variant="outline"
-              className="h-auto rounded-sm px-3 py-2 font-normal"
-              render={
-                <Link href="/mockups/welcome-email" target="_blank">
-                  Welcome Email design
-                </Link>
-              }
-            />
-          </div>
 
           <section
             aria-labelledby="unlisted-products-heading"
@@ -256,6 +256,16 @@ export default async function MockupPage({
               ))}
             </div>
           </section>
+
+          <div className="mt-10 grid gap-x-5 gap-y-8 sm:grid-cols-2">
+            {privateBetaAccessSurfaces.map((surface) => (
+              <MockupEmbed
+                key={surface.title}
+                title={surface.title}
+                href={surface.href}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <>
