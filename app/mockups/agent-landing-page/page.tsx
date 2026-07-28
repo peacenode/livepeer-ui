@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ArrowRightIcon } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
 import {
@@ -11,7 +12,7 @@ import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-de
 import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
 import { LivepeerOrgHeader } from "@/components/mockups/livepeer-org-header"
 import { PlaybooksCtaSection } from "@/components/mockups/playbooks-cta-section"
-import { buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 import {
   getPlaybookDocument,
@@ -42,7 +43,7 @@ export default async function AgentLandingPage() {
       <main className="flex-1">
         <section className="relative flex min-h-[78svh] w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-24">
           <LivepeerAgentDeltaStream className="-translate-y-10 sm:-translate-y-8" />
-          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center sm:-translate-y-24">
+          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center sm:-translate-y-12">
             <div
               className="flex items-end gap-3 text-foreground sm:gap-4"
               aria-label="Livepeer Agent"
@@ -61,15 +62,19 @@ export default async function AgentLandingPage() {
             <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
               {livepeerOrgAgentFixture.hero.heading}
             </h1>
-            <Link
-              href="/mockups/waitlist"
-              className={buttonVariants({
-                size: "lg",
-                className: "h-12 rounded-sm px-6 text-base",
-              })}
+            <Button
+              size="lg"
+              nativeButton={false}
+              render={<Link href="/mockups/waitlist" />}
+              className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
+              style={{
+                backgroundImage:
+                  "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
+              }}
             >
               Join waitlist
-            </Link>
+              <ArrowRightIcon className="size-4" aria-hidden="true" />
+            </Button>
           </div>
         </section>
 
