@@ -4,6 +4,7 @@ import {
   CalendarIcon,
   CreditCardIcon,
   GalleryVerticalEndIcon,
+  PanelsTopLeftIcon,
 } from "lucide-react"
 import { defineConfig } from "sanity"
 import { structureTool, type StructureResolver } from "sanity/structure"
@@ -12,6 +13,7 @@ import { dataset, projectId } from "@/sanity/env"
 import { schemaTypes } from "@/sanity/schema-types"
 
 const singletonSchemaTypes = new Set([
+  "agentRolloutFlow",
   "mockupRoundup",
   "agentConsoleEditorialPage",
   "waitlistPageContent",
@@ -20,6 +22,12 @@ const singletonSchemaTypes = new Set([
   "livepeerOrgSite",
   "livepeerOrgPage",
 ])
+
+const flowsStructure: StructureResolver = (S) =>
+  S.document()
+    .title("Rollout flows")
+    .schemaType("agentRolloutFlow")
+    .documentId("agentRolloutFlow")
 
 const plannerStructure: StructureResolver = (S) =>
   S.documentTypeList("marketingWeek")
@@ -181,6 +189,12 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [
+    structureTool({
+      name: "flows",
+      title: "Flows",
+      icon: PanelsTopLeftIcon,
+      structure: flowsStructure,
+    }),
     structureTool({
       name: "planner",
       title: "Planner",
