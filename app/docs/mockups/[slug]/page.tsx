@@ -145,7 +145,13 @@ function MockupEmbed({
   )
 }
 
-function ProductSurfaceEmbed({ surface }: { surface: SanityMockupPage }) {
+function ProductSurfaceEmbed({
+  surface,
+  className = "",
+}: {
+  surface: SanityMockupPage
+  className?: string
+}) {
   const content = (
     <>
       <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl border bg-black sm:size-24">
@@ -170,12 +176,12 @@ function ProductSurfaceEmbed({ surface }: { surface: SanityMockupPage }) {
       href={surface.href}
       target="_blank"
       aria-label={`Open the ${surface.title} mockup`}
-      className="flex items-center gap-3 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+      className={`flex items-center gap-3 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${className}`}
     >
       {content}
     </Link>
   ) : (
-    <div className="flex items-center gap-3">{content}</div>
+    <div className={`flex items-center gap-3 ${className}`}>{content}</div>
   )
 }
 
@@ -306,6 +312,7 @@ export default async function MockupPage({
                 <ProductSurfaceEmbed
                   key={surface.title}
                   surface={surface}
+                  className="sm:min-w-0 sm:flex-1 sm:basis-0"
                 />
               ))}
             </div>
