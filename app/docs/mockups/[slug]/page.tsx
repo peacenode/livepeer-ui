@@ -168,8 +168,17 @@ const privateBetaPlatformDeployment = {
 const privateBetaAgentDeployment = {
   title: "MCP/Render result",
   hostname: "agent.livepeer.org",
-  description: "MCP and rendered output surfaces.",
+  description:
+    "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
 }
+
+const privateBetaAgentRoutes = [
+  { title: "MCP server", path: "/api/mcp" },
+  { title: "Project render result", path: "/v/{id}" },
+  { title: "Moodboard result", path: "/m/{id}" },
+  { title: "CLI-run result", path: "/preview/{id}" },
+  { title: "Shared-session result", path: "/session/{token}" },
+]
 function MockupEmbed({
   title,
   href,
@@ -405,12 +414,25 @@ export default async function MockupPage({
                 {privateBetaAgentDeployment.description}
               </p>
               {privateBetaRenderSurface && (
-                <div className="mt-5 w-full max-w-lg">
-                  <MockupEmbed
-                    title={privateBetaRenderSurface.title}
-                    href={privateBetaRenderSurface.href}
-                    sourceLabel={privateBetaAgentDeployment.hostname}
-                  />
+                <div className="mt-5 grid w-full max-w-3xl gap-6 md:grid-cols-[minmax(0,32rem)_minmax(12rem,1fr)] md:items-start">
+                  <div className="w-full max-w-lg">
+                    <MockupEmbed
+                      title={privateBetaRenderSurface.title}
+                      href={privateBetaRenderSurface.href}
+                      sourceLabel={`${privateBetaAgentDeployment.hostname}/v/{id}`}
+                    />
+                  </div>
+                  <dl className="flex flex-col gap-4">
+                    {privateBetaAgentRoutes.map((route) => (
+                      <div key={route.path}>
+                        <dt className="text-sm font-semibold">{route.title}</dt>
+                        <dd className="mt-1 text-xs text-muted-foreground">
+                          {privateBetaAgentDeployment.hostname}
+                          {route.path}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
                 </div>
               )}
             </section>
