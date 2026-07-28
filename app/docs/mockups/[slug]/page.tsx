@@ -7,17 +7,17 @@ import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
 
 type MockupRoundupSlug =
-  | "agent-waitlist"
-  | "agent-console"
-  | "livepeer-org"
+  "agent-landing-page" | "agent-waitlist" | "agent-console" | "livepeer-org"
 
 const mockupRoundupSlugs = [
+  "agent-landing-page",
   "agent-waitlist",
   "agent-console",
   "livepeer-org",
 ] as const satisfies readonly MockupRoundupSlug[]
 
 const componentGroupTitles: Record<MockupRoundupSlug, string> = {
+  "agent-landing-page": "Livepeer.org",
   "agent-waitlist": "Agent Waitlist",
   "agent-console": "Agent Console",
   "livepeer-org": "Livepeer.org",
@@ -25,8 +25,26 @@ const componentGroupTitles: Record<MockupRoundupSlug, string> = {
 
 const mockupRoundups: Record<
   MockupRoundupSlug,
-  { title: string; description: string; previewHref: string }
+  {
+    title: string
+    description: string
+    previewHref: string
+    componentNames?: readonly string[]
+  }
 > = {
+  "agent-landing-page": {
+    title: "Agent Landing Page",
+    description:
+      "Early-access landing page combining Livepeer.org navigation, Agent branding, playbooks, capabilities, and the complete site footer.",
+    previewHref: "/mockups/agent-landing-page",
+    componentNames: [
+      "livepeer-org-menu",
+      "livepeer-org-header",
+      "livepeer-org-footer",
+      "playbooks-cta-section",
+      "agent-capabilities-section",
+    ],
+  },
   "agent-waitlist": {
     title: "Agent Waitlist",
     description:
@@ -85,6 +103,11 @@ export default async function MockupRoundupPage({
     (candidate) => candidate.title === componentGroupTitles[slug]
   )
   if (!group) notFound()
+  const componentItems = roundup.componentNames
+    ? group.items.filter((component) =>
+        roundup.componentNames?.includes(component.name)
+      )
+    : group.items
 
   return (
     <article className="max-w-3xl">
@@ -127,7 +150,7 @@ export default async function MockupRoundupPage({
       <section className="mt-10 text-center">
         <h2 className="text-sm font-medium">Components</h2>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          {group.items.map((component) => (
+          {componentItems.map((component) => (
             <Badge
               key={component.name}
               variant="secondary"
