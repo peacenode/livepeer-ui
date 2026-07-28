@@ -693,46 +693,38 @@ export default async function MockupPage({
         </>
       )}
 
-      <section className="mt-10 text-center">
-        {!isRolloutPhase && (
-          <>
-            <h2 className="text-sm font-medium">Components in use</h2>
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
-              {componentItems.map((component) => (
-                <Badge
-                  key={component.name}
-                  variant="secondary"
-                  className="h-auto rounded-sm px-3 py-2 font-normal"
-                  render={
-                    <Link href={`/docs/components/${component.name}`}>
-                      {component.title}
-                    </Link>
-                  }
-                />
-              ))}
-            </div>
-          </>
-        )}
+      {!isRolloutPhase && (
+        <section className="mt-10 text-center">
+          <h2 className="text-sm font-medium">Components in use</h2>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {componentItems.map((component) => (
+              <Badge
+                key={component.name}
+                variant="secondary"
+                className="h-auto rounded-sm px-3 py-2 font-normal"
+                render={
+                  <Link href={`/docs/components/${component.name}`}>
+                    {component.title}
+                  </Link>
+                }
+              />
+            ))}
+          </div>
 
-        <h2
-          className={
-            isRolloutPhase ? "text-sm font-medium" : "mt-8 text-sm font-medium"
-          }
-        >
-          Content
-        </h2>
-        <div className="mt-4">
-          <Badge
-            variant="outline"
-            className="h-auto rounded-sm px-3 py-2 font-normal"
-            render={
-              <Link href="/studio" target="_blank">
-                Edit content in Sanity
-              </Link>
-            }
-          />
-        </div>
-      </section>
+          <h2 className="mt-8 text-sm font-medium">Content</h2>
+          <div className="mt-4">
+            <Badge
+              variant="outline"
+              className="h-auto rounded-sm px-3 py-2 font-normal"
+              render={
+                <Link href="/studio" target="_blank">
+                  Edit content in Sanity
+                </Link>
+              }
+            />
+          </div>
+        </section>
+      )}
     </article>
   )
 }
