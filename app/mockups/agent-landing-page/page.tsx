@@ -41,9 +41,6 @@ export default async function AgentLandingPage() {
         <section className="relative flex min-h-[78svh] w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-24">
           <LivepeerAgentDeltaStream className="-translate-y-10 sm:-translate-y-8" />
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
-            <p className="text-sm font-medium tracking-wide text-muted-foreground">
-              Livepeer Agent Early Access
-            </p>
             <div
               className="flex items-end gap-3 text-foreground sm:gap-4"
               aria-label="Livepeer Agent"
