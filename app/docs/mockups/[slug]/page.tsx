@@ -360,13 +360,13 @@ export default async function MockupPage({
                 {privateBetaWaitlistSurface && (
                   <ProductSurfaceEmbed
                     surface={privateBetaWaitlistSurface}
-                    sourceLabel={privateBetaMarketingDeployment.hostname}
+                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
                   />
                 )}
                 {privateBetaWelcomeEmailSurface && (
                   <ProductSurfaceEmbed
                     surface={privateBetaWelcomeEmailSurface}
-                    sourceLabel={privateBetaMarketingDeployment.hostname}
+                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/waitlist`}
                   />
                 )}
               </div>
