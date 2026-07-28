@@ -355,24 +355,22 @@ export default async function MockupPage({
               {privateBetaMarketingDeployment.description}
             </p>
 
-            <div className="mt-5 grid gap-6 sm:grid-cols-2">
+            <div className="mt-5 grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
               <MockupEmbed
                 title={privateBetaLandingSurface.title}
                 href={privateBetaLandingSurface.href}
                 priority
               />
-              {privateBetaWaitlistSurface && (
-                <MockupEmbed
-                  title={privateBetaWaitlistSurface.title}
-                  href={privateBetaWaitlistSurface.href}
-                />
-              )}
-            </div>
-
-            <div className="mt-5">
-              {privateBetaWelcomeEmailSurface && (
-                <ProductSurfaceEmbed surface={privateBetaWelcomeEmailSurface} />
-              )}
+              <div className="flex flex-col gap-4">
+                {privateBetaWaitlistSurface && (
+                  <ProductSurfaceEmbed surface={privateBetaWaitlistSurface} />
+                )}
+                {privateBetaWelcomeEmailSurface && (
+                  <ProductSurfaceEmbed
+                    surface={privateBetaWelcomeEmailSurface}
+                  />
+                )}
+              </div>
             </div>
           </section>
 
