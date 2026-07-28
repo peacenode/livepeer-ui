@@ -381,10 +381,12 @@ export default async function MockupPage({
                 {privateBetaPlatformDeployment.description}
               </p>
               {privateBetaConsoleSurface && (
-                <ProductSurfaceEmbed
-                  surface={privateBetaConsoleSurface}
-                  className="mt-5"
-                />
+                <div className="mt-5">
+                  <MockupEmbed
+                    title={privateBetaConsoleSurface.title}
+                    href={privateBetaConsoleSurface.href}
+                  />
+                </div>
               )}
             </section>
 
