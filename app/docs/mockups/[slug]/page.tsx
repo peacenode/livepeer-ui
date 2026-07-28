@@ -175,7 +175,8 @@ const privateBetaPlatformDeployment = {
 const privateBetaAgentDeployment = {
   title: "MCP/Renders",
   hostname: "agent.livepeer.org",
-  description: "MCP and rendered output routes remain on agent.livepeer.org.",
+  description:
+    "The root forwards to earlyaccess.livepeer.org/waitlist. MCP and rendered output routes remain on agent.livepeer.org.",
 }
 
 const privateBetaAgentRoutes = [
@@ -473,7 +474,7 @@ export default async function MockupPage({
                     <MockupEmbed
                       title={privateBetaRenderSurface.title}
                       href={privateBetaRenderSurface.href}
-                      sourceLabel={`${privateBetaAgentDeployment.hostname} fwd → ${privateBetaMarketingDeployment.hostname}/waitlist`}
+                      sourceLabel={`${privateBetaAgentDeployment.hostname} →→→ ${privateBetaMarketingDeployment.hostname}/waitlist`}
                     />
                   </div>
                   <div className="flex flex-col gap-4">
