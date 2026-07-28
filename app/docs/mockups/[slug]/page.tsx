@@ -301,12 +301,11 @@ export default async function MockupPage({
             >
               Agent Waitlist
             </h2>
-            <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2">
+            <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
               {privateBetaAccessSurfaces.map((surface) => (
-                <MockupEmbed
+                <ProductSurfaceEmbed
                   key={surface.title}
-                  title={surface.title}
-                  href={surface.href}
+                  surface={surface}
                 />
               ))}
             </div>
