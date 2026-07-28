@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { TriangleAlertIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol } from "@/components/brand"
 import { Badge } from "@/components/ui/badge"
@@ -275,9 +276,6 @@ export default async function MockupPage({
                   priority
                 />
               )}
-              <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-                {privateBetaRoundup?.description}
-              </p>
             </div>
 
             <section
@@ -285,9 +283,13 @@ export default async function MockupPage({
             >
               <h2
                 id="unlisted-products-heading"
-                className="mb-4 text-sm font-medium"
+                className="mb-4 flex items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400"
               >
-                Unlisted product surface area
+                <TriangleAlertIcon
+                  className="mt-0.5 size-4 shrink-0"
+                  aria-hidden="true"
+                />
+                <span>Unlisted product surface area</span>
               </h2>
               <div className="flex flex-col gap-4 text-left">
                 {privateBetaProductSurfaces.map((surface) => (
@@ -299,6 +301,10 @@ export default async function MockupPage({
               </div>
             </section>
           </div>
+
+          <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
+            {privateBetaRoundup?.description}
+          </p>
 
           <section aria-labelledby="agent-waitlist-heading" className="mt-10">
             <h2
