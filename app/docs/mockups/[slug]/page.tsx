@@ -419,20 +419,21 @@ export default async function MockupPage({
                     <MockupEmbed
                       title={privateBetaRenderSurface.title}
                       href={privateBetaRenderSurface.href}
-                      sourceLabel={`${privateBetaAgentDeployment.hostname}/v/{id}`}
+                      sourceLabel={privateBetaAgentDeployment.hostname}
                     />
                   </div>
-                  <dl className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-4">
                     {privateBetaAgentRoutes.map((route) => (
-                      <div key={route.path}>
-                        <dt className="text-sm font-semibold">{route.title}</dt>
-                        <dd className="mt-1 text-xs text-muted-foreground">
-                          {privateBetaAgentDeployment.hostname}
-                          {route.path}
-                        </dd>
-                      </div>
+                      <ProductSurfaceEmbed
+                        key={route.path}
+                        surface={{
+                          title: route.title,
+                          components: privateBetaRenderSurface.components,
+                        }}
+                        sourceLabel={`${privateBetaAgentDeployment.hostname}${route.path}`}
+                      />
                     ))}
-                  </dl>
+                  </div>
                 </div>
               )}
             </section>
