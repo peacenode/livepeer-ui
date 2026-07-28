@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 export default function WelcomeEmailPage() {
   return (
-    <main className="flex min-h-svh items-center justify-center bg-muted px-4 py-12 sm:px-6 sm:py-16">
-      <article className="w-full max-w-[500px] bg-background">
+    <main className="flex min-h-svh justify-center bg-muted sm:px-6">
+      <article className="flex min-h-svh w-full max-w-[500px] flex-col bg-background">
         <header className="border-b px-7 py-6 sm:px-10">
           <div
             className="flex items-end gap-2.5 text-foreground"
@@ -34,7 +34,7 @@ export default function WelcomeEmailPage() {
           </div>
         </header>
 
-        <div className="px-7 py-10 sm:px-10 sm:py-12">
+        <div className="flex-1 px-7 py-10 sm:px-10 sm:py-12">
           <h1 className="text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
             Welcome to the private beta.
           </h1>
