@@ -42,6 +42,18 @@ const livepeerOrgShell = [
 
 const documents = [
   {
+    _id: "mockupRoundup-welcome-email",
+    _type: "mockupRoundup",
+    slug: { _type: "slug", current: "welcome-email" },
+    title: "Welcome Email",
+    description:
+      "Private beta welcome email with Livepeer Agent branding, onboarding copy, and a single install action.",
+    previewHref: "/mockups/welcome-email",
+    pages: [
+      page("Welcome Email", "/mockups/welcome-email", ["welcome-email"]),
+    ],
+  },
+  {
     _id: "mockupRoundup-agent-waitlist",
     _type: "mockupRoundup",
     slug: { _type: "slug", current: "agent-waitlist" },

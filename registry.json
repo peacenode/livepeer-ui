@@ -658,6 +658,29 @@
       ]
     },
     {
+      "name": "welcome-email",
+      "type": "registry:block",
+      "title": "Welcome Email",
+      "description": "Private beta welcome email with Agent branding and a single install action.",
+      "dependencies": [
+        "lucide-react",
+        "next"
+      ],
+      "registryDependencies": [
+        "https://livepeer.peaceno.de/r/button.json"
+      ],
+      "files": [
+        {
+          "path": "components/mockups/welcome-email.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/brand.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
       "name": "waitlist-signup-form",
       "type": "registry:component",
       "title": "Signup Form",
