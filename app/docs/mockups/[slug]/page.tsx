@@ -350,7 +350,7 @@ export default async function MockupPage({
       )}
 
       <section className="mt-10 text-center">
-        <h2 className="text-sm font-medium">Components</h2>
+        <h2 className="text-sm font-medium">Components in use</h2>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {componentItems.map((component) => (
             <Badge
