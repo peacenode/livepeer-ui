@@ -8,15 +8,17 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type {
   AgentRolloutFlow,
-  AgentRolloutScreen,
+  AgentRolloutItem,
 } from "@/sanity/lib/agent-rollout-flow"
 
-function ScreenRow({
-  screen,
+function FlowItem({
+  item,
   headingId,
+  preload = false,
 }: {
-  screen: AgentRolloutScreen
+  item: AgentRolloutItem
   headingId: string
+  preload?: boolean
 }) {
   return (
     <section
@@ -27,15 +29,16 @@ function ScreenRow({
         <div className="overflow-hidden rounded-lg border bg-background">
           <div className="relative aspect-video">
             <Image
-              src={screen.imageUrl}
-              alt={screen.imageAlt}
+              src={item.imageUrl}
+              alt={item.imageAlt}
               fill
+              preload={preload}
               sizes="(min-width: 1024px) 60vw, 100vw"
               className="object-cover"
               style={
-                screen.imageHotspot
+                item.imageHotspot
                   ? {
-                      objectPosition: `${screen.imageHotspot.x * 100}% ${screen.imageHotspot.y * 100}%`,
+                      objectPosition: `${item.imageHotspot.x * 100}% ${item.imageHotspot.y * 100}%`,
                     }
                   : undefined
               }
@@ -46,11 +49,11 @@ function ScreenRow({
 
       <aside>
         <h4 id={headingId} className="font-sans text-lg font-medium">
-          {screen.title}
+          {item.title}
         </h4>
-        {screen.mockupHref && (
+        {item.mockupHref && (
           <a
-            href={screen.mockupHref}
+            href={item.mockupHref}
             target="_blank"
             rel="noreferrer"
             className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -61,10 +64,13 @@ function ScreenRow({
         )}
 
         <ul className="mt-5 space-y-3">
-          {screen.needs.map((item) => (
-            <li key={item} className="flex gap-2.5 text-sm leading-5">
+          {item.checklist.map((checklistItem) => (
+            <li
+              key={checklistItem}
+              className="flex gap-2.5 text-sm leading-5"
+            >
               <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-              <span>{item}</span>
+              <span>{checklistItem}</span>
             </li>
           ))}
         </ul>
@@ -73,18 +79,33 @@ function ScreenRow({
   )
 }
 
+function MarketingPage({
+  page,
+  headingId,
+  preload,
+}: {
+  page: AgentRolloutItem
+  headingId: string
+  preload: boolean
+}) {
+  return <FlowItem item={page} headingId={headingId} preload={preload} />
+}
+
+function UserFlowStep({
+  step,
+  headingId,
+}: {
+  step: AgentRolloutItem
+  headingId: string
+}) {
+  return <FlowItem item={step} headingId={headingId} />
+}
+
 export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
   const [activePhase, setActivePhase] = useState(0)
   const phase = content.phases[activePhase] ?? content.phases[0]
 
   if (!phase) return null
-
-  const marketingScreens = phase.screens.filter(
-    (screen) => screen.section === "marketing"
-  )
-  const userFlowScreens = phase.screens.filter(
-    (screen) => screen.section === "userFlow"
-  )
 
   return (
     <article className="w-full">
@@ -117,7 +138,7 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
           {phase.name}
         </h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-          {phase.summary}
+          {phase.description}
         </p>
         {phase.primaryCta && (
           <div className="mt-4 flex items-center gap-2 text-sm font-medium">
@@ -125,14 +146,14 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
             <Badge>{phase.primaryCta}</Badge>
           </div>
         )}
-        {phase.callout && (
+        {phase.doNotWarning && (
           <div className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400">
             <TriangleAlert className="mt-0.5 size-4 shrink-0" />
-            <span>{phase.callout}</span>
+            <span>{phase.doNotWarning}</span>
           </div>
         )}
 
-        {marketingScreens.length > 0 && (
+        {phase.marketingPages.length > 0 && (
           <section
             aria-labelledby={`marketing-pages-${activePhase}`}
             className="mt-10"
@@ -144,18 +165,19 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
               Marketing pages
             </h3>
             <div className="mt-8 space-y-10">
-              {marketingScreens.map((screen) => (
-                <ScreenRow
-                  key={screen._key}
-                  screen={screen}
-                  headingId={`screen-${activePhase}-${screen._key}`}
+              {phase.marketingPages.map((page, index) => (
+                <MarketingPage
+                  key={page._key}
+                  page={page}
+                  preload={index === 0}
+                  headingId={`marketing-page-${activePhase}-${page._key}`}
                 />
               ))}
             </div>
           </section>
         )}
 
-        {userFlowScreens.length > 0 && (
+        {phase.userFlow.length > 0 && (
           <section
             aria-labelledby={`user-flow-${activePhase}`}
             className="mt-16"
@@ -167,11 +189,11 @@ export function AgentFtueFlow({ content }: { content: AgentRolloutFlow }) {
               User flow
             </h3>
             <div className="mt-8 space-y-16 sm:space-y-20">
-              {userFlowScreens.map((screen) => (
-                <ScreenRow
-                  key={screen._key}
-                  screen={screen}
-                  headingId={`screen-${activePhase}-${screen._key}`}
+              {phase.userFlow.map((step) => (
+                <UserFlowStep
+                  key={step._key}
+                  step={step}
+                  headingId={`user-flow-step-${activePhase}-${step._key}`}
                 />
               ))}
             </div>

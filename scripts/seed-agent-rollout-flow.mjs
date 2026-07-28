@@ -47,21 +47,34 @@ async function uploadImage(imagePath, alt) {
 const phases = []
 
 for (const phase of source.phases) {
-  const screens = []
+  const marketingPages = []
+  const userFlow = []
 
   for (const screen of phase.screens) {
-    const { imagePath, imageAlt, ...fields } = screen
-    screens.push({
-      _type: "screen",
+    const { imagePath, imageAlt, needs, section, ...fields } = screen
+    const item = {
+      _type: section === "marketing" ? "marketingPage" : "userFlowStep",
       ...fields,
+      checklist: needs,
       image: await uploadImage(imagePath, imageAlt),
-    })
+    }
+
+    if (section === "marketing") {
+      marketingPages.push(item)
+    } else {
+      userFlow.push(item)
+    }
   }
 
   phases.push({
     _type: "phase",
-    ...phase,
-    screens,
+    _key: phase._key,
+    name: phase.name,
+    description: phase.summary,
+    primaryCta: phase.primaryCta,
+    doNotWarning: phase.callout,
+    marketingPages,
+    userFlow,
   })
 }
 

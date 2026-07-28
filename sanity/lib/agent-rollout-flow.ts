@@ -3,24 +3,24 @@ import { defineQuery } from "next-sanity"
 import fallbackContent from "@/content/agent-rollout-flow.json"
 import { sanityClient } from "@/sanity/lib/client"
 
-export type AgentRolloutScreen = {
+export type AgentRolloutItem = {
   _key: string
-  section: "marketing" | "userFlow"
   title: string
   imageUrl: string
   imageAlt: string
   imageHotspot?: { x: number; y: number }
   mockupHref?: string
-  needs: string[]
+  checklist: string[]
 }
 
 export type AgentRolloutPhase = {
   _key: string
   name: string
-  summary: string
+  description: string
   primaryCta?: string
-  callout?: string
-  screens: AgentRolloutScreen[]
+  doNotWarning?: string
+  marketingPages: AgentRolloutItem[]
+  userFlow: AgentRolloutItem[]
 }
 
 export type AgentRolloutFlow = {
@@ -36,18 +36,26 @@ const query = defineQuery(`
     phases[] {
       _key,
       name,
-      summary,
+      description,
       primaryCta,
-      callout,
-      screens[] {
+      doNotWarning,
+      marketingPages[] {
         _key,
-        section,
         title,
         "imageUrl": image.asset->url,
         "imageAlt": image.alt,
         "imageHotspot": image.hotspot { x, y },
         mockupHref,
-        needs
+        checklist
+      },
+      userFlow[] {
+        _key,
+        title,
+        "imageUrl": image.asset->url,
+        "imageAlt": image.alt,
+        "imageHotspot": image.hotspot { x, y },
+        mockupHref,
+        checklist
       }
     }
   }
@@ -57,12 +65,25 @@ const fallback: AgentRolloutFlow = {
   title: fallbackContent.title,
   subtitle: fallbackContent.subtitle,
   phases: fallbackContent.phases.map((phase) => ({
-    ...phase,
-    screens: phase.screens.map(({ imagePath, ...screen }) => ({
-      ...screen,
-      section: screen.section as AgentRolloutScreen["section"],
-      imageUrl: imagePath,
-    })),
+    _key: phase._key,
+    name: phase.name,
+    description: phase.summary,
+    primaryCta: phase.primaryCta,
+    doNotWarning: phase.callout,
+    marketingPages: phase.screens
+      .filter((screen) => screen.section === "marketing")
+      .map(({ imagePath, needs, ...screen }) => ({
+        ...screen,
+        imageUrl: imagePath,
+        checklist: needs,
+      })),
+    userFlow: phase.screens
+      .filter((screen) => screen.section === "userFlow")
+      .map(({ imagePath, needs, ...screen }) => ({
+        ...screen,
+        imageUrl: imagePath,
+        checklist: needs,
+      })),
   })),
 }
 
@@ -79,7 +100,9 @@ export async function getAgentRolloutFlow(): Promise<AgentRolloutFlow> {
       }
     )
 
-    return content?.phases?.length ? content : fallback
+    return content?.phases?.every((phase) => phase.userFlow?.length)
+      ? content
+      : fallback
   } catch {
     return fallback
   }
