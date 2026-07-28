@@ -18,7 +18,36 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
     {
       _key: "network",
       title: "Network",
-      links: [{ label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" }],
+      links: [
+        { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
+        { label: "Livepeer Token", href: "https://livepeer.org/token" },
+        { label: "Delegate LPT", href: "https://explorer.livepeer.org" },
+        {
+          label: "Provide GPUs",
+          href: "https://docs.livepeer.org/v1/orchestrators/guides/get-started",
+        },
+        { label: "Roadmap", href: "https://roadmap.livepeer.org/roadmap" },
+      ],
+    },
+    {
+      _key: "resources",
+      title: "Resources",
+      links: [
+        { label: "Primer", href: "https://livepeer.org/primer" },
+        { label: "Blog", href: "https://livepeer.org/blog" },
+        { label: "Foundation", href: "https://livepeer.org/foundation" },
+        { label: "Brand", href: "https://livepeer.org/brand" },
+        { label: "Documentation", href: "https://docs.livepeer.org" },
+      ],
+    },
+    {
+      _key: "community",
+      title: "Community",
+      links: [
+        { label: "Discord", href: "https://discord.gg/livepeer" },
+        { label: "X / Twitter", href: "https://twitter.com/Livepeer" },
+        { label: "Forum", href: "https://forum.livepeer.org" },
+      ],
     },
   ],
   socialLinks: [
