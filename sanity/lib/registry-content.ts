@@ -3,6 +3,7 @@ import { defineQuery } from "next-sanity"
 import { sanityClient } from "@/sanity/lib/client"
 
 export type MockupRoundupSlug =
+  | "private-beta"
   | "welcome-email"
   | "agent-waitlist"
   | "agent-console"
@@ -20,7 +21,7 @@ export interface MockupRoundup {
 export interface MockupPage {
   _key: string
   title: string
-  href: string
+  href?: string
   components: string[]
 }
 

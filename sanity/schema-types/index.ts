@@ -24,6 +24,7 @@ import {
   livepeerOrgSiteType,
 } from "./livepeer-org-pages"
 import { waitlistPageContentType } from "./waitlist-content"
+import { welcomeEmailContentType } from "./welcome-email-content"
 import { agentRolloutFlowType } from "./agent-rollout-flow"
 
 export const schemaTypes = [
@@ -39,6 +40,7 @@ export const schemaTypes = [
   mockupRoundupType,
   agentConsoleEditorialPageType,
   waitlistPageContentType,
+  welcomeEmailContentType,
   agentConsoleShellType,
   agentConsolePageType,
   livepeerOrgLinkType,
