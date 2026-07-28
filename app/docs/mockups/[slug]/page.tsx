@@ -360,11 +360,11 @@ export default async function MockupPage({
           <section aria-labelledby="agent-waitlist-heading" className="mt-10">
             <h2
               id="agent-waitlist-heading"
-              className="mb-4 text-center text-sm font-medium"
+              className="mb-2 text-sm font-medium"
             >
               {privateBetaWaitlistSection?.title}
             </h2>
-            <p className="mx-auto mb-5 max-w-xl text-center text-sm text-balance text-muted-foreground">
+            <p className="mb-5 max-w-xl text-sm text-balance text-muted-foreground">
               {privateBetaWaitlistSection?.description}
             </p>
             <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
