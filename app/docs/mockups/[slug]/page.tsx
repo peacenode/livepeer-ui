@@ -174,10 +174,12 @@ function MockupEmbed({
   title,
   href,
   priority = false,
+  sourceLabel,
 }: {
   title: string
   href?: string
   priority?: boolean
+  sourceLabel?: string
 }) {
   const preview = (
     <>
@@ -203,7 +205,7 @@ function MockupEmbed({
         </span>
       </div>
       <p className="mt-2 px-0.5 text-xs text-muted-foreground">
-        {href ? "From livepeer-ui" : "Design pending"}
+        {sourceLabel ?? (href ? "From livepeer-ui" : "Design pending")}
       </p>
     </>
   )
@@ -225,9 +227,11 @@ function MockupEmbed({
 function ProductSurfaceEmbed({
   surface,
   className = "",
+  sourceLabel,
 }: {
   surface: PrivateBetaSurface
   className?: string
+  sourceLabel?: string
 }) {
   const content = (
     <>
@@ -242,7 +246,8 @@ function ProductSurfaceEmbed({
           {surface.title}
         </span>
         <span className="text-xs text-muted-foreground">
-          {surface.href ? "From livepeer-ui" : "Design pending"}
+          {sourceLabel ??
+            (surface.href ? "From livepeer-ui" : "Design pending")}
         </span>
       </div>
     </>
@@ -340,9 +345,6 @@ export default async function MockupPage({
             >
               {privateBetaMarketingDeployment.title}
             </h2>
-            <Badge variant="outline" className="mt-2 rounded-sm font-normal">
-              {privateBetaMarketingDeployment.hostname}
-            </Badge>
             <p className="mt-3 max-w-xl text-sm text-balance text-muted-foreground">
               {privateBetaMarketingDeployment.description}
             </p>
@@ -352,14 +354,19 @@ export default async function MockupPage({
                 title={privateBetaLandingSurface.title}
                 href={privateBetaLandingSurface.href}
                 priority
+                sourceLabel={privateBetaMarketingDeployment.hostname}
               />
               <div className="flex flex-col gap-4">
                 {privateBetaWaitlistSurface && (
-                  <ProductSurfaceEmbed surface={privateBetaWaitlistSurface} />
+                  <ProductSurfaceEmbed
+                    surface={privateBetaWaitlistSurface}
+                    sourceLabel={privateBetaMarketingDeployment.hostname}
+                  />
                 )}
                 {privateBetaWelcomeEmailSurface && (
                   <ProductSurfaceEmbed
                     surface={privateBetaWelcomeEmailSurface}
+                    sourceLabel={privateBetaMarketingDeployment.hostname}
                   />
                 )}
               </div>
@@ -374,9 +381,6 @@ export default async function MockupPage({
               >
                 {privateBetaPlatformDeployment.title}
               </h3>
-              <Badge variant="outline" className="mt-2 rounded-sm font-normal">
-                {privateBetaPlatformDeployment.hostname}
-              </Badge>
               <p className="mt-3 max-w-sm text-sm text-muted-foreground">
                 {privateBetaPlatformDeployment.description}
               </p>
@@ -385,6 +389,7 @@ export default async function MockupPage({
                   <MockupEmbed
                     title={privateBetaConsoleSurface.title}
                     href={privateBetaConsoleSurface.href}
+                    sourceLabel={privateBetaPlatformDeployment.hostname}
                   />
                 </div>
               )}
@@ -394,17 +399,15 @@ export default async function MockupPage({
               <h3 id="agent-deployment-heading" className="text-sm font-medium">
                 {privateBetaAgentDeployment.title}
               </h3>
-              <Badge variant="outline" className="mt-2 rounded-sm font-normal">
-                {privateBetaAgentDeployment.hostname}
-              </Badge>
               <p className="mt-3 max-w-sm text-sm text-muted-foreground">
                 {privateBetaAgentDeployment.description}
               </p>
               {privateBetaRenderSurface && (
-                <ProductSurfaceEmbed
-                  surface={privateBetaRenderSurface}
-                  className="mt-5"
-                />
+                  <ProductSurfaceEmbed
+                    surface={privateBetaRenderSurface}
+                    className="mt-5"
+                    sourceLabel={privateBetaAgentDeployment.hostname}
+                  />
               )}
             </section>
           </div>
