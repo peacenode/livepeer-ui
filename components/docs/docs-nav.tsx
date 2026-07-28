@@ -29,13 +29,14 @@ export function DocsNav({
       title: "Mockups",
       items: [
         {
-          title: "Agent Landing Page",
-          href: "/docs/mockups/agent-landing-page",
+          title: "Internal Testing",
+          href: "/docs/mockups/internal-testing",
         },
+        { title: "Private Beta", href: "/docs/mockups/private-beta" },
+        { title: "Public Beta", href: "/docs/mockups/public-beta" },
         { title: "Welcome Email", href: "/docs/mockups/welcome-email" },
         { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
         { title: "Agent Console", href: "/docs/mockups/agent-console" },
-        { title: "Livepeer.org", href: "/docs/mockups/livepeer-org" },
       ],
     },
     {
