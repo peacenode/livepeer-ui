@@ -7,10 +7,15 @@ import { Badge } from "@/components/ui/badge"
 import { componentGroups } from "@/lib/docs"
 
 type MockupRoundupSlug =
-  "agent-landing-page" | "agent-waitlist" | "agent-console" | "livepeer-org"
+  | "agent-landing-page"
+  | "welcome-email"
+  | "agent-waitlist"
+  | "agent-console"
+  | "livepeer-org"
 
 const mockupRoundupSlugs = [
   "agent-landing-page",
+  "welcome-email",
   "agent-waitlist",
   "agent-console",
   "livepeer-org",
@@ -18,6 +23,7 @@ const mockupRoundupSlugs = [
 
 const componentGroupTitles: Record<MockupRoundupSlug, string> = {
   "agent-landing-page": "Livepeer.org",
+  "welcome-email": "Agent Waitlist",
   "agent-waitlist": "Agent Waitlist",
   "agent-console": "Agent Console",
   "livepeer-org": "Livepeer.org",
@@ -44,6 +50,13 @@ const mockupRoundups: Record<
       "playbooks-cta-section",
       "agent-capabilities-section",
     ],
+  },
+  "welcome-email": {
+    title: "Welcome Email",
+    description:
+      "Private beta welcome email with Livepeer Agent branding, onboarding copy, and a single install action.",
+    previewHref: "/mockups/welcome-email",
+    componentNames: ["welcome-email"],
   },
   "agent-waitlist": {
     title: "Agent Waitlist",

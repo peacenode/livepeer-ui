@@ -177,6 +177,14 @@
       "title": "Agent Waitlist",
       "items": [
         {
+          "name": "welcome-email",
+          "title": "Welcome Email",
+          "description": "Private beta welcome email with Agent branding and a single install action.",
+          "level": "section",
+          "uses": ["button"],
+          "files": ["components/mockups/welcome-email.tsx"]
+        },
+        {
           "name": "waitlist-signup-form",
           "title": "Signup Form",
           "description": "Email capture form with the emerald early-access action.",

@@ -93,6 +93,7 @@ import WaitlistPanelDemo from "./waitlist-panel-demo"
 import WaitlistReferralLinkDemo from "./waitlist-referral-link-demo"
 import WaitlistSignupFormDemo from "./waitlist-signup-form-demo"
 import WaitlistStatusCardDemo from "./waitlist-status-card-demo"
+import WelcomeEmailDemo from "./welcome-email-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
 import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
@@ -195,6 +196,7 @@ export const demos: Record<string, ComponentType> = {
   "waitlist-referral-link": WaitlistReferralLinkDemo,
   "waitlist-signup-form": WaitlistSignupFormDemo,
   "waitlist-status-card": WaitlistStatusCardDemo,
+  "welcome-email": WelcomeEmailDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
   "characters-workspace-section": CharactersWorkspaceSectionDemo,

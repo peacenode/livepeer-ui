@@ -32,7 +32,7 @@ export function DocsNav({
           title: "Agent Landing Page",
           href: "/docs/mockups/agent-landing-page",
         },
-        { title: "Welcome Email", href: "/mockups/welcome-email" },
+        { title: "Welcome Email", href: "/docs/mockups/welcome-email" },
         { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
         { title: "Agent Console", href: "/docs/mockups/agent-console" },
         { title: "Livepeer.org", href: "/docs/mockups/livepeer-org" },
