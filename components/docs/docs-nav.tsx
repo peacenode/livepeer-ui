@@ -34,9 +34,6 @@ export function DocsNav({
         },
         { title: "Private Beta", href: "/docs/mockups/private-beta" },
         { title: "Public Beta", href: "/docs/mockups/public-beta" },
-        { title: "Welcome Email", href: "/docs/mockups/welcome-email" },
-        { title: "Agent Waitlist", href: "/docs/mockups/agent-waitlist" },
-        { title: "Agent Console", href: "/docs/mockups/agent-console" },
       ],
     },
     {
