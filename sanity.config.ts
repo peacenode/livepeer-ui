@@ -24,10 +24,27 @@ const singletonSchemaTypes = new Set([
 ])
 
 const flowsStructure: StructureResolver = (S) =>
-  S.document()
-    .title("Rollout flows")
-    .schemaType("agentRolloutFlow")
-    .documentId("agentRolloutFlow")
+  S.list()
+    .title("Flows")
+    .items(
+      [
+        ["internal-testing", "Internal testing"],
+        ["private-beta", "Private beta"],
+        ["public-beta", "Public beta"],
+      ].map(([id, title]) =>
+        S.listItem()
+          .id(id)
+          .title(title)
+          .icon(PanelsTopLeftIcon)
+          .child(
+            S.document()
+              .id(`agent-rollout-flow-${id}`)
+              .title(title)
+              .schemaType("agentRolloutFlow")
+              .documentId("agentRolloutFlow")
+          )
+      )
+    )
 
 const plannerStructure: StructureResolver = (S) =>
   S.documentTypeList("marketingWeek")
