@@ -160,10 +160,23 @@ const privateBetaProductSection = {
     "Available to private beta participants through direct links, but not listed publicly.",
 }
 
-const privateBetaWaitlistSection = {
-  title: "Agent Waitlist",
+const privateBetaMarketingDeployment = {
+  title: "Marketing deployment",
+  hostname: "earlyaccess.livepeer.org",
   description:
-    "Waitlist signup and the welcome email used to onboard private beta participants.",
+    "Landing page, waitlist, and welcome email cut over together.",
+}
+
+const privateBetaPlatformDeployment = {
+  title: "Platform deployment",
+  hostname: "platform.livepeer.org",
+  description: "Agent Console, including billing, credits, API keys, and Playbooks.",
+}
+
+const privateBetaAgentDeployment = {
+  title: "Agent deployment",
+  hostname: "agent.livepeer.org",
+  description: "MCP and rendered output surfaces.",
 }
 function MockupEmbed({
   title,
@@ -294,6 +307,12 @@ export default async function MockupPage({
   const privateBetaWelcomeEmailSurface = privateBetaAccessSurfaces.find(
     (page) => page.title === "Welcome Email"
   )
+  const privateBetaConsoleSurface = privateBetaProductSurfaces.find(
+    (page) => page.title === "Agent Console"
+  )
+  const privateBetaRenderSurface = privateBetaProductSurfaces.find(
+    (page) => page.title === "Render Result"
+  )
   const group = componentGroups.find(
     (candidate) => candidate.title === mockup.componentGroup
   )
@@ -322,61 +341,98 @@ export default async function MockupPage({
       <h1 className="sr-only">{mockup.title}</h1>
       {slug === "private-beta" ? (
         <div>
-          <div className="grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
-            <div>
+          <section aria-labelledby="marketing-deployment-heading">
+            <h2
+              id="marketing-deployment-heading"
+              className="text-sm font-medium"
+            >
+              {privateBetaMarketingDeployment.title}
+            </h2>
+            <p className="mt-1 font-mono text-xs text-muted-foreground">
+              {privateBetaMarketingDeployment.hostname}
+            </p>
+            <p className="mt-3 max-w-xl text-sm text-balance text-muted-foreground">
+              {privateBetaMarketingDeployment.description}
+            </p>
+
+            <div className="mt-5 grid gap-6 sm:grid-cols-2">
               <MockupEmbed
                 title={privateBetaLandingSurface.title}
                 href={privateBetaLandingSurface.href}
                 priority
               />
-            </div>
-
-            <section aria-labelledby="unlisted-products-heading">
-              <h2
-                id="unlisted-products-heading"
-                className="mb-4 flex items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400"
-              >
-                <TriangleAlertIcon
-                  className="mt-0.5 size-4 shrink-0"
-                  aria-hidden="true"
-                />
-                <span>{privateBetaProductSection?.title}</span>
-              </h2>
-              <p className="mb-4 text-sm text-muted-foreground">
-                {privateBetaProductSection?.description}
-              </p>
-              <div className="flex flex-col gap-4 text-left">
-                {privateBetaProductSurfaces.map((surface) => (
-                  <ProductSurfaceEmbed key={surface.title} surface={surface} />
-                ))}
-              </div>
-            </section>
-          </div>
-
-          <p className="mx-auto mt-6 max-w-xl text-center text-sm text-balance text-muted-foreground">
-            {mockup.description}
-          </p>
-
-          <section aria-labelledby="agent-waitlist-heading" className="mt-10">
-            <h2
-              id="agent-waitlist-heading"
-              className="mb-2 text-sm font-medium"
-            >
-              {privateBetaWaitlistSection?.title}
-            </h2>
-            <p className="mb-5 max-w-xl text-sm text-balance text-muted-foreground">
-              {privateBetaWaitlistSection?.description}
-            </p>
-            <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(12rem,1fr)] md:items-start">
               {privateBetaWaitlistSurface && (
                 <MockupEmbed
                   title={privateBetaWaitlistSurface.title}
                   href={privateBetaWaitlistSurface.href}
                 />
               )}
+            </div>
+
+            <div className="mt-5">
               {privateBetaWelcomeEmailSurface && (
                 <ProductSurfaceEmbed surface={privateBetaWelcomeEmailSurface} />
               )}
+            </div>
+          </section>
+
+          <section aria-labelledby="unlisted-products-heading" className="mt-12">
+            <h2
+              id="unlisted-products-heading"
+              className="flex items-start gap-2 text-sm font-medium text-amber-600 dark:text-amber-400"
+            >
+              <TriangleAlertIcon
+                className="mt-0.5 size-4 shrink-0"
+                aria-hidden="true"
+              />
+              <span>{privateBetaProductSection.title}</span>
+            </h2>
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+              {privateBetaProductSection.description}
+            </p>
+
+            <div className="mt-6 grid gap-10 sm:grid-cols-2">
+              <section aria-labelledby="platform-deployment-heading">
+                <h3
+                  id="platform-deployment-heading"
+                  className="text-sm font-medium"
+                >
+                  {privateBetaPlatformDeployment.title}
+                </h3>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">
+                  {privateBetaPlatformDeployment.hostname}
+                </p>
+                <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+                  {privateBetaPlatformDeployment.description}
+                </p>
+                {privateBetaConsoleSurface && (
+                  <ProductSurfaceEmbed
+                    surface={privateBetaConsoleSurface}
+                    className="mt-5"
+                  />
+                )}
+              </section>
+
+              <section aria-labelledby="agent-deployment-heading">
+                <h3
+                  id="agent-deployment-heading"
+                  className="text-sm font-medium"
+                >
+                  {privateBetaAgentDeployment.title}
+                </h3>
+                <p className="mt-1 font-mono text-xs text-muted-foreground">
+                  {privateBetaAgentDeployment.hostname}
+                </p>
+                <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+                  {privateBetaAgentDeployment.description}
+                </p>
+                {privateBetaRenderSurface && (
+                  <ProductSurfaceEmbed
+                    surface={privateBetaRenderSurface}
+                    className="mt-5"
+                  />
+                )}
+              </section>
             </div>
           </section>
         </div>
