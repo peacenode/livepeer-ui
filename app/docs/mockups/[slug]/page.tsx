@@ -186,7 +186,7 @@ function ProductSurfaceEmbed({ surface }: { surface: PrivateBetaSurface }) {
         />
       </div>
       <div className="flex min-w-0 flex-col items-start gap-1.5">
-        <span className="rounded-sm bg-black px-2 py-1 text-sm font-semibold text-white">
+        <span className="text-sm font-semibold text-foreground">
           {surface.title}
         </span>
         <span className="text-xs text-muted-foreground">
