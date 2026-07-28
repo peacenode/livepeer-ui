@@ -291,8 +291,10 @@ function ComponentsInUse({
   ]
 
   return (
-    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-      <p className="shrink-0 text-sm font-medium">Components in use</p>
+    <div className="mt-6 flex flex-col gap-2">
+      <p className="text-xs font-medium text-muted-foreground">
+        Components in use
+      </p>
       <div className="flex flex-wrap gap-2">
         {components.map((component) => (
           <Badge
