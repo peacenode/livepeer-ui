@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { LivepeerWordmark } from "@/components/brand"
 import {
@@ -10,6 +11,7 @@ import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-de
 import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
 import { LivepeerOrgHeader } from "@/components/mockups/livepeer-org-header"
 import { PlaybooksCtaSection } from "@/components/mockups/playbooks-cta-section"
+import { buttonVariants } from "@/components/ui/button"
 
 import {
   getPlaybookDocument,
@@ -59,6 +61,15 @@ export default async function AgentLandingPage() {
             <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
               {livepeerOrgAgentFixture.hero.heading}
             </h1>
+            <Link
+              href="/mockups/waitlist"
+              className={buttonVariants({
+                size: "lg",
+                className: "h-12 rounded-sm px-6 text-base",
+              })}
+            >
+              Join waitlist
+            </Link>
           </div>
         </section>
 
