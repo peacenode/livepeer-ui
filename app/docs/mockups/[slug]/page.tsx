@@ -113,7 +113,7 @@ const privateBetaLandingSurface: PrivateBetaSurface = {
 
 const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   {
-    title: "Agent Console",
+    title: "Agent Platform",
     href: "/mockups/private-beta/landing/console",
     components: [
       "livepeer-agent-page-frame",
@@ -168,9 +168,9 @@ const privateBetaMarketingDeployment = {
 }
 
 const privateBetaPlatformDeployment = {
-  title: "Platform deployment",
+  title: "Billing/API Keys",
   hostname: "platform.livepeer.org",
-  description: "Agent Console, including billing, credits, API keys, and Playbooks.",
+  description: "Billing, credits, API keys, and Playbooks.",
 }
 
 const privateBetaAgentDeployment = {
@@ -308,7 +308,7 @@ export default async function MockupPage({
     (page) => page.title === "Welcome Email"
   )
   const privateBetaConsoleSurface = privateBetaProductSurfaces.find(
-    (page) => page.title === "Agent Console"
+    (page) => page.title === "Agent Platform"
   )
   const privateBetaRenderSurface = privateBetaProductSurfaces.find(
     (page) => page.title === "Render Result"
