@@ -31,6 +31,7 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
           style={{
             width: isShallow ? "30cqw" : "min(34cqw, 104cqh)",
           }}
+          data-particle-exclusion
         >
           <LivepeerGradientLockup
             className="block h-auto w-full text-white"

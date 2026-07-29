@@ -135,7 +135,7 @@ function LivepeerCubeStream({
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
 
       const heroCopy =
-        variant === "card"
+        variant === "card" || variant === "banner"
           ? canvas.parentElement?.querySelector("[data-particle-exclusion]")
           : canvas.parentElement?.querySelector("h1")?.parentElement
 
