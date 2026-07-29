@@ -51,19 +51,19 @@ export function SocialBannerArtwork() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 48% 82% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 60%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 32%, transparent) 30%, color-mix(in oklab, var(--color-emerald-500) 13%, transparent) 62%, transparent 100%)",
+            "radial-gradient(ellipse 36% 88% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 32%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 14%, transparent) 30%, color-mix(in oklab, var(--color-emerald-500) 4%, transparent) 58%, transparent 74%)",
         }}
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 blur-xl"
+        className="absolute inset-0"
         style={{
           backgroundImage:
-            "conic-gradient(from 0deg at 0% 0%, transparent 100deg, color-mix(in oklab, var(--color-emerald-500) 15%, transparent) 118deg, color-mix(in oklab, var(--color-emerald-400) 40%, transparent) 136deg, color-mix(in oklab, var(--color-emerald-400) 13%, transparent) 156deg, transparent 172deg)",
+            "conic-gradient(from 0deg at 0% 0%, transparent 112deg, color-mix(in oklab, var(--color-emerald-500) 8%, transparent) 118deg, color-mix(in oklab, var(--color-emerald-400) 34%, transparent) 130deg, color-mix(in oklab, var(--color-emerald-500) 10%, transparent) 138deg, transparent 146deg)",
           maskImage:
-            "radial-gradient(ellipse 105% 145% at 0% 0%, black 0%, black 42%, transparent 80%)",
+            "radial-gradient(ellipse 78% 135% at 0% 0%, black 0%, black 45%, transparent 78%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 105% 145% at 0% 0%, black 0%, black 42%, transparent 80%)",
+            "radial-gradient(ellipse 78% 135% at 0% 0%, black 0%, black 45%, transparent 78%)",
         }}
         aria-hidden="true"
       />
