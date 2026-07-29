@@ -125,7 +125,7 @@ function AssetPromptEditor({
         id="asset-revision-prompt"
         value={value}
         onChange={(event) => setValue(event.target.value)}
-        placeholder="Modify or extend"
+        placeholder="Describe your changes..."
         className="mt-2 min-h-24 resize-none rounded-md"
       />
       <Button
@@ -270,7 +270,7 @@ export function ProjectResultPage({
                       [asset.id]: event.target.value,
                     }))
                   }
-                  placeholder="Modify or extend"
+                  placeholder="Describe your changes..."
                   className="h-8 rounded-[2px] border-foreground/20 bg-background/60 text-xs text-foreground shadow-sm backdrop-blur-sm placeholder:text-muted-foreground"
                 />
               </div>
