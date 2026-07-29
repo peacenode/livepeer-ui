@@ -320,7 +320,7 @@ export function ProjectResultPage({
                     )}
                   </dl>
                 </div>
-                <div className="mt-4 shrink-0 border-t px-1 pt-4 pb-1">
+                <div className="mt-4 shrink-0 px-1 pt-4 pb-1">
                   <AssetPromptEditor
                     key={selectedAsset.id}
                     prompt={selectedAsset.prompt}
