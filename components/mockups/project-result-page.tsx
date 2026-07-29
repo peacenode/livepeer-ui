@@ -271,7 +271,7 @@ export function ProjectResultPage({
                     }))
                   }
                   placeholder="Modify or extend"
-                  className="h-8 rounded-[2px] border-background/20 bg-foreground/60 text-xs text-background shadow-sm backdrop-blur-sm placeholder:text-background/70"
+                  className="h-8 rounded-[2px] border-foreground/20 bg-background/60 text-xs text-foreground shadow-sm backdrop-blur-sm placeholder:text-muted-foreground"
                 />
               </div>
             </div>
