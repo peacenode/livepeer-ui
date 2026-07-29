@@ -47,7 +47,7 @@ export const socialBanners: SocialBanner[] = [
     platform: "X",
     width: 1500,
     height: 500,
-    captureTime: 3.2,
+    captureTime: 4.1,
   },
   {
     id: "linkedin",
@@ -61,28 +61,28 @@ export const socialBanners: SocialBanner[] = [
     platform: "Reddit",
     width: 1080,
     height: 128,
-    captureTime: 2.4,
+    captureTime: 4.1,
   },
   {
     id: "article",
     platform: "Paragraph, Medium, Mirror, Linktree",
     width: 1200,
     height: 300,
-    captureTime: 3.6,
+    captureTime: 4.1,
   },
   {
     id: "discord",
     platform: "Discord",
     width: 960,
     height: 540,
-    captureTime: 2.9,
+    captureTime: 4.1,
   },
   {
     id: "youtube",
     platform: "YouTube",
     width: 2560,
     height: 1440,
-    captureTime: 4.5,
+    captureTime: 4.1,
   },
 ]
 

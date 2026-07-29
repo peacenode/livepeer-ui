@@ -307,6 +307,11 @@ function LivepeerCubeStream({
         }
 
         context.globalAlpha = 1
+
+        if (variant === "banner" && particle.x < fieldCenterX) {
+          continue
+        }
+
         context.fillStyle = palette[particle.colorIndex]
         context.fillRect(
           Math.round(particle.x - particleSize / 2),
