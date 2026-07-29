@@ -50,8 +50,20 @@ export function SocialBannerArtwork() {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse 72% 115% at 0% 0%, rgb(255 255 255 / 0.085) 0%, rgb(255 255 255 / 0.028) 34%, transparent 70%)",
+          backgroundImage:
+            "radial-gradient(ellipse 48% 82% at 0% 0%, color-mix(in oklab, var(--color-emerald-500) 60%, transparent) 0%, color-mix(in oklab, var(--color-emerald-500) 32%, transparent) 30%, color-mix(in oklab, var(--color-emerald-500) 13%, transparent) 62%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 blur-xl"
+        style={{
+          backgroundImage:
+            "conic-gradient(from 0deg at 0% 0%, transparent 100deg, color-mix(in oklab, var(--color-emerald-500) 15%, transparent) 118deg, color-mix(in oklab, var(--color-emerald-400) 40%, transparent) 136deg, color-mix(in oklab, var(--color-emerald-400) 13%, transparent) 156deg, transparent 172deg)",
+          maskImage:
+            "radial-gradient(ellipse 105% 145% at 0% 0%, black 0%, black 42%, transparent 80%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 105% 145% at 0% 0%, black 0%, black 42%, transparent 80%)",
         }}
         aria-hidden="true"
       />
