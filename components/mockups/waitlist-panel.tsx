@@ -1,120 +1,84 @@
 "use client"
 
 import { useState } from "react"
-import { toast } from "sonner"
 
-import { LivepeerGradientLockup } from "@/components/brand"
-import { WaitlistLeaderboard } from "@/components/mockups/waitlist-leaderboard"
-import { WaitlistReferralLink } from "@/components/mockups/waitlist-referral-link"
-import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
-import { WaitlistStatusCard } from "@/components/mockups/waitlist-status-card"
+import { AgentWordmark, LivepeerGradientLockup } from "@/components/brand"
 import type { WaitlistPageContent } from "@/components/mockups/contracts"
-
-const firstNames = [
-  "Maya",
-  "Owen",
-  "Priya",
-  "Noah",
-  "Avery",
-  "Theo",
-  "Sofia",
-  "Eli",
-  "Nia",
-  "Leo",
-]
-const lastNames = [
-  "Chen",
-  "Park",
-  "Shah",
-  "Williams",
-  "Kim",
-  "Martinez",
-  "Okafor",
-  "Nguyen",
-  "Patel",
-  "Rivera",
-]
-
-export const waitlistLeaders = Array.from({ length: 100 }, (_, index) => ({
-  name: `${firstNames[index % firstNames.length]} ${
-    lastNames[Math.floor(index / firstNames.length) % lastNames.length]
-  }`,
-  referrals: Math.max(3, Math.round(142 * Math.pow(0.965, index))),
-}))
+import { WaitlistSignInDialog } from "@/components/mockups/waitlist-sign-in-dialog"
+import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
 
 export function WaitlistPanel({
   content,
-  joinedInitially = false,
 }: {
-  content: Pick<
-    WaitlistPageContent,
-    "panel" | "signupForm" | "statusCard" | "referralLink" | "leaderboard"
-  >
-  joinedInitially?: boolean
+  content: Pick<WaitlistPageContent, "panel" | "signupForm">
 }) {
-  const [email, setEmail] = useState("")
-  const [joined, setJoined] = useState(joinedInitially)
-  const inviteId = email.split("@")[0].replace(/[^a-z0-9]/gi, "") || "invite"
-  const inviteUrl = `livepeer.org/agent/${inviteId.toLowerCase()}`
+  const [sentEmail, setSentEmail] = useState<string>()
 
-  function joinWaitlist(nextEmail: string) {
-    setEmail(nextEmail)
-    setJoined(true)
-    toast.success(content.panel.joinedToast)
+  function joinWaitlist(email: string) {
+    setSentEmail(email)
   }
 
   return (
-    <aside className="dark relative z-10 flex min-h-[calc(100svh-1.5rem)] w-full max-w-sm flex-col overflow-y-auto rounded-2xl border border-white/20 bg-white/[0.055] px-6 py-6 text-foreground shadow-2xl shadow-black/30 backdrop-blur-md backdrop-saturate-150 sm:min-h-[calc(100svh-2rem)] sm:px-8 sm:py-8 md:h-[calc(100svh-2rem)] md:min-h-0">
-      <div
-        className="flex items-end gap-2 self-start text-white"
-        aria-label={content.panel.brandAriaLabel}
-      >
-        <LivepeerGradientLockup className="h-4 w-auto" aria-hidden="true" />
-        <span
-          className="translate-y-[0.08em] font-agent text-base leading-none font-medium tracking-[-0.04em]"
-          aria-hidden="true"
+    <aside className="dark relative z-10 flex h-full min-h-0 w-full flex-col overflow-y-auto overscroll-contain bg-transparent px-6 py-6 text-foreground sm:px-8 sm:py-8">
+      <div className="absolute top-6 right-6 left-6 z-20 flex items-center justify-between sm:top-8 sm:right-8 sm:left-8">
+        <div className="flex text-white" aria-label="Livepeer">
+          <LivepeerGradientLockup className="h-4 w-auto" aria-hidden="true" />
+        </div>
+        {!sentEmail && <WaitlistSignInDialog />}
+      </div>
+
+      {sentEmail ? (
+        <div
+          className="flex flex-1 flex-col items-center justify-center text-center"
+          role="status"
+          aria-live="polite"
         >
-          {content.panel.agentLabel}
-        </span>
-      </div>
-
-      <div
-        className={
-          joined
-            ? "mt-10 max-w-full sm:mt-12"
-            : "mt-16 max-w-full sm:mt-24 md:mt-28"
-        }
-      >
-        <h1 className="mt-4 font-display text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
-          {content.panel.heading}
-        </h1>
-        <p className="mt-6 text-sm leading-6 text-pretty text-muted-foreground">
-          {content.panel.description}
-        </p>
-      </div>
-
-      <div className={joined ? "pt-10" : "mt-auto pt-14"}>
-        {!joined ? (
-          <WaitlistSignupForm {...content.signupForm} onJoin={joinWaitlist} />
-        ) : (
-          <div className="space-y-6">
-            <div className="space-y-1">
-              <WaitlistStatusCard {...content.statusCard} />
-              <WaitlistReferralLink
-                {...content.referralLink}
-                inviteUrl={inviteUrl}
-              />
-            </div>
-            <p className="py-4 text-center font-display text-lg leading-snug text-balance text-muted-foreground">
-              {content.panel.referralPrompt}
+          <h1 className="font-display text-[clamp(2.5rem,4vw,3.5rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
+            <span className="block">Verify</span>
+            <span className="block">your mail</span>
+          </h1>
+          <p className="mt-8 text-sm font-medium text-white">{sentEmail}</p>
+          <p className="mt-1 max-w-xs text-xs leading-5 text-white/55">
+            The link expires in 15 minutes. You can safely close this page after
+            the email arrives.
+          </p>
+          <button
+            type="button"
+            className="mt-8 text-sm font-medium text-white underline underline-offset-4"
+            onClick={() => setSentEmail(undefined)}
+          >
+            Use a different email
+          </button>
+        </div>
+      ) : (
+        <div className="relative flex-1">
+          <div className="absolute inset-x-0 top-1/2 w-full max-w-2xl -translate-y-1/2 text-left">
+            <p className="absolute bottom-full mb-3 text-xs font-medium tracking-wide text-foreground md:mb-5">
+              Livepeer Agent Early Access
             </p>
-            <WaitlistLeaderboard
-              {...content.leaderboard}
-              leaders={waitlistLeaders}
+            <h1
+              className="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,0.46fr)] items-end gap-2 text-white/90 md:gap-3"
+              aria-label={content.panel.brandAriaLabel}
+            >
+              <LivepeerGradientLockup
+                className="h-auto w-full"
+                aria-hidden="true"
+              />
+              <AgentWordmark
+                className="h-auto w-full self-end"
+                aria-hidden="true"
+              />
+            </h1>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 w-full md:top-[calc(75%+1.5rem)] md:bottom-auto md:max-w-sm md:-translate-y-1/2">
+            <WaitlistSignupForm
+              {...content.signupForm}
+              onJoin={joinWaitlist}
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </aside>
   )
 }

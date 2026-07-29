@@ -7,11 +7,11 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Livepeer UI Theme",
-      "description": "Neutral theme for the luma style. Favorit display type, default radius, subtle menu accent.",
+      "description": "Neutral theme for the luma style. Inter interface type, explicit Favorit display type, default radius, subtle menu accent.",
       "cssVars": {
         "theme": {
           "font-display": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
-          "font-heading": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
+          "font-heading": "Inter, sans-serif",
           "font-sans": "var(--font-inter), sans-serif",
           "font-mono": "\"Favorit Mono\", ui-monospace, monospace"
         },
@@ -86,7 +86,7 @@
       "css": {
         "@layer base": {
           "h1, h2, h3, h4, h5, h6": {
-            "font-family": "var(--font-heading)"
+            "font-family": "var(--font-sans)"
           }
         }
       },
@@ -690,7 +690,9 @@
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
-        "https://livepeer.peaceno.de/r/input.json"
+        "https://livepeer.peaceno.de/r/checkbox.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/label.json"
       ],
       "files": [
         {
@@ -750,14 +752,16 @@
       "name": "waitlist-panel",
       "type": "registry:block",
       "title": "Agent Waitlist Panel",
-      "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
+      "description": "Early-access signup and verification panel with a member sign-in dialog.",
       "dependencies": [
-        "lucide-react",
-        "sonner"
+        "lucide-react"
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
-        "https://livepeer.peaceno.de/r/input.json"
+        "https://livepeer.peaceno.de/r/checkbox.json",
+        "https://livepeer.peaceno.de/r/dialog.json",
+        "https://livepeer.peaceno.de/r/input.json",
+        "https://livepeer.peaceno.de/r/label.json"
       ],
       "files": [
         {
@@ -773,19 +777,11 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/waitlist-leaderboard.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "components/mockups/waitlist-referral-link.tsx",
+          "path": "components/mockups/waitlist-sign-in-dialog.tsx",
           "type": "registry:block"
         },
         {
           "path": "components/mockups/waitlist-signup-form.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "components/mockups/waitlist-status-card.tsx",
           "type": "registry:block"
         }
       ]
@@ -794,14 +790,10 @@
       "name": "waitlist-background-hero",
       "type": "registry:block",
       "title": "Background Hero",
-      "description": "Particle-backed Livepeer Agent brand field used behind the waitlist panel.",
+      "description": "Particle-backed field used behind the waitlist panel.",
       "files": [
         {
           "path": "components/mockups/waitlist-background-hero.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "components/brand.tsx",
           "type": "registry:block"
         },
         {
@@ -831,6 +823,9 @@
       "type": "registry:component",
       "title": "Sign In Card",
       "description": "Standalone Livepeer Agent sign-in card with provider and email actions.",
+      "dependencies": [
+        "next"
+      ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/input.json"
@@ -923,6 +918,9 @@
       "type": "registry:block",
       "title": "Authentication Gate",
       "description": "Authentication overlay with the Agent Console sign-in card and contained preview support.",
+      "dependencies": [
+        "next"
+      ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/input.json"

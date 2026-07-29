@@ -39,7 +39,10 @@ export function AgentLandingPage({
               ? "/mockups/private-beta/landing/console"
               : undefined
           }
-          action={{ label: "Join waitlist", href: "/mockups/waitlist" }}
+          action={{
+            label: "Join waitlist",
+            href: "/mockups/private-beta/earlyaccess",
+          }}
           showMenu={false}
         />
       </div>
@@ -69,7 +72,7 @@ export function AgentLandingPage({
             <Button
               size="lg"
               nativeButton={false}
-              render={<Link href="/mockups/waitlist" />}
+              render={<Link href="/mockups/private-beta/earlyaccess" />}
               className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
               style={{
                 backgroundImage:

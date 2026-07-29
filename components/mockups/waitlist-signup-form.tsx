@@ -4,7 +4,9 @@ import { type FormEvent, useState } from "react"
 import { ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export function WaitlistSignupForm({
   label,
@@ -18,6 +20,7 @@ export function WaitlistSignupForm({
   onJoin: (email: string) => void
 }) {
   const [email, setEmail] = useState("")
+  const [newsletterOptIn, setNewsletterOptIn] = useState(true)
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -26,10 +29,10 @@ export function WaitlistSignupForm({
 
   return (
     <form onSubmit={submit}>
-      <label htmlFor="waitlist-email" className="text-sm font-medium">
+      <Label htmlFor="waitlist-email" className="text-xs font-medium text-white">
         {label}
-      </label>
-      <div className="mt-3 flex h-16 gap-1.5 rounded-sm border border-white/25 bg-transparent p-1.5 text-white transition-shadow focus-within:border-white/45 focus-within:ring-2 focus-within:ring-white/20">
+      </Label>
+      <div className="mt-3 flex h-16 gap-1 rounded-sm border border-white/25 bg-transparent p-1 text-white transition-shadow focus-within:border-transparent focus-within:ring-2 focus-within:ring-white/30">
         <Input
           id="waitlist-email"
           type="email"
@@ -52,6 +55,19 @@ export function WaitlistSignupForm({
         >
           <ArrowRight aria-hidden="true" />
         </Button>
+      </div>
+      <div className="mt-4 flex items-start gap-3">
+        <Checkbox
+          id="newsletter-opt-in"
+          checked={newsletterOptIn}
+          onCheckedChange={(checked) => setNewsletterOptIn(checked === true)}
+        />
+        <Label
+          htmlFor="newsletter-opt-in"
+          className="cursor-pointer text-xs leading-5 font-normal text-white/65"
+        >
+          Send me Livepeer news, product updates, and announcements.
+        </Label>
       </div>
     </form>
   )

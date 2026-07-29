@@ -91,6 +91,7 @@ export const usagePlans: readonly LivepeerAgentPromoPlan[] = [
   {
     id: "pro",
     name: "Pro",
+    price: "$4.99",
     credits: "500",
     creditsLabel: "credits/mo",
     description: "For regular creative sessions and production workflows.",
@@ -100,6 +101,7 @@ export const usagePlans: readonly LivepeerAgentPromoPlan[] = [
   {
     id: "max",
     name: "Max",
+    price: "$13.99",
     credits: "1,750",
     creditsLabel: "credits/mo",
     description: "For teams that generate and iterate throughout the week.",

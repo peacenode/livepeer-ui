@@ -41,7 +41,7 @@ function TypeRow({
   return (
     <div className="py-6 first:pt-0 last:pb-0">
       <p className="font-sans text-sm text-muted-foreground">{role}</p>
-      <p className={`mt-4 text-balance font-heading ${className}`}>{sample}</p>
+      <p className={`mt-4 text-balance font-display ${className}`}>{sample}</p>
     </div>
   )
 }

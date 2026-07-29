@@ -1,6 +1,7 @@
 "use client"
 
 import type { FormEvent } from "react"
+import Link from "next/link"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GoogleIcon } from "@/components/brand-social-icons"
@@ -10,10 +11,22 @@ import type { AgentConsoleShell } from "@/components/mockups/contracts"
 
 export function LivepeerAgentSignInCard({
   content,
+  googleLabel,
   onContinue,
+  showDescription = true,
+  showDiscord = true,
+  title,
+  waitlistHref,
+  waitlistLabel = "Sign up for the waitlist",
 }: {
   content: AgentConsoleShell["auth"]
+  googleLabel?: string
   onContinue?: () => void
+  showDescription?: boolean
+  showDiscord?: boolean
+  title?: string
+  waitlistHref?: string
+  waitlistLabel?: string
 }) {
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -35,13 +48,19 @@ export function LivepeerAgentSignInCard({
           AGENT
         </span>
       </div>
-      <h2 className="mt-8 text-2xl font-medium tracking-tight text-balance">
-        {content.title}
+      <h2 className="mt-8 text-xl font-normal tracking-tight text-balance">
+        {title ?? content.title}
       </h2>
-      <p className="mt-2 text-sm text-muted-foreground">
-        {content.description}
-      </p>
-      <div className="mt-7 grid gap-2 sm:grid-cols-2">
+      {showDescription && (
+        <p className="mt-2 text-sm text-muted-foreground">
+          {content.description}
+        </p>
+      )}
+      <div
+        className={
+          showDiscord ? "mt-7 grid gap-2 sm:grid-cols-2" : "mt-7 grid"
+        }
+      >
         <Button
           type="button"
           variant="outline"
@@ -50,18 +69,20 @@ export function LivepeerAgentSignInCard({
           onClick={onContinue}
         >
           <GoogleIcon className="size-5" />
-          {content.googleLabel}
+          {googleLabel ?? content.googleLabel}
         </Button>
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="h-16 w-full rounded-sm px-4"
-          onClick={onContinue}
-        >
-          <DiscordIcon className="size-5" />
-          {content.discordLabel}
-        </Button>
+        {showDiscord && (
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            className="h-16 w-full rounded-sm px-4"
+            onClick={onContinue}
+          >
+            <DiscordIcon className="size-5" />
+            {content.discordLabel}
+          </Button>
+        )}
       </div>
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
@@ -80,11 +101,20 @@ export function LivepeerAgentSignInCard({
         <Button
           type="submit"
           size="lg"
-          className="mt-4 h-16 w-full rounded-sm px-4"
+          className="mt-2 h-16 w-full rounded-sm px-4"
         >
           {content.continueLabel}
         </Button>
       </form>
+      {waitlistHref && (
+        <Button
+          variant="link"
+          className="mt-6 h-auto px-0 font-medium"
+          render={<Link href={waitlistHref} />}
+        >
+          {waitlistLabel}
+        </Button>
+      )}
     </section>
   )
 }

@@ -45,7 +45,14 @@ export default async function PrivateBetaConsoleLayout({
   })
 
   return (
-    <PlatformAuthGate content={shell.auth}>
+    <PlatformAuthGate
+      authenticatedStorageKey="livepeer-agent-private-beta-authenticated"
+      content={shell.auth}
+      googleLabel="Sign in with Google"
+      showDescription={false}
+      showDiscord={false}
+      title="Sign in for early access"
+    >
       <div className="relative flex h-dvh overflow-hidden bg-background">
         <PlatformSidebar
           homeAriaLabel={shell.homeAriaLabel}

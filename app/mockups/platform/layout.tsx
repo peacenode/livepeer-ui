@@ -26,7 +26,10 @@ export default async function MockupsLayout({
   }
 
   return (
-    <PlatformAuthGate content={shell.auth}>
+    <PlatformAuthGate
+      authenticatedStorageKey="livepeer-agent-private-beta-authenticated"
+      content={shell.auth}
+    >
       <div className="relative flex h-dvh overflow-hidden bg-background">
         <PlatformSidebar
           homeAriaLabel={shell.homeAriaLabel}

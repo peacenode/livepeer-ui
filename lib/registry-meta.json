@@ -189,7 +189,7 @@
           "title": "Signup Form",
           "description": "Email capture form with the emerald early-access action.",
           "level": "component",
-          "uses": ["button", "input"],
+          "uses": ["button", "checkbox", "input", "label"],
           "files": ["components/mockups/waitlist-signup-form.tsx"]
         },
         {
@@ -219,14 +219,9 @@
         {
           "name": "waitlist-panel",
           "title": "Agent Waitlist Panel",
-          "description": "Complete interactive signup and referral panel composed from reusable waitlist components.",
+          "description": "Early-access signup and verification panel with a member sign-in dialog.",
           "level": "section",
-          "uses": [
-            "waitlist-signup-form",
-            "waitlist-status-card",
-            "waitlist-referral-link",
-            "waitlist-leaderboard"
-          ],
+          "uses": ["waitlist-signup-form"],
           "files": [
             "components/mockups/waitlist-panel.tsx",
             "components/mockups/contracts.ts"
@@ -235,7 +230,7 @@
         {
           "name": "waitlist-background-hero",
           "title": "Background Hero",
-          "description": "Particle-backed Livepeer Agent brand field used behind the waitlist panel.",
+          "description": "Particle-backed field used behind the waitlist panel.",
           "level": "section",
           "uses": [],
           "files": ["components/mockups/waitlist-background-hero.tsx"]
