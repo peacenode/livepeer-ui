@@ -143,6 +143,11 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   },
 ]
 
+const publicBetaConsoleSurface: PrivateBetaSurface = {
+  ...privateBetaProductSurfaces[0],
+  href: "/mockups/livepeer-agent",
+}
+
 const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
   {
     title: "Agent Waitlist",
@@ -647,14 +652,10 @@ export default async function MockupPage({
               primary={publicBetaInstallSurface}
               primarySourceLabel={privateBetaAgentDeployment.hostname}
               secondary={[
-                ...(privateBetaConsoleSurface
-                  ? [
-                      {
-                        surface: privateBetaConsoleSurface,
-                        sourceLabel: `${privateBetaAgentDeployment.hostname}/console`,
-                      },
-                    ]
-                  : []),
+                {
+                  surface: publicBetaConsoleSurface,
+                  sourceLabel: `${privateBetaAgentDeployment.hostname}/console`,
+                },
                 ...privateBetaAgentRoutes.map((route) => ({
                   surface: {
                     title: route.title,
@@ -665,9 +666,7 @@ export default async function MockupPage({
               ]}
               componentNames={[
                 publicBetaInstallSurface,
-                ...(privateBetaConsoleSurface
-                  ? [privateBetaConsoleSurface]
-                  : []),
+                publicBetaConsoleSurface,
                 privateBetaRenderSurface,
               ].flatMap((surface) => surface.components)}
             />

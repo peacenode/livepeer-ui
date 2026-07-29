@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Playbooks",
 }
 
-export default async function PrivateBetaConsolePlaybooksPage() {
+export default async function ConsolePlaybooksPage() {
   const [playbooks, page] = await Promise.all([
     getSourcePlaybooks(),
     getLivepeerOrgPage("playbook-library"),
@@ -28,7 +28,7 @@ export default async function PrivateBetaConsolePlaybooksPage() {
       variant="plain"
     >
       <SourceCatalog
-        hrefBase="/mockups/private-beta/landing/console/playbooks"
+        hrefBase="/mockups/livepeer-agent/playbooks"
         playbooks={playbooks}
         searchPlaceholder={content.searchPlaceholder}
         emptyMessage={content.emptyMessage}

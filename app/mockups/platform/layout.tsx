@@ -24,6 +24,16 @@ export default async function MockupsLayout({
       "Required Sanity document agentConsoleShell is missing or incomplete."
     )
   }
+  const navigation = shell.navigation.map((item) =>
+    item._key === "learn"
+      ? {
+          ...item,
+          label: "Playbooks",
+          href: "/mockups/livepeer-agent/playbooks",
+          external: false,
+        }
+      : item
+  )
 
   return (
     <PlatformAuthGate
@@ -33,7 +43,7 @@ export default async function MockupsLayout({
       <div className="relative flex h-dvh overflow-hidden bg-background">
         <PlatformSidebar
           homeAriaLabel={shell.homeAriaLabel}
-          navigation={shell.navigation}
+          navigation={navigation}
           userMenuContent={shell.userMenu}
           user={agentConsoleUserFixture}
         />

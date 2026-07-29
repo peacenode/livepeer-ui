@@ -6,10 +6,16 @@ export type PlaybookCardData = {
   image: string | null
 }
 
-export function PlaybookCard({ playbook }: { playbook: PlaybookCardData }) {
+export function PlaybookCard({
+  hrefBase = "/mockups/livepeer-org/library",
+  playbook,
+}: {
+  hrefBase?: string
+  playbook: PlaybookCardData
+}) {
   return (
     <Link
-      href={`/mockups/livepeer-org/library/${playbook.slug}`}
+      href={`${hrefBase}/${playbook.slug}`}
       className="group block rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
     >
       <article>
