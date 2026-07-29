@@ -19,13 +19,6 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
         data-banner-id={banner.id}
         data-banner-size={`${banner.width}x${banner.height}`}
       >
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 18% 48%, color(display-p3 0.015 0.15 0.09) 0%, transparent 38%), linear-gradient(118deg, black 0%, color(display-p3 0.012 0.025 0.019) 58%, color(display-p3 0.018 0.075 0.048) 100%)",
-          }}
-        />
         <LivepeerCubeStream
           freezeAtSeconds={banner.captureTime}
           inverted
