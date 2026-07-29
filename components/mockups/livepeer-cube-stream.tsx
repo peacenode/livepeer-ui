@@ -71,10 +71,12 @@ function makeParticles(
 
 function LivepeerCubeStream({
   className,
+  freezeAtSeconds,
   inverted = false,
   variant = "default",
 }: {
   className?: string
+  freezeAtSeconds?: number
   inverted?: boolean
   variant?: "card" | "default"
 }) {
@@ -99,6 +101,10 @@ function LivepeerCubeStream({
     let palette = getCanvasThemePalette(inverted)
     let start = performance.now()
     let previousTime = start
+
+    if (freezeAtSeconds !== undefined) {
+      delete document.documentElement.dataset.captureReady
+    }
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect()
@@ -272,7 +278,16 @@ function LivepeerCubeStream({
       }
 
       context.globalAlpha = 1
-      if (!reduceMotion) frame = requestAnimationFrame(draw)
+      const frozen =
+        freezeAtSeconds !== undefined && elapsed >= freezeAtSeconds
+
+      if (frozen || reduceMotion) {
+        if (freezeAtSeconds !== undefined) {
+          document.documentElement.dataset.captureReady = "true"
+        }
+      } else {
+        frame = requestAnimationFrame(draw)
+      }
     }
 
     const observer = new ResizeObserver(() => {
@@ -297,8 +312,11 @@ function LivepeerCubeStream({
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
       themeObserver.disconnect()
+      if (freezeAtSeconds !== undefined) {
+        delete document.documentElement.dataset.captureReady
+      }
     }
-  }, [inverted, variant])
+  }, [freezeAtSeconds, inverted, variant])
 
   return (
     <canvas
