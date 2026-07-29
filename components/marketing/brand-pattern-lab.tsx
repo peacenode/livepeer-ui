@@ -1,24 +1,17 @@
 "use client"
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { PauseIcon, PlayIcon, RotateCcwIcon } from "lucide-react"
 import {
-  Color,
-  Matrix4,
+  ExtrudeGeometry,
+  Path,
   PMREMGenerator,
-  type Group,
-  type InstancedMesh,
+  type PointLight,
+  Shape,
   type SpotLight,
 } from "three"
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
-import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -74,76 +67,100 @@ function StudioEnvironment() {
   return null
 }
 
-function PatternBlock({
-  block,
+function createSquareHole(x: number, y: number, size: number) {
+  const half = size / 2
+  const hole = new Path()
+
+  hole.moveTo(x - half, y - half)
+  hole.lineTo(x - half, y + half)
+  hole.lineTo(x + half, y + half)
+  hole.lineTo(x + half, y - half)
+  hole.closePath()
+
+  return hole
+}
+
+function PerforatedSurface({
   depth,
   mode,
   spacing,
 }: {
-  block: (typeof symbolBlocks)[number]
   depth: number
   mode: PatternMode
   spacing: number
 }) {
-  const mesh = useRef<InstancedMesh>(null)
-  const geometry = useMemo(
-    () => new RoundedBoxGeometry(0.34, 0.34, depth, 2, 0.012),
-    [depth]
-  )
-  const instances = useMemo(() => {
-    const positions: [number, number, number][] = []
-    const xGap = 2.1 * spacing
-    const yGap = 2.35 * spacing
+  const geometry = useMemo(() => {
+    const width = 17.4
+    const height = 9.8
+    const halfWidth = width / 2
+    const halfHeight = height / 2
+    const shape = new Shape()
 
-    for (let row = -3; row <= 3; row += 1) {
-      for (let column = -5; column <= 5; column += 1) {
-        const stagger = mode === "stagger" && Math.abs(row) % 2 === 1 ? 1.05 : 0
+    shape.moveTo(-halfWidth, -halfHeight)
+    shape.lineTo(halfWidth, -halfHeight)
+    shape.lineTo(halfWidth, halfHeight)
+    shape.lineTo(-halfWidth, halfHeight)
+    shape.closePath()
+
+    const xGap = 2.06 * spacing
+    const yGap = 2.18 * spacing
+    const holeSize = 0.34
+
+    for (let row = -2; row <= 2; row += 1) {
+      for (let column = -4; column <= 4; column += 1) {
+        const stagger =
+          mode === "stagger" && Math.abs(row) % 2 === 1 ? xGap / 2 : 0
         const wave =
           mode === "wave"
-            ? Math.sin(column * 0.78 + row * 0.52) * 0.34
+            ? Math.sin(column * 0.82 + row * 0.55) * 0.38
             : 0
-        const diagonal = mode === "grid" ? 0 : row * 0.08
+        const originX = column * xGap + stagger
+        const originY = row * yGap + wave
 
-        positions.push([
-          column * xGap + stagger + block[0],
-          row * yGap + wave + block[1],
-          diagonal + Math.sin(column * 0.58 + row * 0.31) * 0.12,
-        ])
+        symbolBlocks.forEach(([blockX, blockY]) => {
+          const x = originX + blockX
+          const y = originY + blockY
+          const inset = holeSize / 2 + 0.08
+
+          if (
+            Math.abs(x) < halfWidth - inset &&
+            Math.abs(y) < halfHeight - inset
+          ) {
+            shape.holes.push(createSquareHole(x, y, holeSize))
+          }
+        })
       }
     }
 
-    return positions
-  }, [block, mode, spacing])
-
-  useLayoutEffect(() => {
-    if (!mesh.current) return
-
-    const matrix = new Matrix4()
-    instances.forEach((position, index) => {
-      matrix.makeTranslation(...position)
-      mesh.current?.setMatrixAt(index, matrix)
+    const nextGeometry = new ExtrudeGeometry(shape, {
+      depth,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      bevelSize: Math.min(0.045, depth * 0.18),
+      bevelThickness: Math.min(0.04, depth * 0.16),
+      curveSegments: 1,
+      steps: 1,
     })
-    mesh.current.instanceMatrix.needsUpdate = true
-  }, [instances])
+
+    nextGeometry.translate(0, 0, -depth / 2)
+    nextGeometry.computeVertexNormals()
+
+    return nextGeometry
+  }, [depth, mode, spacing])
 
   useEffect(() => () => geometry.dispose(), [geometry])
 
   return (
-    <instancedMesh
-      ref={mesh}
-      args={[geometry, undefined, instances.length]}
-      castShadow
-      receiveShadow
-    >
+    <mesh geometry={geometry} castShadow receiveShadow>
       <meshPhysicalMaterial
-        color={new Color("#008f5c")}
-        metalness={0.78}
-        roughness={0.2}
-        clearcoat={0.92}
-        clearcoatRoughness={0.08}
-        envMapIntensity={1.35}
+        color="#010302"
+        metalness={0.86}
+        roughness={0.3}
+        clearcoat={0.64}
+        clearcoatRoughness={0.16}
+        envMapIntensity={0.48}
       />
-    </instancedMesh>
+    </mesh>
   )
 }
 
@@ -152,8 +169,8 @@ function PatternScene({
 }: {
   settings: PatternSettings
 }) {
-  const group = useRef<Group>(null)
   const keyLight = useRef<SpotLight>(null)
+  const apertureLight = useRef<PointLight>(null)
 
   useFrame(({ clock }) => {
     const time = settings.playing
@@ -166,20 +183,23 @@ function PatternScene({
       keyLight.current.target.position.set(lightX * 0.32, 0, 0)
       keyLight.current.target.updateMatrixWorld()
     }
+    if (apertureLight.current) {
+      apertureLight.current.position.set(lightX * 0.72, -1.8, -2.2)
+    }
   })
 
   return (
     <>
       <StudioEnvironment />
       <color attach="background" args={["#000000"]} />
-      <ambientLight intensity={0.055} />
+      <ambientLight intensity={0.006} />
       <spotLight
         ref={keyLight}
         color="#f4fff9"
         position={[-8, 7, 8]}
-        intensity={95}
-        angle={0.34}
-        penumbra={0.16}
+        intensity={62}
+        angle={0.25}
+        penumbra={0.1}
         decay={1.6}
         distance={32}
         castShadow
@@ -187,25 +207,28 @@ function PatternScene({
       <directionalLight
         color="#00c077"
         position={[8, -5, 5]}
-        intensity={1.8}
+        intensity={0.28}
+      />
+      <pointLight
+        ref={apertureLight}
+        color="#00c077"
+        position={[-6, -2, -2]}
+        intensity={24}
+        distance={13}
+        decay={1.7}
       />
       <group
-        ref={group}
         rotation={[
           (-settings.tilt * Math.PI) / 180,
           (settings.tilt * Math.PI) / 360,
           -0.025,
         ]}
       >
-        {symbolBlocks.map((block) => (
-          <PatternBlock
-            block={block}
-            depth={settings.depth}
-            key={block.join("-")}
-            mode={settings.mode}
-            spacing={settings.spacing}
-          />
-        ))}
+        <PerforatedSurface
+          depth={settings.depth}
+          mode={settings.mode}
+          spacing={settings.spacing}
+        />
       </group>
     </>
   )

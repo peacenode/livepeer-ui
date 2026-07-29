@@ -34,8 +34,8 @@ export default function PressKitPage() {
               Brand Pattern Lab
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Develop separate 16:9 dimensional pattern studies without
-              changing the linked social banners.
+              Develop separate 16:9 subtractive pattern studies without changing
+              the linked social banners.
             </p>
           </div>
           <Button

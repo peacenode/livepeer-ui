@@ -16,8 +16,8 @@ export default function PatternLabPage() {
           Brand Pattern Lab
         </h1>
         <p className="mt-2 text-balance text-muted-foreground">
-          Repeat the Livepeer symbol as dimensional geometry, then shape the
-          field and sweep light across it.
+          Subtract a repeating Livepeer SVG pattern from a dimensional surface,
+          then shape the field and sweep light across its cut edges.
         </p>
       </header>
 
