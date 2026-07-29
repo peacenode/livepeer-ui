@@ -145,11 +145,11 @@ const items = [
     type: "registry:theme",
     title: "Livepeer UI Theme",
     description:
-      "Neutral theme for the luma style. Favorit display type, default radius, subtle menu accent.",
+      "Neutral theme for the luma style. Inter interface type, explicit Favorit display type, default radius, subtle menu accent.",
     cssVars: {
       theme: {
         "font-display": '"Favorit", "Favorit Pro", Inter, sans-serif',
-        "font-heading": '"Favorit", "Favorit Pro", Inter, sans-serif',
+        "font-heading": "Inter, sans-serif",
         "font-sans": themeVars["font-sans"],
         "font-mono": '"Favorit Mono", ui-monospace, monospace',
       },
@@ -159,7 +159,7 @@ const items = [
     css: {
       "@layer base": {
         "h1, h2, h3, h4, h5, h6": {
-          "font-family": "var(--font-heading)",
+          "font-family": "var(--font-sans)",
         },
       },
     },

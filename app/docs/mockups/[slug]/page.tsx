@@ -147,9 +147,6 @@ const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
     components: [
       "waitlist-panel",
       "waitlist-signup-form",
-      "waitlist-status-card",
-      "waitlist-referral-link",
-      "waitlist-leaderboard",
       "waitlist-background-hero",
     ],
   },
