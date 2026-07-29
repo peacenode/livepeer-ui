@@ -35,17 +35,17 @@ npm run registry:build   # regenerate registry.json + public/r/*.json
 ```
 
 Registry item URLs (including cross-item `registryDependencies`) are baked
-with `NEXT_PUBLIC_BASE_URL` (default `http://localhost:3000`). Before
-deploying, rebuild with the production URL:
+with `NEXT_PUBLIC_BASE_URL`. It defaults to the canonical registry at
+`https://livepeer.peaceno.de`; override it when testing another deployment:
 
 ```bash
-NEXT_PUBLIC_BASE_URL=https://your-domain npm run registry:build
+NEXT_PUBLIC_BASE_URL=http://localhost:3000 npm run registry:build
 ```
 
 ### Consuming the registry
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/button.json
+npx shadcn@latest add https://livepeer.peaceno.de/r/button.json
 ```
 
 Or add a namespace to your project's `components.json`:
@@ -53,7 +53,7 @@ Or add a namespace to your project's `components.json`:
 ```json
 {
   "registries": {
-    "@livepeer-ui": "http://localhost:3000/r/{name}.json"
+    "@livepeer-ui": "https://livepeer.peaceno.de/r/{name}.json"
   }
 }
 ```
