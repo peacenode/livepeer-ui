@@ -67,8 +67,11 @@ npx shadcn@latest add @livepeer-ui/button
 Brand marks live in `components/brand.tsx` (theme-aware, `currentColor`) and
 `public/brand/` (original white SVGs, favicon, OG embed). The favicon is
 `app/icon.svg` (theme-aware via `prefers-color-scheme`). Typefaces are
-self-hosted in `assets/fonts/`: Favorit Pro (`--font-sans`, weights
-300/400/450/500/700) and Favorit Mono (`--font-mono`, weights 400/500/700).
+self-hosted in `assets/fonts/`: Inter (`--font-sans`, variable weights),
+Favorit Pro (`--font-display`, weights 300/350/400/500/700), and Favorit Mono
+(`--font-mono`, weights 400/500/700). Inter is the default for all product UI
+and text. Favorit Pro must be opted into with `font-display` and is reserved
+for marketing display copy; semantic heading elements do not select it.
 Favorit is a commercial Dinamo typeface licensed by Livepeer — the woff2
 files mirror the ones livepeer.org ships; don't redistribute them outside
 Livepeer work.

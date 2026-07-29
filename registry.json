@@ -11,9 +11,10 @@
       "cssVars": {
         "theme": {
           "font-display": "\"Favorit\", \"Favorit Pro\", Inter, sans-serif",
-          "font-heading": "Inter, sans-serif",
+          "font-heading": "var(--font-inter), sans-serif",
           "font-sans": "var(--font-inter), sans-serif",
-          "font-mono": "\"Favorit Mono\", ui-monospace, monospace"
+          "font-mono": "\"Favorit Mono\", ui-monospace, monospace",
+          "font-weight-book": "350"
         },
         "light": {
           "card": "oklch(1 0 0)",
@@ -83,14 +84,7 @@
           "sidebar-ring": "oklch(0.556 0 0)"
         }
       },
-      "css": {
-        "@layer base": {
-          "h1, h2, h3, h4, h5, h6": {
-            "font-family": "var(--font-sans)"
-          }
-        }
-      },
-      "docs": "Favorit is a licensed local font. Add your licensed Favorit webfont files to the consuming app; Inter remains the fallback."
+      "docs": "Inter is the default interface and text face. Favorit is a licensed local font reserved for explicit marketing display copy via font-display; do not apply it globally to heading elements."
     },
     {
       "name": "brand",
