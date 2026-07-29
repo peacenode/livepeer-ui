@@ -73,10 +73,10 @@ export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
         <div className="flex flex-col gap-10">
           <CreditBalance {...balance} />
           <section>
-            <h2 className="font-sans text-2xl font-medium tracking-tight">
+            <h2 className="text-2xl font-medium tracking-tight">
               {content.upgradeTitle}
             </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               {content.upgradeDescription}
             </p>
             <div className="mt-6">

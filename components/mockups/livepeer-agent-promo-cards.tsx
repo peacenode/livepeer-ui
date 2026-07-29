@@ -57,10 +57,10 @@ export function LivepeerAgentPromoCards({
             >
               {plan.name}
             </p>
-            <p className="mt-5 font-sans text-4xl font-medium tracking-tight tabular-nums">
+            <p className="mt-5 text-4xl font-medium tracking-tight tabular-nums">
               {plan.price}
             </p>
-            <p className="mt-1 font-sans text-lg font-normal text-muted-foreground">
+            <p className="mt-1 text-lg font-normal text-muted-foreground">
               <span className="tabular-nums">{plan.credits}</span>{" "}
               {plan.creditsLabel}
             </p>
