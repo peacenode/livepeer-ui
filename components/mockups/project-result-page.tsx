@@ -16,6 +16,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { useMasonryCorners } from "@/components/mockups/use-masonry-corners"
 
 type ProjectAsset = {
   id: string
@@ -80,6 +81,7 @@ export function ProjectResultPage({
   projectName: string
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const { containerRef, cornerStyles } = useMasonryCorners()
   const capabilities = useMemo(
     () => [...new Set(assets.map((asset) => asset.capability))],
     [assets]
@@ -131,12 +133,17 @@ export function ProjectResultPage({
           </div>
         </header>
 
-        <div className="columns-1 gap-3 sm:columns-2 lg:columns-3 xl:columns-4">
+        <div
+          ref={containerRef}
+          className="columns-1 gap-3 sm:columns-2 lg:columns-3 xl:columns-4"
+        >
           {assets.map((asset, index) => (
             <button
               key={asset.id}
+              data-masonry-item={asset.id}
               type="button"
               className="group mb-3 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              style={cornerStyles[asset.id]}
               onClick={() => setSelectedIndex(index)}
               aria-label={`View asset ${index + 1} of ${assets.length}`}
             >
