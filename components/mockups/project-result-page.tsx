@@ -251,7 +251,7 @@ export function ProjectResultPage({
                       [asset.id]: event.target.value,
                     }))
                   }
-                  placeholder="Add a note"
+                  placeholder="Modify or extend"
                   className="h-8 rounded-[2px] border-white/20 bg-background/40 text-xs shadow-sm backdrop-blur-sm"
                 />
               </div>
