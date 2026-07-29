@@ -237,7 +237,7 @@ export function ProjectResultPage({
               <div className="flex h-full min-h-0 min-w-0 items-center justify-center overflow-hidden bg-background">
                 <AssetMedia asset={selectedAsset} detail />
               </div>
-              <aside className="flex min-h-0 flex-col overflow-hidden border-t bg-background px-4 pt-14 pb-4 md:border-t-0 md:border-l">
+              <aside className="flex min-h-0 flex-col overflow-hidden border-t bg-background px-2 pt-14 pb-4 md:border-t-0 md:border-l">
                 <DialogTitle className="sr-only">
                   {selectedAsset.title ?? "Asset details"}
                 </DialogTitle>
