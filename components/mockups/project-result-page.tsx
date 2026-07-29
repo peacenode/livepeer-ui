@@ -273,7 +273,7 @@ export function ProjectResultPage({
           )}
           {projectCopied
             ? "Copied — paste into your agent"
-            : "Copy project prompt"}
+            : "Copy prompts"}
         </Button>
       </div>
 
