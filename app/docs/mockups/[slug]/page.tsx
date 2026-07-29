@@ -95,6 +95,12 @@ type PrivateBetaSurface = {
   components: string[]
 }
 
+const renderResultComponents = [
+  "livepeer-agent-page-frame",
+  "livepeer-agent-sidebar",
+  "user-menu",
+]
+
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
   href: "/mockups/private-beta/earlyaccess/about",
@@ -132,13 +138,15 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   },
   {
     title: "Render Result",
-    components: [
-      "livepeer-agent-page-frame",
-      "livepeer-agent-sidebar",
-      "user-menu",
-    ],
+    href: "/mockups/private-beta/v/cobalt-runner",
+    components: renderResultComponents,
   },
 ]
+
+const publicBetaConsoleSurface: PrivateBetaSurface = {
+  ...privateBetaProductSurfaces[0],
+  href: "/mockups/livepeer-agent",
+}
 
 const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
   {
@@ -179,7 +187,19 @@ const privateBetaAgentHomeSurface: PrivateBetaSurface = {
 
 const privateBetaAgentRoutes = [
   { title: "MCP server", path: "/api/mcp" },
-  { title: "Render result", path: "/v/" },
+]
+
+const privateBetaRenderExamples: PrivateBetaSurface[] = [
+  {
+    title: "Sunburned Chairman",
+    href: "/mockups/private-beta/v/proj_8429543f3409",
+    components: renderResultComponents,
+  },
+  {
+    title: "Mixed-media result",
+    href: "/mockups/private-beta/v/cobalt-runner",
+    components: renderResultComponents,
+  },
 ]
 
 const internalTestingLandingSurface: PrivateBetaSurface = {
@@ -591,6 +611,13 @@ export default async function MockupPage({
                         sourceLabel={`${privateBetaAgentDeployment.hostname}${route.path}`}
                       />
                     ))}
+                    {privateBetaRenderExamples.map((surface) => (
+                      <ProductSurfaceEmbed
+                        key={surface.href}
+                        surface={surface}
+                        sourceLabel={`${privateBetaAgentDeployment.hostname}/v/${surface.href?.split("/").at(-1)}`}
+                      />
+                    ))}
                   </div>
                 </div>
               )}
@@ -625,14 +652,10 @@ export default async function MockupPage({
               primary={publicBetaInstallSurface}
               primarySourceLabel={privateBetaAgentDeployment.hostname}
               secondary={[
-                ...(privateBetaConsoleSurface
-                  ? [
-                      {
-                        surface: privateBetaConsoleSurface,
-                        sourceLabel: `${privateBetaAgentDeployment.hostname}/console`,
-                      },
-                    ]
-                  : []),
+                {
+                  surface: publicBetaConsoleSurface,
+                  sourceLabel: `${privateBetaAgentDeployment.hostname}/console`,
+                },
                 ...privateBetaAgentRoutes.map((route) => ({
                   surface: {
                     title: route.title,
@@ -643,9 +666,7 @@ export default async function MockupPage({
               ]}
               componentNames={[
                 publicBetaInstallSurface,
-                ...(privateBetaConsoleSurface
-                  ? [privateBetaConsoleSurface]
-                  : []),
+                publicBetaConsoleSurface,
                 privateBetaRenderSurface,
               ].flatMap((surface) => surface.components)}
             />

@@ -61,8 +61,15 @@ export async function generateMetadata({
   return { title: playbook?.title ?? "Playbook" }
 }
 
-export default async function SourcePlaybookPage({ params }: PageProps) {
-  const { slug } = await params
+export async function SourcePlaybookView({
+  catalogHref,
+  embedded = false,
+  slug,
+}: {
+  catalogHref: string
+  embedded?: boolean
+  slug: string
+}) {
   const [playbook, catalog] = await Promise.all([
     getPlaybookDocument(slug),
     getSourcePlaybooks(),
@@ -81,13 +88,25 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
   ].filter((item) => item.value)
 
   return (
-    <main>
-      <div className="mx-auto max-w-4xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28">
+    <div
+      className={
+        embedded
+          ? "min-h-0 flex-1 overflow-y-auto overscroll-contain"
+          : undefined
+      }
+    >
+      <div
+        className={
+          embedded
+            ? "mx-auto max-w-4xl py-6"
+            : "mx-auto max-w-4xl px-4 pt-24 pb-4 sm:px-6 sm:pt-28"
+        }
+      >
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink
-                render={<Link href="/mockups/livepeer-org/library" />}
+                render={<Link href={catalogHref} />}
               >
                 Playbooks
               </BreadcrumbLink>
@@ -211,8 +230,18 @@ export default async function SourcePlaybookPage({ params }: PageProps) {
           />
         </div>
       </div>
-      <InstallAgentFooter />
-    </main>
+      {!embedded && <InstallAgentFooter />}
+    </div>
+  )
+}
+
+export default async function SourcePlaybookPage({ params }: PageProps) {
+  const { slug } = await params
+  return (
+    <SourcePlaybookView
+      catalogHref="/mockups/livepeer-org/library"
+      slug={slug}
+    />
   )
 }
 

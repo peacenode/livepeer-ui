@@ -4,12 +4,12 @@ import { PrivateBetaConsoleShell } from "@/components/mockups/private-beta-conso
 
 export const metadata: Metadata = {
   title: {
-    default: "Console",
+    default: "Render Result",
     template: "%s - Livepeer Agent Private Beta",
   },
 }
 
-export default async function PrivateBetaConsoleLayout({
+export default function PrivateBetaRenderLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

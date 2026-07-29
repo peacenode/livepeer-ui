@@ -19,6 +19,7 @@ export function PlatformSidebar({
   userMenuContent,
   user,
   homeHref = "/mockups/livepeer-agent",
+  profileHref,
 }: {
   className?: string
   homeAriaLabel: string
@@ -26,6 +27,7 @@ export function PlatformSidebar({
   userMenuContent: AgentConsoleShell["userMenu"]
   user: AgentConsoleUser
   homeHref?: string
+  profileHref?: string
 }) {
   const pathname = usePathname()
 
@@ -42,7 +44,7 @@ export function PlatformSidebar({
           aria-label={homeAriaLabel}
           className="inline-flex h-9 items-center"
         >
-          <span className="flex items-end gap-1.5 text-black">
+          <span className="flex items-end gap-1.5 text-foreground">
             <LivepeerGradientSymbol className="h-4 w-auto" />
             <LivepeerWordmark className="h-4 w-auto" />
             <span
@@ -74,7 +76,11 @@ export function PlatformSidebar({
         ))}
       </nav>
       <div className="mt-auto px-3 py-3">
-        <UserMenu content={userMenuContent} user={user} />
+        <UserMenu
+          content={userMenuContent}
+          user={user}
+          profileHref={profileHref}
+        />
       </div>
     </aside>
   )

@@ -9,10 +9,12 @@ import { PlaybookCard } from "@/components/mockups/playbook-card"
 import type { SourcePlaybook } from "./daydream-source"
 
 export function SourceCatalog({
+  hrefBase,
   playbooks,
   searchPlaceholder = "Search playbooks",
   emptyMessage = "No playbooks match your search.",
 }: {
+  hrefBase?: string
   playbooks: SourcePlaybook[]
   searchPlaceholder?: string
   emptyMessage?: string
@@ -51,7 +53,11 @@ export function SourceCatalog({
 
       <div className="mt-8 grid gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((playbook) => (
-          <PlaybookCard key={playbook.slug} playbook={playbook} />
+          <PlaybookCard
+            key={playbook.slug}
+            hrefBase={hrefBase}
+            playbook={playbook}
+          />
         ))}
       </div>
 

@@ -48,7 +48,11 @@ export default async function MockupHomePage() {
           {editorial.home.featureLinks.map((feature) => (
             <a
               key={feature._key ?? feature.href}
-              href={feature.href}
+              href={
+                feature._key === "playbooks"
+                  ? "/mockups/livepeer-agent/playbooks"
+                  : feature.href
+              }
               className="group focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
               <div className="relative aspect-[16/9] overflow-hidden rounded-sm bg-muted">
