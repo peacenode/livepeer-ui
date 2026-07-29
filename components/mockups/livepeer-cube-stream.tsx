@@ -82,11 +82,13 @@ function LivepeerCubeStream({
   className,
   freezeAtSeconds,
   inverted = false,
+  startAtSeconds = 0,
   variant = "default",
 }: {
   className?: string
   freezeAtSeconds?: number
   inverted?: boolean
+  startAtSeconds?: number
   variant?: "banner" | "card" | "default"
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -104,11 +106,12 @@ function LivepeerCubeStream({
     let frame = 0
     let height = 0
     let heroExclusionRadius = 0
+    let isPrerolling = false
     let resizeFrame = 0
     let width = 0
     let particles: Particle[] = []
     let palette = getCanvasThemePalette(inverted)
-    let start = performance.now()
+    let start = performance.now() - startAtSeconds * 1000
     let previousTime = start
 
     if (freezeAtSeconds !== undefined) {
@@ -319,7 +322,7 @@ function LivepeerCubeStream({
         if (freezeAtSeconds !== undefined) {
           document.documentElement.dataset.captureReady = "true"
         }
-      } else {
+      } else if (!isPrerolling) {
         frame = requestAnimationFrame(draw)
       }
     }
@@ -338,7 +341,27 @@ function LivepeerCubeStream({
       attributeFilter: ["class", "style"],
     })
     resize()
-    start = performance.now()
+    const prerollStart = performance.now()
+    start = prerollStart
+    previousTime = prerollStart
+
+    if (!reduceMotion && startAtSeconds > 0) {
+      isPrerolling = true
+
+      for (
+        let simulatedTime = 16.667;
+        simulatedTime <= startAtSeconds * 1000;
+        simulatedTime += 16.667
+      ) {
+        draw(prerollStart + simulatedTime)
+      }
+
+      isPrerolling = false
+    }
+
+    const playbackStart = performance.now()
+    start = playbackStart - startAtSeconds * 1000
+    previousTime = playbackStart
     frame = requestAnimationFrame(draw)
 
     return () => {
@@ -350,7 +373,7 @@ function LivepeerCubeStream({
         delete document.documentElement.dataset.captureReady
       }
     }
-  }, [freezeAtSeconds, inverted, variant])
+  }, [freezeAtSeconds, inverted, startAtSeconds, variant])
 
   return (
     <canvas
