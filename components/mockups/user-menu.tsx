@@ -36,9 +36,11 @@ const themes = [
 export function UserMenu({
   content,
   user,
+  profileHref = "/mockups/livepeer-agent/account",
 }: {
   content: AgentConsoleShell["userMenu"]
   user: AgentConsoleUser
+  profileHref?: string
 }) {
   const { theme, setTheme } = useTheme()
 
@@ -86,7 +88,7 @@ export function UserMenu({
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          render={<Link href="/mockups/livepeer-agent/account" />}
+          render={<Link href={profileHref} />}
         >
           <CircleUserRoundIcon />
           {content.manageProfileLabel}

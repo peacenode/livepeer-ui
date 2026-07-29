@@ -19,6 +19,7 @@ export function PlatformSidebar({
   userMenuContent,
   user,
   homeHref = "/mockups/livepeer-agent",
+  profileHref,
 }: {
   className?: string
   homeAriaLabel: string
@@ -26,6 +27,7 @@ export function PlatformSidebar({
   userMenuContent: AgentConsoleShell["userMenu"]
   user: AgentConsoleUser
   homeHref?: string
+  profileHref?: string
 }) {
   const pathname = usePathname()
 
@@ -74,7 +76,11 @@ export function PlatformSidebar({
         ))}
       </nav>
       <div className="mt-auto px-3 py-3">
-        <UserMenu content={userMenuContent} user={user} />
+        <UserMenu
+          content={userMenuContent}
+          user={user}
+          profileHref={profileHref}
+        />
       </div>
     </aside>
   )
