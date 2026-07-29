@@ -66,7 +66,10 @@ Registry dependencies are declared by each item and are installed by the shadcn 
 ## Foundations
 
 - Use the registry's neutral color system and semantic tokens. Do not introduce a second token layer for the same roles.
-- Use Inter for all product UI, ordinary headings, and the complete named Tailwind text scale from \`text-xs\` through \`text-9xl\`. Favorit Pro is only for marketing display copy and must be explicitly applied with \`font-display\`; never infer it from an \`h1\`–\`h6\` element. Marketing display headings use Favorit Light consistently and establish hierarchy through size: H1 \`font-display text-5xl leading-none font-light tracking-tighter sm:text-7xl\`; H2 \`font-display text-4xl leading-none font-light tracking-tighter sm:text-5xl\`; H3 \`font-display text-2xl leading-tight font-light tracking-tighter sm:text-3xl\`. Use Favorit Mono only for code, commands, paths, raw tokens, timestamps, and short identifiers.
+- Use Inter (\`font-sans\`) for product UI: navigation, controls, forms, tables, dialogs, data, body copy, and product-page headings. A heading element does not imply a display face.
+- Reserve Favorit Pro (\`font-display\`) for prominent marketing statements such as hero copy and major campaign section headings. Apply it intentionally; do not use it for routine headings, labels, or application chrome.
+- Marketing display copy should normally pair \`font-display font-light\` with a tight line-height, slightly tighter tracking, and balanced wrapping. Start from \`font-display font-light leading-none tracking-tighter text-balance\`, then choose a responsive size for the composition. The \`font-light\` utility alone changes weight but does not select Favorit Pro.
+- Use Favorit Mono (\`font-mono\`) only for code, commands, paths, raw tokens, timestamps, and short technical identifiers. Do not use monospace for explanatory prose.
 - Use the default registry radii, borders, spacing, and control heights. Do not globally restyle installed primitives to create a separate visual system.
 - Use Lucide icons only. Icons clarify actions or state; they are not decoration.
 - Support light and dark themes through the supplied semantic variables. Do not hard-code colors that break either theme.
