@@ -110,9 +110,25 @@ export function ProjectResultPage({
     <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4 pb-12 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10">
       <div className="mx-auto w-full max-w-6xl md:pt-6">
         <header className="mb-10 flex items-center justify-between gap-4">
-          <h1 className="font-sans text-[2rem] leading-[0.98] font-light tracking-[-0.025em] text-balance">
-            {projectName}
-          </h1>
+          <div>
+            <h1 className="font-sans text-[2rem] leading-[0.98] font-light tracking-[-0.025em] text-balance">
+              {projectName}
+            </h1>
+            <div
+              className="mt-4 flex flex-wrap gap-2"
+              aria-label="Capabilities"
+            >
+              {capabilities.map((capability) => (
+                <Badge
+                  key={capability}
+                  variant="secondary"
+                  className="rounded-sm px-3 py-2 font-normal"
+                >
+                  {capability}
+                </Badge>
+              ))}
+            </div>
+          </div>
         </header>
 
         <div className="columns-1 gap-3 sm:columns-2 lg:columns-3 xl:columns-4">
@@ -149,18 +165,6 @@ export function ProjectResultPage({
             <CornerDownLeftIcon data-icon="inline-end" />
           </Button>
         </form>
-
-        <div className="mt-8 flex flex-wrap gap-1.5" aria-label="Capabilities">
-          {capabilities.map((capability) => (
-            <Badge
-              key={capability}
-              variant="secondary"
-              className="rounded-sm px-3 py-2 font-normal"
-            >
-              {capability}
-            </Badge>
-          ))}
-        </div>
       </div>
 
       <Dialog
