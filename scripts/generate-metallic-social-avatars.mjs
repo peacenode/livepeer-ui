@@ -48,7 +48,7 @@ function avatarSvg(size) {
         transform="translate(${translateX} ${translateY}) scale(${symbolScale})"
         fill="url(#metal)"
         stroke="#ffffff"
-        stroke-width=".75"
+        stroke-width="1"
         stroke-linejoin="miter"
         paint-order="stroke fill"
       >
