@@ -29,7 +29,7 @@ type PatternSettings = {
 }
 
 const defaultSettings: PatternSettings = {
-  depth: 0.42,
+  depth: 0.28,
   light: 18,
   mode: "stagger",
   playing: true,
@@ -102,24 +102,27 @@ function PerforatedSurface({
     shape.lineTo(-halfWidth, halfHeight)
     shape.closePath()
 
-    const xGap = 2.06 * spacing
-    const yGap = 2.18 * spacing
-    const holeSize = 0.34
+    const xGap = 1.02 * spacing
+    const yGap = 1.08 * spacing
+    const symbolScale = 0.47
+    const holeSize = 0.16
+    const columns = Math.ceil(halfWidth / xGap) + 1
+    const rows = Math.ceil(halfHeight / yGap) + 1
 
-    for (let row = -2; row <= 2; row += 1) {
-      for (let column = -4; column <= 4; column += 1) {
+    for (let row = -rows; row <= rows; row += 1) {
+      for (let column = -columns; column <= columns; column += 1) {
         const stagger =
           mode === "stagger" && Math.abs(row) % 2 === 1 ? xGap / 2 : 0
         const wave =
           mode === "wave"
-            ? Math.sin(column * 0.82 + row * 0.55) * 0.38
+            ? Math.sin(column * 0.82 + row * 0.55) * 0.16
             : 0
         const originX = column * xGap + stagger
         const originY = row * yGap + wave
 
         symbolBlocks.forEach(([blockX, blockY]) => {
-          const x = originX + blockX
-          const y = originY + blockY
+          const x = originX + blockX * symbolScale
+          const y = originY + blockY * symbolScale
           const inset = holeSize / 2 + 0.08
 
           if (
@@ -135,9 +138,9 @@ function PerforatedSurface({
     const nextGeometry = new ExtrudeGeometry(shape, {
       depth,
       bevelEnabled: true,
-      bevelSegments: 2,
-      bevelSize: Math.min(0.045, depth * 0.18),
-      bevelThickness: Math.min(0.04, depth * 0.16),
+      bevelSegments: 1,
+      bevelSize: Math.min(0.018, depth * 0.09),
+      bevelThickness: Math.min(0.016, depth * 0.08),
       curveSegments: 1,
       steps: 1,
     })
@@ -345,16 +348,16 @@ export function BrandPatternLab() {
         <div className="space-y-5">
           <Control
             label="Spacing"
-            min={0.72}
-            max={1.38}
+            min={0.68}
+            max={1.5}
             step={0.01}
             value={settings.spacing}
             onValueChange={(value) => update("spacing", value)}
           />
           <Control
             label="Extrusion"
-            min={0.08}
-            max={0.9}
+            min={0.06}
+            max={0.65}
             step={0.01}
             value={settings.depth}
             onValueChange={(value) => update("depth", value)}
