@@ -40,7 +40,7 @@ export async function PrivateBetaConsoleShell({
       showDiscord={false}
       title="Sign in for early access"
     >
-      <div className="relative isolate flex h-dvh min-h-0 overflow-hidden overscroll-none bg-background">
+      <div className="relative isolate flex h-dvh min-h-0 overflow-hidden bg-background">
         <PlatformSidebar
           className="min-h-0 overscroll-contain"
           homeAriaLabel={shell.homeAriaLabel}
@@ -50,7 +50,7 @@ export async function PrivateBetaConsoleShell({
           homeHref={consoleHref}
           profileHref={`${consoleHref}/account`}
         />
-        <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden overscroll-none">
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <div className="flex min-h-0 w-full flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
             {children}
           </div>
