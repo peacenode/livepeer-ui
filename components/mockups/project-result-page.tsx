@@ -96,7 +96,7 @@ function AssetPromptEditor({
   projectId: string
   prompt?: string
 }) {
-  const [value, setValue] = useState(prompt)
+  const [value, setValue] = useState("")
   const [copied, setCopied] = useState(false)
 
   async function copyPrompt() {
@@ -105,7 +105,8 @@ function AssetPromptEditor({
         {
           project_id: projectId,
           asset_id: assetId,
-          prompt: value,
+          prompt: prompt ?? "",
+          note: value,
         },
         null,
         2
@@ -124,7 +125,7 @@ function AssetPromptEditor({
         id="asset-revision-prompt"
         value={value}
         onChange={(event) => setValue(event.target.value)}
-        placeholder="Describe the next iteration"
+        placeholder="Modify or extend"
         className="mt-2 min-h-24 resize-none rounded-md"
       />
       <Button
