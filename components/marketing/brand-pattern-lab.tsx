@@ -105,22 +105,29 @@ function createPatternOrigins(
   const origins: PatternOrigin[] = []
 
   if (mode === "radial") {
-    origins.push({ x: 0, y: 0, rotation: 0 })
+    let ring = 0
 
-    for (let radius = gap; radius <= halfWidth + 1; radius += gap) {
+    for (
+      let radius = gap * 1.9;
+      radius <= halfWidth + gap;
+      radius += gap * 0.96
+    ) {
       const count = Math.max(
-        6,
-        Math.round((Math.PI * 2 * radius) / (gap * 1.18))
+        8,
+        Math.round((Math.PI * 2 * radius) / (gap * 1.12))
       )
+      const offset = ring % 2 === 0 ? 0 : Math.PI / count
 
       for (let index = 0; index < count; index += 1) {
-        const angle = (index / count) * Math.PI * 2
+        const angle = (index / count) * Math.PI * 2 + offset
         origins.push({
           x: Math.cos(angle) * radius,
-          y: Math.sin(angle) * radius * 0.56,
-          rotation: angle + Math.PI / 2,
+          y: Math.sin(angle) * radius,
+          rotation: angle,
         })
       }
+
+      ring += 1
     }
 
     return origins
@@ -268,7 +275,7 @@ function PatternScene({
 
 export function BrandPatternLab() {
   const [mode, setMode] = useState<PatternMode>("stagger")
-  const [size, setSize] = useState<PatternSize>("small")
+  const [size, setSize] = useState<PatternSize>("micro")
   const [light, setLight] = useState<LightPreset>("soft")
 
   return (
