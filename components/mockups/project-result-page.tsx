@@ -125,9 +125,11 @@ function AssetPromptEditor({ prompt = "" }: { prompt?: string }) {
 
 export function ProjectResultPage({
   assets,
+  projectId,
   projectName,
 }: {
   assets: ProjectAsset[]
+  projectId: string
   projectName: string
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
@@ -167,6 +169,7 @@ export function ProjectResultPage({
 
       return [
         {
+          project_id: projectId,
           asset_id: asset.id,
           prompt: asset.prompt ?? "",
           note,

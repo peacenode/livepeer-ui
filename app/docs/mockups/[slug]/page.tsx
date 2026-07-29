@@ -95,6 +95,12 @@ type PrivateBetaSurface = {
   components: string[]
 }
 
+const renderResultComponents = [
+  "livepeer-agent-page-frame",
+  "livepeer-agent-sidebar",
+  "user-menu",
+]
+
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
   href: "/mockups/private-beta/earlyaccess/about",
@@ -133,11 +139,7 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   {
     title: "Render Result",
     href: "/mockups/private-beta/v/cobalt-runner",
-    components: [
-      "livepeer-agent-page-frame",
-      "livepeer-agent-sidebar",
-      "user-menu",
-    ],
+    components: renderResultComponents,
   },
 ]
 
@@ -180,7 +182,19 @@ const privateBetaAgentHomeSurface: PrivateBetaSurface = {
 
 const privateBetaAgentRoutes = [
   { title: "MCP server", path: "/api/mcp" },
-  { title: "Render result", path: "/v/" },
+]
+
+const privateBetaRenderExamples: PrivateBetaSurface[] = [
+  {
+    title: "Sunburned Chairman",
+    href: "/mockups/private-beta/v/proj_8429543f3409",
+    components: renderResultComponents,
+  },
+  {
+    title: "Mixed-media result",
+    href: "/mockups/private-beta/v/cobalt-runner",
+    components: renderResultComponents,
+  },
 ]
 
 const internalTestingLandingSurface: PrivateBetaSurface = {
@@ -590,6 +604,13 @@ export default async function MockupPage({
                           components: privateBetaRenderSurface.components,
                         }}
                         sourceLabel={`${privateBetaAgentDeployment.hostname}${route.path}`}
+                      />
+                    ))}
+                    {privateBetaRenderExamples.map((surface) => (
+                      <ProductSurfaceEmbed
+                        key={surface.href}
+                        surface={surface}
+                        sourceLabel={`${privateBetaAgentDeployment.hostname}/v/${surface.href?.split("/").at(-1)}`}
                       />
                     ))}
                   </div>
