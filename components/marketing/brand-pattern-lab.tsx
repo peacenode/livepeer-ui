@@ -1,20 +1,16 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { useEffect, useMemo, useState } from "react"
+import { Canvas } from "@react-three/fiber"
 import {
   ExtrudeGeometry,
   Path,
-  PMREMGenerator,
-  type PointLight,
   Shape,
-  type SpotLight,
 } from "three"
-import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
 
 import { Button } from "@/components/ui/button"
 
-type PatternMode = "stagger" | "radial" | "diamond"
+type PatternMode = "stagger" | "radial"
 
 type PatternOrigin = {
   rotation: number
@@ -30,27 +26,6 @@ const symbolBlocks = [
   [0, -0.28],
   [0.46, 0],
 ] as const
-
-function StudioEnvironment() {
-  const { gl, scene } = useThree()
-
-  useEffect(() => {
-    const generator = new PMREMGenerator(gl)
-    const environment = generator.fromScene(new RoomEnvironment(), 0.04)
-
-    // Three.js scene configuration is intentionally imperative.
-    // eslint-disable-next-line react-hooks/immutability
-    scene.environment = environment.texture
-
-    return () => {
-      scene.environment = null
-      environment.dispose()
-      generator.dispose()
-    }
-  }, [gl, scene])
-
-  return null
-}
 
 function createSquareHole(
   x: number,
@@ -107,8 +82,8 @@ function createPatternOrigins(
     return origins
   }
 
-  const xGap = mode === "diamond" ? 0.82 : 1.02
-  const yGap = mode === "diamond" ? 0.82 : 1.08
+  const xGap = 1.02
+  const yGap = 1.08
   const columns = Math.ceil(halfWidth / xGap) + 2
   const rows = Math.ceil(halfHeight / yGap) + 2
 
@@ -119,7 +94,7 @@ function createPatternOrigins(
           column * xGap +
           (Math.abs(row) % 2 === 1 ? xGap / 2 : 0),
         y: row * yGap,
-        rotation: mode === "diamond" ? Math.PI / 4 : 0,
+        rotation: 0,
       })
     }
   }
@@ -199,51 +174,18 @@ function PerforatedSurface({ mode }: { mode: PatternMode }) {
 }
 
 function PatternScene({ mode }: { mode: PatternMode }) {
-  const keyLight = useRef<SpotLight>(null)
-  const apertureLight = useRef<PointLight>(null)
-
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime() * 0.34
-    const lightX = Math.sin(time) * 11
-
-    if (keyLight.current) {
-      keyLight.current.position.set(lightX, 7, 8)
-      keyLight.current.target.position.set(lightX * 0.32, 0, 0)
-      keyLight.current.target.updateMatrixWorld()
-    }
-    if (apertureLight.current) {
-      apertureLight.current.position.set(lightX * 0.72, -1.8, -2.2)
-    }
-  })
-
   return (
     <>
-      <StudioEnvironment />
       <color attach="background" args={["#000000"]} />
-      <ambientLight intensity={0.006} />
       <spotLight
-        ref={keyLight}
         color="#f4fff9"
-        position={[-8, 7, 8]}
-        intensity={62}
-        angle={0.25}
-        penumbra={0.1}
-        decay={1.6}
-        distance={32}
+        position={[-5.5, 5, 7]}
+        intensity={1450}
+        angle={0.58}
+        penumbra={0.28}
+        decay={1}
+        distance={0}
         castShadow
-      />
-      <directionalLight
-        color="#00c077"
-        position={[8, -5, 5]}
-        intensity={0.28}
-      />
-      <pointLight
-        ref={apertureLight}
-        color="#00c077"
-        position={[-6, -2, -2]}
-        intensity={24}
-        distance={13}
-        decay={1.7}
       />
       <group
         rotation={[
@@ -287,7 +229,7 @@ export function BrandPatternLab() {
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2 border-y py-5">
-        {(["stagger", "radial", "diamond"] as const).map((pattern) => (
+        {(["stagger", "radial"] as const).map((pattern) => (
           <Button
             key={pattern}
             size="sm"

@@ -17,7 +17,7 @@ export default function PatternLabPage() {
         </h1>
         <p className="mt-2 text-balance text-muted-foreground">
           Subtract a repeating Livepeer SVG pattern from a dimensional surface,
-          then shape the field and sweep light across its cut edges.
+          then study its cut edges under a single fixed light.
         </p>
       </header>
 
