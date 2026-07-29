@@ -184,7 +184,7 @@ export function ProjectResultPage({
         >
           {selectedAsset && (
             <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_18rem] md:grid-rows-1">
-              <div className="flex h-full min-h-0 min-w-0 items-center justify-center overflow-hidden bg-background p-4">
+              <div className="flex h-full min-h-0 min-w-0 items-center justify-center overflow-hidden bg-background">
                 <AssetMedia asset={selectedAsset} detail />
               </div>
               <aside className="flex min-h-0 flex-col border-t bg-background p-5 md:border-t-0 md:border-l">
