@@ -99,6 +99,7 @@ function LivepeerGradientLockup({
 }: React.SVGProps<SVGSVGElement> & { metallic?: boolean }) {
   const gradientId = React.useId().replaceAll(":", "")
   const wordmarkGradientId = `${gradientId}-wordmark`
+  const metallicSymbolGradientId = `${gradientId}-metallic-symbol`
 
   return (
     <svg
@@ -126,10 +127,26 @@ function LivepeerGradientLockup({
           <stop offset=".72" stopColor="#ededed" />
           <stop offset="1" stopColor="#bdbdbd" />
         </linearGradient>
+        <linearGradient
+          id={metallicSymbolGradientId}
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
+          <stop offset="0" stopColor="#b8ffe5" />
+          <stop offset=".1" stopColor="#12e49b" />
+          <stop offset=".55" stopColor="#00c077" />
+          <stop offset="1" stopColor="#007e4e" />
+        </linearGradient>
       </defs>
       <g
-        fill={metallic ? `url(#${wordmarkGradientId})` : `url(#${gradientId})`}
-        stroke={metallic ? "#fff" : undefined}
+        fill={
+          metallic
+            ? `url(#${metallicSymbolGradientId})`
+            : `url(#${gradientId})`
+        }
+        stroke={metallic ? "#d8fff1" : undefined}
         strokeWidth={metallic ? 1 : undefined}
         strokeLinejoin={metallic ? "miter" : undefined}
         paintOrder={metallic ? "stroke fill" : undefined}
