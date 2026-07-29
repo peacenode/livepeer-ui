@@ -36,7 +36,7 @@ function avatarSvg(size) {
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
       <defs>
-        <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="metal" x1="0" y1="0" x2=".342" y2="1">
           <stop offset="0" stop-color="#45e7ab"/>
           <stop offset=".1" stop-color="#16d994"/>
           <stop offset=".55" stop-color="#00c077"/>

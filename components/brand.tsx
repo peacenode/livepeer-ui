@@ -119,7 +119,7 @@ function LivepeerGradientLockup({
           id={wordmarkGradientId}
           x1="0"
           y1="0"
-          x2="0"
+          x2=".342"
           y2="1"
         >
           <stop offset="0" stopColor="#fff" />
@@ -131,7 +131,7 @@ function LivepeerGradientLockup({
           id={metallicSymbolGradientId}
           x1="0"
           y1="0"
-          x2="0"
+          x2=".342"
           y2="1"
         >
           <stop offset="0" stopColor="#45e7ab" />
