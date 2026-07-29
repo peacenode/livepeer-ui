@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { PlatformBrandLink } from "@/components/mockups/platform-brand-link"
 import { UserMenu } from "@/components/mockups/user-menu"
 import { cn } from "@/lib/utils"
 import type {
@@ -39,22 +39,10 @@ export function PlatformSidebar({
       )}
     >
       <div className="px-5 pt-6 pb-1">
-        <Link
+        <PlatformBrandLink
+          ariaLabel={homeAriaLabel}
           href={homeHref}
-          aria-label={homeAriaLabel}
-          className="inline-flex h-9 items-center"
-        >
-          <span className="flex items-end gap-1.5 text-foreground">
-            <LivepeerGradientSymbol className="h-4 w-auto" />
-            <LivepeerWordmark className="h-4 w-auto" />
-            <span
-              className="translate-y-[0.17em] font-agent text-sm leading-none font-medium tracking-tight"
-              aria-hidden="true"
-            >
-              AGENT
-            </span>
-          </span>
-        </Link>
+        />
       </div>
       <nav className="flex flex-col items-start gap-1 px-3 pt-5">
         {navigation.map((item) => (

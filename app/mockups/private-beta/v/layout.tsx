@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PrivateBetaConsoleShell } from "@/components/mockups/private-beta-console-shell"
+import { PrivateBetaRenderShell } from "@/components/mockups/private-beta-render-shell"
 
 export const metadata: Metadata = {
   title: {
@@ -14,5 +14,5 @@ export default function PrivateBetaRenderLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <PrivateBetaConsoleShell>{children}</PrivateBetaConsoleShell>
+  return <PrivateBetaRenderShell>{children}</PrivateBetaRenderShell>
 }
