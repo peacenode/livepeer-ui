@@ -25,7 +25,7 @@ export default async function PrivateBetaAgentPage() {
       showDiscord={false}
       successHref="/mockups/private-beta/landing/console"
       title="Sign in for early access"
-      waitlistHref="/mockups/waitlist"
+      waitlistHref="/mockups/private-beta/earlyaccess"
       waitlistLabel="Sign up for the waitlist"
     >
       <main className="min-h-dvh bg-background" />

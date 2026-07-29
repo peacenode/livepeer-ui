@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
 
 export default function PrivateBetaPage() {
-  redirect("/mockups/private-beta/landing-page")
+  redirect("/mockups/private-beta/earlyaccess")
 }

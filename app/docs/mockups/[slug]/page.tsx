@@ -69,7 +69,7 @@ const mockups = {
     title: "Agent Waitlist",
     description:
       "Signup, referral, status, leaderboard, and branded background components for the Agent Waitlist.",
-    previewHref: "/mockups/waitlist",
+    previewHref: "/mockups/private-beta/earlyaccess",
     componentGroup: "Agent Waitlist",
   },
   "agent-console": {
@@ -97,7 +97,7 @@ type PrivateBetaSurface = {
 
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
-  href: "/mockups/private-beta/landing-page",
+  href: "/mockups/private-beta/earlyaccess/about",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
@@ -143,7 +143,7 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
 const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
   {
     title: "Agent Waitlist",
-    href: "/mockups/waitlist",
+    href: "/mockups/private-beta/earlyaccess",
     components: [
       "waitlist-panel",
       "waitlist-signup-form",
