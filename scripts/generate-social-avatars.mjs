@@ -3,7 +3,7 @@ import path from "node:path"
 
 import sharp from "sharp"
 
-const batch = "20260729-131040"
+const batch = "20260729-131235"
 const sizes = [400, 500, 512, 800]
 const outputDirectory = path.join(
   process.cwd(),
@@ -42,9 +42,9 @@ for (const size of sizes) {
     <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
       <defs>
         <linearGradient id="green" x1="0" y1="0" x2=".342" y2="1">
-          <stop offset="0" stop-color="#0abd7d"/>
-          <stop offset=".32" stop-color="#0abd7d"/>
-          <stop offset="1" stop-color="#05945c"/>
+          <stop offset="0" stop-color="#00c077"/>
+          <stop offset=".32" stop-color="#00c077"/>
+          <stop offset="1" stop-color="#009756"/>
         </linearGradient>
       </defs>
       <rect width="${size}" height="${size}" fill="#000"/>
@@ -56,6 +56,5 @@ for (const size of sizes) {
 
   await sharp(Buffer.from(svg))
     .png({ compressionLevel: 9 })
-    .withIccProfile("p3")
     .toFile(path.join(outputDirectory, `${size}.png`))
 }
