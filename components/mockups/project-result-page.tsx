@@ -155,7 +155,7 @@ export function ProjectResultPage({
             <Badge
               key={capability}
               variant="secondary"
-              className="font-normal text-muted-foreground"
+              className="rounded-sm px-3 py-2 font-normal"
             >
               {capability}
             </Badge>
