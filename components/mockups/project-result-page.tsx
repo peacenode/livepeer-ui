@@ -229,7 +229,13 @@ export function ProjectResultPage({
                   <AssetMedia asset={asset} />
                 </span>
               </button>
-              <div className="absolute inset-x-2 bottom-2 z-10 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
+              <div
+                className={
+                  assetNotes[asset.id]?.trim()
+                    ? "absolute inset-x-2 bottom-2 z-10 opacity-100 transition-opacity"
+                    : "absolute inset-x-2 bottom-2 z-10 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100"
+                }
+              >
                 <label htmlFor={`asset-note-${asset.id}`} className="sr-only">
                   Note for {asset.title ?? asset.id}
                 </label>
@@ -243,7 +249,7 @@ export function ProjectResultPage({
                     }))
                   }
                   placeholder="Add a note"
-                  className="h-8 rounded-[2px] border-white/30 bg-background/65 text-xs shadow-sm backdrop-blur-md"
+                  className="h-8 rounded-[2px] border-white/20 bg-background/40 text-xs shadow-sm backdrop-blur-sm"
                 />
               </div>
             </div>
