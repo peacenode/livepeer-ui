@@ -247,7 +247,7 @@ export function ProjectResultPage({
                 onClick={() => setSelectedIndex(index)}
                 aria-label={`View asset ${index + 1} of ${assets.length}`}
               >
-                <span className="block transition-opacity group-hover:opacity-90">
+                <span className="block">
                   <AssetMedia asset={asset} />
                 </span>
               </button>
