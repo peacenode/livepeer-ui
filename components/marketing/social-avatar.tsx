@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import type { SocialAvatar as SocialAvatarConfig } from "@/lib/social-assets"
 
-const avatarBatch = "20260729-131235"
+const avatarBatch = "20260729-131616"
 
 export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
   return (
