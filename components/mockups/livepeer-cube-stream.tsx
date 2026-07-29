@@ -127,7 +127,7 @@ function LivepeerCubeStream({
 
       if (nextWidth <= 0 || nextHeight <= 0) return
 
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.5)
+      const ratio = Math.min(window.devicePixelRatio || 1, 2)
       const previousWidth = width
       const previousHeight = height
       const crossedMobileBreakpoint =
@@ -308,15 +308,12 @@ function LivepeerCubeStream({
 
         context.globalAlpha = 1
         context.fillStyle = palette[particle.colorIndex]
-        context.beginPath()
-        context.arc(
-          particle.x,
-          particle.y,
-          particleSize / 2,
-          0,
-          Math.PI * 2
+        context.fillRect(
+          Math.round(particle.x - particleSize / 2),
+          Math.round(particle.y - particleSize / 2),
+          particleSize,
+          particleSize
         )
-        context.fill()
       }
 
       context.globalAlpha = 1
