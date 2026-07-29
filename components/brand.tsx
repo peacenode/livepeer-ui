@@ -135,7 +135,7 @@ function LivepeerGradientLockup({
             : "currentColor"
         }
         stroke={metallicWordmark ? "#fff" : undefined}
-        strokeWidth={metallicWordmark ? 0.65 : undefined}
+        strokeWidth={metallicWordmark ? 1 : undefined}
         strokeLinejoin={metallicWordmark ? "miter" : undefined}
         paintOrder={metallicWordmark ? "stroke fill" : undefined}
       >
