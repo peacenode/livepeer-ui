@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { PauseIcon, PlayIcon, RotateCcwIcon } from "lucide-react"
 import {
   ExtrudeGeometry,
   Path,
@@ -14,27 +13,13 @@ import {
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
 
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
 
-type PatternMode = "grid" | "stagger" | "wave"
+type PatternMode = "stagger" | "radial" | "diamond"
 
-type PatternSettings = {
-  depth: number
-  light: number
-  mode: PatternMode
-  playing: boolean
-  spacing: number
-  tilt: number
-}
-
-const defaultSettings: PatternSettings = {
-  depth: 0.28,
-  light: 18,
-  mode: "stagger",
-  playing: true,
-  spacing: 1,
-  tilt: 18,
+type PatternOrigin = {
+  rotation: number
+  x: number
+  y: number
 }
 
 const symbolBlocks = [
@@ -67,31 +52,86 @@ function StudioEnvironment() {
   return null
 }
 
-function createSquareHole(x: number, y: number, size: number) {
+function createSquareHole(
+  x: number,
+  y: number,
+  size: number,
+  rotation: number
+) {
   const half = size / 2
   const hole = new Path()
+  const cosine = Math.cos(rotation)
+  const sine = Math.sin(rotation)
+  const corners = [
+    [-half, -half],
+    [-half, half],
+    [half, half],
+    [half, -half],
+  ].map(([cornerX, cornerY]) => [
+    x + cornerX * cosine - cornerY * sine,
+    y + cornerX * sine + cornerY * cosine,
+  ])
 
-  hole.moveTo(x - half, y - half)
-  hole.lineTo(x - half, y + half)
-  hole.lineTo(x + half, y + half)
-  hole.lineTo(x + half, y - half)
+  hole.moveTo(corners[0][0], corners[0][1])
+  corners.slice(1).forEach(([cornerX, cornerY]) => {
+    hole.lineTo(cornerX, cornerY)
+  })
   hole.closePath()
 
   return hole
 }
 
-function PerforatedSurface({
-  depth,
-  mode,
-  spacing,
-}: {
-  depth: number
-  mode: PatternMode
-  spacing: number
-}) {
+function createPatternOrigins(
+  mode: PatternMode,
+  halfWidth: number,
+  halfHeight: number
+) {
+  const origins: PatternOrigin[] = []
+
+  if (mode === "radial") {
+    origins.push({ x: 0, y: 0, rotation: 0 })
+
+    for (let radius = 0.78; radius <= halfWidth + 1; radius += 0.78) {
+      const count = Math.max(6, Math.round((Math.PI * 2 * radius) / 0.92))
+
+      for (let index = 0; index < count; index += 1) {
+        const angle = (index / count) * Math.PI * 2
+        origins.push({
+          x: Math.cos(angle) * radius,
+          y: Math.sin(angle) * radius * 0.56,
+          rotation: angle + Math.PI / 2,
+        })
+      }
+    }
+
+    return origins
+  }
+
+  const xGap = mode === "diamond" ? 0.82 : 1.02
+  const yGap = mode === "diamond" ? 0.82 : 1.08
+  const columns = Math.ceil(halfWidth / xGap) + 2
+  const rows = Math.ceil(halfHeight / yGap) + 2
+
+  for (let row = -rows; row <= rows; row += 1) {
+    for (let column = -columns; column <= columns; column += 1) {
+      origins.push({
+        x:
+          column * xGap +
+          (Math.abs(row) % 2 === 1 ? xGap / 2 : 0),
+        y: row * yGap,
+        rotation: mode === "diamond" ? Math.PI / 4 : 0,
+      })
+    }
+  }
+
+  return origins
+}
+
+function PerforatedSurface({ mode }: { mode: PatternMode }) {
   const geometry = useMemo(() => {
     const width = 17.4
     const height = 9.8
+    const depth = 0.28
     const halfWidth = width / 2
     const halfHeight = height / 2
     const shape = new Shape()
@@ -102,38 +142,29 @@ function PerforatedSurface({
     shape.lineTo(-halfWidth, halfHeight)
     shape.closePath()
 
-    const xGap = 1.02 * spacing
-    const yGap = 1.08 * spacing
     const symbolScale = 0.47
     const holeSize = 0.16
-    const columns = Math.ceil(halfWidth / xGap) + 1
-    const rows = Math.ceil(halfHeight / yGap) + 1
+    const origins = createPatternOrigins(mode, halfWidth, halfHeight)
 
-    for (let row = -rows; row <= rows; row += 1) {
-      for (let column = -columns; column <= columns; column += 1) {
-        const stagger =
-          mode === "stagger" && Math.abs(row) % 2 === 1 ? xGap / 2 : 0
-        const wave =
-          mode === "wave"
-            ? Math.sin(column * 0.82 + row * 0.55) * 0.16
-            : 0
-        const originX = column * xGap + stagger
-        const originY = row * yGap + wave
+    origins.forEach(({ rotation, x: originX, y: originY }) => {
+      const cosine = Math.cos(rotation)
+      const sine = Math.sin(rotation)
 
-        symbolBlocks.forEach(([blockX, blockY]) => {
-          const x = originX + blockX * symbolScale
-          const y = originY + blockY * symbolScale
-          const inset = holeSize / 2 + 0.08
+      symbolBlocks.forEach(([blockX, blockY]) => {
+        const scaledX = blockX * symbolScale
+        const scaledY = blockY * symbolScale
+        const x = originX + scaledX * cosine - scaledY * sine
+        const y = originY + scaledX * sine + scaledY * cosine
+        const inset = holeSize / 2 + 0.08
 
-          if (
-            Math.abs(x) < halfWidth - inset &&
-            Math.abs(y) < halfHeight - inset
-          ) {
-            shape.holes.push(createSquareHole(x, y, holeSize))
-          }
-        })
-      }
-    }
+        if (
+          Math.abs(x) < halfWidth - inset &&
+          Math.abs(y) < halfHeight - inset
+        ) {
+          shape.holes.push(createSquareHole(x, y, holeSize, rotation))
+        }
+      })
+    })
 
     const nextGeometry = new ExtrudeGeometry(shape, {
       depth,
@@ -149,7 +180,7 @@ function PerforatedSurface({
     nextGeometry.computeVertexNormals()
 
     return nextGeometry
-  }, [depth, mode, spacing])
+  }, [mode])
 
   useEffect(() => () => geometry.dispose(), [geometry])
 
@@ -167,18 +198,12 @@ function PerforatedSurface({
   )
 }
 
-function PatternScene({
-  settings,
-}: {
-  settings: PatternSettings
-}) {
+function PatternScene({ mode }: { mode: PatternMode }) {
   const keyLight = useRef<SpotLight>(null)
   const apertureLight = useRef<PointLight>(null)
 
   useFrame(({ clock }) => {
-    const time = settings.playing
-      ? clock.getElapsedTime() * 0.34
-      : (settings.light / 100) * Math.PI * 2
+    const time = clock.getElapsedTime() * 0.34
     const lightX = Math.sin(time) * 11
 
     if (keyLight.current) {
@@ -222,67 +247,19 @@ function PatternScene({
       />
       <group
         rotation={[
-          (-settings.tilt * Math.PI) / 180,
-          (settings.tilt * Math.PI) / 360,
+          (-18 * Math.PI) / 180,
+          (18 * Math.PI) / 360,
           -0.025,
         ]}
       >
-        <PerforatedSurface
-          depth={settings.depth}
-          mode={settings.mode}
-          spacing={settings.spacing}
-        />
+        <PerforatedSurface mode={mode} />
       </group>
     </>
   )
 }
 
-function Control({
-  label,
-  max,
-  min,
-  onValueChange,
-  step,
-  value,
-}: {
-  label: string
-  max: number
-  min: number
-  onValueChange: (value: number) => void
-  step: number
-  value: number
-}) {
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between gap-4">
-        <Label className="text-xs text-muted-foreground">{label}</Label>
-        <span className="font-mono text-xs tabular-nums">
-          {Number.isInteger(step) ? value : value.toFixed(2)}
-        </span>
-      </div>
-      <Slider
-        min={min}
-        max={max}
-        step={step}
-        value={[value]}
-        onValueChange={(nextValue) =>
-          onValueChange(
-            Array.isArray(nextValue) ? (nextValue[0] ?? value) : nextValue
-          )
-        }
-        aria-label={label}
-      />
-    </div>
-  )
-}
-
 export function BrandPatternLab() {
-  const [settings, setSettings] = useState(defaultSettings)
-
-  const update = <Key extends keyof PatternSettings>(
-    key: Key,
-    value: PatternSettings[Key]
-  ) => setSettings((current) => ({ ...current, [key]: value }))
+  const [mode, setMode] = useState<PatternMode>("stagger")
 
   return (
     <section className="mt-8">
@@ -301,7 +278,7 @@ export function BrandPatternLab() {
             powerPreference: "high-performance",
           }}
         >
-          <PatternScene settings={settings} />
+          <PatternScene mode={mode} />
         </Canvas>
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3 text-[10px] font-medium tracking-widest text-white/45 uppercase">
           <span>Livepeer pattern study</span>
@@ -309,82 +286,18 @@ export function BrandPatternLab() {
         </div>
       </div>
 
-      <div className="mt-5 grid gap-6 border-y py-5 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div>
-          <Label className="text-xs text-muted-foreground">Pattern</Label>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {(["grid", "stagger", "wave"] as const).map((mode) => (
-              <Button
-                key={mode}
-                size="sm"
-                variant={settings.mode === mode ? "secondary" : "outline"}
-                onClick={() => update("mode", mode)}
-                className="capitalize"
-              >
-                {mode}
-              </Button>
-            ))}
-          </div>
-          <div className="mt-3 flex gap-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => update("playing", !settings.playing)}
-            >
-              {settings.playing ? <PauseIcon /> : <PlayIcon />}
-              {settings.playing ? "Pause light" : "Play light"}
-            </Button>
-            <Button
-              size="icon-sm"
-              variant="ghost"
-              aria-label="Reset pattern"
-              onClick={() => setSettings(defaultSettings)}
-            >
-              <RotateCcwIcon />
-            </Button>
-          </div>
-        </div>
-
-        <div className="space-y-5">
-          <Control
-            label="Spacing"
-            min={0.68}
-            max={1.5}
-            step={0.01}
-            value={settings.spacing}
-            onValueChange={(value) => update("spacing", value)}
-          />
-          <Control
-            label="Extrusion"
-            min={0.06}
-            max={0.65}
-            step={0.01}
-            value={settings.depth}
-            onValueChange={(value) => update("depth", value)}
-          />
-        </div>
-
-        <div className="space-y-5">
-          <Control
-            label="Surface tilt"
-            min={-6}
-            max={34}
-            step={1}
-            value={settings.tilt}
-            onValueChange={(value) => update("tilt", value)}
-          />
-          <Control
-            label="Light position"
-            min={0}
-            max={100}
-            step={1}
-            value={settings.light}
-            onValueChange={(value) => {
-              update("playing", false)
-              update("light", value)
-            }}
-          />
-        </div>
+      <div className="mt-5 flex flex-wrap gap-2 border-y py-5">
+        {(["stagger", "radial", "diamond"] as const).map((pattern) => (
+          <Button
+            key={pattern}
+            size="sm"
+            variant={mode === pattern ? "secondary" : "outline"}
+            onClick={() => setMode(pattern)}
+            className="capitalize"
+          >
+            {pattern}
+          </Button>
+        ))}
       </div>
     </section>
   )
