@@ -4,7 +4,7 @@ import { ArrowUpRightIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
-import { socialBanners } from "@/lib/social-assets"
+import { socialAvatars, socialBanners } from "@/lib/social-assets"
 
 export const metadata: Metadata = {
   title: "Social Kit · Deliverables",
@@ -84,9 +84,30 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                       candidate.width === width && candidate.height === height
                   )
                 : undefined
+            const avatar =
+              deliverable.id === "avatar"
+                ? socialAvatars.find(
+                    (candidate) =>
+                      candidate.width === width && candidate.height === height
+                  )
+                : undefined
             const label = `${width} × ${height} px`
 
-            return banner ? (
+            return avatar ? (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+                render={
+                  <Link
+                    href={`/social-assets/avatars/${avatar.id}`}
+                    aria-label={`${label} avatar for ${avatar.platforms}`}
+                  />
+                }
+              >
+                {label}
+              </Badge>
+            ) : banner ? (
               <Badge
                 key={label}
                 variant="secondary"

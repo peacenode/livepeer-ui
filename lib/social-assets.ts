@@ -6,6 +6,41 @@ export type SocialBanner = {
   width: number
 }
 
+export type SocialAvatar = {
+  height: number
+  id: string
+  platforms: string
+  width: number
+}
+
+export const socialAvatars: SocialAvatar[] = [
+  {
+    id: "400",
+    platforms: "X, LinkedIn",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "500",
+    platforms: "GitHub",
+    width: 500,
+    height: 500,
+  },
+  {
+    id: "512",
+    platforms:
+      "Discord, Telegram, Reddit, Paragraph, Medium, Mirror, TikTok, Linktree",
+    width: 512,
+    height: 512,
+  },
+  {
+    id: "800",
+    platforms: "YouTube",
+    width: 800,
+    height: 800,
+  },
+]
+
 export const socialBanners: SocialBanner[] = [
   {
     id: "x",
@@ -53,4 +88,8 @@ export const socialBanners: SocialBanner[] = [
 
 export function getSocialBanner(id: string) {
   return socialBanners.find((banner) => banner.id === id)
+}
+
+export function getSocialAvatar(id: string) {
+  return socialAvatars.find((avatar) => avatar.id === id)
 }
