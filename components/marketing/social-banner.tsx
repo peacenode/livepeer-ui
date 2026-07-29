@@ -1,17 +1,16 @@
 "use client"
 
-import { LivepeerGradientSymbol } from "@/components/brand"
+import { LivepeerGradientLockup } from "@/components/brand"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import type { SocialBanner } from "@/lib/social-assets"
 
 export function SocialBanner({ banner }: { banner: SocialBanner }) {
   const isShallow = banner.height / banner.width < 0.2
-  const isUltraWide = banner.width / banner.height > 4
 
   return (
     <>
       <main
-        className="relative isolate overflow-hidden bg-white text-neutral-950"
+        className="relative isolate overflow-hidden bg-black text-white"
         style={{
           width: banner.width,
           height: banner.height,
@@ -24,40 +23,26 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 16% 46%, color(display-p3 0.91 1 0.95) 0%, transparent 34%), linear-gradient(118deg, white 0%, color(display-p3 0.965 1 0.98) 56%, color(display-p3 0.93 0.99 0.96) 100%)",
+              "radial-gradient(circle at 18% 48%, color(display-p3 0.015 0.15 0.09) 0%, transparent 38%), linear-gradient(118deg, black 0%, color(display-p3 0.012 0.025 0.019) 58%, color(display-p3 0.018 0.075 0.048) 100%)",
           }}
         />
         <LivepeerCubeStream
           freezeAtSeconds={banner.captureTime}
+          inverted
           variant="card"
-          className="opacity-95"
+          className="opacity-90"
         />
 
         <div
-          className="relative z-10 flex h-full items-center"
+          className="absolute top-1/2 left-[62%] z-10 -translate-x-1/2 -translate-y-1/2"
           style={{
-            paddingInline: isUltraWide ? "4.25cqw" : "6.5cqw",
+            width: isShallow ? "30cqw" : "min(34cqw, 104cqh)",
           }}
         >
-          <div
-            className="flex max-w-[64%] items-center"
-            style={{ gap: isShallow ? "2.25cqh" : "3.5cqh" }}
-            data-particle-exclusion
-          >
-            <LivepeerGradientSymbol
-              className="h-[30cqh] w-auto shrink-0"
-              aria-hidden="true"
-            />
-            <h1
-              className="leading-[0.98] font-light tracking-[-0.045em] text-balance"
-              style={{ fontSize: "min(14cqh, 5.5cqw)" }}
-            >
-              The open inference network.{" "}
-              <span className="text-neutral-950/45">
-                Connect GPUs, power AI and media workloads on Livepeer.
-              </span>
-            </h1>
-          </div>
+          <LivepeerGradientLockup
+            className="block h-auto w-full text-white"
+            aria-hidden="true"
+          />
         </div>
       </main>
       <style jsx global>{`
