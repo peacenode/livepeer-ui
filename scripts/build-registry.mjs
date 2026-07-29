@@ -149,21 +149,15 @@ const items = [
     cssVars: {
       theme: {
         "font-display": '"Favorit", "Favorit Pro", Inter, sans-serif',
-        "font-heading": "Inter, sans-serif",
+        "font-heading": themeVars["font-sans"],
         "font-sans": themeVars["font-sans"],
         "font-mono": '"Favorit Mono", ui-monospace, monospace',
+        "font-weight-book": themeVars["font-weight-book"],
       },
       light: extractCssVars(css, ":root"),
       dark: extractCssVars(css, "\\.dark"),
     },
-    css: {
-      "@layer base": {
-        "h1, h2, h3, h4, h5, h6": {
-          "font-family": "var(--font-sans)",
-        },
-      },
-    },
-    docs: "Favorit is a licensed local font. Add your licensed Favorit webfont files to the consuming app; Inter remains the fallback.",
+    docs: "Inter is the default interface and text face. Favorit is a licensed local font reserved for explicit marketing display copy via font-display; do not apply it globally to heading elements.",
   },
   {
     name: "brand",

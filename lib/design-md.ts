@@ -66,7 +66,7 @@ Registry dependencies are declared by each item and are installed by the shadcn 
 ## Foundations
 
 - Use the registry's neutral color system and semantic tokens. Do not introduce a second token layer for the same roles.
-- Use Inter for interface text. Favorit Pro is the display and heading face where the licensed font files are available. Use Favorit Mono only for code, commands, paths, raw tokens, timestamps, and short identifiers.
+- Use Inter for all product UI, ordinary headings, and the complete named Tailwind text scale from \`text-xs\` through \`text-9xl\`. Favorit Pro is only for marketing display copy and must be explicitly applied with \`font-display\`; never infer it from an \`h1\`–\`h6\` element. Marketing display headings use Favorit Light consistently and establish hierarchy through size: H1 \`font-display text-5xl leading-none font-light tracking-tighter sm:text-7xl\`; H2 \`font-display text-4xl leading-none font-light tracking-tighter sm:text-5xl\`; H3 \`font-display text-2xl leading-tight font-light tracking-tighter sm:text-3xl\`. Use Favorit Mono only for code, commands, paths, raw tokens, timestamps, and short identifiers.
 - Use the default registry radii, borders, spacing, and control heights. Do not globally restyle installed primitives to create a separate visual system.
 - Use Lucide icons only. Icons clarify actions or state; they are not decoration.
 - Support light and dark themes through the supplied semantic variables. Do not hard-code colors that break either theme.

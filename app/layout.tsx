@@ -11,7 +11,8 @@ import { cn } from "@/lib/utils"
 const fontDisplay = localFont({
   src: [
     { path: "../assets/fonts/FavoritPro-Light.woff2", weight: "300" },
-    { path: "../assets/fonts/FavoritPro-Book.woff2", weight: "400" },
+    { path: "../assets/fonts/FavoritPro-Book.woff2", weight: "350" },
+    { path: "../assets/fonts/FavoritPro-Regular.woff2", weight: "400" },
     { path: "../assets/fonts/FavoritPro-Medium.woff2", weight: "500" },
     { path: "../assets/fonts/FavoritPro-Bold.woff2", weight: "700" },
   ],
