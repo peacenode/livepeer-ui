@@ -135,14 +135,14 @@ export function ProjectResultPage({
 
         <div
           ref={containerRef}
-          className="columns-1 gap-3 sm:columns-2 lg:columns-3 xl:columns-4"
+          className="columns-1 gap-1 sm:columns-2 lg:columns-3 xl:columns-4"
         >
           {assets.map((asset, index) => (
             <button
               key={asset.id}
               data-masonry-item={asset.id}
               type="button"
-              className="group mb-3 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="group mb-1 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               style={cornerStyles[asset.id]}
               onClick={() => setSelectedIndex(index)}
               aria-label={`View asset ${index + 1} of ${assets.length}`}
