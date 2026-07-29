@@ -243,7 +243,7 @@ export function ProjectResultPage({
                     }))
                   }
                   placeholder="Add a note"
-                  className="h-8 rounded-sm bg-background/90 text-xs shadow-sm backdrop-blur-sm"
+                  className="h-8 rounded-[2px] border-white/30 bg-background/65 text-xs shadow-sm backdrop-blur-md"
                 />
               </div>
             </div>
