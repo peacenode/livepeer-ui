@@ -56,13 +56,13 @@ export default function PressKitPage() {
 }
 
 function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
-  const sizes = [
-    ...new Set(
-      deliverable.requirements.map(
-        ({ width, height }) => `${width} × ${height} px`
-      )
-    ),
-  ]
+  const sizes = deliverable.requirements.filter(
+    (requirement, index, requirements) =>
+      requirements.findIndex(
+        ({ width, height }) =>
+          width === requirement.width && height === requirement.height
+      ) === index
+  )
   const platforms = deliverable.requirements.flatMap(({ platform }) =>
     platform.split(/\s*[/,]\s*/)
   )
@@ -76,11 +76,40 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
 
       <div className="mt-4">
         <div className="flex flex-wrap gap-1.5">
-          {sizes.map((size) => (
-            <Badge key={size} variant="secondary" className="rounded-sm">
-              {size}
-            </Badge>
-          ))}
+          {sizes.map(({ width, height }) => {
+            const banner =
+              deliverable.id === "banners-headers"
+                ? socialBanners.find(
+                    (candidate) =>
+                      candidate.width === width && candidate.height === height
+                  )
+                : undefined
+            const label = `${width} × ${height} px`
+
+            return banner ? (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+                render={
+                  <Link
+                    href={`/social-assets/banners/${banner.id}`}
+                    aria-label={`${label} ${banner.platform} banner`}
+                  />
+                }
+              >
+                {label}
+              </Badge>
+            ) : (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+              >
+                {label}
+              </Badge>
+            )
+          })}
         </div>
       </div>
 
