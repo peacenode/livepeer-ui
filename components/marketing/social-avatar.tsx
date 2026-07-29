@@ -1,3 +1,5 @@
+import { Fragment } from "react"
+
 import type { SocialAvatar as SocialAvatarConfig } from "@/lib/social-assets"
 
 const tiles = [
@@ -44,51 +46,79 @@ function BeveledLivepeerSymbol() {
       aria-label="Livepeer"
     >
       <defs>
-        <linearGradient
-          id="avatar-face"
-          x1="-5"
-          y1="-5"
-          x2="78"
-          y2="99"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0" stopColor="color(display-p3 0.12 1 0.68)" />
-          <stop offset=".42" stopColor="color(display-p3 0.01 0.82 0.53)" />
-          <stop offset="1" stopColor="color(display-p3 0 0.48 0.3)" />
-        </linearGradient>
-        <linearGradient
-          id="avatar-rim"
-          x1="-5"
-          y1="-5"
-          x2="78"
-          y2="99"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0" stopColor="color(display-p3 0.48 1 0.79)" />
-          <stop offset=".48" stopColor="color(display-p3 0.015 0.7 0.44)" />
-          <stop offset="1" stopColor="color(display-p3 0 0.2 0.12)" />
-        </linearGradient>
+        {tiles.map(([x, y], index) => (
+          <Fragment key={`${x}-${y}`}>
+            <linearGradient
+              id={`avatar-face-${index}`}
+              x1={x}
+              y1={y}
+              x2={x + 15.5}
+              y2={y + 15.5}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="color(display-p3 0.12 1 0.68)" />
+              <stop
+                offset=".42"
+                stopColor="color(display-p3 0.01 0.82 0.53)"
+              />
+              <stop offset="1" stopColor="color(display-p3 0 0.48 0.3)" />
+            </linearGradient>
+            <linearGradient
+              id={`avatar-rim-${index}`}
+              x1={x}
+              y1={y}
+              x2={x + 15.5}
+              y2={y + 15.5}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="color(display-p3 0.48 1 0.79)" />
+              <stop
+                offset=".48"
+                stopColor="color(display-p3 0.015 0.7 0.44)"
+              />
+              <stop offset="1" stopColor="color(display-p3 0 0.2 0.12)" />
+            </linearGradient>
+          </Fragment>
+        ))}
       </defs>
 
       <g>
-        {tiles.map(([x, y]) => (
-          <g key={`${x}-${y}`}>
-            <rect
-              x={x}
-              y={y}
-              width="15.5"
-              height="15.5"
-              fill="url(#avatar-rim)"
-            />
-            <rect
-              x={x + 0.3}
-              y={y + 0.3}
-              width="14.9"
-              height="14.9"
-              fill="url(#avatar-face)"
-            />
-          </g>
-        ))}
+        {tiles.map(([x, y], index) => {
+          const farX = x + 15.5
+          const farY = y + 15.5
+          const innerX = x + 0.3
+          const innerY = y + 0.3
+          const innerFarX = farX - 0.3
+          const innerFarY = farY - 0.3
+
+          return (
+            <g key={`${x}-${y}`}>
+              <polygon
+                points={`${x},${y} ${farX},${y} ${innerFarX},${innerY} ${innerX},${innerY}`}
+                fill={`url(#avatar-rim-${index})`}
+              />
+              <polygon
+                points={`${farX},${y} ${farX},${farY} ${innerFarX},${innerFarY} ${innerFarX},${innerY}`}
+                fill={`url(#avatar-rim-${index})`}
+              />
+              <polygon
+                points={`${x},${farY} ${farX},${farY} ${innerFarX},${innerFarY} ${innerX},${innerFarY}`}
+                fill={`url(#avatar-rim-${index})`}
+              />
+              <polygon
+                points={`${x},${y} ${innerX},${innerY} ${innerX},${innerFarY} ${x},${farY}`}
+                fill={`url(#avatar-rim-${index})`}
+              />
+              <rect
+                x={innerX}
+                y={innerY}
+                width="14.9"
+                height="14.9"
+                fill={`url(#avatar-face-${index})`}
+              />
+            </g>
+          )
+        })}
       </g>
     </svg>
   )
