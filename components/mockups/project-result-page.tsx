@@ -108,9 +108,9 @@ export function ProjectResultPage({
 
   return (
     <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4 pb-12 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10">
-      <div className="mx-auto w-full max-w-6xl pt-2 md:pt-8">
-        <header className="mb-6 flex items-center justify-between gap-4">
-          <h1 className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">
+      <div className="mx-auto w-full max-w-6xl md:pt-6">
+        <header className="mb-10 flex items-center justify-between gap-4">
+          <h1 className="font-sans text-[2rem] leading-[0.98] font-light tracking-[-0.025em] text-balance">
             {projectName}
           </h1>
         </header>
