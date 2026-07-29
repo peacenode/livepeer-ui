@@ -1,8 +1,11 @@
 import type { Metadata } from "next"
 
-import { ProjectResultPage } from "@/components/mockups/project-result-page"
+import {
+  ProjectResultPage,
+  type ProjectAsset,
+} from "@/components/mockups/project-result-page"
 
-const assets = [
+const assets: ProjectAsset[] = [
   {
     id: "asset-1",
     type: "image" as const,
@@ -11,6 +14,8 @@ const assets = [
     width: 1672,
     height: 941,
     capability: "flux-dev",
+    format: "webp",
+    source: "generated",
   },
   {
     id: "asset-2",
@@ -20,6 +25,11 @@ const assets = [
     width: 720,
     height: 1080,
     capability: "ltx-t2v",
+    format: "mp4",
+    source: "generated",
+    durationSeconds: 3,
+    frameRate: 30,
+    videoCodec: "h264",
   },
   {
     id: "asset-3",
@@ -29,6 +39,8 @@ const assets = [
     width: 1536,
     height: 1024,
     capability: "flux-dev",
+    format: "webp",
+    source: "generated",
   },
   {
     id: "asset-4",
@@ -38,6 +50,8 @@ const assets = [
     width: 1672,
     height: 941,
     capability: "flux-kontext",
+    format: "webp",
+    source: "generated",
   },
   {
     id: "asset-5",
@@ -47,6 +61,11 @@ const assets = [
     width: 1280,
     height: 720,
     capability: "ltx-t2v",
+    format: "mp4",
+    source: "generated",
+    durationSeconds: 3,
+    frameRate: 30,
+    videoCodec: "h264",
   },
   {
     id: "asset-6",
@@ -56,6 +75,8 @@ const assets = [
     width: 1536,
     height: 1024,
     capability: "flux-dev",
+    format: "webp",
+    source: "generated",
   },
   {
     id: "asset-7",
@@ -65,8 +86,60 @@ const assets = [
     width: 1672,
     height: 941,
     capability: "flux-kontext",
+    format: "webp",
+    source: "generated",
   },
 ]
+
+const storyboardProjectAssets: ProjectAsset[] = [
+  {
+    id: "scene-0",
+    type: "video",
+    src: "https://v3b.fal.media/files/b/0aa42105/GnA1OQDnplQOOJ7D5fVqZ_8vV8IkpD.mp4",
+    alt: "Arrival of the Chairman",
+    width: 1920,
+    height: 1080,
+    title: "Arrival of the Chairman",
+    prompt: "Arrival of the Chairman",
+    capability: "import",
+    source: "import",
+    format: "mp4",
+    durationSeconds: 6.12,
+    frameRate: 25,
+    videoCodec: "h264",
+    audioCodec: "aac",
+    sizeBytes: 2_588_338,
+  },
+  {
+    id: "scene-1",
+    type: "video",
+    src: "https://v3b.fal.media/files/b/0aa42104/KvyB2Cs2sqasGRhPrpbBB_Pflw7wgQ.mp4",
+    alt: "Board Meeting by the Tide",
+    width: 1920,
+    height: 1080,
+    title: "Board Meeting by the Tide",
+    prompt: "Board Meeting by the Tide",
+    capability: "import",
+    source: "import",
+    format: "mp4",
+    durationSeconds: 6.12,
+    frameRate: 25,
+    videoCodec: "h264",
+    audioCodec: "aac",
+    sizeBytes: 7_226_379,
+  },
+]
+
+function projectDetails(projectId: string) {
+  if (projectId === "proj_8429543f3409") {
+    return {
+      name: "The Sunburned Chairman — A Beachside Business Film",
+      assets: storyboardProjectAssets,
+    }
+  }
+
+  return { name: "Cobalt Runner", assets }
+}
 
 export async function generateMetadata({
   params,
@@ -74,8 +147,7 @@ export async function generateMetadata({
   params: Promise<{ project_id: string }>
 }): Promise<Metadata> {
   const { project_id: projectId } = await params
-  const projectName =
-    projectId === "cobalt-runner" ? "Cobalt Runner" : "Project result"
+  const { name: projectName } = projectDetails(projectId)
 
   return { title: projectName }
 }
@@ -86,8 +158,10 @@ export default async function PrivateBetaProjectResultPage({
   params: Promise<{ project_id: string }>
 }) {
   const { project_id: projectId } = await params
-  const projectName =
-    projectId === "cobalt-runner" ? "Cobalt Runner" : "Project result"
+  const { name: projectName, assets: projectAssets } =
+    projectDetails(projectId)
 
-  return <ProjectResultPage assets={assets} projectName={projectName} />
+  return (
+    <ProjectResultPage assets={projectAssets} projectName={projectName} />
+  )
 }

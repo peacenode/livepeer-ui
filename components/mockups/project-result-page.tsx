@@ -5,11 +5,13 @@ import Image from "next/image"
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  CopyIcon,
   CornerDownLeftIcon,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Dialog,
   DialogContent,
@@ -17,7 +19,7 @@ import {
 } from "@/components/ui/dialog"
 import { useMasonryCorners } from "@/components/mockups/use-masonry-corners"
 
-type ProjectAsset = {
+export type ProjectAsset = {
   id: string
   type: "image" | "video"
   src: string
@@ -25,6 +27,20 @@ type ProjectAsset = {
   width: number
   height: number
   capability: string
+  title?: string
+  prompt?: string
+  source?: string
+  format?: string
+  durationSeconds?: number
+  frameRate?: number
+  videoCodec?: string
+  audioCodec?: string
+  sizeBytes?: number
+}
+
+function formatBytes(bytes: number) {
+  if (bytes < 1_000_000) return `${Math.round(bytes / 1_000)} KB`
+  return `${(bytes / 1_000_000).toFixed(1)} MB`
 }
 
 function AssetMedia({
@@ -69,6 +85,52 @@ function AssetMedia({
           : "h-auto w-full object-cover"
       }
     />
+  )
+}
+
+function AssetPromptEditor({ prompt = "" }: { prompt?: string }) {
+  const [value, setValue] = useState(prompt)
+  const [copied, setCopied] = useState(false)
+
+  async function copyPrompt() {
+    await navigator.clipboard.writeText(value)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1500)
+  }
+
+  return (
+    <form
+      className="mt-5 border-t pt-5"
+      onSubmit={(event) => event.preventDefault()}
+    >
+      <label htmlFor="asset-revision-prompt" className="text-sm font-medium">
+        Prompt
+      </label>
+      <Textarea
+        id="asset-revision-prompt"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder="Describe the next iteration"
+        className="mt-2 min-h-24 resize-none rounded-md"
+      />
+      <div className="mt-2 flex gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="flex-1"
+          onClick={copyPrompt}
+          disabled={!value.trim()}
+        >
+          <CopyIcon data-icon="inline-start" />
+          {copied ? "Copied" : "Copy prompt"}
+        </Button>
+        <Button type="submit" size="sm" className="flex-1">
+          Iterate
+          <CornerDownLeftIcon data-icon="inline-end" />
+        </Button>
+      </div>
+    </form>
   )
 }
 
@@ -187,46 +249,102 @@ export function ProjectResultPage({
               <div className="flex h-full min-h-0 min-w-0 items-center justify-center overflow-hidden bg-background">
                 <AssetMedia asset={selectedAsset} detail />
               </div>
-              <aside className="flex min-h-0 flex-col border-t bg-background p-5 md:border-t-0 md:border-l">
-                <div className="pr-8">
-                  <p className="text-xs text-muted-foreground">
-                    Asset {(selectedIndex ?? 0) + 1} of {assets.length}
-                  </p>
-                  <DialogTitle className="mt-1 font-sans text-lg font-medium">
-                    Asset details
-                  </DialogTitle>
+              <aside className="flex min-h-0 flex-col overflow-hidden border-t bg-background p-5 md:border-t-0 md:border-l">
+                <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+                  <div className="pr-8">
+                    <p className="text-xs text-muted-foreground">
+                      Asset {(selectedIndex ?? 0) + 1} of {assets.length}
+                    </p>
+                    <DialogTitle className="mt-1 font-sans text-lg font-medium">
+                      {selectedAsset.title ?? "Asset details"}
+                    </DialogTitle>
+                    {selectedAsset.prompt &&
+                      selectedAsset.prompt !== selectedAsset.title && (
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                          {selectedAsset.prompt}
+                        </p>
+                      )}
+                  </div>
+
+                  <AssetPromptEditor
+                    key={selectedAsset.id}
+                    prompt={selectedAsset.prompt}
+                  />
+
+                  <dl className="mt-6 divide-y text-sm">
+                    <div className="flex items-center justify-between gap-4 py-2.5">
+                      <dt className="text-muted-foreground">Capability</dt>
+                      <dd>
+                        <Badge
+                          variant="secondary"
+                          className="rounded-sm px-3 py-2 font-normal"
+                        >
+                          {selectedAsset.capability}
+                        </Badge>
+                      </dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-4 py-2.5">
+                      <dt className="text-muted-foreground">Media</dt>
+                      <dd className="capitalize">{selectedAsset.type}</dd>
+                    </div>
+                    {selectedAsset.format && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Format</dt>
+                        <dd className="uppercase">{selectedAsset.format}</dd>
+                      </div>
+                    )}
+                    <div className="flex items-center justify-between gap-4 py-2.5">
+                      <dt className="text-muted-foreground">Dimensions</dt>
+                      <dd>
+                        {selectedAsset.width} × {selectedAsset.height}
+                      </dd>
+                    </div>
+                    {selectedAsset.durationSeconds !== undefined && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Duration</dt>
+                        <dd>{selectedAsset.durationSeconds.toFixed(1)}s</dd>
+                      </div>
+                    )}
+                    {selectedAsset.frameRate !== undefined && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Frame rate</dt>
+                        <dd>{selectedAsset.frameRate} fps</dd>
+                      </div>
+                    )}
+                    {selectedAsset.videoCodec && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Video</dt>
+                        <dd className="uppercase">
+                          {selectedAsset.videoCodec}
+                        </dd>
+                      </div>
+                    )}
+                    {selectedAsset.audioCodec && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Audio</dt>
+                        <dd className="uppercase">
+                          {selectedAsset.audioCodec}
+                        </dd>
+                      </div>
+                    )}
+                    {selectedAsset.sizeBytes !== undefined && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Size</dt>
+                        <dd>{formatBytes(selectedAsset.sizeBytes)}</dd>
+                      </div>
+                    )}
+                    {selectedAsset.source && (
+                      <div className="flex items-center justify-between gap-4 py-2.5">
+                        <dt className="text-muted-foreground">Source</dt>
+                        <dd className="capitalize">{selectedAsset.source}</dd>
+                      </div>
+                    )}
+                  </dl>
+
                 </div>
 
-                <dl className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-sm md:grid-cols-1">
-                  <div>
-                    <dt className="text-xs text-muted-foreground">Media</dt>
-                    <dd className="mt-1 capitalize">{selectedAsset.type}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-muted-foreground">
-                      Dimensions
-                    </dt>
-                    <dd className="mt-1">
-                      {selectedAsset.width} × {selectedAsset.height}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-muted-foreground">
-                      Capability
-                    </dt>
-                    <dd className="mt-2">
-                      <Badge
-                        variant="secondary"
-                        className="rounded-sm px-3 py-2 font-normal"
-                      >
-                        {selectedAsset.capability}
-                      </Badge>
-                    </dd>
-                  </div>
-                </dl>
-
                 {assets.length > 1 && (
-                  <div className="mt-auto flex gap-2 pt-8">
+                  <div className="mt-4 flex shrink-0 gap-2 border-t pt-4">
                     <Button
                       type="button"
                       variant="outline"
