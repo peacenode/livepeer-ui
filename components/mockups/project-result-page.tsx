@@ -6,7 +6,6 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CornerDownLeftIcon,
-  XIcon,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -181,52 +180,77 @@ export function ProjectResultPage({
         }}
       >
         <DialogContent
-          showCloseButton={false}
-          className="flex h-dvh w-screen max-w-none items-center justify-center rounded-none bg-black/95 p-4 text-white shadow-none ring-0 sm:max-w-none"
+          className="h-[min(50rem,calc(100dvh-2rem))] overflow-hidden rounded-lg p-0 sm:max-w-6xl"
         >
-          <DialogTitle className="sr-only">
-            {selectedIndex === null
-              ? "Project asset"
-              : `Project asset ${selectedIndex + 1} of ${assets.length}`}
-          </DialogTitle>
           {selectedAsset && (
-            <div className="flex h-full w-full items-center justify-center">
-              <AssetMedia asset={selectedAsset} detail />
+            <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_18rem] md:grid-rows-1">
+              <div className="flex min-h-0 items-center justify-center overflow-hidden bg-black p-4">
+                <AssetMedia asset={selectedAsset} detail />
+              </div>
+              <aside className="flex min-h-0 flex-col border-t bg-background p-5 md:border-t-0 md:border-l">
+                <div className="pr-8">
+                  <p className="text-xs text-muted-foreground">
+                    Asset {(selectedIndex ?? 0) + 1} of {assets.length}
+                  </p>
+                  <DialogTitle className="mt-1 font-sans text-lg font-medium">
+                    Asset details
+                  </DialogTitle>
+                </div>
+
+                <dl className="mt-8 grid grid-cols-2 gap-x-4 gap-y-5 text-sm md:grid-cols-1">
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Media</dt>
+                    <dd className="mt-1 capitalize">{selectedAsset.type}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">
+                      Dimensions
+                    </dt>
+                    <dd className="mt-1">
+                      {selectedAsset.width} × {selectedAsset.height}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">
+                      Capability
+                    </dt>
+                    <dd className="mt-2">
+                      <Badge
+                        variant="secondary"
+                        className="rounded-sm px-3 py-2 font-normal"
+                      >
+                        {selectedAsset.capability}
+                      </Badge>
+                    </dd>
+                  </div>
+                </dl>
+
+                {assets.length > 1 && (
+                  <div className="mt-auto flex gap-2 pt-8">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => selectOffset(-1)}
+                    >
+                      <ArrowLeftIcon data-icon="inline-start" />
+                      Previous
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => selectOffset(1)}
+                    >
+                      Next
+                      <ArrowRightIcon data-icon="inline-end" />
+                    </Button>
+                  </div>
+                )}
+              </aside>
             </div>
-          )}
-          <Button
-            type="button"
-            variant="secondary"
-            size="icon"
-            className="absolute top-4 right-4"
-            onClick={() => setSelectedIndex(null)}
-          >
-            <XIcon />
-            <span className="sr-only">Close detail view</span>
-          </Button>
-          {assets.length > 1 && (
-            <>
-              <Button
-                type="button"
-                variant="secondary"
-                size="icon"
-                className="absolute top-1/2 left-4 -translate-y-1/2"
-                onClick={() => selectOffset(-1)}
-              >
-                <ArrowLeftIcon />
-                <span className="sr-only">Previous asset</span>
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                size="icon"
-                className="absolute top-1/2 right-4 -translate-y-1/2"
-                onClick={() => selectOffset(1)}
-              >
-                <ArrowRightIcon />
-                <span className="sr-only">Next asset</span>
-              </Button>
-            </>
           )}
         </DialogContent>
       </Dialog>
