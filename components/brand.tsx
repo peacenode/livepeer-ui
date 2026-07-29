@@ -134,8 +134,8 @@ function LivepeerGradientLockup({
           x2="0"
           y2="1"
         >
-          <stop offset="0" stopColor="#b8ffe5" />
-          <stop offset=".1" stopColor="#12e49b" />
+          <stop offset="0" stopColor="#45e7ab" />
+          <stop offset=".1" stopColor="#16d994" />
           <stop offset=".55" stopColor="#00c077" />
           <stop offset="1" stopColor="#007e4e" />
         </linearGradient>
@@ -146,7 +146,7 @@ function LivepeerGradientLockup({
             ? `url(#${metallicSymbolGradientId})`
             : `url(#${gradientId})`
         }
-        stroke={metallic ? "#d8fff1" : undefined}
+        stroke={metallic ? "#45e7ab" : undefined}
         strokeWidth={metallic ? 1 : undefined}
         strokeLinejoin={metallic ? "miter" : undefined}
         paintOrder={metallic ? "stroke fill" : undefined}

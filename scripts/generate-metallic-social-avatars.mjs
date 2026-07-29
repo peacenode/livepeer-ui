@@ -37,8 +37,8 @@ function avatarSvg(size) {
     <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
       <defs>
         <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#b8ffe5"/>
-          <stop offset=".1" stop-color="#12e49b"/>
+          <stop offset="0" stop-color="#45e7ab"/>
+          <stop offset=".1" stop-color="#16d994"/>
           <stop offset=".55" stop-color="#00c077"/>
           <stop offset="1" stop-color="#007e4e"/>
         </linearGradient>
@@ -47,7 +47,7 @@ function avatarSvg(size) {
       <g
         transform="translate(${translateX} ${translateY}) scale(${symbolScale})"
         fill="url(#metal)"
-        stroke="#d8fff1"
+        stroke="#45e7ab"
         stroke-width="1"
         stroke-linejoin="miter"
         paint-order="stroke fill"
