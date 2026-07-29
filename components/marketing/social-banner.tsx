@@ -75,7 +75,7 @@ export function SocialBannerArtwork() {
       >
         <LivepeerGradientLockup
           className="block h-auto w-full text-white"
-          metallicWordmark
+          metallic
           aria-hidden="true"
         />
       </div>
