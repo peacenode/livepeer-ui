@@ -3,12 +3,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import Image from "next/image"
 import {
+  CheckIcon,
   CopyIcon,
-  CornerDownLeftIcon,
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import {
   Dialog,
@@ -130,6 +131,8 @@ export function ProjectResultPage({
   projectName: string
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [assetNotes, setAssetNotes] = useState<Record<string, string>>({})
+  const [projectCopied, setProjectCopied] = useState(false)
   const { containerRef, cornerStyles } = useMasonryCorners()
   const capabilities = useMemo(
     () => [...new Set(assets.map((asset) => asset.capability))],
@@ -156,6 +159,29 @@ export function ProjectResultPage({
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [selectedIndex, selectOffset])
+
+  async function copyProjectPrompt() {
+    const iterable = assets.flatMap((asset) => {
+      const note = assetNotes[asset.id]?.trim()
+      if (!note) return []
+
+      return [
+        {
+          asset_id: asset.id,
+          prompt: asset.prompt ?? "",
+          note,
+        },
+      ]
+    })
+
+    await navigator.clipboard.writeText(JSON.stringify(iterable, null, 2))
+    setProjectCopied(true)
+    window.setTimeout(() => setProjectCopied(false), 1500)
+  }
+
+  const hasProjectNotes = Object.values(assetNotes).some(
+    (note) => note.trim().length > 0
+  )
 
   return (
     <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4 pb-12 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10">
@@ -187,40 +213,59 @@ export function ProjectResultPage({
           className="columns-1 gap-1 sm:columns-2 lg:columns-3 xl:columns-4"
         >
           {assets.map((asset, index) => (
-            <button
+            <div
               key={asset.id}
               data-masonry-item={asset.id}
-              type="button"
-              className="group mb-1 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="group relative mb-1 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted"
               style={cornerStyles[asset.id]}
-              onClick={() => setSelectedIndex(index)}
-              aria-label={`View asset ${index + 1} of ${assets.length}`}
             >
-              <span className="block transition-opacity group-hover:opacity-90">
-                <AssetMedia asset={asset} />
-              </span>
-            </button>
+              <button
+                type="button"
+                className="block w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                onClick={() => setSelectedIndex(index)}
+                aria-label={`View asset ${index + 1} of ${assets.length}`}
+              >
+                <span className="block transition-opacity group-hover:opacity-90">
+                  <AssetMedia asset={asset} />
+                </span>
+              </button>
+              <div className="absolute inset-x-2 bottom-2 z-10 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
+                <label htmlFor={`asset-note-${asset.id}`} className="sr-only">
+                  Note for {asset.title ?? asset.id}
+                </label>
+                <Input
+                  id={`asset-note-${asset.id}`}
+                  value={assetNotes[asset.id] ?? ""}
+                  onChange={(event) =>
+                    setAssetNotes((current) => ({
+                      ...current,
+                      [asset.id]: event.target.value,
+                    }))
+                  }
+                  placeholder="Add a note"
+                  className="h-8 rounded-sm bg-background/90 text-xs shadow-sm backdrop-blur-sm"
+                />
+              </div>
+            </div>
           ))}
         </div>
 
-        <form
-          className="mt-10 flex flex-col gap-3 border-t pt-6 sm:flex-row"
-          onSubmit={(event) => event.preventDefault()}
+        <Button
+          type="button"
+          size="lg"
+          onClick={copyProjectPrompt}
+          disabled={!hasProjectNotes}
+          className="mt-10 h-24 w-full rounded-sm"
         >
-          <label htmlFor="revision-request" className="sr-only">
-            Revision request
-          </label>
-          <input
-            id="revision-request"
-            type="text"
-            placeholder="Describe a revision"
-            className="h-10 min-w-0 flex-1 rounded-md border bg-background px-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
-          />
-          <Button type="submit" className="sm:self-start">
-            Send revision
-            <CornerDownLeftIcon data-icon="inline-end" />
-          </Button>
-        </form>
+          {projectCopied ? (
+            <CheckIcon aria-hidden="true" />
+          ) : (
+            <CopyIcon aria-hidden="true" />
+          )}
+          {projectCopied
+            ? "Copied — paste into your agent"
+            : "Copy project prompt"}
+        </Button>
       </div>
 
       <Dialog
