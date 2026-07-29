@@ -132,6 +132,7 @@ const privateBetaProductSurfaces: PrivateBetaSurface[] = [
   },
   {
     title: "Render Result",
+    href: "/mockups/private-beta/v/cobalt-runner",
     components: [
       "livepeer-agent-page-frame",
       "livepeer-agent-sidebar",

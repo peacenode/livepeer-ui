@@ -1,0 +1,224 @@
+"use client"
+
+import { useCallback, useEffect, useMemo, useState } from "react"
+import Image from "next/image"
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CornerDownLeftIcon,
+  XIcon,
+} from "lucide-react"
+
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog"
+
+type ProjectAsset = {
+  id: string
+  type: "image" | "video"
+  src: string
+  alt: string
+  width: number
+  height: number
+  capability: string
+}
+
+function AssetMedia({
+  asset,
+  detail = false,
+}: {
+  asset: ProjectAsset
+  detail?: boolean
+}) {
+  if (asset.type === "video") {
+    return (
+      <video
+        src={asset.src}
+        className={
+          detail
+            ? "max-h-[calc(100dvh-8rem)] max-w-full object-contain"
+            : "h-auto w-full object-cover"
+        }
+        controls={detail}
+        autoPlay={detail}
+        loop
+        muted
+        playsInline
+      />
+    )
+  }
+
+  return (
+    <Image
+      src={asset.src}
+      alt={asset.alt}
+      width={asset.width}
+      height={asset.height}
+      sizes={
+        detail
+          ? "100vw"
+          : "(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw"
+      }
+      className={
+        detail
+          ? "max-h-[calc(100dvh-8rem)] w-auto max-w-full object-contain"
+          : "h-auto w-full object-cover"
+      }
+    />
+  )
+}
+
+export function ProjectResultPage({
+  assets,
+  projectName,
+}: {
+  assets: ProjectAsset[]
+  projectName: string
+}) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const capabilities = useMemo(
+    () => [...new Set(assets.map((asset) => asset.capability))],
+    [assets]
+  )
+  const selectedAsset =
+    selectedIndex === null ? null : assets[selectedIndex] ?? null
+
+  const selectOffset = useCallback((offset: number) => {
+    setSelectedIndex((current) => {
+      if (current === null || assets.length === 0) return current
+      return (current + offset + assets.length) % assets.length
+    })
+  }, [assets.length])
+
+  useEffect(() => {
+    if (selectedIndex === null) return
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowLeft") selectOffset(-1)
+      if (event.key === "ArrowRight") selectOffset(1)
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [selectedIndex, selectOffset])
+
+  return (
+    <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4 pb-12 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10">
+      <div className="mx-auto w-full max-w-6xl pt-2 md:pt-8">
+        <header className="mb-6 flex items-center justify-between gap-4">
+          <h1 className="font-sans text-2xl font-medium tracking-tight text-balance sm:text-3xl">
+            {projectName}
+          </h1>
+        </header>
+
+        <div className="columns-1 gap-3 sm:columns-2 lg:columns-3 xl:columns-4">
+          {assets.map((asset, index) => (
+            <button
+              key={asset.id}
+              type="button"
+              className="group mb-3 block w-full break-inside-avoid overflow-hidden rounded-sm bg-muted text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`View asset ${index + 1} of ${assets.length}`}
+            >
+              <span className="block transition-opacity group-hover:opacity-90">
+                <AssetMedia asset={asset} />
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <form
+          className="mt-10 flex flex-col gap-3 border-t pt-6 sm:flex-row"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <label htmlFor="revision-request" className="sr-only">
+            Revision request
+          </label>
+          <input
+            id="revision-request"
+            type="text"
+            placeholder="Describe a revision"
+            className="h-10 min-w-0 flex-1 rounded-md border bg-background px-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
+          />
+          <Button type="submit" className="sm:self-start">
+            Send revision
+            <CornerDownLeftIcon data-icon="inline-end" />
+          </Button>
+        </form>
+
+        <div className="mt-8 flex flex-wrap gap-1.5" aria-label="Capabilities">
+          {capabilities.map((capability) => (
+            <Badge
+              key={capability}
+              variant="secondary"
+              className="font-normal text-muted-foreground"
+            >
+              {capability}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      <Dialog
+        open={selectedAsset !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedIndex(null)
+        }}
+      >
+        <DialogContent
+          showCloseButton={false}
+          className="flex h-dvh w-screen max-w-none items-center justify-center rounded-none bg-black/95 p-4 text-white shadow-none ring-0 sm:max-w-none"
+        >
+          <DialogTitle className="sr-only">
+            {selectedIndex === null
+              ? "Project asset"
+              : `Project asset ${selectedIndex + 1} of ${assets.length}`}
+          </DialogTitle>
+          {selectedAsset && (
+            <div className="flex h-full w-full items-center justify-center">
+              <AssetMedia asset={selectedAsset} detail />
+            </div>
+          )}
+          <Button
+            type="button"
+            variant="secondary"
+            size="icon"
+            className="absolute top-4 right-4"
+            onClick={() => setSelectedIndex(null)}
+          >
+            <XIcon />
+            <span className="sr-only">Close detail view</span>
+          </Button>
+          {assets.length > 1 && (
+            <>
+              <Button
+                type="button"
+                variant="secondary"
+                size="icon"
+                className="absolute top-1/2 left-4 -translate-y-1/2"
+                onClick={() => selectOffset(-1)}
+              >
+                <ArrowLeftIcon />
+                <span className="sr-only">Previous asset</span>
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                size="icon"
+                className="absolute top-1/2 right-4 -translate-y-1/2"
+                onClick={() => selectOffset(1)}
+              >
+                <ArrowRightIcon />
+                <span className="sr-only">Next asset</span>
+              </Button>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </section>
+  )
+}
