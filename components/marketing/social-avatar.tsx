@@ -13,7 +13,10 @@ export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
       data-avatar-id={avatar.id}
       data-avatar-size={`${avatar.width}x${avatar.height}`}
     >
-      <LivepeerGradientSymbol className="h-[52cqh] w-auto" aria-hidden="true" />
+      <LivepeerGradientSymbol
+        className="h-[52cqh] w-auto translate-x-[13%]"
+        aria-hidden="true"
+      />
       <style>{"nextjs-portal { display: none !important; }"}</style>
     </main>
   )
