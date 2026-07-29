@@ -87,12 +87,30 @@ function AssetMedia({
   )
 }
 
-function AssetPromptEditor({ prompt = "" }: { prompt?: string }) {
+function AssetPromptEditor({
+  assetId,
+  projectId,
+  prompt = "",
+}: {
+  assetId: string
+  projectId: string
+  prompt?: string
+}) {
   const [value, setValue] = useState(prompt)
   const [copied, setCopied] = useState(false)
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(value)
+    await navigator.clipboard.writeText(
+      JSON.stringify(
+        {
+          project_id: projectId,
+          asset_id: assetId,
+          prompt: value,
+        },
+        null,
+        2
+      )
+    )
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1500)
   }
@@ -377,6 +395,8 @@ export function ProjectResultPage({
                 <div className="mt-4 shrink-0 px-1 pt-4 pb-1">
                   <AssetPromptEditor
                     key={selectedAsset.id}
+                    assetId={selectedAsset.id}
+                    projectId={projectId}
                     prompt={selectedAsset.prompt}
                   />
                 </div>
