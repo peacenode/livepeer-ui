@@ -1,0 +1,69 @@
+import Image from "next/image"
+
+import { SocialBannerArtwork } from "@/components/marketing/social-banner"
+import { socialAvatarBatch } from "@/lib/social-assets"
+
+export function XProfilePreview() {
+  return (
+    <section className="mt-10 border-t pt-8">
+      <h2 className="text-xl font-semibold tracking-tight">
+        X profile relationship
+      </h2>
+      <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+        The 1500 × 500 header and 400 × 400 avatar shown at X&apos;s desktop
+        and mobile overlap.
+      </p>
+
+      <div className="mt-5 grid items-start gap-8 md:grid-cols-[minmax(0,598px)_minmax(240px,390px)]">
+        <ProfileFrame label="Desktop" avatarLeft="2.675%" avatarSize="18.73%" />
+        <ProfileFrame label="Mobile" avatarLeft="4.1%" avatarSize="20.5%" />
+      </div>
+    </section>
+  )
+}
+
+function ProfileFrame({
+  avatarSize,
+  avatarLeft,
+  label,
+}: {
+  avatarLeft: string
+  avatarSize: string
+  label: string
+}) {
+  return (
+    <figure>
+      <figcaption className="mb-2 text-xs font-medium text-muted-foreground">
+        {label}
+      </figcaption>
+      <div className="overflow-hidden rounded-xl border bg-background">
+        <div
+          className="relative aspect-3/1 bg-black"
+          style={{ containerType: "size" }}
+        >
+          <SocialBannerArtwork />
+          <div
+            className="absolute top-full z-20 -translate-y-1/2 overflow-hidden rounded-full border-4 border-background bg-black"
+            style={{
+              left: avatarLeft,
+              width: avatarSize,
+              aspectRatio: "1",
+              boxShadow:
+                "-10px -10px 28px rgb(255 255 255 / 0.09), 0 8px 20px rgb(0 0 0 / 0.18)",
+            }}
+          >
+            <Image
+              src={`/social-assets/avatars/${socialAvatarBatch}/400.png`}
+              fill
+              sizes="112px"
+              alt="Livepeer profile avatar"
+              className="object-cover"
+              unoptimized
+            />
+          </div>
+        </div>
+        <div className="h-24 bg-background sm:h-28" aria-hidden="true" />
+      </div>
+    </figure>
+  )
+}

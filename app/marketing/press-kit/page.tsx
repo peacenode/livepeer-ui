@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import { socialAvatars, socialBanners } from "@/lib/social-assets"
 
@@ -23,6 +24,8 @@ export default function PressKitPage() {
         </p>
       </header>
 
+      <XProfilePreview />
+
       <div className="mt-8 grid gap-x-8 gap-y-14 md:grid-cols-2">
         {pressDeliverables.map((deliverable) => (
           <Deliverable key={deliverable.id} deliverable={deliverable} />
@@ -32,8 +35,8 @@ export default function PressKitPage() {
       <section className="mt-16 border-t pt-8">
         <h2 className="text-xl font-semibold tracking-tight">Banner routes</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Each route renders at its export dimensions and freezes the particle
-          stream at a tuned point in the animation.
+          Each route renders the shared banner composition at its exact export
+          dimensions.
         </p>
         <div className="mt-5 divide-y border-y">
           {socialBanners.map((banner) => (

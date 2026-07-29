@@ -13,6 +13,8 @@ export type SocialAvatar = {
   width: number
 }
 
+export const socialAvatarBatch = "20260729-132136"
+
 export const socialAvatars: SocialAvatar[] = [
   {
     id: "400",
