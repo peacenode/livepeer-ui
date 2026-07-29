@@ -40,7 +40,7 @@ function AssetMedia({
         src={asset.src}
         className={
           detail
-            ? "h-auto w-auto max-h-full max-w-full object-contain"
+            ? "h-full w-full object-contain"
             : "h-auto w-full object-cover"
         }
         controls={detail}
@@ -65,7 +65,7 @@ function AssetMedia({
       }
       className={
         detail
-          ? "h-auto w-auto max-h-full max-w-full object-contain"
+          ? "h-full w-full object-contain"
           : "h-auto w-full object-cover"
       }
     />
