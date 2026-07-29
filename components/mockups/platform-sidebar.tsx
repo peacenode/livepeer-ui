@@ -44,7 +44,7 @@ export function PlatformSidebar({
           aria-label={homeAriaLabel}
           className="inline-flex h-9 items-center"
         >
-          <span className="flex items-end gap-1.5 text-black">
+          <span className="flex items-end gap-1.5 text-foreground">
             <LivepeerGradientSymbol className="h-4 w-auto" />
             <LivepeerWordmark className="h-4 w-auto" />
             <span
