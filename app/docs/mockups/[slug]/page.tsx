@@ -179,10 +179,7 @@ const privateBetaAgentHomeSurface: PrivateBetaSurface = {
 
 const privateBetaAgentRoutes = [
   { title: "MCP server", path: "/api/mcp" },
-  { title: "Project render result", path: "/v/{id}" },
-  { title: "Moodboard result", path: "/m/{id}" },
-  { title: "CLI-run result", path: "/preview/{id}" },
-  { title: "Shared-session result", path: "/session/{token}" },
+  { title: "Render result", path: "/v/" },
 ]
 
 const internalTestingLandingSurface: PrivateBetaSurface = {
