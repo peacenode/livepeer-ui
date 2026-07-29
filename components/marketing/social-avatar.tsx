@@ -1,4 +1,4 @@
-import { LivepeerGradientLockup } from "@/components/brand"
+import { LivepeerGradientSymbol } from "@/components/brand"
 import type { SocialAvatar as SocialAvatarConfig } from "@/lib/social-assets"
 
 export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
@@ -13,10 +13,7 @@ export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
       data-avatar-id={avatar.id}
       data-avatar-size={`${avatar.width}x${avatar.height}`}
     >
-      <LivepeerGradientLockup
-        className="h-auto w-[78cqw] text-white"
-        aria-hidden="true"
-      />
+      <LivepeerGradientSymbol className="h-[52cqh] w-auto" aria-hidden="true" />
       <style>{"nextjs-portal { display: none !important; }"}</style>
     </main>
   )
