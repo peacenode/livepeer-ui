@@ -111,6 +111,8 @@ function LivepeerCubeStream({
     let width = 0
     let particles: Particle[] = []
     let palette = getCanvasThemePalette(inverted)
+    let readyFrame = 0
+    let readyPaintFrame = 0
     let start = performance.now() - startAtSeconds * 1000
     let previousTime = start
 
@@ -215,7 +217,7 @@ function LivepeerCubeStream({
           width * (variant === "card" || variant === "banner" ? 0.15 : 0.1),
           180
         )
-      const particleSize = width < 640 ? 2 : 3
+      const particleSize = width < 640 ? 2 : variant === "banner" ? 5 : 3
       const windForce =
         width < 640
           ? -0.002
@@ -306,12 +308,15 @@ function LivepeerCubeStream({
 
         context.globalAlpha = 1
         context.fillStyle = palette[particle.colorIndex]
-        context.fillRect(
-          Math.round(particle.x - particleSize / 2),
-          Math.round(particle.y - particleSize / 2),
-          particleSize,
-          particleSize
+        context.beginPath()
+        context.arc(
+          particle.x,
+          particle.y,
+          particleSize / 2,
+          0,
+          Math.PI * 2
         )
+        context.fill()
       }
 
       context.globalAlpha = 1
@@ -319,8 +324,16 @@ function LivepeerCubeStream({
         freezeAtSeconds !== undefined && elapsed >= freezeAtSeconds
 
       if (frozen || reduceMotion) {
-        if (freezeAtSeconds !== undefined) {
-          document.documentElement.dataset.captureReady = "true"
+        if (
+          freezeAtSeconds !== undefined &&
+          !isPrerolling &&
+          readyFrame === 0
+        ) {
+          readyFrame = requestAnimationFrame(() => {
+            readyPaintFrame = requestAnimationFrame(() => {
+              document.documentElement.dataset.captureReady = "true"
+            })
+          })
         }
       } else if (!isPrerolling) {
         frame = requestAnimationFrame(draw)
@@ -340,32 +353,37 @@ function LivepeerCubeStream({
       attributes: true,
       attributeFilter: ["class", "style"],
     })
-    resize()
-    const prerollStart = performance.now()
-    start = prerollStart
-    previousTime = prerollStart
+    frame = requestAnimationFrame(() => {
+      resize()
 
-    if (!reduceMotion && startAtSeconds > 0) {
-      isPrerolling = true
+      const prerollStart = performance.now()
+      start = prerollStart
+      previousTime = prerollStart
 
-      for (
-        let simulatedTime = 16.667;
-        simulatedTime <= startAtSeconds * 1000;
-        simulatedTime += 16.667
-      ) {
-        draw(prerollStart + simulatedTime)
+      if (!reduceMotion && startAtSeconds > 0) {
+        isPrerolling = true
+
+        for (
+          let simulatedTime = 16.667;
+          simulatedTime <= startAtSeconds * 1000;
+          simulatedTime += 16.667
+        ) {
+          draw(prerollStart + simulatedTime)
+        }
+
+        isPrerolling = false
       }
 
-      isPrerolling = false
-    }
-
-    const playbackStart = performance.now()
-    start = playbackStart - startAtSeconds * 1000
-    previousTime = playbackStart
-    frame = requestAnimationFrame(draw)
+      const playbackStart = performance.now()
+      start = playbackStart - startAtSeconds * 1000
+      previousTime = playbackStart
+      frame = requestAnimationFrame(draw)
+    })
 
     return () => {
       cancelAnimationFrame(frame)
+      cancelAnimationFrame(readyFrame)
+      cancelAnimationFrame(readyPaintFrame)
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
       themeObserver.disconnect()

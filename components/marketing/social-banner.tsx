@@ -20,7 +20,7 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
         data-banner-size={`${banner.width}x${banner.height}`}
       >
         <LivepeerCubeStream
-          startAtSeconds={banner.startTime}
+          startAtSeconds={banner.captureTime}
           freezeAtSeconds={banner.captureTime}
           inverted
           variant="banner"

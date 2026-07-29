@@ -3,7 +3,6 @@ export type SocialBanner = {
   height: number
   id: string
   platform: string
-  startTime: number
   width: number
 }
 
@@ -48,7 +47,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "X",
     width: 1500,
     height: 500,
-    startTime: 1.95,
     captureTime: 3.2,
   },
   {
@@ -56,7 +54,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "LinkedIn",
     width: 4200,
     height: 700,
-    startTime: 2.85,
     captureTime: 4.1,
   },
   {
@@ -64,7 +61,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "Reddit",
     width: 1080,
     height: 128,
-    startTime: 1.15,
     captureTime: 2.4,
   },
   {
@@ -72,7 +68,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "Paragraph, Medium, Mirror, Linktree",
     width: 1200,
     height: 300,
-    startTime: 2.35,
     captureTime: 3.6,
   },
   {
@@ -80,7 +75,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "Discord",
     width: 960,
     height: 540,
-    startTime: 1.65,
     captureTime: 2.9,
   },
   {
@@ -88,7 +82,6 @@ export const socialBanners: SocialBanner[] = [
     platform: "YouTube",
     width: 2560,
     height: 1440,
-    startTime: 3.25,
     captureTime: 4.5,
   },
 ]
