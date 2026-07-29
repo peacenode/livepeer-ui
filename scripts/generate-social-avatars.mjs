@@ -3,7 +3,7 @@ import path from "node:path"
 
 import sharp from "sharp"
 
-const batch = "20260729-130308"
+const batch = "20260729-131040"
 const sizes = [400, 500, 512, 800]
 const outputDirectory = path.join(
   process.cwd(),
@@ -28,10 +28,13 @@ for (const size of sizes) {
   const scale = (size * 0.52) / 89
   const symbolX = size * 0.34225
   const symbolY = size * 0.24
+  const tileSize = Math.round(15.4995 * scale)
   const rectangles = tiles
     .map(
       ([x, y]) =>
-        `<rect x="${x}" y="${y}" width="15.4995" height="15.4995"/>`
+        `<rect x="${Math.round(symbolX + x * scale)}" y="${Math.round(
+          symbolY + y * scale
+        )}" width="${tileSize}" height="${tileSize}"/>`
     )
     .join("")
 
@@ -45,7 +48,7 @@ for (const size of sizes) {
         </linearGradient>
       </defs>
       <rect width="${size}" height="${size}" fill="#000"/>
-      <g fill="url(#green)" transform="translate(${symbolX} ${symbolY}) scale(${scale})">
+      <g fill="url(#green)" shape-rendering="crispEdges">
         ${rectangles}
       </g>
     </svg>
