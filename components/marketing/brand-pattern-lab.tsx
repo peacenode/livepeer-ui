@@ -11,11 +11,51 @@ import {
 import { Button } from "@/components/ui/button"
 
 type PatternMode = "stagger" | "radial"
+type PatternSize = "medium" | "small" | "micro"
+type LightPreset = "soft" | "focused" | "raking"
 
 type PatternOrigin = {
   rotation: number
   x: number
   y: number
+}
+
+const patternSizes: Record<
+  PatternSize,
+  { gap: number; hole: number; symbol: number }
+> = {
+  medium: { gap: 1.02, hole: 0.16, symbol: 0.47 },
+  small: { gap: 0.78, hole: 0.12, symbol: 0.36 },
+  micro: { gap: 0.58, hole: 0.085, symbol: 0.265 },
+}
+
+const lightPresets: Record<
+  LightPreset,
+  {
+    angle: number
+    intensity: number
+    penumbra: number
+    position: [number, number, number]
+  }
+> = {
+  soft: {
+    angle: 0.58,
+    intensity: 1450,
+    penumbra: 0.28,
+    position: [-5.5, 5, 7],
+  },
+  focused: {
+    angle: 0.36,
+    intensity: 1900,
+    penumbra: 0.16,
+    position: [-5.8, 4.6, 8],
+  },
+  raking: {
+    angle: 0.48,
+    intensity: 2400,
+    penumbra: 0.14,
+    position: [-8, 2.2, 3.8],
+  },
 }
 
 const symbolBlocks = [
@@ -58,6 +98,7 @@ function createSquareHole(
 
 function createPatternOrigins(
   mode: PatternMode,
+  gap: number,
   halfWidth: number,
   halfHeight: number
 ) {
@@ -66,8 +107,11 @@ function createPatternOrigins(
   if (mode === "radial") {
     origins.push({ x: 0, y: 0, rotation: 0 })
 
-    for (let radius = 0.78; radius <= halfWidth + 1; radius += 0.78) {
-      const count = Math.max(6, Math.round((Math.PI * 2 * radius) / 0.92))
+    for (let radius = gap; radius <= halfWidth + 1; radius += gap) {
+      const count = Math.max(
+        6,
+        Math.round((Math.PI * 2 * radius) / (gap * 1.18))
+      )
 
       for (let index = 0; index < count; index += 1) {
         const angle = (index / count) * Math.PI * 2
@@ -82,8 +126,8 @@ function createPatternOrigins(
     return origins
   }
 
-  const xGap = 1.02
-  const yGap = 1.08
+  const xGap = gap
+  const yGap = gap * 1.06
   const columns = Math.ceil(halfWidth / xGap) + 2
   const rows = Math.ceil(halfHeight / yGap) + 2
 
@@ -102,7 +146,13 @@ function createPatternOrigins(
   return origins
 }
 
-function PerforatedSurface({ mode }: { mode: PatternMode }) {
+function PerforatedSurface({
+  mode,
+  size,
+}: {
+  mode: PatternMode
+  size: PatternSize
+}) {
   const geometry = useMemo(() => {
     const width = 17.4
     const height = 9.8
@@ -117,9 +167,15 @@ function PerforatedSurface({ mode }: { mode: PatternMode }) {
     shape.lineTo(-halfWidth, halfHeight)
     shape.closePath()
 
-    const symbolScale = 0.47
-    const holeSize = 0.16
-    const origins = createPatternOrigins(mode, halfWidth, halfHeight)
+    const scale = patternSizes[size]
+    const symbolScale = scale.symbol
+    const holeSize = scale.hole
+    const origins = createPatternOrigins(
+      mode,
+      scale.gap,
+      halfWidth,
+      halfHeight
+    )
 
     origins.forEach(({ rotation, x: originX, y: originY }) => {
       const cosine = Math.cos(rotation)
@@ -155,7 +211,7 @@ function PerforatedSurface({ mode }: { mode: PatternMode }) {
     nextGeometry.computeVertexNormals()
 
     return nextGeometry
-  }, [mode])
+  }, [mode, size])
 
   useEffect(() => () => geometry.dispose(), [geometry])
 
@@ -173,16 +229,26 @@ function PerforatedSurface({ mode }: { mode: PatternMode }) {
   )
 }
 
-function PatternScene({ mode }: { mode: PatternMode }) {
+function PatternScene({
+  light,
+  mode,
+  size,
+}: {
+  light: LightPreset
+  mode: PatternMode
+  size: PatternSize
+}) {
+  const lighting = lightPresets[light]
+
   return (
     <>
       <color attach="background" args={["#000000"]} />
       <spotLight
         color="#f4fff9"
-        position={[-5.5, 5, 7]}
-        intensity={1450}
-        angle={0.58}
-        penumbra={0.28}
+        position={lighting.position}
+        intensity={lighting.intensity}
+        angle={lighting.angle}
+        penumbra={lighting.penumbra}
         decay={1}
         distance={0}
         castShadow
@@ -194,7 +260,7 @@ function PatternScene({ mode }: { mode: PatternMode }) {
           -0.025,
         ]}
       >
-        <PerforatedSurface mode={mode} />
+        <PerforatedSurface mode={mode} size={size} />
       </group>
     </>
   )
@@ -202,6 +268,8 @@ function PatternScene({ mode }: { mode: PatternMode }) {
 
 export function BrandPatternLab() {
   const [mode, setMode] = useState<PatternMode>("stagger")
+  const [size, setSize] = useState<PatternSize>("small")
+  const [light, setLight] = useState<LightPreset>("soft")
 
   return (
     <section className="mt-8">
@@ -220,7 +288,7 @@ export function BrandPatternLab() {
             powerPreference: "high-performance",
           }}
         >
-          <PatternScene mode={mode} />
+          <PatternScene light={light} mode={mode} size={size} />
         </Canvas>
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between p-3 text-[10px] font-medium tracking-widest text-white/45 uppercase">
           <span>Livepeer pattern study</span>
@@ -228,19 +296,57 @@ export function BrandPatternLab() {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-y py-5">
-        {(["stagger", "radial"] as const).map((pattern) => (
+      <div className="mt-5 grid gap-5 border-y py-5 sm:grid-cols-3">
+        <OptionGroup
+          label="Pattern"
+          options={["stagger", "radial"]}
+          value={mode}
+          onChange={setMode}
+        />
+        <OptionGroup
+          label="Size"
+          options={["medium", "small", "micro"]}
+          value={size}
+          onChange={setSize}
+        />
+        <OptionGroup
+          label="Light"
+          options={["soft", "focused", "raking"]}
+          value={light}
+          onChange={setLight}
+        />
+      </div>
+    </section>
+  )
+}
+
+function OptionGroup<Option extends string>({
+  label,
+  onChange,
+  options,
+  value,
+}: {
+  label: string
+  onChange: (option: Option) => void
+  options: readonly Option[]
+  value: Option
+}) {
+  return (
+    <div>
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {options.map((option) => (
           <Button
-            key={pattern}
+            key={option}
             size="sm"
-            variant={mode === pattern ? "secondary" : "outline"}
-            onClick={() => setMode(pattern)}
+            variant={value === option ? "secondary" : "outline"}
+            onClick={() => onChange(option)}
             className="capitalize"
           >
-            {pattern}
+            {option}
           </Button>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
