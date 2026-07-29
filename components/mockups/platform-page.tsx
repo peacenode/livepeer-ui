@@ -34,7 +34,7 @@ export function PlatformPage({
   )
 
   return (
-    <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-4 pb-10 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10 md:pt-6">
+    <section className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto px-4 pb-10 sm:-mx-6 sm:px-6 md:-mx-10 md:px-10 md:pt-6">
       <div
         className={cn(
           "mx-auto w-full max-w-screen-2xl",

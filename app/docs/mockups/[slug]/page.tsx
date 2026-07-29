@@ -663,6 +663,10 @@ export default async function MockupPage({
                   },
                   sourceLabel: `${privateBetaAgentDeployment.hostname}${route.path}`,
                 })),
+                ...privateBetaRenderExamples.map((surface) => ({
+                  surface,
+                  sourceLabel: `${privateBetaAgentDeployment.hostname}/v/${surface.href?.split("/").at(-1)}`,
+                })),
               ]}
               componentNames={[
                 publicBetaInstallSurface,
