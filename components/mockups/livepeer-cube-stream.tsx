@@ -27,7 +27,7 @@ function makeParticles(
   count: number,
   width: number,
   height: number,
-  variant: "card" | "default"
+  variant: "banner" | "card" | "default"
 ): Particle[] {
   return Array.from({ length: count }, (_, index) => {
     const progress = noise(index + 3)
@@ -38,14 +38,23 @@ function makeParticles(
       Math.min(width * 0.25, 340) *
       (0.4 + progress * 0.6)
     const fieldCenterX =
-      width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
+      width *
+      (width < 640
+        ? 0.18
+        : variant === "banner"
+          ? 0.5
+          : variant === "card"
+            ? 0.32
+            : 0.3)
     const fieldCenterY = height * 0.5
     const fieldRadius =
       width < 640
         ? width * 0.92
-        : variant === "card"
-          ? Math.min(width * 0.42, height * 0.95)
-          : Math.min(width * 0.36, height * 0.54)
+        : variant === "banner"
+          ? Math.min(width * 0.42, height * 0.68)
+          : variant === "card"
+            ? Math.min(width * 0.42, height * 0.95)
+            : Math.min(width * 0.36, height * 0.54)
     let x = centerX + spread
     let y = (-0.1 + progress * 1.2) * height
     const fieldX = x - fieldCenterX
@@ -78,7 +87,7 @@ function LivepeerCubeStream({
   className?: string
   freezeAtSeconds?: number
   inverted?: boolean
-  variant?: "card" | "default"
+  variant?: "banner" | "card" | "default"
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -132,7 +141,9 @@ function LivepeerCubeStream({
 
       if (heroCopy instanceof HTMLElement && width >= 640) {
         const copyBounds = heroCopy.getBoundingClientRect()
-        const fieldCenterX = width * (variant === "card" ? 0.32 : 0.3)
+        const fieldCenterX =
+          width *
+          (variant === "banner" ? 0.5 : variant === "card" ? 0.32 : 0.3)
         const fieldCenterY = height * 0.5
         const fieldPadding = variant === "card" ? 20 : 32
         const copyRight = copyBounds.right - bounds.left + fieldPadding
@@ -175,22 +186,39 @@ function LivepeerCubeStream({
         : Math.min(2, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
       const fieldCenterX =
-        width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
+        width *
+        (width < 640
+          ? 0.18
+          : variant === "banner"
+            ? 0.5
+            : variant === "card"
+              ? 0.32
+              : 0.3)
       const fieldCenterY = height * 0.5
       const fieldRadius =
         width < 640
           ? width * 0.92
           : Math.max(
-              variant === "card"
-                ? Math.min(width * 0.42, height * 0.95)
-                : Math.min(width * 0.42, height * 0.78),
+              variant === "banner"
+                ? Math.min(width * 0.42, height * 0.68)
+                : variant === "card"
+                  ? Math.min(width * 0.42, height * 0.95)
+                  : Math.min(width * 0.42, height * 0.78),
               heroExclusionRadius
             )
       const influenceRadius =
-        fieldRadius + Math.min(width * (variant === "card" ? 0.15 : 0.1), 180)
+        fieldRadius +
+        Math.min(
+          width * (variant === "card" || variant === "banner" ? 0.15 : 0.1),
+          180
+        )
       const particleSize = width < 640 ? 2 : 3
       const windForce =
-        width < 640 ? -0.002 : variant === "card" ? -0.014 : -0.0065
+        width < 640
+          ? -0.002
+          : variant === "card" || variant === "banner"
+            ? -0.014
+            : -0.0065
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
@@ -216,9 +244,15 @@ function LivepeerCubeStream({
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
           const radialForce =
-            radialError * (variant === "card" ? 0.00006 : 0.000035) * proximity
+            radialError *
+            (variant === "card" || variant === "banner"
+              ? 0.00006
+              : 0.000035) *
+            proximity
           const orbitForce =
-            proximity * proximity * (variant === "card" ? 0.085 : 0.06)
+            proximity *
+            proximity *
+            (variant === "card" || variant === "banner" ? 0.085 : 0.06)
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the

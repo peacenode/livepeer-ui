@@ -29,12 +29,12 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
         <LivepeerCubeStream
           freezeAtSeconds={banner.captureTime}
           inverted
-          variant="card"
+          variant="banner"
           className="opacity-90"
         />
 
         <div
-          className="absolute top-1/2 left-[62%] z-10 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
           style={{
             width: isShallow ? "30cqw" : "min(34cqw, 104cqh)",
           }}
