@@ -86,12 +86,14 @@ export function SocialPreviewArtwork() {
         className="absolute inset-x-0 bottom-0 z-20 h-[68%]"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(90deg, transparent 0, rgb(0 0 0 / 0.38) 0.8cqw, rgb(0 0 0 / 0.9) 1.7cqw, rgb(0 0 0 / 0.24) 2.6cqw, transparent 3.5cqw)",
-          filter: "blur(0.3cqw)",
+            "linear-gradient(90deg, rgb(0 0 0 / 0.98) 0 0.7cqw, transparent 0.7cqw calc(100% - 0.7cqw), rgb(0 0 0 / 0.98) calc(100% - 0.7cqw)), linear-gradient(0deg, rgb(0 0 0 / 0.98) 0 0.7cqw, transparent 0.7cqw calc(100% - 0.7cqw), rgb(0 0 0 / 0.98) calc(100% - 0.7cqw)), radial-gradient(circle at 46% 43%, rgb(0 0 0) 0 32%, rgb(0 0 0 / 0.96) 36%, rgb(255 255 255 / 0.1) 39%, rgb(255 255 255 / 0.025) 41%, rgb(0 0 0 / 0.92) 46%, transparent 47%), linear-gradient(132deg, rgb(255 255 255 / 0.09) 0%, rgb(255 255 255 / 0.02) 18%, rgb(0 0 0 / 0.9) 72%)",
+          backgroundSize: "14cqw 14cqw",
+          backgroundPosition: "center bottom",
+          opacity: 0.58,
           maskImage:
-            "linear-gradient(to top, black 0%, rgb(0 0 0 / 0.88) 42%, transparent 100%)",
+            "linear-gradient(to top, black 0%, black 38%, rgb(0 0 0 / 0.72) 64%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to top, black 0%, rgb(0 0 0 / 0.88) 42%, transparent 100%)",
+            "linear-gradient(to top, black 0%, black 38%, rgb(0 0 0 / 0.72) 64%, transparent 100%)",
         }}
         aria-hidden="true"
       />
