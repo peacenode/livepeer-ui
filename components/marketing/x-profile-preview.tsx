@@ -7,7 +7,7 @@ export function XProfilePreview() {
   return (
     <section className="mt-10 border-t pt-8">
       <h2 className="text-xl font-semibold tracking-tight">
-        X profile relationship
+        X demo
       </h2>
       <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
         The 1500 × 500 header and 400 × 400 avatar shown at X&apos;s desktop
