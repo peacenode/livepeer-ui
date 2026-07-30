@@ -5,7 +5,7 @@ import { BrandPatternLab } from "@/components/marketing/brand-pattern-lab"
 export const metadata: Metadata = {
   title: "Brand Pattern Lab",
   description:
-    "A 16:9 Three.js canvas for developing dimensional Livepeer brand patterns.",
+    "A 16:9 circle lattice that carves Livepeer figures and patterns as negative space.",
 }
 
 export default function PatternLabPage() {
@@ -16,8 +16,8 @@ export default function PatternLabPage() {
           Brand Pattern Lab
         </h1>
         <p className="mt-2 text-balance text-muted-foreground">
-          Subtract a repeating Livepeer SVG pattern from a dimensional surface,
-          then study its cut edges under a single fixed light.
+          A connected circle lattice that carves figures and full-field
+          patterns as negative space.
         </p>
       </header>
 
