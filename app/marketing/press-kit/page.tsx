@@ -186,16 +186,20 @@ function DeliverablePreview({
   const ratio = deliverable.previewWidth / deliverable.previewHeight
   const isAvatar = deliverable.id === "avatar"
   const isBanner = deliverable.id === "banners-headers"
+  const isSocialPreview = deliverable.id === "social-preview"
+  const hasBannerArtwork = isBanner || isSocialPreview
 
   return (
     <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
       <div
         className={`relative max-h-full max-w-full overflow-hidden ${
-          isAvatar || isBanner ? "bg-black" : "bg-muted-foreground/20"
+          isAvatar || hasBannerArtwork
+            ? "bg-black"
+            : "bg-muted-foreground/20"
         }`}
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
-          containerType: isBanner ? "size" : undefined,
+          containerType: hasBannerArtwork ? "size" : undefined,
           width:
             ratio >= 2.5
               ? "100%"
@@ -220,6 +224,7 @@ function DeliverablePreview({
           />
         ) : null}
         {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
+        {isSocialPreview ? <SocialBannerArtwork /> : null}
       </div>
     </div>
   )
