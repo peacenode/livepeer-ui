@@ -27,7 +27,7 @@ function makeParticles(
   count: number,
   width: number,
   height: number,
-  variant: "card" | "default"
+  variant: "banner" | "card" | "default"
 ): Particle[] {
   return Array.from({ length: count }, (_, index) => {
     const progress = noise(index + 3)
@@ -38,14 +38,23 @@ function makeParticles(
       Math.min(width * 0.25, 340) *
       (0.4 + progress * 0.6)
     const fieldCenterX =
-      width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
+      width *
+      (width < 640
+        ? 0.18
+        : variant === "banner"
+          ? 0.5
+          : variant === "card"
+            ? 0.32
+            : 0.3)
     const fieldCenterY = height * 0.5
     const fieldRadius =
       width < 640
         ? width * 0.92
-        : variant === "card"
-          ? Math.min(width * 0.42, height * 0.95)
-          : Math.min(width * 0.36, height * 0.54)
+        : variant === "banner"
+          ? Math.min(width * 0.42, height * 0.68)
+          : variant === "card"
+            ? Math.min(width * 0.42, height * 0.95)
+            : Math.min(width * 0.36, height * 0.54)
     let x = centerX + spread
     let y = (-0.1 + progress * 1.2) * height
     const fieldX = x - fieldCenterX
@@ -71,12 +80,16 @@ function makeParticles(
 
 function LivepeerCubeStream({
   className,
+  freezeAtSeconds,
   inverted = false,
+  startAtSeconds = 0,
   variant = "default",
 }: {
   className?: string
+  freezeAtSeconds?: number
   inverted?: boolean
-  variant?: "card" | "default"
+  startAtSeconds?: number
+  variant?: "banner" | "card" | "default"
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -93,12 +106,19 @@ function LivepeerCubeStream({
     let frame = 0
     let height = 0
     let heroExclusionRadius = 0
+    let isPrerolling = false
     let resizeFrame = 0
     let width = 0
     let particles: Particle[] = []
     let palette = getCanvasThemePalette(inverted)
-    let start = performance.now()
+    let readyFrame = 0
+    let readyPaintFrame = 0
+    let start = performance.now() - startAtSeconds * 1000
     let previousTime = start
+
+    if (freezeAtSeconds !== undefined) {
+      delete document.documentElement.dataset.captureReady
+    }
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect()
@@ -107,7 +127,7 @@ function LivepeerCubeStream({
 
       if (nextWidth <= 0 || nextHeight <= 0) return
 
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.5)
+      const ratio = Math.min(window.devicePixelRatio || 1, 2)
       const previousWidth = width
       const previousHeight = height
       const crossedMobileBreakpoint =
@@ -120,13 +140,15 @@ function LivepeerCubeStream({
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
 
       const heroCopy =
-        variant === "card"
+        variant === "card" || variant === "banner"
           ? canvas.parentElement?.querySelector("[data-particle-exclusion]")
           : canvas.parentElement?.querySelector("h1")?.parentElement
 
       if (heroCopy instanceof HTMLElement && width >= 640) {
         const copyBounds = heroCopy.getBoundingClientRect()
-        const fieldCenterX = width * (variant === "card" ? 0.32 : 0.3)
+        const fieldCenterX =
+          width *
+          (variant === "banner" ? 0.5 : variant === "card" ? 0.32 : 0.3)
         const fieldCenterY = height * 0.5
         const fieldPadding = variant === "card" ? 20 : 32
         const copyRight = copyBounds.right - bounds.left + fieldPadding
@@ -169,22 +191,39 @@ function LivepeerCubeStream({
         : Math.min(2, Math.max(0.25, (time - previousTime) / 16.667))
       previousTime = time
       const fieldCenterX =
-        width * (width < 640 ? 0.18 : variant === "card" ? 0.32 : 0.3)
+        width *
+        (width < 640
+          ? 0.18
+          : variant === "banner"
+            ? 0.5
+            : variant === "card"
+              ? 0.32
+              : 0.3)
       const fieldCenterY = height * 0.5
       const fieldRadius =
         width < 640
           ? width * 0.92
           : Math.max(
-              variant === "card"
-                ? Math.min(width * 0.42, height * 0.95)
-                : Math.min(width * 0.42, height * 0.78),
+              variant === "banner"
+                ? Math.min(width * 0.42, height * 0.68)
+                : variant === "card"
+                  ? Math.min(width * 0.42, height * 0.95)
+                  : Math.min(width * 0.42, height * 0.78),
               heroExclusionRadius
             )
       const influenceRadius =
-        fieldRadius + Math.min(width * (variant === "card" ? 0.15 : 0.1), 180)
-      const particleSize = width < 640 ? 2 : 3
+        fieldRadius +
+        Math.min(
+          width * (variant === "card" || variant === "banner" ? 0.15 : 0.1),
+          180
+        )
+      const particleSize = width < 640 ? 2 : variant === "banner" ? 5 : 3
       const windForce =
-        width < 640 ? -0.002 : variant === "card" ? -0.014 : -0.0065
+        width < 640
+          ? -0.002
+          : variant === "card" || variant === "banner"
+            ? -0.014
+            : -0.0065
 
       for (const particle of particles) {
         const waveX = Math.sin(elapsed * 1.4 + particle.wave) * 0.004
@@ -210,9 +249,15 @@ function LivepeerCubeStream({
           const radialY = fieldY / fieldDistance
           const radialError = fieldDistance - fieldRadius
           const radialForce =
-            radialError * (variant === "card" ? 0.00006 : 0.000035) * proximity
+            radialError *
+            (variant === "card" || variant === "banner"
+              ? 0.00006
+              : 0.000035) *
+            proximity
           const orbitForce =
-            proximity * proximity * (variant === "card" ? 0.085 : 0.06)
+            proximity *
+            proximity *
+            (variant === "card" || variant === "banner" ? 0.085 : 0.06)
 
           // The demo combines radial gravity with a stronger perpendicular
           // force. Here the target radius protects the copy while the
@@ -262,6 +307,11 @@ function LivepeerCubeStream({
         }
 
         context.globalAlpha = 1
+
+        if (variant === "banner" && particle.x < fieldCenterX) {
+          continue
+        }
+
         context.fillStyle = palette[particle.colorIndex]
         context.fillRect(
           Math.round(particle.x - particleSize / 2),
@@ -272,7 +322,24 @@ function LivepeerCubeStream({
       }
 
       context.globalAlpha = 1
-      if (!reduceMotion) frame = requestAnimationFrame(draw)
+      const frozen =
+        freezeAtSeconds !== undefined && elapsed >= freezeAtSeconds
+
+      if (frozen || reduceMotion) {
+        if (
+          freezeAtSeconds !== undefined &&
+          !isPrerolling &&
+          readyFrame === 0
+        ) {
+          readyFrame = requestAnimationFrame(() => {
+            readyPaintFrame = requestAnimationFrame(() => {
+              document.documentElement.dataset.captureReady = "true"
+            })
+          })
+        }
+      } else if (!isPrerolling) {
+        frame = requestAnimationFrame(draw)
+      }
     }
 
     const observer = new ResizeObserver(() => {
@@ -288,17 +355,45 @@ function LivepeerCubeStream({
       attributes: true,
       attributeFilter: ["class", "style"],
     })
-    resize()
-    start = performance.now()
-    frame = requestAnimationFrame(draw)
+    frame = requestAnimationFrame(() => {
+      resize()
+
+      const prerollStart = performance.now()
+      start = prerollStart
+      previousTime = prerollStart
+
+      if (!reduceMotion && startAtSeconds > 0) {
+        isPrerolling = true
+
+        for (
+          let simulatedTime = 16.667;
+          simulatedTime <= startAtSeconds * 1000;
+          simulatedTime += 16.667
+        ) {
+          draw(prerollStart + simulatedTime)
+        }
+
+        isPrerolling = false
+      }
+
+      const playbackStart = performance.now()
+      start = playbackStart - startAtSeconds * 1000
+      previousTime = playbackStart
+      frame = requestAnimationFrame(draw)
+    })
 
     return () => {
       cancelAnimationFrame(frame)
+      cancelAnimationFrame(readyFrame)
+      cancelAnimationFrame(readyPaintFrame)
       cancelAnimationFrame(resizeFrame)
       observer.disconnect()
       themeObserver.disconnect()
+      if (freezeAtSeconds !== undefined) {
+        delete document.documentElement.dataset.captureReady
+      }
     }
-  }, [inverted, variant])
+  }, [freezeAtSeconds, inverted, startAtSeconds, variant])
 
   return (
     <canvas

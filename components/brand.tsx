@@ -93,8 +93,13 @@ function LivepeerLockup(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function LivepeerGradientLockup(props: React.SVGProps<SVGSVGElement>) {
+function LivepeerGradientLockup({
+  metallic = false,
+  ...props
+}: React.SVGProps<SVGSVGElement> & { metallic?: boolean }) {
   const gradientId = React.useId().replaceAll(":", "")
+  const wordmarkGradientId = `${gradientId}-wordmark`
+  const metallicSymbolGradientId = `${gradientId}-metallic-symbol`
 
   return (
     <svg
@@ -110,9 +115,53 @@ function LivepeerGradientLockup(props: React.SVGProps<SVGSVGElement>) {
           <stop offset=".32" stopColor="color(display-p3 0.04 0.74 0.49)" />
           <stop offset="1" stopColor="color(display-p3 0.02 0.58 0.36)" />
         </linearGradient>
+        <linearGradient
+          id={wordmarkGradientId}
+          x1="0"
+          y1="0"
+          x2=".342"
+          y2="1"
+        >
+          <stop offset="0" stopColor="#fff" />
+          <stop offset=".46" stopColor="#fff" />
+          <stop offset=".72" stopColor="#ededed" />
+          <stop offset="1" stopColor="#bdbdbd" />
+        </linearGradient>
+        <linearGradient
+          id={metallicSymbolGradientId}
+          x1="0"
+          y1="0"
+          x2=".342"
+          y2="1"
+        >
+          <stop offset="0" stopColor="#45e7ab" />
+          <stop offset=".1" stopColor="#16d994" />
+          <stop offset=".55" stopColor="#00c077" />
+          <stop offset="1" stopColor="#007e4e" />
+        </linearGradient>
       </defs>
-      <g fill={`url(#${gradientId})`}>{symbolPaths}</g>
-      <g fill="currentColor">{wordmarkPaths}</g>
+      <g
+        fill={
+          metallic
+            ? `url(#${metallicSymbolGradientId})`
+            : `url(#${gradientId})`
+        }
+        stroke={metallic ? "#45e7ab" : undefined}
+        strokeWidth={metallic ? 1 : undefined}
+        strokeLinejoin={metallic ? "miter" : undefined}
+        paintOrder={metallic ? "stroke fill" : undefined}
+      >
+        {symbolPaths}
+      </g>
+      <g
+        fill={metallic ? `url(#${wordmarkGradientId})` : "currentColor"}
+        stroke={metallic ? "#fff" : undefined}
+        strokeWidth={metallic ? 1 : undefined}
+        strokeLinejoin={metallic ? "miter" : undefined}
+        paintOrder={metallic ? "stroke fill" : undefined}
+      >
+        {wordmarkPaths}
+      </g>
     </svg>
   )
 }

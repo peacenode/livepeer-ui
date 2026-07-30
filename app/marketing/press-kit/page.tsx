@@ -1,7 +1,18 @@
 import type { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
 
+import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
+import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
+import {
+  getSocialAvatarImagePath,
+  getSocialBannerImagePath,
+  socialAvatarBatch,
+  socialAvatars,
+  socialBanners,
+} from "@/lib/social-assets"
 
 export const metadata: Metadata = {
   title: "Social Kit · Deliverables",
@@ -25,22 +36,20 @@ export default function PressKitPage() {
           <Deliverable key={deliverable.id} deliverable={deliverable} />
         ))}
       </div>
+
+      <XProfilePreview />
     </article>
   )
 }
 
 function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
-  const sizes = [
-    ...new Set(
-      deliverable.requirements.map(
-        ({ width, height }) => `${width} × ${height} px`
-      )
-    ),
-  ]
-  const platforms = deliverable.requirements.flatMap(({ platform }) =>
-    platform.split(/\s*[/,]\s*/)
+  const sizes = deliverable.requirements.filter(
+    (requirement, index, requirements) =>
+      requirements.findIndex(
+        ({ width, height }) =>
+          width === requirement.width && height === requirement.height
+      ) === index
   )
-
   return (
     <article>
       <DeliverablePreview deliverable={deliverable} />
@@ -50,23 +59,62 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
 
       <div className="mt-4">
         <div className="flex flex-wrap gap-1.5">
-          {sizes.map((size) => (
-            <Badge key={size} variant="secondary" className="rounded-sm">
-              {size}
-            </Badge>
-          ))}
+          {sizes.map(({ width, height }) => {
+            const banner =
+              deliverable.id === "banners-headers"
+                ? socialBanners.find(
+                    (candidate) =>
+                      candidate.width === width && candidate.height === height
+                  )
+                : undefined
+            const avatar =
+              deliverable.id === "avatar"
+                ? socialAvatars.find(
+                    (candidate) =>
+                      candidate.width === width && candidate.height === height
+                  )
+                : undefined
+            const label = `${width} × ${height} px`
+
+            return avatar ? (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+                render={
+                  <Link
+                    href={getSocialAvatarImagePath(avatar)}
+                    download={`livepeer-avatar-${avatar.width}x${avatar.height}.png`}
+                    aria-label={`Download ${label} avatar`}
+                  />
+                }
+              >
+                {label}
+              </Badge>
+            ) : banner ? (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+                render={
+                  <Link
+                    href={getSocialBannerImagePath(banner)}
+                    download={`${banner.id}-${banner.width}x${banner.height}.png`}
+                    aria-label={`${label} ${banner.platform} banner`}
+                  />
+                }
+              >
+                {label}
+              </Badge>
+            ) : (
+              <Badge key={label} variant="secondary" className="rounded-sm">
+                {label}
+              </Badge>
+            )
+          })}
         </div>
       </div>
 
-      <div className="mt-2">
-        <div className="flex flex-wrap gap-1.5">
-          {[...new Set(platforms)].map((platform) => (
-            <Badge key={platform} className="rounded-sm">
-              {platform}
-            </Badge>
-          ))}
-        </div>
-      </div>
     </article>
   )
 }
@@ -76,27 +124,34 @@ function DeliverablePreview({
 }: {
   deliverable: PressDeliverable
 }) {
-  const ratio = deliverable.previewWidth / deliverable.previewHeight
+  const isAvatar = deliverable.id === "avatar"
+  const isBanner = deliverable.id === "banners-headers"
 
   return (
-    <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
+    <div className="flex aspect-3/1 items-start justify-start">
       <div
-        className="max-h-full max-w-full bg-muted-foreground/20"
+        className={`relative h-full overflow-hidden bg-black ${
+          isAvatar ? "aspect-square" : "w-full"
+        }`}
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
-          width:
-            ratio >= 2.5
-              ? "100%"
-              : ratio >= 1.1
-                ? "90%"
-                : ratio >= 1
-                  ? "60%"
-                  : "auto",
-          height: ratio < 1 ? "100%" : "auto",
+          containerType: isBanner ? "size" : undefined,
         }}
         aria-label={`${deliverable.name} aspect ratio`}
         role="img"
-      />
+      >
+        {isAvatar ? (
+          <Image
+            src={`/social-assets/avatars/${socialAvatarBatch}/800.png`}
+            fill
+            sizes="320px"
+            alt="Livepeer avatar"
+            className="object-cover"
+            unoptimized
+          />
+        ) : null}
+        {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
+      </div>
     </div>
   )
 }

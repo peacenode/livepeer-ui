@@ -16,5 +16,5 @@ export function getCanvasThemePalette(inverted = false) {
     neutralColors[3] = styles.getPropertyValue("--secondary").trim()
   }
 
-  return [...neutralColors, "#10b981"]
+  return [...neutralColors, "color(display-p3 0.04 0.74 0.49)"]
 }
