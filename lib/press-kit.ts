@@ -81,37 +81,6 @@ export const pressDeliverables: PressDeliverable[] = [
     ],
   },
   {
-    id: "social-preview",
-    name: "Social preview",
-    previewWidth: 1200,
-    previewHeight: 630,
-    requirements: [
-      {
-        platform: "Livepeer.org, Field Notes, LinkedIn, X, Forum",
-        width: 1200,
-        height: 630,
-      },
-      {
-        platform: "GitHub",
-        width: 1280,
-        height: 640,
-      },
-    ],
-  },
-  {
-    id: "square-social-preview",
-    name: "Square social preview",
-    previewWidth: 1,
-    previewHeight: 1,
-    requirements: [
-      {
-        platform: "Open Graph, Instagram, LinkedIn, X",
-        width: 1080,
-        height: 1080,
-      },
-    ],
-  },
-  {
     id: "vertical-social-cover",
     name: "Vertical social cover",
     previewWidth: 9,

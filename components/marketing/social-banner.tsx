@@ -63,23 +63,3 @@ export function SocialBannerArtwork({
     </>
   )
 }
-
-export function SocialPreviewArtwork() {
-  return (
-    <div
-      className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
-      style={{ width: "82cqw" }}
-      data-lockup
-    >
-      <Image
-        src={socialBannerWordmark}
-        width={1318}
-        height={196}
-        alt="Livepeer"
-        className="block h-auto w-full"
-        priority
-        unoptimized
-      />
-    </div>
-  )
-}

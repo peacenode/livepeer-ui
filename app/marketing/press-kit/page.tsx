@@ -3,17 +3,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import {
-  SocialBannerArtwork,
-  SocialPreviewArtwork,
-} from "@/components/marketing/social-banner"
+import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import {
   getSocialBannerImagePath,
-  getSocialPreviewImagePath,
   socialAvatarBatch,
   socialAvatars,
   socialBanners,
@@ -127,11 +123,6 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                       candidate.width === width && candidate.height === height
                   )
                 : undefined
-            const socialPreviewPath =
-              deliverable.id === "social-preview" ||
-              deliverable.id === "square-social-preview"
-                ? getSocialPreviewImagePath(width, height)
-                : undefined
             const label = `${width} × ${height} px`
 
             return avatar ? (
@@ -163,27 +154,8 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
               >
                 {label}
               </Badge>
-            ) : socialPreviewPath ? (
-              <Badge
-                key={label}
-                variant="secondary"
-                className="rounded-sm"
-                render={
-                  <Link
-                    href={socialPreviewPath}
-                    download={`livepeer-social-preview-${width}x${height}.png`}
-                    aria-label={`Download ${label} social preview`}
-                  />
-                }
-              >
-                {label}
-              </Badge>
             ) : (
-              <Badge
-                key={label}
-                variant="secondary"
-                className="rounded-sm"
-              >
+              <Badge key={label} variant="secondary" className="rounded-sm">
                 {label}
               </Badge>
             )
@@ -212,17 +184,13 @@ function DeliverablePreview({
   const ratio = deliverable.previewWidth / deliverable.previewHeight
   const isAvatar = deliverable.id === "avatar"
   const isBanner = deliverable.id === "banners-headers"
-  const isSocialPreview = deliverable.id === "social-preview"
-  const isSquareSocialPreview = deliverable.id === "square-social-preview"
-  const hasBannerArtwork = isBanner || isSocialPreview
+  const hasBannerArtwork = isBanner
 
   return (
     <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
       <div
         className={`relative max-h-full max-w-full overflow-hidden ${
-          isAvatar || isSquareSocialPreview || hasBannerArtwork
-            ? "bg-black"
-            : "bg-muted-foreground/20"
+          isAvatar || hasBannerArtwork ? "bg-black" : "bg-muted-foreground/20"
         }`}
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
@@ -250,18 +218,7 @@ function DeliverablePreview({
             unoptimized
           />
         ) : null}
-        {isSquareSocialPreview ? (
-          <Image
-            src={getSocialPreviewImagePath(1080, 1080)}
-            fill
-            sizes="320px"
-            alt="Livepeer square social preview"
-            className="object-cover"
-            unoptimized
-          />
-        ) : null}
         {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
-        {isSocialPreview ? <SocialPreviewArtwork /> : null}
       </div>
     </div>
   )
