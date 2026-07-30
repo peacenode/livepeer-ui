@@ -3,7 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { SocialBannerArtwork } from "@/components/marketing/social-banner"
+import {
+  SocialBannerArtwork,
+  SocialPreviewArtwork,
+} from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
@@ -226,9 +229,7 @@ function DeliverablePreview({
           />
         ) : null}
         {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
-        {isSocialPreview ? (
-          <SocialBannerArtwork centeredWidth="60cqw" />
-        ) : null}
+        {isSocialPreview ? <SocialPreviewArtwork /> : null}
       </div>
     </div>
   )
