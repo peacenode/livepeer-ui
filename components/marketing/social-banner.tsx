@@ -1,49 +1,29 @@
-"use client"
-
 import Image from "next/image"
-import { useEffect } from "react"
 
 import {
+  getSocialBannerImagePath,
   socialBannerWordmark,
   type SocialBanner,
 } from "@/lib/social-assets"
 
 export function SocialBanner({ banner }: { banner: SocialBanner }) {
-  useEffect(() => {
-    let paintFrame = 0
-    const readyFrame = requestAnimationFrame(() => {
-      paintFrame = requestAnimationFrame(() => {
-        document.documentElement.dataset.captureReady = "true"
-      })
-    })
-
-    return () => {
-      cancelAnimationFrame(readyFrame)
-      cancelAnimationFrame(paintFrame)
-      delete document.documentElement.dataset.captureReady
-    }
-  }, [])
-
   return (
-    <>
-      <main
-        className="relative isolate overflow-hidden bg-black text-white"
-        style={{
-          width: banner.width,
-          height: banner.height,
-          containerType: "size",
-        }}
-        data-banner-id={banner.id}
-        data-banner-size={`${banner.width}x${banner.height}`}
-      >
-        <SocialBannerArtwork bottomAligned={banner.id === "x"} />
-      </main>
-      <style jsx global>{`
-        nextjs-portal {
-          display: none !important;
-        }
-      `}</style>
-    </>
+    <main
+      className="overflow-hidden bg-black"
+      style={{ width: banner.width, height: banner.height }}
+      data-banner-id={banner.id}
+      data-banner-size={`${banner.width}x${banner.height}`}
+    >
+      <Image
+        src={getSocialBannerImagePath(banner)}
+        width={banner.width}
+        height={banner.height}
+        alt={`${banner.platform} Livepeer banner`}
+        priority
+        unoptimized
+      />
+      <style>{"nextjs-portal { display: none !important; }"}</style>
+    </main>
   )
 }
 

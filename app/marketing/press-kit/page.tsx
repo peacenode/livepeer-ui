@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import {
+  getSocialBannerImagePath,
   socialAvatarBatch,
   socialAvatars,
   socialBanners,
@@ -145,7 +146,8 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                 className="rounded-sm"
                 render={
                   <Link
-                    href={`/social-assets/banners/${banner.id}`}
+                    href={getSocialBannerImagePath(banner)}
+                    download={`${banner.id}-${banner.width}x${banner.height}.png`}
                     aria-label={`${label} ${banner.platform} banner`}
                   />
                 }

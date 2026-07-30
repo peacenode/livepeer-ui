@@ -14,6 +14,7 @@ export type SocialAvatar = {
 }
 
 export const socialAvatarBatch = "20260730-135359"
+export const socialBannerBatch = "20260730-143011"
 export const socialBannerWordmark =
   "/social-assets/banners/20260730-135359/livepeer-wordmark.svg"
 
@@ -92,6 +93,10 @@ export const socialBanners: SocialBanner[] = [
 
 export function getSocialBanner(id: string) {
   return socialBanners.find((banner) => banner.id === id)
+}
+
+export function getSocialBannerImagePath(banner: SocialBanner) {
+  return `/social-assets/banners/${socialBannerBatch}/${banner.id}.png`
 }
 
 export function getSocialAvatar(id: string) {
