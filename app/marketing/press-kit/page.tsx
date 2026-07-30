@@ -226,7 +226,9 @@ function DeliverablePreview({
           />
         ) : null}
         {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
-        {isSocialPreview ? <SocialBannerArtwork /> : null}
+        {isSocialPreview ? (
+          <SocialBannerArtwork centeredWidth="60cqw" />
+        ) : null}
       </div>
     </div>
   )

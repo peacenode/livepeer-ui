@@ -29,15 +29,17 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
 
 export function SocialBannerArtwork({
   bottomAligned = false,
+  centeredWidth = "44cqw",
 }: {
   bottomAligned?: boolean
+  centeredWidth?: string
 }) {
   return (
     <>
       <div
         className="absolute z-10"
         style={{
-          width: bottomAligned ? "36cqw" : "44cqw",
+          width: bottomAligned ? "36cqw" : centeredWidth,
           ...(bottomAligned
             ? { right: "10cqh", bottom: "10cqh" }
             : {
