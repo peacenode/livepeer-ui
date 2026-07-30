@@ -29,7 +29,7 @@ await mkdir(outputDirectory, { recursive: true })
 await Promise.all(
   previews.map(async ({ width, height }) => {
     const wordmark = await sharp(wordmarkPath)
-      .resize({ width: Math.round(width * 0.88) })
+      .resize({ width: Math.round(width * 0.82) })
       .png()
       .toBuffer({ resolveWithObject: true })
 
