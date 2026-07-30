@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRightIcon } from "lucide-react"
 
 import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
@@ -38,29 +37,6 @@ export default function PressKitPage() {
           <Deliverable key={deliverable.id} deliverable={deliverable} />
         ))}
       </div>
-
-      <section className="mt-16 border-t pt-8">
-        <h2 className="text-xl font-semibold tracking-tight">Banner routes</h2>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Each route renders the shared banner composition at its exact export
-          dimensions.
-        </p>
-        <div className="mt-5 divide-y border-y">
-          {socialBanners.map((banner) => (
-            <Link
-              key={banner.id}
-              href={`/social-assets/banners/${banner.id}`}
-              className="flex items-center justify-between gap-4 py-3 text-sm hover:text-foreground/65"
-            >
-              <span>{banner.platform}</span>
-              <span className="flex items-center gap-2 text-muted-foreground">
-                {banner.width} × {banner.height}
-                <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
     </article>
   )
 }
