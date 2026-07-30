@@ -38,7 +38,9 @@ await Promise.all(
       .png()
       .toBuffer({ resolveWithObject: true })
     const left = Math.round(
-      width - wordmark.info.width - (xLayout ? height * 0.1 : width * 0.07)
+      xLayout
+        ? width - wordmark.info.width - height * 0.1
+        : (width - wordmark.info.width) / 2
     )
     const top = Math.round(
       xLayout

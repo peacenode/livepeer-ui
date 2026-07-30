@@ -37,11 +37,14 @@ export function SocialBannerArtwork({
       <div
         className="absolute z-10"
         style={{
-          right: bottomAligned ? "10cqh" : "7cqw",
           width: bottomAligned ? "36cqw" : "44cqw",
           ...(bottomAligned
-            ? { bottom: "10cqh" }
-            : { top: "50%", transform: "translateY(-50%)" }),
+            ? { right: "10cqh", bottom: "10cqh" }
+            : {
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }),
         }}
         data-lockup
       >
