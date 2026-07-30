@@ -66,34 +66,20 @@ export function SocialBannerArtwork({
 
 export function SocialPreviewArtwork() {
   return (
-    <>
-      <div
-        className="absolute left-1/2 z-10 -translate-x-1/2"
-        style={{ bottom: 0, width: "100cqw" }}
-        data-lockup
-      >
-        <Image
-          src={socialBannerWordmark}
-          width={1318}
-          height={196}
-          alt="Livepeer"
-          className="block h-auto w-full"
-          priority
-          unoptimized
-        />
-      </div>
-      <div
-        className="absolute left-1/2 z-20 -translate-x-1/2"
-        style={{
-          bottom: 0,
-          width: "100cqw",
-          aspectRatio: "1318 / 196",
-          backgroundImage:
-            "radial-gradient(ellipse 17% 145% at 16% 118%, rgb(0 0 0 / 0.94) 0%, rgb(0 0 0 / 0.64) 38%, transparent 72%), radial-gradient(ellipse 13% 155% at 58% 112%, rgb(0 0 0 / 0.86) 0%, rgb(0 0 0 / 0.42) 42%, transparent 76%), linear-gradient(101deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.52) 12%, transparent 31%, transparent 68%, rgb(0 0 0 / 0.34) 82%, rgb(0 0 0 / 0.78) 100%)",
-          filter: "blur(0.22cqw)",
-        }}
-        aria-hidden="true"
+    <div
+      className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+      style={{ width: "88cqw" }}
+      data-lockup
+    >
+      <Image
+        src={socialBannerWordmark}
+        width={1318}
+        height={196}
+        alt="Livepeer"
+        className="block h-auto w-full"
+        priority
+        unoptimized
       />
-    </>
+    </div>
   )
 }
