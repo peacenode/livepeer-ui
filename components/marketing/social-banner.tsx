@@ -68,28 +68,28 @@ export function SocialPreviewArtwork() {
   return (
     <>
       <div
-        className="absolute left-1/2 z-10 -translate-x-1/2"
-        style={{ bottom: 0, width: "100cqw" }}
+        className="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end"
         data-lockup
       >
-        <Image
-          src={socialBannerWordmark}
-          width={1318}
-          height={196}
-          alt="Livepeer"
-          className="block h-auto w-full"
-          priority
-          unoptimized
-        />
+        {Array.from({ length: 4 }, (_, index) => (
+          <Image
+            key={index}
+            src={socialBannerWordmark}
+            width={1318}
+            height={196}
+            alt=""
+            className="block h-auto w-full shrink-0"
+            priority
+            unoptimized
+            aria-hidden="true"
+          />
+        ))}
       </div>
       <div
-        className="absolute left-1/2 z-20 -translate-x-1/2"
+        className="absolute inset-0 z-20"
         style={{
-          bottom: 0,
-          width: "100cqw",
-          aspectRatio: "1318 / 196",
           backgroundImage:
-            "radial-gradient(ellipse 17% 145% at 16% 118%, rgb(0 0 0 / 0.94) 0%, rgb(0 0 0 / 0.64) 38%, transparent 72%), radial-gradient(ellipse 13% 155% at 58% 112%, rgb(0 0 0 / 0.86) 0%, rgb(0 0 0 / 0.42) 42%, transparent 76%), linear-gradient(101deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.52) 12%, transparent 31%, transparent 68%, rgb(0 0 0 / 0.34) 82%, rgb(0 0 0 / 0.78) 100%)",
+            "radial-gradient(ellipse 18% 72% at 16% 105%, rgb(0 0 0 / 0.96) 0%, rgb(0 0 0 / 0.62) 42%, transparent 76%), radial-gradient(ellipse 15% 78% at 58% 82%, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.4) 44%, transparent 78%), linear-gradient(101deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.5) 12%, transparent 31%, transparent 68%, rgb(0 0 0 / 0.34) 82%, rgb(0 0 0 / 0.78) 100%)",
           filter: "blur(0.22cqw)",
         }}
         aria-hidden="true"
