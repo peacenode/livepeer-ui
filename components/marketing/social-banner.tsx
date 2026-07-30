@@ -36,7 +36,7 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
         data-banner-id={banner.id}
         data-banner-size={`${banner.width}x${banner.height}`}
       >
-        <SocialBannerArtwork />
+        <SocialBannerArtwork bottomAligned={banner.id === "x"} />
       </main>
       <style jsx global>{`
         nextjs-portal {
@@ -47,12 +47,22 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
   )
 }
 
-export function SocialBannerArtwork() {
+export function SocialBannerArtwork({
+  bottomAligned = false,
+}: {
+  bottomAligned?: boolean
+}) {
   return (
     <>
       <div
-        className="absolute top-1/2 z-10 -translate-y-1/2"
-        style={{ right: "7cqw", width: "44cqw" }}
+        className="absolute z-10"
+        style={{
+          right: "7cqw",
+          width: "44cqw",
+          ...(bottomAligned
+            ? { bottom: "10cqh" }
+            : { top: "50%", transform: "translateY(-50%)" }),
+        }}
         data-lockup
       >
         <Image

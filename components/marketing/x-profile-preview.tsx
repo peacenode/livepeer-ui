@@ -41,7 +41,7 @@ function ProfileFrame({
           className="relative aspect-3/1 bg-black"
           style={{ containerType: "size" }}
         >
-          <SocialBannerArtwork />
+          <SocialBannerArtwork bottomAligned />
           <div
             className="absolute top-full z-20 -translate-y-1/2 overflow-hidden rounded-full border-4 border-background bg-black"
             style={{
