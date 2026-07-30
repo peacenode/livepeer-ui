@@ -31,13 +31,13 @@ export default function PressKitPage() {
         </p>
       </header>
 
-      <XProfilePreview />
-
       <div className="mt-8 grid gap-x-8 gap-y-14 md:grid-cols-2">
         {pressDeliverables.map((deliverable) => (
           <Deliverable key={deliverable.id} deliverable={deliverable} />
         ))}
       </div>
+
+      <XProfilePreview />
     </article>
   )
 }
