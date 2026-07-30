@@ -135,29 +135,18 @@ function DeliverablePreview({
 }: {
   deliverable: PressDeliverable
 }) {
-  const ratio = deliverable.previewWidth / deliverable.previewHeight
   const isAvatar = deliverable.id === "avatar"
   const isBanner = deliverable.id === "banners-headers"
-  const hasBannerArtwork = isBanner
 
   return (
-    <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
+    <div className="flex aspect-3/1 items-start justify-start">
       <div
-        className={`relative max-h-full max-w-full overflow-hidden ${
-          isAvatar || hasBannerArtwork ? "bg-black" : "bg-muted-foreground/20"
+        className={`relative h-full overflow-hidden bg-black ${
+          isAvatar ? "aspect-square" : "w-full"
         }`}
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
-          containerType: hasBannerArtwork ? "size" : undefined,
-          width:
-            ratio >= 2.5
-              ? "100%"
-              : ratio >= 1.1
-                ? "90%"
-                : ratio >= 1
-                  ? "60%"
-                  : "auto",
-          height: ratio < 1 ? "100%" : "auto",
+          containerType: isBanner ? "size" : undefined,
         }}
         aria-label={`${deliverable.name} aspect ratio`}
         role="img"
