@@ -80,17 +80,4 @@ export const pressDeliverables: PressDeliverable[] = [
       },
     ],
   },
-  {
-    id: "vertical-social-cover",
-    name: "Vertical social cover",
-    previewWidth: 9,
-    previewHeight: 16,
-    requirements: [
-      {
-        platform: "TikTok / X",
-        width: 1080,
-        height: 1920,
-      },
-    ],
-  },
 ]
