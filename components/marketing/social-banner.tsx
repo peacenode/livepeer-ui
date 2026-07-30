@@ -1,9 +1,12 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect } from "react"
 
-import { LivepeerGradientLockup } from "@/components/brand"
-import type { SocialBanner } from "@/lib/social-assets"
+import {
+  socialBannerWordmark,
+  type SocialBanner,
+} from "@/lib/social-assets"
 
 export function SocialBanner({ banner }: { banner: SocialBanner }) {
   useEffect(() => {
@@ -70,13 +73,17 @@ export function SocialBannerArtwork() {
 
       <div
         className="absolute top-1/2 z-10 -translate-y-1/2"
-        style={{ right: "7cqw", width: "30cqw" }}
+        style={{ right: "7cqw", width: "44cqw" }}
         data-lockup
       >
-        <LivepeerGradientLockup
-          className="block h-auto w-full text-white"
-          metallic
-          aria-hidden="true"
+        <Image
+          src={socialBannerWordmark}
+          width={1318}
+          height={196}
+          alt="Livepeer"
+          className="block h-auto w-full"
+          priority
+          unoptimized
         />
       </div>
     </>
