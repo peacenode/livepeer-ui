@@ -40,6 +40,11 @@ export const pressDeliverables: PressDeliverable[] = [
         width: 800,
         height: 800,
       },
+      {
+        platform: "Square social preview",
+        width: 1080,
+        height: 1080,
+      },
     ],
   },
   {

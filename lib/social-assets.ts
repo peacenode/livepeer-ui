@@ -13,7 +13,7 @@ export type SocialAvatar = {
   width: number
 }
 
-export const socialAvatarBatch = "20260730-150741"
+export const socialAvatarBatch = "20260730-153511"
 export const socialBannerBatch = "20260730-143207"
 export const socialPreviewBatch = "20260730-150741"
 export const socialBannerWordmark =
@@ -44,6 +44,12 @@ export const socialAvatars: SocialAvatar[] = [
     platforms: "YouTube",
     width: 800,
     height: 800,
+  },
+  {
+    id: "1080",
+    platforms: "Square social preview",
+    width: 1080,
+    height: 1080,
   },
 ]
 
