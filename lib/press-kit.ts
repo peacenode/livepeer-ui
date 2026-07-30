@@ -99,6 +99,19 @@ export const pressDeliverables: PressDeliverable[] = [
     ],
   },
   {
+    id: "square-social-preview",
+    name: "Square social preview",
+    previewWidth: 1,
+    previewHeight: 1,
+    requirements: [
+      {
+        platform: "Open Graph, Instagram, LinkedIn, X",
+        width: 1080,
+        height: 1080,
+      },
+    ],
+  },
+  {
     id: "vertical-social-cover",
     name: "Vertical social cover",
     previewWidth: 9,

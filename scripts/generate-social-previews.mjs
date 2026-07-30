@@ -5,10 +5,11 @@ import sharp from "sharp"
 
 const batch = process.argv[2]
 const wordmarkPath = process.argv[3]
+const avatarPath = process.argv[4]
 
-if (!batch || !wordmarkPath) {
+if (!batch || !wordmarkPath || !avatarPath) {
   throw new Error(
-    "Usage: node scripts/generate-social-previews.mjs <batch> <wordmark.svg>"
+    "Usage: node scripts/generate-social-previews.mjs <batch> <wordmark.svg> <avatar.png>"
   )
 }
 
@@ -52,5 +53,10 @@ await Promise.all(
       .toFile(path.join(outputDirectory, `${width}x${height}.png`))
   })
 )
+
+await sharp(avatarPath)
+  .resize(1080, 1080)
+  .png({ compressionLevel: 9 })
+  .toFile(path.join(outputDirectory, "1080x1080.png"))
 
 console.log(outputDirectory)

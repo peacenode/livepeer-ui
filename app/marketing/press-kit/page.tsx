@@ -128,7 +128,8 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                   )
                 : undefined
             const socialPreviewPath =
-              deliverable.id === "social-preview"
+              deliverable.id === "social-preview" ||
+              deliverable.id === "square-social-preview"
                 ? getSocialPreviewImagePath(width, height)
                 : undefined
             const label = `${width} × ${height} px`
@@ -212,13 +213,14 @@ function DeliverablePreview({
   const isAvatar = deliverable.id === "avatar"
   const isBanner = deliverable.id === "banners-headers"
   const isSocialPreview = deliverable.id === "social-preview"
+  const isSquareSocialPreview = deliverable.id === "square-social-preview"
   const hasBannerArtwork = isBanner || isSocialPreview
 
   return (
     <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
       <div
         className={`relative max-h-full max-w-full overflow-hidden ${
-          isAvatar || hasBannerArtwork
+          isAvatar || isSquareSocialPreview || hasBannerArtwork
             ? "bg-black"
             : "bg-muted-foreground/20"
         }`}
@@ -244,6 +246,16 @@ function DeliverablePreview({
             fill
             sizes="320px"
             alt="Livepeer avatar"
+            className="object-cover"
+            unoptimized
+          />
+        ) : null}
+        {isSquareSocialPreview ? (
+          <Image
+            src={getSocialPreviewImagePath(1080, 1080)}
+            fill
+            sizes="320px"
+            alt="Livepeer square social preview"
             className="object-cover"
             unoptimized
           />

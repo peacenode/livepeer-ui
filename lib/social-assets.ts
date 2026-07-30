@@ -15,7 +15,7 @@ export type SocialAvatar = {
 
 export const socialAvatarBatch = "20260730-135359"
 export const socialBannerBatch = "20260730-143207"
-export const socialPreviewBatch = "20260730-145223"
+export const socialPreviewBatch = "20260730-145401"
 export const socialBannerWordmark =
   "/social-assets/banners/20260730-135359/livepeer-wordmark.svg"
 
