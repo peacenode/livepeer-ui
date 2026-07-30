@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import {
+  getSocialAvatarImagePath,
   getSocialBannerImagePath,
   socialAvatarBatch,
   socialAvatars,
@@ -49,10 +50,6 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
           width === requirement.width && height === requirement.height
       ) === index
   )
-  const platforms = deliverable.requirements.flatMap(({ platform }) =>
-    platform.split(/\s*[/,]\s*/)
-  )
-
   return (
     <article>
       <DeliverablePreview deliverable={deliverable} />
@@ -86,8 +83,9 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                 className="rounded-sm"
                 render={
                   <Link
-                    href={`/social-assets/avatars/${avatar.id}`}
-                    aria-label={`${label} avatar for ${avatar.platforms}`}
+                    href={getSocialAvatarImagePath(avatar)}
+                    download={`livepeer-avatar-${avatar.width}x${avatar.height}.png`}
+                    aria-label={`Download ${label} avatar`}
                   />
                 }
               >
@@ -117,15 +115,6 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
         </div>
       </div>
 
-      <div className="mt-2">
-        <div className="flex flex-wrap gap-1.5">
-          {[...new Set(platforms)].map((platform) => (
-            <Badge key={platform} className="rounded-sm">
-              {platform}
-            </Badge>
-          ))}
-        </div>
-      </div>
     </article>
   )
 }

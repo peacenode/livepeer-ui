@@ -107,3 +107,7 @@ export function getSocialPreviewImagePath(width: number, height: number) {
 export function getSocialAvatar(id: string) {
   return socialAvatars.find((avatar) => avatar.id === id)
 }
+
+export function getSocialAvatarImagePath(avatar: SocialAvatar) {
+  return `/social-assets/avatars/${socialAvatarBatch}/${avatar.id}.png`
+}
