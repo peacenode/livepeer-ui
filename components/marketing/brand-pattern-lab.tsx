@@ -5,12 +5,12 @@ import { useEffect, useRef } from "react"
 import { DotCut } from "@/lib/dotcut/engine"
 
 const variations = [
-  { name: "Hero mark", detail: "Single large cut" },
-  { name: "Tight repeat", detail: "Aligned field" },
-  { name: "Stagger", detail: "Offset field" },
-  { name: "Stream", detail: "Diagonal sequence" },
-  { name: "Radial", detail: "Rotating ring" },
-  { name: "Weave", detail: "Interlocking field" },
+  { name: "Hero mark", detail: "Contained square module" },
+  { name: "Tight repeat", detail: "Aligned 6×6 modules" },
+  { name: "Stagger", detail: "Offset 6×6 modules" },
+  { name: "Stream", detail: "Diagonal square sequence" },
+  { name: "Radial", detail: "Rotated square modules" },
+  { name: "Weave", detail: "Alternating 6×6 modules" },
 ] as const
 
 export function BrandPatternLab() {

@@ -151,32 +151,29 @@ export function rasterize(
   rows: number
 ) {
   const output = new Uint8Array(columns * rows).fill(1)
-  const marks = symbolPlacements(scene.kind, columns, rows)
+  const canvas = document.createElement("canvas")
+  canvas.width = columns
+  canvas.height = rows
+  const context = canvas.getContext("2d", {
+    willReadFrequently: true,
+  })
+  if (!context) return output
 
-  for (let y = 0; y < rows; y += 1) {
-    for (let x = 0; x < columns; x += 1) {
-      if (
-        marks.some((mark) =>
-          inOfficialSymbol(
-            x + 0.5,
-            y + 0.5,
-            mark.x,
-            mark.y,
-            mark.height,
-            mark.rotation
-          )
-        )
-      ) {
-        output[y * columns + x] = 0
-      }
-    }
+  context.fillStyle = "#fff"
+  for (const placement of symbolPlacements(scene.kind, columns, rows)) {
+    drawOfficialSymbol(context, placement)
+  }
+
+  const pixels = context.getImageData(0, 0, columns, rows).data
+  for (let index = 0; index < output.length; index += 1) {
+    if (pixels[index * 4 + 3] > 110) output[index] = 0
   }
   return output
 }
 
 type SymbolPlacement = {
-  height: number
   rotation: number
+  size: number
   x: number
   y: number
 }
@@ -201,32 +198,30 @@ function symbolPlacements(
   const marks: SymbolPlacement[] = []
 
   if (kind === "symbol") {
+    const size = Math.min(rows * 0.76, columns * 0.42)
     return [
       {
         x: centerX,
         y: centerY,
-        height: rows * 0.82,
+        size,
         rotation: 0,
       },
     ]
   }
 
   if (kind === "symbol-grid" || kind === "symbol-stagger") {
-    const height = rows * 0.38
-    const width = height * (symbolViewBox.width / symbolViewBox.height)
-    const gapX = width + 3
-    const gapY = height + 2
-    const rowCount = Math.ceil(rows / gapY) + 1
-    const columnCount = Math.ceil(columns / gapX) + 1
+    const size = 6
+    const rowCount = Math.ceil(rows / size) + 2
+    const columnCount = Math.ceil(columns / size) + 2
 
     for (let row = -1; row < rowCount; row += 1) {
       const stagger =
-        kind === "symbol-stagger" && row % 2 !== 0 ? gapX / 2 : 0
+        kind === "symbol-stagger" && row % 2 !== 0 ? size / 2 : 0
       for (let column = -1; column < columnCount; column += 1) {
         marks.push({
-          x: column * gapX + stagger + width / 2,
-          y: row * gapY + height / 2,
-          height,
+          x: column * size + stagger + size / 2,
+          y: row * size + size / 2,
+          size,
           rotation: 0,
         })
       }
@@ -235,13 +230,13 @@ function symbolPlacements(
   }
 
   if (kind === "symbol-stream") {
-    const height = rows * 0.56
-    const spacing = columns / 4
-    for (let index = -1; index <= 4; index += 1) {
+    const size = 9
+    const spacing = size * 1.15
+    for (let index = -2; index <= 5; index += 1) {
       marks.push({
-        x: index * spacing + centerX * 0.28,
-        y: centerY + (index % 2 === 0 ? -rows * 0.18 : rows * 0.18),
-        height,
+        x: index * spacing + centerX * 0.18,
+        y: centerY + (index % 2 === 0 ? -size * 0.42 : size * 0.42),
+        size,
         rotation: -0.46,
       })
     }
@@ -249,31 +244,30 @@ function symbolPlacements(
   }
 
   if (kind === "symbol-radial") {
-    const height = rows * 0.38
-    const radius = rows * 0.3
+    const size = 7
+    const radius = Math.max(size * 0.82, rows * 0.28)
     const count = 6
     for (let index = 0; index < count; index += 1) {
       const angle = (index / count) * Math.PI * 2
       marks.push({
         x: centerX + Math.cos(angle) * radius,
         y: centerY + Math.sin(angle) * radius,
-        height,
+        size,
         rotation: angle + Math.PI / 2,
       })
     }
     return marks
   }
 
-  const height = rows * 0.46
-  const width = height * (symbolViewBox.width / symbolViewBox.height)
-  const spacingX = width * 1.18
-  const spacingY = height * 0.72
-  for (let row = -1; row <= 3; row += 1) {
-    for (let column = -1; column <= Math.ceil(columns / spacingX); column += 1) {
+  const size = 6
+  const rowCount = Math.ceil(rows / size) + 2
+  const columnCount = Math.ceil(columns / size) + 2
+  for (let row = -1; row < rowCount; row += 1) {
+    for (let column = -1; column < columnCount; column += 1) {
       marks.push({
-        x: column * spacingX + (row % 2 === 0 ? 0 : spacingX / 2),
-        y: row * spacingY,
-        height,
+        x: column * size + size / 2,
+        y: row * size + size / 2,
+        size,
         rotation: (row + column) % 2 === 0 ? 0 : Math.PI,
       })
     }
@@ -281,31 +275,24 @@ function symbolPlacements(
   return marks
 }
 
-function inOfficialSymbol(
-  x: number,
-  y: number,
-  centerX: number,
-  centerY: number,
-  height: number,
-  rotation: number
+function drawOfficialSymbol(
+  context: CanvasRenderingContext2D,
+  placement: SymbolPlacement
 ) {
-  const cosine = Math.cos(-rotation)
-  const sine = Math.sin(-rotation)
-  const dx = x - centerX
-  const dy = y - centerY
-  const localX = dx * cosine - dy * sine
-  const localY = dx * sine + dy * cosine
-  const width = height * (symbolViewBox.width / symbolViewBox.height)
-  const svgX = ((localX + width / 2) / width) * symbolViewBox.width
-  const svgY = ((localY + height / 2) / height) * symbolViewBox.height
+  const scale = placement.size / symbolViewBox.height
+  const renderedWidth = symbolViewBox.width * scale
+  const renderedHeight = symbolViewBox.height * scale
 
-  return officialSymbolRects.some(
-    ([rectX, rectY, rectWidth, rectHeight]) =>
-      svgX >= rectX &&
-      svgX <= rectX + rectWidth &&
-      svgY >= rectY &&
-      svgY <= rectY + rectHeight
-  )
+  context.save()
+  context.translate(placement.x, placement.y)
+  context.rotate(placement.rotation)
+  context.translate(-renderedWidth / 2, -renderedHeight / 2)
+  context.scale(scale, scale)
+
+  for (const [x, y, width, height] of officialSymbolRects) {
+    context.fillRect(x, y, width, height)
+  }
+  context.restore()
 }
 
 export function cellDelay(
