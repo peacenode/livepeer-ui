@@ -13,6 +13,7 @@ import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import {
   getSocialBannerImagePath,
+  getSocialPreviewImagePath,
   socialAvatarBatch,
   socialAvatars,
   socialBanners,
@@ -126,6 +127,10 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                       candidate.width === width && candidate.height === height
                   )
                 : undefined
+            const socialPreviewPath =
+              deliverable.id === "social-preview"
+                ? getSocialPreviewImagePath(width, height)
+                : undefined
             const label = `${width} × ${height} px`
 
             return avatar ? (
@@ -152,6 +157,21 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                     href={getSocialBannerImagePath(banner)}
                     download={`${banner.id}-${banner.width}x${banner.height}.png`}
                     aria-label={`${label} ${banner.platform} banner`}
+                  />
+                }
+              >
+                {label}
+              </Badge>
+            ) : socialPreviewPath ? (
+              <Badge
+                key={label}
+                variant="secondary"
+                className="rounded-sm"
+                render={
+                  <Link
+                    href={socialPreviewPath}
+                    download={`livepeer-social-preview-${width}x${height}.png`}
+                    aria-label={`Download ${label} social preview`}
                   />
                 }
               >
