@@ -69,7 +69,7 @@ export function SocialPreviewArtwork() {
     <>
       <div
         className="absolute left-1/2 z-10 -translate-x-1/2"
-        style={{ bottom: "9cqh", width: "88cqw" }}
+        style={{ bottom: 0, width: "100cqw" }}
         data-lockup
       >
         <Image
@@ -83,17 +83,14 @@ export function SocialPreviewArtwork() {
         />
       </div>
       <div
-        className="absolute inset-x-0 bottom-0 z-20 h-[68%]"
+        className="absolute left-1/2 z-20 -translate-x-1/2"
         style={{
+          bottom: 0,
+          width: "100cqw",
+          aspectRatio: "1318 / 196",
           backgroundImage:
-            "linear-gradient(90deg, rgb(0 0 0 / 0.98) 0 0.7cqw, transparent 0.7cqw calc(100% - 0.7cqw), rgb(0 0 0 / 0.98) calc(100% - 0.7cqw)), linear-gradient(0deg, rgb(0 0 0 / 0.98) 0 0.7cqw, transparent 0.7cqw calc(100% - 0.7cqw), rgb(0 0 0 / 0.98) calc(100% - 0.7cqw)), radial-gradient(circle at 46% 43%, rgb(0 0 0) 0 32%, rgb(0 0 0 / 0.96) 36%, rgb(255 255 255 / 0.1) 39%, rgb(255 255 255 / 0.025) 41%, rgb(0 0 0 / 0.92) 46%, transparent 47%), linear-gradient(132deg, rgb(255 255 255 / 0.09) 0%, rgb(255 255 255 / 0.02) 18%, rgb(0 0 0 / 0.9) 72%)",
-          backgroundSize: "14cqw 14cqw",
-          backgroundPosition: "center bottom",
-          opacity: 0.58,
-          maskImage:
-            "linear-gradient(to top, black 0%, black 38%, rgb(0 0 0 / 0.72) 64%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to top, black 0%, black 38%, rgb(0 0 0 / 0.72) 64%, transparent 100%)",
+            "radial-gradient(ellipse 17% 145% at 16% 118%, rgb(0 0 0 / 0.94) 0%, rgb(0 0 0 / 0.64) 38%, transparent 72%), radial-gradient(ellipse 13% 155% at 58% 112%, rgb(0 0 0 / 0.86) 0%, rgb(0 0 0 / 0.42) 42%, transparent 76%), linear-gradient(101deg, rgb(0 0 0 / 0.9) 0%, rgb(0 0 0 / 0.52) 12%, transparent 31%, transparent 68%, rgb(0 0 0 / 0.34) 82%, rgb(0 0 0 / 0.78) 100%)",
+          filter: "blur(0.22cqw)",
         }}
         aria-hidden="true"
       />
