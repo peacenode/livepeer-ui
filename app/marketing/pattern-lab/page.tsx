@@ -16,8 +16,8 @@ export default function PatternLabPage() {
           Brand Pattern Lab
         </h1>
         <p className="mt-2 text-balance text-muted-foreground">
-          A connected circle lattice that carves figures and full-field
-          patterns as negative space.
+          Static pattern studies derived from the Livepeer symbol and carved
+          from a connected circle lattice.
         </p>
       </header>
 

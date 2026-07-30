@@ -8,20 +8,25 @@ export type TransitionKind =
 export type StyleKind = "drift" | "grain" | "swell" | "streak" | null
 
 export type Scene = {
-  kind: "text" | "rings" | "checker" | "bars" | "columns" | "boxes"
+  kind:
+    | "symbol"
+    | "symbol-grid"
+    | "symbol-stagger"
+    | "symbol-stream"
+    | "symbol-radial"
+    | "symbol-weave"
   palette: number
   style?: StyleKind
   transition: TransitionKind
-  value?: string
 }
 
 export const scenes: Scene[] = [
-  { kind: "text", value: "A", transition: "wipe", palette: 0, style: "drift" },
-  { kind: "rings", transition: "ripple", palette: 1, style: "grain" },
-  { kind: "columns", transition: "columns", palette: 2, style: "streak" },
-  { kind: "checker", transition: "scatter", palette: 3, style: "swell" },
-  { kind: "boxes", transition: "collapse", palette: 4, style: "grain" },
-  { kind: "bars", transition: "wipe", palette: 5, style: "drift" },
+  { kind: "symbol", transition: "wipe", palette: 0, style: "drift" },
+  { kind: "symbol-grid", transition: "columns", palette: 1, style: "grain" },
+  { kind: "symbol-stagger", transition: "scatter", palette: 2, style: "swell" },
+  { kind: "symbol-stream", transition: "wipe", palette: 3, style: "streak" },
+  { kind: "symbol-radial", transition: "ripple", palette: 4, style: "swell" },
+  { kind: "symbol-weave", transition: "collapse", palette: 5, style: "grain" },
 ]
 
 export const palettes: [string, string][] = [
@@ -143,18 +148,17 @@ export function styleField(
 export function rasterize(
   scene: Scene,
   columns: number,
-  rows: number,
-  fontFamily: string
+  rows: number
 ) {
   const output = new Uint8Array(columns * rows).fill(1)
   const centerX = (columns - 1) / 2
   const centerY = (rows - 1) / 2
 
-  if (scene.kind === "checker") {
-    const block = Math.max(2, Math.round(columns / 14))
+  if (scene.kind === "symbol") {
+    const unit = Math.max(2.4, Math.min(rows / 5.8, columns / 11))
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < columns; x += 1) {
-        if ((Math.floor(x / block) + Math.floor(y / block)) % 2 === 0) {
+        if (inSymbol(x, y, centerX, centerY, unit, 0)) {
           output[y * columns + x] = 0
         }
       }
@@ -162,10 +166,14 @@ export function rasterize(
     return output
   }
 
-  if (scene.kind === "bars") {
+  if (scene.kind === "symbol-grid") {
+    const tileWidth = 7
+    const tileHeight = 8
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < columns; x += 1) {
-        if (Math.floor((x + y) / 3) % 2 === 0) {
+        const localX = mod(x - 1, tileWidth)
+        const localY = mod(y - 1, tileHeight)
+        if (inMicroSymbol(localX, localY)) {
           output[y * columns + x] = 0
         }
       }
@@ -173,14 +181,16 @@ export function rasterize(
     return output
   }
 
-  if (scene.kind === "columns") {
-    const blockWidth = 4
-    const blockHeight = 3
+  if (scene.kind === "symbol-stagger") {
+    const tileWidth = 8
+    const tileHeight = 7
     for (let y = 0; y < rows; y += 1) {
-      const shift =
-        Math.floor(y / blockHeight) % 2 === 0 ? 0 : blockWidth / 2
+      const band = Math.floor(y / tileHeight)
+      const shift = band % 2 === 0 ? 0 : tileWidth / 2
       for (let x = 0; x < columns; x += 1) {
-        if (Math.floor((x + shift) / blockWidth) % 2 === 0) {
+        const localX = mod(x + shift - 1, tileWidth)
+        const localY = mod(y - 1, tileHeight)
+        if (inMicroSymbol(localX, localY)) {
           output[y * columns + x] = 0
         }
       }
@@ -188,74 +198,114 @@ export function rasterize(
     return output
   }
 
-  if (scene.kind === "boxes") {
+  if (scene.kind === "symbol-stream") {
+    const origins = [
+      [-18, 7, -0.42],
+      [-8, -2, -0.42],
+      [2, 7, -0.42],
+      [12, -2, -0.42],
+      [22, 7, -0.42],
+    ] as const
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < columns; x += 1) {
-        const distance = Math.max(
-          Math.abs(x - centerX),
-          Math.abs(y - centerY)
+        const carved = origins.some(([originX, originY, rotation]) =>
+          inSymbol(
+            x,
+            y,
+            centerX + originX,
+            centerY + originY,
+            1.1,
+            rotation
+          )
         )
-        if (Math.floor(distance / 2.5) % 2 === 0) {
-          output[y * columns + x] = 0
-        }
+        if (carved) output[y * columns + x] = 0
       }
     }
     return output
   }
 
-  if (scene.kind === "rings") {
-    const maxRadius = Math.hypot(columns, rows) / 2
+  if (scene.kind === "symbol-radial") {
+    const marks: Array<[number, number, number]> = []
+    const ringRadius = Math.min(rows * 0.33, columns * 0.18)
+    const count = 8
+    for (let index = 0; index < count; index += 1) {
+      const angle = (index / count) * Math.PI * 2
+      marks.push([
+        centerX + Math.cos(angle) * ringRadius,
+        centerY + Math.sin(angle) * ringRadius,
+        angle + Math.PI / 2,
+      ])
+    }
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < columns; x += 1) {
-        const distance =
-          Math.hypot(x - centerX, y - centerY) / maxRadius
-        if (Math.floor(distance * 6) % 2 === 0) {
+        if (
+          marks.some(([markX, markY, rotation]) =>
+            inSymbol(x, y, markX, markY, 0.72, rotation)
+          )
+        )
           output[y * columns + x] = 0
-        }
       }
     }
     return output
   }
 
-  const canvas = document.createElement("canvas")
-  canvas.width = columns
-  canvas.height = rows
-  const context = canvas.getContext("2d", { willReadFrequently: true })
-  const text = (scene.value ?? "").trim()
-  if (!context || !text) return output
-
-  context.fillStyle = "#000"
-  context.fillRect(0, 0, columns, rows)
-  context.fillStyle = "#fff"
-  context.textAlign = "center"
-  context.textBaseline = "middle"
-
-  let fontSize = rows * 0.8
-  context.font = `700 ${fontSize}px ${fontFamily}`
-  const maxWidth = columns * 0.36
-  const firstMeasurement = context.measureText(text)
-  if (firstMeasurement.width > maxWidth) {
-    fontSize *= maxWidth / firstMeasurement.width
-    context.font = `700 ${fontSize}px ${fontFamily}`
+  for (let y = 0; y < rows; y += 1) {
+    for (let x = 0; x < columns; x += 1) {
+      const tileX = Math.floor((x + y * 0.72) / 8)
+      const tileY = Math.floor((y - x * 0.18) / 7)
+      const rotation = (tileX + tileY) % 2 === 0 ? 0 : Math.PI
+      const originX = tileX * 8 - tileY * 1.2 + 3
+      const originY = tileY * 7 + tileX * 1.45 + 3
+      if (inSymbol(x, y, originX, originY, 0.74, rotation)) {
+        output[y * columns + x] = 0
+      }
+    }
   }
-
-  const maxHeight = rows * 0.58
-  const measurement = context.measureText(text)
-  const glyphHeight =
-    measurement.actualBoundingBoxAscent +
-    measurement.actualBoundingBoxDescent
-  if (glyphHeight > maxHeight) {
-    fontSize *= maxHeight / glyphHeight
-    context.font = `700 ${fontSize}px ${fontFamily}`
-  }
-
-  context.fillText(text, columns / 2, rows / 2 + rows * 0.02)
-  const pixels = context.getImageData(0, 0, columns, rows).data
-  for (let index = 0; index < columns * rows; index += 1) {
-    if (pixels[index * 4] > 110) output[index] = 0
-  }
-
   return output
+}
+
+const symbolBlocks = [
+  [-1, -2],
+  [-1, 0],
+  [-1, 2],
+  [0, -1],
+  [0, 1],
+  [1, 0],
+] as const
+
+function inSymbol(
+  x: number,
+  y: number,
+  centerX: number,
+  centerY: number,
+  unit: number,
+  rotation: number
+) {
+  const cosine = Math.cos(-rotation)
+  const sine = Math.sin(-rotation)
+  const dx = x - centerX
+  const dy = y - centerY
+  const localX = dx * cosine - dy * sine
+  const localY = dx * sine + dy * cosine
+  const blockSize = unit * 0.78
+
+  return symbolBlocks.some(
+    ([blockX, blockY]) =>
+      Math.abs(localX - blockX * unit * 1.25) <= blockSize / 2 &&
+      Math.abs(localY - blockY * unit * 1.25) <= blockSize / 2
+  )
+}
+
+function inMicroSymbol(x: number, y: number) {
+  return (
+    (x === 1 && (y === 1 || y === 3 || y === 5)) ||
+    (x === 3 && (y === 2 || y === 4)) ||
+    (x === 5 && y === 3)
+  )
+}
+
+function mod(value: number, divisor: number) {
+  return ((value % divisor) + divisor) % divisor
 }
 
 export function cellDelay(

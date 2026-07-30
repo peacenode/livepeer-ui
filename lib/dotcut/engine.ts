@@ -58,11 +58,17 @@ export class DotCut {
   private devicePixelRatio = 1
   private resizeObserver: ResizeObserver | null = null
   private disposed = false
-  private fontFamily = "Inter, sans-serif"
-
-  constructor(host: HTMLElement, fontFamily?: string) {
+  constructor(
+    host: HTMLElement,
+    sceneIndex = 0
+  ) {
     this.host = host
-    if (fontFamily) this.fontFamily = fontFamily
+    this.sceneIndex = Math.max(
+      0,
+      Math.min(scenes.length - 1, Math.round(sceneIndex))
+    )
+    this.previousScene = this.sceneIndex
+    this.previousPalette = scenes[this.sceneIndex].palette
 
     this.canvas = document.createElement("canvas")
     this.canvas.style.cssText =
@@ -82,6 +88,7 @@ export class DotCut {
 
   setPointer(pointer: { x: number; y: number } | null) {
     this.pointer = pointer
+    if (!this.running) this.draw(0)
   }
 
   toCell(x: number, y: number) {
@@ -173,8 +180,7 @@ export class DotCut {
     const next = rasterize(
       scene,
       this.columns,
-      this.rows,
-      this.fontFamily
+      this.rows
     )
 
     this.from.set(this.live)
