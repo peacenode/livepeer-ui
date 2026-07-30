@@ -21,12 +21,12 @@ export type Scene = {
 }
 
 export const scenes: Scene[] = [
-  { kind: "symbol", transition: "wipe", palette: 0, style: "drift" },
-  { kind: "symbol-grid", transition: "columns", palette: 1, style: "grain" },
-  { kind: "symbol-stagger", transition: "scatter", palette: 2, style: "swell" },
-  { kind: "symbol-stream", transition: "wipe", palette: 3, style: "streak" },
-  { kind: "symbol-radial", transition: "ripple", palette: 4, style: "swell" },
-  { kind: "symbol-weave", transition: "collapse", palette: 5, style: "grain" },
+  { kind: "symbol", transition: "wipe", palette: 0 },
+  { kind: "symbol-grid", transition: "columns", palette: 1 },
+  { kind: "symbol-stagger", transition: "scatter", palette: 2 },
+  { kind: "symbol-stream", transition: "wipe", palette: 3 },
+  { kind: "symbol-radial", transition: "ripple", palette: 4 },
+  { kind: "symbol-weave", transition: "collapse", palette: 5 },
 ]
 
 export const palettes: [string, string][] = [
@@ -151,112 +151,22 @@ export function rasterize(
   rows: number
 ) {
   const output = new Uint8Array(columns * rows).fill(1)
-  const centerX = (columns - 1) / 2
-  const centerY = (rows - 1) / 2
-
-  if (scene.kind === "symbol") {
-    const unit = Math.max(2.4, Math.min(rows / 5.8, columns / 11))
-    for (let y = 0; y < rows; y += 1) {
-      for (let x = 0; x < columns; x += 1) {
-        if (inSymbol(x, y, centerX, centerY, unit, 0)) {
-          output[y * columns + x] = 0
-        }
-      }
-    }
-    return output
-  }
-
-  if (scene.kind === "symbol-grid") {
-    const tileWidth = 7
-    const tileHeight = 8
-    for (let y = 0; y < rows; y += 1) {
-      for (let x = 0; x < columns; x += 1) {
-        const localX = mod(x - 1, tileWidth)
-        const localY = mod(y - 1, tileHeight)
-        if (inMicroSymbol(localX, localY)) {
-          output[y * columns + x] = 0
-        }
-      }
-    }
-    return output
-  }
-
-  if (scene.kind === "symbol-stagger") {
-    const tileWidth = 8
-    const tileHeight = 7
-    for (let y = 0; y < rows; y += 1) {
-      const band = Math.floor(y / tileHeight)
-      const shift = band % 2 === 0 ? 0 : tileWidth / 2
-      for (let x = 0; x < columns; x += 1) {
-        const localX = mod(x + shift - 1, tileWidth)
-        const localY = mod(y - 1, tileHeight)
-        if (inMicroSymbol(localX, localY)) {
-          output[y * columns + x] = 0
-        }
-      }
-    }
-    return output
-  }
-
-  if (scene.kind === "symbol-stream") {
-    const origins = [
-      [-18, 7, -0.42],
-      [-8, -2, -0.42],
-      [2, 7, -0.42],
-      [12, -2, -0.42],
-      [22, 7, -0.42],
-    ] as const
-    for (let y = 0; y < rows; y += 1) {
-      for (let x = 0; x < columns; x += 1) {
-        const carved = origins.some(([originX, originY, rotation]) =>
-          inSymbol(
-            x,
-            y,
-            centerX + originX,
-            centerY + originY,
-            1.1,
-            rotation
-          )
-        )
-        if (carved) output[y * columns + x] = 0
-      }
-    }
-    return output
-  }
-
-  if (scene.kind === "symbol-radial") {
-    const marks: Array<[number, number, number]> = []
-    const ringRadius = Math.min(rows * 0.33, columns * 0.18)
-    const count = 8
-    for (let index = 0; index < count; index += 1) {
-      const angle = (index / count) * Math.PI * 2
-      marks.push([
-        centerX + Math.cos(angle) * ringRadius,
-        centerY + Math.sin(angle) * ringRadius,
-        angle + Math.PI / 2,
-      ])
-    }
-    for (let y = 0; y < rows; y += 1) {
-      for (let x = 0; x < columns; x += 1) {
-        if (
-          marks.some(([markX, markY, rotation]) =>
-            inSymbol(x, y, markX, markY, 0.72, rotation)
-          )
-        )
-          output[y * columns + x] = 0
-      }
-    }
-    return output
-  }
+  const marks = symbolPlacements(scene.kind, columns, rows)
 
   for (let y = 0; y < rows; y += 1) {
     for (let x = 0; x < columns; x += 1) {
-      const tileX = Math.floor((x + y * 0.72) / 8)
-      const tileY = Math.floor((y - x * 0.18) / 7)
-      const rotation = (tileX + tileY) % 2 === 0 ? 0 : Math.PI
-      const originX = tileX * 8 - tileY * 1.2 + 3
-      const originY = tileY * 7 + tileX * 1.45 + 3
-      if (inSymbol(x, y, originX, originY, 0.74, rotation)) {
+      if (
+        marks.some((mark) =>
+          inOfficialSymbol(
+            x + 0.5,
+            y + 0.5,
+            mark.x,
+            mark.y,
+            mark.height,
+            mark.rotation
+          )
+        )
+      ) {
         output[y * columns + x] = 0
       }
     }
@@ -264,21 +174,119 @@ export function rasterize(
   return output
 }
 
-const symbolBlocks = [
-  [-1, -2],
-  [-1, 0],
-  [-1, 2],
-  [0, -1],
-  [0, 1],
-  [1, 0],
+type SymbolPlacement = {
+  height: number
+  rotation: number
+  x: number
+  y: number
+}
+
+const symbolViewBox = { width: 72.393, height: 88.6207 }
+const officialSymbolRects = [
+  [0, 0.944092, 15.4995, 15.4995],
+  [28.4692, 19.0045, 15.4995, 15.4995],
+  [56.8936, 37.0667, 15.4994, 15.4994],
+  [28.4692, 55.0819, 15.4995, 15.4995],
+  [0, 73.1212, 15.4995, 15.4995],
+  [0, 37.0667, 15.4995, 15.4994],
 ] as const
 
-function inSymbol(
+function symbolPlacements(
+  kind: Scene["kind"],
+  columns: number,
+  rows: number
+) {
+  const centerX = columns / 2
+  const centerY = rows / 2
+  const marks: SymbolPlacement[] = []
+
+  if (kind === "symbol") {
+    return [
+      {
+        x: centerX,
+        y: centerY,
+        height: rows * 0.82,
+        rotation: 0,
+      },
+    ]
+  }
+
+  if (kind === "symbol-grid" || kind === "symbol-stagger") {
+    const height = rows * 0.38
+    const width = height * (symbolViewBox.width / symbolViewBox.height)
+    const gapX = width + 3
+    const gapY = height + 2
+    const rowCount = Math.ceil(rows / gapY) + 1
+    const columnCount = Math.ceil(columns / gapX) + 1
+
+    for (let row = -1; row < rowCount; row += 1) {
+      const stagger =
+        kind === "symbol-stagger" && row % 2 !== 0 ? gapX / 2 : 0
+      for (let column = -1; column < columnCount; column += 1) {
+        marks.push({
+          x: column * gapX + stagger + width / 2,
+          y: row * gapY + height / 2,
+          height,
+          rotation: 0,
+        })
+      }
+    }
+    return marks
+  }
+
+  if (kind === "symbol-stream") {
+    const height = rows * 0.56
+    const spacing = columns / 4
+    for (let index = -1; index <= 4; index += 1) {
+      marks.push({
+        x: index * spacing + centerX * 0.28,
+        y: centerY + (index % 2 === 0 ? -rows * 0.18 : rows * 0.18),
+        height,
+        rotation: -0.46,
+      })
+    }
+    return marks
+  }
+
+  if (kind === "symbol-radial") {
+    const height = rows * 0.38
+    const radius = rows * 0.3
+    const count = 6
+    for (let index = 0; index < count; index += 1) {
+      const angle = (index / count) * Math.PI * 2
+      marks.push({
+        x: centerX + Math.cos(angle) * radius,
+        y: centerY + Math.sin(angle) * radius,
+        height,
+        rotation: angle + Math.PI / 2,
+      })
+    }
+    return marks
+  }
+
+  const height = rows * 0.46
+  const width = height * (symbolViewBox.width / symbolViewBox.height)
+  const spacingX = width * 1.18
+  const spacingY = height * 0.72
+  for (let row = -1; row <= 3; row += 1) {
+    for (let column = -1; column <= Math.ceil(columns / spacingX); column += 1) {
+      marks.push({
+        x: column * spacingX + (row % 2 === 0 ? 0 : spacingX / 2),
+        y: row * spacingY,
+        height,
+        rotation: (row + column) % 2 === 0 ? 0 : Math.PI,
+      })
+    }
+  }
+  return marks
+}
+
+function inOfficialSymbol(
   x: number,
   y: number,
   centerX: number,
   centerY: number,
-  unit: number,
+  height: number,
   rotation: number
 ) {
   const cosine = Math.cos(-rotation)
@@ -287,25 +295,17 @@ function inSymbol(
   const dy = y - centerY
   const localX = dx * cosine - dy * sine
   const localY = dx * sine + dy * cosine
-  const blockSize = unit * 0.78
+  const width = height * (symbolViewBox.width / symbolViewBox.height)
+  const svgX = ((localX + width / 2) / width) * symbolViewBox.width
+  const svgY = ((localY + height / 2) / height) * symbolViewBox.height
 
-  return symbolBlocks.some(
-    ([blockX, blockY]) =>
-      Math.abs(localX - blockX * unit * 1.25) <= blockSize / 2 &&
-      Math.abs(localY - blockY * unit * 1.25) <= blockSize / 2
+  return officialSymbolRects.some(
+    ([rectX, rectY, rectWidth, rectHeight]) =>
+      svgX >= rectX &&
+      svgX <= rectX + rectWidth &&
+      svgY >= rectY &&
+      svgY <= rectY + rectHeight
   )
-}
-
-function inMicroSymbol(x: number, y: number) {
-  return (
-    (x === 1 && (y === 1 || y === 3 || y === 5)) ||
-    (x === 3 && (y === 2 || y === 4)) ||
-    (x === 5 && y === 3)
-  )
-}
-
-function mod(value: number, divisor: number) {
-  return ((value % divisor) + divisor) % divisor
 }
 
 export function cellDelay(
