@@ -1,12 +1,18 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
+import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
-import { socialAvatars, socialBanners } from "@/lib/social-assets"
+import {
+  socialAvatarBatch,
+  socialAvatars,
+  socialBanners,
+} from "@/lib/social-assets"
 
 export const metadata: Metadata = {
   title: "Social Kit · Deliverables",
@@ -178,13 +184,18 @@ function DeliverablePreview({
   deliverable: PressDeliverable
 }) {
   const ratio = deliverable.previewWidth / deliverable.previewHeight
+  const isAvatar = deliverable.id === "avatar"
+  const isBanner = deliverable.id === "banners-headers"
 
   return (
     <div className="flex aspect-4/3 items-center justify-center rounded-sm bg-muted p-8">
       <div
-        className="max-h-full max-w-full bg-muted-foreground/20"
+        className={`relative max-h-full max-w-full overflow-hidden ${
+          isAvatar || isBanner ? "bg-black" : "bg-muted-foreground/20"
+        }`}
         style={{
           aspectRatio: `${deliverable.previewWidth} / ${deliverable.previewHeight}`,
+          containerType: isBanner ? "size" : undefined,
           width:
             ratio >= 2.5
               ? "100%"
@@ -197,7 +208,19 @@ function DeliverablePreview({
         }}
         aria-label={`${deliverable.name} aspect ratio`}
         role="img"
-      />
+      >
+        {isAvatar ? (
+          <Image
+            src={`/social-assets/avatars/${socialAvatarBatch}/800.png`}
+            fill
+            sizes="320px"
+            alt="Livepeer avatar"
+            className="object-cover"
+            unoptimized
+          />
+        ) : null}
+        {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
+      </div>
     </div>
   )
 }
