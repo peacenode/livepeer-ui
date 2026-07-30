@@ -5,7 +5,6 @@ import { ArrowUpRightIcon } from "lucide-react"
 
 import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
 import {
@@ -33,27 +32,6 @@ export default function PressKitPage() {
       </header>
 
       <XProfilePreview />
-
-      <section className="mt-12 border-y py-6">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <h2 className="text-xl font-semibold tracking-tight">
-              Brand Pattern Lab
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Develop separate 16:9 subtractive pattern studies without changing
-              the linked social banners.
-            </p>
-          </div>
-          <Button
-            variant="outline"
-            render={<Link href="/marketing/pattern-lab" />}
-          >
-            Open pattern lab
-            <ArrowUpRightIcon aria-hidden="true" />
-          </Button>
-        </div>
-      </section>
 
       <div className="mt-8 grid gap-x-8 gap-y-14 md:grid-cols-2">
         {pressDeliverables.map((deliverable) => (
