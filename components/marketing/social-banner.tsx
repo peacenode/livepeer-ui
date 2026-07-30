@@ -57,8 +57,8 @@ export function SocialBannerArtwork({
       <div
         className="absolute z-10"
         style={{
-          right: "7cqw",
-          width: "44cqw",
+          right: bottomAligned ? "10cqh" : "7cqw",
+          width: bottomAligned ? "36cqw" : "44cqw",
           ...(bottomAligned
             ? { bottom: "10cqh" }
             : { top: "50%", transform: "translateY(-50%)" }),
