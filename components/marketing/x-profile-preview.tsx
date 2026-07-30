@@ -48,8 +48,6 @@ function ProfileFrame({
               left: avatarLeft,
               width: avatarSize,
               aspectRatio: "1",
-              boxShadow:
-                "-10px -10px 28px rgb(255 255 255 / 0.09), 0 8px 20px rgb(0 0 0 / 0.18)",
             }}
           >
             <Image
