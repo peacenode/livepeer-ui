@@ -6,6 +6,39 @@ type SlideFormat = "landscape" | "portrait"
 
 const alignments: SlideAlignment[] = ["left", "center", "right"]
 
+const formatConfig = {
+  landscape: {
+    width: 1920,
+    height: 1080,
+    insetX: 96,
+    topY: 84,
+    bottomY: 996,
+    heroX: 96,
+    heroY: 180,
+    heroWidth: 1728,
+    heroHeight: 720,
+    heroTextWidth: 1500,
+    heroFontSize: 132,
+  },
+  portrait: {
+    width: 1080,
+    height: 1920,
+    insetX: 72,
+    topY: 88,
+    bottomY: 1832,
+    heroX: 72,
+    heroY: 280,
+    heroWidth: 936,
+    heroHeight: 1360,
+    heroTextWidth: 840,
+    heroFontSize: 116,
+  },
+} as const
+
+const railFontSize = 22
+const logoWidth = 144
+const logoHeight = 18
+
 function SlideRail({
   position,
   format,
@@ -14,35 +47,112 @@ function SlideRail({
   format: SlideFormat
 }) {
   const isTop = position === "top"
+  const canvas = formatConfig[format]
+  const y = isTop ? canvas.topY : canvas.bottomY
 
   return (
-    <div
-      className={cn(
-        "absolute grid grid-cols-3 items-center gap-2 font-mono leading-none tracking-wide uppercase",
-        format === "landscape"
-          ? "inset-x-[5%] text-[clamp(0.35rem,0.65vw,0.625rem)]"
-          : "inset-x-[8%] text-[clamp(0.35rem,0.75vw,0.625rem)]",
-        isTop
-          ? format === "landscape"
-            ? "top-[8%]"
-            : "top-[5%]"
-          : format === "landscape"
-            ? "bottom-[8%]"
-            : "bottom-[5%]"
-      )}
+    <g
+      fill="currentColor"
+      fontFamily="var(--font-mono)"
+      fontSize={railFontSize}
+      letterSpacing={2}
     >
       {isTop ? (
-        <LivepeerGradientLockup className="h-[clamp(0.45rem,0.9vw,0.75rem)] w-auto max-w-full text-white" />
+        <LivepeerGradientLockup
+          x={canvas.insetX}
+          y={y - logoHeight / 2}
+          width={logoWidth}
+          height={logoHeight}
+          className="text-white"
+        />
       ) : (
-        <span className="truncate text-left">livepeer.org</span>
+        <text
+          x={canvas.insetX}
+          y={y}
+          dominantBaseline="middle"
+          textAnchor="start"
+        >
+          LIVEPEER.ORG
+        </text>
       )}
-      <span className="truncate text-center">
+
+      <text
+        x={canvas.width / 2}
+        y={y}
+        dominantBaseline="middle"
+        textAnchor="middle"
+      >
         {isTop ? "Presentation" : "Foundations"}
-      </span>
-      <span className="truncate text-right">
+      </text>
+
+      <text
+        x={canvas.width - canvas.insetX}
+        y={y}
+        dominantBaseline="middle"
+        textAnchor="end"
+      >
         {isTop ? "July 2026" : "01"}
-      </span>
-    </div>
+      </text>
+    </g>
+  )
+}
+
+function SlideCanvas({
+  format,
+  alignment,
+}: {
+  format: SlideFormat
+  alignment: SlideAlignment
+}) {
+  const canvas = formatConfig[format]
+
+  const justifyContent = {
+    left: "flex-start",
+    center: "center",
+    right: "flex-end",
+  }[alignment]
+
+  return (
+    <svg
+      viewBox={`0 0 ${canvas.width} ${canvas.height}`}
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-label={`${format} Livepeer slide with ${alignment}-aligned hero text`}
+      className="block h-auto w-full text-white"
+    >
+      <rect width={canvas.width} height={canvas.height} fill="#0a0a0a" />
+      <SlideRail position="top" format={format} />
+
+      <foreignObject
+        x={canvas.heroX}
+        y={canvas.heroY}
+        width={canvas.heroWidth}
+        height={canvas.heroHeight}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            color: "white",
+            display: "flex",
+            fontFamily: "var(--font-display)",
+            fontSize: canvas.heroFontSize,
+            fontWeight: 300,
+            height: "100%",
+            justifyContent,
+            letterSpacing: "-0.055em",
+            lineHeight: 0.94,
+            textAlign: alignment,
+            width: "100%",
+          }}
+        >
+          <div style={{ width: canvas.heroTextWidth }}>
+            A clear statement goes here.
+          </div>
+        </div>
+      </foreignObject>
+
+      <SlideRail position="bottom" format={format} />
+    </svg>
   )
 }
 
@@ -59,41 +169,8 @@ function SlideLayout({
         format === "portrait" && "mx-auto w-full max-w-72"
       )}
     >
-      <div
-        className={cn(
-          "relative overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950 text-white shadow-sm",
-          format === "landscape" ? "aspect-video" : "aspect-[9/16]"
-        )}
-      >
-        <SlideRail position="top" format={format} />
-
-        <div
-          className={cn(
-            "absolute flex items-center",
-            format === "landscape"
-              ? "inset-x-[5%] inset-y-[19%]"
-              : "inset-x-[8%] inset-y-[16%]",
-            alignment === "left" && "justify-start",
-            alignment === "center" && "justify-center",
-            alignment === "right" && "justify-end"
-          )}
-        >
-          <p
-            className={cn(
-              "max-w-[90%] font-display leading-[0.94] font-light tracking-[-0.055em] text-balance",
-              format === "landscape"
-                ? "text-[clamp(1.125rem,1.8vw,1.5rem)]"
-                : "text-[clamp(1.5rem,3.5vw,2.75rem)]",
-              alignment === "left" && "text-left",
-              alignment === "center" && "text-center",
-              alignment === "right" && "text-right"
-            )}
-          >
-            A clear statement goes here.
-          </p>
-        </div>
-
-        <SlideRail position="bottom" format={format} />
+      <div className="overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950 shadow-sm">
+        <SlideCanvas format={format} alignment={alignment} />
       </div>
       <figcaption className="mt-2 text-sm text-muted-foreground capitalize">
         Hero {alignment}
