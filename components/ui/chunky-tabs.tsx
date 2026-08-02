@@ -50,7 +50,7 @@ export function ChunkyTabs({
                 <DropdownMenuRadioItem
                   key={item}
                   value={item}
-                  className="rounded-sm"
+                  className="rounded-sm text-sm"
                 >
                   {item}
                 </DropdownMenuRadioItem>
@@ -73,7 +73,7 @@ export function ChunkyTabs({
             <TabsTrigger
               key={item}
               value={item}
-              className="h-auto flex-none rounded-sm py-2"
+              className="h-auto flex-none rounded-sm py-2 text-sm"
             >
               {item}
             </TabsTrigger>
