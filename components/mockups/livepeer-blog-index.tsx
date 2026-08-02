@@ -162,10 +162,13 @@ export function LivepeerBlogIndex({
                     className="pointer-events-none absolute inset-y-auto top-0 left-0 z-10 flex h-11 items-center gap-1.5 text-sm text-muted-foreground"
                     transition={searchLayoutTransition}
                   >
-                      <SearchIcon className="size-4" />
-                      {query.length === 0 && (
-                        <span>Search articles</span>
-                      )}
+                    <SearchIcon className="size-4" />
+                    <span
+                      aria-hidden="true"
+                      className={query.length > 0 ? "invisible" : undefined}
+                    >
+                      Search articles
+                    </span>
                   </motion.div>
 
                   <motion.div
