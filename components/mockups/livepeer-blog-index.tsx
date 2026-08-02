@@ -92,7 +92,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
-                    className="justify-end"
+                    className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
                     aria-label="Close search"
                     onClick={() => setFiltersOpen(false)}
                   >
@@ -111,7 +111,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     type="button"
                     size="sm"
                     variant="ghost"
-                    className={`h-auto w-full justify-start rounded-none p-0 font-normal hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
+                    className={`h-auto w-full justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
                     onClick={() => setCategory(item)}
                   >
                     {item}
@@ -157,7 +157,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
-                    className="justify-end"
+                    className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
                     aria-label="Close search"
                     onClick={() => setFiltersOpen(false)}
                   >
@@ -176,7 +176,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     type="button"
                     size="sm"
                     variant="ghost"
-                    className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-normal hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
+                    className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
                     onClick={() => setCategory(item)}
                   >
                     {item}
