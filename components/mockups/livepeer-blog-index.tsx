@@ -102,15 +102,16 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               </InputGroup>
 
               <div
-                className="mt-4 grid grid-cols-2 gap-2"
+                className="mt-6 grid w-full grid-cols-3 gap-x-6 gap-y-3"
                 aria-label="Blog categories"
               >
                 {categories.map((item) => (
                   <Button
                     key={item}
                     type="button"
-                    variant={category === item ? "default" : "secondary"}
-                    className="w-full justify-start rounded-sm font-normal"
+                    size="sm"
+                    variant="ghost"
+                    className={`h-auto w-full justify-start rounded-none p-0 font-normal hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
                     onClick={() => setCategory(item)}
                   >
                     {item}
@@ -166,7 +167,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               </InputGroup>
 
               <div
-                className="mt-4 grid w-full grid-cols-7 gap-2"
+                className="mt-6 grid w-full grid-cols-3 gap-x-8 gap-y-3"
                 aria-label="Blog categories"
               >
                 {categories.map((item) => (
@@ -174,8 +175,8 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     key={item}
                     type="button"
                     size="sm"
-                    variant={category === item ? "default" : "secondary"}
-                    className="w-full min-w-0 rounded-sm px-2 font-normal"
+                    variant="ghost"
+                    className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-normal hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
                     onClick={() => setCategory(item)}
                   >
                     {item}
