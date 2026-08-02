@@ -65,6 +65,75 @@
   width: 100%;
   border-collapse: collapse;
 }
+
+.livepeer-blog-prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.livepeer-blog-prose > * + * {
+  margin-top: 1.5rem;
+}
+
+.livepeer-blog-prose :is(h2, h3) {
+  margin-top: 3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.livepeer-blog-prose h2 {
+  font-size: 1.75rem;
+}
+
+.livepeer-blog-prose h3 {
+  font-size: 1.35rem;
+}
+
+.livepeer-blog-prose :is(ul, ol) {
+  padding-left: 1.5rem;
+}
+
+.livepeer-blog-prose ul {
+  list-style: disc;
+}
+
+.livepeer-blog-prose ol {
+  list-style: decimal;
+}
+
+.livepeer-blog-prose li + li {
+  margin-top: 0.5rem;
+}
+
+.livepeer-blog-prose a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.livepeer-blog-prose blockquote {
+  border-left: 2px solid var(--border);
+  color: var(--muted-foreground);
+  padding-left: 1.25rem;
+}
+
+.livepeer-blog-prose figure {
+  margin-block: 2.5rem;
+}
+
+.livepeer-blog-prose :is(img, video) {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+
+.livepeer-blog-prose figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
 .planner-markdown :is(th, td) {
   border-bottom: 1px solid var(--border);
   padding: 0.6rem;

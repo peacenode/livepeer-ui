@@ -12,6 +12,7 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
     { label: "GPU", href: "/mockups/livepeer-org/earn" },
     { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
     { label: "Agent Playbooks", href: "/mockups/livepeer-org/library" },
+    { label: "Blog", href: "/mockups/livepeer-org/blog" },
   ],
   footerTagline: "The open inference network.",
   footerGroups: [
