@@ -4,8 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
-import { cn } from "@/lib/utils"
 
 const categories = [
   "All",
@@ -41,33 +41,24 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
   return (
     <main className="px-4 pt-28 pb-24 sm:px-6 lg:px-10 lg:pt-36">
       <div className="mx-auto max-w-7xl">
-        <header className="max-w-2xl">
-          <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+        <header className="text-center">
+          <h1 className="font-display text-balance text-4xl leading-[0.98] font-light tracking-[-0.045em] sm:text-5xl">
             Latest Updates
           </h1>
-          <p className="mt-5 text-balance text-lg text-muted-foreground">
-            News, insights, and updates from across the Livepeer ecosystem.
-          </p>
         </header>
 
-        <div className="mt-10 flex flex-wrap gap-2" aria-label="Blog categories">
-          {categories.map((item) => (
-            <button
-              key={item}
-              type="button"
-              aria-pressed={category === item}
-              onClick={() => setCategory(item)}
-              className={cn(
-                "rounded-full border px-4 py-2 text-sm transition-colors",
-                category === item
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border hover:bg-muted"
-              )}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
+        <Tabs value={category} onValueChange={setCategory} className="mt-8">
+          <TabsList
+            aria-label="Blog categories"
+            className="mx-auto max-w-full justify-start overflow-x-auto sm:justify-center"
+          >
+            {categories.map((item) => (
+              <TabsTrigger key={item} value={item} className="flex-none">
+                {item}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
 
         <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
