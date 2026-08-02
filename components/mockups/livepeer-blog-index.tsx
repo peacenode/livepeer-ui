@@ -126,9 +126,13 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           )}
         </div>
 
-        <div className="mt-8 hidden justify-center md:flex">
+        <div className="relative z-30 mt-8 hidden h-11 justify-center md:flex">
           {filtersOpen ? (
-            <div className="w-full max-w-2xl rounded-sm bg-muted p-2">
+            <div className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2 bg-gradient-to-b from-background via-background via-55% to-transparent"
+              />
               <InputGroup className="h-11 rounded-sm border bg-background">
                 <InputGroupAddon>
                   <SearchIcon />
@@ -145,11 +149,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   <InputGroupButton
                     size="icon-xs"
                     aria-label="Close search"
-                    onClick={() => {
-                      setQuery("")
-                      setCategory("All")
-                      setFiltersOpen(false)
-                    }}
+                    onClick={() => setFiltersOpen(false)}
                   >
                     <XIcon />
                   </InputGroupButton>
@@ -157,7 +157,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               </InputGroup>
 
               <div
-                className="mt-2 flex flex-wrap gap-1"
+                className="mt-4 flex flex-wrap justify-center gap-2"
                 aria-label="Blog categories"
               >
                 {categories.map((item) => (
@@ -165,7 +165,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     key={item}
                     type="button"
                     size="sm"
-                    variant={category === item ? "default" : "ghost"}
+                    variant={category === item ? "default" : "secondary"}
                     className="rounded-sm font-normal"
                     onClick={() => setCategory(item)}
                   >
