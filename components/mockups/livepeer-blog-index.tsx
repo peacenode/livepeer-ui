@@ -31,6 +31,9 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
+const overlayGradient =
+  "linear-gradient(to bottom, var(--background) 0%, var(--background) 45%, color-mix(in oklab, var(--background) 96%, transparent) 55%, color-mix(in oklab, var(--background) 82%, transparent) 65%, color-mix(in oklab, var(--background) 50%, transparent) 78%, color-mix(in oklab, var(--background) 18%, transparent) 90%, transparent 100%)"
+
 function displayCategory(category: string) {
   return category === "Product & Protocol" ? "Protocol" : category
 }
@@ -70,9 +73,10 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
             <div className="absolute top-0 left-1/2 w-full max-w-md -translate-x-1/2">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2 bg-gradient-to-b from-background via-background via-55% to-transparent"
+                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
+                style={{ background: overlayGradient }}
               />
-              <InputGroup className="h-11 rounded-sm border bg-background">
+              <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
                 <InputGroupAddon>
                   <SearchIcon />
                 </InputGroupAddon>
@@ -131,9 +135,10 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
             <div className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2 bg-gradient-to-b from-background via-background via-55% to-transparent"
+                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
+                style={{ background: overlayGradient }}
               />
-              <InputGroup className="h-11 rounded-sm border bg-background">
+              <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
                 <InputGroupAddon>
                   <SearchIcon />
                 </InputGroupAddon>
