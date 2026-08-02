@@ -82,23 +82,20 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
-              <div className="mt-5 flex items-center gap-2 font-mono text-xs text-muted-foreground">
-                <span>{post.category}</span>
-                <span aria-hidden>·</span>
-                <time dateTime={post.publishedAt}>
+              <div className="mt-5 flex flex-col items-start gap-2">
+                <span className="font-mono text-xs text-muted-foreground">
+                  {post.category}
+                </span>
+                <h2 className="text-balance text-xl font-semibold tracking-tight group-hover:underline group-hover:underline-offset-4">
+                  {post.title}
+                </h2>
+                <time
+                  dateTime={post.publishedAt}
+                  className="font-mono text-xs text-muted-foreground"
+                >
                   {dateFormatter.format(new Date(post.publishedAt))}
                 </time>
               </div>
-              <h2 className="mt-3 text-balance text-xl font-semibold tracking-tight group-hover:underline group-hover:underline-offset-4">
-                {post.title}
-              </h2>
-              <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
-                {post.description}
-              </p>
-              <p className="mt-4 font-mono text-xs text-muted-foreground">
-                {post.author ? `${post.author} · ` : ""}
-                {post.readingTime} min read
-              </p>
             </Link>
           ))}
         </div>
