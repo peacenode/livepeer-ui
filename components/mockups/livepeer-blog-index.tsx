@@ -102,7 +102,7 @@ export function LivepeerBlogIndex({
     <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <header className="pt-12 text-center lg:pt-16">
-          <h1 className="font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
+          <h1 className="font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-[clamp(2.5rem,4.5vw,4rem)]">
             Latest Updates
           </h1>
         </header>
