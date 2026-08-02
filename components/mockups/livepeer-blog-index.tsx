@@ -37,10 +37,9 @@ const overlayGradient =
   "linear-gradient(to bottom, var(--background) 0%, var(--background) 45%, color-mix(in oklab, var(--background) 96%, transparent) 55%, color-mix(in oklab, var(--background) 82%, transparent) 65%, color-mix(in oklab, var(--background) 50%, transparent) 78%, color-mix(in oklab, var(--background) 18%, transparent) 90%, transparent 100%)"
 
 const searchLayoutTransition = {
-  type: "spring" as const,
-  stiffness: 500,
-  damping: 42,
-  mass: 0.7,
+  type: "tween" as const,
+  duration: 0.24,
+  ease: [0.22, 1, 0.36, 1] as const,
 }
 
 function displayCategory(category: string) {
@@ -198,7 +197,7 @@ export function LivepeerBlogIndex({
                     type="button"
                     variant="ghost"
                     size="lg"
-                    className="h-11 rounded-sm font-normal hover:bg-transparent"
+                    className="h-11 rounded-sm font-normal hover:bg-transparent active:translate-y-0"
                     onClick={openFilters}
                   >
                     <motion.span
