@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
 import {
@@ -84,16 +83,13 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               Search articles
             </Button>
             <DialogContent
-              className="top-16 left-0 h-[calc(100dvh-4rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-transparent bg-gradient-to-b from-background via-background via-60% to-transparent px-4 pt-28 shadow-none ring-0 sm:max-w-none md:hidden"
-              overlayClassName="inset-x-0 top-16 bottom-0 bg-transparent backdrop-blur-none md:hidden"
+              showCloseButton={false}
+              className="top-[13.5rem] left-0 h-[calc(100dvh-13.5rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-transparent bg-gradient-to-b from-background via-background via-55% to-transparent px-4 pt-8 shadow-none ring-0 sm:max-w-none md:hidden"
+              overlayClassName="inset-x-0 top-[13.5rem] bottom-0 bg-transparent backdrop-blur-none md:hidden"
             >
+              <DialogTitle className="sr-only">Search articles</DialogTitle>
               <div className="mx-auto w-full max-w-md">
-                <DialogHeader className="text-center">
-                  <DialogTitle className="font-display text-balance text-4xl leading-[0.98] font-light tracking-[-0.045em]">
-                    Latest Updates
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="mt-8">
+                <div>
                   <InputGroup className="h-11 rounded-sm border bg-background">
                     <InputGroupAddon>
                       <SearchIcon />
@@ -106,6 +102,15 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                       placeholder="Search articles"
                       aria-label="Search articles"
                     />
+                    <InputGroupAddon align="inline-end">
+                      <InputGroupButton
+                        size="icon-xs"
+                        aria-label="Close search"
+                        onClick={() => setFiltersOpen(false)}
+                      >
+                        <XIcon />
+                      </InputGroupButton>
+                    </InputGroupAddon>
                   </InputGroup>
 
                   <div
