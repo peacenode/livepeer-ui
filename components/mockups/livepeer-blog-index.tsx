@@ -39,9 +39,9 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
   )
 
   return (
-    <main className="px-4 pt-24 pb-24 sm:px-6 lg:px-10 lg:pt-28">
+    <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <header className="text-center">
+        <header className="pt-12 text-center lg:pt-16">
           <h1 className="font-display text-balance text-4xl leading-[0.98] font-light tracking-[-0.045em] sm:text-5xl">
             Latest Updates
           </h1>
@@ -55,7 +55,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           className="mt-8"
         />
 
-        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
             <Link
               key={post._id}
