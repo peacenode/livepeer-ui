@@ -7,11 +7,6 @@ import { useMemo, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog"
-import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
@@ -70,69 +65,65 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           </h1>
         </header>
 
-        <div className="mt-8 flex justify-center md:hidden">
-          <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
+        <div className="relative z-30 mt-8 flex h-11 justify-center md:hidden">
+          {filtersOpen ? (
+            <div className="absolute top-0 left-1/2 w-full max-w-md -translate-x-1/2">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2 bg-gradient-to-b from-background via-background via-55% to-transparent"
+              />
+              <InputGroup className="h-11 rounded-sm border bg-background">
+                <InputGroupAddon>
+                  <SearchIcon />
+                </InputGroupAddon>
+                <InputGroupInput
+                  autoFocus
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search articles"
+                  aria-label="Search articles"
+                />
+                <InputGroupAddon align="inline-end">
+                  <InputGroupButton
+                    size="icon-xs"
+                    aria-label="Close search"
+                    onClick={() => setFiltersOpen(false)}
+                  >
+                    <XIcon />
+                  </InputGroupButton>
+                </InputGroupAddon>
+              </InputGroup>
+
+              <div
+                className="mt-4 grid grid-cols-2 gap-2"
+                aria-label="Blog categories"
+              >
+                {categories.map((item) => (
+                  <Button
+                    key={item}
+                    type="button"
+                    variant={category === item ? "default" : "secondary"}
+                    className="justify-start rounded-sm font-normal"
+                    onClick={() => setCategory(item)}
+                  >
+                    {item}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          ) : (
             <Button
               type="button"
               variant="secondary"
               size="lg"
-              className={`rounded-sm font-normal ${filtersOpen ? "invisible" : ""}`}
+              className="rounded-sm font-normal"
               onClick={() => setFiltersOpen(true)}
             >
               <SearchIcon />
               Search articles
             </Button>
-            <DialogContent
-              showCloseButton={false}
-              className="top-[13.5rem] left-0 h-[calc(100dvh-13.5rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-transparent bg-gradient-to-b from-background via-background via-55% to-transparent px-4 pt-8 shadow-none ring-0 sm:max-w-none md:hidden"
-              overlayClassName="inset-x-0 top-[13.5rem] bottom-0 bg-transparent backdrop-blur-none md:hidden"
-            >
-              <DialogTitle className="sr-only">Search articles</DialogTitle>
-              <div className="mx-auto w-full max-w-md">
-                <div>
-                  <InputGroup className="h-11 rounded-sm border bg-background">
-                    <InputGroupAddon>
-                      <SearchIcon />
-                    </InputGroupAddon>
-                    <InputGroupInput
-                      autoFocus
-                      type="search"
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder="Search articles"
-                      aria-label="Search articles"
-                    />
-                    <InputGroupAddon align="inline-end">
-                      <InputGroupButton
-                        size="icon-xs"
-                        aria-label="Close search"
-                        onClick={() => setFiltersOpen(false)}
-                      >
-                        <XIcon />
-                      </InputGroupButton>
-                    </InputGroupAddon>
-                  </InputGroup>
-
-                  <div
-                    className="mt-4 grid grid-cols-2 gap-2"
-                    aria-label="Blog categories"
-                  >
-                    {categories.map((item) => (
-                      <Button
-                        key={item}
-                        type="button"
-                        variant={category === item ? "default" : "secondary"}
-                        className="justify-start rounded-sm font-normal"
-                        onClick={() => setCategory(item)}
-                      >
-                        {item}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
+          )}
         </div>
 
         <div className="mt-8 hidden justify-center md:flex">
