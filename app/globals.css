@@ -311,15 +311,3 @@
     font-variant-ligatures: none;
   }
 }
-
-@keyframes blog-search-label-move {
-  from {
-    transform: translate(
-      var(--blog-search-label-x, 0),
-      var(--blog-search-label-y, 0)
-    );
-  }
-  to {
-    transform: translate(0, 0);
-  }
-}

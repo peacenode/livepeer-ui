@@ -3,8 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { SearchIcon, XIcon } from "lucide-react"
+import { AnimatePresence, LayoutGroup, motion, MotionConfig } from "motion/react"
 import { useMemo, useState } from "react"
-import { flushSync } from "react-dom"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -35,6 +35,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 const overlayGradient =
   "linear-gradient(to bottom, var(--background) 0%, var(--background) 45%, color-mix(in oklab, var(--background) 96%, transparent) 55%, color-mix(in oklab, var(--background) 82%, transparent) 65%, color-mix(in oklab, var(--background) 50%, transparent) 78%, color-mix(in oklab, var(--background) 18%, transparent) 90%, transparent 100%)"
 
+const searchLayoutTransition = {
+  type: "spring" as const,
+  stiffness: 500,
+  damping: 42,
+  mass: 0.7,
+}
+
 function displayCategory(category: string) {
   return category === "Product & Protocol" ? "Protocol" : category
 }
@@ -60,40 +67,6 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
     [category, posts, query]
   )
 
-  function setFiltersOpenWithTransition(open: boolean) {
-    const source = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-blog-search-label]")
-    ).find((element) => element.getBoundingClientRect().width > 0)
-    const sourceRect = source?.getBoundingClientRect()
-
-    flushSync(() => setFiltersOpen(open))
-
-    if (
-      !sourceRect ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return
-    }
-
-    const target = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-blog-search-label]")
-    ).find((element) => element.getBoundingClientRect().width > 0)
-
-    if (!target) return
-
-    const targetRect = target.getBoundingClientRect()
-    target.style.setProperty(
-      "--blog-search-label-x",
-      `${sourceRect.left - targetRect.left}px`
-    )
-    target.style.setProperty(
-      "--blog-search-label-y",
-      `${sourceRect.top - targetRect.top}px`
-    )
-    target.style.animation =
-      "blog-search-label-move 320ms cubic-bezier(0.22, 1, 0.36, 1) both"
-  }
-
   return (
     <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -103,157 +76,109 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           </h1>
         </header>
 
-        <div className="relative z-30 mt-8 flex h-11 justify-center md:hidden">
-          {filtersOpen ? (
-            <div className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
-                style={{ background: overlayGradient }}
-              />
-              <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                <InputGroupAddon className="pl-0">
-                  <SearchIcon className="-translate-x-px" />
-                </InputGroupAddon>
-                <InputGroupInput
-                  autoFocus
-                  type="search"
-                  className="px-0 text-sm"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder=""
-                  aria-label="Search articles"
-                />
-                {query.length === 0 && (
-                  <span
-                    aria-hidden="true"
-                    data-blog-search-label
-                    className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm text-muted-foreground"
+        <MotionConfig reducedMotion="user">
+          <LayoutGroup id="blog-search">
+            <div className="relative z-30 mt-8 flex h-11 justify-center">
+              <AnimatePresence initial={false} mode="popLayout">
+                {filtersOpen ? (
+                  <motion.div
+                    key="expanded"
+                    className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2"
                   >
-                    Search articles
-                  </span>
+                    <motion.div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
+                      style={{ background: overlayGradient }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    />
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.16 }}
+                    >
+                      <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
+                        <InputGroupInput
+                          autoFocus
+                          type="search"
+                          className="pr-0 pl-[22px] text-sm"
+                          value={query}
+                          onChange={(event) => setQuery(event.target.value)}
+                          placeholder=""
+                          aria-label="Search articles"
+                        />
+                        <InputGroupAddon align="inline-end" className="pr-0">
+                          <InputGroupButton
+                            size="icon-xs"
+                            className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
+                            aria-label="Close search"
+                            onClick={() => setFiltersOpen(false)}
+                          >
+                            <XIcon className="-translate-x-0.5" />
+                          </InputGroupButton>
+                        </InputGroupAddon>
+                      </InputGroup>
+                    </motion.div>
+
+                    <motion.div
+                      layoutId="blog-search-prompt"
+                      className="pointer-events-none absolute inset-y-auto top-0 left-0 z-10 flex h-11 items-center gap-1.5 text-sm text-muted-foreground"
+                      transition={searchLayoutTransition}
+                    >
+                      <SearchIcon className="size-4" />
+                      {query.length === 0 && <span>Search articles</span>}
+                    </motion.div>
+
+                    <motion.div
+                      className="mt-6 grid w-full grid-cols-3 gap-x-6 gap-y-3 md:gap-x-8"
+                      aria-label="Blog categories"
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.2, delay: 0.06 }}
+                    >
+                      {categories.map((item) => (
+                        <Button
+                          key={item}
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
+                          onClick={() => setCategory(item)}
+                        >
+                          {item}
+                        </Button>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                ) : (
+                  <motion.div key="trigger">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="lg"
+                      className="h-11 rounded-sm font-normal hover:bg-transparent"
+                      onClick={() => setFiltersOpen(true)}
+                    >
+                      <motion.span
+                        layoutId="blog-search-prompt"
+                        className="inline-flex items-center gap-1.5"
+                        transition={searchLayoutTransition}
+                      >
+                        <SearchIcon className="size-4" />
+                        <span>Search articles</span>
+                      </motion.span>
+                    </Button>
+                  </motion.div>
                 )}
-                <InputGroupAddon align="inline-end" className="pr-0">
-                  <InputGroupButton
-                    size="icon-xs"
-                    className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
-                    aria-label="Close search"
-                    onClick={() => setFiltersOpenWithTransition(false)}
-                  >
-                    <XIcon className="-translate-x-0.5" />
-                  </InputGroupButton>
-                </InputGroupAddon>
-              </InputGroup>
-
-              <div
-                className="mt-6 grid w-full grid-cols-3 gap-x-6 gap-y-3"
-                aria-label="Blog categories"
-              >
-                {categories.map((item) => (
-                  <Button
-                    key={item}
-                    type="button"
-                    size="sm"
-                    variant="ghost"
-                    className={`h-auto w-full justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
-                    onClick={() => setCategory(item)}
-                  >
-                    {item}
-                  </Button>
-                ))}
-              </div>
+              </AnimatePresence>
             </div>
-          ) : (
-            <Button
-              type="button"
-              variant="ghost"
-              size="lg"
-              className="rounded-sm font-normal hover:bg-transparent"
-              onClick={() => setFiltersOpenWithTransition(true)}
-            >
-              <SearchIcon />
-              <span data-blog-search-label className="inline-block">
-                Search articles
-              </span>
-            </Button>
-          )}
-        </div>
-
-        <div className="relative z-30 mt-8 hidden h-11 justify-center md:flex">
-          {filtersOpen ? (
-            <div className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
-                style={{ background: overlayGradient }}
-              />
-              <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                <InputGroupAddon className="pl-0">
-                  <SearchIcon className="-translate-x-px" />
-                </InputGroupAddon>
-                <InputGroupInput
-                  autoFocus
-                  type="search"
-                  className="px-0 text-sm"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder=""
-                  aria-label="Search articles"
-                />
-                {query.length === 0 && (
-                  <span
-                    aria-hidden="true"
-                    data-blog-search-label
-                    className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm text-muted-foreground"
-                  >
-                    Search articles
-                  </span>
-                )}
-                <InputGroupAddon align="inline-end" className="pr-0">
-                  <InputGroupButton
-                    size="icon-xs"
-                    className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
-                    aria-label="Close search"
-                    onClick={() => setFiltersOpenWithTransition(false)}
-                  >
-                    <XIcon className="-translate-x-0.5" />
-                  </InputGroupButton>
-                </InputGroupAddon>
-              </InputGroup>
-
-              <div
-                className="mt-6 grid w-full grid-cols-3 gap-x-8 gap-y-3"
-                aria-label="Blog categories"
-              >
-                {categories.map((item) => (
-                  <Button
-                    key={item}
-                    type="button"
-                    size="sm"
-                    variant="ghost"
-                    className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
-                    onClick={() => setCategory(item)}
-                  >
-                    {item}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <Button
-              type="button"
-              variant="ghost"
-              size="lg"
-              className="rounded-sm font-normal hover:bg-transparent"
-              onClick={() => setFiltersOpenWithTransition(true)}
-            >
-              <SearchIcon />
-              <span data-blog-search-label className="inline-block">
-                Search articles
-              </span>
-            </Button>
-          )}
-        </div>
+          </LayoutGroup>
+        </MotionConfig>
 
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
