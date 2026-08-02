@@ -90,7 +90,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 {post.title}
               </h2>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-xs font-normal text-muted-foreground">
+                <span className="text-xs text-foreground">
                   {displayCategory(post.category)}
                 </span>
                 <time
