@@ -29,6 +29,40 @@ const socialIcons = {
   website: GlobeIcon,
 }
 
+const menuOrder = [
+  {
+    label: "Home",
+    matches: (label: string, href: string) =>
+      label === "Home" || href.endsWith("/livepeer-org"),
+  },
+  {
+    label: "Foundation",
+    matches: (_label: string, href: string) => href.includes("/foundation"),
+  },
+  {
+    label: "Ecosystem",
+    matches: (_label: string, href: string) => href.includes("/ecosystem"),
+  },
+  {
+    label: "Agent",
+    matches: (_label: string, href: string) => href.includes("/agent"),
+  },
+  {
+    label: "GPU",
+    matches: (label: string, href: string) =>
+      label === "GPU" || href.includes("/earn"),
+  },
+  {
+    label: "Token",
+    matches: (_label: string, href: string) => href.includes("/token"),
+  },
+  {
+    label: "Updates",
+    matches: (label: string, href: string) =>
+      label === "Updates" || href.includes("/blog"),
+  },
+]
+
 function LivepeerMenuIcon() {
   return (
     <svg
@@ -45,6 +79,10 @@ function LivepeerMenuIcon() {
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
+  const menuLinks = menuOrder.flatMap(({ label, matches }) => {
+    const link = site.menuLinks.find((item) => matches(item.label, item.href))
+    return link ? [{ ...link, label }] : []
+  })
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -92,7 +130,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
 
         <div className="grid gap-12 px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
           <nav className="flex flex-col items-start gap-4 text-left">
-            {site.menuLinks.map((item) => (
+            {menuLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
