@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronsUpDownIcon } from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 
 import {
   DropdownMenu,
@@ -27,18 +27,21 @@ export function ChunkyTabs({
 }) {
   return (
     <div className={cn(className)}>
-      <div className="mx-auto w-full max-w-xs sm:hidden">
+      <div className="flex justify-center sm:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger
             aria-label={ariaLabel}
             render={
-              <button className="flex h-11 w-full items-center justify-between rounded-sm border bg-muted px-3 text-sm outline-none transition-colors hover:bg-muted/80 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50" />
+              <button className="inline-flex h-11 w-fit items-center gap-2 rounded-sm border bg-muted px-3 text-sm outline-none transition-colors hover:bg-muted/80 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50" />
             }
           >
             <span>{value}</span>
-            <ChevronsUpDownIcon className="size-4 text-muted-foreground" />
+            <ChevronDownIcon className="size-4 text-muted-foreground" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="rounded-sm p-1" align="center">
+          <DropdownMenuContent
+            className="w-[calc(100vw-2rem)] max-w-xs rounded-sm p-1"
+            align="center"
+          >
             <DropdownMenuRadioGroup
               value={value}
               onValueChange={onValueChange}
