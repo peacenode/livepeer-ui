@@ -70,7 +70,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
 
         <div className="relative z-30 mt-8 flex h-11 justify-center md:hidden">
           {filtersOpen ? (
-            <div className="absolute top-0 left-1/2 w-full max-w-md -translate-x-1/2">
+            <div className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
@@ -108,7 +108,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     key={item}
                     type="button"
                     variant={category === item ? "default" : "secondary"}
-                    className="justify-start rounded-sm font-normal"
+                    className="w-full justify-start rounded-sm font-normal"
                     onClick={() => setCategory(item)}
                   >
                     {item}
@@ -162,7 +162,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               </InputGroup>
 
               <div
-                className="mt-4 flex flex-wrap justify-center gap-2"
+                className="mt-4 grid w-full grid-cols-7 gap-2"
                 aria-label="Blog categories"
               >
                 {categories.map((item) => (
@@ -171,7 +171,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     type="button"
                     size="sm"
                     variant={category === item ? "default" : "secondary"}
-                    className="rounded-sm font-normal"
+                    className="w-full min-w-0 rounded-sm px-2 font-normal"
                     onClick={() => setCategory(item)}
                   >
                     {item}
