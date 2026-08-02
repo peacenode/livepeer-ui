@@ -21,20 +21,22 @@ export function ChunkyTabs({
       onValueChange={onValueChange}
       className={className}
     >
-      <TabsList
-        aria-label={ariaLabel}
-        className="mx-auto h-auto! max-w-full justify-start overflow-x-auto rounded-sm sm:justify-center"
-      >
-        {items.map((item) => (
-          <TabsTrigger
-            key={item}
-            value={item}
-            className="h-auto flex-none rounded-sm py-2"
-          >
-            {item}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <div className="max-w-full overflow-x-auto pb-1">
+        <TabsList
+          aria-label={ariaLabel}
+          className="mx-auto h-auto! min-w-max rounded-sm"
+        >
+          {items.map((item) => (
+            <TabsTrigger
+              key={item}
+              value={item}
+              className="h-auto flex-none rounded-sm py-2"
+            >
+              {item}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
     </Tabs>
   )
 }
