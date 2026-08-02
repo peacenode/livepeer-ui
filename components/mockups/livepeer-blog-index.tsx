@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { SearchIcon, XIcon } from "lucide-react"
 import { useMemo, useState } from "react"
+import { flushSync } from "react-dom"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -59,6 +60,40 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
     [category, posts, query]
   )
 
+  function setFiltersOpenWithTransition(open: boolean) {
+    const source = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-blog-search-label]")
+    ).find((element) => element.getBoundingClientRect().width > 0)
+    const sourceRect = source?.getBoundingClientRect()
+
+    flushSync(() => setFiltersOpen(open))
+
+    if (
+      !sourceRect ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return
+    }
+
+    const target = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-blog-search-label]")
+    ).find((element) => element.getBoundingClientRect().width > 0)
+
+    if (!target) return
+
+    const targetRect = target.getBoundingClientRect()
+    target.style.setProperty(
+      "--blog-search-label-x",
+      `${sourceRect.left - targetRect.left}px`
+    )
+    target.style.setProperty(
+      "--blog-search-label-y",
+      `${sourceRect.top - targetRect.top}px`
+    )
+    target.style.animation =
+      "blog-search-label-move 320ms cubic-bezier(0.22, 1, 0.36, 1) both"
+  }
+
   return (
     <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -86,15 +121,24 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="px-0 text-sm"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search articles"
+                  placeholder=""
                   aria-label="Search articles"
                 />
+                {query.length === 0 && (
+                  <span
+                    aria-hidden="true"
+                    data-blog-search-label
+                    className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm text-muted-foreground"
+                  >
+                    Search articles
+                  </span>
+                )}
                 <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
                     className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
                     aria-label="Close search"
-                    onClick={() => setFiltersOpen(false)}
+                    onClick={() => setFiltersOpenWithTransition(false)}
                   >
                     <XIcon className="-translate-x-0.5" />
                   </InputGroupButton>
@@ -125,10 +169,12 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               variant="ghost"
               size="lg"
               className="rounded-sm font-normal hover:bg-transparent"
-              onClick={() => setFiltersOpen(true)}
+              onClick={() => setFiltersOpenWithTransition(true)}
             >
               <SearchIcon />
-              Search articles
+              <span data-blog-search-label className="inline-block">
+                Search articles
+              </span>
             </Button>
           )}
         </div>
@@ -151,15 +197,24 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="px-0 text-sm"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search articles"
+                  placeholder=""
                   aria-label="Search articles"
                 />
+                {query.length === 0 && (
+                  <span
+                    aria-hidden="true"
+                    data-blog-search-label
+                    className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-sm text-muted-foreground"
+                  >
+                    Search articles
+                  </span>
+                )}
                 <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
                     className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
                     aria-label="Close search"
-                    onClick={() => setFiltersOpen(false)}
+                    onClick={() => setFiltersOpenWithTransition(false)}
                   >
                     <XIcon className="-translate-x-0.5" />
                   </InputGroupButton>
@@ -190,10 +245,12 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               variant="ghost"
               size="lg"
               className="rounded-sm font-normal hover:bg-transparent"
-              onClick={() => setFiltersOpen(true)}
+              onClick={() => setFiltersOpenWithTransition(true)}
             >
               <SearchIcon />
-              Search articles
+              <span data-blog-search-label className="inline-block">
+                Search articles
+              </span>
             </Button>
           )}
         </div>
