@@ -74,7 +74,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
             <Link
               key={post._id}
               href={`/mockups/livepeer-org/blog/${post.slug}`}
-              className="group min-w-0"
+              className="group flex min-w-0 flex-col gap-3"
             >
               <div className="relative aspect-[16/9] overflow-hidden rounded-sm border bg-muted">
                 <Image
@@ -86,10 +86,10 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
-              <h2 className="mt-3 font-display text-balance text-xl font-light tracking-tight">
+              <h2 className="font-display text-balance text-xl font-light tracking-tight">
                 {post.title}
               </h2>
-              <div className="mt-3 flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <span className="text-xs text-foreground">
                   {displayCategory(post.category)}
                 </span>
