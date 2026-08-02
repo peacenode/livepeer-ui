@@ -87,7 +87,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
-              <h2 className="mt-3 font-display text-balance text-xl font-light tracking-tight group-hover:underline group-hover:underline-offset-4">
+              <h2 className="mt-3 font-display text-balance text-xl font-light tracking-tight">
                 {post.title}
               </h2>
               <div className="mt-3 flex items-center gap-2">
