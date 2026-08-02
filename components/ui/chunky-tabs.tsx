@@ -1,8 +1,6 @@
 "use client"
 
 import { ChevronDownIcon } from "lucide-react"
-import LiquidGlass from "liquid-glass-react"
-import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 
 import {
   DropdownMenu,
@@ -13,18 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
-
-const subscribeToGlassVariant = () => () => undefined
-
-function getGlassVariantSnapshot() {
-  const requested =
-    new URLSearchParams(window.location.search).get("glass") === "liquid"
-  const chromium = /Chrom(e|ium)|Edg\//.test(navigator.userAgent)
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches
-  return requested && chromium && !reducedMotion
-}
 
 export function ChunkyTabs({
   items,
@@ -39,32 +25,6 @@ export function ChunkyTabs({
   ariaLabel: string
   className?: string
 }) {
-  const tabsListRef = useRef<HTMLDivElement>(null)
-  const [tabBarSize, setTabBarSize] = useState({ width: 0, height: 0 })
-  const useLiquidGlass = useSyncExternalStore(
-    subscribeToGlassVariant,
-    getGlassVariantSnapshot,
-    () => false
-  )
-
-  useEffect(() => {
-    const tabsList = tabsListRef.current
-    if (!tabsList) return
-
-    const updateSize = () => {
-      const { width, height } = tabsList.getBoundingClientRect()
-      setTabBarSize({ width, height })
-    }
-    const frame = requestAnimationFrame(updateSize)
-    const observer = new ResizeObserver(updateSize)
-    observer.observe(tabsList)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      observer.disconnect()
-    }
-  }, [])
-
   return (
     <div className={cn(className)}>
       <div className="flex justify-center sm:hidden">
@@ -104,49 +64,21 @@ export function ChunkyTabs({
         value={value}
         onValueChange={onValueChange}
         className="hidden sm:flex"
-        data-glass-variant={useLiquidGlass ? "liquid" : "frosted"}
       >
-        <div className="relative mx-auto">
-          {useLiquidGlass && tabBarSize.width > 0 && (
-            <div
-              className="pointer-events-none absolute inset-0 translate-x-1/2 translate-y-1/2 [&>*]:absolute!"
-              aria-hidden
+        <TabsList
+          aria-label={ariaLabel}
+          className="mx-auto h-auto! min-w-max rounded-sm"
+        >
+          {items.map((item) => (
+            <TabsTrigger
+              key={item}
+              value={item}
+              className="h-auto flex-none rounded-sm py-2 text-sm"
             >
-            <LiquidGlass
-              padding="0px"
-              cornerRadius={6}
-              displacementScale={28}
-              blurAmount={0.04}
-              saturation={135}
-              aberrationIntensity={1.25}
-              elasticity={0.12}
-              style={{ width: tabBarSize.width, height: tabBarSize.height }}
-            >
-                <div
-                  style={{ width: tabBarSize.width, height: tabBarSize.height }}
-                />
-            </LiquidGlass>
-            </div>
-          )}
-          <TabsList
-            ref={tabsListRef}
-            aria-label={ariaLabel}
-            className={cn(
-              "relative z-10 mx-auto h-auto! min-w-max rounded-sm",
-              useLiquidGlass && "bg-white/15 shadow-none backdrop-blur-none"
-            )}
-          >
-            {items.map((item) => (
-              <TabsTrigger
-                key={item}
-                value={item}
-                className="h-auto flex-none rounded-sm py-2 text-sm"
-              >
-                {item}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </div>
+              {item}
+            </TabsTrigger>
+          ))}
+        </TabsList>
       </Tabs>
     </div>
   )
