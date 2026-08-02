@@ -57,19 +57,6 @@ export function LivepeerBlogIndex({
   const [inputReady, setInputReady] = useState(false)
   const [sharedLayoutEnabled, setSharedLayoutEnabled] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = Object.fromEntries(
-      categories.map((item) => [item, 0])
-    )
-    counts.All = posts.length
-
-    posts.forEach((post) => {
-      const item = displayCategory(post.category)
-      if (item in counts) counts[item] += 1
-    })
-
-    return counts
-  }, [posts])
   const visiblePosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
     return posts.filter((post) => {
@@ -196,14 +183,10 @@ export function LivepeerBlogIndex({
                         type="button"
                         size="sm"
                         variant="ghost"
-                        aria-label={`${item}, ${categoryCounts[item]} articles`}
                         className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
                         onClick={() => setCategory(item)}
                       >
-                        <span>{item}</span>
-                        <span className="font-sans font-normal text-muted-foreground/50">
-                          {categoryCounts[item]}
-                        </span>
+                        {item}
                       </Button>
                     ))}
                   </motion.div>
