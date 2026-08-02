@@ -77,8 +77,8 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 style={{ background: overlayGradient }}
               />
               <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                <InputGroupAddon>
-                  <SearchIcon />
+                <InputGroupAddon className="pl-0">
+                  <SearchIcon className="-translate-x-px" />
                 </InputGroupAddon>
                 <InputGroupInput
                   autoFocus
@@ -89,13 +89,14 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   placeholder="Search articles"
                   aria-label="Search articles"
                 />
-                <InputGroupAddon align="inline-end">
+                <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
+                    className="justify-end"
                     aria-label="Close search"
                     onClick={() => setFiltersOpen(false)}
                   >
-                    <XIcon />
+                    <XIcon className="-translate-x-0.5" />
                   </InputGroupButton>
                 </InputGroupAddon>
               </InputGroup>
@@ -140,8 +141,8 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 style={{ background: overlayGradient }}
               />
               <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                <InputGroupAddon>
-                  <SearchIcon />
+                <InputGroupAddon className="pl-0">
+                  <SearchIcon className="-translate-x-px" />
                 </InputGroupAddon>
                 <InputGroupInput
                   autoFocus
@@ -152,13 +153,14 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   placeholder="Search articles"
                   aria-label="Search articles"
                 />
-                <InputGroupAddon align="inline-end">
+                <InputGroupAddon align="inline-end" className="pr-0">
                   <InputGroupButton
                     size="icon-xs"
+                    className="justify-end"
                     aria-label="Close search"
                     onClick={() => setFiltersOpen(false)}
                   >
-                    <XIcon />
+                    <XIcon className="-translate-x-0.5" />
                   </InputGroupButton>
                 </InputGroupAddon>
               </InputGroup>
