@@ -74,7 +74,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
             <Link
               key={post._id}
               href={`/mockups/livepeer-org/blog/${post.slug}`}
-              className="group flex min-w-0 flex-col gap-3"
+              className="group flex min-w-0 flex-col gap-2"
             >
               <div className="relative aspect-[16/9] overflow-hidden rounded-sm border bg-muted">
                 <Image
