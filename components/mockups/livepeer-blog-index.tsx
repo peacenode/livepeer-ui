@@ -7,17 +7,17 @@ import { useMemo, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group"
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
 import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
 
 const categories = [
@@ -72,7 +72,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
         </header>
 
         <div className="mt-8 flex justify-center md:hidden">
-          <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
+          <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
             <Button
               type="button"
               variant="secondary"
@@ -83,16 +83,16 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               <SearchIcon />
               Search articles
             </Button>
-            <SheetContent
-              side="bottom"
-              className="max-h-[85dvh] rounded-t-lg"
+            <DialogContent
+              className="top-16 left-0 h-[calc(100dvh-4rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-background px-4 py-10 shadow-none ring-0 sm:max-w-none md:hidden"
+              overlayClassName="inset-x-0 top-16 bottom-0 bg-background/80 backdrop-blur-sm md:hidden"
             >
-              <SheetHeader className="pb-4">
-                <SheetTitle className="font-display text-xl font-light">
-                  Search articles
-                </SheetTitle>
-              </SheetHeader>
-              <div className="overflow-y-auto px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+              <div className="mx-auto w-full max-w-md">
+                <DialogHeader className="pb-6 text-center">
+                  <DialogTitle className="font-display text-3xl font-light">
+                    Search articles
+                  </DialogTitle>
+                </DialogHeader>
                 <InputGroup className="h-11 rounded-sm border bg-background">
                   <InputGroupAddon>
                     <SearchIcon />
@@ -123,8 +123,8 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   ))}
                 </div>
               </div>
-            </SheetContent>
-          </Sheet>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <div className="mt-8 hidden justify-center md:flex">
