@@ -138,7 +138,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 className={cn(
                   "text-2xl font-light tracking-tight transition-colors hover:text-emerald-500 sm:text-3xl",
                   pathname === item.href
-                    ? "text-background underline underline-offset-8"
+                    ? "text-background"
                     : "text-background/55"
                 )}
               >
