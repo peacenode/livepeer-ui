@@ -201,7 +201,7 @@ export function LivepeerBlogIndex({
                         onClick={() => setCategory(item)}
                       >
                         <span>{item}</span>
-                        <span className="font-normal text-muted-foreground/50 tabular-nums">
+                        <span className="font-sans font-normal text-muted-foreground/50">
                           {categoryCounts[item]}
                         </span>
                       </Button>
