@@ -131,9 +131,11 @@ export function LivepeerBlogIndex({
                     transition={{ duration: 0.16 }}
                   >
                     <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                      <InputGroupInput
-                        ref={searchInputRef}
-                        type="search"
+                        <InputGroupInput
+                          ref={searchInputRef}
+                          type="text"
+                          inputMode="search"
+                          enterKeyHint="search"
                         className={`pr-0 pl-[22px] text-sm ${inputReady ? "caret-foreground" : "caret-transparent"}`}
                         value={query}
                         onChange={(event) => setQuery(event.target.value)}
@@ -160,16 +162,10 @@ export function LivepeerBlogIndex({
                     className="pointer-events-none absolute inset-y-auto top-0 left-0 z-10 flex h-11 items-center gap-1.5 text-sm text-muted-foreground"
                     transition={searchLayoutTransition}
                   >
-                    <SearchIcon className="size-4" />
-                    {query.length === 0 && (
-                      <motion.span
-                        initial={{ opacity: 1 }}
-                        animate={{ opacity: 0 }}
-                        transition={{ duration: 0.08, delay: 0.22 }}
-                      >
-                        Search articles
-                      </motion.span>
-                    )}
+                      <SearchIcon className="size-4" />
+                      {query.length === 0 && (
+                        <span>Search articles</span>
+                      )}
                   </motion.div>
 
                   <motion.div
