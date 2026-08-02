@@ -55,7 +55,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           className="mt-8"
         />
 
-        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+        <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
             <Link
               key={post._id}
