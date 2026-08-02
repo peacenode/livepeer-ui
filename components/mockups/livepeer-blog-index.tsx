@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ChunkyTabs } from "@/components/ui/chunky-tabs"
 import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
 
 const categories = [
@@ -47,18 +47,13 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           </h1>
         </header>
 
-        <Tabs value={category} onValueChange={setCategory} className="mt-8">
-          <TabsList
-            aria-label="Blog categories"
-            className="mx-auto max-w-full justify-start overflow-x-auto sm:justify-center"
-          >
-            {categories.map((item) => (
-              <TabsTrigger key={item} value={item} className="flex-none">
-                {item}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+        <ChunkyTabs
+          items={categories}
+          value={category}
+          onValueChange={setCategory}
+          ariaLabel="Blog categories"
+          className="mt-8"
+        />
 
         <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
