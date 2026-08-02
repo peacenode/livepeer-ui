@@ -39,7 +39,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
   )
 
   return (
-    <main className="px-4 pt-28 pb-24 sm:px-6 lg:px-10 lg:pt-36">
+    <main className="px-4 pt-24 pb-24 sm:px-6 lg:px-10 lg:pt-28">
       <div className="mx-auto max-w-7xl">
         <header className="text-center">
           <h1 className="font-display text-balance text-4xl leading-[0.98] font-light tracking-[-0.045em] sm:text-5xl">
