@@ -4,7 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { SearchIcon, XIcon } from "lucide-react"
 import { AnimatePresence, LayoutGroup, motion, MotionConfig } from "motion/react"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { flushSync } from "react-dom"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -50,6 +51,9 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
   const [category, setCategory] = useState("All")
   const [query, setQuery] = useState("")
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [inputReady, setInputReady] = useState(false)
+  const [sharedLayoutEnabled, setSharedLayoutEnabled] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const visiblePosts = useMemo(
     () => {
       const normalizedQuery = query.trim().toLowerCase()
@@ -66,6 +70,29 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
     },
     [category, posts, query]
   )
+
+  useEffect(() => {
+    if (!filtersOpen || inputReady) return
+
+    const timeout = window.setTimeout(() => {
+      setInputReady(true)
+      searchInputRef.current?.focus()
+    }, 450)
+
+    return () => window.clearTimeout(timeout)
+  }, [filtersOpen, inputReady])
+
+  function openFilters() {
+    flushSync(() => setSharedLayoutEnabled(true))
+    setInputReady(false)
+    window.requestAnimationFrame(() => setFiltersOpen(true))
+  }
+
+  function closeFilters() {
+    flushSync(() => setSharedLayoutEnabled(false))
+    setInputReady(false)
+    setFiltersOpen(false)
+  }
 
   return (
     <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
@@ -91,21 +118,21 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                       style={{ background: overlayGradient }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      exit={{ opacity: 0, transition: { duration: 0.1 } }}
                       transition={{ duration: 0.2 }}
                     />
 
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      exit={{ opacity: 0, transition: { duration: 0.08 } }}
                       transition={{ duration: 0.16 }}
                     >
                       <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
                         <InputGroupInput
-                          autoFocus
+                          ref={searchInputRef}
                           type="search"
-                          className="pr-0 pl-[22px] text-sm"
+                          className={`pr-0 pl-[22px] text-sm ${inputReady ? "caret-foreground" : "caret-transparent"}`}
                           value={query}
                           onChange={(event) => setQuery(event.target.value)}
                           placeholder=""
@@ -116,7 +143,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                             size="icon-xs"
                             className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
                             aria-label="Close search"
-                            onClick={() => setFiltersOpen(false)}
+                            onClick={closeFilters}
                           >
                             <XIcon className="-translate-x-0.5" />
                           </InputGroupButton>
@@ -125,7 +152,11 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     </motion.div>
 
                     <motion.div
-                      layoutId="blog-search-prompt"
+                      layoutId={
+                        sharedLayoutEnabled
+                          ? "blog-search-prompt"
+                          : undefined
+                      }
                       className="pointer-events-none absolute inset-y-auto top-0 left-0 z-10 flex h-11 items-center gap-1.5 text-sm text-muted-foreground"
                       transition={searchLayoutTransition}
                     >
@@ -138,7 +169,11 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                       aria-label="Blog categories"
                       initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
+                      exit={{
+                        opacity: 0,
+                        y: -4,
+                        transition: { duration: 0.08 },
+                      }}
                       transition={{ duration: 0.2, delay: 0.06 }}
                     >
                       {categories.map((item) => (
@@ -156,16 +191,25 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     </motion.div>
                   </motion.div>
                 ) : (
-                  <motion.div key="trigger">
+                  <motion.div
+                    key="trigger"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.12, ease: "easeOut" }}
+                  >
                     <Button
                       type="button"
                       variant="ghost"
                       size="lg"
                       className="h-11 rounded-sm font-normal hover:bg-transparent"
-                      onClick={() => setFiltersOpen(true)}
+                      onClick={openFilters}
                     >
                       <motion.span
-                        layoutId="blog-search-prompt"
+                        layoutId={
+                          sharedLayoutEnabled
+                            ? "blog-search-prompt"
+                            : undefined
+                        }
                         className="inline-flex items-center gap-1.5"
                         transition={searchLayoutTransition}
                       >
