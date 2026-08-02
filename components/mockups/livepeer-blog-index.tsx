@@ -83,6 +83,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 <InputGroupInput
                   autoFocus
                   type="search"
+                  className="px-0"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search articles"
@@ -145,6 +146,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 <InputGroupInput
                   autoFocus
                   type="search"
+                  className="px-0"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   placeholder="Search articles"
