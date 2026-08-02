@@ -58,7 +58,7 @@ export default async function LivepeerBlogPostPage({
             <span aria-hidden>·</span>
             <span>{post.readingTime} min read</span>
           </div>
-          <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-xl border bg-muted">
+          <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-sm border bg-muted">
             <Image
               src={post.heroImageUrl}
               alt={post.heroImageAlt || ""}

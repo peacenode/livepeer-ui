@@ -125,7 +125,7 @@
 .livepeer-blog-prose :is(img, video) {
   width: 100%;
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-sm);
 }
 
 .livepeer-blog-prose figcaption {

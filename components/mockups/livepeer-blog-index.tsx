@@ -76,7 +76,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               href={`/mockups/livepeer-org/blog/${post.slug}`}
               className="group min-w-0"
             >
-              <div className="relative aspect-[16/9] overflow-hidden rounded-xl border bg-muted">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-sm border bg-muted">
                 <Image
                   src={post.heroImageUrl}
                   alt={post.heroImageAlt || ""}
