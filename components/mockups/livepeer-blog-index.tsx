@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useMemo, useState } from "react"
 
 import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
+import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
 const categories = [
@@ -86,13 +87,10 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
-              <div className="mt-5 flex flex-col items-start gap-2">
-                <span className="text-xs text-muted-foreground">
+              <div className="mt-5 flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
                   {displayCategory(post.category)}
-                </span>
-                <h2 className="font-display text-balance text-xl font-light tracking-tight group-hover:underline group-hover:underline-offset-4">
-                  {post.title}
-                </h2>
+                </Badge>
                 <time
                   dateTime={post.publishedAt}
                   className="text-xs text-muted-foreground"
@@ -100,6 +98,9 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                   {dateFormatter.format(new Date(post.publishedAt))}
                 </time>
               </div>
+              <h2 className="mt-3 font-display text-balance text-xl font-light tracking-tight group-hover:underline group-hover:underline-offset-4">
+                {post.title}
+              </h2>
             </Link>
           ))}
         </div>
