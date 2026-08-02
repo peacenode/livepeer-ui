@@ -76,7 +76,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               type="button"
               variant="secondary"
               size="lg"
-              className="rounded-sm font-normal"
+              className={`rounded-sm font-normal ${filtersOpen ? "invisible" : ""}`}
               onClick={() => setFiltersOpen(true)}
             >
               <SearchIcon />
