@@ -84,43 +84,46 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
               Search articles
             </Button>
             <DialogContent
-              className="top-16 left-0 h-[calc(100dvh-4rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-background px-4 py-10 shadow-none ring-0 sm:max-w-none md:hidden"
-              overlayClassName="inset-x-0 top-16 bottom-0 bg-background/80 backdrop-blur-sm md:hidden"
+              className="top-16 left-0 h-[calc(100dvh-4rem)] max-w-none translate-x-0 translate-y-0 content-start gap-0 rounded-none bg-transparent bg-gradient-to-b from-background via-background via-60% to-transparent px-4 pt-28 shadow-none ring-0 sm:max-w-none md:hidden"
+              overlayClassName="inset-x-0 top-16 bottom-0 bg-transparent backdrop-blur-none md:hidden"
             >
               <div className="mx-auto w-full max-w-md">
-                <DialogHeader className="pb-6 text-center">
-                  <DialogTitle className="font-display text-3xl font-light">
-                    Search articles
+                <DialogHeader className="text-center">
+                  <DialogTitle className="font-display text-balance text-4xl leading-[0.98] font-light tracking-[-0.045em]">
+                    Latest Updates
                   </DialogTitle>
                 </DialogHeader>
-                <InputGroup className="h-11 rounded-sm border bg-background">
-                  <InputGroupAddon>
-                    <SearchIcon />
-                  </InputGroupAddon>
-                  <InputGroupInput
-                    type="search"
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Search articles"
-                    aria-label="Search articles"
-                  />
-                </InputGroup>
+                <div className="mt-8">
+                  <InputGroup className="h-11 rounded-sm border bg-background">
+                    <InputGroupAddon>
+                      <SearchIcon />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      autoFocus
+                      type="search"
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder="Search articles"
+                      aria-label="Search articles"
+                    />
+                  </InputGroup>
 
-                <div
-                  className="mt-4 grid grid-cols-2 gap-2"
-                  aria-label="Blog categories"
-                >
-                  {categories.map((item) => (
-                    <Button
-                      key={item}
-                      type="button"
-                      variant={category === item ? "default" : "secondary"}
-                      className="justify-start rounded-sm font-normal"
-                      onClick={() => setCategory(item)}
-                    >
-                      {item}
-                    </Button>
-                  ))}
+                  <div
+                    className="mt-4 grid grid-cols-2 gap-2"
+                    aria-label="Blog categories"
+                  >
+                    {categories.map((item) => (
+                      <Button
+                        key={item}
+                        type="button"
+                        variant={category === item ? "default" : "secondary"}
+                        className="justify-start rounded-sm font-normal"
+                        onClick={() => setCategory(item)}
+                      >
+                        {item}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </DialogContent>
