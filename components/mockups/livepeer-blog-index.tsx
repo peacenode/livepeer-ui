@@ -118,14 +118,14 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                       style={{ background: overlayGradient }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, transition: { duration: 0.1 } }}
+                      exit={{ opacity: 0, transition: { duration: 0.06 } }}
                       transition={{ duration: 0.2 }}
                     />
 
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, transition: { duration: 0.08 } }}
+                      exit={{ opacity: 0, transition: { duration: 0.05 } }}
                       transition={{ duration: 0.16 }}
                     >
                       <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
@@ -172,7 +172,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                       exit={{
                         opacity: 0,
                         y: -4,
-                        transition: { duration: 0.08 },
+                        transition: { duration: 0.05 },
                       }}
                       transition={{ duration: 0.2, delay: 0.06 }}
                     >
@@ -191,12 +191,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                     </motion.div>
                   </motion.div>
                 ) : (
-                  <motion.div
-                    key="trigger"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.12, ease: "easeOut" }}
-                  >
+                  <motion.div key="trigger">
                     <Button
                       type="button"
                       variant="ghost"
