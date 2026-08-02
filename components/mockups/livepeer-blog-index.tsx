@@ -91,7 +91,7 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 {post.title}
               </h2>
               <div className="mt-3 flex items-center gap-2">
-                <Badge variant="secondary" className="text-xs font-normal">
+                <Badge variant="outline" className="rounded-sm text-xs font-normal">
                   {displayCategory(post.category)}
                 </Badge>
                 <time
