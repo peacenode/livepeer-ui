@@ -36,7 +36,7 @@ export default async function LivepeerBlogPostPage({
     <main className="px-4 pt-28 pb-24 sm:px-6 lg:pt-36">
       <article className="mx-auto max-w-[680px]">
         <header className="mb-12">
-          <div className="mb-8 flex items-center gap-2 font-mono text-sm text-muted-foreground">
+          <div className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
             <Link
               href="/mockups/livepeer-org/blog"
               className="transition-colors hover:text-foreground"
@@ -46,10 +46,10 @@ export default async function LivepeerBlogPostPage({
             <span aria-hidden>›</span>
             <span>{post.category}</span>
           </div>
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+          <h1 className="font-display text-balance text-3xl font-light tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
             {post.title}
           </h1>
-          <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-sm text-muted-foreground">
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             {post.author && <span>{post.author}</span>}
             {post.author && <span aria-hidden>·</span>}
             <time dateTime={post.publishedAt}>
@@ -78,7 +78,7 @@ export default async function LivepeerBlogPostPage({
         <div className="mt-16 border-t pt-10 text-center">
           <Link
             href="/mockups/livepeer-org/blog"
-            className="font-mono text-sm text-muted-foreground hover:text-foreground"
+            className="text-sm text-muted-foreground hover:text-foreground"
           >
             ← All posts
           </Link>

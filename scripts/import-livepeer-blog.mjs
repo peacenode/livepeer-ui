@@ -77,13 +77,14 @@ async function importPost(slug) {
   const description = decodeHtml(
     extract(html, /<meta name="description" content="([^"]*)"/, "description")
   )
-  const category = text(
+  const sourceCategory = text(
     extract(
       article,
       /<span class="text-foreground\/50">([\s\S]*?)<\/span>/,
       "category"
     )
   )
+  const category = sourceCategory === "Product & Protocol" ? "Protocol" : sourceCategory
   const publishedAt = extract(article, /<time dateTime="([^"]+)"/, "date")
   const readingTime = Number(
     extract(article, /<span>(\d+) min read<\/span>/, "reading time")

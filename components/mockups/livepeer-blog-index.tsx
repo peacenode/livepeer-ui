@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 
 const categories = [
   "All",
-  "Product & Protocol",
+  "Protocol",
   "Ecosystem",
   "Network",
   "Community",
@@ -24,13 +24,17 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
+function displayCategory(category: string) {
+  return category === "Product & Protocol" ? "Protocol" : category
+}
+
 export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] }) {
   const [category, setCategory] = useState("All")
   const visiblePosts = useMemo(
     () =>
       category === "All"
         ? posts
-        : posts.filter((post) => post.category === category),
+        : posts.filter((post) => displayCategory(post.category) === category),
     [category, posts]
   )
 
@@ -83,15 +87,15 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
                 />
               </div>
               <div className="mt-5 flex flex-col items-start gap-2">
-                <span className="font-mono text-xs text-muted-foreground">
-                  {post.category}
+                <span className="text-xs text-muted-foreground">
+                  {displayCategory(post.category)}
                 </span>
-                <h2 className="text-balance text-xl font-semibold tracking-tight group-hover:underline group-hover:underline-offset-4">
+                <h2 className="font-display text-balance text-xl font-light tracking-tight group-hover:underline group-hover:underline-offset-4">
                   {post.title}
                 </h2>
                 <time
                   dateTime={post.publishedAt}
-                  className="font-mono text-xs text-muted-foreground"
+                  className="text-xs text-muted-foreground"
                 >
                   {dateFormatter.format(new Date(post.publishedAt))}
                 </time>
