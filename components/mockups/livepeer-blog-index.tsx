@@ -122,9 +122,9 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           ) : (
             <Button
               type="button"
-              variant="secondary"
+              variant="ghost"
               size="lg"
-              className="rounded-sm font-normal"
+              className="rounded-sm font-normal hover:bg-transparent"
               onClick={() => setFiltersOpen(true)}
             >
               <SearchIcon />
@@ -187,9 +187,9 @@ export function LivepeerBlogIndex({ posts }: { posts: LivepeerBlogPostSummary[] 
           ) : (
             <Button
               type="button"
-              variant="secondary"
+              variant="ghost"
               size="lg"
-              className="rounded-sm font-normal"
+              className="rounded-sm font-normal hover:bg-transparent"
               onClick={() => setFiltersOpen(true)}
             >
               <SearchIcon />
