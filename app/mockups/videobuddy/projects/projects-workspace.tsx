@@ -35,7 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, framesForName, storyMedia } from "../media-assets"
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 
 type Project = {
   id: string

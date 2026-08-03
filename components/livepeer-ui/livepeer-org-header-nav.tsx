@@ -8,7 +8,7 @@ import { ArrowUpRightIcon } from "lucide-react"
 import type {
   EditorialLink,
   LivepeerOrgSite,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { LivepeerOrgNavigationImages } from "@/sanity/lib/livepeer-org-navigation"

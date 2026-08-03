@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ChevronRightIcon, CircleDashedIcon } from "lucide-react"
 
-import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
+import { LivepeerCubeStream } from "@/components/livepeer-ui/livepeer-cube-stream"
 import { Card, CardTitle } from "@/components/ui/card"
 
 export function LivepeerAgentOnboardingSection({

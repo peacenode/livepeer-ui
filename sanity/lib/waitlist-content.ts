@@ -1,9 +1,9 @@
 import { defineQuery } from "next-sanity"
 
-import type { WaitlistPageContent } from "@/components/mockups/contracts"
+import type { WaitlistPageContent } from "@/components/livepeer-ui/contracts"
 import { sanityClient } from "@/sanity/lib/client"
 
-export type { WaitlistPageContent } from "@/components/mockups/contracts"
+export type { WaitlistPageContent } from "@/components/livepeer-ui/contracts"
 
 const waitlistPageContentQuery = defineQuery(`
   *[_type == "waitlistPageContent" && _id == "waitlistPageContent-waitlist"][0] {

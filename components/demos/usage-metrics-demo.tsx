@@ -1,4 +1,4 @@
-import { UsageMetrics } from "@/components/mockups/usage-metrics"
+import { UsageMetrics } from "@/components/livepeer-ui/usage-metrics"
 import { usageMetrics } from "@/components/demos/fixtures/usage"
 
 export default function UsageMetricsDemo() {

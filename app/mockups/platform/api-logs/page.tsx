@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { RefreshCwIcon, Trash2Icon } from "lucide-react"
 
-import { ApiLogsSection } from "@/components/mockups/api-logs-section"
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { ApiLogsSection } from "@/components/livepeer-ui/api-logs-section"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { Button } from "@/components/ui/button"
 import {
   getAgentConsolePage,

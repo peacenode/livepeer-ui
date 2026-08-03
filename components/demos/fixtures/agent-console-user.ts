@@ -1,4 +1,4 @@
-import type { AgentConsoleUser } from "@/components/mockups/contracts"
+import type { AgentConsoleUser } from "@/components/livepeer-ui/contracts"
 
 export const agentConsoleUserFixture: AgentConsoleUser = {
   username: "Username",

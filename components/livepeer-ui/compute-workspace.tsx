@@ -1,8 +1,8 @@
 import {
   ComputeMetrics,
   type ComputeMetric,
-} from "@/components/mockups/compute-metrics"
-import { OrchestratorTable } from "@/components/mockups/orchestrator-table"
+} from "@/components/livepeer-ui/compute-metrics"
+import { OrchestratorTable } from "@/components/livepeer-ui/orchestrator-table"
 import type { Orchestrator } from "@/lib/livepeer"
 
 export function ComputeWorkspace({

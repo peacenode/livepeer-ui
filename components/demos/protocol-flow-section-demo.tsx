@@ -1,4 +1,4 @@
-import { ProtocolFlowSection } from "@/components/mockups/protocol-flow-section"
+import { ProtocolFlowSection } from "@/components/livepeer-ui/protocol-flow-section"
 import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 const protocol = videoBuddyPageFixture("protocol").protocol!

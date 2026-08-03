@@ -1,11 +1,11 @@
-import type { BillingPageSummaryProps } from "@/components/mockups/billing-page-summary"
-import { BillingPageSummary } from "@/components/mockups/billing-page-summary"
+import type { BillingPageSummaryProps } from "@/components/livepeer-ui/billing-page-summary"
+import { BillingPageSummary } from "@/components/livepeer-ui/billing-page-summary"
 import type {
   InvoiceRecord,
   InvoiceTableLabels,
   InvoiceTableProps,
-} from "@/components/mockups/invoice-table"
-import { InvoiceTable } from "@/components/mockups/invoice-table"
+} from "@/components/livepeer-ui/invoice-table"
+import { InvoiceTable } from "@/components/livepeer-ui/invoice-table"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 

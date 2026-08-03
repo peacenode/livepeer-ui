@@ -9,12 +9,12 @@
   ],
   "files": [
     {
-      "path": "components/mockups/client-mobile-bottom-navigation.tsx",
+      "path": "components/livepeer-ui/client-mobile-bottom-navigation.tsx",
       "content": "import Link from \"next/link\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n  clientNavigationItems,\n  isClientRouteActive,\n} from \"./client-navigation-items\"\n\nexport function ClientMobileBottomNavigation({ pathname }: { pathname: string }) {\n  return (\n    <nav aria-label=\"Livepeer Agent\" className=\"grid h-16 grid-cols-5 border-t bg-background/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur\">\n      {clientNavigationItems.map((item) => {\n        const active = isClientRouteActive(item.href, pathname)\n        return (\n          <Link key={item.href} href={item.href} className={cn(\"mx-1 my-1 flex min-w-0 flex-col items-center justify-center gap-1 rounded-xl text-[11px] text-muted-foreground transition-colors\", active && \"bg-muted font-medium text-foreground\")}>\n            <item.icon className={cn(\"text-foreground\", item.brand ? \"h-[18px] w-auto\" : \"size-6\")} />\n            <span className=\"truncate\">{item.label}</span>\n          </Link>\n        )\n      })}\n    </nav>\n  )\n}\n",
       "type": "registry:component"
     },
     {
-      "path": "components/mockups/client-navigation-items.ts",
+      "path": "components/livepeer-ui/client-navigation-items.ts",
       "content": "import {\n  ApertureIcon,\n  FilmIcon,\n  FolderIcon,\n  Grid2X2Icon,\n} from \"lucide-react\"\n\nimport { LivepeerSymbol } from \"@/components/brand\"\n\nexport const clientNavigationItems = [\n  { href: \"/mockups/client\", label: \"Create\", icon: LivepeerSymbol, brand: true },\n  { href: \"/mockups/client/storyboards\", label: \"Storyboards\", icon: Grid2X2Icon, brand: false },\n  { href: \"/mockups/client/characters\", label: \"Characters\", icon: ApertureIcon, brand: false },\n  { href: \"/mockups/client/footage\", label: \"Clips\", icon: FilmIcon, brand: false },\n  { href: \"/mockups/client/projects\", label: \"Projects\", icon: FolderIcon, brand: false },\n]\n\nexport function isClientRouteActive(href: string, pathname: string) {\n  return href === \"/mockups/client\" ? pathname === href : pathname.startsWith(href)\n}\n",
       "type": "registry:component"
     },

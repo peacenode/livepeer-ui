@@ -1,4 +1,4 @@
-import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
+import { LivepeerOrgFooter } from "@/components/livepeer-ui/livepeer-org-footer"
 import { livepeerOrgSiteFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function LivepeerOrgFooterDemo() {

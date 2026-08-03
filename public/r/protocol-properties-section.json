@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/protocol-properties-section.tsx",
+      "path": "components/livepeer-ui/protocol-properties-section.tsx",
       "content": "import { PlayIcon, WalletCardsIcon } from \"lucide-react\"\nexport function ProtocolPropertiesSection({\n  agentHeading,\n  agentDescription,\n  paymentHeading,\n  paymentDescription,\n}: {\n  agentHeading: string\n  agentDescription: string\n  paymentHeading: string\n  paymentDescription: string\n}) {\n  return (\n    <section className=\"grid gap-10 md:grid-cols-2\">\n      <div>\n        <PlayIcon className=\"size-5\" aria-hidden=\"true\" />\n        <h2 className=\"mt-3 text-lg font-medium\">{agentHeading}</h2>\n        <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n          {agentDescription}\n        </p>\n      </div>\n      <div>\n        <WalletCardsIcon className=\"size-5\" aria-hidden=\"true\" />\n        <h2 className=\"mt-3 text-lg font-medium\">{paymentHeading}</h2>\n        <p className=\"mt-3 text-sm leading-relaxed text-muted-foreground\">\n          {paymentDescription}\n        </p>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:block"
     }

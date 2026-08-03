@@ -11,7 +11,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/client-install-command.tsx",
+      "path": "components/livepeer-ui/client-install-command.tsx",
       "content": "\"use client\"\n\nimport { useState } from \"react\"\nimport { CheckIcon, CopyIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\n\nconst installCommand = \"npx skills add livepeer/agent-skills --global --agent codex claude-code\"\n\nexport function ClientInstallCommand() {\n  const [copied, setCopied] = useState(false)\n  async function copyCommand() {\n    await navigator.clipboard.writeText(installCommand)\n    setCopied(true)\n    window.setTimeout(() => setCopied(false), 1600)\n  }\n  return (\n    <div className=\"flex items-center gap-2 rounded-xl bg-muted p-2 pl-4\">\n      <code className=\"min-w-0 flex-1 overflow-x-auto text-xs whitespace-nowrap\">{installCommand}</code>\n      <Button type=\"button\" variant=\"outline\" size=\"icon-sm\" aria-label={copied ? \"Copied install command\" : \"Copy install command\"} onClick={copyCommand}>\n        {copied ? <CheckIcon /> : <CopyIcon />}\n      </Button>\n    </div>\n  )\n}\n",
       "type": "registry:component"
     }

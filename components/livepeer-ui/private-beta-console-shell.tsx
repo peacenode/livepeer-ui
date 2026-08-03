@@ -1,6 +1,6 @@
 import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
-import { PlatformAuthGate } from "@/components/mockups/platform-auth-gate"
-import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
+import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
+import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 const consoleHref = "/mockups/private-beta/landing/console"

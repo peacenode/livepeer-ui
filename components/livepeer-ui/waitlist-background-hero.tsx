@@ -1,4 +1,4 @@
-import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
+import { LivepeerCubeStream } from "@/components/livepeer-ui/livepeer-cube-stream"
 
 export function WaitlistBackgroundHero() {
   return (

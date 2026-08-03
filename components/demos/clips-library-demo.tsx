@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 
-import { ClipsLibrary } from "@/components/mockups/clips-library"
-import type { ClientClip as Clip } from "@/components/mockups/client-clip"
+import { ClipsLibrary } from "@/components/livepeer-ui/clips-library"
+import type { ClientClip as Clip } from "@/components/livepeer-ui/client-clip"
 import { storyMedia } from "@/app/mockups/videobuddy/media-assets"
 import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 

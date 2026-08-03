@@ -16,7 +16,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { useMasonryCorners } from "@/components/mockups/use-masonry-corners"
+import { useMasonryCorners } from "@/components/livepeer-ui/use-masonry-corners"
 
 export type ProjectAsset = {
   id: string

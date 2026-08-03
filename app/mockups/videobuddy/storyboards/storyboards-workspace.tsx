@@ -24,7 +24,7 @@ import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
 import { downloadMedia, MediaContextMenu } from "../media-context-menu"
 import { ProjectPicker } from "../project-picker"
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 
 type ImageBatch = {
   id: number

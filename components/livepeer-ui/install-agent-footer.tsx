@@ -1,6 +1,6 @@
 import { CopyButton } from "@/components/copy-button"
 import { LivepeerWordmark } from "@/components/brand"
-import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
+import { LivepeerAgentDeltaStream } from "@/components/livepeer-ui/livepeer-agent-delta-stream"
 import { cn } from "@/lib/utils"
 
 const mcpServerUrl = "https://livepeer.org/api/mcp"

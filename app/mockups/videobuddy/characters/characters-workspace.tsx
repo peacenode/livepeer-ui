@@ -11,7 +11,7 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 import {
   Dialog,
   DialogContent,

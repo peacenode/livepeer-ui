@@ -6,7 +6,7 @@ import { CheckIcon, ChevronDownIcon, SearchIcon } from "lucide-react"
 import {
   EcosystemCard,
   type EcosystemApp,
-} from "@/components/mockups/ecosystem-card"
+} from "@/components/livepeer-ui/ecosystem-card"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,

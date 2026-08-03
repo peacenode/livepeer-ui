@@ -1,4 +1,4 @@
-import { WaitlistPanel } from "@/components/mockups/waitlist-panel"
+import { WaitlistPanel } from "@/components/livepeer-ui/waitlist-panel"
 
 import { waitlistContentFixture } from "./waitlist-content-fixture"
 

@@ -2,15 +2,15 @@ import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
-import { AgentCapabilitiesSection } from "@/components/mockups/agent-capabilities-section"
+import { AgentCapabilitiesSection } from "@/components/livepeer-ui/agent-capabilities-section"
 import type {
   LivepeerOrgPage,
   LivepeerOrgSite,
-} from "@/components/mockups/contracts"
-import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
-import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
-import { LivepeerOrgHeader } from "@/components/mockups/livepeer-org-header"
-import { PlaybooksCtaSection } from "@/components/mockups/playbooks-cta-section"
+} from "@/components/livepeer-ui/contracts"
+import { LivepeerAgentDeltaStream } from "@/components/livepeer-ui/livepeer-agent-delta-stream"
+import { LivepeerOrgFooter } from "@/components/livepeer-ui/livepeer-org-footer"
+import { LivepeerOrgHeader } from "@/components/livepeer-ui/livepeer-org-header"
+import { PlaybooksCtaSection } from "@/components/livepeer-ui/playbooks-cta-section"
 import { Button } from "@/components/ui/button"
 
 export function AgentLandingPage({

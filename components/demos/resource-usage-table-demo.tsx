@@ -1,4 +1,4 @@
-import { ResourceUsageTable } from "@/components/mockups/resource-usage-table"
+import { ResourceUsageTable } from "@/components/livepeer-ui/resource-usage-table"
 import {
   resourceUsageRows,
   usageContent,

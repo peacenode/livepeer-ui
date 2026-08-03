@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/usage-metrics.tsx",
+      "path": "components/livepeer-ui/usage-metrics.tsx",
       "content": "import {\n  Card,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\"\n\nexport type UsageMetric = {\n  label: string\n  value: string\n}\n\nexport type UsageMetricsProps = {\n  metrics: readonly UsageMetric[]\n}\n\nexport function UsageMetrics({ metrics }: UsageMetricsProps) {\n  return (\n    <div className=\"grid gap-3 sm:grid-cols-2\">\n      {metrics.map((metric) => (\n        <Card key={metric.label} variant=\"metric\">\n          <CardHeader>\n            <CardDescription>{metric.label}</CardDescription>\n            <CardTitle className=\"font-sans text-3xl leading-none font-medium tracking-tight tabular-nums\">\n              {metric.value}\n            </CardTitle>\n          </CardHeader>\n        </Card>\n      ))}\n    </div>\n  )\n}\n",
       "type": "registry:component"
     }

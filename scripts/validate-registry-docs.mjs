@@ -81,9 +81,9 @@ for (const item of metadataItems) {
         (url) => new URL(url).pathname === `/r/${dependency}.json`
       )
       const hasBundledDependency =
-        dependencyMetadata.kind === "catalog" &&
-        dependencyMetadata.files?.every((file) =>
-          registryItem.files?.some((candidate) => candidate.path === file)
+        dependencyMetadata.files?.length > 0 &&
+        registryItem.files?.some(
+          (candidate) => candidate.path === dependencyMetadata.files[0]
         )
       requireRelationship(
         hasRegistryDependency || hasBundledDependency,

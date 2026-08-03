@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import { LivepeerAgentHero } from "@/components/mockups/livepeer-agent-hero"
-import { AgentAccessSection } from "@/components/mockups/agent-access-section"
-import { AgentCapabilitiesSection } from "@/components/mockups/agent-capabilities-section"
-import { PlaybooksCtaSection } from "@/components/mockups/playbooks-cta-section"
+import { LivepeerAgentHero } from "@/components/livepeer-ui/livepeer-agent-hero"
+import { AgentAccessSection } from "@/components/livepeer-ui/agent-access-section"
+import { AgentCapabilitiesSection } from "@/components/livepeer-ui/agent-capabilities-section"
+import { PlaybooksCtaSection } from "@/components/livepeer-ui/playbooks-cta-section"
 
 import { getPlaybookDocument, getSourcePlaybooks } from "../daydream-source"
 import { getLivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"

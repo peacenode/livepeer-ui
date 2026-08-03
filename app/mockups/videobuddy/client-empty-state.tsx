@@ -1,1 +1,1 @@
-export { ClientEmptyState } from "@/components/mockups/client-empty-state"
+export { ClientEmptyState } from "@/components/livepeer-ui/client-empty-state"

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PrivateBetaRenderShell } from "@/components/mockups/private-beta-render-shell"
+import { PrivateBetaRenderShell } from "@/components/livepeer-ui/private-beta-render-shell"
 
 export const metadata: Metadata = {
   title: {

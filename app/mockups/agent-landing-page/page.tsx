@@ -4,7 +4,7 @@ import {
   livepeerOrgAgentFixture,
   livepeerOrgSiteFixture,
 } from "@/components/demos/fixtures/livepeer-org"
-import { AgentLandingPage as AgentLandingPageView } from "@/components/mockups/agent-landing-page"
+import { AgentLandingPage as AgentLandingPageView } from "@/components/livepeer-ui/agent-landing-page"
 
 import {
   getPlaybookDocument,

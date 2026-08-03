@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { CopyButton } from "@/components/copy-button"
 import { LivepeerWordmark } from "@/components/brand"
-import { LivepeerAgentDeltaStream } from "@/components/mockups/livepeer-agent-delta-stream"
+import { LivepeerAgentDeltaStream } from "@/components/livepeer-ui/livepeer-agent-delta-stream"
 
 export function LivepeerAgentHero({
   content,

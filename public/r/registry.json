@@ -665,7 +665,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/welcome-email.tsx",
+          "path": "components/livepeer-ui/welcome-email.tsx",
           "type": "registry:block"
         },
         {
@@ -690,7 +690,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/waitlist-signup-form.tsx",
+          "path": "components/livepeer-ui/waitlist-signup-form.tsx",
           "type": "registry:component"
         }
       ]
@@ -702,7 +702,7 @@
       "description": "Shareable waitlist position and referral summary card.",
       "files": [
         {
-          "path": "components/mockups/waitlist-status-card.tsx",
+          "path": "components/livepeer-ui/waitlist-status-card.tsx",
           "type": "registry:component"
         },
         {
@@ -725,7 +725,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/waitlist-referral-link.tsx",
+          "path": "components/livepeer-ui/waitlist-referral-link.tsx",
           "type": "registry:component"
         }
       ]
@@ -737,7 +737,7 @@
       "description": "Ranked referral list with a highlighted current-user row.",
       "files": [
         {
-          "path": "components/mockups/waitlist-leaderboard.tsx",
+          "path": "components/livepeer-ui/waitlist-leaderboard.tsx",
           "type": "registry:component"
         }
       ]
@@ -759,11 +759,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/waitlist-panel.tsx",
+          "path": "components/livepeer-ui/waitlist-panel.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -771,11 +771,11 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/waitlist-sign-in-dialog.tsx",
+          "path": "components/livepeer-ui/waitlist-sign-in-dialog.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/waitlist-signup-form.tsx",
+          "path": "components/livepeer-ui/waitlist-signup-form.tsx",
           "type": "registry:block"
         }
       ]
@@ -787,11 +787,11 @@
       "description": "Particle-backed field used behind the waitlist panel.",
       "files": [
         {
-          "path": "components/mockups/waitlist-background-hero.tsx",
+          "path": "components/livepeer-ui/waitlist-background-hero.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -807,7 +807,7 @@
       "description": "Page-level frame with a responsive heading, description, action slot, and optional bordered panel.",
       "files": [
         {
-          "path": "components/mockups/platform-page.tsx",
+          "path": "components/livepeer-ui/platform-page.tsx",
           "type": "registry:block"
         }
       ]
@@ -826,11 +826,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-agent-sign-in-card.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-sign-in-card.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -860,19 +860,19 @@
       ],
       "files": [
         {
-          "path": "components/mockups/platform-sidebar.tsx",
+          "path": "components/livepeer-ui/platform-sidebar.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/project-menu.tsx",
+          "path": "components/livepeer-ui/project-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/user-menu.tsx",
+          "path": "components/livepeer-ui/user-menu.tsx",
           "type": "registry:component"
         },
         {
@@ -898,11 +898,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/user-menu.tsx",
+          "path": "components/livepeer-ui/user-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         }
       ]
@@ -921,15 +921,15 @@
       ],
       "files": [
         {
-          "path": "components/mockups/platform-auth-gate.tsx",
+          "path": "components/livepeer-ui/platform-auth-gate.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-agent-sign-in-card.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-sign-in-card.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -955,7 +955,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/api-key-actions.tsx",
+          "path": "components/livepeer-ui/api-key-actions.tsx",
           "type": "registry:component"
         }
       ]
@@ -975,7 +975,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/delete-api-key-dialog.tsx",
+          "path": "components/livepeer-ui/delete-api-key-dialog.tsx",
           "type": "registry:component"
         }
       ]
@@ -998,11 +998,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/api-keys-section.tsx",
+          "path": "components/livepeer-ui/api-keys-section.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/delete-api-key-dialog.tsx",
+          "path": "components/livepeer-ui/delete-api-key-dialog.tsx",
           "type": "registry:block"
         }
       ]
@@ -1020,7 +1020,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/api-logs-section.tsx",
+          "path": "components/livepeer-ui/api-logs-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1035,7 +1035,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/credit-balance.tsx",
+          "path": "components/livepeer-ui/credit-balance.tsx",
           "type": "registry:component"
         }
       ]
@@ -1050,7 +1050,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/daily-usage-table.tsx",
+          "path": "components/livepeer-ui/daily-usage-table.tsx",
           "type": "registry:component"
         }
       ]
@@ -1065,7 +1065,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/resource-usage-table.tsx",
+          "path": "components/livepeer-ui/resource-usage-table.tsx",
           "type": "registry:component"
         }
       ]
@@ -1087,27 +1087,27 @@
       ],
       "files": [
         {
-          "path": "components/mockups/usage-workspace.tsx",
+          "path": "components/livepeer-ui/usage-workspace.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/credit-balance.tsx",
+          "path": "components/livepeer-ui/credit-balance.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/daily-usage-table.tsx",
+          "path": "components/livepeer-ui/daily-usage-table.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-agent-promo-cards.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-promo-cards.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/resource-usage-table.tsx",
+          "path": "components/livepeer-ui/resource-usage-table.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/usage-metrics.tsx",
+          "path": "components/livepeer-ui/usage-metrics.tsx",
           "type": "registry:block"
         }
       ]
@@ -1123,7 +1123,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/billing-page-summary.tsx",
+          "path": "components/livepeer-ui/billing-page-summary.tsx",
           "type": "registry:component"
         }
       ]
@@ -1140,7 +1140,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/invoice-table.tsx",
+          "path": "components/livepeer-ui/invoice-table.tsx",
           "type": "registry:component"
         }
       ]
@@ -1158,15 +1158,15 @@
       ],
       "files": [
         {
-          "path": "components/mockups/billing-workspace.tsx",
+          "path": "components/livepeer-ui/billing-workspace.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/billing-page-summary.tsx",
+          "path": "components/livepeer-ui/billing-page-summary.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/invoice-table.tsx",
+          "path": "components/livepeer-ui/invoice-table.tsx",
           "type": "registry:block"
         }
       ]
@@ -1181,7 +1181,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/usage-metrics.tsx",
+          "path": "components/livepeer-ui/usage-metrics.tsx",
           "type": "registry:component"
         }
       ]
@@ -1200,7 +1200,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-agent-promo-cards.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-promo-cards.tsx",
           "type": "registry:component"
         }
       ]
@@ -1219,11 +1219,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-agent-onboarding-section.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-onboarding-section.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1245,7 +1245,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/orchestrator-table.tsx",
+          "path": "components/livepeer-ui/orchestrator-table.tsx",
           "type": "registry:block"
         },
         {
@@ -1264,7 +1264,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/compute-metrics.tsx",
+          "path": "components/livepeer-ui/compute-metrics.tsx",
           "type": "registry:component"
         }
       ]
@@ -1283,15 +1283,15 @@
       ],
       "files": [
         {
-          "path": "components/mockups/compute-workspace.tsx",
+          "path": "components/livepeer-ui/compute-workspace.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/compute-metrics.tsx",
+          "path": "components/livepeer-ui/compute-metrics.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/orchestrator-table.tsx",
+          "path": "components/livepeer-ui/orchestrator-table.tsx",
           "type": "registry:block"
         },
         {
@@ -1333,7 +1333,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-menu.tsx",
+          "path": "components/livepeer-ui/livepeer-org-menu.tsx",
           "type": "registry:component"
         },
         {
@@ -1341,7 +1341,7 @@
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -1365,15 +1365,15 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-header.tsx",
+          "path": "components/livepeer-ui/livepeer-org-header.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/livepeer-org-menu.tsx",
+          "path": "components/livepeer-ui/livepeer-org-menu.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -1396,11 +1396,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-footer.tsx",
+          "path": "components/livepeer-ui/livepeer-org-footer.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
         {
@@ -1423,7 +1423,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/agent-compatibility.tsx",
+          "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:component"
         }
       ]
@@ -1442,11 +1442,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-agent-hero.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-hero.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-delta-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1477,11 +1477,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/agent-access-section.tsx",
+          "path": "components/livepeer-ui/agent-access-section.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/agent-compatibility.tsx",
+          "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:block"
         }
       ]
@@ -1500,7 +1500,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/agent-capabilities-section.tsx",
+          "path": "components/livepeer-ui/agent-capabilities-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1519,7 +1519,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/playbooks-cta-section.tsx",
+          "path": "components/livepeer-ui/playbooks-cta-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1531,7 +1531,7 @@
       "description": "Centered heading and introduction for the playbook library.",
       "files": [
         {
-          "path": "components/mockups/playbook-library-header.tsx",
+          "path": "components/livepeer-ui/playbook-library-header.tsx",
           "type": "registry:block"
         }
       ]
@@ -1546,7 +1546,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/playbook-card.tsx",
+          "path": "components/livepeer-ui/playbook-card.tsx",
           "type": "registry:component"
         }
       ]
@@ -1569,7 +1569,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/playbook-card.tsx",
+          "path": "components/livepeer-ui/playbook-card.tsx",
           "type": "registry:block"
         },
         {
@@ -1591,7 +1591,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/install-agent-footer.tsx",
+          "path": "components/livepeer-ui/install-agent-footer.tsx",
           "type": "registry:block"
         },
         {
@@ -1603,7 +1603,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-agent-delta-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-agent-delta-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1649,7 +1649,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/ecosystem-card.tsx",
+          "path": "components/livepeer-ui/ecosystem-card.tsx",
           "type": "registry:component"
         }
       ]
@@ -1675,7 +1675,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/ecosystem-card.tsx",
+          "path": "components/livepeer-ui/ecosystem-card.tsx",
           "type": "registry:block"
         }
       ]
@@ -1694,11 +1694,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "path": "components/livepeer-ui/livepeer-org-landing-sections.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1706,11 +1706,11 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/agent-compatibility.tsx",
+          "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1733,11 +1733,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "path": "components/livepeer-ui/livepeer-org-landing-sections.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1745,11 +1745,11 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/agent-compatibility.tsx",
+          "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1772,11 +1772,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/livepeer-org-landing-sections.tsx",
+          "path": "components/livepeer-ui/livepeer-org-landing-sections.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -1784,11 +1784,11 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/agent-compatibility.tsx",
+          "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/livepeer-cube-stream.tsx",
+          "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
           "type": "registry:block"
         },
         {
@@ -1811,11 +1811,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/client-application-sidebar.tsx",
+          "path": "components/livepeer-ui/client-application-sidebar.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/client-navigation-items.ts",
+          "path": "components/livepeer-ui/client-navigation-items.ts",
           "type": "registry:component"
         },
         {
@@ -1835,11 +1835,11 @@
       ],
       "files": [
         {
-          "path": "components/mockups/client-mobile-bottom-navigation.tsx",
+          "path": "components/livepeer-ui/client-mobile-bottom-navigation.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/client-navigation-items.ts",
+          "path": "components/livepeer-ui/client-navigation-items.ts",
           "type": "registry:component"
         },
         {
@@ -1862,19 +1862,19 @@
       ],
       "files": [
         {
-          "path": "components/mockups/client-application-shell.tsx",
+          "path": "components/livepeer-ui/client-application-shell.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-application-sidebar.tsx",
+          "path": "components/livepeer-ui/client-application-sidebar.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-mobile-bottom-navigation.tsx",
+          "path": "components/livepeer-ui/client-mobile-bottom-navigation.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-navigation-items.ts",
+          "path": "components/livepeer-ui/client-navigation-items.ts",
           "type": "registry:block"
         },
         {
@@ -1896,7 +1896,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/client-install-command.tsx",
+          "path": "components/livepeer-ui/client-install-command.tsx",
           "type": "registry:component"
         }
       ]
@@ -1908,7 +1908,7 @@
       "description": "Introductory statement for the Livepeer Agent protocol architecture.",
       "files": [
         {
-          "path": "components/mockups/protocol-header-section.tsx",
+          "path": "components/livepeer-ui/protocol-header-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1924,7 +1924,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/protocol-flow-section.tsx",
+          "path": "components/livepeer-ui/protocol-flow-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1936,7 +1936,7 @@
       "description": "Four-step sequence showing how a Livepeer Agent request moves.",
       "files": [
         {
-          "path": "components/mockups/protocol-request-flow-section.tsx",
+          "path": "components/livepeer-ui/protocol-request-flow-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1951,7 +1951,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/protocol-properties-section.tsx",
+          "path": "components/livepeer-ui/protocol-properties-section.tsx",
           "type": "registry:block"
         }
       ]
@@ -1966,7 +1966,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/client-empty-state.tsx",
+          "path": "components/livepeer-ui/client-empty-state.tsx",
           "type": "registry:component"
         }
       ]
@@ -1984,7 +1984,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/clips-header.tsx",
+          "path": "components/livepeer-ui/clips-header.tsx",
           "type": "registry:component"
         }
       ]
@@ -2003,7 +2003,7 @@
       ],
       "files": [
         {
-          "path": "components/mockups/clip-card.tsx",
+          "path": "components/livepeer-ui/clip-card.tsx",
           "type": "registry:component"
         },
         {
@@ -2011,7 +2011,7 @@
           "type": "registry:component"
         },
         {
-          "path": "components/mockups/client-clip.ts",
+          "path": "components/livepeer-ui/client-clip.ts",
           "type": "registry:component"
         }
       ]
@@ -2030,19 +2030,19 @@
       ],
       "files": [
         {
-          "path": "components/mockups/clips-library.tsx",
+          "path": "components/livepeer-ui/clips-library.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-empty-state.tsx",
+          "path": "components/livepeer-ui/client-empty-state.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/clip-card.tsx",
+          "path": "components/livepeer-ui/clip-card.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-clip.ts",
+          "path": "components/livepeer-ui/client-clip.ts",
           "type": "registry:block"
         },
         {
@@ -2159,7 +2159,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         }
       ]
@@ -2202,7 +2202,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         }
       ]
@@ -2234,7 +2234,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         },
         {
@@ -2242,23 +2242,23 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/clips-header.tsx",
+          "path": "components/livepeer-ui/clips-header.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/clip-card.tsx",
+          "path": "components/livepeer-ui/clip-card.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/clips-library.tsx",
+          "path": "components/livepeer-ui/clips-library.tsx",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-clip.ts",
+          "path": "components/livepeer-ui/client-clip.ts",
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/client-empty-state.tsx",
+          "path": "components/livepeer-ui/client-empty-state.tsx",
           "type": "registry:block"
         }
       ]
@@ -2294,7 +2294,7 @@
           "type": "registry:block"
         },
         {
-          "path": "components/mockups/contracts.ts",
+          "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
         }
       ]

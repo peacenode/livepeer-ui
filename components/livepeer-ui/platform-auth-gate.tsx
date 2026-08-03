@@ -3,9 +3,9 @@
 import { type ReactNode, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
+import { LivepeerAgentSignInCard } from "@/components/livepeer-ui/livepeer-agent-sign-in-card"
 import { cn } from "@/lib/utils"
-import type { AgentConsoleShell } from "@/components/mockups/contracts"
+import type { AgentConsoleShell } from "@/components/livepeer-ui/contracts"
 
 function PlatformAuthGate({
   children,

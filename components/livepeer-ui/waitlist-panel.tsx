@@ -3,9 +3,9 @@
 import { useState } from "react"
 
 import { AgentWordmark, LivepeerGradientLockup } from "@/components/brand"
-import type { WaitlistPageContent } from "@/components/mockups/contracts"
-import { WaitlistSignInDialog } from "@/components/mockups/waitlist-sign-in-dialog"
-import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
+import type { WaitlistPageContent } from "@/components/livepeer-ui/contracts"
+import { WaitlistSignInDialog } from "@/components/livepeer-ui/waitlist-sign-in-dialog"
+import { WaitlistSignupForm } from "@/components/livepeer-ui/waitlist-signup-form"
 
 export function WaitlistPanel({
   content,

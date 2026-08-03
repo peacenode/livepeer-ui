@@ -1,6 +1,6 @@
 import { CircleCheckIcon } from "lucide-react"
 
-import { DeleteApiKeyDialog } from "@/components/mockups/delete-api-key-dialog"
+import { DeleteApiKeyDialog } from "@/components/livepeer-ui/delete-api-key-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import {

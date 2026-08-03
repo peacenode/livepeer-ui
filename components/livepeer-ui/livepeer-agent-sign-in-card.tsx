@@ -7,7 +7,7 @@ import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { DiscordIcon, GoogleIcon } from "@/components/brand-social-icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import type { AgentConsoleShell } from "@/components/mockups/contracts"
+import type { AgentConsoleShell } from "@/components/livepeer-ui/contracts"
 
 export function LivepeerAgentSignInCard({
   content,

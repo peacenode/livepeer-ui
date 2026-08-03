@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { getSourcePlaybooks } from "../daydream-source"
 import { InstallAgentFooter } from "../install-agent-footer"
 import { SourceCatalog } from "../source-catalog"
-import { PlaybookLibraryHeader } from "@/components/mockups/playbook-library-header"
+import { PlaybookLibraryHeader } from "@/components/livepeer-ui/playbook-library-header"
 import { getLivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"
 
 export const metadata: Metadata = {

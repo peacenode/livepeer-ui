@@ -1,7 +1,7 @@
 import {
   WaitlistLeaderboard,
   type WaitlistLeader,
-} from "@/components/mockups/waitlist-leaderboard"
+} from "@/components/livepeer-ui/waitlist-leaderboard"
 
 import { waitlistContentFixture } from "./waitlist-content-fixture"
 

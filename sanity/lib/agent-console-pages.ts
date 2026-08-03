@@ -3,14 +3,14 @@ import { defineQuery } from "next-sanity"
 import type {
   AgentConsoleLink,
   AgentConsoleShell,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 import { sanityClient } from "@/sanity/lib/client"
 
 export type {
   AgentConsoleLink,
   AgentConsoleShell,
   AgentConsoleUser,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 
 export type AgentConsolePageSlug =
   | "home"

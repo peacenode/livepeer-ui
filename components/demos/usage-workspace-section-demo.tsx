@@ -1,4 +1,4 @@
-import { UsageWorkspace } from "@/components/mockups/usage-workspace"
+import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
 import {
   creditBalance,
   dailyUsageRows,

@@ -1,4 +1,4 @@
-import { EcosystemCard } from "@/components/mockups/ecosystem-card"
+import { EcosystemCard } from "@/components/livepeer-ui/ecosystem-card"
 import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 const app = {

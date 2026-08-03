@@ -25,7 +25,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type {
   AgentConsoleShell,
   AgentConsoleUser,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 
 const themes = [
   { value: "system", label: "System theme", icon: MonitorIcon },

@@ -1,6 +1,6 @@
 "use client"
 
-import { WaitlistSignupForm } from "@/components/mockups/waitlist-signup-form"
+import { WaitlistSignupForm } from "@/components/livepeer-ui/waitlist-signup-form"
 
 import { waitlistContentFixture } from "./waitlist-content-fixture"
 

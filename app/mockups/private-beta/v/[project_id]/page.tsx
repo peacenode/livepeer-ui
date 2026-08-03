@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import {
   ProjectResultPage,
   type ProjectAsset,
-} from "@/components/mockups/project-result-page"
+} from "@/components/livepeer-ui/project-result-page"
 import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 type StoryboardScene = {

@@ -1,4 +1,4 @@
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 
 const page = (
   name: VideoBuddyPageContent["page"],

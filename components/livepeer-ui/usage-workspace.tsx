@@ -5,23 +5,23 @@ import type { JSX } from "react"
 import {
   CreditBalance,
   type CreditBalanceProps,
-} from "@/components/mockups/credit-balance"
+} from "@/components/livepeer-ui/credit-balance"
 import {
   DailyUsageTable,
   type DailyUsageRow,
-} from "@/components/mockups/daily-usage-table"
+} from "@/components/livepeer-ui/daily-usage-table"
 import {
   LivepeerAgentPromoCards,
   type LivepeerAgentPromoPlan,
-} from "@/components/mockups/livepeer-agent-promo-cards"
+} from "@/components/livepeer-ui/livepeer-agent-promo-cards"
 import {
   ResourceUsageTable,
   type ResourceUsageRow,
-} from "@/components/mockups/resource-usage-table"
+} from "@/components/livepeer-ui/resource-usage-table"
 import {
   UsageMetrics,
   type UsageMetric,
-} from "@/components/mockups/usage-metrics"
+} from "@/components/livepeer-ui/usage-metrics"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export type UsageWorkspaceContent = {

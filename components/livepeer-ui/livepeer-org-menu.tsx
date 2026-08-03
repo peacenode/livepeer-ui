@@ -5,8 +5,8 @@ import Link from "next/link"
 import { ArrowLeftIcon, XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import { getLivepeerOrgFoundationHref } from "@/components/mockups/livepeer-org-header-nav"
-import type { LivepeerOrgSite } from "@/components/mockups/contracts"
+import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
+import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,

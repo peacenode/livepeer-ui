@@ -6,9 +6,9 @@ import { createPortal } from "react-dom"
 import { ChevronDownIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import { LivepeerOrgHeaderNav } from "@/components/mockups/livepeer-org-header-nav"
-import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
-import type { LivepeerOrgSite } from "@/components/mockups/contracts"
+import { LivepeerOrgHeaderNav } from "@/components/livepeer-ui/livepeer-org-header-nav"
+import { LivepeerOrgMenu } from "@/components/livepeer-ui/livepeer-org-menu"
+import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 import type { LivepeerOrgNavigationImages } from "@/sanity/lib/livepeer-org-navigation"
 import { Button } from "@/components/ui/button"
 import {

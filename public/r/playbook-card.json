@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/playbook-card.tsx",
+      "path": "components/livepeer-ui/playbook-card.tsx",
       "content": "import Link from \"next/link\"\n\nexport type PlaybookCardData = {\n  slug: string\n  title: string\n  image: string | null\n}\n\nexport function PlaybookCard({ playbook }: { playbook: PlaybookCardData }) {\n  return (\n    <Link\n      href={`/mockups/livepeer-org/library/${playbook.slug}`}\n      className=\"group block rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none\"\n    >\n      <article>\n        <div\n          className=\"aspect-square overflow-hidden rounded-sm bg-muted bg-cover bg-center\"\n          style={\n            playbook.image\n              ? { backgroundImage: `url(\"${playbook.image}\")` }\n              : undefined\n          }\n          aria-hidden=\"true\"\n        />\n        <div className=\"mt-4 flex max-w-sm flex-col gap-1.5\">\n          <h2 className=\"line-clamp-2 font-heading text-xl font-normal\">\n            {playbook.title}\n          </h2>\n        </div>\n      </article>\n    </Link>\n  )\n}\n",
       "type": "registry:component"
     }

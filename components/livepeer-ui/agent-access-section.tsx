@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
-import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
+import { AgentCompatibility } from "@/components/livepeer-ui/agent-compatibility"
 import { Button } from "@/components/ui/button"
 
 export function AgentAccessSection({

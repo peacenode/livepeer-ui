@@ -1,4 +1,4 @@
 export {
   ClientInstallCommand,
   ClientInstallCommand as InstallCommand,
-} from "@/components/mockups/client-install-command"
+} from "@/components/livepeer-ui/client-install-command"

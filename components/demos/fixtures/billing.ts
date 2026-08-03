@@ -1,12 +1,12 @@
 import type {
   BillingPaymentMethod,
   BillingPeriodSummary,
-} from "@/components/mockups/billing-page-summary"
-import type { BillingWorkspaceEditorialContent } from "@/components/mockups/billing-workspace"
+} from "@/components/livepeer-ui/billing-page-summary"
+import type { BillingWorkspaceEditorialContent } from "@/components/livepeer-ui/billing-workspace"
 import type {
   InvoiceRecord,
   InvoiceTableLabels,
-} from "@/components/mockups/invoice-table"
+} from "@/components/livepeer-ui/invoice-table"
 
 export const demoBillingContent: BillingWorkspaceEditorialContent = {
   heading: "Billing",

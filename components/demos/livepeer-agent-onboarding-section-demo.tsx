@@ -1,4 +1,4 @@
-import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-agent-onboarding-section"
+import { LivepeerAgentOnboardingSection } from "@/components/livepeer-ui/livepeer-agent-onboarding-section"
 
 export default function LivepeerAgentOnboardingSectionDemo() {
   return (

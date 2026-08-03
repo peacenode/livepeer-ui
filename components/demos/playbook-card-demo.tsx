@@ -1,4 +1,4 @@
-import { PlaybookCard } from "@/components/mockups/playbook-card"
+import { PlaybookCard } from "@/components/livepeer-ui/playbook-card"
 import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 const playbook = {

@@ -3,9 +3,9 @@ import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
-import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
-import type { LivepeerOrgPage } from "@/components/mockups/contracts"
-import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
+import { AgentCompatibility } from "@/components/livepeer-ui/agent-compatibility"
+import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
+import { LivepeerCubeStream } from "@/components/livepeer-ui/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
 import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 

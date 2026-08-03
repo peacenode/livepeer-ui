@@ -1,4 +1,4 @@
-import { LivepeerOrgHeader } from "@/components/mockups/livepeer-org-header"
+import { LivepeerOrgHeader } from "@/components/livepeer-ui/livepeer-org-header"
 import { livepeerOrgSiteFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function LivepeerOrgHeaderDemo() {

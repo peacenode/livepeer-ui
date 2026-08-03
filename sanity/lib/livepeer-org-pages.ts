@@ -4,7 +4,7 @@ import type {
   LivepeerOrgPage,
   LivepeerOrgPageSlug,
   LivepeerOrgSite,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 import { sanityClient } from "@/sanity/lib/client"
 
 export type {
@@ -13,7 +13,7 @@ export type {
   LivepeerOrgPage,
   LivepeerOrgPageSlug,
   LivepeerOrgSite,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 
 const siteQuery = defineQuery(
   `*[_type == "livepeerOrgSite" && _id == "livepeerOrgSite"][0]`

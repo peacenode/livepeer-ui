@@ -1,4 +1,4 @@
-import { UserMenu } from "@/components/mockups/user-menu"
+import { UserMenu } from "@/components/livepeer-ui/user-menu"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
 import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
 

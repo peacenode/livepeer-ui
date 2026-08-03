@@ -1,4 +1,4 @@
-import { PlatformBrandLink } from "@/components/mockups/platform-brand-link"
+import { PlatformBrandLink } from "@/components/livepeer-ui/platform-brand-link"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 const consoleHref = "/mockups/private-beta/landing/console"

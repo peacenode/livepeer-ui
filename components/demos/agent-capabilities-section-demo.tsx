@@ -1,4 +1,4 @@
-import { AgentCapabilitiesSection } from "@/components/mockups/agent-capabilities-section"
+import { AgentCapabilitiesSection } from "@/components/livepeer-ui/agent-capabilities-section"
 import { livepeerOrgAgentFixture } from "@/components/demos/fixtures/livepeer-org"
 
 const capabilities = [

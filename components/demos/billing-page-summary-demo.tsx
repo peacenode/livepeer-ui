@@ -2,7 +2,7 @@ import {
   demoBillingPeriod,
   demoPaymentMethod,
 } from "@/components/demos/fixtures/billing"
-import { BillingPageSummary } from "@/components/mockups/billing-page-summary"
+import { BillingPageSummary } from "@/components/livepeer-ui/billing-page-summary"
 
 export default function BillingPageSummaryDemo() {
   return (

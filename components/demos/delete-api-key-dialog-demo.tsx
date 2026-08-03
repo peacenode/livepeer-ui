@@ -1,4 +1,4 @@
-import { DeleteApiKeyDialog } from "@/components/mockups/delete-api-key-dialog"
+import { DeleteApiKeyDialog } from "@/components/livepeer-ui/delete-api-key-dialog"
 
 export default function DeleteApiKeyDialogDemo() {
   return (

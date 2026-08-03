@@ -4,13 +4,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { PlatformBrandLink } from "@/components/mockups/platform-brand-link"
-import { UserMenu } from "@/components/mockups/user-menu"
+import { PlatformBrandLink } from "@/components/livepeer-ui/platform-brand-link"
+import { UserMenu } from "@/components/livepeer-ui/user-menu"
 import { cn } from "@/lib/utils"
 import type {
   AgentConsoleShell,
   AgentConsoleUser,
-} from "@/components/mockups/contracts"
+} from "@/components/livepeer-ui/contracts"
 
 export function PlatformSidebar({
   className,

@@ -1,4 +1,4 @@
-import { PlaybookLibraryHeader } from "@/components/mockups/playbook-library-header"
+import { PlaybookLibraryHeader } from "@/components/livepeer-ui/playbook-library-header"
 import { livepeerOrgLibraryFixture } from "@/components/demos/fixtures/livepeer-org"
 
 export default function PlaybookLibraryHeaderDemo() {

@@ -5,7 +5,7 @@
   "description": "Introductory statement for the Livepeer Agent protocol architecture.",
   "files": [
     {
-      "path": "components/mockups/protocol-header-section.tsx",
+      "path": "components/livepeer-ui/protocol-header-section.tsx",
       "content": "export function ProtocolHeaderSection({\n  eyebrow,\n  heading,\n  description,\n}: {\n  eyebrow: string\n  heading: string\n  description: string\n}) {\n  return (\n    <header className=\"max-w-3xl\">\n      <p className=\"text-sm text-muted-foreground\">{eyebrow}</p>\n      <h1 className=\"mt-2 text-3xl font-medium text-balance\">{heading}</h1>\n      <p className=\"mt-4 text-base leading-relaxed text-muted-foreground\">\n        {description}\n      </p>\n    </header>\n  )\n}\n",
       "type": "registry:block"
     }

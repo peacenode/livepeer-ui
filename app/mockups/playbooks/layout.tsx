@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { LivepeerOrgFooter } from "@/components/mockups/livepeer-org-footer"
-import { LivepeerOrgHeader } from "@/components/mockups/livepeer-org-header"
+import { LivepeerOrgFooter } from "@/components/livepeer-ui/livepeer-org-footer"
+import { LivepeerOrgHeader } from "@/components/livepeer-ui/livepeer-org-header"
 import { getLivepeerOrgNavigationImages } from "@/sanity/lib/livepeer-org-navigation"
 import { getLivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
 

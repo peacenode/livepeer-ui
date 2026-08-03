@@ -1,4 +1,4 @@
-import { ProtocolPropertiesSection } from "@/components/mockups/protocol-properties-section"
+import { ProtocolPropertiesSection } from "@/components/livepeer-ui/protocol-properties-section"
 import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
 
 const protocol = videoBuddyPageFixture("protocol").protocol!

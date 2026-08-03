@@ -1,3 +1,3 @@
-export { ClientApplicationSidebar } from "@/components/mockups/client-application-sidebar"
-export { ClientMobileBottomNavigation } from "@/components/mockups/client-mobile-bottom-navigation"
-export { clientNavigationItems } from "@/components/mockups/client-navigation-items"
+export { ClientApplicationSidebar } from "@/components/livepeer-ui/client-application-sidebar"
+export { ClientMobileBottomNavigation } from "@/components/livepeer-ui/client-mobile-bottom-navigation"
+export { clientNavigationItems } from "@/components/livepeer-ui/client-navigation-items"

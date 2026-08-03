@@ -1,4 +1,4 @@
-import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
+import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
 import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
 import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
 

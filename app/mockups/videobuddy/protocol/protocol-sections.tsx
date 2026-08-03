@@ -1,11 +1,11 @@
-export { ProtocolHeaderSection } from "@/components/mockups/protocol-header-section"
+export { ProtocolHeaderSection } from "@/components/livepeer-ui/protocol-header-section"
 export {
   ProtocolFlowSection,
   ProtocolLayerCard,
   protocolLayers,
-} from "@/components/mockups/protocol-flow-section"
+} from "@/components/livepeer-ui/protocol-flow-section"
 export {
   ProtocolRequestFlowSection,
   protocolRequestSteps,
-} from "@/components/mockups/protocol-request-flow-section"
-export { ProtocolPropertiesSection } from "@/components/mockups/protocol-properties-section"
+} from "@/components/livepeer-ui/protocol-request-flow-section"
+export { ProtocolPropertiesSection } from "@/components/livepeer-ui/protocol-properties-section"

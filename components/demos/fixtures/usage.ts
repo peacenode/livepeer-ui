@@ -1,9 +1,9 @@
-import type { CreditBalanceProps } from "@/components/mockups/credit-balance"
-import type { DailyUsageRow } from "@/components/mockups/daily-usage-table"
-import type { LivepeerAgentPromoPlan } from "@/components/mockups/livepeer-agent-promo-cards"
-import type { ResourceUsageRow } from "@/components/mockups/resource-usage-table"
-import type { UsageMetric } from "@/components/mockups/usage-metrics"
-import type { UsageWorkspaceContent } from "@/components/mockups/usage-workspace"
+import type { CreditBalanceProps } from "@/components/livepeer-ui/credit-balance"
+import type { DailyUsageRow } from "@/components/livepeer-ui/daily-usage-table"
+import type { LivepeerAgentPromoPlan } from "@/components/livepeer-ui/livepeer-agent-promo-cards"
+import type { ResourceUsageRow } from "@/components/livepeer-ui/resource-usage-table"
+import type { UsageMetric } from "@/components/livepeer-ui/usage-metrics"
+import type { UsageWorkspaceContent } from "@/components/livepeer-ui/usage-workspace"
 
 export const usageContent: UsageWorkspaceContent = {
   overviewTabLabel: "Overview",
