@@ -47,6 +47,14 @@ const resourceOrder: Record<string, number> = {
   Documentation: 3,
 }
 
+const networkOrder: Record<string, number> = {
+  Ecosystem: 0,
+  "Livepeer Token": 1,
+  "Provide GPUs": 2,
+  "Delegate LPT": 3,
+  Roadmap: 4,
+}
+
 function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
   const matches = localLinkMatches[label]
   return matches
@@ -87,12 +95,18 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
             >
               {[...group.links]
                 .filter((item) => item.label !== "Primer")
-                .sort((a, b) =>
-                  group.title === "Resources"
-                    ? (resourceOrder[a.label] ?? 99) -
-                      (resourceOrder[b.label] ?? 99)
+                .sort((a, b) => {
+                  const order =
+                    group.title === "Resources"
+                      ? resourceOrder
+                      : group.title === "Network"
+                        ? networkOrder
+                        : null
+
+                  return order
+                    ? (order[a.label] ?? 99) - (order[b.label] ?? 99)
                     : 0
-                )
+                })
                 .map((item) => {
                   const href = resolveHref(site, item.label, item.href)
                   const external = href.startsWith("http")
