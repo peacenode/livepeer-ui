@@ -45,19 +45,10 @@ export function LivepeerTokenPage({
 
       <section
         id="tokenomics"
-        className="flex min-h-[32rem] items-center px-4 pt-12 pb-12 sm:min-h-[42rem] sm:px-6 sm:pt-16 sm:pb-16 lg:px-10"
+        className="flex items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-10"
       >
         <div className="mx-auto flex w-full max-w-screen-xl flex-col items-center text-center">
-          <TokenNetworkDiagram className="mb-10 h-auto w-full max-w-2xl sm:mb-14" />
-          <DisplayHeading as="h2" className="max-w-[22ch]">
-            {content.role.heading}
-          </DisplayHeading>
-          <p className="mt-5 max-w-prose text-sm leading-relaxed text-balance text-foreground/60">
-            {content.role.introduction}
-          </p>
-          <div className="mt-12 py-12 sm:mt-16 sm:py-16">
-            <TokenLabel />
-          </div>
+          <TokenNetworkDiagram className="h-auto w-full max-w-2xl" />
         </div>
       </section>
 
