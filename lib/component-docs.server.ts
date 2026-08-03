@@ -34,6 +34,7 @@ export function getComponentDocumentationSource(
   if (!item?.files?.length) return null
 
   const demoPath = path.join(
+    /* turbopackIgnore: true */
     process.cwd(),
     "components",
     "demos",
@@ -44,7 +45,10 @@ export function getComponentDocumentationSource(
     usage: fs.readFileSync(demoPath, "utf8"),
     files: item.files.map((file) => ({
       path: file.path,
-      code: fs.readFileSync(path.join(process.cwd(), file.path), "utf8"),
+      code: fs.readFileSync(
+        path.join(/* turbopackIgnore: true */ process.cwd(), file.path),
+        "utf8"
+      ),
       lang: sourceLanguage(file.path),
     })),
   }
