@@ -21,7 +21,7 @@ export default async function PlaybooksLayout({
       data-livepeer-org-shell
       className="flex min-h-dvh flex-col overflow-x-clip overscroll-none bg-background"
     >
-      <div className="sticky inset-x-0 top-0 z-[60] -mb-16">
+      <div className="sticky inset-x-0 top-0 z-[80] -mb-16">
         <LivepeerOrgHeader site={site} />
       </div>
       <div className="flex-1">{children}</div>

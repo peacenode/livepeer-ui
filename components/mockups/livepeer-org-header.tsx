@@ -74,6 +74,15 @@ export function LivepeerOrgHeader({
   return (
     <>
       {mounted &&
+        createPortal(
+          <div
+            aria-hidden="true"
+            data-livepeer-header-surface
+            className="pointer-events-none fixed inset-x-0 top-0 z-50 h-16 bg-background"
+          />,
+          document.body
+        )}
+      {mounted &&
         showMenu &&
         createPortal(
           <>
@@ -81,7 +90,7 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-30 bg-black/10 backdrop-blur transition-opacity duration-200 ease-out",
+                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/10 backdrop-blur transition-opacity duration-200 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
               )}
             />
@@ -89,14 +98,14 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-surface
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-0 z-40 h-[15.25rem] bg-background transition-transform duration-200 ease-out will-change-transform",
+                "pointer-events-none fixed inset-x-0 top-0 z-[75] h-[15.25rem] bg-background transition-transform duration-200 ease-out will-change-transform",
                 desktopMenuOpen ? "translate-y-0" : "-translate-y-full"
               )}
             />
           </>,
           document.body
         )}
-      <header className="relative z-50 w-full bg-background">
+      <header className="relative z-50 w-full bg-transparent">
         <div className="relative z-10 flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6">
           <div className="flex min-w-0 items-end gap-5">
             <Link
@@ -132,6 +141,7 @@ export function LivepeerOrgHeader({
                     <DropdownMenuContent
                       align="end"
                       sideOffset={8}
+                      positionerClassName="z-[90]"
                       className="w-72 rounded-sm p-1.5"
                     >
                       {loginLinks.map((item) => {
