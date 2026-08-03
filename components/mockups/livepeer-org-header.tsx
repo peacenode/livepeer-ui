@@ -145,10 +145,7 @@ export function LivepeerOrgHeader({
                   >
                     <DropdownMenuTrigger
                       render={
-                        <Button
-                          variant="secondary"
-                          className="rounded-sm"
-                        />
+                        <Button variant="secondary" className="rounded-sm" />
                       }
                     >
                       Log in
@@ -179,14 +176,10 @@ export function LivepeerOrgHeader({
                                 <Link href={item.href} />
                               )
                             }
-                            className="cursor-pointer justify-between rounded-sm px-3 py-2.5"
+                            className="cursor-pointer rounded-sm px-3 py-2.5"
                           >
-                            <span>{item.label}</span>
-                            <span
-                              aria-hidden="true"
-                              className="font-sans text-muted-foreground"
-                            >
-                              ↗
+                            <span>
+                              {item.label} <span aria-hidden="true">↗</span>
                             </span>
                           </DropdownMenuItem>
                         )
