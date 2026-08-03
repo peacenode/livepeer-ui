@@ -116,6 +116,8 @@ function getHeaderGroup(site: LivepeerOrgSite, title: string) {
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
   const [renderedTitle, setRenderedTitle] = React.useState("Network")
+  const [panelLeft, setPanelLeft] = React.useState(0)
+  const navRef = React.useRef<HTMLElement | null>(null)
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const renderedGroup = getHeaderGroup(site, renderedTitle)
   const renderedLinks = renderedGroup
@@ -134,7 +136,8 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
           return order ? (order[a.label] ?? 99) - (order[b.label] ?? 99) : 0
         })
     : []
-  const panelWidth = Math.ceil(renderedLinks.length / 2) * 288 + 16
+  const columnCount = Math.min(3, renderedLinks.length)
+  const panelWidth = columnCount * 288
 
   const cancelClose = React.useCallback(() => {
     if (closeTimer.current) {
@@ -146,6 +149,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   const openMenu = React.useCallback(
     (title: string) => {
       cancelClose()
+      setPanelLeft(navRef.current?.getBoundingClientRect().left ?? 0)
       setRenderedTitle(title)
       setActiveTitle(title)
     },
@@ -172,6 +176,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
 
   return (
     <nav
+      ref={navRef}
       className="relative top-1 hidden items-end gap-0 lg:flex"
       aria-label="Site sections"
       onPointerEnter={cancelClose}
@@ -239,11 +244,17 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div className="px-4 pt-6 pb-8 sm:px-6 lg:px-10">
+        <div
+          style={{ paddingLeft: panelLeft }}
+          className="pt-3 pr-4 pb-5 sm:pr-6 lg:pr-10"
+        >
           <div
             key={renderedTitle}
-            style={{ width: panelWidth }}
-            className="grid max-w-full auto-cols-72 grid-flow-col grid-rows-2 gap-1 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            style={{
+              width: panelWidth,
+              gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+            }}
+            className="grid max-w-full gap-1 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
           >
             {renderedLinks.map((item) => {
               const href = resolveHref(site, item.label, item.href)
