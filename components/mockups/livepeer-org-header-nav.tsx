@@ -248,7 +248,7 @@ export function LivepeerOrgHeaderNav({
 
   const scheduleClose = React.useCallback(() => {
     cancelClose()
-    closeTimer.current = setTimeout(() => setActiveTitle(null), 140)
+    closeTimer.current = setTimeout(() => setActiveTitle(null), 100)
   }, [cancelClose])
 
   React.useEffect(() => {
@@ -323,7 +323,7 @@ export function LivepeerOrgHeaderNav({
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         className={cn(
-          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-100 ease-out will-change-[opacity,transform]",
+          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-75 ease-out will-change-[opacity,transform]",
           activeTitle
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
@@ -332,7 +332,7 @@ export function LivepeerOrgHeaderNav({
         <div className="px-4 pt-3 pb-6 sm:px-6 lg:px-10">
           <div
             key={renderedTitle}
-            className="mx-auto grid max-w-7xl grid-cols-3 gap-2 xl:grid-cols-4 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            className="mx-auto grid max-w-7xl grid-cols-3 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-75 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1 xl:grid-cols-4"
           >
             {renderedLinks.map((item) => (
               <LivepeerOrgNavItem
