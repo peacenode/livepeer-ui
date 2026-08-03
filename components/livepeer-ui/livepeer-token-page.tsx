@@ -40,15 +40,9 @@ export function LivepeerTokenPage({
           <p className="mt-5 max-w-prose text-sm leading-relaxed text-balance text-foreground/60">
             {content.hero.description}
           </p>
-        </div>
-      </section>
-
-      <section
-        id="tokenomics"
-        className="flex items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-10"
-      >
-        <div className="mx-auto flex w-full max-w-screen-xl flex-col items-center text-center">
-          <TokenNetworkDiagram className="h-auto w-full max-w-2xl" />
+          <div id="tokenomics" className="mt-12 w-full sm:mt-16">
+            <TokenNetworkDiagram className="mx-auto h-auto w-full max-w-2xl" />
+          </div>
         </div>
       </section>
 

@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils"
 
 export type TokenNetworkDiagramContent = {
-  applications: { number: string; title: string; description: string }
-  gateways: { number: string; title: string; description: string }
-  orchestrators: { number: string; title: string; description: string }
-  delegators: { number: string; title: string; description: string }
+  applications: { title: string; description: string }
+  gateways: { title: string; description: string }
+  orchestrators: { title: string; description: string }
+  delegators: { title: string; description: string }
   flows: {
     requests: string
     jobsAndPayments: string
@@ -16,22 +16,18 @@ export type TokenNetworkDiagramContent = {
 
 export const defaultTokenNetworkDiagramContent: TokenNetworkDiagramContent = {
   applications: {
-    number: "01",
     title: "Applications",
     description: "Request video compute jobs",
   },
   gateways: {
-    number: "02",
     title: "Gateway Nodes",
     description: "Route jobs to orchestrators",
   },
   orchestrators: {
-    number: "03",
     title: "Orchestrator Nodes",
     description: "GPU clusters process work",
   },
   delegators: {
-    number: "04",
     title: "Delegators",
     description: "Stake LPT and earn fees",
   },
@@ -194,13 +190,6 @@ function DiagramNode({
         strokeOpacity="0.16"
         strokeWidth="1.5"
       />
-      <text
-        x={x + 28}
-        y={y + 34}
-        className="fill-emerald-700 text-[15px] dark:fill-emerald-500"
-      >
-        {node.number}
-      </text>
       <text
         x={x + 140}
         y={y + 67}
