@@ -98,12 +98,12 @@ export function LivepeerOrgHeader({
           </>,
           document.body
         )}
-      <header className="relative z-50 w-full bg-background">
+      <header className="relative z-50 w-full bg-transparent">
         <div className="relative z-10 mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <div className="flex min-w-0 items-end gap-5">
             <Link
               href={site.homeHref}
-              className="flex shrink-0 items-center gap-3"
+              className="relative z-10 flex shrink-0 items-center gap-3"
               aria-label="Livepeer.org home"
             >
               <span className="flex items-center gap-1.5 text-foreground">
@@ -119,7 +119,7 @@ export function LivepeerOrgHeader({
               />
             )}
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="relative z-10 flex items-center gap-2 sm:gap-3">
             {showMenu && (
               <>
                 <div
