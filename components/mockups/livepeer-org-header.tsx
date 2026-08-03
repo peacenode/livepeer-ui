@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerOrgHeaderNav } from "@/components/mockups/livepeer-org-header-nav"
 import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
@@ -35,6 +36,7 @@ export function LivepeerOrgHeader({
           </span>
         </Link>
         <div className="flex items-center gap-1 sm:gap-2">
+          {showMenu && <LivepeerOrgHeaderNav site={site} />}
           {playbooksHref && (
             <Button
               variant="secondary"
