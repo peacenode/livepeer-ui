@@ -106,13 +106,15 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
-            <span
-              className="flex items-center gap-1.5 text-background"
+            <Link
+              href={site.homeHref}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-1.5 text-background transition-colors hover:text-emerald-500 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               aria-label="Livepeer"
             >
               <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
               <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
-            </span>
+            </Link>
           </SheetTitle>
           <SheetClose
             render={
