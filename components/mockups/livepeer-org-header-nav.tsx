@@ -331,7 +331,7 @@ export function LivepeerOrgHeaderNav({
               width: panelWidth,
               gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
             }}
-            className="grid max-w-full gap-1 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            className="grid max-w-full auto-rows-[4rem] content-start gap-1 self-start data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
           >
             {renderedLinks.map((item) => (
               <LivepeerOrgNavItem
