@@ -43,6 +43,7 @@ export function DocsNav({
         { title: "Brand", href: "/docs/brand" },
         { title: "Assets", href: "/docs/assets" },
         { title: "Colors", href: "/docs/colors" },
+        { title: "Slides", href: "/docs/slides" },
         { title: "Font display", href: "/docs/favorit-pro" },
         { title: "Font sans", href: "/docs/inter" },
       ],
