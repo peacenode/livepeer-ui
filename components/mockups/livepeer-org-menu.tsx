@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { XIcon } from "lucide-react"
+import { ArrowLeftIcon, XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/mockups/livepeer-org-header-nav"
@@ -154,7 +154,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                   onClick={() => setShowLoginLinks(false)}
                   className="mb-6 flex w-fit items-center gap-2 rounded-sm py-2 font-sans text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <span aria-hidden="true">←</span>
+                  <ArrowLeftIcon aria-hidden="true" className="size-4" />
                   Back
                 </button>
                 {loginLinks.map((item) => {
