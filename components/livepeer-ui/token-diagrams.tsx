@@ -151,34 +151,13 @@ function DiagramNode({
   x,
   y,
   node,
-  active = false,
 }: {
   x: number
   y: number
   node: TokenNetworkDiagramContent["applications"]
-  active?: boolean
 }) {
   return (
     <g>
-      {active && (
-        <rect
-          x={x - 6}
-          y={y - 6}
-          width="292"
-          height="124"
-          rx="6"
-          fill="none"
-          className="stroke-emerald-700 motion-reduce:hidden dark:stroke-emerald-500"
-          strokeWidth="1.5"
-        >
-          <animate
-            attributeName="stroke-opacity"
-            values="0.08;0.3;0.08"
-            dur="2.8s"
-            repeatCount="indefinite"
-          />
-        </rect>
-      )}
       <rect
         x={x}
         y={y}
@@ -192,20 +171,22 @@ function DiagramNode({
       />
       <text
         x={x + 140}
-        y={y + 67}
+        y={y + 50}
         textAnchor="middle"
+        dominantBaseline="middle"
         fill="currentColor"
-        className="text-[23px] font-semibold"
+        className="text-sm font-semibold"
       >
         {node.title}
       </text>
       <text
         x={x + 140}
-        y={y + 94}
+        y={y + 76}
         textAnchor="middle"
+        dominantBaseline="middle"
         fill="currentColor"
         opacity="0.55"
-        className="text-[15px]"
+        className="text-[13px]"
       >
         {node.description}
       </text>
@@ -263,10 +244,32 @@ function FlowLabel({
       x={x}
       y={y}
       textAnchor="middle"
+      dominantBaseline="middle"
       transform={`rotate(${rotate} ${x} ${y})`}
       className="fill-emerald-700 text-[13px] font-medium tracking-wide dark:fill-emerald-500"
     >
       {children}
+    </text>
+  )
+}
+
+function DiagonalFlowLabel({
+  pathId,
+  dy,
+  children,
+}: {
+  pathId: string
+  dy: number
+  children: string
+}) {
+  return (
+    <text
+      dy={dy}
+      className="fill-emerald-700 text-[13px] font-medium tracking-wide dark:fill-emerald-500"
+    >
+      <textPath href={`#${pathId}`} startOffset="50%" textAnchor="middle">
+        {children}
+      </textPath>
     </text>
   )
 }
@@ -315,27 +318,27 @@ export function TokenNetworkDiagram({
         markerEnd="url(#token-flow-arrow)"
       >
         <path d="M170 132V444" />
-        <path d="M310 456 506 132" />
-        <path d="M320 468 516 144" />
+        <path id="jobs-payments-path" d="M290 444 490 112" />
+        <path id="video-response-path" d="M310 464 510 132" />
         <path d="M630 444V132" strokeDasharray="8 7" />
         <path d="M700 132V444" />
       </g>
       <g aria-hidden="true">
         <AnimatedPacket path="M170 132V444" duration="2.8s" begin="0s" />
-        <AnimatedPacket path="M310 456 506 132" duration="3.2s" begin="-1.4s" />
-        <AnimatedPacket path="M320 468 516 144" duration="3.2s" begin="0s" />
+        <AnimatedPacket path="M290 444 490 112" duration="3.2s" begin="-1.4s" />
+        <AnimatedPacket path="M310 464 510 132" duration="3.2s" begin="0s" />
         <AnimatedPacket path="M630 444V132" duration="3s" begin="-0.8s" />
         <AnimatedPacket path="M700 132V444" duration="3s" begin="-2s" />
       </g>
       <FlowLabel x={145} y={288} rotate={-90}>
         {content.flows.requests}
       </FlowLabel>
-      <FlowLabel x={365} y={340} rotate={-59}>
+      <DiagonalFlowLabel pathId="jobs-payments-path" dy={-10}>
         {content.flows.jobsAndPayments}
-      </FlowLabel>
-      <FlowLabel x={452} y={244} rotate={-59}>
+      </DiagonalFlowLabel>
+      <DiagonalFlowLabel pathId="video-response-path" dy={14}>
         {content.flows.videoResponse}
-      </FlowLabel>
+      </DiagonalFlowLabel>
       <FlowLabel x={607} y={288} rotate={-90}>
         {content.flows.stake}
       </FlowLabel>
@@ -344,8 +347,8 @@ export function TokenNetworkDiagram({
       </FlowLabel>
       <DiagramNode x={30} y={20} node={content.applications} />
       <DiagramNode x={30} y={444} node={content.gateways} />
-      <DiagramNode x={490} y={20} node={content.orchestrators} active />
-      <DiagramNode x={490} y={444} node={content.delegators} active />
+      <DiagramNode x={490} y={20} node={content.orchestrators} />
+      <DiagramNode x={490} y={444} node={content.delegators} />
     </svg>
   )
 }
