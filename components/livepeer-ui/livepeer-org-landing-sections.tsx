@@ -17,8 +17,8 @@ export function NetworkHeroSection({
   content: HomeContent["hero"]
 }) {
   return (
-    <section className="relative flex min-h-[40rem] w-full items-center overflow-hidden bg-background sm:min-h-[76svh]">
-      <LivepeerCubeStream className="z-[70]" />
+    <section className="relative isolate flex min-h-[40rem] w-full items-center overflow-hidden bg-background sm:min-h-[76svh]">
+      <LivepeerCubeStream className="z-0" />
       <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
         <div className="flex max-w-3xl flex-col items-start">
           <h1 className="max-w-[70%] text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-none sm:text-[clamp(2.5rem,4.5vw,4rem)]">

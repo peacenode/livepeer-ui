@@ -61,8 +61,8 @@ const resourceOrder: Record<string, number> = {
 
 const networkOrder: Record<string, number> = {
   Ecosystem: 0,
-  "Livepeer Token": 1,
-  "Provide GPUs": 2,
+  "Provide GPUs": 1,
+  "Livepeer Token": 2,
   "Delegate LPT": 3,
   Roadmap: 4,
 }
@@ -160,7 +160,12 @@ export function LivepeerOrgNavItem({
 }) {
   const href = resolveHref(site, item.label, item.href)
   const external = href.startsWith("http")
-  const label = item.label === "Blog" ? "Latest Updates" : item.label
+  const label =
+    item.label === "Blog"
+      ? "Latest Updates"
+      : item.label === "Provide GPUs"
+        ? "Provide Compute"
+        : item.label
   const image = navigationImages?.[item.label]
   const content = (
     <>
@@ -264,56 +269,67 @@ export function LivepeerOrgHeaderNav({
     return () => document.removeEventListener("keydown", onKeyDown)
   }, [])
 
+  React.useEffect(() => {
+    if (!activeTitle) return
+
+    const onScroll = () => setActiveTitle(null)
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [activeTitle])
+
   React.useLayoutEffect(() => {
     onOpenChange?.(activeTitle !== null)
   }, [activeTitle, onOpenChange])
 
   return (
-    <nav
-      className="relative top-1 hidden items-end gap-0 before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-[''] lg:flex"
-      aria-label="Site sections"
-      onPointerEnter={cancelClose}
-      onPointerLeave={scheduleClose}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
-      }}
-    >
-      {headerItems.map((title) => {
-        if (title === "Foundation") {
+    <>
+      <nav
+        className="relative top-1 z-10 hidden items-end gap-0 before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-[''] lg:flex"
+        aria-label="Site sections"
+        onPointerEnter={cancelClose}
+        onPointerLeave={scheduleClose}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
+        }}
+      >
+        {headerItems.map((title) => {
+          if (title === "Foundation") {
+            return (
+              <Button
+                key={title}
+                variant="ghost"
+                nativeButton={false}
+                render={<Link href={getLivepeerOrgFoundationHref(site)} />}
+                onPointerEnter={() => setActiveTitle(null)}
+                onFocus={() => setActiveTitle(null)}
+                className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+              >
+                Foundation
+              </Button>
+            )
+          }
+
+          const group = getLivepeerOrgHeaderGroup(site, title)
+          if (!group) return null
+
           return (
             <Button
-              key={title}
+              key={group._key}
               variant="ghost"
-              nativeButton={false}
-              render={<Link href={getLivepeerOrgFoundationHref(site)} />}
-              onPointerEnter={() => setActiveTitle(null)}
-              onFocus={() => setActiveTitle(null)}
-              className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+              aria-haspopup="true"
+              aria-controls="livepeer-header-menu"
+              aria-expanded={activeTitle === title}
+              onPointerEnter={() => openMenu(title)}
+              onFocus={() => openMenu(title)}
+              onClick={() => openMenu(title)}
+              className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent"
             >
-              Foundation
+              {group.title}
             </Button>
           )
-        }
-
-        const group = getLivepeerOrgHeaderGroup(site, title)
-        if (!group) return null
-
-        return (
-          <Button
-            key={group._key}
-            variant="ghost"
-            aria-haspopup="true"
-            aria-controls="livepeer-header-menu"
-            aria-expanded={activeTitle === title}
-            onPointerEnter={() => openMenu(title)}
-            onFocus={() => openMenu(title)}
-            onClick={() => openMenu(title)}
-            className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent"
-          >
-            {group.title}
-          </Button>
-        )
-      })}
+        })}
+      </nav>
 
       <div
         id="livepeer-header-menu"
@@ -323,13 +339,13 @@ export function LivepeerOrgHeaderNav({
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         className={cn(
-          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-75 ease-out will-change-[opacity,transform]",
+          "absolute top-0 left-1/2 z-0 w-screen -translate-x-1/2 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-75 ease-out will-change-[opacity,transform]",
           activeTitle
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div className="px-4 pt-3 pb-6 sm:px-6 lg:px-10">
+        <div className="px-4 pt-[4.75rem] pb-6 sm:px-6 lg:px-10">
           <div
             key={renderedTitle}
             className="mx-auto grid max-w-7xl grid-cols-3 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-75 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1 xl:grid-cols-4"
@@ -347,6 +363,6 @@ export function LivepeerOrgHeaderNav({
           </div>
         </div>
       </div>
-    </nav>
+    </>
   )
 }

@@ -84,15 +84,6 @@ export function LivepeerOrgHeader({
   return (
     <>
       {mounted &&
-        createPortal(
-          <div
-            aria-hidden="true"
-            data-livepeer-header-surface
-            className="pointer-events-none fixed inset-x-0 top-0 z-50 h-16 bg-background"
-          />,
-          document.body
-        )}
-      {mounted &&
         showMenu &&
         createPortal(
           <>
@@ -100,7 +91,7 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/5 backdrop-blur-sm transition-opacity duration-75 ease-out",
+                "pointer-events-none fixed inset-0 z-[72] bg-black/5 backdrop-blur-sm transition-opacity duration-75 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
               )}
             />
@@ -112,7 +103,7 @@ export function LivepeerOrgHeader({
           <div className="flex min-w-0 items-end gap-5">
             <Link
               href={site.homeHref}
-              className="flex shrink-0 items-center gap-3"
+              className="relative z-10 flex shrink-0 items-center gap-3"
               aria-label="Livepeer.org home"
             >
               <span className="flex items-center gap-1.5 text-foreground">
@@ -128,7 +119,7 @@ export function LivepeerOrgHeader({
               />
             )}
           </div>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="relative z-10 flex items-center gap-2 sm:gap-3">
             {showMenu && (
               <>
                 <div
