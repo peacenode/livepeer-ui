@@ -1,13 +1,13 @@
-import Link from "next/link"
-import { ArrowRightIcon } from "lucide-react"
-
 import { LivepeerGradientSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
+import {
+  TokenExchangeCard,
+  TokenStakingCard,
+} from "@/components/livepeer-ui/token-action-cards"
 import {
   TokenConstructionDiagram,
   TokenNetworkDiagram,
 } from "@/components/livepeer-ui/token-diagrams"
-import { Button } from "@/components/ui/button"
 import { DisplayHeading } from "@/components/ui/display-heading"
 
 type TokenContent = NonNullable<LivepeerOrgPage["tokenContent"]>
@@ -54,20 +54,15 @@ export function LivepeerTokenPage({ content }: { content: TokenContent }) {
           <p className="mt-5 max-w-prose text-sm leading-relaxed text-balance text-foreground/60">
             {content.role.introduction}
           </p>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            render={<Link href={content.delegate.cta.href} />}
-            className="mt-10 h-14 rounded-sm bg-transparent px-5 sm:mt-12"
-          >
-            {content.delegate.cta.label}
-            <ArrowRightIcon aria-hidden="true" />
-          </Button>
           <div className="mt-12 py-12 sm:mt-16 sm:py-16">
             <TokenLabel />
           </div>
         </div>
+      </section>
+
+      <section className="grid md:grid-cols-2">
+        <TokenExchangeCard content={content.exchanges} />
+        <TokenStakingCard content={content.delegate} />
       </section>
     </main>
   )
