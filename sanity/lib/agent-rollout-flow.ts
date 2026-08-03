@@ -36,27 +36,43 @@ const query = defineQuery(`
     phases[] {
       _key,
       name,
-      description,
+      "description": coalesce(description, summary),
       primaryCta,
-      doNotWarning,
-      marketingPages[] {
+      "doNotWarning": coalesce(doNotWarning, callout),
+      "marketingPages": coalesce(marketingPages[] {
         _key,
         title,
         "imageUrl": image.asset->url,
-        "imageAlt": image.alt,
+        "imageAlt": coalesce(image.alt, imageAlt),
         "imageHotspot": image.hotspot { x, y },
         mockupHref,
-        checklist
-      },
-      userFlow[] {
+        "checklist": coalesce(checklist, needs)
+      }, screens[section == "marketing"] {
         _key,
         title,
         "imageUrl": image.asset->url,
-        "imageAlt": image.alt,
+        "imageAlt": coalesce(image.alt, imageAlt),
         "imageHotspot": image.hotspot { x, y },
         mockupHref,
-        checklist
-      }
+        "checklist": coalesce(checklist, needs)
+      }),
+      "userFlow": coalesce(userFlow[] {
+        _key,
+        title,
+        "imageUrl": image.asset->url,
+        "imageAlt": coalesce(image.alt, imageAlt),
+        "imageHotspot": image.hotspot { x, y },
+        mockupHref,
+        "checklist": coalesce(checklist, needs)
+      }, screens[section == "userFlow"] {
+        _key,
+        title,
+        "imageUrl": image.asset->url,
+        "imageAlt": coalesce(image.alt, imageAlt),
+        "imageHotspot": image.hotspot { x, y },
+        mockupHref,
+        "checklist": coalesce(checklist, needs)
+      })
     }
   }
 `)

@@ -13,7 +13,7 @@
           "_key": "internal-marketing",
           "section": "marketing",
           "title": "Agent landing page",
-          "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/c433081d0712f13f2191748d1416ae124e3619d1-1930x924.png",
           "imageAlt": "Livepeer Agent landing page",
           "mockupHref": "/docs/mockups/agent-landing-page",
           "needs": [
@@ -25,7 +25,7 @@
           "_key": "install-with-credits",
           "section": "userFlow",
           "title": "Install MCP with preloaded credits",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Claude Code session running the Livepeer MCP",
           "needs": [
             "Install the MCP in the tester’s Agent",
@@ -37,7 +37,7 @@
           "_key": "submit-generation",
           "section": "userFlow",
           "title": "Submit generation",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Agent session submitting a generation prompt",
           "needs": [
             "Submit a generation prompt",
@@ -48,7 +48,7 @@
           "_key": "stable-link",
           "section": "userFlow",
           "title": "Receive stable link",
-          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/a1403d8fd01c4bea4fbb81a99e319483b185d3ee-1360x946.png",
           "imageAlt": "Stable results link showing generated media",
           "needs": [
             "Return a stable results link in the Agent",
@@ -60,7 +60,7 @@
           "_key": "user-interview",
           "section": "userFlow",
           "title": "User interview",
-          "imagePath": "/flow-references/20260727-194600-user-interview/user-interview.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/ac787e0774a0918acff6dce2ba10cebe518a77f6-1212x804.png",
           "imageAlt": "Google Meet link for the user interview",
           "needs": [
             "Schedule a follow-up with the tester",
@@ -81,7 +81,7 @@
           "_key": "private-marketing",
           "section": "marketing",
           "title": "Agent landing page",
-          "imagePath": "/flow-references/20260727-184956/agent-marketing-page.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/c433081d0712f13f2191748d1416ae124e3619d1-1930x924.png",
           "imageAlt": "Livepeer Agent early-access marketing page",
           "mockupHref": "/docs/mockups/agent-landing-page",
           "needs": ["Plant a flag", "Used as a press kit for outreach"]
@@ -90,7 +90,7 @@
           "_key": "waitlist",
           "section": "marketing",
           "title": "Waitlist",
-          "imagePath": "/flow-references/20260727-183925/agent-waitlist.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/ffe7b7701678a0cea8b18f7ee5f325d07c42461d-2194x1502.png",
           "imageAlt": "Livepeer Agent early-access waitlist",
           "mockupHref": "/docs/mockups/agent-waitlist",
           "needs": ["Collect an email", "Export approved emails for the auth gate", "Send a clear confirmation"]
@@ -99,7 +99,7 @@
           "_key": "access-email",
           "section": "userFlow",
           "title": "Receive access email",
-          "imagePath": "/flow-references/20260727-201500-sanity/access-email.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/4dde10142b1a1e39f6535cbdb4c3bed3ef5d0c04-1600x900.png",
           "imageAlt": "Private beta access email with an Add to Claude button",
           "mockupHref": "/mockups/welcome-email",
           "needs": ["Send the email when a waitlisted user is approved", "Include the MCP setup instructions", "Give the user a single install prompt"]
@@ -108,7 +108,7 @@
           "_key": "install",
           "section": "userFlow",
           "title": "Add the MCP to their Agent",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Claude Code session running the Livepeer MCP",
           "needs": ["User runs install", "Submits a prompt to test the MCP", "MCP OAuth is triggered"]
         },
@@ -116,7 +116,7 @@
           "_key": "oauth",
           "section": "userFlow",
           "title": "OAuth with waitlisted email",
-          "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/102d7d510a7315c5fe6daf13fbf82f5e41142653-2294x1710.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
           "needs": ["Check the email against the approved list", "Connect authentication to usage tracking", "Account comes with limited free credits"]
@@ -125,7 +125,7 @@
           "_key": "return",
           "section": "userFlow",
           "title": "Returns to session",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Claude Code session after connecting the Livepeer MCP",
           "needs": ["Return the user to the same Agent session", "Confirm that the MCP connection succeeded", "Give progress while the generation runs"]
         },
@@ -133,7 +133,7 @@
           "_key": "results",
           "section": "userFlow",
           "title": "Preview generations",
-          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/a1403d8fd01c4bea4fbb81a99e319483b185d3ee-1360x946.png",
           "imageAlt": "Generation history with video previews and prompts",
           "needs": ["Return a stable results link in the Agent", "Show generated media with its prompt and context", "Make each result easy to preview or open"]
         }
@@ -149,16 +149,16 @@
           "_key": "public-marketing",
           "section": "marketing",
           "title": "livepeer.org/agent",
-          "imagePath": "/flow-references/20260727-192146/public-agent-marketing-page.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/ea9ee27679e6353d0adc98438e77306c3ef31ce3-2348x1378.png",
           "imageAlt": "Public Livepeer Agent marketing page",
-          "mockupHref": "/flow-references/20260727-192146/public-agent-marketing-page.png",
+          "mockupHref": "https://cdn.sanity.io/images/l36s876e/production/ea9ee27679e6353d0adc98438e77306c3ef31ce3-2348x1378.png",
           "needs": ["Publish the page at livepeer.org/agent", "Add the Agent to the main website navigation", "Share the public MCP endpoint"]
         },
         {
           "_key": "install",
           "section": "userFlow",
           "title": "Add the MCP to their Agent",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Claude Code session running the Livepeer MCP",
           "needs": ["User runs install", "Submits a prompt to test the MCP", "MCP OAuth is triggered"]
         },
@@ -166,7 +166,7 @@
           "_key": "oauth",
           "section": "userFlow",
           "title": "MCP OAuth",
-          "imagePath": "/flow-references/20260727-194000-oauth/oauth.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/102d7d510a7315c5fe6daf13fbf82f5e41142653-2294x1710.png",
           "imageAlt": "Livepeer Agent OAuth sign-in screen",
           "mockupHref": "/docs/components/livepeer-agent-auth-gate",
           "needs": ["Authenticate the user", "Connect authentication to usage tracking", "Account comes with limited free credits"]
@@ -175,7 +175,7 @@
           "_key": "return",
           "section": "userFlow",
           "title": "Returns to session",
-          "imagePath": "/flow-references/20260727-184344/agent-client.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/753003c19e532dd4d5924da2d0ab0e1cfd61b84d-1520x1036.png",
           "imageAlt": "Claude Code session after connecting the Livepeer MCP",
           "needs": ["Return the user to the same Agent session", "Confirm that the MCP connection succeeded", "Give progress while the generation runs"]
         },
@@ -183,7 +183,7 @@
           "_key": "results",
           "section": "userFlow",
           "title": "Preview generations",
-          "imagePath": "/flow-references/20260727-184759/generation-preview.png",
+          "imagePath": "https://cdn.sanity.io/images/l36s876e/production/a1403d8fd01c4bea4fbb81a99e319483b185d3ee-1360x946.png",
           "imageAlt": "Generation history with video previews and prompts",
           "needs": ["Return a stable results link in the Agent", "Show generated media with its prompt and context", "Make each result easy to preview or open"]
         }
