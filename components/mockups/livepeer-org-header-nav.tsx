@@ -53,9 +53,9 @@ const localLinkMatches: Record<
 }
 
 const resourceOrder: Record<string, number> = {
-  Foundation: 0,
-  Blog: 1,
-  Brand: 2,
+  Blog: 0,
+  Brand: 1,
+  Roadmap: 2,
   Documentation: 3,
 }
 
@@ -102,6 +102,20 @@ export function getLivepeerOrgHeaderGroup(
     }
   }
 
+  if (title === "Resources") {
+    const resources = site.footerGroups.find((item) => item.title === title)
+    const roadmap = site.footerGroups
+      .find((item) => item.title === "Network")
+      ?.links.find((item) => item.label === "Roadmap")
+
+    return resources
+      ? {
+          ...resources,
+          links: roadmap ? [...resources.links, roadmap] : resources.links,
+        }
+      : undefined
+  }
+
   return site.footerGroups.find((item) => item.title === title)
 }
 
@@ -109,7 +123,12 @@ export function getLivepeerOrgHeaderLinks(
   group: NonNullable<ReturnType<typeof getLivepeerOrgHeaderGroup>>
 ) {
   return [...group.links]
-    .filter((item) => item.label !== "Primer" && item.label !== "Foundation")
+    .filter(
+      (item) =>
+        item.label !== "Primer" &&
+        item.label !== "Foundation" &&
+        !(group.title === "Network" && item.label === "Roadmap")
+    )
     .sort((a, b) => {
       const order =
         group.title === "Resources"
@@ -202,7 +221,13 @@ export function LivepeerOrgHeaderNav({
 }) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
   const [renderedTitle, setRenderedTitle] = React.useState("Network")
+  const [scrollProgress, setScrollProgress] = React.useState({
+    visible: false,
+    left: 0,
+    width: 100,
+  })
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const scrollRowRef = React.useRef<HTMLDivElement>(null)
   const renderedGroup = getLivepeerOrgHeaderGroup(
     site,
     renderedTitle as (typeof livepeerOrgHeaderGroups)[number]
@@ -212,6 +237,17 @@ export function LivepeerOrgHeaderNav({
     : []
   const columnCount = renderedLinks.length
   const panelWidth = columnCount * 256 + Math.max(0, columnCount - 1) * 8
+
+  const updateScrollProgress = React.useCallback(() => {
+    const row = scrollRowRef.current
+    if (!row) return
+
+    const overflow = row.scrollWidth - row.clientWidth
+    const width = Math.min(100, (row.clientWidth / row.scrollWidth) * 100)
+    const left = overflow > 0 ? (row.scrollLeft / overflow) * (100 - width) : 0
+
+    setScrollProgress({ visible: overflow > 1, left, width })
+  }, [])
 
   const cancelClose = React.useCallback(() => {
     if (closeTimer.current) {
@@ -250,6 +286,22 @@ export function LivepeerOrgHeaderNav({
   React.useEffect(() => {
     onOpenChange?.(activeTitle !== null)
   }, [activeTitle, onOpenChange])
+
+  React.useEffect(() => {
+    const row = scrollRowRef.current
+    if (!row) return
+
+    row.scrollLeft = 0
+    updateScrollProgress()
+    const observer = new ResizeObserver(updateScrollProgress)
+    observer.observe(row)
+    row.addEventListener("scroll", updateScrollProgress, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      row.removeEventListener("scroll", updateScrollProgress)
+    }
+  }, [renderedTitle, updateScrollProgress])
 
   return (
     <nav
@@ -312,25 +364,41 @@ export function LivepeerOrgHeaderNav({
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div className="flex h-[11.25rem] overflow-x-auto px-4 pt-3 pb-5 [scrollbar-width:none] sm:px-6 lg:px-10 [&::-webkit-scrollbar]:hidden">
+        <div className="relative h-[11.25rem]">
           <div
-            key={renderedTitle}
-            style={{
-              width: panelWidth,
-              gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
-            }}
-            className="mx-auto grid h-full shrink-0 grid-rows-1 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            ref={scrollRowRef}
+            className="flex h-full [scrollbar-width:none] overflow-x-auto px-4 pt-3 pb-6 sm:px-6 lg:px-10 [&::-webkit-scrollbar]:hidden"
           >
-            {renderedLinks.map((item) => (
-              <LivepeerOrgNavItem
-                key={`${item.label}-${item.href}`}
-                site={site}
-                item={item}
-                navigationImages={navigationImages}
-                onNavigate={() => setActiveTitle(null)}
-              />
-            ))}
+            <div
+              key={renderedTitle}
+              style={{
+                width: panelWidth,
+                gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
+              }}
+              className="mx-auto grid h-full shrink-0 grid-rows-1 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            >
+              {renderedLinks.map((item) => (
+                <LivepeerOrgNavItem
+                  key={`${item.label}-${item.href}`}
+                  site={site}
+                  item={item}
+                  navigationImages={navigationImages}
+                  onNavigate={() => setActiveTitle(null)}
+                />
+              ))}
+            </div>
           </div>
+          {scrollProgress.visible && (
+            <div className="absolute right-10 bottom-2 left-10 h-1 overflow-hidden rounded-full bg-muted/60">
+              <div
+                className="h-full rounded-full bg-muted-foreground/25"
+                style={{
+                  marginLeft: `${scrollProgress.left}%`,
+                  width: `${scrollProgress.width}%`,
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </nav>
