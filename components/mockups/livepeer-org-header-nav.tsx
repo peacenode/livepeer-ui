@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 import {
   ArrowUpRightIcon,
@@ -18,12 +19,7 @@ import {
 
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils"
 
 const headerGroups = ["Network", "Agent", "Resources", "Foundation"]
 
@@ -118,10 +114,71 @@ function getHeaderGroup(site: LivepeerOrgSite, title: string) {
 }
 
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
+  const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
+  const [renderedTitle, setRenderedTitle] = React.useState("Network")
+  const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+  const renderedGroup = getHeaderGroup(site, renderedTitle)
+  const renderedLinks = renderedGroup
+    ? [...renderedGroup.links]
+        .filter(
+          (item) => item.label !== "Primer" && item.label !== "Foundation"
+        )
+        .sort((a, b) => {
+          const order =
+            renderedGroup.title === "Resources"
+              ? resourceOrder
+              : renderedGroup.title === "Network"
+                ? networkOrder
+                : null
+
+          return order ? (order[a.label] ?? 99) - (order[b.label] ?? 99) : 0
+        })
+    : []
+  const panelWidth = Math.ceil(renderedLinks.length / 2) * 288 + 16
+
+  const cancelClose = React.useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }, [])
+
+  const openMenu = React.useCallback(
+    (title: string) => {
+      cancelClose()
+      setRenderedTitle(title)
+      setActiveTitle(title)
+    },
+    [cancelClose]
+  )
+
+  const scheduleClose = React.useCallback(() => {
+    cancelClose()
+    closeTimer.current = setTimeout(() => setActiveTitle(null), 140)
+  }, [cancelClose])
+
+  React.useEffect(() => {
+    return () => cancelClose()
+  }, [cancelClose])
+
+  React.useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveTitle(null)
+    }
+
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [])
+
   return (
     <nav
-      className="hidden translate-y-1 items-end gap-0 lg:flex"
+      className="relative hidden translate-y-1 items-end gap-0 lg:flex"
       aria-label="Site sections"
+      onPointerEnter={cancelClose}
+      onPointerLeave={scheduleClose}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
+      }}
     >
       {headerGroups.map((title) => {
         if (title === "Foundation") {
@@ -150,85 +207,96 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
         if (!group) return null
 
         return (
-          <DropdownMenu key={group._key} modal={false}>
-            <DropdownMenuTrigger
-              openOnHover
-              delay={80}
-              closeDelay={120}
-              render={
-                <Button
-                  variant="ghost"
-                  className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent"
-                />
-              }
-            >
-              {group.title}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              sideOffset={8}
-              className="grid w-auto min-w-72 auto-cols-72 grid-flow-col grid-rows-2 gap-1 rounded-sm bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-foreground/5 duration-150 data-[side=bottom]:slide-in-from-top-0 dark:ring-foreground/10 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
-            >
-              {[...group.links]
-                .filter(
-                  (item) =>
-                    item.label !== "Primer" && item.label !== "Foundation"
-                )
-                .sort((a, b) => {
-                  const order =
-                    group.title === "Resources"
-                      ? resourceOrder
-                      : group.title === "Network"
-                        ? networkOrder
-                        : null
-
-                  return order
-                    ? (order[a.label] ?? 99) - (order[b.label] ?? 99)
-                    : 0
-                })
-                .map((item) => {
-                  const href = resolveHref(site, item.label, item.href)
-                  const external = href.startsWith("http")
-                  const label =
-                    item.label === "Blog" ? "Latest Updates" : item.label
-                  const Icon = linkIcons[item.label]
-
-                  return (
-                    <DropdownMenuItem
-                      key={`${item.label}-${href}`}
-                      render={
-                        external ? (
-                          <a href={href} target="_blank" rel="noreferrer" />
-                        ) : (
-                          <Link href={href} />
-                        )
-                      }
-                      className="min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
-                    >
-                      <span className="flex size-10 shrink-0 items-center justify-center">
-                        <Icon
-                          className="size-6 text-muted-foreground"
-                          strokeWidth={2}
-                        />
-                      </span>
-                      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                        <span className="text-sm text-popover-foreground">
-                          {label}
-                        </span>
-                        <span className="text-xs leading-snug text-muted-foreground">
-                          {linkDescriptions[item.label]}
-                        </span>
-                      </span>
-                      {external && (
-                        <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
-                      )}
-                    </DropdownMenuItem>
-                  )
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button
+            key={group._key}
+            variant="ghost"
+            aria-haspopup="true"
+            aria-controls="livepeer-header-menu"
+            aria-expanded={activeTitle === title}
+            onPointerEnter={() => openMenu(title)}
+            onFocus={() => openMenu(title)}
+            onClick={() => openMenu(title)}
+            className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent"
+          >
+            {group.title}
+          </Button>
         )
       })}
+
+      <div
+        id="livepeer-header-menu"
+        aria-label={`${renderedTitle} menu`}
+        aria-hidden={!activeTitle}
+        inert={!activeTitle}
+        onPointerEnter={cancelClose}
+        onPointerLeave={scheduleClose}
+        style={{ width: panelWidth }}
+        className={cn(
+          "absolute top-[calc(100%+2rem)] left-0 overflow-hidden rounded-sm bg-popover text-popover-foreground shadow-xl ring-1 ring-foreground/5 transition-[width,opacity,transform] duration-200 ease-out will-change-[width,opacity,transform] dark:ring-foreground/10",
+          activeTitle
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0"
+        )}
+      >
+        <div
+          key={renderedTitle}
+          className="grid auto-cols-72 grid-flow-col grid-rows-2 gap-1 p-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+        >
+          {renderedLinks.map((item) => {
+            const href = resolveHref(site, item.label, item.href)
+            const external = href.startsWith("http")
+            const label = item.label === "Blog" ? "Latest Updates" : item.label
+            const Icon = linkIcons[item.label]
+
+            const content = (
+              <>
+                <span className="flex size-10 shrink-0 items-center justify-center">
+                  <Icon
+                    className="size-6 text-muted-foreground"
+                    strokeWidth={2}
+                  />
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <span className="text-sm text-popover-foreground">
+                    {label}
+                  </span>
+                  <span className="text-xs leading-snug text-muted-foreground">
+                    {linkDescriptions[item.label]}
+                  </span>
+                </span>
+                {external && (
+                  <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
+                )}
+              </>
+            )
+
+            const className =
+              "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none outline-none transition-colors hover:bg-muted focus-visible:bg-muted"
+
+            return external ? (
+              <a
+                key={`${item.label}-${href}`}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className={className}
+                onClick={() => setActiveTitle(null)}
+              >
+                {content}
+              </a>
+            ) : (
+              <Link
+                key={`${item.label}-${href}`}
+                href={href}
+                className={className}
+                onClick={() => setActiveTitle(null)}
+              >
+                {content}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
     </nav>
   )
 }
