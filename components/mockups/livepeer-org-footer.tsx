@@ -44,16 +44,16 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
           ))}
         </div>
 
-        <div className="mt-16 flex items-center gap-6 sm:justify-between lg:grid lg:grid-cols-3 lg:gap-10">
+        <div className="mt-16 flex items-center gap-6 sm:justify-between md:grid md:grid-cols-3 md:justify-normal md:gap-12 lg:gap-10">
           <a
             href={site.homeHref}
-            className="inline-flex items-center gap-1.5 text-foreground lg:col-start-1 lg:row-start-1"
+            className="inline-flex items-center gap-1.5 text-foreground md:col-start-1 md:row-start-1"
             aria-label="Livepeer home"
           >
             <LivepeerGradientSymbol className="h-4 w-auto" />
             <LivepeerWordmark className="h-4 w-auto" />
           </a>
-          <div className="flex items-center gap-4 lg:col-start-2 lg:row-start-1">
+          <div className="flex items-center gap-4 md:col-start-2 md:row-start-1">
             {site.socialLinks.map((social) => {
               const Icon = socialIcons[social.service]
 
