@@ -297,26 +297,11 @@ export function TokenNetworkDiagram({
       </desc>
       <defs>
         <path id="video-response-label-path" d="M310 464 510 132" />
-        <marker
-          id="token-flow-arrow"
-          viewBox="0 0 10 10"
-          refX="8"
-          refY="5"
-          markerWidth="5"
-          markerHeight="5"
-          orient="auto-start-reverse"
-        >
-          <path
-            d="M0 0 10 5 0 10Z"
-            className="fill-emerald-700 dark:fill-emerald-500"
-          />
-        </marker>
       </defs>
       <g
         className="stroke-emerald-700 dark:stroke-emerald-500"
         fill="none"
         strokeWidth="1.5"
-        markerEnd="url(#token-flow-arrow)"
       >
         <path d="M170 132V444" />
         <path id="jobs-payments-path" d="M290 444 490 112" />
