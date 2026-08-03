@@ -25,7 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const headerGroups = ["Network", "Resources", "Agent"]
+const headerGroups = ["Network", "Agent", "Resources"]
 
 const linkDescriptions: Record<string, string> = {
   Ecosystem: "Explore apps built on Livepeer",
