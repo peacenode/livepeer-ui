@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/mockups/livepeer-org/:path*",
+        destination: "/docs/public-beta/livepeer-org/:path*",
+        permanent: true,
+      },
+      {
         source: "/mockups/platform/:path*",
         destination: "/mockups/livepeer-agent/:path*",
         permanent: true,
@@ -43,6 +48,14 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         {
+          source: "/docs/public-beta/livepeer-org/agent/:path*",
+          destination: "/mockups/playbooks/install/:path*",
+        },
+        {
+          source: "/docs/public-beta/livepeer-org/:path*",
+          destination: "/mockups/playbooks/:path*",
+        },
+        {
           source: "/mockups/client/:path*",
           destination: "/mockups/videobuddy/:path*",
         },
@@ -51,16 +64,7 @@ const nextConfig: NextConfig = {
           destination: "/mockups/platform/:path*",
         },
       ],
-      afterFiles: [
-        {
-          source: "/mockups/livepeer-org/agent/:path*",
-          destination: "/mockups/playbooks/install/:path*",
-        },
-        {
-          source: "/mockups/livepeer-org/:path*",
-          destination: "/mockups/playbooks/:path*",
-        },
-      ],
+      afterFiles: [],
       fallback: [],
     }
   },

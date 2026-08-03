@@ -40,7 +40,7 @@ const mockups = {
     title: "Public Beta",
     description:
       "The complete Livepeer.org public experience across the network, Agent, playbooks, ecosystem, and GPU participation.",
-    previewHref: "/mockups/livepeer-org",
+    previewHref: "/docs/public-beta/livepeer-org",
     componentGroup: "Livepeer.org",
   },
   "agent-landing-page": {
@@ -83,7 +83,7 @@ const mockups = {
     title: "Livepeer.org",
     description:
       "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
-    previewHref: "/mockups/livepeer-org",
+    previewHref: "/docs/public-beta/livepeer-org",
     componentGroup: "Livepeer.org",
   },
 } as const
@@ -209,7 +209,7 @@ const internalTestingLandingSurface: PrivateBetaSurface = {
 
 const publicBetaLivepeerSurface: PrivateBetaSurface = {
   title: "Livepeer.org",
-  href: "/mockups/livepeer-org",
+  href: "/docs/public-beta/livepeer-org",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
@@ -222,7 +222,7 @@ const publicBetaLivepeerSurface: PrivateBetaSurface = {
 
 const publicBetaInstallSurface: PrivateBetaSurface = {
   title: "Install instructions",
-  href: "/mockups/livepeer-org/agent",
+  href: "/docs/public-beta/livepeer-org/agent",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
