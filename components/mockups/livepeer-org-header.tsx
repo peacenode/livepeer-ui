@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 import { createPortal } from "react-dom"
 import {
-  BookOpenIcon,
   BotIcon,
   ChevronDownIcon,
   MessageSquareIcon,
@@ -36,12 +35,6 @@ const loginLinks = [
     description: "View and manage network stake",
     href: "https://explorer.livepeer.org/orchestrators",
     icon: ServerIcon,
-  },
-  {
-    label: "Agent Playbooks",
-    description: "Open playbooks in Agent Console",
-    href: "/mockups/livepeer-agent/playbooks",
-    icon: BookOpenIcon,
   },
   {
     label: "Agent Console",
@@ -88,7 +81,7 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-30 bg-black/40 backdrop-blur transition-opacity duration-200 ease-out",
+                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-30 bg-black/25 backdrop-blur transition-opacity duration-200 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
               )}
             />
@@ -104,7 +97,7 @@ export function LivepeerOrgHeader({
           document.body
         )}
       <header className="relative z-50 w-full bg-background">
-        <div className="relative z-10 flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
+        <div className="relative z-10 flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6">
           <div className="flex min-w-0 items-end gap-5">
             <Link
               href={site.homeHref}
@@ -112,8 +105,8 @@ export function LivepeerOrgHeader({
               aria-label="Livepeer.org home"
             >
               <span className="flex items-center gap-1.5 text-foreground">
-                <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
-                <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
+                <LivepeerGradientSymbol className="h-4 w-auto" />
+                <LivepeerWordmark className="h-4 w-auto" />
               </span>
             </Link>
             {showMenu && (

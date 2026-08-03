@@ -43,6 +43,7 @@ const linkDescriptions: Record<string, string> = {
   Brand: "Logos, guidelines, and brand assets",
   Documentation: "Technical guides and reference",
   "Livepeer Agent": "Create and edit media with your agent",
+  "Agent Playbooks": "Run production-ready workflows in Agent Console",
   "Agent Documentation": "Build with Livepeer AI tools and APIs",
 }
 
@@ -57,6 +58,7 @@ const linkIcons: Record<string, LucideIcon> = {
   Brand: PaletteIcon,
   Documentation: BookOpenIcon,
   "Livepeer Agent": BotIcon,
+  "Agent Playbooks": BookOpenIcon,
   "Agent Documentation": BookOpenIcon,
 }
 
@@ -114,6 +116,10 @@ export function getLivepeerOrgHeaderGroup(
       title: "Agent",
       links: [
         { label: "Livepeer Agent", href: agentHref },
+        {
+          label: "Agent Playbooks",
+          href: "/mockups/livepeer-agent/playbooks",
+        },
         {
           label: "Agent Documentation",
           href: "https://docs.livepeer.org/v1/ai/builders/get-started",
