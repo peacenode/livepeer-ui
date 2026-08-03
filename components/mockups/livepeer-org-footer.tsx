@@ -44,23 +44,25 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
           ))}
         </div>
 
-        <div className="mt-16 flex items-center gap-4">
-          {site.socialLinks.map((social) => {
-            const Icon = socialIcons[social.service]
+        <div className="mt-16 lg:grid lg:grid-cols-3 lg:gap-10">
+          <div className="flex w-full items-center justify-between lg:col-start-2 lg:w-auto lg:justify-start lg:gap-4">
+            {site.socialLinks.map((social) => {
+              const Icon = socialIcons[social.service]
 
-            return (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={social.label}
-                className="text-muted-foreground transition-colors hover:text-emerald-500"
-              >
-                <Icon className="size-5" aria-hidden="true" />
-              </a>
-            )
-          })}
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                  className="text-muted-foreground transition-colors hover:text-emerald-500"
+                >
+                  <Icon className="size-5" aria-hidden="true" />
+                </a>
+              )
+            })}
+          </div>
         </div>
 
         <a
