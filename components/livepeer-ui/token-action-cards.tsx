@@ -51,6 +51,7 @@ export function TokenExchangeCard({
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
       <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
         <h2 className="flex items-center gap-2">
+          <span className="text-xs font-normal tracking-tight">Get</span>
           <span className="flex items-center gap-2 text-white/60">
             <LivepeerGradientSymbol
               className="h-2.5 w-auto shrink-0 sm:h-3"
@@ -58,9 +59,7 @@ export function TokenExchangeCard({
             />
             <span className="text-xs font-normal">$LPT</span>
           </span>
-          <span className="text-xs font-normal tracking-tight">
-            Available on
-          </span>
+          <span className="text-xs font-normal tracking-tight">at…</span>
         </h2>
       </div>
       {content.links.map((exchange) => {
