@@ -159,16 +159,11 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 </button>
                 {loginLinks.map((item) => {
                   const className =
-                    "flex items-center justify-between gap-4 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
+                    "flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
                   const content = (
                     <>
                       <span>{item.label}</span>
-                      <span
-                        aria-hidden="true"
-                        className="font-sans text-[0.75em] tracking-normal text-muted-foreground"
-                      >
-                        ↗
-                      </span>
+                      <span aria-hidden="true">↗</span>
                     </>
                   )
 
@@ -226,15 +221,10 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 <button
                   type="button"
                   onClick={() => setShowLoginLinks(true)}
-                  className="mt-6 flex items-center justify-between gap-4 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
+                  className="mt-8 flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
                 >
                   <span>Login</span>
-                  <span
-                    aria-hidden="true"
-                    className="font-sans text-[0.75em] tracking-normal text-muted-foreground"
-                  >
-                    →
-                  </span>
+                  <span aria-hidden="true">→</span>
                 </button>
               </>
             )}
