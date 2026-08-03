@@ -166,7 +166,7 @@ function DiagramNode({
           y={y - 6}
           width="292"
           height="124"
-          rx="24"
+          rx="6"
           fill="none"
           className="stroke-emerald-700 motion-reduce:hidden dark:stroke-emerald-500"
           strokeWidth="1.5"
@@ -184,7 +184,7 @@ function DiagramNode({
         y={y}
         width="280"
         height="112"
-        rx="18"
+        rx="6"
         fill="var(--background)"
         stroke="currentColor"
         strokeOpacity="0.16"
