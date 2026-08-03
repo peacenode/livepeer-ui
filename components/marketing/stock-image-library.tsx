@@ -22,8 +22,7 @@ export function StockImageLibrary({
       ].sort((a, b) => a.order - b.order || a.name.localeCompare(b.name)),
     [images]
   )
-  const [groupId, setGroupId] = useState("all")
-  const [subgroupId, setSubgroupId] = useState("all")
+  const [groupId, setGroupId] = useState(groups[0]?._id ?? "")
   const { containerRef, cornerStyles } = useMasonryCorners()
 
   const subgroups = useMemo(
@@ -32,22 +31,22 @@ export function StockImageLibrary({
         ...new Map(
           images
             .filter(
-              (image) =>
-                groupId === "all" || image.subgroup.group._id === groupId
+              (image) => image.subgroup.group._id === groupId
             )
             .map((image) => [image.subgroup._id, image.subgroup])
         ).values(),
       ].sort((a, b) => a.order - b.order || a.name.localeCompare(b.name)),
     [groupId, images]
   )
+  const [subgroupId, setSubgroupId] = useState(subgroups[0]?._id ?? "")
 
   const visibleImages = useMemo(
     () =>
       images
         .filter(
           (image) =>
-            (groupId === "all" || image.subgroup.group._id === groupId) &&
-            (subgroupId === "all" || image.subgroup._id === subgroupId)
+            image.subgroup.group._id === groupId &&
+            image.subgroup._id === subgroupId
         )
         .toSorted(
           (a, b) =>
@@ -59,8 +58,16 @@ export function StockImageLibrary({
   )
 
   function chooseGroup(value: string | null) {
-    setGroupId(value ?? "all")
-    setSubgroupId("all")
+    const nextGroupId = value ?? groups[0]?._id ?? ""
+    const nextSubgroup = images
+      .filter((image) => image.subgroup.group._id === nextGroupId)
+      .map((image) => image.subgroup)
+      .toSorted(
+        (a, b) => a.order - b.order || a.name.localeCompare(b.name)
+      )[0]
+
+    setGroupId(nextGroupId)
+    setSubgroupId(nextSubgroup?._id ?? "")
   }
 
   return (
@@ -69,7 +76,6 @@ export function StockImageLibrary({
         <div className="mx-auto flex w-full max-w-6xl justify-center overflow-x-auto">
           <Tabs value={groupId} onValueChange={chooseGroup}>
             <TabsList variant="line">
-              <TabsTrigger value="all">All</TabsTrigger>
               {groups.map((group) => (
                 <TabsTrigger key={group._id} value={group._id}>
                   {group.name}
@@ -83,15 +89,6 @@ export function StockImageLibrary({
           className="mx-auto mt-4 flex w-full max-w-6xl flex-wrap justify-center gap-2"
           aria-label="Filter by subgroup"
         >
-          <Badge
-            variant={subgroupId === "all" ? "default" : "secondary"}
-            className="h-8 rounded-sm px-3 font-normal"
-            render={
-              <button type="button" onClick={() => setSubgroupId("all")} />
-            }
-          >
-            All
-          </Badge>
           {subgroups.map((subgroup) => (
             <Badge
               key={subgroup._id}
