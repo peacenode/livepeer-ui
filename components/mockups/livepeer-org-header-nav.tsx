@@ -199,7 +199,13 @@ export function LivepeerOrgNavItem({
   )
 }
 
-export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
+export function LivepeerOrgHeaderNav({
+  site,
+  onOpenChange,
+}: {
+  site: LivepeerOrgSite
+  onOpenChange?: (open: boolean) => void
+}) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
   const [renderedTitle, setRenderedTitle] = React.useState("Network")
   const [panelLeft, setPanelLeft] = React.useState(0)
@@ -250,6 +256,10 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
     return () => document.removeEventListener("keydown", onKeyDown)
   }, [])
 
+  React.useEffect(() => {
+    onOpenChange?.(activeTitle !== null)
+  }, [activeTitle, onOpenChange])
+
   return (
     <nav
       ref={navRef}
@@ -299,14 +309,6 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
       })}
 
       <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-40 bg-black/40 transition-opacity duration-200 ease-out",
-          activeTitle ? "opacity-100" : "opacity-0"
-        )}
-      />
-
-      <div
         id="livepeer-header-menu"
         aria-label={`${renderedTitle} menu`}
         aria-hidden={!activeTitle}
@@ -314,7 +316,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         className={cn(
-          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-200 ease-out will-change-[opacity,transform]",
+          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-transparent text-foreground transition-[opacity,transform] duration-200 ease-out will-change-[opacity,transform]",
           activeTitle
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
