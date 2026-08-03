@@ -45,9 +45,7 @@ const stockImagesQuery = defineQuery(`
 `)
 
 export async function getStockImageLibrary() {
-  return sanityClient.fetch<StockImageLibraryItem[]>(
-    stockImagesQuery,
-    {},
-    { next: { revalidate: 60, tags: ["stock-images"] } }
-  )
+  return sanityClient
+    .withConfig({ useCdn: false })
+    .fetch<StockImageLibraryItem[]>(stockImagesQuery, {}, { cache: "no-store" })
 }
