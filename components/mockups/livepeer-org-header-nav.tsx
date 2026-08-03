@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRightIcon, ChevronDownIcon } from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
@@ -33,7 +33,10 @@ function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
 
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
-    <nav className="hidden items-center md:flex" aria-label="Site sections">
+    <nav
+      className="hidden items-center gap-1 md:flex"
+      aria-label="Site sections"
+    >
       {headerGroups.map((title) => {
         const group = site.footerGroups.find((item) => item.title === title)
         if (!group) return null
@@ -44,17 +47,16 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               render={
                 <Button
                   variant="ghost"
-                  className="group h-11 gap-1.5 rounded-sm px-3 font-normal hover:bg-transparent active:translate-y-0"
+                  className="h-9 rounded-full px-4 font-normal text-muted-foreground transition-[color,background-color,box-shadow] hover:bg-transparent hover:text-foreground aria-expanded:bg-white aria-expanded:text-foreground aria-expanded:shadow-sm aria-expanded:ring-1 aria-expanded:ring-black/[0.08] active:translate-y-0"
                 />
               }
             >
               {group.title}
-              <ChevronDownIcon className="size-3.5 transition-transform duration-150 group-aria-expanded:rotate-180" />
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="start"
               sideOffset={8}
-              className="w-64 min-w-64 rounded-sm bg-white p-2 text-foreground shadow-xl ring-1 ring-black/[0.08] duration-150 data-[side=bottom]:slide-in-from-top-0 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
+              className="grid w-72 min-w-72 gap-1 rounded-sm bg-white p-2 text-foreground shadow-xl ring-1 ring-black/[0.08] duration-150 data-[side=bottom]:slide-in-from-top-0 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
             >
               {group.links.map((item) => {
                 const href = resolveHref(site, item.label, item.href)
@@ -70,7 +72,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                         <Link href={href} />
                       )
                     }
-                    className="min-h-11 rounded-sm px-3 font-normal"
+                    className="min-h-12 rounded-xl border border-black/[0.06] bg-white px-4 font-normal shadow-xs transition-[background-color,border-color] hover:border-black/[0.1] focus:border-black/[0.1] focus:bg-muted/40"
                   >
                     <span>{item.label}</span>
                     {external && (
