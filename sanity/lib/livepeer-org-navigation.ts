@@ -5,7 +5,7 @@ import { sanityClient } from "@/sanity/lib/client"
 export type LivepeerOrgNavigationImages = Record<string, string | null>
 
 const query = defineQuery(`{
-  "Ecosystem": *[_type == "livepeerOrgPage" && page == "ecosystem"][0].ecosystemContent.apps[name == "NYTV" && image.asset->_createdAt >= $uploadedAfter][0].image.asset->url,
+  "Ecosystem": *[_id == "livepeerBlogPost-ai-x-open-media-forum" && heroImage.asset->_createdAt >= $uploadedAfter][0].heroImage.asset->url,
   "Livepeer Token": *[_id == "livepeerBlogPost-q1-2026-messari-state-of-livepeer" && heroImage.asset->_createdAt >= $uploadedAfter][0].heroImage.asset->url,
   "Delegate LPT": *[_id == "livepeerBlogPost-why-delegation-still-matters-in-a-low-inflation-environment" && heroImage.asset->_createdAt >= $uploadedAfter][0].heroImage.asset->url,
   "Provide GPUs": *[_id == "livepeerBlogPost-livepeer-incorporated-and-realtime-ai" && heroImage.asset->_createdAt >= $uploadedAfter][0].heroImage.asset->url,
