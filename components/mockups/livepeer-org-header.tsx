@@ -155,7 +155,7 @@ export function LivepeerOrgHeader({
                       align="end"
                       sideOffset={8}
                       positionerClassName="z-[90]"
-                      className="w-72 rounded-sm bg-secondary p-1.5"
+                      className="w-max min-w-0 rounded-sm bg-secondary p-1"
                       onPointerEnter={cancelLoginClose}
                       onPointerLeave={scheduleLoginClose}
                     >
@@ -176,7 +176,7 @@ export function LivepeerOrgHeader({
                                 <Link href={item.href} />
                               )
                             }
-                            className="cursor-pointer rounded-sm px-3 py-2.5"
+                            className="cursor-pointer rounded-sm px-2.5 py-2"
                           >
                             <span>
                               {item.label} <span aria-hidden="true">↗</span>
