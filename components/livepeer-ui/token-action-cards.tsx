@@ -50,7 +50,7 @@ export function TokenExchangeCard({
   return (
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
       <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
-        <h2 className="flex flex-col items-center gap-1.5">
+        <h2 className="flex items-center gap-2">
           <span className="flex items-center gap-2 text-white/60">
             <LivepeerGradientSymbol
               className="h-2.5 w-auto shrink-0 sm:h-3"
