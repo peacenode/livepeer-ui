@@ -1,10 +1,6 @@
 import Image from "next/image"
 
-import {
-  getSocialBannerImagePath,
-  socialBannerWordmark,
-  type SocialBanner,
-} from "@/lib/social-assets"
+import type { SocialBanner } from "@/lib/social-assets"
 
 export function SocialBanner({ banner }: { banner: SocialBanner }) {
   return (
@@ -15,7 +11,7 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
       data-banner-size={`${banner.width}x${banner.height}`}
     >
       <Image
-        src={getSocialBannerImagePath(banner)}
+        src={banner.imageUrl!}
         width={banner.width}
         height={banner.height}
         alt={`${banner.platform} Livepeer banner`}
@@ -28,9 +24,11 @@ export function SocialBanner({ banner }: { banner: SocialBanner }) {
 }
 
 export function SocialBannerArtwork({
+  wordmarkUrl,
   bottomAligned = false,
   centeredWidth = "44cqw",
 }: {
+  wordmarkUrl: string
   bottomAligned?: boolean
   centeredWidth?: string
 }) {
@@ -51,7 +49,7 @@ export function SocialBannerArtwork({
         data-lockup
       >
         <Image
-          src={socialBannerWordmark}
+          src={wordmarkUrl}
           width={1318}
           height={196}
           alt="Livepeer"
