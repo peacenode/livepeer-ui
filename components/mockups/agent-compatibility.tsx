@@ -1,34 +1,35 @@
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 const agents = [
   {
     name: "Claude",
-    src: "/compatibility/20260725-000727/claude.svg",
+    src: sanityStaticAssets.agentCompatibility.claude,
   },
   {
     name: "Claude Code",
-    src: "/compatibility/20260724-2055/claude-code.png",
+    src: sanityStaticAssets.agentCompatibility.claudeCode,
   },
   {
     name: "Codex",
-    src: "/compatibility/20260725-103200-openai/OAI_OpenAI-Blossom_White.svg",
+    src: sanityStaticAssets.agentCompatibility.codex,
     monochrome: true,
     opticalScale: true,
   },
   {
     name: "Hermes",
-    src: "/compatibility/20260725-000727/hermes.svg",
+    src: sanityStaticAssets.agentCompatibility.hermes,
     monochrome: true,
   },
   {
     name: "OpenClaw",
-    src: "/compatibility/20260725-000727/openclaw.svg",
+    src: sanityStaticAssets.agentCompatibility.openClaw,
   },
   {
     name: "Pi",
-    src: "/compatibility/20260725-000727/pi.svg",
+    src: sanityStaticAssets.agentCompatibility.pi,
     monochrome: true,
   },
 ]

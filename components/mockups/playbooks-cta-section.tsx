@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRightIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 export function PlaybooksCtaSection({
   content,
@@ -18,7 +19,7 @@ export function PlaybooksCtaSection({
   return (
     <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
       <Image
-        src="/playbooks/20260725-031450/runner-background.jpg"
+        src={sanityStaticAssets.playbooks.runnerBackground}
         alt=""
         fill
         className="hidden object-cover object-center sm:block dark:opacity-20 dark:mix-blend-luminosity"
@@ -46,7 +47,7 @@ export function PlaybooksCtaSection({
       </div>
       <div className="relative aspect-4/3 w-full sm:hidden">
         <Image
-          src="/playbooks/20260725-031450/runner-background.jpg"
+          src={sanityStaticAssets.playbooks.runnerBackground}
           alt=""
           fill
           className="object-cover object-[65%_center] dark:opacity-20 dark:mix-blend-luminosity"

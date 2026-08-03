@@ -1,32 +1,22 @@
-const assetRoot = "/generated/2026-07-24-004043"
-const slugGangAssetRoot = "/generated/2026-07-24-142500-slug-gang"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 export const storyMedia = {
   saltSignal: {
-    wide: `${assetRoot}/salt-signal-wide.webp`,
-    character: `${assetRoot}/mara-portrait.webp`,
+    wide: sanityStaticAssets.projectResults.saltSignal,
+    character: sanityStaticAssets.projectResults.maraPortrait,
   },
   blackTide: {
-    wide: `${assetRoot}/black-tide-wide.webp`,
-    character: `${assetRoot}/june-portrait.webp`,
+    wide: sanityStaticAssets.projectResults.blackTide,
+    character: sanityStaticAssets.projectResults.junePortrait,
   },
   afterHours: {
-    wide: `${assetRoot}/after-hours-wide.webp`,
-    character: `${assetRoot}/eli-portrait.webp`,
+    wide: sanityStaticAssets.projectResults.afterHours,
+    character: sanityStaticAssets.projectResults.eliPortrait,
   },
 } as const
 
 export const storyboardFrames = {
-  slugGang: [
-    `${slugGangAssetRoot}/scene-01.png`,
-    `${slugGangAssetRoot}/scene-02.png`,
-    `${slugGangAssetRoot}/scene-03.png`,
-    `${slugGangAssetRoot}/scene-04.png`,
-    `${slugGangAssetRoot}/scene-05.png`,
-    `${slugGangAssetRoot}/scene-06.png`,
-    `${slugGangAssetRoot}/scene-07.png`,
-    `${slugGangAssetRoot}/scene-08.png`,
-  ],
+  slugGang: sanityStaticAssets.slugGangFrames,
   saltSignal: [
     storyMedia.saltSignal.wide,
     storyMedia.saltSignal.character,

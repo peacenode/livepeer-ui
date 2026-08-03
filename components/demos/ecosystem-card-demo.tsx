@@ -1,4 +1,5 @@
 import { EcosystemCard } from "@/components/mockups/ecosystem-card"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 const app = {
   name: "Daydream",
@@ -6,7 +7,7 @@ const app = {
   href: "https://daydream.live",
   description:
     "Open-source, local-first platform for running real-time interactive generative AI video pipelines.",
-  image: "/ecosystem/20260726-1500/daydream.svg",
+  image: sanityStaticAssets.daydream,
   tags: ["AI Video", "Generative", "API"],
 }
 

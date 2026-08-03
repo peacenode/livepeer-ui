@@ -1,3 +1,5 @@
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
+
 export type InferenceContainer = {
   slug: string
   creator: string
@@ -14,7 +16,7 @@ export const inferenceContainers: InferenceContainer[] = [
   {
     slug: "livepeer-agent",
     creator: "Livepeer",
-    image: "/container-thumbnails/20260724-002929/ai-runner.webp",
+    image: sanityStaticAssets.containers.aiRunner,
     github: "livepeer/ai-runner",
     description:
       "Batch AI pipeline runtime. Loads diffusion, speech, and language models onto the GPU and serves inference over REST.",
@@ -42,7 +44,7 @@ export const inferenceContainers: InferenceContainer[] = [
   {
     slug: "comfystream",
     creator: "Livepeer",
-    image: "/container-thumbnails/20260724-002929/comfystream.webp",
+    image: sanityStaticAssets.containers.comfyStream,
     github: "livepeer/comfystream",
     description:
       "Realtime video AI runtime. Runs ComfyUI workflows frame-by-frame over WebRTC for live video-to-video pipelines.",
@@ -53,7 +55,7 @@ export const inferenceContainers: InferenceContainer[] = [
   {
     slug: "comfyui-base",
     creator: "Livepeer",
-    image: "/container-thumbnails/20260724-002929/comfyui-base.webp",
+    image: sanityStaticAssets.containers.comfyUiBase,
     github: "livepeer/ai-runner",
     description:
       "Base image comfystream builds on — packages ComfyUI, the node-graph diffusion engine by comfyanonymous, built from the ai-runner repo.",

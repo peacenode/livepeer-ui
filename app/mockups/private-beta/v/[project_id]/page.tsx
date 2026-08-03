@@ -4,6 +4,7 @@ import {
   ProjectResultPage,
   type ProjectAsset,
 } from "@/components/mockups/project-result-page"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 type StoryboardScene = {
   index: number
@@ -53,7 +54,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-1",
     type: "image" as const,
-    src: "/generated/2026-07-24-004043/salt-signal-wide.webp",
+    src: sanityStaticAssets.projectResults.saltSignal,
     alt: "Cinematic still of a figure by the sea",
     width: 1672,
     height: 941,
@@ -64,7 +65,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-2",
     type: "video" as const,
-    src: "/generated/20260728-210500-render-result/eli-portrait.mp4",
+    src: sanityStaticAssets.projectResults.eliPortraitVideo,
     alt: "Portrait video result",
     width: 720,
     height: 1080,
@@ -78,7 +79,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-3",
     type: "image" as const,
-    src: "/generated/2026-07-24-004043/mara-portrait.webp",
+    src: sanityStaticAssets.projectResults.maraPortrait,
     alt: "Portrait result",
     width: 1536,
     height: 1024,
@@ -89,7 +90,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-4",
     type: "image" as const,
-    src: "/generated/2026-07-24-004043/after-hours-wide.webp",
+    src: sanityStaticAssets.projectResults.afterHours,
     alt: "Nighttime cinematic still",
     width: 1672,
     height: 941,
@@ -100,7 +101,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-5",
     type: "video" as const,
-    src: "/generated/20260728-210500-render-result/black-tide.mp4",
+    src: sanityStaticAssets.projectResults.blackTideVideo,
     alt: "Wide cinematic video result",
     width: 1280,
     height: 720,
@@ -114,7 +115,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-6",
     type: "image" as const,
-    src: "/generated/2026-07-24-004043/june-portrait.webp",
+    src: sanityStaticAssets.projectResults.junePortrait,
     alt: "Character portrait result",
     width: 1536,
     height: 1024,
@@ -125,7 +126,7 @@ const assets: ProjectAsset[] = [
   {
     id: "asset-7",
     type: "image" as const,
-    src: "/generated/2026-07-24-004043/black-tide-wide.webp",
+    src: sanityStaticAssets.projectResults.blackTide,
     alt: "Wide cinematic result",
     width: 1672,
     height: 941,
@@ -148,26 +149,24 @@ const storyboardMediaMetadata: Record<
     | "sizeBytes"
   >
 > = {
-  "https://v3b.fal.media/files/b/0aa42105/GnA1OQDnplQOOJ7D5fVqZ_8vV8IkpD.mp4":
-    {
-      width: 1920,
-      height: 1080,
-      durationSeconds: 6.12,
-      frameRate: 25,
-      videoCodec: "h264",
-      audioCodec: "aac",
-      sizeBytes: 2_588_338,
-    },
-  "https://v3b.fal.media/files/b/0aa42104/KvyB2Cs2sqasGRhPrpbBB_Pflw7wgQ.mp4":
-    {
-      width: 1920,
-      height: 1080,
-      durationSeconds: 6.12,
-      frameRate: 25,
-      videoCodec: "h264",
-      audioCodec: "aac",
-      sizeBytes: 7_226_379,
-    },
+  "https://v3b.fal.media/files/b/0aa42105/GnA1OQDnplQOOJ7D5fVqZ_8vV8IkpD.mp4": {
+    width: 1920,
+    height: 1080,
+    durationSeconds: 6.12,
+    frameRate: 25,
+    videoCodec: "h264",
+    audioCodec: "aac",
+    sizeBytes: 2_588_338,
+  },
+  "https://v3b.fal.media/files/b/0aa42104/KvyB2Cs2sqasGRhPrpbBB_Pflw7wgQ.mp4": {
+    width: 1920,
+    height: 1080,
+    durationSeconds: 6.12,
+    frameRate: 25,
+    videoCodec: "h264",
+    audioCodec: "aac",
+    sizeBytes: 7_226_379,
+  },
 }
 
 function isStoryboardProject(value: unknown): value is StoryboardProject {
