@@ -206,6 +206,17 @@ const livepeerOrgStructure: StructureResolver = (S) =>
             .schemaType("livepeerOrgPage")
             .documentId("livepeerOrgPage-provide-gpu-compute")
         ),
+      S.divider(),
+      S.listItem()
+        .title("Blog")
+        .icon(GalleryVerticalEndIcon)
+        .child(
+          S.documentTypeList("livepeerBlogPost")
+            .title("Blog posts")
+            .defaultOrdering([
+              { field: "publishedAt", direction: "desc" },
+            ])
+        ),
     ])
 
 export default defineConfig({

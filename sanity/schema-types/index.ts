@@ -26,6 +26,7 @@ import {
 import { waitlistPageContentType } from "./waitlist-content"
 import { welcomeEmailContentType } from "./welcome-email-content"
 import { agentRolloutFlowType } from "./agent-rollout-flow"
+import { livepeerBlogPostType } from "./livepeer-blog-post"
 
 export const schemaTypes = [
   agentRolloutFlowType,
@@ -46,4 +47,5 @@ export const schemaTypes = [
   livepeerOrgLinkType,
   livepeerOrgSiteType,
   livepeerOrgPageType,
+  livepeerBlogPostType,
 ]
