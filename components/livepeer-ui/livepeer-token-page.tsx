@@ -2,10 +2,7 @@ import { LivepeerGradientSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
 import { LivepeerStakingCard } from "@/components/livepeer-ui/livepeer-staking-card"
 import { TokenExchangeCard } from "@/components/livepeer-ui/token-action-cards"
-import {
-  TokenConstructionDiagram,
-  TokenNetworkDiagram,
-} from "@/components/livepeer-ui/token-diagrams"
+import { TokenNetworkDiagram } from "@/components/livepeer-ui/token-diagrams"
 import { DisplayHeading } from "@/components/ui/display-heading"
 
 type TokenContent = NonNullable<LivepeerOrgPage["tokenContent"]>
@@ -43,7 +40,6 @@ export function LivepeerTokenPage({
           <p className="mt-5 max-w-prose text-sm leading-relaxed text-balance text-foreground/60">
             {content.hero.description}
           </p>
-          <TokenConstructionDiagram className="mt-12 h-auto w-full max-w-xl sm:mt-16" />
         </div>
       </section>
 
