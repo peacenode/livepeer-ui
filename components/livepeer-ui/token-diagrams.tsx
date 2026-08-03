@@ -296,6 +296,7 @@ export function TokenNetworkDiagram({
         Delegators stake Livepeer Token with orchestrators and receive fees.
       </desc>
       <defs>
+        <path id="video-response-label-path" d="M310 464 510 132" />
         <marker
           id="token-flow-arrow"
           viewBox="0 0 10 10"
@@ -319,14 +320,14 @@ export function TokenNetworkDiagram({
       >
         <path d="M170 132V444" />
         <path id="jobs-payments-path" d="M290 444 490 112" />
-        <path id="video-response-path" d="M310 464 510 132" />
+        <path id="video-response-path" d="M510 132 310 464" />
         <path id="stake-path" d="M630 444V132" strokeDasharray="8 7" />
         <path id="fees-path" d="M700 132V444" />
       </g>
       <g aria-hidden="true">
         <AnimatedPacket path="M170 132V444" duration="2.8s" begin="0s" />
         <AnimatedPacket path="M290 444 490 112" duration="3.2s" begin="-1.4s" />
-        <AnimatedPacket path="M310 464 510 132" duration="3.2s" begin="0s" />
+        <AnimatedPacket path="M510 132 310 464" duration="3.2s" begin="0s" />
         <AnimatedPacket path="M630 444V132" duration="3s" begin="-0.8s" />
         <AnimatedPacket path="M700 132V444" duration="3s" begin="-2s" />
       </g>
@@ -336,7 +337,7 @@ export function TokenNetworkDiagram({
       <PathFlowLabel pathId="jobs-payments-path" dy={-10}>
         {content.flows.jobsAndPayments}
       </PathFlowLabel>
-      <PathFlowLabel pathId="video-response-path" dy={14}>
+      <PathFlowLabel pathId="video-response-label-path" dy={14}>
         {content.flows.videoResponse}
       </PathFlowLabel>
       <PathFlowLabel pathId="stake-path" dy={-18}>
