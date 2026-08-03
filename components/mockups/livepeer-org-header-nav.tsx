@@ -123,7 +123,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                           <Link href={href} />
                         )
                       }
-                      className="min-h-16 items-center rounded-xl border border-black/[0.06] bg-white px-4 py-3 font-normal shadow-xs transition-[background-color,border-color] hover:border-black/[0.1] focus:border-black/[0.1] focus:bg-muted/40"
+                    className="min-h-16 items-center rounded-sm bg-white px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted/40 focus:bg-muted/40"
                     >
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                         <span className="text-sm text-foreground">{label}</span>
