@@ -40,6 +40,13 @@ const localLinkMatches: Record<
     label === "Foundation" || href.includes("/foundation"),
 }
 
+const resourceOrder: Record<string, number> = {
+  Foundation: 0,
+  Blog: 1,
+  Brand: 2,
+  Documentation: 3,
+}
+
 function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
   const matches = localLinkMatches[label]
   return matches
@@ -78,11 +85,19 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               sideOffset={8}
               className="grid w-72 min-w-72 gap-1 rounded-sm bg-white p-2 text-foreground shadow-xl ring-1 ring-black/[0.08] duration-150 data-[side=bottom]:slide-in-from-top-0 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
             >
-              {group.links
+              {[...group.links]
                 .filter((item) => item.label !== "Primer")
+                .sort((a, b) =>
+                  group.title === "Resources"
+                    ? (resourceOrder[a.label] ?? 99) -
+                      (resourceOrder[b.label] ?? 99)
+                    : 0
+                )
                 .map((item) => {
                   const href = resolveHref(site, item.label, item.href)
                   const external = href.startsWith("http")
+                  const label =
+                    item.label === "Blog" ? "Latest Updates" : item.label
 
                   return (
                     <DropdownMenuItem
@@ -97,9 +112,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                       className="min-h-16 items-center rounded-xl border border-black/[0.06] bg-white px-4 py-3 font-normal shadow-xs transition-[background-color,border-color] hover:border-black/[0.1] focus:border-black/[0.1] focus:bg-muted/40"
                     >
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                        <span className="text-sm text-foreground">
-                          {item.label}
-                        </span>
+                        <span className="text-sm text-foreground">{label}</span>
                         <span className="text-xs leading-snug text-muted-foreground">
                           {linkDescriptions[item.label]}
                         </span>
