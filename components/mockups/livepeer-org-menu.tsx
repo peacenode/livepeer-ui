@@ -82,6 +82,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         `${site.homeHref}/blog`
       ),
     },
+    { label: "Login", href: "/mockups/livepeer-agent" },
   ]
 
   return (
@@ -134,7 +135,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           <nav className="flex flex-col" aria-label="Mobile site sections">
             {mobileLinks.map((item) => {
               const className =
-                "rounded-sm py-3 text-2xl tracking-tight text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
 
               return item.href.startsWith("http") ? (
                 <a
