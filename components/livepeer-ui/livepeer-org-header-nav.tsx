@@ -163,7 +163,7 @@ export function LivepeerOrgNavItem({
   className?: string
 }) {
   const href = resolveHref(site, item.label, item.href)
-  const external = href.startsWith("http")
+  const jumpOut = href.startsWith("http") || item.label === "Agent Playbooks"
   const label =
     item.label === "Blog"
       ? "Latest Updates"
@@ -187,7 +187,7 @@ export function LivepeerOrgNavItem({
       <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1">
         <span className="flex items-start gap-1.5 text-sm text-foreground">
           <span className="min-w-0 truncate">{label}</span>
-          {external && (
+          {jumpOut && (
             <ArrowUpRightIcon className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
           )}
         </span>
@@ -202,7 +202,7 @@ export function LivepeerOrgNavItem({
     className
   )
 
-  return external ? (
+  return jumpOut ? (
     <a
       href={href}
       target="_blank"
