@@ -17,8 +17,11 @@ export default async function PlaybooksLayout({
 }>) {
   const site = await getLivepeerOrgSite()
   return (
-    <div className="flex min-h-dvh flex-col bg-background">
-      <div className="absolute inset-x-0 top-0 z-20">
+    <div
+      data-livepeer-org-shell
+      className="flex min-h-dvh flex-col overflow-x-clip overscroll-none bg-background"
+    >
+      <div className="absolute inset-x-0 top-0 z-40">
         <LivepeerOrgHeader site={site} />
       </div>
       <div className="flex-1">{children}</div>
