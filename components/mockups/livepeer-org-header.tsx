@@ -58,10 +58,28 @@ export function LivepeerOrgHeader({
     () => false
   )
   const [desktopMenuOpen, setDesktopMenuOpen] = React.useState(false)
+  const [loginMenuOpen, setLoginMenuOpen] = React.useState(false)
+  const loginCloseTimer = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  )
   const useLivepeerHref =
     site.menuLinks.find(
       (link) => link.label === "Livepeer Agent" || link.href.includes("/agent")
     )?.href ?? `${site.homeHref}/agent`
+
+  const cancelLoginClose = React.useCallback(() => {
+    if (loginCloseTimer.current) {
+      clearTimeout(loginCloseTimer.current)
+      loginCloseTimer.current = null
+    }
+  }, [])
+
+  const scheduleLoginClose = React.useCallback(() => {
+    cancelLoginClose()
+    loginCloseTimer.current = setTimeout(() => setLoginMenuOpen(false), 100)
+  }, [cancelLoginClose])
+
+  React.useEffect(() => () => cancelLoginClose(), [cancelLoginClose])
 
   return (
     <>
@@ -113,11 +131,24 @@ export function LivepeerOrgHeader({
           <div className="flex items-center gap-2 sm:gap-3">
             {showMenu && (
               <>
-                <div className="hidden lg:block">
-                  <DropdownMenu>
+                <div
+                  className="hidden lg:block"
+                  onPointerEnter={() => {
+                    cancelLoginClose()
+                    setLoginMenuOpen(true)
+                  }}
+                  onPointerLeave={scheduleLoginClose}
+                >
+                  <DropdownMenu
+                    open={loginMenuOpen}
+                    onOpenChange={setLoginMenuOpen}
+                  >
                     <DropdownMenuTrigger
                       render={
-                        <Button variant="secondary" className="rounded-sm" />
+                        <Button
+                          variant="secondary"
+                          className="rounded-sm"
+                        />
                       }
                     >
                       Log in
@@ -127,7 +158,9 @@ export function LivepeerOrgHeader({
                       align="end"
                       sideOffset={8}
                       positionerClassName="z-[90]"
-                      className="w-72 rounded-sm p-1.5"
+                      className="w-72 rounded-sm bg-secondary p-1.5"
+                      onPointerEnter={cancelLoginClose}
+                      onPointerLeave={scheduleLoginClose}
                     >
                       {loginLinks.map((item) => {
                         const external = item.href.startsWith("http")
