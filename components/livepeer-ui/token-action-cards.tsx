@@ -58,7 +58,7 @@ export function TokenExchangeCard({
             />
             <span className="text-xs font-normal">$LPT</span>
           </span>
-          <span className="text-sm font-normal tracking-tight sm:text-base">
+          <span className="text-xs font-normal tracking-tight">
             Available on
           </span>
         </h2>
