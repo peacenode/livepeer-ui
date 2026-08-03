@@ -16,7 +16,7 @@ const exchangeStyles: Record<
   }
 > = {
   Binance: {
-    className: "bg-[#f0b90b] text-black",
+    className: "bg-[#fcd535] text-black",
     logoClassName: "size-7 brightness-0",
     logoSrc: "/brand/exchanges/binance.svg",
   },
@@ -51,7 +51,7 @@ export function TokenExchangeCard({
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
       <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
         <h2 className="text-2xl font-light tracking-tight sm:text-3xl">
-          Get Livepeer Token
+          Livepeer Token is available on
         </h2>
       </div>
       {content.links.map((exchange) => {
