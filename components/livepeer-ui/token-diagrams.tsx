@@ -171,7 +171,7 @@ function DiagramNode({
       />
       <text
         x={x + 140}
-        y={y + 50}
+        y={y + 47}
         textAnchor="middle"
         dominantBaseline="middle"
         fill="currentColor"
@@ -181,7 +181,7 @@ function DiagramNode({
       </text>
       <text
         x={x + 140}
-        y={y + 76}
+        y={y + 68}
         textAnchor="middle"
         dominantBaseline="middle"
         fill="currentColor"
@@ -253,7 +253,7 @@ function FlowLabel({
   )
 }
 
-function DiagonalFlowLabel({
+function PathFlowLabel({
   pathId,
   dy,
   children,
@@ -320,8 +320,8 @@ export function TokenNetworkDiagram({
         <path d="M170 132V444" />
         <path id="jobs-payments-path" d="M290 444 490 112" />
         <path id="video-response-path" d="M310 464 510 132" />
-        <path d="M630 444V132" strokeDasharray="8 7" />
-        <path d="M700 132V444" />
+        <path id="stake-path" d="M630 444V132" strokeDasharray="8 7" />
+        <path id="fees-path" d="M700 132V444" />
       </g>
       <g aria-hidden="true">
         <AnimatedPacket path="M170 132V444" duration="2.8s" begin="0s" />
@@ -333,18 +333,18 @@ export function TokenNetworkDiagram({
       <FlowLabel x={145} y={288} rotate={-90}>
         {content.flows.requests}
       </FlowLabel>
-      <DiagonalFlowLabel pathId="jobs-payments-path" dy={-10}>
+      <PathFlowLabel pathId="jobs-payments-path" dy={-10}>
         {content.flows.jobsAndPayments}
-      </DiagonalFlowLabel>
-      <DiagonalFlowLabel pathId="video-response-path" dy={14}>
+      </PathFlowLabel>
+      <PathFlowLabel pathId="video-response-path" dy={14}>
         {content.flows.videoResponse}
-      </DiagonalFlowLabel>
-      <FlowLabel x={607} y={288} rotate={-90}>
+      </PathFlowLabel>
+      <PathFlowLabel pathId="stake-path" dy={-18}>
         {content.flows.stake}
-      </FlowLabel>
-      <FlowLabel x={724} y={288} rotate={90}>
+      </PathFlowLabel>
+      <PathFlowLabel pathId="fees-path" dy={-18}>
         {content.flows.fees}
-      </FlowLabel>
+      </PathFlowLabel>
       <DiagramNode x={30} y={20} node={content.applications} />
       <DiagramNode x={30} y={444} node={content.gateways} />
       <DiagramNode x={490} y={20} node={content.orchestrators} />
