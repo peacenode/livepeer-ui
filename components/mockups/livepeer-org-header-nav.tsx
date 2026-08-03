@@ -1,21 +1,9 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
-import {
-  ArrowUpRightIcon,
-  BookOpenIcon,
-  BotIcon,
-  CoinsIcon,
-  CpuIcon,
-  HandCoinsIcon,
-  LandmarkIcon,
-  MapIcon,
-  NewspaperIcon,
-  PaletteIcon,
-  ShapesIcon,
-  type LucideIcon,
-} from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
 
 import type {
   EditorialLink,
@@ -23,6 +11,7 @@ import type {
 } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import type { LivepeerOrgNavigationImages } from "@/sanity/lib/livepeer-org-navigation"
 
 export const livepeerOrgHeaderGroups = [
   "Network",
@@ -47,19 +36,20 @@ const linkDescriptions: Record<string, string> = {
   "Agent Documentation": "Build with Livepeer AI tools and APIs",
 }
 
-const linkIcons: Record<string, LucideIcon> = {
-  Ecosystem: ShapesIcon,
-  "Livepeer Token": CoinsIcon,
-  "Delegate LPT": HandCoinsIcon,
-  "Provide GPUs": CpuIcon,
-  Roadmap: MapIcon,
-  Blog: NewspaperIcon,
-  Foundation: LandmarkIcon,
-  Brand: PaletteIcon,
-  Documentation: BookOpenIcon,
-  "Livepeer Agent": BotIcon,
-  "Agent Playbooks": BookOpenIcon,
-  "Agent Documentation": BookOpenIcon,
+const fallbackImages: Record<string, string> = {
+  Ecosystem: "/ecosystem/20260726-1500/nytv-live.jpg",
+  "Livepeer Token": "/foundation/20260802-122635/halftone.png",
+  "Delegate LPT": "/brand/og.png",
+  "Provide GPUs":
+    "/generated/20260725-101313-console-home-cards/orchestrator.png",
+  Roadmap: "/foundation/20260802-122635/halftone.png",
+  Blog: "/social-assets/banners/20260730-143011/article.png",
+  Brand: "/brand/og.png",
+  Documentation: "/flow-references/20260727-184759/generation-preview.png",
+  "Livepeer Agent": "/generated/20260725-101313-console-home-cards/runner.png",
+  "Agent Playbooks":
+    "/generated/20260726-2326-console-home-playbooks/playbooks.png",
+  "Agent Documentation": "/playbooks/20260724-1905/playbook-mockup.jpg",
 }
 
 const localLinkMatches: Record<
@@ -155,36 +145,46 @@ export function getLivepeerOrgFoundationHref(site: LivepeerOrgSite) {
 export function LivepeerOrgNavItem({
   site,
   item,
+  navigationImages,
   onNavigate,
   className,
 }: {
   site: LivepeerOrgSite
   item: EditorialLink
+  navigationImages?: LivepeerOrgNavigationImages
   onNavigate?: () => void
   className?: string
 }) {
   const href = resolveHref(site, item.label, item.href)
   const external = href.startsWith("http")
   const label = item.label === "Blog" ? "Latest Updates" : item.label
-  const Icon = linkIcons[item.label]
+  const image = navigationImages?.[item.label] ?? fallbackImages[item.label]
   const content = (
     <>
-      <span className="flex size-10 shrink-0 items-center justify-center">
-        <Icon className="size-6 text-muted-foreground" strokeWidth={2} />
+      <span className="relative aspect-[3/4] h-full shrink-0 overflow-hidden rounded-sm bg-muted">
+        <Image
+          src={image}
+          alt=""
+          fill
+          sizes="96px"
+          className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+        />
       </span>
-      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="text-sm text-foreground">{label}</span>
+      <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1">
+        <span className="flex items-start gap-1.5 text-sm text-foreground">
+          <span className="min-w-0 truncate">{label}</span>
+          {external && (
+            <ArrowUpRightIcon className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
+          )}
+        </span>
         <span className="truncate text-xs leading-snug text-muted-foreground">
           {linkDescriptions[item.label]}
         </span>
       </span>
-      {external && (
-        <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
-      )}
     </>
   )
   const itemClassName = cn(
-    "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors outline-none hover:bg-muted focus-visible:bg-muted",
+    "group flex h-full min-w-0 items-stretch gap-3 rounded-sm bg-transparent p-2 font-normal shadow-none outline-none focus-visible:ring-2 focus-visible:ring-ring",
     className
   )
 
@@ -207,9 +207,11 @@ export function LivepeerOrgNavItem({
 
 export function LivepeerOrgHeaderNav({
   site,
+  navigationImages,
   onOpenChange,
 }: {
   site: LivepeerOrgSite
+  navigationImages?: LivepeerOrgNavigationImages
   onOpenChange?: (open: boolean) => void
 }) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
@@ -222,8 +224,8 @@ export function LivepeerOrgHeaderNav({
   const renderedLinks = renderedGroup
     ? getLivepeerOrgHeaderLinks(renderedGroup)
     : []
-  const columnCount = Math.min(3, renderedLinks.length)
-  const panelWidth = columnCount * 288
+  const columnCount = renderedLinks.length
+  const panelWidth = columnCount * 256
 
   const cancelClose = React.useCallback(() => {
     if (closeTimer.current) {
@@ -331,13 +333,14 @@ export function LivepeerOrgHeaderNav({
               width: panelWidth,
               gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
             }}
-            className="grid max-w-full auto-rows-[4rem] content-start gap-1 self-start data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            className="grid h-full max-w-full grid-rows-1 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
           >
             {renderedLinks.map((item) => (
               <LivepeerOrgNavItem
                 key={`${item.label}-${item.href}`}
                 site={site}
                 item={item}
+                navigationImages={navigationImages}
                 onNavigate={() => setActiveTitle(null)}
               />
             ))}

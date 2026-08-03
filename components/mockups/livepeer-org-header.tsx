@@ -9,6 +9,7 @@ import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { LivepeerOrgHeaderNav } from "@/components/mockups/livepeer-org-header-nav"
 import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
+import type { LivepeerOrgNavigationImages } from "@/sanity/lib/livepeer-org-navigation"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -35,12 +36,14 @@ const loginLinks = [
 
 export function LivepeerOrgHeader({
   site,
+  navigationImages,
   consoleHref,
   playbooksHref,
   action,
   showMenu = true,
 }: {
   site: LivepeerOrgSite
+  navigationImages?: LivepeerOrgNavigationImages
   consoleHref?: string
   playbooksHref?: string
   action?: {
@@ -110,6 +113,7 @@ export function LivepeerOrgHeader({
             {showMenu && (
               <LivepeerOrgHeaderNav
                 site={site}
+                navigationImages={navigationImages}
                 onOpenChange={setDesktopMenuOpen}
               />
             )}
