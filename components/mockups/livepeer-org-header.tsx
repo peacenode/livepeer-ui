@@ -82,16 +82,8 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/5 backdrop-blur transition-opacity duration-200 ease-out",
+                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/5 backdrop-blur transition-opacity duration-100 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
-              )}
-            />
-            <div
-              aria-hidden="true"
-              data-livepeer-nav-surface
-              className={cn(
-                "pointer-events-none fixed inset-x-0 top-0 z-[75] h-[15.25rem] bg-background transition-transform duration-200 ease-out will-change-transform",
-                desktopMenuOpen ? "translate-y-0" : "-translate-y-full"
               )}
             />
           </>,
