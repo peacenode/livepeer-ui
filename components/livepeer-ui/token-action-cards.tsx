@@ -16,7 +16,7 @@ const exchangeStyles: Record<
   }
 > = {
   Binance: {
-    className: "bg-[#fcd535] text-black",
+    className: "bg-[#ffd000] text-black",
     logoClassName: "size-7 brightness-0",
     logoSrc: "/brand/exchanges/binance.svg",
   },
