@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-html:has([data-livepeer-org-shell]),
-body:has([data-livepeer-org-shell]) {
+html,
+body {
   overflow-x: clip;
   overscroll-behavior: none;
 }
