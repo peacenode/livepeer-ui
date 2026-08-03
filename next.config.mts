@@ -33,6 +33,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/mockups/private-beta/earlyaccess/about",
+        destination: "/docs/private-beta/livepeer-org",
+        permanent: true,
+      },
+      {
+        source: "/mockups/agent-landing-page",
+        destination: "/docs/internal-testing/livepeer-org",
+        permanent: true,
+      },
+      {
         source: "/mockups/platform/:path*",
         destination: "/mockups/livepeer-agent/:path*",
         permanent: true,
@@ -47,6 +57,14 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
+        {
+          source: "/docs/private-beta/livepeer-org",
+          destination: "/mockups/private-beta/earlyaccess/about",
+        },
+        {
+          source: "/docs/internal-testing/livepeer-org",
+          destination: "/mockups/agent-landing-page",
+        },
         {
           source: "/docs/public-beta/livepeer-org/agent/:path*",
           destination: "/mockups/playbooks/install/:path*",
