@@ -10,6 +10,8 @@ import {
 } from "@/lib/component-docs.server"
 import { components, getComponentDoc, registryItemUrl } from "@/lib/docs"
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return components.map((component) => ({ slug: component.name }))
 }
