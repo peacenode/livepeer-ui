@@ -119,7 +119,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
         className="z-[90] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
       >
-        <header className="flex h-16 items-center justify-between px-4 sm:px-6">
+        <header className="flex h-16 items-center justify-between px-4">
           <SheetTitle className="text-left">
             <Link
               href={site.homeHref}
@@ -145,7 +145,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           </SheetClose>
         </header>
 
-        <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
+        <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:py-8">
           <nav className="flex flex-col" aria-label="Mobile site sections">
             {showLoginLinks ? (
               <>
