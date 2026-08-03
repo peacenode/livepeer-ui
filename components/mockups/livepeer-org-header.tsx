@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { createPortal } from "react-dom"
 import {
+  BookOpenIcon,
   BotIcon,
   ChevronDownIcon,
   MessageSquareIcon,
@@ -35,6 +36,12 @@ const loginLinks = [
     description: "View and manage network stake",
     href: "https://explorer.livepeer.org/orchestrators",
     icon: ServerIcon,
+  },
+  {
+    label: "Agent Playbooks",
+    description: "Open playbooks in Agent Console",
+    href: "/mockups/livepeer-agent/playbooks",
+    icon: BookOpenIcon,
   },
   {
     label: "Agent Console",
