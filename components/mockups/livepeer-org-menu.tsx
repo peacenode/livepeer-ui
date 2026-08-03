@@ -48,13 +48,13 @@ const menuOrder = [
     matches: (_label: string, href: string) => href.includes("/agent"),
   },
   {
+    label: "$LPT",
+    matches: (_label: string, href: string) => href.includes("/token"),
+  },
+  {
     label: "GPU",
     matches: (label: string, href: string) =>
       label === "GPU" || href.includes("/earn"),
-  },
-  {
-    label: "Token",
-    matches: (_label: string, href: string) => href.includes("/token"),
   },
   {
     label: "Updates",
@@ -102,7 +102,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="h-dvh max-h-none overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none sm:h-auto sm:max-h-dvh"
+        className="h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-foreground text-background shadow-none [mask-image:linear-gradient(to_bottom,#000_0%,#000_40%,transparent_60%,transparent_100%)] [mask-position:0_0] [mask-size:100%_250%] transition-[opacity,mask-position] duration-300 ease-out will-change-[mask-position,opacity] data-ending-style:opacity-0 data-ending-style:[mask-position:0_100%] data-starting-style:opacity-0 data-starting-style:[mask-position:0_100%] data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:[mask-image:none] motion-reduce:transition-none"
       >
         <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
           <SheetTitle className="text-left">
@@ -128,7 +128,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           </SheetClose>
         </header>
 
-        <div className="grid gap-12 px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
+        <div className="grid flex-1 content-between gap-12 overflow-y-auto px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
           <nav className="flex flex-col items-start gap-4 text-left">
             {menuLinks.map((item) => (
               <Link
