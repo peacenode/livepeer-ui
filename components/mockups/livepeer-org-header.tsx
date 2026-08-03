@@ -3,12 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { createPortal } from "react-dom"
-import {
-  BotIcon,
-  ChevronDownIcon,
-  MessageSquareIcon,
-  ServerIcon,
-} from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { LivepeerOrgHeaderNav } from "@/components/mockups/livepeer-org-header-nav"
@@ -26,21 +21,15 @@ import { cn } from "@/lib/utils"
 const loginLinks = [
   {
     label: "Forum",
-    description: "Join community discussions",
     href: "https://forum.livepeer.org",
-    icon: MessageSquareIcon,
   },
   {
     label: "Orchestrators",
-    description: "View and manage network stake",
     href: "https://explorer.livepeer.org/orchestrators",
-    icon: ServerIcon,
   },
   {
     label: "Agent Console",
-    description: "Open your Livepeer Agent workspace",
     href: "/mockups/livepeer-agent",
-    icon: BotIcon,
   },
 ] as const
 
@@ -90,7 +79,7 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/10 backdrop-blur transition-opacity duration-200 ease-out",
+                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/5 backdrop-blur transition-opacity duration-200 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
               )}
             />
@@ -145,7 +134,6 @@ export function LivepeerOrgHeader({
                       className="w-72 rounded-sm p-1.5"
                     >
                       {loginLinks.map((item) => {
-                        const Icon = item.icon
                         const external = item.href.startsWith("http")
 
                         return (
@@ -162,14 +150,14 @@ export function LivepeerOrgHeader({
                                 <Link href={item.href} />
                               )
                             }
-                            className="min-h-14 cursor-pointer rounded-sm px-3 py-2.5"
+                            className="cursor-pointer justify-between rounded-sm px-3 py-2.5"
                           >
-                            <Icon className="size-5 text-muted-foreground" />
-                            <span className="flex min-w-0 flex-col gap-0.5">
-                              <span>{item.label}</span>
-                              <span className="text-xs font-normal text-muted-foreground">
-                                {item.description}
-                              </span>
+                            <span>{item.label}</span>
+                            <span
+                              aria-hidden="true"
+                              className="font-sans text-muted-foreground"
+                            >
+                              ↗
                             </span>
                           </DropdownMenuItem>
                         )
