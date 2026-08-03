@@ -48,7 +48,7 @@ export function LivepeerOrgHeader({
             <Button
               nativeButton={false}
               render={<Link href={useLivepeerHref} />}
-              className="rounded-sm"
+              className="hidden rounded-sm lg:inline-flex"
             >
               Use Livepeer
             </Button>
