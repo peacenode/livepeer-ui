@@ -269,6 +269,15 @@ export function LivepeerOrgHeaderNav({
     return () => document.removeEventListener("keydown", onKeyDown)
   }, [])
 
+  React.useEffect(() => {
+    if (!activeTitle) return
+
+    const onScroll = () => setActiveTitle(null)
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [activeTitle])
+
   React.useLayoutEffect(() => {
     onOpenChange?.(activeTitle !== null)
   }, [activeTitle, onOpenChange])
