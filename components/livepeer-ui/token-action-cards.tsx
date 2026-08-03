@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerSymbol } from "@/components/brand"
+import { LivepeerSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
 
@@ -50,16 +50,20 @@ export function TokenExchangeCard({
   return (
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
       <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
-        <h2 className="flex items-center gap-2">
-          <span className="text-xs font-normal tracking-tight">Get</span>
-          <span className="flex items-center gap-2 text-white/60">
-            <LivepeerGradientSymbol
+        <h2 className="flex items-center gap-1.5">
+          <span className="text-xs font-normal tracking-tight text-white/60">
+            Get
+          </span>
+          <span className="flex items-center gap-1 text-white">
+            <LivepeerSymbol
               className="h-2.5 w-auto shrink-0 sm:h-3"
               aria-hidden="true"
             />
             <span className="text-xs font-normal">$LPT</span>
           </span>
-          <span className="text-xs font-normal tracking-tight">at…</span>
+          <span className="text-xs font-normal tracking-tight text-white/60">
+            at…
+          </span>
         </h2>
       </div>
       {content.links.map((exchange) => {
