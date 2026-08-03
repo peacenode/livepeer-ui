@@ -80,9 +80,9 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       label: "Provide Compute",
       href: findHref(
         ["GPU", "Provide GPUs", "Provide GPU", "Provide Compute"],
-        "/earn",
-        `${site.homeHref}/earn`
-      ),
+        "/compute",
+        `${site.homeHref}/compute`
+      ).replace(/\/earn(?=\/|$)/, "/compute"),
     },
     {
       label: "Latest Updates",

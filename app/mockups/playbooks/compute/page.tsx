@@ -12,7 +12,7 @@ import {
   SparklesIcon,
 } from "lucide-react"
 
-import { LivepeerSymbol } from "@/components/brand"
+import { LivepeerStakingCard } from "@/components/livepeer-ui/livepeer-staking-card"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -260,33 +260,7 @@ export default async function EarnWithGpuPage() {
           </div>
         </article>
 
-        <article className="aspect-square bg-muted">
-          <div className="flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
-            <LivepeerSymbol className="size-10 text-emerald-500 sm:size-16" />
-            <h2 className="mt-4 text-3xl font-light tracking-tight sm:mt-8 sm:text-4xl">
-              {content.stake.heading}
-            </h2>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-balance text-muted-foreground sm:mt-3">
-              {content.stake.description}
-            </p>
-            <Button
-              nativeButton={false}
-              variant="outline"
-              size="lg"
-              className="mt-5 h-14 rounded-sm bg-background px-6 sm:mt-7 sm:h-16"
-              render={
-                <a
-                  href={content.stake.cta.href}
-                  target="_blank"
-                  rel="noreferrer"
-                />
-              }
-            >
-              {content.stake.cta.label}
-              <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-            </Button>
-          </div>
-        </article>
+        <LivepeerStakingCard content={content.stake} />
       </section>
     </main>
   )

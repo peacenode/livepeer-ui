@@ -1,9 +1,7 @@
 import { LivepeerGradientSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
-import {
-  TokenExchangeCard,
-  TokenStakingCard,
-} from "@/components/livepeer-ui/token-action-cards"
+import { LivepeerStakingCard } from "@/components/livepeer-ui/livepeer-staking-card"
+import { TokenExchangeCard } from "@/components/livepeer-ui/token-action-cards"
 import {
   TokenConstructionDiagram,
   TokenNetworkDiagram,
@@ -11,6 +9,7 @@ import {
 import { DisplayHeading } from "@/components/ui/display-heading"
 
 type TokenContent = NonNullable<LivepeerOrgPage["tokenContent"]>
+type StakeContent = NonNullable<LivepeerOrgPage["earnContent"]>["stake"]
 
 function TokenLabel() {
   return (
@@ -24,7 +23,13 @@ function TokenLabel() {
   )
 }
 
-export function LivepeerTokenPage({ content }: { content: TokenContent }) {
+export function LivepeerTokenPage({
+  content,
+  stakeContent,
+}: {
+  content: TokenContent
+  stakeContent: StakeContent
+}) {
   return (
     <main>
       <section className="flex items-center px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-10">
@@ -62,7 +67,7 @@ export function LivepeerTokenPage({ content }: { content: TokenContent }) {
 
       <section className="grid md:grid-cols-2">
         <TokenExchangeCard content={content.exchanges} />
-        <TokenStakingCard content={content.delegate} />
+        <LivepeerStakingCard content={stakeContent} />
       </section>
     </main>
   )

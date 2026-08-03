@@ -69,10 +69,14 @@ const networkOrder: Record<string, number> = {
 
 function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
   const matches = localLinkMatches[label]
-  return matches
+  const resolvedHref = matches
     ? (site.menuLinks.find((link) => matches(link.label, link.href))?.href ??
-        href)
+      href)
     : href
+
+  return label === "Provide GPUs"
+    ? resolvedHref.replace(/\/earn(?=\/|$)/, "/compute")
+    : resolvedHref
 }
 
 export function getLivepeerOrgHeaderGroup(
@@ -290,7 +294,8 @@ export function LivepeerOrgHeaderNav({
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
+          if (!event.currentTarget.contains(event.relatedTarget))
+            scheduleClose()
         }}
       >
         {headerItems.map((title) => {

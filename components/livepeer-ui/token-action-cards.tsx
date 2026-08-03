@@ -1,9 +1,8 @@
 import Image from "next/image"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerSymbol } from "@/components/brand"
+import { LivepeerGradientSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/livepeer-ui/contracts"
-import { Button } from "@/components/ui/button"
 
 type TokenContent = NonNullable<LivepeerOrgPage["tokenContent"]>
 
@@ -89,59 +88,18 @@ export function TokenExchangeCard({
                 />
                 <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
                   <span>{exchange.label}</span>
-                  <ArrowUpRightIcon
-                    className="size-[1em]"
-                    aria-hidden="true"
-                  />
+                  <ArrowUpRightIcon className="size-[1em]" aria-hidden="true" />
                 </span>
               </>
             ) : (
               <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
                 <span>{exchange.label}</span>
-                <ArrowUpRightIcon
-                  className="size-[1em]"
-                  aria-hidden="true"
-                />
+                <ArrowUpRightIcon className="size-[1em]" aria-hidden="true" />
               </span>
             )}
           </a>
         )
       })}
-    </article>
-  )
-}
-
-export function TokenStakingCard({
-  content,
-}: {
-  content: TokenContent["delegate"]
-}) {
-  return (
-    <article className="aspect-square bg-muted">
-      <div className="flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
-        <LivepeerSymbol className="size-10 text-emerald-500 sm:size-16" />
-        <p className="mt-4 text-xs text-muted-foreground sm:mt-8">
-          {content.eyebrow}
-        </p>
-        <h2 className="mt-2 max-w-lg text-3xl font-light tracking-tight text-balance sm:text-4xl">
-          {content.heading}
-        </h2>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-balance text-muted-foreground sm:mt-3">
-          {content.description}
-        </p>
-        <Button
-          nativeButton={false}
-          variant="outline"
-          size="lg"
-          className="mt-5 h-14 rounded-sm bg-background px-6 sm:mt-7 sm:h-16"
-          render={
-            <a href={content.cta.href} target="_blank" rel="noreferrer" />
-          }
-        >
-          {content.cta.label}
-          <ArrowUpRightIcon className="size-4" aria-hidden="true" />
-        </Button>
-      </div>
     </article>
   )
 }

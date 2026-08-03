@@ -9,10 +9,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TokenPage() {
-  const page = await getLivepeerOrgPage("token")
+  const [page, computePage] = await Promise.all([
+    getLivepeerOrgPage("token"),
+    getLivepeerOrgPage("provide-gpu-compute"),
+  ])
   if (!page.tokenContent)
     throw new Error(
       'Required "tokenContent" is missing from "livepeerOrgPage-token".'
     )
-  return <LivepeerTokenPage content={page.tokenContent} />
+  if (!computePage.earnContent)
+    throw new Error(
+      'Required "earnContent" is missing from "livepeerOrgPage-provide-gpu-compute".'
+    )
+  return (
+    <LivepeerTokenPage
+      content={page.tokenContent}
+      stakeContent={computePage.earnContent.stake}
+    />
+  )
 }
