@@ -328,7 +328,7 @@ export function LivepeerOrgHeaderNav({
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         className={cn(
-          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-75 ease-out will-change-[opacity,transform]",
+          "absolute top-[calc(100%+1.5rem)] left-1/2 z-50 w-screen -translate-x-1/2 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-75 ease-out will-change-[opacity,transform]",
           activeTitle
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
