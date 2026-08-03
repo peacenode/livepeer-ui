@@ -7,6 +7,7 @@ import { AgentCompatibility } from "@/components/mockups/agent-compatibility"
 import type { LivepeerOrgPage } from "@/components/mockups/contracts"
 import { LivepeerCubeStream } from "@/components/mockups/livepeer-cube-stream"
 import { Button } from "@/components/ui/button"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 type HomeContent = NonNullable<LivepeerOrgPage["homeContent"]>
 
@@ -63,7 +64,7 @@ export function LivepeerAgentFeatureSection({
   return (
     <section className="relative min-h-[38rem] overflow-hidden bg-muted sm:min-h-[56rem]">
       <Image
-        src="/playbooks/20260725-031450/runner-background.jpg"
+        src={sanityStaticAssets.playbooks.runnerBackground}
         alt=""
         fill
         className="object-cover object-center dark:opacity-20 dark:mix-blend-luminosity"

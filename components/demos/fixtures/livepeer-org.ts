@@ -2,6 +2,7 @@ import type {
   LivepeerOrgPage,
   LivepeerOrgSite,
 } from "@/sanity/lib/livepeer-org-pages"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 export const livepeerOrgSiteFixture: LivepeerOrgSite = {
   _id: "livepeerOrgSite",
@@ -162,7 +163,7 @@ export const livepeerOrgEcosystemFixture: NonNullable<
       href: "https://daydream.live",
       description:
         "Open-source, local-first platform for running real-time interactive generative AI video pipelines.",
-      image: "/ecosystem/20260726-1500/daydream.svg",
+      image: sanityStaticAssets.daydream,
       tags: ["AI Video", "Generative", "API"],
     },
   ],

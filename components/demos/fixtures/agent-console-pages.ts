@@ -2,6 +2,7 @@ import type {
   AgentConsolePageDocument,
   AgentConsoleShell,
 } from "@/sanity/lib/agent-console-pages"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 export const agentConsoleShellFixture: AgentConsoleShell = {
   _id: "agentConsoleShell",
@@ -95,8 +96,7 @@ export const agentConsolePageFixtures = [
           description:
             "Provide compute to the network and earn service fees and protocol rewards.",
           href: "https://docs.livepeer.org/v1/orchestrators/guides/get-started",
-          imageSrc:
-            "/generated/20260725-101313-console-home-cards/orchestrator.png",
+          imageSrc: sanityStaticAssets.consoleCards.orchestrator,
         },
         {
           _key: "playbooks",
@@ -104,8 +104,7 @@ export const agentConsolePageFixtures = [
           description:
             "Create and edit images and video from the agent of your choice.",
           href: "/mockups/livepeer-org/library",
-          imageSrc:
-            "/generated/20260726-2326-console-home-playbooks/playbooks.png",
+          imageSrc: sanityStaticAssets.consoleCards.playbooks,
         },
       ],
       researchTitle: "Research",
