@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/client-empty-state.tsx",
+      "path": "components/livepeer-ui/client-empty-state.tsx",
       "content": "import type { LucideIcon } from \"lucide-react\"\n\nexport function ClientEmptyState({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description?: string }) {\n  return (\n    <div className=\"flex min-h-80 flex-col items-center justify-center text-center\">\n      <Icon className=\"size-5 text-muted-foreground\" aria-hidden=\"true\" />\n      <p className=\"mt-3 text-sm font-medium\">{title}</p>\n      {description ? <p className=\"mt-1 max-w-sm text-sm text-muted-foreground\">{description}</p> : null}\n    </div>\n  )\n}\n",
       "type": "registry:component"
     }

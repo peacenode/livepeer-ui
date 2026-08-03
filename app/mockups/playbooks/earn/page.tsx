@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/card"
 import { formatCompact, getNetworkStats } from "@/lib/livepeer"
 import { getLivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 export const metadata: Metadata = {
   title: "Provide GPU compute",
@@ -224,7 +225,7 @@ export default async function EarnWithGpuPage() {
           <div className="relative flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
             <div className="flex flex-col items-center justify-center">
               <Image
-                src="/brands/20260725-0345/arbitrum.svg"
+                src={sanityStaticAssets.arbitrum}
                 alt={content.arbitrum.imageAlt}
                 width={64}
                 height={64}

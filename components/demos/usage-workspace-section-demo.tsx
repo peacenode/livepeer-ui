@@ -1,4 +1,4 @@
-import { UsageWorkspace } from "@/components/mockups/usage-workspace"
+import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
 import {
   creditBalance,
   dailyUsageRows,
@@ -6,7 +6,7 @@ import {
   usageContent,
   usageMetrics,
   usagePlans,
-} from "@/components/demos/fixtures/usage"
+} from "@/app/mockups/_data/usage"
 
 export default function UsageWorkspaceSectionDemo() {
   return (

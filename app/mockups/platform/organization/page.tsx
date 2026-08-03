@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

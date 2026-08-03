@@ -1,5 +1,5 @@
-import { AgentCapabilitiesSection } from "@/components/mockups/agent-capabilities-section"
-import { livepeerOrgAgentFixture } from "@/components/demos/fixtures/livepeer-org"
+import { AgentCapabilitiesSection } from "@/components/livepeer-ui/agent-capabilities-section"
+import { livepeerOrgAgentFixture } from "@/app/mockups/_data/livepeer-org"
 
 const capabilities = [
   "Image generation",

@@ -3,8 +3,8 @@ import { ArrowDownToLineIcon } from "lucide-react"
 
 import { InstallCommand } from "@/components/docs/install-command"
 import { registryItemUrl } from "@/lib/docs"
-import { getSocialPreviewImagePath } from "@/lib/social-assets"
 import { cn } from "@/lib/utils"
+import { getSocialAssetSet } from "@/sanity/lib/social-assets"
 
 export const metadata: Metadata = {
   title: "Assets",
@@ -54,7 +54,8 @@ function DownloadOverlay({
   )
 }
 
-export default function AssetsPage() {
+export default async function AssetsPage() {
+  const assets = await getSocialAssetSet()
   return (
     <article className="max-w-3xl">
       <h1 className="text-3xl font-semibold tracking-tight">Assets</h1>
@@ -114,29 +115,34 @@ export default function AssetsPage() {
         posts.
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        {socialPreviews.map(({ width, height, alt }) => (
-          <figure
-            key={`${width}x${height}`}
-            className="overflow-hidden rounded-lg border"
-          >
-            <div className="relative flex aspect-4/3 items-center justify-center bg-muted p-6">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getSocialPreviewImagePath(width, height)}
-                alt={alt}
-                className="max-h-full max-w-full"
-              />
-              <DownloadOverlay
-                href={getSocialPreviewImagePath(width, height)}
-                label={`Download ${width} by ${height} social preview PNG`}
-                className="text-foreground"
-              />
-            </div>
-            <figcaption className="border-t px-3 py-2 text-sm text-muted-foreground">
-              {width} × {height} px
-            </figcaption>
-          </figure>
-        ))}
+        {socialPreviews.map(({ width, height, alt }) => {
+          const imageUrl = assets.previews.find(
+            (preview) => preview.width === width && preview.height === height
+          )!.imageUrl
+          return (
+            <figure
+              key={`${width}x${height}`}
+              className="overflow-hidden rounded-lg border"
+            >
+              <div className="relative flex aspect-4/3 items-center justify-center bg-muted p-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imageUrl}
+                  alt={alt}
+                  className="max-h-full max-w-full"
+                />
+                <DownloadOverlay
+                  href={imageUrl}
+                  label={`Download ${width} by ${height} social preview PNG`}
+                  className="text-foreground"
+                />
+              </div>
+              <figcaption className="border-t px-3 py-2 text-sm text-muted-foreground">
+                {width} × {height} px
+              </figcaption>
+            </figure>
+          )
+        })}
       </div>
     </article>
   )

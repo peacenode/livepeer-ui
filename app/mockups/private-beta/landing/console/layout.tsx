@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
-import { PrivateBetaConsoleShell } from "@/components/mockups/private-beta-console-shell"
+import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
+import { PrivateBetaConsoleShell } from "@/components/livepeer-ui/private-beta-console-shell"
 
 export const metadata: Metadata = {
   title: {
@@ -14,5 +15,9 @@ export default async function PrivateBetaConsoleLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <PrivateBetaConsoleShell>{children}</PrivateBetaConsoleShell>
+  return (
+    <PrivateBetaConsoleShell user={agentConsoleUserFixture}>
+      {children}
+    </PrivateBetaConsoleShell>
+  )
 }

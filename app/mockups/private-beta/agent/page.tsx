@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PlatformAuthGate } from "@/components/mockups/platform-auth-gate"
+import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {

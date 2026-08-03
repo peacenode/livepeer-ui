@@ -1,4 +1,4 @@
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { Button } from "@/components/ui/button"
 
 export default function LivepeerAgentPageFrameDemo() {

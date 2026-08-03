@@ -131,6 +131,21 @@ const description = defineField({
   rows: 3,
   validation: (r) => r.required(),
 })
+const illustration = defineField({
+  name: "illustration",
+  title: "Illustration",
+  type: "image",
+  options: { hotspot: true },
+  fields: [
+    defineField({
+      name: "alt",
+      title: "Alternative text",
+      type: "string",
+      validation: (r) => r.required(),
+    }),
+  ],
+  validation: (r) => r.required(),
+})
 
 export const livepeerOrgPageType = defineType({
   name: "livepeerOrgPage",
@@ -147,6 +162,8 @@ export const livepeerOrgPageType = defineType({
         layout: "radio",
         list: [
           { title: "Home", value: "home" },
+          { title: "Livepeer Token", value: "token" },
+          { title: "Foundation", value: "foundation" },
           { title: "Livepeer Agent", value: "livepeer-agent" },
           { title: "Playbook library", value: "playbook-library" },
           { title: "Ecosystem", value: "ecosystem" },
@@ -166,6 +183,228 @@ export const livepeerOrgPageType = defineType({
       title: "SEO description",
       type: "text",
       rows: 2,
+    }),
+    defineField({
+      name: "tokenContent",
+      title: "Token page sections",
+      type: "object",
+      hidden: ({ parent }) => parent?.page !== "token",
+      fields: [
+        defineField({
+          name: "hero",
+          title: "Hero",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "metadata",
+              title: "Token metadata",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            description,
+            illustration,
+            defineField({
+              name: "primaryCta",
+              title: "Primary action",
+              type: "livepeerOrgLink",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "secondaryCta",
+              title: "Secondary action",
+              type: "livepeerOrgLink",
+              validation: (r) => r.required(),
+            }),
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "role",
+          title: "Tokenomics",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            defineField({
+              name: "introduction",
+              title: "Introduction",
+              type: "text",
+              rows: 2,
+              validation: (r) => r.required(),
+            }),
+            illustration,
+            defineField({
+              name: "paragraphs",
+              title: "Details",
+              type: "array",
+              of: [defineArrayMember({ type: "text", rows: 3 })],
+              validation: (r) => r.required().min(1),
+            }),
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "exchanges",
+          title: "Exchanges",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            defineField({
+              name: "links",
+              title: "Exchange links",
+              type: "array",
+              of: [defineArrayMember({ type: "livepeerOrgLink" })],
+              validation: (r) => r.required().min(1),
+            }),
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "delegate",
+          title: "Delegation call to action",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            description,
+            cta,
+          ],
+          validation: (r) => r.required(),
+        }),
+      ],
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "foundationContent",
+      title: "Foundation page sections",
+      type: "object",
+      hidden: ({ parent }) => parent?.page !== "foundation",
+      fields: [
+        defineField({
+          name: "hero",
+          title: "Hero",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            description,
+            illustration,
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "about",
+          title: "About the Foundation",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            description,
+            illustration,
+            defineField({
+              name: "establishedLink",
+              title: "Established link",
+              type: "livepeerOrgLink",
+              validation: (r) => r.required(),
+            }),
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "responsibilities",
+          title: "What we do",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            defineField({
+              name: "items",
+              title: "Responsibilities",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  name: "livepeerFoundationResponsibility",
+                  title: "Responsibility",
+                  fields: [heading, description],
+                  preview: { select: { title: "heading" } },
+                }),
+              ],
+              validation: (r) => r.required().min(1),
+            }),
+            cta,
+          ],
+          validation: (r) => r.required(),
+        }),
+        defineField({
+          name: "project",
+          title: "About the Project",
+          type: "object",
+          fields: [
+            defineField({
+              name: "eyebrow",
+              title: "Eyebrow",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            heading,
+            illustration,
+            defineField({
+              name: "paragraphs",
+              title: "History",
+              type: "array",
+              of: [defineArrayMember({ type: "text", rows: 4 })],
+              validation: (r) => r.required().min(1),
+            }),
+            defineField({
+              name: "feesLink",
+              title: "Network fees source",
+              type: "livepeerOrgLink",
+              validation: (r) => r.required(),
+            }),
+          ],
+          validation: (r) => r.required(),
+        }),
+      ],
+      validation: (r) => r.required(),
     }),
     defineField({
       name: "homeContent",
@@ -379,8 +618,17 @@ export const livepeerOrgPageType = defineType({
                 description,
                 defineField({
                   name: "image",
-                  title: "Logo path",
-                  type: "string",
+                  title: "Logo",
+                  type: "image",
+                  options: { hotspot: false },
+                  fields: [
+                    defineField({
+                      name: "alt",
+                      title: "Alternative text",
+                      type: "string",
+                      validation: (r) => r.required(),
+                    }),
+                  ],
                   validation: (r) => r.required(),
                 }),
                 defineField({

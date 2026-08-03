@@ -3,9 +3,9 @@
 import { useState } from "react"
 
 import { storyMedia } from "../media-assets"
-import { downloadMedia } from "../media-context-menu"
+import { downloadMedia } from "@/components/livepeer-ui/media-context-menu"
 import { ClipsHeader, ClipsLibrary, type Clip } from "./clips-components"
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 
 const initialFootage: Clip[] = [
   {

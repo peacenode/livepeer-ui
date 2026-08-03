@@ -1,6 +1,7 @@
 "use client"
 
 import { SourceCatalog } from "@/app/mockups/playbooks/source-catalog"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 
 const playbooks = [
   {
@@ -8,7 +9,7 @@ const playbooks = [
     title: "Krea 2 Open-Source: Train Your Brand Aesthetic",
     summary: "Train a reusable visual identity and create a campaign.",
     tags: ["Image", "Brand"],
-    image: "/playbooks/20260725-031450/runner-background.jpg",
+    image: sanityStaticAssets.playbooks.runnerBackground,
     deliverables: ["Brand image set"],
     stats: [],
   },

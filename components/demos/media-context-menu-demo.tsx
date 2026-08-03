@@ -1,6 +1,6 @@
 "use client"
 
-import { MediaContextMenu } from "@/app/mockups/videobuddy/media-context-menu"
+import { MediaContextMenu } from "@/components/livepeer-ui/media-context-menu"
 
 export default function MediaContextMenuDemo() {
   return (

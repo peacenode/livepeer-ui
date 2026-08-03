@@ -1,6 +1,6 @@
 "use client"
 
-import { ClipCard } from "@/components/mockups/clip-card"
+import { ClipCard } from "@/components/livepeer-ui/clip-card"
 import { storyMedia } from "@/app/mockups/videobuddy/media-assets"
 
 export default function ClipCardDemo() {

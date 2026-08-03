@@ -1,5 +1,5 @@
-import { LivepeerAgentSignInCard } from "@/components/mockups/livepeer-agent-sign-in-card"
-import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
+import { LivepeerAgentSignInCard } from "@/components/livepeer-ui/livepeer-agent-sign-in-card"
+import { agentConsoleShellFixture } from "@/app/mockups/_data/agent-console-pages"
 
 export default function LivepeerAgentSignInCardDemo() {
   return <LivepeerAgentSignInCard content={agentConsoleShellFixture.auth} />

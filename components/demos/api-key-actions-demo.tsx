@@ -1,4 +1,4 @@
-import { ApiKeyActions } from "@/components/mockups/api-key-actions"
+import { ApiKeyActions } from "@/components/livepeer-ui/api-key-actions"
 
 export default function ApiKeyActionsDemo() {
   return (

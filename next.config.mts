@@ -34,12 +34,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/mockups/private-beta/earlyaccess/about",
-        destination: "/docs/private-beta/livepeer-org",
+        destination: "/docs/private-beta/earlyaccess/about",
         permanent: true,
       },
       {
         source: "/mockups/agent-landing-page",
-        destination: "/docs/internal-testing/livepeer-org",
+        destination: "/docs/internal-testing/earlyaccess/about",
+        permanent: true,
+      },
+      {
+        source: "/docs/internal-testing/livepeer-org",
+        destination: "/docs/internal-testing/earlyaccess/about",
+        permanent: true,
+      },
+      {
+        source: "/docs/private-beta/livepeer-org",
+        destination: "/docs/private-beta/earlyaccess/about",
         permanent: true,
       },
       {
@@ -58,12 +68,20 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         {
-          source: "/docs/private-beta/livepeer-org",
-          destination: "/mockups/private-beta/earlyaccess/about",
+          source: "/docs/internal-testing/earlyaccess",
+          destination: "/mockups/private-beta/earlyaccess",
         },
         {
-          source: "/docs/internal-testing/livepeer-org",
+          source: "/docs/internal-testing/earlyaccess/about",
           destination: "/mockups/agent-landing-page",
+        },
+        {
+          source: "/docs/private-beta/earlyaccess",
+          destination: "/mockups/private-beta/earlyaccess",
+        },
+        {
+          source: "/docs/private-beta/earlyaccess/about",
+          destination: "/mockups/private-beta/earlyaccess/about",
         },
         {
           source: "/docs/public-beta/livepeer-org/agent/:path*",

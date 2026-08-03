@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "components/mockups/credit-balance.tsx",
+      "path": "components/livepeer-ui/credit-balance.tsx",
       "content": "import { Badge } from \"@/components/ui/badge\"\n\nexport type CreditBalanceProps = {\n  title: string\n  planLabel: string\n  balance: string\n  allowance: string\n  unitLabel: string\n  refreshLabel: string\n  refreshDate: string\n}\n\nexport function CreditBalance({\n  title,\n  planLabel,\n  balance,\n  allowance,\n  unitLabel,\n  refreshLabel,\n  refreshDate,\n}: CreditBalanceProps) {\n  return (\n    <section className=\"grid gap-4 md:grid-cols-2\">\n      <div className=\"flex flex-col gap-8\">\n        <div className=\"flex items-center gap-2\">\n          <h2 className=\"font-sans text-sm font-medium\">{title}</h2>\n          <Badge variant=\"outline\">{planLabel}</Badge>\n        </div>\n        <div>\n          <p className=\"text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl\">\n            {balance}{\" \"}\n            <span className=\"text-xl font-normal tracking-normal text-muted-foreground sm:text-2xl\">\n              / {allowance} {unitLabel}\n            </span>\n          </p>\n          <div className=\"mt-8 flex items-center gap-2\">\n            <span className=\"text-sm text-muted-foreground\">\n              {refreshLabel}\n            </span>\n            <Badge variant=\"secondary\" className=\"rounded-sm\">\n              {refreshDate}\n            </Badge>\n          </div>\n        </div>\n      </div>\n    </section>\n  )\n}\n",
       "type": "registry:component"
     }

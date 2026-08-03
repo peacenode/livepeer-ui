@@ -1,6 +1,6 @@
-import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
-import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
-import { agentConsoleUserFixture } from "@/components/mockups/fixtures/agent-console-user"
+import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
+import { agentConsoleShellFixture } from "@/app/mockups/_data/agent-console-pages"
+import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
 
 export default function LivepeerAgentSidebarDemo() {
   return (

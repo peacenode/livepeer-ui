@@ -22,9 +22,9 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { imageGroupRadius } from "../image-grid-utils"
 import { frameAt, storyboardFrames } from "../media-assets"
-import { downloadMedia, MediaContextMenu } from "../media-context-menu"
+import { downloadMedia, MediaContextMenu } from "@/components/livepeer-ui/media-context-menu"
 import { ProjectPicker } from "../project-picker"
-import type { VideoBuddyPageContent } from "@/components/mockups/contracts"
+import type { VideoBuddyPageContent } from "@/components/livepeer-ui/contracts"
 
 type ImageBatch = {
   id: number

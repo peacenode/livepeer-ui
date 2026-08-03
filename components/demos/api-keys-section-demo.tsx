@@ -1,4 +1,4 @@
-import { ApiKeysSection } from "@/components/mockups/api-keys-section"
+import { ApiKeysSection } from "@/components/livepeer-ui/api-keys-section"
 export default function ApiKeysSectionDemo() {
   return (
     <div className="w-full overflow-x-auto">

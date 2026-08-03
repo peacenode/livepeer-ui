@@ -1,5 +1,5 @@
-import { LivepeerAgentHero } from "@/components/mockups/livepeer-agent-hero"
-import { livepeerOrgAgentFixture } from "@/components/demos/fixtures/livepeer-org"
+import { LivepeerAgentHero } from "@/components/livepeer-ui/livepeer-agent-hero"
+import { livepeerOrgAgentFixture } from "@/app/mockups/_data/livepeer-org"
 
 export default function LivepeerAgentHeroDemo() {
   return (

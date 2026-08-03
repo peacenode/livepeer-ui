@@ -1,6 +1,6 @@
-import { WaitlistBackgroundHero } from "@/components/mockups/waitlist-background-hero"
-import { WaitlistPanel } from "@/components/mockups/waitlist-panel"
-import type { WaitlistPageContent } from "@/components/mockups/contracts"
+import { WaitlistBackgroundHero } from "@/components/livepeer-ui/waitlist-background-hero"
+import { WaitlistPanel } from "@/components/livepeer-ui/waitlist-panel"
+import type { WaitlistPageContent } from "@/components/livepeer-ui/contracts"
 
 export function WaitlistMockup({ content }: { content: WaitlistPageContent }) {
   return (

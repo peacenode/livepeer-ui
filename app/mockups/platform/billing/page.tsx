@@ -5,9 +5,9 @@ import {
   demoBillingPeriod,
   demoInvoiceLabels,
   demoPaymentMethod,
-} from "@/components/demos/fixtures/billing"
-import { BillingWorkspace } from "@/components/mockups/billing-workspace"
-import { PlatformPage } from "@/components/mockups/platform-page"
+} from "@/app/mockups/_data/billing"
+import { BillingWorkspace } from "@/components/livepeer-ui/billing-workspace"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import {
   getAgentConsolePage,
   type BillingPageContent,

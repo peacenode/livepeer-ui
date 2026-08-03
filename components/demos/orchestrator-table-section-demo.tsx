@@ -1,4 +1,4 @@
-import { OrchestratorTable } from "@/components/mockups/orchestrator-table"
+import { OrchestratorTable } from "@/components/livepeer-ui/orchestrator-table"
 
 const orchestrators = [
   {

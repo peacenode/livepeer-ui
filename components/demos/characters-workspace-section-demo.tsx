@@ -1,5 +1,5 @@
 import { CharactersWorkspace } from "@/app/mockups/videobuddy/characters/characters-workspace"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 
 export default function CharactersWorkspaceSectionDemo() {
   return (

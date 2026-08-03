@@ -1,1 +1,1 @@
-export { InstallAgentFooter } from "@/components/mockups/install-agent-footer"
+export { InstallAgentFooter } from "@/components/livepeer-ui/install-agent-footer"

@@ -6,9 +6,9 @@ import {
   resourceUsageRows,
   usageMetrics,
   usagePlans,
-} from "@/components/demos/fixtures/usage"
-import { PlatformPage } from "@/components/mockups/platform-page"
-import { UsageWorkspace } from "@/components/mockups/usage-workspace"
+} from "@/app/mockups/_data/usage"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
+import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
 import {
   getAgentConsolePage,
   type UsagePageContent,

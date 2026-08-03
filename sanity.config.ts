@@ -4,6 +4,7 @@ import {
   CalendarIcon,
   CreditCardIcon,
   GalleryVerticalEndIcon,
+  ImagesIcon,
   PanelsTopLeftIcon,
 } from "lucide-react"
 import { defineConfig } from "sanity"
@@ -11,6 +12,7 @@ import { structureTool, type StructureResolver } from "sanity/structure"
 
 import { dataset, projectId } from "@/sanity/env"
 import { schemaTypes } from "@/sanity/schema-types"
+import { StockImageManager } from "@/sanity/stock-images/stock-image-manager"
 
 const singletonSchemaTypes = new Set([
   "agentRolloutFlow",
@@ -213,9 +215,7 @@ const livepeerOrgStructure: StructureResolver = (S) =>
         .child(
           S.documentTypeList("livepeerBlogPost")
             .title("Blog posts")
-            .defaultOrdering([
-              { field: "publishedAt", direction: "desc" },
-            ])
+            .defaultOrdering([{ field: "publishedAt", direction: "desc" }])
         ),
     ])
 
@@ -256,6 +256,15 @@ export default defineConfig({
       icon: GalleryVerticalEndIcon,
       structure: livepeerOrgStructure,
     }),
+  ],
+  tools: (prev) => [
+    ...prev,
+    {
+      name: "stock-images",
+      title: "Stock Images",
+      icon: ImagesIcon,
+      component: StockImageManager,
+    },
   ],
   schema: {
     types: schemaTypes,

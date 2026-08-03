@@ -1,4 +1,4 @@
-import { WaitlistBackgroundHero } from "@/components/mockups/waitlist-background-hero"
+import { WaitlistBackgroundHero } from "@/components/livepeer-ui/waitlist-background-hero"
 
 export default function WaitlistBackgroundHeroDemo() {
   return (

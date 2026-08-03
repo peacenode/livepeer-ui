@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { WelcomeEmail } from "@/components/mockups/welcome-email"
+import { WelcomeEmail } from "@/components/livepeer-ui/welcome-email"
 import { getWelcomeEmailContent } from "@/sanity/lib/welcome-email-content"
 
 export const metadata: Metadata = {

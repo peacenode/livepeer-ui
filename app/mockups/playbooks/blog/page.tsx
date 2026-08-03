@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { LivepeerBlogIndex } from "@/components/mockups/livepeer-blog-index"
+import { LivepeerBlogIndex } from "@/components/livepeer-ui/livepeer-blog-index"
 import { getLivepeerBlogPosts } from "@/sanity/lib/livepeer-blog"
 
 export const metadata: Metadata = {

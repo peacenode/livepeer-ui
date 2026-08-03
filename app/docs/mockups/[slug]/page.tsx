@@ -12,7 +12,7 @@ const mockups = {
     title: "Internal Testing",
     description:
       "The Agent landing page is exclusively for private marketing and communications during internal testing.",
-    previewHref: "/docs/internal-testing/livepeer-org",
+    previewHref: "/docs/internal-testing/earlyaccess/about",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -26,7 +26,7 @@ const mockups = {
     title: "Private Beta",
     description:
       "The Agent landing page remains exclusively for private marketing and communications during the private beta.",
-    previewHref: "/docs/private-beta/livepeer-org",
+    previewHref: "/docs/private-beta/earlyaccess/about",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -47,7 +47,7 @@ const mockups = {
     title: "Agent Landing Page",
     description:
       "The Agent landing page is exclusively for private marketing and communications during internal testing.",
-    previewHref: "/docs/internal-testing/livepeer-org",
+    previewHref: "/docs/internal-testing/earlyaccess/about",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -103,7 +103,7 @@ const renderResultComponents = [
 
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
-  href: "/docs/private-beta/livepeer-org",
+  href: "/docs/private-beta/earlyaccess/about",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
@@ -151,7 +151,7 @@ const publicBetaConsoleSurface: PrivateBetaSurface = {
 const privateBetaAccessSurfaces: PrivateBetaSurface[] = [
   {
     title: "Agent Waitlist",
-    href: "/mockups/private-beta/earlyaccess",
+    href: "/docs/private-beta/earlyaccess",
     components: [
       "waitlist-panel",
       "waitlist-signup-form",
@@ -204,7 +204,12 @@ const privateBetaRenderExamples: PrivateBetaSurface[] = [
 
 const internalTestingLandingSurface: PrivateBetaSurface = {
   ...privateBetaLandingSurface,
-  href: "/docs/internal-testing/livepeer-org",
+  href: "/docs/internal-testing/earlyaccess/about",
+}
+
+const internalTestingWaitlistSurface: PrivateBetaSurface = {
+  ...privateBetaAccessSurfaces[0],
+  href: "/docs/internal-testing/earlyaccess",
 }
 
 const publicBetaLivepeerSurface: PrivateBetaSurface = {
@@ -505,12 +510,12 @@ export default async function MockupPage({
           headingId="internal-marketing-deployment-heading"
           title="Marketing"
           description={privateBetaMarketingDeployment.description}
-          primary={privateBetaWaitlistSurface ?? internalTestingLandingSurface}
-          primarySourceLabel={privateBetaMarketingDeployment.hostname}
+          primary={internalTestingWaitlistSurface}
+          primarySourceLabel={`${privateBetaMarketingDeployment.hostname}/internal-testing/earlyaccess`}
           secondary={[
             {
               surface: internalTestingLandingSurface,
-              sourceLabel: `${privateBetaMarketingDeployment.hostname}/about`,
+              sourceLabel: `${privateBetaMarketingDeployment.hostname}/internal-testing/earlyaccess/about`,
             },
             ...(privateBetaWelcomeEmailSurface
               ? [
@@ -523,7 +528,7 @@ export default async function MockupPage({
           ]}
           componentNames={[
             internalTestingLandingSurface,
-            ...(privateBetaWaitlistSurface ? [privateBetaWaitlistSurface] : []),
+            internalTestingWaitlistSurface,
             ...(privateBetaWelcomeEmailSurface
               ? [privateBetaWelcomeEmailSurface]
               : []),
@@ -549,14 +554,14 @@ export default async function MockupPage({
                     title={privateBetaWaitlistSurface.title}
                     href={privateBetaWaitlistSurface.href}
                     priority
-                    sourceLabel={privateBetaMarketingDeployment.hostname}
+                    sourceLabel={`${privateBetaMarketingDeployment.hostname}/private-beta/earlyaccess`}
                   />
                 </div>
               )}
               <div className="flex flex-col gap-4">
                 <ProductSurfaceEmbed
                   surface={privateBetaLandingSurface}
-                  sourceLabel={`${privateBetaMarketingDeployment.hostname}/about`}
+                  sourceLabel={`${privateBetaMarketingDeployment.hostname}/private-beta/earlyaccess/about`}
                 />
                 {privateBetaWelcomeEmailSurface && (
                   <ProductSurfaceEmbed

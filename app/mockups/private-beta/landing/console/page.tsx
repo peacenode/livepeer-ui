@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { LivepeerAgentOnboardingSection } from "@/components/mockups/livepeer-agent-onboarding-section"
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { LivepeerAgentOnboardingSection } from "@/components/livepeer-ui/livepeer-agent-onboarding-section"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { CardTitle } from "@/components/ui/card"
 import {
   getAgentConsolePage,

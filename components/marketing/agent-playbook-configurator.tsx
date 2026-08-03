@@ -5,6 +5,7 @@ import Image from "next/image"
 import { CheckIcon, CopyIcon, FileIcon, UploadIcon, XIcon } from "lucide-react"
 
 import { LivepeerSymbol } from "@/components/brand"
+import { sanityStaticAssets } from "@/sanity/lib/static-assets"
 import {
   Accordion,
   AccordionContent,
@@ -76,7 +77,7 @@ const playbooks: Playbook[] = [
     description:
       "Turn a campaign prompt into a cinematic short film. Start quickly with a creative brief or add references for a more controlled, consistent result.",
     outcome: "Cinematic campaign short",
-    image: "/playbooks/20260726-2311-campaign-video/generate.png",
+    image: sanityStaticAssets.playbooks.campaignVideo.generate,
     deliverables: [
       "Cinematic campaign short",
       "Final video in the selected aspect ratio",
@@ -125,7 +126,7 @@ const playbooks: Playbook[] = [
     description:
       "Cut and stitch source footage, layer or replace audio, remove distractions, and composite a new background for a polished launch video.",
     outcome: "Edited launch video",
-    image: "/playbooks/20260726-2311-campaign-video/edit.png",
+    image: sanityStaticAssets.playbooks.campaignVideo.edit,
     deliverables: [
       "Edited launch video",
       "Cleaned and mixed audio",
@@ -170,7 +171,7 @@ const playbooks: Playbook[] = [
     description:
       "Add prompted overlays, filters, object detection, or interactive visual layers to footage you already have, then extend the video or supporting imagery.",
     outcome: "Augmented video experience",
-    image: "/playbooks/20260726-2311-campaign-video/augment.png",
+    image: sanityStaticAssets.playbooks.campaignVideo.augment,
     deliverables: [
       "Augmented campaign video",
       "Tracked overlays and visual effects",

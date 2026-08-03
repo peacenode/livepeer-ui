@@ -4,7 +4,7 @@ import { useMemo, useState } from "react"
 import { SearchIcon } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
-import { PlaybookCard } from "@/components/mockups/playbook-card"
+import { PlaybookCard } from "@/components/livepeer-ui/playbook-card"
 
 import type { SourcePlaybook } from "./daydream-source"
 

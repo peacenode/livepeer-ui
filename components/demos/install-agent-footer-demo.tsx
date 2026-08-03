@@ -1,4 +1,4 @@
-import { InstallAgentFooter } from "@/components/mockups/install-agent-footer"
+import { InstallAgentFooter } from "@/components/livepeer-ui/install-agent-footer"
 
 export default function InstallAgentFooterDemo() {
   return (

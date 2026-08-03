@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"

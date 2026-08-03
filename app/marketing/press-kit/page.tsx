@@ -6,13 +6,8 @@ import { SocialBannerArtwork } from "@/components/marketing/social-banner"
 import { Badge } from "@/components/ui/badge"
 import { XProfilePreview } from "@/components/marketing/x-profile-preview"
 import { pressDeliverables, type PressDeliverable } from "@/lib/press-kit"
-import {
-  getSocialAvatarImagePath,
-  getSocialBannerImagePath,
-  socialAvatarBatch,
-  socialAvatars,
-  socialBanners,
-} from "@/lib/social-assets"
+import type { SocialAssetSet } from "@/sanity/lib/social-assets"
+import { getSocialAssetSet } from "@/sanity/lib/social-assets"
 
 export const metadata: Metadata = {
   title: "Social Kit · Deliverables",
@@ -20,7 +15,8 @@ export const metadata: Metadata = {
     "The brand asset deliverables and export requirements for Livepeer's public channels.",
 }
 
-export default function PressKitPage() {
+export default async function PressKitPage() {
+  const assets = await getSocialAssetSet()
   return (
     <article className="w-full max-w-5xl pb-20">
       <header className="max-w-3xl">
@@ -33,16 +29,31 @@ export default function PressKitPage() {
 
       <div className="mt-8 grid gap-x-8 gap-y-14 md:grid-cols-2">
         {pressDeliverables.map((deliverable) => (
-          <Deliverable key={deliverable.id} deliverable={deliverable} />
+          <Deliverable
+            key={deliverable.id}
+            deliverable={deliverable}
+            assets={assets}
+          />
         ))}
       </div>
 
-      <XProfilePreview />
+      <XProfilePreview
+        avatarUrl={
+          assets.avatars.find((avatar) => avatar.id === "400")!.imageUrl
+        }
+        wordmarkUrl={assets.wordmarkUrl}
+      />
     </article>
   )
 }
 
-function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
+function Deliverable({
+  deliverable,
+  assets,
+}: {
+  deliverable: PressDeliverable
+  assets: SocialAssetSet
+}) {
   const sizes = deliverable.requirements.filter(
     (requirement, index, requirements) =>
       requirements.findIndex(
@@ -52,7 +63,7 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
   )
   return (
     <article>
-      <DeliverablePreview deliverable={deliverable} />
+      <DeliverablePreview deliverable={deliverable} assets={assets} />
       <div className="mt-4">
         <h2 className="text-lg font-medium">{deliverable.name}</h2>
       </div>
@@ -62,14 +73,14 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
           {sizes.map(({ width, height }) => {
             const banner =
               deliverable.id === "banners-headers"
-                ? socialBanners.find(
+                ? assets.banners.find(
                     (candidate) =>
                       candidate.width === width && candidate.height === height
                   )
                 : undefined
             const avatar =
               deliverable.id === "avatar"
-                ? socialAvatars.find(
+                ? assets.avatars.find(
                     (candidate) =>
                       candidate.width === width && candidate.height === height
                   )
@@ -83,7 +94,7 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                 className="rounded-sm"
                 render={
                   <Link
-                    href={getSocialAvatarImagePath(avatar)}
+                    href={avatar.imageUrl}
                     download={`livepeer-avatar-${avatar.width}x${avatar.height}.png`}
                     aria-label={`Download ${label} avatar`}
                   />
@@ -98,7 +109,7 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
                 className="rounded-sm"
                 render={
                   <Link
-                    href={getSocialBannerImagePath(banner)}
+                    href={banner.imageUrl}
                     download={`${banner.id}-${banner.width}x${banner.height}.png`}
                     aria-label={`${label} ${banner.platform} banner`}
                   />
@@ -114,15 +125,16 @@ function Deliverable({ deliverable }: { deliverable: PressDeliverable }) {
           })}
         </div>
       </div>
-
     </article>
   )
 }
 
 function DeliverablePreview({
   deliverable,
+  assets,
 }: {
   deliverable: PressDeliverable
+  assets: SocialAssetSet
 }) {
   const isAvatar = deliverable.id === "avatar"
   const isBanner = deliverable.id === "banners-headers"
@@ -142,7 +154,7 @@ function DeliverablePreview({
       >
         {isAvatar ? (
           <Image
-            src={`/social-assets/avatars/${socialAvatarBatch}/800.png`}
+            src={assets.avatars.find((avatar) => avatar.id === "800")!.imageUrl}
             fill
             sizes="320px"
             alt="Livepeer avatar"
@@ -150,7 +162,9 @@ function DeliverablePreview({
             unoptimized
           />
         ) : null}
-        {isBanner ? <SocialBannerArtwork bottomAligned /> : null}
+        {isBanner ? (
+          <SocialBannerArtwork bottomAligned wordmarkUrl={assets.wordmarkUrl} />
+        ) : null}
       </div>
     </div>
   )

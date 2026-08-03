@@ -1,4 +1,4 @@
-import { ClientApplicationSidebar } from "@/components/mockups/client-application-sidebar"
+import { ClientApplicationSidebar } from "@/components/livepeer-ui/client-application-sidebar"
 
 export default function ClientApplicationSidebarDemo() {
   return (

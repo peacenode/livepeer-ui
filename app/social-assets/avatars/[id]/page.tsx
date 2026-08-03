@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { SocialAvatar } from "@/components/marketing/social-avatar"
-import { getSocialAvatar, socialAvatars } from "@/lib/social-assets"
+import { socialAvatars } from "@/lib/social-assets"
+import { getSocialAssetSet } from "@/sanity/lib/social-assets"
 
 export function generateStaticParams() {
   return socialAvatars.map(({ id }) => ({ id }))
@@ -12,7 +13,9 @@ export async function generateMetadata({
   params,
 }: PageProps<"/social-assets/avatars/[id]">): Promise<Metadata> {
   const { id } = await params
-  const avatar = getSocialAvatar(id)
+  const avatar = (await getSocialAssetSet()).avatars.find(
+    (item) => item.id === id
+  )
 
   return {
     title: avatar
@@ -25,7 +28,9 @@ export default async function SocialAvatarPage({
   params,
 }: PageProps<"/social-assets/avatars/[id]">) {
   const { id } = await params
-  const avatar = getSocialAvatar(id)
+  const avatar = (await getSocialAssetSet()).avatars.find(
+    (item) => item.id === id
+  )
 
   if (!avatar) notFound()
 

@@ -1,6 +1,6 @@
-import { WaitlistReferralLink } from "@/components/mockups/waitlist-referral-link"
+import { WaitlistReferralLink } from "@/components/livepeer-ui/waitlist-referral-link"
 
-import { waitlistContentFixture } from "./waitlist-content-fixture"
+import { waitlistContentFixture } from "@/app/mockups/_data/waitlist-content"
 
 export default function WaitlistReferralLinkDemo() {
   return (

@@ -115,12 +115,12 @@ Backing source: `app/mockups/platform`
 Current sources:
 
 - `app/mockups/platform/layout.tsx`
-- `components/mockups/platform-auth-gate.tsx`
-- `components/mockups/platform-sidebar.tsx`
-- `components/mockups/platform-mobile-nav.tsx`
-- `components/mockups/project-menu.tsx`
-- `components/mockups/user-menu.tsx`
-- `components/mockups/platform-page.tsx`
+- `components/livepeer-ui/platform-auth-gate.tsx`
+- `components/livepeer-ui/platform-sidebar.tsx`
+- `components/livepeer-ui/platform-mobile-nav.tsx`
+- `components/livepeer-ui/project-menu.tsx`
+- `components/livepeer-ui/user-menu.tsx`
+- `components/livepeer-ui/platform-page.tsx`
 
 Target organization:
 
@@ -171,7 +171,7 @@ Current source: `app/mockups/platform/compute/page.tsx`
 | Network summary | `ComputeMetricsSection` | `MetricCard` | `Card` |
 | Orchestrators | `OrchestratorTableSection` | address cell, status cell | `Table`, `Badge` |
 
-Current reusable implementation: `components/mockups/orchestrator-table.tsx`.
+Current reusable implementation: `components/livepeer-ui/orchestrator-table.tsx`.
 Move it under `components/livepeer-agent/sections` and pass rows, loading state,
 error, and refresh callback as props.
 

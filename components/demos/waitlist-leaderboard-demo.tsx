@@ -1,9 +1,9 @@
 import {
   WaitlistLeaderboard,
   type WaitlistLeader,
-} from "@/components/mockups/waitlist-leaderboard"
+} from "@/components/livepeer-ui/waitlist-leaderboard"
 
-import { waitlistContentFixture } from "./waitlist-content-fixture"
+import { waitlistContentFixture } from "@/app/mockups/_data/waitlist-content"
 
 const leaders: WaitlistLeader[] = [
   { name: "Maya Chen", referrals: 142 },

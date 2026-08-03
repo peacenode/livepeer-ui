@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { getSourcePlaybooks } from "@/app/mockups/playbooks/daydream-source"
 import { SourceCatalog } from "@/app/mockups/playbooks/source-catalog"
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { getLivepeerOrgPage } from "@/sanity/lib/livepeer-org-pages"
 
 export const metadata: Metadata = {

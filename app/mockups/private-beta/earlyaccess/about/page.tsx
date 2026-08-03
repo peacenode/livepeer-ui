@@ -4,7 +4,7 @@ import {
   getPlaybookDocument,
   getSourcePlaybooks,
 } from "@/app/mockups/playbooks/daydream-source"
-import { AgentLandingPage } from "@/components/mockups/agent-landing-page"
+import { AgentLandingPage } from "@/components/livepeer-ui/agent-landing-page"
 import {
   getLivepeerOrgPage,
   getLivepeerOrgSite,

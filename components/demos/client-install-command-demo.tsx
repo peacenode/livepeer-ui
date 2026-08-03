@@ -1,4 +1,4 @@
-import { ClientInstallCommand } from "@/components/mockups/client-install-command"
+import { ClientInstallCommand } from "@/components/livepeer-ui/client-install-command"
 
 export default function ClientInstallCommandDemo() {
   return (

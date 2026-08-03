@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
-import { ComputeWorkspace } from "@/components/mockups/compute-workspace"
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { ComputeWorkspace } from "@/components/livepeer-ui/compute-workspace"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { Button } from "@/components/ui/button"
 import {
   formatCompact,

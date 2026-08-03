@@ -4,6 +4,7 @@ export type SocialBanner = {
   id: string
   platform: string
   width: number
+  imageUrl?: string
 }
 
 export type SocialAvatar = {
@@ -11,13 +12,8 @@ export type SocialAvatar = {
   id: string
   platforms: string
   width: number
+  imageUrl?: string
 }
-
-export const socialAvatarBatch = "20260730-153511"
-export const socialBannerBatch = "20260730-143207"
-export const socialPreviewBatch = "20260730-150741"
-export const socialBannerWordmark =
-  "/social-assets/banners/20260730-135359/livepeer-wordmark.svg"
 
 export const socialAvatars: SocialAvatar[] = [
   {
@@ -102,18 +98,6 @@ export function getSocialBanner(id: string) {
   return socialBanners.find((banner) => banner.id === id)
 }
 
-export function getSocialBannerImagePath(banner: SocialBanner) {
-  return `/social-assets/banners/${socialBannerBatch}/${banner.id}.png`
-}
-
-export function getSocialPreviewImagePath(width: number, height: number) {
-  return `/social-assets/previews/${socialPreviewBatch}/${width}x${height}.png`
-}
-
 export function getSocialAvatar(id: string) {
   return socialAvatars.find((avatar) => avatar.id === id)
-}
-
-export function getSocialAvatarImagePath(avatar: SocialAvatar) {
-  return `/social-assets/avatars/${socialAvatarBatch}/${avatar.id}.png`
 }

@@ -1,4 +1,4 @@
-import { WelcomeEmail } from "@/components/mockups/welcome-email"
+import { WelcomeEmail } from "@/components/livepeer-ui/welcome-email"
 
 const content = {
   heading: "Welcome to the private beta.",

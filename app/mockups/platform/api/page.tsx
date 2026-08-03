@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
-import { ApiKeyActions } from "@/components/mockups/api-key-actions"
-import { ApiKeysSection } from "@/components/mockups/api-keys-section"
-import { PlatformPage } from "@/components/mockups/platform-page"
+import { ApiKeyActions } from "@/components/livepeer-ui/api-key-actions"
+import { ApiKeysSection } from "@/components/livepeer-ui/api-keys-section"
+import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import {
   getAgentConsolePage,
   type ApiKeysPageContent,

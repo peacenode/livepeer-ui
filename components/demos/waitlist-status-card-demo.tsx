@@ -1,6 +1,6 @@
-import { WaitlistStatusCard } from "@/components/mockups/waitlist-status-card"
+import { WaitlistStatusCard } from "@/components/livepeer-ui/waitlist-status-card"
 
-import { waitlistContentFixture } from "./waitlist-content-fixture"
+import { waitlistContentFixture } from "@/app/mockups/_data/waitlist-content"
 
 export default function WaitlistStatusCardDemo() {
   return (

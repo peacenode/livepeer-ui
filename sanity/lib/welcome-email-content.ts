@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity"
 
-import type { WelcomeEmailContent } from "@/components/mockups/welcome-email"
+import type { WelcomeEmailContent } from "@/components/livepeer-ui/welcome-email"
 import { sanityClient } from "@/sanity/lib/client"
 
 const welcomeEmailContentQuery = defineQuery(`

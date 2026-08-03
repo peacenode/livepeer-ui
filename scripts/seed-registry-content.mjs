@@ -1,8 +1,8 @@
 import { getCliClient } from "sanity/cli"
 
-import { agentConsoleSeedDocuments } from "../components/demos/fixtures/agent-console-pages.ts"
-import { livepeerOrgSeedDocuments } from "../components/demos/fixtures/livepeer-org.ts"
-import { waitlistContentSeedDocument } from "../components/demos/waitlist-content-fixture.ts"
+import { agentConsoleSeedDocuments } from "../app/mockups/_data/agent-console-pages.ts"
+import { livepeerOrgSeedDocuments } from "../app/mockups/_data/livepeer-org.ts"
+import { waitlistContentSeedDocument } from "../app/mockups/_data/waitlist-content.ts"
 
 const client = getCliClient({ apiVersion: "2026-07-26" })
 
@@ -140,7 +140,7 @@ const documents = [
     slug: { _type: "slug", current: "livepeer-org" },
     title: "Livepeer.org",
     description:
-      "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
+      "Navigation, landing, Agent, ecosystem, and network sections used across Livepeer.org.",
     previewHref: "/mockups/livepeer-org",
     pages: [
       page("Home", "/mockups/livepeer-org", [
@@ -155,14 +155,6 @@ const documents = [
         "agent-compatibility",
         "agent-access-section",
         "agent-capabilities-section",
-        "playbooks-cta-section",
-      ]),
-      page("Playbook library", "/mockups/livepeer-org/library", [
-        ...livepeerOrgShell,
-        "playbook-library-header",
-        "playbook-card",
-        "playbook-catalog",
-        "install-agent-footer",
       ]),
       page("Ecosystem", "/mockups/livepeer-org/ecosystem", [
         ...livepeerOrgShell,

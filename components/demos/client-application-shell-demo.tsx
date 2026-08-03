@@ -1,4 +1,4 @@
-import { ClientApplicationShell } from "@/components/mockups/client-application-shell"
+import { ClientApplicationShell } from "@/components/livepeer-ui/client-application-shell"
 
 export default function ClientApplicationShellDemo() {
   return (

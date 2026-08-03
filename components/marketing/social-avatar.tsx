@@ -1,9 +1,6 @@
 import Image from "next/image"
 
-import {
-  socialAvatarBatch,
-  type SocialAvatar as SocialAvatarConfig,
-} from "@/lib/social-assets"
+import type { SocialAvatar as SocialAvatarConfig } from "@/lib/social-assets"
 
 export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
   return (
@@ -14,7 +11,7 @@ export function SocialAvatar({ avatar }: { avatar: SocialAvatarConfig }) {
       data-avatar-size={`${avatar.width}x${avatar.height}`}
     >
       <Image
-        src={`/social-assets/avatars/${socialAvatarBatch}/${avatar.id}.png`}
+        src={avatar.imageUrl!}
         width={avatar.width}
         height={avatar.height}
         alt="Livepeer"
