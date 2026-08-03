@@ -3,13 +3,46 @@
 import * as React from "react"
 import Link from "next/link"
 import { createPortal } from "react-dom"
+import {
+  BotIcon,
+  ChevronDownIcon,
+  MessageSquareIcon,
+  ServerIcon,
+} from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { LivepeerOrgHeaderNav } from "@/components/mockups/livepeer-org-header-nav"
 import { LivepeerOrgMenu } from "@/components/mockups/livepeer-org-menu"
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+
+const loginLinks = [
+  {
+    label: "Forum",
+    description: "Join community discussions",
+    href: "https://forum.livepeer.org",
+    icon: MessageSquareIcon,
+  },
+  {
+    label: "Orchestrators",
+    description: "View and manage network stake",
+    href: "https://explorer.livepeer.org/orchestrators",
+    icon: ServerIcon,
+  },
+  {
+    label: "Agent Console",
+    description: "Open your Livepeer Agent workspace",
+    href: "/mockups/livepeer-agent",
+    icon: BotIcon,
+  },
+] as const
 
 export function LivepeerOrgHeader({
   site,
@@ -85,13 +118,63 @@ export function LivepeerOrgHeader({
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
             {showMenu && (
-              <Button
-                nativeButton={false}
-                render={<Link href={useLivepeerHref} />}
-                className="hidden rounded-sm lg:inline-flex"
-              >
-                Use Livepeer
-              </Button>
+              <>
+                <div className="hidden lg:block">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      render={
+                        <Button variant="secondary" className="rounded-sm" />
+                      }
+                    >
+                      Log in
+                      <ChevronDownIcon className="size-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="end"
+                      sideOffset={8}
+                      className="w-72 rounded-sm p-1.5"
+                    >
+                      {loginLinks.map((item) => {
+                        const Icon = item.icon
+                        const external = item.href.startsWith("http")
+
+                        return (
+                          <DropdownMenuItem
+                            key={item.label}
+                            render={
+                              external ? (
+                                <a
+                                  href={item.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                />
+                              ) : (
+                                <Link href={item.href} />
+                              )
+                            }
+                            className="min-h-14 cursor-pointer rounded-sm px-3 py-2.5"
+                          >
+                            <Icon className="size-5 text-muted-foreground" />
+                            <span className="flex min-w-0 flex-col gap-0.5">
+                              <span>{item.label}</span>
+                              <span className="text-xs font-normal text-muted-foreground">
+                                {item.description}
+                              </span>
+                            </span>
+                          </DropdownMenuItem>
+                        )
+                      })}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                <Button
+                  nativeButton={false}
+                  render={<Link href={useLivepeerHref} />}
+                  className="hidden rounded-sm lg:inline-flex"
+                >
+                  Use Livepeer
+                </Button>
+              </>
             )}
             {playbooksHref && (
               <Button
