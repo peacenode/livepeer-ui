@@ -91,7 +91,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
             <DropdownMenuContent
               align="start"
               sideOffset={8}
-              className="grid w-72 min-w-72 gap-1 rounded-sm bg-white p-2 text-foreground shadow-xl ring-1 ring-black/[0.08] duration-150 data-[side=bottom]:slide-in-from-top-0 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
+              className="grid w-72 min-w-72 gap-1 rounded-sm bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-foreground/5 duration-150 data-[side=bottom]:slide-in-from-top-0 dark:ring-foreground/10 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
             >
               {[...group.links]
                 .filter((item) => item.label !== "Primer")
@@ -123,10 +123,12 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                           <Link href={href} />
                         )
                       }
-                    className="min-h-16 items-center rounded-sm bg-white px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
+                      className="min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
                     >
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                        <span className="text-sm text-foreground">{label}</span>
+                        <span className="text-sm text-popover-foreground">
+                          {label}
+                        </span>
                         <span className="text-xs leading-snug text-muted-foreground">
                           {linkDescriptions[item.label]}
                         </span>
