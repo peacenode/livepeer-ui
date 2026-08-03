@@ -155,13 +155,34 @@ function DiagramNode({
   x,
   y,
   node,
+  active = false,
 }: {
   x: number
   y: number
   node: TokenNetworkDiagramContent["applications"]
+  active?: boolean
 }) {
   return (
     <g>
+      {active && (
+        <rect
+          x={x - 6}
+          y={y - 6}
+          width="292"
+          height="124"
+          rx="24"
+          fill="none"
+          className="stroke-emerald-700 motion-reduce:hidden dark:stroke-emerald-500"
+          strokeWidth="1.5"
+        >
+          <animate
+            attributeName="stroke-opacity"
+            values="0.08;0.3;0.08"
+            dur="2.8s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      )}
       <rect
         x={x}
         y={y}
@@ -199,6 +220,40 @@ function DiagramNode({
       >
         {node.description}
       </text>
+    </g>
+  )
+}
+
+function AnimatedPacket({
+  path,
+  duration,
+  begin,
+}: {
+  path: string
+  duration: string
+  begin: string
+}) {
+  return (
+    <g
+      aria-hidden="true"
+      className="fill-emerald-700 motion-reduce:hidden dark:fill-emerald-500"
+    >
+      <circle r="7" opacity="0.12">
+        <animateMotion
+          path={path}
+          dur={duration}
+          begin={begin}
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle r="2.75">
+        <animateMotion
+          path={path}
+          dur={duration}
+          begin={begin}
+          repeatCount="indefinite"
+        />
+      </circle>
     </g>
   )
 }
@@ -276,13 +331,20 @@ export function TokenNetworkDiagram({
         <path d="M630 444V132" strokeDasharray="8 7" />
         <path d="M700 132V444" />
       </g>
+      <g aria-hidden="true">
+        <AnimatedPacket path="M170 132V444" duration="2.8s" begin="0s" />
+        <AnimatedPacket path="M310 456 506 132" duration="3.2s" begin="-1.4s" />
+        <AnimatedPacket path="M320 468 516 144" duration="3.2s" begin="0s" />
+        <AnimatedPacket path="M630 444V132" duration="3s" begin="-0.8s" />
+        <AnimatedPacket path="M700 132V444" duration="3s" begin="-2s" />
+      </g>
       <FlowLabel x={145} y={288} rotate={-90}>
         {content.flows.requests}
       </FlowLabel>
-      <FlowLabel x={390} y={315} rotate={-59}>
+      <FlowLabel x={365} y={340} rotate={-59}>
         {content.flows.jobsAndPayments}
       </FlowLabel>
-      <FlowLabel x={425} y={275} rotate={-59}>
+      <FlowLabel x={452} y={244} rotate={-59}>
         {content.flows.videoResponse}
       </FlowLabel>
       <FlowLabel x={607} y={288} rotate={-90}>
@@ -293,8 +355,8 @@ export function TokenNetworkDiagram({
       </FlowLabel>
       <DiagramNode x={30} y={20} node={content.applications} />
       <DiagramNode x={30} y={444} node={content.gateways} />
-      <DiagramNode x={490} y={20} node={content.orchestrators} />
-      <DiagramNode x={490} y={444} node={content.delegators} />
+      <DiagramNode x={490} y={20} node={content.orchestrators} active />
+      <DiagramNode x={490} y={444} node={content.delegators} active />
     </svg>
   )
 }

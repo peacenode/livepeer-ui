@@ -49,7 +49,7 @@ export function LivepeerTokenPage({ content }: { content: TokenContent }) {
         className="flex min-h-[32rem] items-center px-4 pt-12 pb-12 sm:min-h-[42rem] sm:px-6 sm:pt-16 sm:pb-16 lg:px-10"
       >
         <div className="mx-auto flex w-full max-w-screen-xl flex-col items-center text-center">
-          <TokenNetworkDiagram className="mb-12 h-auto w-full max-w-4xl sm:mb-16" />
+          <TokenNetworkDiagram className="mb-10 h-auto w-full max-w-2xl sm:mb-14" />
           <DisplayHeading as="h2" className="max-w-[22ch]">
             {content.role.heading}
           </DisplayHeading>
