@@ -22,21 +22,37 @@ export function LivepeerOrgHeader({
   }
   showMenu?: boolean
 }) {
+  const useLivepeerHref =
+    site.menuLinks.find(
+      (link) => link.label === "Livepeer Agent" || link.href.includes("/agent")
+    )?.href ?? `${site.homeHref}/agent`
+
   return (
     <header className="relative z-20 w-full bg-transparent">
       <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
-        <Link
-          href={site.homeHref}
-          className="flex shrink-0 items-center gap-3"
-          aria-label="Livepeer.org home"
-        >
-          <span className="flex items-center gap-1.5 text-foreground">
-            <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
-            <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
-          </span>
-        </Link>
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex min-w-0 items-end gap-5">
+          <Link
+            href={site.homeHref}
+            className="flex shrink-0 items-center gap-3"
+            aria-label="Livepeer.org home"
+          >
+            <span className="flex items-center gap-1.5 text-foreground">
+              <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
+              <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
+            </span>
+          </Link>
           {showMenu && <LivepeerOrgHeaderNav site={site} />}
+        </div>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {showMenu && (
+            <Button
+              nativeButton={false}
+              render={<Link href={useLivepeerHref} />}
+              className="rounded-sm"
+            >
+              Use Livepeer
+            </Button>
+          )}
           {playbooksHref && (
             <Button
               variant="secondary"

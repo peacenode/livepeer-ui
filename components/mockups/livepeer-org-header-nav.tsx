@@ -25,7 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const headerGroups = ["Network", "Agent", "Resources"]
+const headerGroups = ["Network", "Agent", "Resources", "Foundation"]
 
 const linkDescriptions: Record<string, string> = {
   Ecosystem: "Explore apps built on Livepeer",
@@ -120,10 +120,32 @@ function getHeaderGroup(site: LivepeerOrgSite, title: string) {
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
     <nav
-      className="hidden items-center gap-2 lg:flex"
+      className="hidden translate-y-1 items-end gap-0 lg:flex"
       aria-label="Site sections"
     >
       {headerGroups.map((title) => {
+        if (title === "Foundation") {
+          return (
+            <Button
+              key={title}
+              variant="ghost"
+              nativeButton={false}
+              render={
+                <Link
+                  href={resolveHref(
+                    site,
+                    "Foundation",
+                    "https://livepeer.org/foundation"
+                  )}
+                />
+              }
+              className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+            >
+              Foundation
+            </Button>
+          )
+        }
+
         const group = getHeaderGroup(site, title)
         if (!group) return null
 
@@ -136,7 +158,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               render={
                 <Button
                   variant="ghost"
-                  className="h-auto rounded-sm px-4 py-2.5 font-normal text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:translate-y-0 aria-expanded:bg-muted aria-expanded:text-foreground"
+                  className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-transparent aria-expanded:text-foreground dark:hover:bg-transparent"
                 />
               }
             >
@@ -148,7 +170,10 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               className="grid w-auto min-w-72 auto-cols-72 grid-flow-col grid-rows-2 gap-1 rounded-sm bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-foreground/5 duration-150 data-[side=bottom]:slide-in-from-top-0 dark:ring-foreground/10 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
             >
               {[...group.links]
-                .filter((item) => item.label !== "Primer")
+                .filter(
+                  (item) =>
+                    item.label !== "Primer" && item.label !== "Foundation"
+                )
                 .sort((a, b) => {
                   const order =
                     group.title === "Resources"
