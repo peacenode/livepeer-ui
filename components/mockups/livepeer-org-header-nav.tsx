@@ -82,7 +82,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               render={
                 <Button
                   variant="ghost"
-                  className="h-9 rounded-full px-4 font-normal text-muted-foreground transition-[color,background-color,box-shadow] hover:bg-transparent hover:text-foreground active:translate-y-0 aria-expanded:bg-white aria-expanded:text-foreground aria-expanded:shadow-sm aria-expanded:ring-1 aria-expanded:ring-black/[0.08]"
+                  className="h-9 rounded-full px-4 font-normal text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:translate-y-0 aria-expanded:bg-muted aria-expanded:text-foreground"
                 />
               }
             >
@@ -123,7 +123,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                           <Link href={href} />
                         )
                       }
-                    className="min-h-16 items-center rounded-sm bg-white px-4 py-3 font-normal shadow-none transition-[background-color,box-shadow] hover:bg-muted/40 hover:shadow-[inset_0_1px_3px_rgb(0_0_0/0.08)] focus:bg-muted/40 focus:shadow-[inset_0_1px_3px_rgb(0_0_0/0.08)]"
+                    className="min-h-16 items-center rounded-sm bg-white px-4 py-3 font-normal shadow-none transition-[background-color,box-shadow] hover:bg-muted/40 hover:shadow-[inset_0_0_3px_rgb(0_0_0/0.1)] focus:bg-muted/40 focus:shadow-[inset_0_0_3px_rgb(0_0_0/0.1)]"
                     >
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                         <span className="text-sm text-foreground">{label}</span>
