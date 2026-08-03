@@ -172,7 +172,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
 
   return (
     <nav
-      className="relative hidden translate-y-1 items-end gap-0 lg:flex"
+      className="relative top-1 hidden items-end gap-0 lg:flex"
       aria-label="Site sections"
       onPointerEnter={cancelClose}
       onPointerLeave={scheduleClose}
@@ -196,6 +196,8 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                   )}
                 />
               }
+              onPointerEnter={() => setActiveTitle(null)}
+              onFocus={() => setActiveTitle(null)}
               className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
             >
               Foundation
@@ -230,71 +232,74 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
         inert={!activeTitle}
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
-        style={{ width: panelWidth }}
         className={cn(
-          "absolute top-[calc(100%+2rem)] left-0 overflow-hidden rounded-sm bg-popover text-popover-foreground shadow-xl ring-1 ring-foreground/5 transition-[width,opacity,transform] duration-200 ease-out will-change-[width,opacity,transform] dark:ring-foreground/10",
+          "fixed inset-x-0 top-16 z-50 overflow-hidden bg-background text-foreground transition-[opacity,transform] duration-200 ease-out will-change-[opacity,transform]",
           activeTitle
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div
-          key={renderedTitle}
-          className="grid auto-cols-72 grid-flow-col grid-rows-2 gap-1 p-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
-        >
-          {renderedLinks.map((item) => {
-            const href = resolveHref(site, item.label, item.href)
-            const external = href.startsWith("http")
-            const label = item.label === "Blog" ? "Latest Updates" : item.label
-            const Icon = linkIcons[item.label]
+        <div className="px-4 pt-6 pb-8 sm:px-6 lg:px-10">
+          <div
+            key={renderedTitle}
+            style={{ width: panelWidth }}
+            className="grid max-w-full auto-cols-72 grid-flow-col grid-rows-2 gap-1 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+          >
+            {renderedLinks.map((item) => {
+              const href = resolveHref(site, item.label, item.href)
+              const external = href.startsWith("http")
+              const label =
+                item.label === "Blog" ? "Latest Updates" : item.label
+              const Icon = linkIcons[item.label]
 
-            const content = (
-              <>
-                <span className="flex size-10 shrink-0 items-center justify-center">
-                  <Icon
-                    className="size-6 text-muted-foreground"
-                    strokeWidth={2}
-                  />
-                </span>
-                <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                  <span className="text-sm text-popover-foreground">
-                    {label}
+              const content = (
+                <>
+                  <span className="flex size-10 shrink-0 items-center justify-center">
+                    <Icon
+                      className="size-6 text-muted-foreground"
+                      strokeWidth={2}
+                    />
                   </span>
-                  <span className="text-xs leading-snug text-muted-foreground">
-                    {linkDescriptions[item.label]}
+                  <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <span className="text-sm text-popover-foreground">
+                      {label}
+                    </span>
+                    <span className="text-xs leading-snug text-muted-foreground">
+                      {linkDescriptions[item.label]}
+                    </span>
                   </span>
-                </span>
-                {external && (
-                  <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
-                )}
-              </>
-            )
+                  {external && (
+                    <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
+                  )}
+                </>
+              )
 
-            const className =
-              "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none outline-none transition-colors hover:bg-muted focus-visible:bg-muted"
+              const className =
+                "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none outline-none transition-colors hover:bg-muted focus-visible:bg-muted"
 
-            return external ? (
-              <a
-                key={`${item.label}-${href}`}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className={className}
-                onClick={() => setActiveTitle(null)}
-              >
-                {content}
-              </a>
-            ) : (
-              <Link
-                key={`${item.label}-${href}`}
-                href={href}
-                className={className}
-                onClick={() => setActiveTitle(null)}
-              >
-                {content}
-              </Link>
-            )
-          })}
+              return external ? (
+                <a
+                  key={`${item.label}-${href}`}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={className}
+                  onClick={() => setActiveTitle(null)}
+                >
+                  {content}
+                </a>
+              ) : (
+                <Link
+                  key={`${item.label}-${href}`}
+                  href={href}
+                  className={className}
+                  onClick={() => setActiveTitle(null)}
+                >
+                  {content}
+                </Link>
+              )
+            })}
+          </div>
         </div>
       </div>
     </nav>
