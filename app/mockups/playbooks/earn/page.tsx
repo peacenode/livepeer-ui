@@ -66,9 +66,7 @@ export default async function EarnWithGpuPage() {
     <main>
       <section className="mx-auto flex max-w-screen-2xl flex-col items-center px-4 pt-28 pb-16 text-center sm:px-6 sm:pt-36 sm:pb-24 lg:px-10">
         <h1 className="max-w-4xl text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.05] font-light tracking-[-0.045em] text-balance">
-          Start with the operating model that fits your hardware, stake, and
-          tolerance for infrastructure work. A pool is the shortest path. A
-          solo node gives you control and the full operating burden.
+          Put your GPU to work on Livepeer. Join a pool or run your own node.
         </h1>
         <div className="mt-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
           {earnings.map((earning) => (
