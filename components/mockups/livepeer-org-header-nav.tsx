@@ -36,22 +36,6 @@ const linkDescriptions: Record<string, string> = {
   "Agent Documentation": "Build with Livepeer AI tools and APIs",
 }
 
-const fallbackImages: Record<string, string> = {
-  Ecosystem: "/ecosystem/20260726-1500/nytv-live.jpg",
-  "Livepeer Token": "/foundation/20260802-122635/halftone.png",
-  "Delegate LPT": "/brand/og.png",
-  "Provide GPUs":
-    "/generated/20260725-101313-console-home-cards/orchestrator.png",
-  Roadmap: "/foundation/20260802-122635/halftone.png",
-  Blog: "/social-assets/banners/20260730-143011/article.png",
-  Brand: "/brand/og.png",
-  Documentation: "/flow-references/20260727-184759/generation-preview.png",
-  "Livepeer Agent": "/generated/20260725-101313-console-home-cards/runner.png",
-  "Agent Playbooks":
-    "/generated/20260726-2326-console-home-playbooks/playbooks.png",
-  "Agent Documentation": "/playbooks/20260724-1905/playbook-mockup.jpg",
-}
-
 const localLinkMatches: Record<
   string,
   (label: string, href: string) => boolean
@@ -158,17 +142,19 @@ export function LivepeerOrgNavItem({
   const href = resolveHref(site, item.label, item.href)
   const external = href.startsWith("http")
   const label = item.label === "Blog" ? "Latest Updates" : item.label
-  const image = navigationImages?.[item.label] ?? fallbackImages[item.label]
+  const image = navigationImages?.[item.label]
   const content = (
     <>
-      <span className="relative aspect-[3/4] h-full shrink-0 overflow-hidden rounded-sm bg-muted">
-        <Image
-          src={image}
-          alt=""
-          fill
-          sizes="96px"
-          className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
-        />
+      <span className="relative aspect-[3/4] h-full shrink-0 overflow-hidden rounded-xs bg-muted">
+        {image && (
+          <Image
+            src={image}
+            alt=""
+            fill
+            sizes="96px"
+            className="object-cover"
+          />
+        )}
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1">
         <span className="flex items-start gap-1.5 text-sm text-foreground">
@@ -177,14 +163,14 @@ export function LivepeerOrgNavItem({
             <ArrowUpRightIcon className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
           )}
         </span>
-        <span className="truncate text-xs leading-snug text-muted-foreground">
+        <span className="text-xs leading-snug text-pretty text-muted-foreground">
           {linkDescriptions[item.label]}
         </span>
       </span>
     </>
   )
   const itemClassName = cn(
-    "group flex h-full min-w-0 items-stretch gap-3 rounded-sm bg-transparent p-2 font-normal shadow-none outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    "group flex h-full min-w-0 items-stretch gap-3 rounded-sm bg-transparent p-2 font-normal shadow-none transition-colors outline-none hover:bg-muted focus-visible:bg-muted focus-visible:ring-2 focus-visible:ring-ring",
     className
   )
 
@@ -225,7 +211,7 @@ export function LivepeerOrgHeaderNav({
     ? getLivepeerOrgHeaderLinks(renderedGroup)
     : []
   const columnCount = renderedLinks.length
-  const panelWidth = columnCount * 256
+  const panelWidth = columnCount * 256 + Math.max(0, columnCount - 1) * 8
 
   const cancelClose = React.useCallback(() => {
     if (closeTimer.current) {
@@ -326,14 +312,14 @@ export function LivepeerOrgHeaderNav({
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div className="flex h-[11.25rem] justify-center px-4 pt-3 pb-5 sm:px-6 lg:px-10">
+        <div className="flex h-[11.25rem] overflow-x-auto px-4 pt-3 pb-5 [scrollbar-width:none] sm:px-6 lg:px-10 [&::-webkit-scrollbar]:hidden">
           <div
             key={renderedTitle}
             style={{
               width: panelWidth,
               gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))`,
             }}
-            className="grid h-full max-w-full grid-rows-1 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
+            className="mx-auto grid h-full shrink-0 grid-rows-1 gap-2 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
           >
             {renderedLinks.map((item) => (
               <LivepeerOrgNavItem
