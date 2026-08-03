@@ -64,26 +64,21 @@ export default async function EarnWithGpuPage() {
 
   return (
     <main>
-      <section className="mx-auto max-w-screen-2xl px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-24 lg:px-10">
-        <div className="max-w-3xl">
-          <h1 className="text-[clamp(2.5rem,4.5vw,4rem)] leading-[0.98] font-light tracking-[-0.045em] text-balance">
-            {content.hero.heading}
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {content.hero.description}
-          </p>
-        </div>
+      <section className="mx-auto flex max-w-screen-2xl flex-col items-center px-4 pt-28 pb-16 text-center sm:px-6 sm:pt-36 sm:pb-24 lg:px-10">
+        <h1 className="max-w-4xl text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.05] font-light tracking-[-0.045em] text-balance">
+          Start with the operating model that fits your hardware, stake, and
+          tolerance for infrastructure work. A pool is the shortest path. A
+          solo node gives you control and the full operating burden.
+        </h1>
         <div className="mt-16 grid grid-cols-2 gap-4 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
           {earnings.map((earning) => (
             <Card key={earning.label} variant="metric" className="rounded-sm">
-              <CardHeader>
-                <CardDescription className="flex w-full items-baseline gap-1.5">
+              <CardHeader className="items-center text-center">
+                <CardDescription className="flex w-full items-baseline justify-center gap-1.5 font-sans">
                   <span>{earning.label}</span>
-                  <span className="shrink-0 tabular-nums">
-                    {earning.period}
-                  </span>
+                  <span className="shrink-0">{earning.period}</span>
                 </CardDescription>
-                <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight tabular-nums">
+                <CardTitle className="font-sans text-3xl leading-none font-medium tracking-tight">
                   {earning.value}
                 </CardTitle>
               </CardHeader>
