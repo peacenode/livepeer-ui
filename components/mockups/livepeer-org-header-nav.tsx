@@ -1,7 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRightIcon } from "lucide-react"
+import {
+  ArrowUpRightIcon,
+  BookOpenIcon,
+  CoinsIcon,
+  CpuIcon,
+  HandCoinsIcon,
+  LandmarkIcon,
+  MapIcon,
+  NewspaperIcon,
+  PaletteIcon,
+  ShapesIcon,
+  type LucideIcon,
+} from "lucide-react"
 
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
@@ -24,6 +36,18 @@ const linkDescriptions: Record<string, string> = {
   Foundation: "Meet the organization supporting Livepeer",
   Brand: "Logos, guidelines, and brand assets",
   Documentation: "Technical guides and reference",
+}
+
+const linkIcons: Record<string, LucideIcon> = {
+  Ecosystem: ShapesIcon,
+  "Livepeer Token": CoinsIcon,
+  "Delegate LPT": HandCoinsIcon,
+  "Provide GPUs": CpuIcon,
+  Roadmap: MapIcon,
+  Blog: NewspaperIcon,
+  Foundation: LandmarkIcon,
+  Brand: PaletteIcon,
+  Documentation: BookOpenIcon,
 }
 
 const localLinkMatches: Record<
@@ -112,6 +136,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                   const external = href.startsWith("http")
                   const label =
                     item.label === "Blog" ? "Latest Updates" : item.label
+                  const Icon = linkIcons[item.label]
 
                   return (
                     <DropdownMenuItem
@@ -125,6 +150,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                       }
                       className="min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
                     >
+                      <Icon className="size-4 shrink-0 text-muted-foreground" />
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                         <span className="text-sm text-popover-foreground">
                           {label}
