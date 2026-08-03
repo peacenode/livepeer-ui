@@ -43,14 +43,24 @@ export function LivepeerOrgHeader({
       {mounted &&
         showMenu &&
         createPortal(
-          <div
-            aria-hidden="true"
-            data-livepeer-nav-surface
-            className={cn(
-              "pointer-events-none fixed inset-x-0 top-0 z-40 h-[15.25rem] bg-background transition-transform duration-200 ease-out will-change-transform",
-              desktopMenuOpen ? "translate-y-0" : "-translate-y-full"
-            )}
-          />,
+          <>
+            <div
+              aria-hidden="true"
+              data-livepeer-nav-overlay
+              className={cn(
+                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-30 bg-black/40 transition-opacity duration-200 ease-out",
+                desktopMenuOpen ? "opacity-100" : "opacity-0"
+              )}
+            />
+            <div
+              aria-hidden="true"
+              data-livepeer-nav-surface
+              className={cn(
+                "pointer-events-none fixed inset-x-0 top-0 z-40 h-[15.25rem] bg-background transition-transform duration-200 ease-out will-change-transform",
+                desktopMenuOpen ? "translate-y-0" : "-translate-y-full"
+              )}
+            />
+          </>,
           document.body
         )}
       <header className="relative z-50 w-full bg-transparent">
