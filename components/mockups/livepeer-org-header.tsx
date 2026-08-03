@@ -68,7 +68,11 @@ export function LivepeerOrgHeader({
               {action.label} →
             </Button>
           )}
-          {showMenu && <LivepeerOrgMenu site={site} />}
+          {showMenu && (
+            <div className="lg:hidden">
+              <LivepeerOrgMenu site={site} />
+            </div>
+          )}
         </div>
       </div>
     </header>

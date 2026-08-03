@@ -120,7 +120,7 @@ function getHeaderGroup(site: LivepeerOrgSite, title: string) {
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
     <nav
-      className="hidden items-center gap-2 md:flex"
+      className="hidden items-center gap-2 lg:flex"
       aria-label="Site sections"
     >
       {headerGroups.map((title) => {
