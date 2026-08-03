@@ -66,7 +66,7 @@ export function StockImageLibrary({
   return (
     <div>
       <div className="pb-5">
-        <div className="mx-auto w-full max-w-6xl overflow-x-auto">
+        <div className="mx-auto flex w-full max-w-6xl justify-center overflow-x-auto">
           <Tabs value={groupId} onValueChange={chooseGroup}>
             <TabsList variant="line">
               <TabsTrigger value="all">All</TabsTrigger>
@@ -80,7 +80,7 @@ export function StockImageLibrary({
         </div>
 
         <div
-          className="mx-auto mt-4 flex w-full max-w-6xl flex-wrap gap-2"
+          className="mx-auto mt-4 flex w-full max-w-6xl flex-wrap justify-center gap-2"
           aria-label="Filter by subgroup"
         >
           <Badge

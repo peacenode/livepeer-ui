@@ -12,7 +12,7 @@ export default async function StockImagesPage() {
   const images = await getStockImageLibrary()
 
   return (
-    <article className="w-full max-w-6xl pb-20">
+    <article className="mx-auto w-full max-w-6xl pb-20">
       <StockImageLibrary images={images} />
     </article>
   )
