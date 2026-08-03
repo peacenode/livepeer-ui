@@ -254,7 +254,7 @@ export default async function EarnWithGpuPage() {
                 <ArrowUpRightIcon className="size-4" aria-hidden="true" />
               </Button>
             </div>
-            <p className="absolute right-6 bottom-4 left-6 text-[0.625rem] leading-4 font-normal text-balance text-white/40 sm:right-10 sm:bottom-7 sm:left-10 sm:text-[0.6875rem] sm:leading-relaxed">
+            <p className="absolute right-10 bottom-7 left-10 hidden text-[0.6875rem] leading-relaxed font-normal text-balance text-white/40 lg:block">
               {content.arbitrum.disclaimer}
             </p>
           </div>
