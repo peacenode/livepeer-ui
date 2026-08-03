@@ -29,8 +29,18 @@ function LivepeerMenuIcon() {
   )
 }
 
+const loginLinks = [
+  { label: "Forum", href: "https://forum.livepeer.org" },
+  {
+    label: "Orchestrator",
+    href: "https://explorer.livepeer.org/orchestrators",
+  },
+  { label: "Agent Console", href: "/mockups/livepeer-agent" },
+] as const
+
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const [open, setOpen] = React.useState(false)
+  const [showLoginLinks, setShowLoginLinks] = React.useState(false)
   const allLinks = [
     ...site.menuLinks,
     ...site.footerGroups.flatMap((group) => group.links),
@@ -82,11 +92,15 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         `${site.homeHref}/blog`
       ),
     },
-    { label: "Login", href: "/mockups/livepeer-agent" },
   ]
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen)
+    if (!nextOpen) setShowLoginLinks(false)
+  }
+
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger
         render={
           <Button
@@ -133,39 +147,97 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
 
         <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
           <nav className="flex flex-col" aria-label="Mobile site sections">
-            {mobileLinks.map((item) => {
-              const className =
-                "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
-
-              const link = item.href.startsWith("http") ? (
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setOpen(false)}
-                  className={className}
+            {showLoginLinks ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setShowLoginLinks(false)}
+                  className="mb-6 flex w-fit items-center gap-2 rounded-sm py-2 font-sans text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={className}
-                >
-                  {item.label}
-                </Link>
-              )
+                  <span aria-hidden="true">←</span>
+                  Back
+                </button>
+                {loginLinks.map((item) => {
+                  const className =
+                    "flex items-center justify-between gap-4 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
+                  const content = (
+                    <>
+                      <span>{item.label}</span>
+                      <span
+                        aria-hidden="true"
+                        className="font-sans text-[0.75em] tracking-normal text-muted-foreground"
+                      >
+                        ↗
+                      </span>
+                    </>
+                  )
 
-              return (
-                <React.Fragment key={item.label}>
-                  {link}
-                  {item.label === "Latest Updates" && (
-                    <div aria-hidden="true" className="my-2 w-full border-t" />
-                  )}
-                </React.Fragment>
-              )
-            })}
+                  return item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {content}
+                    </Link>
+                  )
+                })}
+              </>
+            ) : (
+              <>
+                {mobileLinks.map((item) => {
+                  const className =
+                    "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
+
+                  return item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+                <button
+                  type="button"
+                  onClick={() => setShowLoginLinks(true)}
+                  className="mt-6 flex items-center justify-between gap-4 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
+                >
+                  <span>Login</span>
+                  <span
+                    aria-hidden="true"
+                    className="font-sans text-[0.75em] tracking-normal text-muted-foreground"
+                  >
+                    →
+                  </span>
+                </button>
+              </>
+            )}
           </nav>
         </div>
       </SheetContent>
