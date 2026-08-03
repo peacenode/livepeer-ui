@@ -145,7 +145,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
             <DropdownMenuContent
               align="start"
               sideOffset={8}
-              className="grid w-72 min-w-72 gap-1 rounded-sm bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-foreground/5 duration-150 data-[side=bottom]:slide-in-from-top-0 dark:ring-foreground/10 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
+              className="grid w-auto min-w-72 auto-cols-72 grid-flow-col grid-rows-2 gap-1 rounded-sm bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-foreground/5 duration-150 data-[side=bottom]:slide-in-from-top-0 dark:ring-foreground/10 data-open:fade-in-0 data-open:zoom-in-100 data-closed:fade-out-0 data-closed:zoom-out-100"
             >
               {[...group.links]
                 .filter((item) => item.label !== "Primer")
