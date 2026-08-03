@@ -6,6 +6,8 @@ export interface StockImageLibraryItem {
   _id: string
   name: string
   url: string
+  width: number
+  height: number
   createdAt: string
   tags: string[]
   subgroup: {
@@ -25,6 +27,8 @@ const stockImagesQuery = defineQuery(`
     _id,
     name,
     "url": image.asset->url,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
     "createdAt": _createdAt,
     "tags": coalesce(tags, []),
     "subgroup": group->{
