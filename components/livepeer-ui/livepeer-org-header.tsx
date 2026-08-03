@@ -91,7 +91,7 @@ export function LivepeerOrgHeader({
               aria-hidden="true"
               data-livepeer-nav-overlay
               className={cn(
-                "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-[72] bg-black/5 backdrop-blur-sm transition-opacity duration-75 ease-out",
+                "pointer-events-none fixed inset-0 z-[72] bg-black/5 backdrop-blur-sm transition-opacity duration-75 ease-out",
                 desktopMenuOpen ? "opacity-100" : "opacity-0"
               )}
             />
