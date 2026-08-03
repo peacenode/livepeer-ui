@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol } from "@/components/brand"
 import type { LivepeerOrgPage } from "@/components/mockups/contracts"
-import { FoundationVennAnimation } from "@/components/mockups/foundation-venn-animation"
+import { FoundationVennAnimation } from "@/components/livepeer-ui/foundation-venn-animation"
 import { Button } from "@/components/ui/button"
 import { DisplayHeading } from "@/components/ui/display-heading"
 
