@@ -6,45 +6,43 @@ import { Button } from "@/components/ui/button"
 
 type TokenContent = NonNullable<LivepeerOrgPage["tokenContent"]>
 
-const exchangeStyles: Record<string, string> = {
-  Binance: "bg-[#f0b90b] text-[#181a20]",
-  Coinbase: "bg-[#0052ff] text-white",
-  Kraken: "bg-[#5741d9] text-white",
-  Uniswap: "bg-[#ff007a] text-white",
-  OKX: "bg-black text-white",
-}
-
 export function TokenExchangeCard({
   content,
 }: {
   content: TokenContent["exchanges"]
 }) {
   return (
-    <article className="grid aspect-square grid-rows-6 overflow-hidden">
-      <div className="flex items-center justify-between bg-emerald-500 px-6 text-black sm:px-10">
-        <div>
-          <p className="text-xs text-black/60">{content.eyebrow}</p>
-          <h2 className="mt-1 text-2xl font-light tracking-tight sm:text-3xl">
-            Buy $LPT
-          </h2>
-        </div>
-        <LivepeerSymbol className="size-8 sm:size-10" />
+    <article className="aspect-square bg-foreground text-background">
+      <div className="flex size-full flex-col items-center justify-center px-6 text-center sm:px-10">
+        <LivepeerSymbol className="size-10 text-emerald-500 sm:size-16" />
+        <p className="mt-4 text-xs text-background/50 sm:mt-8">
+          {content.eyebrow}
+        </p>
+        <h2 className="mt-2 text-3xl font-light tracking-tight sm:text-4xl">
+          Buy $LPT
+        </h2>
+        <ul className="mt-6 grid w-full max-w-md grid-cols-2 border-t border-background/15 sm:mt-8">
+          {content.links.map((exchange) => (
+            <li
+              key={exchange.href}
+              className="border-r border-b border-background/15 last:col-span-2 last:border-r-0 even:border-r-0"
+            >
+              <a
+                href={exchange.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex min-h-12 items-center justify-between px-3 text-left text-sm transition-colors hover:bg-background/10 sm:min-h-14 sm:px-4"
+              >
+                {exchange.label}
+                <ArrowUpRightIcon
+                  className="size-3.5 text-background/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      {content.links.map((exchange) => (
-        <a
-          key={exchange.href}
-          href={exchange.href}
-          target="_blank"
-          rel="noreferrer"
-          className={`group flex items-center justify-between px-6 text-xl font-medium tracking-tight transition-[filter] hover:brightness-95 sm:px-10 sm:text-2xl ${exchangeStyles[exchange.label] ?? "bg-muted text-foreground"}`}
-        >
-          {exchange.label}
-          <ArrowUpRightIcon
-            className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            aria-hidden="true"
-          />
-        </a>
-      ))}
     </article>
   )
 }
