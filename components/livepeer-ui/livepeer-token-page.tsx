@@ -40,16 +40,6 @@ export function LivepeerTokenPage({ content }: { content: TokenContent }) {
           <p className="mt-5 max-w-prose text-sm leading-relaxed text-balance text-foreground/60">
             {content.hero.description}
           </p>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            render={<Link href="#tokenomics" />}
-            className="mt-8 h-12 rounded-sm bg-transparent px-4"
-          >
-            {content.hero.secondaryCta.label}
-            <ArrowRightIcon aria-hidden="true" />
-          </Button>
           <TokenConstructionDiagram className="mt-12 h-auto w-full max-w-xl sm:mt-16" />
         </div>
       </section>
