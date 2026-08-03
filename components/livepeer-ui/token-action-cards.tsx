@@ -12,45 +12,33 @@ const exchangeStyles: Record<
   {
     className: string
     logoClassName: string
-    logoHeight: number
     logoSrc: string
-    logoWidth: number
   }
 > = {
   Binance: {
-    className: "bg-gradient-to-r from-[#ffd95a] to-[#f0b90b] text-black",
-    logoClassName: "h-auto w-36 brightness-0",
-    logoHeight: 127,
+    className: "bg-[#f0b90b] text-black",
+    logoClassName: "size-7 brightness-0",
     logoSrc: "/brand/exchanges/binance.svg",
-    logoWidth: 632,
   },
   Coinbase: {
-    className: "bg-gradient-to-r from-[#3478ff] to-[#0052ff] text-white",
-    logoClassName: "h-auto w-36 brightness-0 invert",
-    logoHeight: 197,
+    className: "bg-[#0052ff] text-white",
+    logoClassName: "size-7 brightness-0 invert",
     logoSrc: "/brand/exchanges/coinbase.svg",
-    logoWidth: 1102,
   },
   Kraken: {
-    className: "bg-gradient-to-r from-[#8068ee] to-[#5741d9] text-white",
-    logoClassName: "h-auto w-32 brightness-0 invert",
-    logoHeight: 26,
+    className: "bg-[#5741d9] text-white",
+    logoClassName: "size-7 brightness-0 invert",
     logoSrc: "/brand/exchanges/kraken.svg",
-    logoWidth: 151,
   },
   Uniswap: {
-    className: "bg-gradient-to-r from-[#ff75ba] to-[#ff007a] text-black",
-    logoClassName: "h-auto w-36 brightness-0",
-    logoHeight: 240,
+    className: "bg-[#ff007a] text-black",
+    logoClassName: "size-8 brightness-0",
     logoSrc: "/brand/exchanges/uniswap.svg",
-    logoWidth: 961,
   },
   OKX: {
-    className: "bg-gradient-to-r from-[#d3ff66] to-[#b6ff20] text-black",
-    logoClassName: "h-auto w-20",
-    logoHeight: 224,
+    className: "bg-[#b6ff20] text-black",
+    logoClassName: "size-8",
     logoSrc: "/brand/exchanges/okx.svg",
-    logoWidth: 748,
   },
 }
 
@@ -61,7 +49,7 @@ export function TokenExchangeCard({
 }) {
   return (
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
-      <div className="flex items-center justify-center bg-gradient-to-r from-emerald-400 to-emerald-500 px-6 text-center text-black sm:px-10">
+      <div className="flex items-center justify-center bg-emerald-500 px-6 text-center text-black sm:px-10">
         <h2 className="text-2xl font-light tracking-tight sm:text-3xl">
           Buy $LPT
         </h2>
@@ -79,15 +67,20 @@ export function TokenExchangeCard({
             className={`group flex items-center justify-between px-6 transition-[filter] hover:brightness-95 sm:px-10 ${style?.className ?? "bg-muted text-foreground"}`}
           >
             {style ? (
-              <Image
-                src={style.logoSrc}
-                alt={`${exchange.label} wordmark`}
-                width={style.logoWidth}
-                height={style.logoHeight}
-                className={style.logoClassName}
-              />
+              <span className="flex items-center gap-3">
+                <Image
+                  src={style.logoSrc}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className={style.logoClassName}
+                />
+                <span className="text-xl font-normal tracking-tight sm:text-2xl">
+                  {exchange.label}
+                </span>
+              </span>
             ) : (
-              <span className="text-xl font-medium sm:text-2xl">
+              <span className="text-xl font-normal tracking-tight sm:text-2xl">
                 {exchange.label}
               </span>
             )}
