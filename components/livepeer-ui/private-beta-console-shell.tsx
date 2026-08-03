@@ -1,4 +1,4 @@
-import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
+import type { AgentConsoleUser } from "@/components/livepeer-ui/contracts"
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
 import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
@@ -7,8 +7,10 @@ const consoleHref = "/mockups/private-beta/landing/console"
 
 export async function PrivateBetaConsoleShell({
   children,
+  user,
 }: Readonly<{
   children: React.ReactNode
+  user: AgentConsoleUser
 }>) {
   const shell = await getAgentConsoleShell()
 
@@ -46,7 +48,7 @@ export async function PrivateBetaConsoleShell({
           homeAriaLabel={shell.homeAriaLabel}
           navigation={navigation}
           userMenuContent={shell.userMenu}
-          user={agentConsoleUserFixture}
+          user={user}
           homeHref={consoleHref}
           profileHref={`${consoleHref}/account`}
         />

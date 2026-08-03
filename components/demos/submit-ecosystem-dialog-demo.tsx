@@ -1,5 +1,5 @@
 import { SubmitEcosystemDialog } from "@/app/mockups/playbooks/ecosystem/submit-ecosystem-dialog"
-import { livepeerOrgEcosystemFixture } from "@/components/demos/fixtures/livepeer-org"
+import { livepeerOrgEcosystemFixture } from "@/app/mockups/_data/livepeer-org"
 
 export default function SubmitEcosystemDialogDemo() {
   return (

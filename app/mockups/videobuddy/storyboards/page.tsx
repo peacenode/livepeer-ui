@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 
 import { StoryboardsWorkspace } from "./storyboards-workspace"
 

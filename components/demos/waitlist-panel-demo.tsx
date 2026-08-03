@@ -1,6 +1,6 @@
 import { WaitlistPanel } from "@/components/livepeer-ui/waitlist-panel"
 
-import { waitlistContentFixture } from "./waitlist-content-fixture"
+import { waitlistContentFixture } from "@/app/mockups/_data/waitlist-content"
 
 export default function WaitlistPanelDemo() {
   return (

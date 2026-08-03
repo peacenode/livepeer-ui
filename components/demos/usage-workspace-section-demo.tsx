@@ -6,7 +6,7 @@ import {
   usageContent,
   usageMetrics,
   usagePlans,
-} from "@/components/demos/fixtures/usage"
+} from "@/app/mockups/_data/usage"
 
 export default function UsageWorkspaceSectionDemo() {
   return (

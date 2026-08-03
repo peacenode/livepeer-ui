@@ -1,7 +1,7 @@
 "use client"
 
 import { ClipsHeader } from "@/components/livepeer-ui/clips-header"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 
 const content = videoBuddyPageFixture("footage")
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ArrowRightIcon, BlocksIcon, CpuIcon, PlayIcon } from "lucide-react"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 import type { VideoBuddyProtocolIcon } from "@/components/livepeer-ui/contracts"
 
 import {

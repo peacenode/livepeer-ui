@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
-import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
+import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
 import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 

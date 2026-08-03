@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { PlayIcon } from "lucide-react"
-import { MediaContextMenu } from "@/app/mockups/videobuddy/media-context-menu"
+import { MediaContextMenu } from "@/components/livepeer-ui/media-context-menu"
 import type { ClientClip } from "./client-clip"
 export function ClipCard({ clip, onDownload, onDuplicate, onRemove }: { clip: ClientClip; onDownload: () => void; onDuplicate: () => void; onRemove: () => void }) {
   return <article className="grid gap-4 py-1 lg:grid-cols-[minmax(320px,0.9fr)_minmax(0,1.1fr)] lg:gap-6">

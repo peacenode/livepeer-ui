@@ -1,7 +1,7 @@
 import {
   demoBillingInvoices,
   demoInvoiceLabels,
-} from "@/components/demos/fixtures/billing"
+} from "@/app/mockups/_data/billing"
 import { InvoiceTable } from "@/components/livepeer-ui/invoice-table"
 
 export default function InvoiceTableDemo() {

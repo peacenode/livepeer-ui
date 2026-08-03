@@ -66,7 +66,7 @@ import { storyMedia } from "./media-assets"
 import {
   downloadMedia,
   MediaContextMenu,
-} from "./media-context-menu"
+} from "@/components/livepeer-ui/media-context-menu"
 
 const creationModes = [
   { label: "Storyboard", icon: Grid2X2Icon },

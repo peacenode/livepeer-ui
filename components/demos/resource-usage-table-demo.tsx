@@ -2,7 +2,7 @@ import { ResourceUsageTable } from "@/components/livepeer-ui/resource-usage-tabl
 import {
   resourceUsageRows,
   usageContent,
-} from "@/components/demos/fixtures/usage"
+} from "@/app/mockups/_data/usage"
 export default function ResourceUsageTableDemo() {
   return (
     <ResourceUsageTable

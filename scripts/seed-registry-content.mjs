@@ -1,8 +1,8 @@
 import { getCliClient } from "sanity/cli"
 
-import { agentConsoleSeedDocuments } from "../components/demos/fixtures/agent-console-pages.ts"
-import { livepeerOrgSeedDocuments } from "../components/demos/fixtures/livepeer-org.ts"
-import { waitlistContentSeedDocument } from "../components/demos/waitlist-content-fixture.ts"
+import { agentConsoleSeedDocuments } from "../app/mockups/_data/agent-console-pages.ts"
+import { livepeerOrgSeedDocuments } from "../app/mockups/_data/livepeer-org.ts"
+import { waitlistContentSeedDocument } from "../app/mockups/_data/waitlist-content.ts"
 
 const client = getCliClient({ apiVersion: "2026-07-26" })
 

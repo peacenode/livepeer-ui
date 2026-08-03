@@ -1,5 +1,5 @@
 import { LivepeerOrgFooter } from "@/components/livepeer-ui/livepeer-org-footer"
-import { livepeerOrgSiteFixture } from "@/components/demos/fixtures/livepeer-org"
+import { livepeerOrgSiteFixture } from "@/app/mockups/_data/livepeer-org"
 
 export default function LivepeerOrgFooterDemo() {
   return (

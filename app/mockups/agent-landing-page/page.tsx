@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import {
   livepeerOrgAgentFixture,
   livepeerOrgSiteFixture,
-} from "@/components/demos/fixtures/livepeer-org"
+} from "@/app/mockups/_data/livepeer-org"
 import { AgentLandingPage as AgentLandingPageView } from "@/components/livepeer-ui/agent-landing-page"
 
 import {

@@ -725,7 +725,7 @@
           "uses": ["media-context-menu"],
           "files": [
             "components/livepeer-ui/clip-card.tsx",
-            "app/mockups/videobuddy/media-context-menu.tsx"
+            "components/livepeer-ui/media-context-menu.tsx"
           ]
         },
         {
@@ -743,7 +743,7 @@
           "level": "component",
           "uses": ["context-menu"],
           "previewPath": "/mockups/client",
-          "files": ["app/mockups/videobuddy/media-context-menu.tsx"]
+          "files": ["components/livepeer-ui/media-context-menu.tsx"]
         },
         {
           "name": "project-picker",
@@ -770,7 +770,7 @@
           "files": [
             "app/mockups/videobuddy/agent-workspace.tsx",
             "app/mockups/videobuddy/media-assets.ts",
-            "app/mockups/videobuddy/media-context-menu.tsx"
+            "components/livepeer-ui/media-context-menu.tsx"
           ]
         },
         {
@@ -789,7 +789,7 @@
             "app/mockups/videobuddy/storyboards/storyboards-workspace.tsx",
             "app/mockups/videobuddy/image-grid-utils.ts",
             "app/mockups/videobuddy/media-assets.ts",
-            "app/mockups/videobuddy/media-context-menu.tsx",
+            "components/livepeer-ui/media-context-menu.tsx",
             "app/mockups/videobuddy/project-picker.tsx",
             "components/livepeer-ui/contracts.ts"
           ]
@@ -810,7 +810,7 @@
             "app/mockups/videobuddy/characters/characters-workspace.tsx",
             "app/mockups/videobuddy/image-grid-utils.ts",
             "app/mockups/videobuddy/media-assets.ts",
-            "app/mockups/videobuddy/media-context-menu.tsx",
+            "components/livepeer-ui/media-context-menu.tsx",
             "app/mockups/videobuddy/project-picker.tsx",
             "components/livepeer-ui/contracts.ts"
           ]
@@ -824,7 +824,7 @@
           "files": [
             "app/mockups/videobuddy/footage/footage-workspace.tsx",
             "app/mockups/videobuddy/media-assets.ts",
-            "app/mockups/videobuddy/media-context-menu.tsx",
+            "components/livepeer-ui/media-context-menu.tsx",
             "components/livepeer-ui/contracts.ts"
           ]
         },

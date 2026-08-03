@@ -1,5 +1,5 @@
 import { EcosystemCatalog } from "@/app/mockups/playbooks/ecosystem/ecosystem-catalog"
-import { livepeerOrgEcosystemFixture } from "@/components/demos/fixtures/livepeer-org"
+import { livepeerOrgEcosystemFixture } from "@/app/mockups/_data/livepeer-org"
 
 export default function EcosystemCatalogDemo() {
   return (

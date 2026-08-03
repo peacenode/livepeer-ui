@@ -1,6 +1,6 @@
 import { UserMenu } from "@/components/livepeer-ui/user-menu"
-import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
-import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
+import { agentConsoleShellFixture } from "@/app/mockups/_data/agent-console-pages"
+import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
 
 export default function UserMenuDemo() {
   return (

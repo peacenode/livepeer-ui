@@ -1,7 +1,7 @@
 import {
   demoBillingPeriod,
   demoPaymentMethod,
-} from "@/components/demos/fixtures/billing"
+} from "@/app/mockups/_data/billing"
 import { BillingPageSummary } from "@/components/livepeer-ui/billing-page-summary"
 
 export default function BillingPageSummaryDemo() {

@@ -2007,7 +2007,7 @@
           "type": "registry:component"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:component"
         },
         {
@@ -2046,7 +2046,7 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
         }
       ]
@@ -2064,7 +2064,7 @@
       ],
       "files": [
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:component"
         }
       ]
@@ -2116,7 +2116,7 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
         }
       ]
@@ -2151,7 +2151,7 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
         },
         {
@@ -2194,7 +2194,7 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
         },
         {
@@ -2230,7 +2230,7 @@
           "type": "registry:block"
         },
         {
-          "path": "app/mockups/videobuddy/media-context-menu.tsx",
+          "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
         },
         {

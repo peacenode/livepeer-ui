@@ -1,5 +1,5 @@
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
-import { agentConsoleShellFixture } from "@/components/demos/fixtures/agent-console-pages"
+import { agentConsoleShellFixture } from "@/app/mockups/_data/agent-console-pages"
 
 export default function LivepeerAgentAuthGateDemo() {
   return (

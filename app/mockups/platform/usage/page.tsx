@@ -6,7 +6,7 @@ import {
   resourceUsageRows,
   usageMetrics,
   usagePlans,
-} from "@/components/demos/fixtures/usage"
+} from "@/app/mockups/_data/usage"
 import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
 import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import {

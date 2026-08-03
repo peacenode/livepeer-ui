@@ -1,5 +1,5 @@
 import { ProtocolHeaderSection } from "@/components/livepeer-ui/protocol-header-section"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 
 const content = videoBuddyPageFixture("protocol")
 const protocol = content.protocol!

@@ -4,7 +4,7 @@ import {
   demoBillingPeriod,
   demoInvoiceLabels,
   demoPaymentMethod,
-} from "@/components/demos/fixtures/billing"
+} from "@/app/mockups/_data/billing"
 import { BillingWorkspace } from "@/components/livepeer-ui/billing-workspace"
 
 export default function BillingWorkspaceSectionDemo() {

@@ -1,5 +1,5 @@
 import { ProjectsWorkspace } from "@/app/mockups/videobuddy/projects/projects-workspace"
-import { videoBuddyPageFixture } from "@/components/demos/fixtures/videobuddy-pages"
+import { videoBuddyPageFixture } from "@/app/mockups/_data/videobuddy-pages"
 
 export default function ProjectsWorkspaceSectionDemo() {
   return (

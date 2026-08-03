@@ -1,5 +1,5 @@
 import { LivepeerAgentPromoCards } from "@/components/livepeer-ui/livepeer-agent-promo-cards"
-import { usagePlans } from "@/components/demos/fixtures/usage"
+import { usagePlans } from "@/app/mockups/_data/usage"
 
 export default function LivepeerAgentPromoCardsDemo() {
   return (
