@@ -214,8 +214,6 @@ export function LivepeerOrgHeaderNav({
 }) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
   const [renderedTitle, setRenderedTitle] = React.useState("Network")
-  const [panelLeft, setPanelLeft] = React.useState(0)
-  const navRef = React.useRef<HTMLElement | null>(null)
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
   const renderedGroup = getLivepeerOrgHeaderGroup(
     site,
@@ -237,7 +235,6 @@ export function LivepeerOrgHeaderNav({
   const openMenu = React.useCallback(
     (title: string) => {
       cancelClose()
-      setPanelLeft(navRef.current?.getBoundingClientRect().left ?? 0)
       setRenderedTitle(title)
       setActiveTitle(title)
     },
@@ -268,7 +265,6 @@ export function LivepeerOrgHeaderNav({
 
   return (
     <nav
-      ref={navRef}
       className="relative top-1 hidden items-end gap-0 before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-[''] lg:flex"
       aria-label="Site sections"
       onPointerEnter={cancelClose}
@@ -328,10 +324,7 @@ export function LivepeerOrgHeaderNav({
             : "pointer-events-none -translate-y-1 opacity-0"
         )}
       >
-        <div
-          style={{ paddingLeft: panelLeft }}
-          className="h-[11.25rem] pt-3 pr-4 pb-5 sm:pr-6 lg:pr-10"
-        >
+        <div className="flex h-[11.25rem] justify-center px-4 pt-3 pb-5 sm:px-6 lg:px-10">
           <div
             key={renderedTitle}
             style={{
