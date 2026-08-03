@@ -593,7 +593,7 @@
           "title": "Ecosystem Catalog",
           "description": "Searchable and filterable ecosystem catalog composed from reusable cards.",
           "level": "section",
-          "uses": ["button", "dropdown-menu", "ecosystem-card", "input"],
+          "uses": ["badge", "button", "ecosystem-card", "input-group"],
           "files": ["app/mockups/playbooks/ecosystem/ecosystem-catalog.tsx"]
         },
         {

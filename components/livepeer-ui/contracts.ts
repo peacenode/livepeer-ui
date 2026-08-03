@@ -77,6 +77,8 @@ export interface VideoBuddyPageContent {
 export type EditorialLink = { _key?: string; label: string; href: string }
 export type LivepeerOrgPageSlug =
   | "home"
+  | "token"
+  | "foundation"
   | "livepeer-agent"
   | "playbook-library"
   | "ecosystem"
@@ -109,6 +111,72 @@ export interface LivepeerOrgPage {
   page: LivepeerOrgPageSlug
   seoTitle: string
   seoDescription?: string
+  tokenContent?: {
+    hero: {
+      eyebrow: string
+      metadata: string
+      heading: string
+      description: string
+      illustrationUrl?: string
+      illustrationAlt?: string
+      primaryCta: EditorialLink
+      secondaryCta: EditorialLink
+    }
+    role: {
+      eyebrow: string
+      heading: string
+      introduction: string
+      paragraphs: string[]
+      illustrationUrl?: string
+      illustrationAlt?: string
+    }
+    exchanges: {
+      eyebrow: string
+      heading: string
+      links: EditorialLink[]
+    }
+    delegate: {
+      eyebrow: string
+      heading: string
+      description: string
+      cta: EditorialLink
+    }
+  }
+  foundationContent?: {
+    hero: {
+      eyebrow: string
+      heading: string
+      description: string
+      illustrationUrl?: string
+      illustrationAlt?: string
+    }
+    about: {
+      eyebrow: string
+      heading: string
+      description: string
+      establishedLink: EditorialLink
+      illustrationUrl?: string
+      illustrationAlt?: string
+    }
+    responsibilities: {
+      eyebrow: string
+      heading: string
+      items: {
+        _key: string
+        heading: string
+        description: string
+      }[]
+      cta: EditorialLink
+    }
+    project: {
+      eyebrow: string
+      heading: string
+      paragraphs: string[]
+      feesLink: EditorialLink
+      illustrationUrl?: string
+      illustrationAlt?: string
+    }
+  }
   homeContent?: {
     hero: {
       heading: string

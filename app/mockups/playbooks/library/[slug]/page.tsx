@@ -235,14 +235,8 @@ export async function SourcePlaybookView({
   )
 }
 
-export default async function SourcePlaybookPage({ params }: PageProps) {
-  const { slug } = await params
-  return (
-    <SourcePlaybookView
-      catalogHref="/mockups/livepeer-org/library"
-      slug={slug}
-    />
-  )
+export default function RemovedLivepeerOrgPlaybookPage() {
+  notFound()
 }
 
 export async function generateStaticParams() {

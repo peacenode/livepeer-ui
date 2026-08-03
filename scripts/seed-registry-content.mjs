@@ -140,7 +140,7 @@ const documents = [
     slug: { _type: "slug", current: "livepeer-org" },
     title: "Livepeer.org",
     description:
-      "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
+      "Navigation, landing, Agent, ecosystem, and network sections used across Livepeer.org.",
     previewHref: "/mockups/livepeer-org",
     pages: [
       page("Home", "/mockups/livepeer-org", [
@@ -155,14 +155,6 @@ const documents = [
         "agent-compatibility",
         "agent-access-section",
         "agent-capabilities-section",
-        "playbooks-cta-section",
-      ]),
-      page("Playbook library", "/mockups/livepeer-org/library", [
-        ...livepeerOrgShell,
-        "playbook-library-header",
-        "playbook-card",
-        "playbook-catalog",
-        "install-agent-footer",
       ]),
       page("Ecosystem", "/mockups/livepeer-org/ecosystem", [
         ...livepeerOrgShell,

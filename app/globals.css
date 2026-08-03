@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html:has([data-livepeer-org-shell]),
+body:has([data-livepeer-org-shell]) {
+  overflow-x: clip;
+  overscroll-behavior: none;
+}
+
 .planner-markdown {
   color: var(--foreground);
   font-size: 1rem;

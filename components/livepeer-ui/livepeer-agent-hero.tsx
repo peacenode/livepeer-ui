@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { CopyButton } from "@/components/copy-button"
-import { LivepeerWordmark } from "@/components/brand"
+import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { LivepeerAgentDeltaStream } from "@/components/livepeer-ui/livepeer-agent-delta-stream"
 
 export function LivepeerAgentHero({
@@ -16,16 +16,25 @@ export function LivepeerAgentHero({
   }
 }) {
   return (
-    <section className="relative flex w-full items-center overflow-hidden bg-background px-4 pt-28 pb-16 sm:px-6 sm:pt-64 sm:pb-16">
-      <LivepeerAgentDeltaStream className="-translate-y-10 sm:-translate-y-8" />
+    <section className="relative flex w-full items-center overflow-hidden bg-background px-4 pt-48 pb-48 sm:px-6 lg:pt-72 lg:pb-40">
+      <LivepeerAgentDeltaStream className="translate-y-0 lg:-translate-y-16" />
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center gap-7 text-center">
         <div
-          className="flex items-end gap-3 text-foreground sm:gap-4"
+          className="flex max-w-full items-end gap-0.5 text-foreground lg:gap-2"
           aria-label="Livepeer Agent"
         >
-          <LivepeerWordmark className="h-8 w-auto sm:h-10" aria-hidden="true" />
+          <span className="flex min-w-0 items-center gap-1.5 lg:gap-4">
+            <LivepeerGradientSymbol
+              className="h-[clamp(1.125rem,5.5vw,1.5rem)] w-auto lg:h-10"
+              aria-hidden="true"
+            />
+            <LivepeerWordmark
+              className="h-[clamp(1.125rem,5.5vw,1.5rem)] w-auto lg:h-10"
+              aria-hidden="true"
+            />
+          </span>
           <span
-            className="translate-y-[0.17em] font-agent text-3xl leading-none font-medium tracking-tight sm:text-4xl"
+            className="translate-y-[0.17em] font-agent text-[clamp(1.125rem,5.25vw,1.5rem)] leading-none font-medium tracking-tight lg:text-4xl"
             aria-hidden="true"
           >
             AGENT

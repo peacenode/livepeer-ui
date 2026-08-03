@@ -29,16 +29,6 @@ export function AgentLandingPage({
       <div className="absolute inset-x-0 top-0 z-20">
         <LivepeerOrgHeader
           site={site}
-          playbooksHref={
-            privateBeta
-              ? "/mockups/private-beta/landing/console/playbooks"
-              : undefined
-          }
-          consoleHref={
-            privateBeta
-              ? "/mockups/private-beta/landing/console"
-              : undefined
-          }
           action={{
             label: "Join waitlist",
             href: "/mockups/private-beta/earlyaccess",

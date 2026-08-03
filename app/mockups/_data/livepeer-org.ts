@@ -10,10 +10,11 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
   menuLinks: [
     { label: "Home", href: "/mockups/livepeer-org" },
     { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
+    { label: "Livepeer Token", href: "/mockups/livepeer-org/token" },
     { label: "GPU", href: "/mockups/livepeer-org/earn" },
     { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
-    { label: "Agent Playbooks", href: "/mockups/livepeer-org/library" },
     { label: "Blog", href: "/mockups/livepeer-org/blog" },
+    { label: "Foundation", href: "/mockups/livepeer-org/foundation" },
   ],
   footerTagline: "The open inference network.",
   footerGroups: [
@@ -91,7 +92,7 @@ export const livepeerOrgHomeFixture: NonNullable<
     installCta: { label: "Install", href: "/mockups/livepeer-org/agent" },
     libraryCta: {
       label: "Browse Playbooks",
-      href: "/mockups/livepeer-org/library",
+      href: "/mockups/livepeer-agent/playbooks",
     },
   },
   providerCta: {
@@ -124,13 +125,16 @@ export const livepeerOrgAgentFixture: NonNullable<
   capabilities: {
     heading:
       "Livepeer Agent brings image, video, audio, 3D, editing, rendering, and production tools across the Livepeer network into one interface.",
-    cta: { label: "See more", href: "/mockups/livepeer-org/library" },
+    cta: { label: "See more", href: "/mockups/livepeer-agent/playbooks" },
   },
   playbooks: {
     heading: "Playbooks, ready to run.",
     description:
       "Start from a complete recipe for image, video, or audio generation. Copy it into Livepeer Agent, customize the inputs, and create from your agent.",
-    cta: { label: "Browse Playbooks", href: "/mockups/livepeer-org/library" },
+    cta: {
+      label: "Browse Playbooks",
+      href: "/mockups/livepeer-agent/playbooks",
+    },
   },
 }
 
@@ -153,7 +157,7 @@ export const livepeerOrgEcosystemFixture: NonNullable<
   description:
     "Explore what developers and teams are building with real-time AI video inference on Livepeer.",
   submitLabel: "Submit app",
-  searchPlaceholder: "Search",
+  searchPlaceholder: "Search ecosystem",
   emptyMessage: "No ecosystem apps match your search.",
   apps: [
     {

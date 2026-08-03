@@ -2,18 +2,10 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { SearchIcon, XIcon } from "lucide-react"
-import { LayoutGroup, motion, MotionConfig } from "motion/react"
-import { useEffect, useMemo, useRef, useState } from "react"
-import { flushSync } from "react-dom"
+import { useMemo, useState } from "react"
 
-import { Button } from "@/components/ui/button"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/components/ui/input-group"
+import { FilterSearch } from "@/components/livepeer-ui/filter-search"
+import { DisplayHeading } from "@/components/ui/display-heading"
 import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
 
 const categories = [
@@ -33,15 +25,6 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 })
 
-const overlayGradient =
-  "linear-gradient(to bottom, var(--background) 0%, var(--background) 45%, color-mix(in oklab, var(--background) 96%, transparent) 55%, color-mix(in oklab, var(--background) 82%, transparent) 65%, color-mix(in oklab, var(--background) 50%, transparent) 78%, color-mix(in oklab, var(--background) 18%, transparent) 90%, transparent 100%)"
-
-const searchLayoutTransition = {
-  type: "tween" as const,
-  duration: 0.24,
-  ease: [0.22, 1, 0.36, 1] as const,
-}
-
 function displayCategory(category: string) {
   return category === "Product & Protocol" ? "Protocol" : category
 }
@@ -53,10 +36,6 @@ export function LivepeerBlogIndex({
 }) {
   const [category, setCategory] = useState("All")
   const [query, setQuery] = useState("")
-  const [filtersOpen, setFiltersOpen] = useState(false)
-  const [inputReady, setInputReady] = useState(false)
-  const [sharedLayoutEnabled, setSharedLayoutEnabled] = useState(false)
-  const searchInputRef = useRef<HTMLInputElement>(null)
   const visiblePosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
     return posts.filter((post) => {
@@ -71,151 +50,25 @@ export function LivepeerBlogIndex({
     })
   }, [category, posts, query])
 
-  useEffect(() => {
-    if (!filtersOpen || inputReady) return
-
-    const timeout = window.setTimeout(() => {
-      setInputReady(true)
-      searchInputRef.current?.focus()
-    }, 340)
-
-    return () => window.clearTimeout(timeout)
-  }, [filtersOpen, inputReady])
-
-  function openFilters() {
-    flushSync(() => {
-      setSharedLayoutEnabled(true)
-    })
-    setInputReady(false)
-    window.requestAnimationFrame(() => setFiltersOpen(true))
-  }
-
-  function closeFilters() {
-    flushSync(() => {
-      setSharedLayoutEnabled(false)
-    })
-    setInputReady(false)
-    setFiltersOpen(false)
-  }
-
   return (
     <main className="px-4 pt-16 pb-24 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
         <header className="pt-12 text-center lg:pt-16">
-          <h1 className="font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-[clamp(2.5rem,4.5vw,4rem)]">
-            Latest Updates
-          </h1>
+          <DisplayHeading>Latest Updates</DisplayHeading>
         </header>
 
-        <MotionConfig reducedMotion="user">
-          <LayoutGroup id="blog-search">
-            <div className="relative z-30 mt-8 flex h-11 justify-center">
-              {filtersOpen ? (
-                <motion.div
-                  key="expanded"
-                  className="absolute top-0 left-1/2 w-full max-w-2xl -translate-x-1/2"
-                >
-                  <motion.div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute top-0 left-1/2 -z-10 h-[100dvh] w-screen -translate-x-1/2"
-                    style={{ background: overlayGradient }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.16 }}
-                  >
-                    <InputGroup className="h-11 rounded-sm border bg-background has-[[data-slot=input-group-control]:focus-visible]:ring-0">
-                        <InputGroupInput
-                          ref={searchInputRef}
-                          type="text"
-                          inputMode="search"
-                          enterKeyHint="search"
-                        className={`pr-0 pl-[22px] text-sm ${inputReady ? "caret-foreground" : "caret-transparent"}`}
-                        value={query}
-                        onChange={(event) => setQuery(event.target.value)}
-                        placeholder=""
-                        aria-label="Search articles"
-                      />
-                      <InputGroupAddon align="inline-end" className="pr-0">
-                        <InputGroupButton
-                          size="icon-xs"
-                          className="justify-end text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0"
-                          aria-label="Close search"
-                          onClick={closeFilters}
-                        >
-                          <XIcon className="-translate-x-0.5" />
-                        </InputGroupButton>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </motion.div>
-
-                  <motion.div
-                    layoutId={
-                      sharedLayoutEnabled ? "blog-search-prompt" : undefined
-                    }
-                    className="pointer-events-none absolute inset-y-auto top-0 left-0 z-10 flex h-11 items-center gap-1.5 text-sm text-muted-foreground"
-                    transition={searchLayoutTransition}
-                  >
-                    <SearchIcon className="size-4" />
-                    <span
-                      aria-hidden="true"
-                      className={query.length > 0 ? "invisible" : undefined}
-                    >
-                      Search articles
-                    </span>
-                  </motion.div>
-
-                  <motion.div
-                    className="mt-6 grid w-full grid-cols-3 gap-x-6 gap-y-3 md:gap-x-8"
-                    aria-label="Blog categories"
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, delay: 0.06 }}
-                  >
-                    {categories.map((item) => (
-                      <Button
-                        key={item}
-                        type="button"
-                        size="sm"
-                        variant="ghost"
-                        className={`h-auto w-full min-w-0 justify-start rounded-none p-0 font-medium hover:bg-transparent hover:text-foreground ${category === item ? "text-foreground" : "text-muted-foreground"}`}
-                        onClick={() => setCategory(item)}
-                      >
-                        {item}
-                      </Button>
-                    ))}
-                  </motion.div>
-                </motion.div>
-              ) : (
-                <motion.div key="trigger">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="lg"
-                    className="h-11 rounded-sm font-normal hover:bg-transparent active:translate-y-0"
-                    onClick={openFilters}
-                  >
-                    <motion.span
-                      layoutId={
-                        sharedLayoutEnabled ? "blog-search-prompt" : undefined
-                      }
-                      className="inline-flex items-center gap-1.5"
-                      transition={searchLayoutTransition}
-                    >
-                      <SearchIcon className="size-4" />
-                      <span>Search articles</span>
-                    </motion.span>
-                  </Button>
-                </motion.div>
-              )}
-            </div>
-          </LayoutGroup>
-        </MotionConfig>
+        <FilterSearch
+          categories={categories}
+          category={category}
+          onCategoryChange={setCategory}
+          query={query}
+          onQueryChange={setQuery}
+          placeholder="Search articles"
+          searchLabel="Search articles"
+          categoriesLabel="Blog categories"
+          className="mt-8"
+          categoryGridClassName="grid-cols-3"
+        />
 
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (

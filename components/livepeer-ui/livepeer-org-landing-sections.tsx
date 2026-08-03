@@ -90,15 +90,6 @@ export function LivepeerAgentFeatureSection({
             {content.installCta.label}
             <ArrowRightIcon />
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            render={<Link href={content.libraryCta.href} />}
-            className="h-16 rounded-sm bg-transparent px-4"
-          >
-            {content.libraryCta.label}
-          </Button>
         </div>
         <AgentCompatibility className="mt-7" responsiveAlignment />
       </div>

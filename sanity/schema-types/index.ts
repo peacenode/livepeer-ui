@@ -27,6 +27,7 @@ import { waitlistPageContentType } from "./waitlist-content"
 import { welcomeEmailContentType } from "./welcome-email-content"
 import { agentRolloutFlowType } from "./agent-rollout-flow"
 import { livepeerBlogPostType } from "./livepeer-blog-post"
+import { stockImageGroupType, stockImageType } from "./stock-images"
 import { socialAssetSetType } from "./social-assets"
 
 export const schemaTypes = [
@@ -49,5 +50,7 @@ export const schemaTypes = [
   livepeerOrgSiteType,
   livepeerOrgPageType,
   livepeerBlogPostType,
+  stockImageGroupType,
+  stockImageType,
   socialAssetSetType,
 ]

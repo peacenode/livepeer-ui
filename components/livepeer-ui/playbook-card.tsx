@@ -7,7 +7,7 @@ export type PlaybookCardData = {
 }
 
 export function PlaybookCard({
-  hrefBase = "/mockups/livepeer-org/library",
+  hrefBase = "/mockups/livepeer-agent/playbooks",
   playbook,
 }: {
   hrefBase?: string

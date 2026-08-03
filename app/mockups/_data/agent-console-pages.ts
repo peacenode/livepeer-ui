@@ -35,8 +35,8 @@ export const agentConsoleShellFixture: AgentConsoleShell = {
     {
       _key: "learn",
       label: "Learn",
-      href: "/mockups/livepeer-org/library",
-      external: true,
+      href: "/mockups/livepeer-agent/playbooks",
+      external: false,
     },
   ],
   userMenu: {
@@ -103,7 +103,7 @@ export const agentConsolePageFixtures = [
           title: "Explore playbooks",
           description:
             "Create and edit images and video from the agent of your choice.",
-          href: "/mockups/livepeer-org/library",
+          href: "/mockups/livepeer-agent/playbooks",
           imageSrc: sanityStaticAssets.consoleCards.playbooks,
         },
       ],

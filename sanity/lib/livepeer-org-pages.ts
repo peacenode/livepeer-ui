@@ -18,7 +18,24 @@ export type {
 const siteQuery = defineQuery(
   `*[_type == "livepeerOrgSite" && _id == "livepeerOrgSite"][0]`
 )
-const pageQuery = defineQuery(`*[_type == "livepeerOrgPage" && _id == $id][0]`)
+const pageQuery = defineQuery(`*[_type == "livepeerOrgPage" && _id == $id][0]{
+  ...,
+  tokenContent{
+    ...,
+    hero{..., "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt},
+    role{..., "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt}
+  },
+  foundationContent{
+    ...,
+    hero{..., "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt},
+    about{..., "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt},
+    project{..., "illustrationUrl": illustration.asset->url, "illustrationAlt": illustration.alt}
+  },
+  ecosystemContent{
+    ...,
+    apps[]{..., "image": image.asset->url}
+  }
+}`)
 const options = { next: { revalidate: 60, tags: ["livepeer-org-content"] } }
 
 export async function getLivepeerOrgSite(): Promise<LivepeerOrgSite> {

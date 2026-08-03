@@ -876,6 +876,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/livepeer-ui/platform-brand-link.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand.tsx",
           "type": "registry:component"
         }
@@ -1325,7 +1329,8 @@
       "description": "Full-width Livepeer.org navigation dropdown with primary links, resource groups, social links, and active-route state.",
       "dependencies": [
         "lucide-react",
-        "next"
+        "next",
+        "next-sanity"
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
@@ -1347,6 +1352,22 @@
         {
           "path": "components/brand.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "components/livepeer-ui/livepeer-org-header-nav.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/lib/livepeer-org-navigation.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/lib/client.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/env.ts",
+          "type": "registry:component"
         }
       ]
     },
@@ -1357,10 +1378,12 @@
       "description": "Responsive Livepeer.org header with brand link and site navigation menu.",
       "dependencies": [
         "lucide-react",
-        "next"
+        "next",
+        "next-sanity"
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/button.json",
+        "https://livepeer.peaceno.de/r/dropdown-menu.json",
         "https://livepeer.peaceno.de/r/sheet.json"
       ],
       "files": [
@@ -1381,7 +1404,19 @@
           "type": "registry:component"
         },
         {
-          "path": "components/brand-social-icons.tsx",
+          "path": "components/livepeer-ui/livepeer-org-header-nav.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/lib/livepeer-org-navigation.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/lib/client.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/env.ts",
           "type": "registry:component"
         }
       ]
@@ -1424,6 +1459,10 @@
       "files": [
         {
           "path": "components/livepeer-ui/agent-compatibility.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:component"
         }
       ]
@@ -1483,6 +1522,10 @@
         {
           "path": "components/livepeer-ui/agent-compatibility.tsx",
           "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
+          "type": "registry:block"
         }
       ]
     },
@@ -1520,6 +1563,10 @@
       "files": [
         {
           "path": "components/livepeer-ui/playbooks-cta-section.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         }
       ]
@@ -1661,13 +1708,13 @@
       "description": "Searchable and filterable ecosystem catalog composed from reusable cards.",
       "dependencies": [
         "lucide-react",
+        "motion",
         "next"
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/badge.json",
         "https://livepeer.peaceno.de/r/button.json",
-        "https://livepeer.peaceno.de/r/dropdown-menu.json",
-        "https://livepeer.peaceno.de/r/input.json"
+        "https://livepeer.peaceno.de/r/input-group.json"
       ],
       "files": [
         {
@@ -1676,6 +1723,10 @@
         },
         {
           "path": "components/livepeer-ui/ecosystem-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "components/livepeer-ui/filter-search.tsx",
           "type": "registry:block"
         }
       ]
@@ -1711,6 +1762,10 @@
         },
         {
           "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         },
         {
@@ -1753,6 +1808,10 @@
           "type": "registry:block"
         },
         {
+          "path": "sanity/lib/static-assets.ts",
+          "type": "registry:block"
+        },
+        {
           "path": "lib/canvas-theme.ts",
           "type": "registry:block"
         }
@@ -1789,6 +1848,10 @@
         },
         {
           "path": "components/livepeer-ui/livepeer-cube-stream.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         },
         {
@@ -2118,6 +2181,10 @@
         {
           "path": "components/livepeer-ui/media-context-menu.tsx",
           "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
+          "type": "registry:block"
         }
       ]
     },
@@ -2160,6 +2227,10 @@
         },
         {
           "path": "components/livepeer-ui/contracts.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         }
       ]
@@ -2204,6 +2275,10 @@
         {
           "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
+          "type": "registry:block"
         }
       ]
     },
@@ -2239,6 +2314,10 @@
         },
         {
           "path": "app/mockups/videobuddy/footage/clips-components.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         },
         {
@@ -2295,6 +2374,10 @@
         },
         {
           "path": "components/livepeer-ui/contracts.ts",
+          "type": "registry:block"
+        },
+        {
+          "path": "sanity/lib/static-assets.ts",
           "type": "registry:block"
         }
       ]
