@@ -160,7 +160,12 @@ export function LivepeerOrgNavItem({
 }) {
   const href = resolveHref(site, item.label, item.href)
   const external = href.startsWith("http")
-  const label = item.label === "Blog" ? "Latest Updates" : item.label
+  const label =
+    item.label === "Blog"
+      ? "Latest Updates"
+      : item.label === "Provide GPUs"
+        ? "Provide Compute"
+        : item.label
   const image = navigationImages?.[item.label]
   const content = (
     <>
