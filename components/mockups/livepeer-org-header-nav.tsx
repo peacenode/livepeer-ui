@@ -246,7 +246,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
       >
         <div
           style={{ paddingLeft: panelLeft }}
-          className="pt-3 pr-4 pb-5 sm:pr-6 lg:pr-10"
+          className="h-[11.25rem] pt-3 pr-4 pb-5 sm:pr-6 lg:pr-10"
         >
           <div
             key={renderedTitle}
