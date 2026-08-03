@@ -19,9 +19,7 @@ function TokenLabel() {
         className="h-2.5 w-auto shrink-0 sm:h-3"
         aria-hidden="true"
       />
-      <p className="text-xs font-normal text-foreground/60">
-        Livepeer Token · LPT
-      </p>
+      <p className="text-xs font-normal text-foreground/60">$LPT</p>
     </div>
   )
 }
