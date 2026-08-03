@@ -14,7 +14,7 @@ const socialIcons = {
 export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
   return (
     <footer className="bg-background">
-      <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">
+      <div className="w-full px-4 pt-12 pb-6">
         <div className="grid gap-12 sm:grid-cols-3 lg:gap-10">
           {site.footerGroups.map((group) => (
             <div key={group.title}>
@@ -44,8 +44,16 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
           ))}
         </div>
 
-        <div className="mt-16 lg:grid lg:grid-cols-3 lg:gap-10">
-          <div className="flex w-full items-center justify-between lg:col-start-2 lg:w-auto lg:justify-start lg:gap-4">
+        <div className="mt-16 flex flex-col gap-10 lg:grid lg:grid-cols-3 lg:items-center lg:gap-10">
+          <a
+            href={site.homeHref}
+            className="order-2 inline-flex items-center gap-1.5 text-foreground lg:order-none lg:col-start-1 lg:row-start-1"
+            aria-label="Livepeer home"
+          >
+            <LivepeerGradientSymbol className="h-4 w-auto" />
+            <LivepeerWordmark className="h-4 w-auto" />
+          </a>
+          <div className="order-1 flex w-full items-center justify-between lg:order-none lg:col-start-2 lg:row-start-1 lg:w-auto lg:justify-start lg:gap-4">
             {site.socialLinks.map((social) => {
               const Icon = socialIcons[social.service]
 
@@ -64,15 +72,6 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
             })}
           </div>
         </div>
-
-        <a
-          href={site.homeHref}
-          className="mt-10 inline-flex items-center gap-1.5 text-foreground"
-          aria-label="Livepeer home"
-        >
-          <LivepeerGradientSymbol className="h-4 w-auto" />
-          <LivepeerWordmark className="h-4 w-auto" />
-        </a>
 
         <div className="mt-12">
           <p className="text-xs text-muted-foreground">{site.copyright}</p>
