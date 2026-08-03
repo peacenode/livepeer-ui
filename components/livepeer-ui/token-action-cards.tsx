@@ -31,8 +31,8 @@ const exchangeStyles: Record<
     logoSrc: "/brand/exchanges/kraken.svg",
   },
   Uniswap: {
-    className: "bg-[#ff007a] text-black",
-    logoClassName: "size-8 brightness-0",
+    className: "bg-[#ff007a] text-white",
+    logoClassName: "size-8 brightness-0 invert",
     logoSrc: "/brand/exchanges/uniswap.svg",
   },
   OKX: {
@@ -64,10 +64,10 @@ export function TokenExchangeCard({
             target="_blank"
             rel="noreferrer"
             aria-label={`Buy LPT on ${exchange.label}`}
-            className={`group flex items-center px-6 transition-[filter] hover:brightness-95 sm:px-10 ${style?.className ?? "bg-muted text-foreground"}`}
+            className={`group flex items-center justify-between px-6 transition-[filter] hover:brightness-95 sm:px-10 ${style?.className ?? "bg-muted text-foreground"}`}
           >
             {style ? (
-              <span className="flex items-center gap-3">
+              <>
                 <Image
                   src={style.logoSrc}
                   alt=""
@@ -78,16 +78,16 @@ export function TokenExchangeCard({
                 <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
                   <span>{exchange.label}</span>
                   <ArrowUpRightIcon
-                    className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="size-[1em]"
                     aria-hidden="true"
                   />
                 </span>
-              </span>
+              </>
             ) : (
               <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
                 <span>{exchange.label}</span>
                 <ArrowUpRightIcon
-                  className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="size-[1em]"
                   aria-hidden="true"
                 />
               </span>
