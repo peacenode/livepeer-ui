@@ -64,11 +64,11 @@ export default async function EarnWithGpuPage() {
 
   return (
     <main>
-      <section className="mx-auto flex max-w-screen-2xl flex-col items-center px-4 pt-28 pb-16 text-center sm:px-6 sm:pt-36 sm:pb-24 lg:px-10">
+      <section className="mx-auto flex max-w-screen-2xl flex-col items-center px-4 py-20 text-center sm:px-6 sm:py-24 lg:px-10">
         <h1 className="max-w-4xl text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.05] font-light tracking-[-0.045em] text-balance">
           Put your GPU to work on Livepeer. Join a pool or run your own node.
         </h1>
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:mt-12 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:w-fit sm:grid-cols-[repeat(2,14rem)]">
           {earnings.map((earning) => (
             <Card key={earning.label} variant="metric" className="rounded-sm">
               <CardHeader className="items-center text-center">
@@ -86,7 +86,7 @@ export default async function EarnWithGpuPage() {
         <Button
           nativeButton={false}
           size="lg"
-          className="mt-10 h-16 rounded-sm px-6 sm:mt-12"
+          className="mt-8 h-16 rounded-sm px-6 sm:mt-10"
           render={
             <a href={content.hero.cta.href} target="_blank" rel="noreferrer" />
           }
