@@ -84,15 +84,6 @@ export function LivepeerOrgHeader({
   return (
     <>
       {mounted &&
-        createPortal(
-          <div
-            aria-hidden="true"
-            data-livepeer-header-surface
-            className="pointer-events-none fixed inset-x-0 top-0 z-50 h-16 bg-background"
-          />,
-          document.body
-        )}
-      {mounted &&
         showMenu &&
         createPortal(
           <>
@@ -107,7 +98,7 @@ export function LivepeerOrgHeader({
           </>,
           document.body
         )}
-      <header className="relative z-50 w-full bg-transparent">
+      <header className="relative z-50 w-full bg-background">
         <div className="relative z-10 mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <div className="flex min-w-0 items-end gap-5">
             <Link
