@@ -137,9 +137,8 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
               const className =
                 "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-[clamp(2.5rem,4.5vw,4rem)]"
 
-              return item.href.startsWith("http") ? (
+              const link = item.href.startsWith("http") ? (
                 <a
-                  key={item.label}
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
@@ -150,13 +149,21 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 </a>
               ) : (
                 <Link
-                  key={item.label}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={className}
                 >
                   {item.label}
                 </Link>
+              )
+
+              return (
+                <React.Fragment key={item.label}>
+                  {link}
+                  {item.label === "Latest Updates" && (
+                    <div aria-hidden="true" className="my-2 w-full border-t" />
+                  )}
+                </React.Fragment>
               )
             })}
           </nav>
