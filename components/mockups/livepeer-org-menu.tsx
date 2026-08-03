@@ -45,7 +45,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           <Button
             variant="ghost"
             size="icon-sm"
-            className="hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+            className="hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent dark:hover:bg-transparent"
           />
         }
       >
