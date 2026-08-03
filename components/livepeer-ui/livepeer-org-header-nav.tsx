@@ -61,8 +61,8 @@ const resourceOrder: Record<string, number> = {
 
 const networkOrder: Record<string, number> = {
   Ecosystem: 0,
-  "Livepeer Token": 1,
-  "Provide GPUs": 2,
+  "Provide GPUs": 1,
+  "Livepeer Token": 2,
   "Delegate LPT": 3,
   Roadmap: 4,
 }
