@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" fill="none" class="block h-full w-full" aria-hidden="true"><g><circle cx="50" cy="32" r="24" stroke="rgba(232,232,228,0.85)" stroke-width="0.7"></circle><circle cx="50" cy="32" r="24" stroke="rgba(64,191,134,1)" stroke-width="0.9" stroke-dasharray="18 200" style="animation:coordTrace 4.8s linear 0s infinite;transform-origin:50px 32px"></circle></g><g><circle cx="32" cy="62" r="24" stroke="rgba(232,232,228,0.85)" stroke-width="0.7"></circle><circle cx="32" cy="62" r="24" stroke="rgba(64,191,134,1)" stroke-width="0.9" stroke-dasharray="18 200" style="animation:coordTrace 4.8s linear 1.6s infinite;transform-origin:32px 62px"></circle></g><g><circle cx="68" cy="62" r="24" stroke="rgba(232,232,228,0.85)" stroke-width="0.7"></circle><circle cx="68" cy="62" r="24" stroke="rgba(64,191,134,1)" stroke-width="0.9" stroke-dasharray="18 200" style="animation:coordTrace 4.8s linear 3.2s infinite;transform-origin:68px 62px"></circle></g><circle cx="50" cy="52" r="1.2" fill="rgba(232,232,228,0.85)"></circle><style>
+        @keyframes coordTrace {
+          0%   { stroke-dashoffset: 0; opacity: 0; }
+          8%   { opacity: 0.9; }
+          70%  { stroke-dashoffset: -150; opacity: 0.9; }
+          100% { stroke-dashoffset: -150; opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          circle[style*="animation"] { animation: none !important; opacity: 0 !important; }
+        }
+      </style></svg>
