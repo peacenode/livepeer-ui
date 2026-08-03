@@ -2,15 +2,11 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ArrowUpRightIcon, GlobeIcon, XIcon } from "lucide-react"
+import { ArrowLeftIcon, XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import {
-  DiscordIcon,
-  GitHubIcon,
-  XIcon as SocialXIcon,
-} from "@/components/brand-social-icons"
+import { getLivepeerOrgFoundationHref } from "@/components/mockups/livepeer-org-header-nav"
+import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -19,49 +15,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
-import type { LivepeerOrgSite } from "@/components/mockups/contracts"
-
-const socialIcons = {
-  discord: DiscordIcon,
-  x: SocialXIcon,
-  github: GitHubIcon,
-  website: GlobeIcon,
-}
-
-const menuOrder = [
-  {
-    label: "Home",
-    matches: (label: string, href: string) =>
-      label === "Home" || href.endsWith("/livepeer-org"),
-  },
-  {
-    label: "Foundation",
-    matches: (_label: string, href: string) => href.includes("/foundation"),
-  },
-  {
-    label: "Ecosystem",
-    matches: (_label: string, href: string) => href.includes("/ecosystem"),
-  },
-  {
-    label: "Agent",
-    matches: (_label: string, href: string) => href.includes("/agent"),
-  },
-  {
-    label: "GPU",
-    matches: (label: string, href: string) =>
-      label === "GPU" || href.includes("/earn"),
-  },
-  {
-    label: "Token",
-    matches: (_label: string, href: string) => href.includes("/token"),
-  },
-  {
-    label: "Updates",
-    matches: (label: string, href: string) =>
-      label === "Updates" || href.includes("/blog"),
-  },
-]
 
 function LivepeerMenuIcon() {
   return (
@@ -76,22 +29,84 @@ function LivepeerMenuIcon() {
   )
 }
 
+const loginLinks = [
+  { label: "Forum", href: "https://forum.livepeer.org" },
+  {
+    label: "Orchestrator",
+    href: "https://explorer.livepeer.org/orchestrators",
+  },
+  { label: "Agent Console", href: "/mockups/livepeer-agent" },
+] as const
+
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
-  const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
-  const menuLinks = menuOrder.flatMap(({ label, matches }) => {
-    const link = site.menuLinks.find((item) => matches(item.label, item.href))
-    return link ? [{ ...link, label }] : []
-  })
+  const [showLoginLinks, setShowLoginLinks] = React.useState(false)
+  const allLinks = [
+    ...site.menuLinks,
+    ...site.footerGroups.flatMap((group) => group.links),
+  ]
+  const findHref = (labels: string[], path: string, fallback: string) =>
+    site.menuLinks.find(
+      (link) => labels.includes(link.label) || link.href.includes(path)
+    )?.href ??
+    allLinks.find(
+      (link) => labels.includes(link.label) || link.href.includes(path)
+    )?.href ??
+    fallback
+  const mobileLinks = [
+    { label: "Home", href: site.homeHref },
+    { label: "Foundation", href: getLivepeerOrgFoundationHref(site) },
+    {
+      label: "Ecosystem",
+      href: findHref(["Ecosystem"], "/ecosystem", `${site.homeHref}/ecosystem`),
+    },
+    {
+      label: "Agent",
+      href: findHref(
+        ["Livepeer Agent", "Agent"],
+        "/agent",
+        `${site.homeHref}/agent`
+      ),
+    },
+    {
+      label: "$LPT",
+      href: findHref(
+        ["Livepeer Token", "$LPT"],
+        "/token",
+        `${site.homeHref}/token`
+      ),
+    },
+    {
+      label: "Provide Compute",
+      href: findHref(
+        ["GPU", "Provide GPUs", "Provide GPU", "Provide Compute"],
+        "/earn",
+        `${site.homeHref}/earn`
+      ),
+    },
+    {
+      label: "Latest Updates",
+      href: findHref(
+        ["Blog", "Latest Updates"],
+        "/blog",
+        `${site.homeHref}/blog`
+      ),
+    },
+  ]
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen)
+    if (!nextOpen) setShowLoginLinks(false)
+  }
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger
         render={
           <Button
             variant="ghost"
             size="icon-sm"
-            className="hover:bg-transparent hover:text-emerald-500"
+            className="hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent dark:hover:bg-transparent"
           />
         }
       >
@@ -102,24 +117,26 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="h-dvh max-h-none overflow-y-auto border-0 bg-foreground text-background shadow-none duration-200 ease-out data-ending-style:opacity-100 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-100 data-[side=top]:border-b-0 motion-reduce:transition-none sm:h-auto sm:max-h-dvh"
+        className="z-[90] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
       >
-        <header className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
+        <header className="flex h-16 items-center justify-between px-4">
           <SheetTitle className="text-left">
-            <span
-              className="flex items-center gap-1.5 text-background"
+            <Link
+              href={site.homeHref}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-1.5 text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               aria-label="Livepeer"
             >
               <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
               <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
-            </span>
+            </Link>
           </SheetTitle>
           <SheetClose
             render={
               <Button
                 variant="ghost"
                 size="icon-sm"
-                className="text-background hover:bg-transparent hover:text-emerald-500"
+                className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
               />
             }
           >
@@ -128,79 +145,90 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           </SheetClose>
         </header>
 
-        <div className="grid gap-12 px-4 pt-10 pb-8 sm:gap-16 sm:px-6 sm:pt-14 lg:px-10">
-          <nav className="flex flex-col items-start gap-4 text-left">
-            {menuLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "text-2xl font-light tracking-tight transition-colors hover:text-emerald-500 sm:text-3xl",
-                  pathname === item.href
-                    ? "text-background"
-                    : "text-background/55"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-4">
-            {site.socialLinks.map((social) => {
-              const Icon = socialIcons[social.service]
-
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={social.label}
-                  className="text-background/55 transition-colors hover:text-emerald-500"
+        <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:py-8">
+          <nav className="flex flex-col" aria-label="Mobile site sections">
+            {showLoginLinks ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setShowLoginLinks(false)}
+                  className="mb-6 flex w-fit items-center gap-2 rounded-sm py-2 font-sans text-sm text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <Icon className="size-5" aria-hidden="true" />
-                </a>
-              )
-            })}
-          </div>
+                  <ArrowLeftIcon aria-hidden="true" className="size-4" />
+                  Back
+                </button>
+                {loginLinks.map((item) => {
+                  const className =
+                    "flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
+                  const content = (
+                    <>
+                      <span>{item.label}</span>
+                      <span aria-hidden="true">↗</span>
+                    </>
+                  )
 
-          <div className="grid gap-10 sm:grid-cols-3">
-            {site.footerGroups.map((group) => (
-              <div key={group.title}>
-                <h2 className="text-sm font-medium text-background">
-                  {group.title}
-                </h2>
-                <div className="mt-4 flex flex-col items-start gap-3">
-                  {group.links.map((link) => {
-                    const external = link.href.startsWith("http")
+                  return item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {content}
+                    </Link>
+                  )
+                })}
+              </>
+            ) : (
+              <>
+                {mobileLinks.map((item) => {
+                  const className =
+                    "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
 
-                    return (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noreferrer" : undefined}
-                        onClick={() => setOpen(false)}
-                        className="inline-flex items-center gap-1 text-sm text-background/55 transition-colors hover:text-emerald-500"
-                      >
-                        {link.label}
-                        {external && (
-                          <ArrowUpRightIcon
-                            className="size-3.5"
-                            aria-hidden="true"
-                          />
-                        )}
-                      </a>
-                    )
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs text-background/55">{site.copyright}</p>
+                  return item.href.startsWith("http") ? (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+                <button
+                  type="button"
+                  onClick={() => setShowLoginLinks(true)}
+                  className="mt-8 flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
+                >
+                  <span>Login</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </>
+            )}
+          </nav>
         </div>
       </SheetContent>
     </Sheet>

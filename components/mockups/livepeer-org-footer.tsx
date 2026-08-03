@@ -14,40 +14,8 @@ const socialIcons = {
 export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
   return (
     <footer className="bg-background">
-      <div className="w-full px-4 pt-12 pb-6 sm:px-6 sm:pt-16 sm:pb-8 lg:px-10">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.8fr] lg:gap-10">
-          <div className="sm:col-span-2 lg:col-span-1">
-            <a
-              href={site.homeHref}
-              className="inline-flex items-center gap-1.5 text-foreground"
-              aria-label="Livepeer home"
-            >
-              <LivepeerGradientSymbol className="h-4 w-auto" />
-              <LivepeerWordmark className="h-4 w-auto" />
-            </a>
-            <p className="mt-4 text-sm text-muted-foreground">
-              {site.footerTagline}
-            </p>
-            <div className="mt-7 flex items-center gap-4">
-              {site.socialLinks.map((social) => {
-                const Icon = socialIcons[social.service]
-
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={social.label}
-                    className="text-muted-foreground transition-colors hover:text-emerald-500"
-                  >
-                    <Icon className="size-5" aria-hidden="true" />
-                  </a>
-                )
-              })}
-            </div>
-          </div>
-
+      <div className="w-full px-4 pt-12 pb-6">
+        <div className="grid gap-12 sm:grid-cols-3 lg:gap-10">
           {site.footerGroups.map((group) => (
             <div key={group.title}>
               <h2 className="text-sm font-medium">{group.title}</h2>
@@ -76,7 +44,36 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
           ))}
         </div>
 
-        <div className="mt-24">
+        <div className="mt-16 flex items-center gap-6 sm:justify-between md:grid md:grid-cols-3 md:justify-normal md:gap-12 lg:gap-10">
+          <a
+            href={site.homeHref}
+            className="inline-flex items-center gap-1.5 text-foreground md:col-start-1 md:row-start-1"
+            aria-label="Livepeer home"
+          >
+            <LivepeerGradientSymbol className="h-4 w-auto" />
+            <LivepeerWordmark className="h-4 w-auto" />
+          </a>
+          <div className="flex items-center gap-4 md:col-start-2 md:row-start-1">
+            {site.socialLinks.map((social) => {
+              const Icon = socialIcons[social.service]
+
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                  className="text-muted-foreground transition-colors hover:text-emerald-500"
+                >
+                  <Icon className="size-5" aria-hidden="true" />
+                </a>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="mt-12">
           <p className="text-xs text-muted-foreground">{site.copyright}</p>
         </div>
       </div>

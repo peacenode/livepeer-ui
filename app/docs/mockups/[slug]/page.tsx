@@ -12,7 +12,7 @@ const mockups = {
     title: "Internal Testing",
     description:
       "The Agent landing page is exclusively for private marketing and communications during internal testing.",
-    previewHref: "/mockups/agent-landing-page",
+    previewHref: "/docs/internal-testing/livepeer-org",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -26,7 +26,7 @@ const mockups = {
     title: "Private Beta",
     description:
       "The Agent landing page remains exclusively for private marketing and communications during the private beta.",
-    previewHref: "/mockups/private-beta",
+    previewHref: "/docs/private-beta/livepeer-org",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -40,14 +40,14 @@ const mockups = {
     title: "Public Beta",
     description:
       "The complete Livepeer.org public experience across the network, Agent, playbooks, ecosystem, and GPU participation.",
-    previewHref: "/mockups/livepeer-org",
+    previewHref: "/docs/public-beta/livepeer-org",
     componentGroup: "Livepeer.org",
   },
   "agent-landing-page": {
     title: "Agent Landing Page",
     description:
       "The Agent landing page is exclusively for private marketing and communications during internal testing.",
-    previewHref: "/mockups/agent-landing-page",
+    previewHref: "/docs/internal-testing/livepeer-org",
     componentGroup: "Livepeer.org",
     componentNames: [
       "livepeer-org-menu",
@@ -83,7 +83,7 @@ const mockups = {
     title: "Livepeer.org",
     description:
       "Navigation, landing, Agent, playbook, ecosystem, and network sections used across Livepeer.org.",
-    previewHref: "/mockups/livepeer-org",
+    previewHref: "/docs/public-beta/livepeer-org",
     componentGroup: "Livepeer.org",
   },
 } as const
@@ -103,7 +103,7 @@ const renderResultComponents = [
 
 const privateBetaLandingSurface: PrivateBetaSurface = {
   title: "Agent Landing Page",
-  href: "/mockups/private-beta/earlyaccess/about",
+  href: "/docs/private-beta/livepeer-org",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
@@ -204,12 +204,12 @@ const privateBetaRenderExamples: PrivateBetaSurface[] = [
 
 const internalTestingLandingSurface: PrivateBetaSurface = {
   ...privateBetaLandingSurface,
-  href: "/mockups/agent-landing-page",
+  href: "/docs/internal-testing/livepeer-org",
 }
 
 const publicBetaLivepeerSurface: PrivateBetaSurface = {
   title: "Livepeer.org",
-  href: "/mockups/livepeer-org",
+  href: "/docs/public-beta/livepeer-org",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
@@ -222,7 +222,7 @@ const publicBetaLivepeerSurface: PrivateBetaSurface = {
 
 const publicBetaInstallSurface: PrivateBetaSurface = {
   title: "Install instructions",
-  href: "/mockups/livepeer-org/agent",
+  href: "/docs/public-beta/livepeer-org/agent",
   components: [
     "livepeer-org-menu",
     "livepeer-org-header",
