@@ -264,7 +264,7 @@ export function LivepeerOrgHeaderNav({
     return () => document.removeEventListener("keydown", onKeyDown)
   }, [])
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     onOpenChange?.(activeTitle !== null)
   }, [activeTitle, onOpenChange])
 
