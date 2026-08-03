@@ -4,6 +4,7 @@ import Link from "next/link"
 import {
   ArrowUpRightIcon,
   BookOpenIcon,
+  BotIcon,
   CoinsIcon,
   CpuIcon,
   HandCoinsIcon,
@@ -24,7 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const headerGroups = ["Network", "Resources"]
+const headerGroups = ["Network", "Resources", "Agent"]
 
 const linkDescriptions: Record<string, string> = {
   Ecosystem: "Explore apps built on Livepeer",
@@ -36,6 +37,8 @@ const linkDescriptions: Record<string, string> = {
   Foundation: "Meet the organization supporting Livepeer",
   Brand: "Logos, guidelines, and brand assets",
   Documentation: "Technical guides and reference",
+  "Livepeer Agent": "Create and edit media with your agent",
+  "Agent Documentation": "Build with Livepeer AI tools and APIs",
 }
 
 const linkIcons: Record<string, LucideIcon> = {
@@ -48,6 +51,8 @@ const linkIcons: Record<string, LucideIcon> = {
   Foundation: LandmarkIcon,
   Brand: PaletteIcon,
   Documentation: BookOpenIcon,
+  "Livepeer Agent": BotIcon,
+  "Agent Documentation": BookOpenIcon,
 }
 
 const localLinkMatches: Record<
@@ -62,6 +67,8 @@ const localLinkMatches: Record<
   Blog: (label, href) => label === "Blog" || href.includes("/blog"),
   Foundation: (label, href) =>
     label === "Foundation" || href.includes("/foundation"),
+  "Livepeer Agent": (label, href) =>
+    label === "Livepeer Agent" || href.includes("/agent"),
 }
 
 const resourceOrder: Record<string, number> = {
@@ -87,6 +94,29 @@ function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
     : href
 }
 
+function getHeaderGroup(site: LivepeerOrgSite, title: string) {
+  if (title === "Agent") {
+    const matchesAgent = localLinkMatches["Livepeer Agent"]
+    const agentHref =
+      site.menuLinks.find((link) => matchesAgent(link.label, link.href))
+        ?.href ?? `${site.homeHref}/agent`
+
+    return {
+      _key: "agent",
+      title: "Agent",
+      links: [
+        { label: "Livepeer Agent", href: agentHref },
+        {
+          label: "Agent Documentation",
+          href: "https://docs.livepeer.org/v1/ai/builders/get-started",
+        },
+      ],
+    }
+  }
+
+  return site.footerGroups.find((item) => item.title === title)
+}
+
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
     <nav
@@ -94,7 +124,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
       aria-label="Site sections"
     >
       {headerGroups.map((title) => {
-        const group = site.footerGroups.find((item) => item.title === title)
+        const group = getHeaderGroup(site, title)
         if (!group) return null
 
         return (
