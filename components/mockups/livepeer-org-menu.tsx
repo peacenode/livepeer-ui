@@ -77,9 +77,9 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       ),
     },
     {
-      label: "Provide GPU",
+      label: "Provide Compute",
       href: findHref(
-        ["GPU", "Provide GPUs", "Provide GPU"],
+        ["GPU", "Provide GPUs", "Provide GPU", "Provide Compute"],
         "/earn",
         `${site.homeHref}/earn`
       ),
