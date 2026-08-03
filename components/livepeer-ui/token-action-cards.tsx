@@ -48,10 +48,10 @@ export function TokenExchangeCard({
   content: TokenContent["exchanges"]
 }) {
   return (
-    <article className="grid aspect-square grid-rows-6 overflow-hidden">
+    <article className="grid aspect-square grid-rows-[1.25fr_repeat(5,1fr)] overflow-hidden">
       <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
-        <h2 className="text-2xl font-light tracking-tight sm:text-3xl">
-          Livepeer Token is available on
+        <h2 className="max-w-[14ch] text-2xl font-light tracking-tight text-balance sm:text-3xl">
+          Livepeer Token is available on...
         </h2>
       </div>
       {content.links.map((exchange) => {
