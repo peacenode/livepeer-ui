@@ -5,13 +5,7 @@ import Link from "next/link"
 import { XIcon } from "lucide-react"
 
 import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
-import {
-  getLivepeerOrgFoundationHref,
-  getLivepeerOrgHeaderGroup,
-  getLivepeerOrgHeaderLinks,
-  livepeerOrgHeaderGroups,
-  LivepeerOrgNavItem,
-} from "@/components/mockups/livepeer-org-header-nav"
+import { getLivepeerOrgFoundationHref } from "@/components/mockups/livepeer-org-header-nav"
 import type { LivepeerOrgSite } from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
 import {
@@ -37,6 +31,58 @@ function LivepeerMenuIcon() {
 
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const [open, setOpen] = React.useState(false)
+  const allLinks = [
+    ...site.menuLinks,
+    ...site.footerGroups.flatMap((group) => group.links),
+  ]
+  const findHref = (labels: string[], path: string, fallback: string) =>
+    site.menuLinks.find(
+      (link) => labels.includes(link.label) || link.href.includes(path)
+    )?.href ??
+    allLinks.find(
+      (link) => labels.includes(link.label) || link.href.includes(path)
+    )?.href ??
+    fallback
+  const mobileLinks = [
+    { label: "Home", href: site.homeHref },
+    { label: "Foundation", href: getLivepeerOrgFoundationHref(site) },
+    {
+      label: "Ecosystem",
+      href: findHref(["Ecosystem"], "/ecosystem", `${site.homeHref}/ecosystem`),
+    },
+    {
+      label: "Agent",
+      href: findHref(
+        ["Livepeer Agent", "Agent"],
+        "/agent",
+        `${site.homeHref}/agent`
+      ),
+    },
+    {
+      label: "$LPT",
+      href: findHref(
+        ["Livepeer Token", "$LPT"],
+        "/token",
+        `${site.homeHref}/token`
+      ),
+    },
+    {
+      label: "Provide GPU",
+      href: findHref(
+        ["GPU", "Provide GPUs", "Provide GPU"],
+        "/earn",
+        `${site.homeHref}/earn`
+      ),
+    },
+    {
+      label: "Latest Updates",
+      href: findHref(
+        ["Blog", "Latest Updates"],
+        "/blog",
+        `${site.homeHref}/blog`
+      ),
+    },
+  ]
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -85,43 +131,33 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         </header>
 
         <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
-          <nav className="grid gap-8" aria-label="Mobile site sections">
-            {livepeerOrgHeaderGroups.map((title) => {
-              const group = getLivepeerOrgHeaderGroup(site, title)
-              if (!group) return null
+          <nav className="flex flex-col" aria-label="Mobile site sections">
+            {mobileLinks.map((item) => {
+              const className =
+                "rounded-sm py-3 text-2xl tracking-tight text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
 
-              return (
-                <section
-                  key={group._key}
-                  aria-labelledby={`${group._key}-title`}
+              return item.href.startsWith("http") ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className={className}
                 >
-                  <h2
-                    id={`${group._key}-title`}
-                    className="px-4 text-xs font-medium text-muted-foreground"
-                  >
-                    {group.title}
-                  </h2>
-                  <div className="mt-2 grid gap-1 sm:grid-cols-2">
-                    {getLivepeerOrgHeaderLinks(group).map((item) => (
-                      <LivepeerOrgNavItem
-                        key={`${item.label}-${item.href}`}
-                        site={site}
-                        item={item}
-                        onNavigate={() => setOpen(false)}
-                      />
-                    ))}
-                  </div>
-                </section>
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={className}
+                >
+                  {item.label}
+                </Link>
               )
             })}
-
-            <Link
-              href={getLivepeerOrgFoundationHref(site)}
-              onClick={() => setOpen(false)}
-              className="rounded-sm px-4 py-3 text-sm font-medium transition-colors outline-none hover:bg-muted focus-visible:bg-muted"
-            >
-              Foundation
-            </Link>
           </nav>
         </div>
       </SheetContent>
