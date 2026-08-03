@@ -22,6 +22,7 @@ export function DocsNav({
         { title: "Flows", href: "/marketing/agent-ftue-flow" },
         { title: "Social Kit", href: "/marketing/press-kit" },
         { title: "Brand Kit", href: "/marketing/brand-kit" },
+        { title: "Stock Images", href: "/marketing/stock-images" },
         { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
       ],
     },
