@@ -82,7 +82,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
               render={
                 <Button
                   variant="ghost"
-                  className="h-9 rounded-full px-4 font-normal text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:translate-y-0 aria-expanded:bg-muted aria-expanded:text-foreground"
+                  className="h-auto rounded-sm px-4 py-2.5 font-normal text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:translate-y-0 aria-expanded:bg-muted aria-expanded:text-foreground"
                 />
               }
             >
