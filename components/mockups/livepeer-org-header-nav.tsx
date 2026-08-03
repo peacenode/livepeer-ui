@@ -150,10 +150,12 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                       }
                       className="min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
                     >
-                      <Icon
-                        className="size-6 shrink-0 text-muted-foreground"
-                        strokeWidth={2}
-                      />
+                      <span className="flex size-10 shrink-0 items-center justify-center">
+                        <Icon
+                          className="size-6 text-muted-foreground"
+                          strokeWidth={2}
+                        />
+                      </span>
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                         <span className="text-sm text-popover-foreground">
                           {label}
