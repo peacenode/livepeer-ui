@@ -49,9 +49,9 @@ export function TokenExchangeCard({
 }) {
   return (
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
-      <div className="flex items-center justify-center bg-emerald-500 px-6 text-center text-black sm:px-10">
+      <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
         <h2 className="text-2xl font-light tracking-tight sm:text-3xl">
-          Buy $LPT
+          Get Livepeer Token
         </h2>
       </div>
       {content.links.map((exchange) => {
@@ -64,7 +64,7 @@ export function TokenExchangeCard({
             target="_blank"
             rel="noreferrer"
             aria-label={`Buy LPT on ${exchange.label}`}
-            className={`group flex items-center justify-between px-6 transition-[filter] hover:brightness-95 sm:px-10 ${style?.className ?? "bg-muted text-foreground"}`}
+            className={`group flex items-center px-6 transition-[filter] hover:brightness-95 sm:px-10 ${style?.className ?? "bg-muted text-foreground"}`}
           >
             {style ? (
               <span className="flex items-center gap-3">
@@ -75,19 +75,23 @@ export function TokenExchangeCard({
                   height={32}
                   className={style.logoClassName}
                 />
-                <span className="text-xl font-normal tracking-tight sm:text-2xl">
-                  {exchange.label}
+                <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
+                  <span>{exchange.label}</span>
+                  <ArrowUpRightIcon
+                    className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
                 </span>
               </span>
             ) : (
-              <span className="text-xl font-normal tracking-tight sm:text-2xl">
-                {exchange.label}
+              <span className="inline-flex items-center gap-1.5 text-xl font-normal tracking-tight sm:text-2xl">
+                <span>{exchange.label}</span>
+                <ArrowUpRightIcon
+                  className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
               </span>
             )}
-            <ArrowUpRightIcon
-              className="size-5 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              aria-hidden="true"
-            />
           </a>
         )
       })}
