@@ -14,6 +14,19 @@ import {
 
 const headerGroups = ["Network", "Resources"]
 
+const linkDescriptions: Record<string, string> = {
+  Ecosystem: "Explore apps built on Livepeer",
+  "Livepeer Token": "Learn how LPT coordinates the network",
+  "Delegate LPT": "Stake LPT with network operators",
+  "Provide GPUs": "Run an orchestrator and earn fees",
+  Roadmap: "See what’s next for the network",
+  Primer: "Understand Livepeer in ten minutes",
+  Blog: "Updates from across the ecosystem",
+  Foundation: "Meet the organization supporting Livepeer",
+  Brand: "Logos, guidelines, and brand assets",
+  Documentation: "Technical guides and reference",
+}
+
 const localLinkMatches: Record<string, (label: string, href: string) => boolean> = {
   Ecosystem: (label, href) => label === "Ecosystem" || href.includes("/ecosystem"),
   "Livepeer Token": (label, href) =>
@@ -42,8 +55,11 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
         if (!group) return null
 
         return (
-          <DropdownMenu key={group._key}>
+          <DropdownMenu key={group._key} modal={false}>
             <DropdownMenuTrigger
+              openOnHover
+              delay={80}
+              closeDelay={120}
               render={
                 <Button
                   variant="ghost"
@@ -72,9 +88,16 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                         <Link href={href} />
                       )
                     }
-                    className="min-h-12 rounded-xl border border-black/[0.06] bg-white px-4 font-normal shadow-xs transition-[background-color,border-color] hover:border-black/[0.1] focus:border-black/[0.1] focus:bg-muted/40"
+                    className="min-h-16 items-center rounded-xl border border-black/[0.06] bg-white px-4 py-3 font-normal shadow-xs transition-[background-color,border-color] hover:border-black/[0.1] focus:border-black/[0.1] focus:bg-muted/40"
                   >
-                    <span>{item.label}</span>
+                    <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                      <span className="text-sm text-foreground">
+                        {item.label}
+                      </span>
+                      <span className="text-xs leading-snug text-muted-foreground">
+                        {linkDescriptions[item.label]}
+                      </span>
+                    </span>
                     {external && (
                       <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
                     )}
