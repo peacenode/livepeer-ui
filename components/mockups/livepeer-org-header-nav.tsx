@@ -90,7 +90,7 @@ function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
     <nav
-      className="hidden items-center gap-1 md:flex"
+      className="hidden items-center gap-2 md:flex"
       aria-label="Site sections"
     >
       {headerGroups.map((title) => {
@@ -150,7 +150,10 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
                       }
                       className="min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors hover:bg-muted focus:bg-muted"
                     >
-                      <Icon className="size-4 shrink-0 text-muted-foreground" />
+                      <Icon
+                        className="size-6 shrink-0 text-muted-foreground"
+                        strokeWidth={2}
+                      />
                       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                         <span className="text-sm text-popover-foreground">
                           {label}

@@ -35,7 +35,7 @@ export function LivepeerOrgHeader({
             <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
           </span>
         </Link>
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-2 sm:gap-3">
           {showMenu && <LivepeerOrgHeaderNav site={site} />}
           {playbooksHref && (
             <Button
