@@ -28,7 +28,7 @@ export function LivepeerOrgHeader({
     )?.href ?? `${site.homeHref}/agent`
 
   return (
-    <header className="relative z-50 w-full bg-background">
+    <header className="relative z-50 w-full bg-transparent transition-colors duration-200 has-[[aria-expanded=true]]:bg-background">
       <div className="flex h-16 w-full items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
         <div className="flex min-w-0 items-end gap-5">
           <Link

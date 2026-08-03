@@ -17,11 +17,20 @@ import {
   type LucideIcon,
 } from "lucide-react"
 
-import type { LivepeerOrgSite } from "@/components/mockups/contracts"
+import type {
+  EditorialLink,
+  LivepeerOrgSite,
+} from "@/components/mockups/contracts"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const headerGroups = ["Network", "Agent", "Resources", "Foundation"]
+export const livepeerOrgHeaderGroups = [
+  "Network",
+  "Agent",
+  "Resources",
+] as const
+
+const headerItems = [...livepeerOrgHeaderGroups, "Foundation"] as const
 
 const linkDescriptions: Record<string, string> = {
   Ecosystem: "Explore apps built on Livepeer",
@@ -90,7 +99,10 @@ function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
     : href
 }
 
-function getHeaderGroup(site: LivepeerOrgSite, title: string) {
+export function getLivepeerOrgHeaderGroup(
+  site: LivepeerOrgSite,
+  title: (typeof livepeerOrgHeaderGroups)[number]
+) {
   if (title === "Agent") {
     const matchesAgent = localLinkMatches["Livepeer Agent"]
     const agentHref =
@@ -113,28 +125,92 @@ function getHeaderGroup(site: LivepeerOrgSite, title: string) {
   return site.footerGroups.find((item) => item.title === title)
 }
 
+export function getLivepeerOrgHeaderLinks(
+  group: NonNullable<ReturnType<typeof getLivepeerOrgHeaderGroup>>
+) {
+  return [...group.links]
+    .filter((item) => item.label !== "Primer" && item.label !== "Foundation")
+    .sort((a, b) => {
+      const order =
+        group.title === "Resources"
+          ? resourceOrder
+          : group.title === "Network"
+            ? networkOrder
+            : null
+
+      return order ? (order[a.label] ?? 99) - (order[b.label] ?? 99) : 0
+    })
+}
+
+export function getLivepeerOrgFoundationHref(site: LivepeerOrgSite) {
+  return resolveHref(site, "Foundation", "https://livepeer.org/foundation")
+}
+
+export function LivepeerOrgNavItem({
+  site,
+  item,
+  onNavigate,
+  className,
+}: {
+  site: LivepeerOrgSite
+  item: EditorialLink
+  onNavigate?: () => void
+  className?: string
+}) {
+  const href = resolveHref(site, item.label, item.href)
+  const external = href.startsWith("http")
+  const label = item.label === "Blog" ? "Latest Updates" : item.label
+  const Icon = linkIcons[item.label]
+  const content = (
+    <>
+      <span className="flex size-10 shrink-0 items-center justify-center">
+        <Icon className="size-6 text-muted-foreground" strokeWidth={2} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <span className="text-sm text-foreground">{label}</span>
+        <span className="text-xs leading-snug text-muted-foreground">
+          {linkDescriptions[item.label]}
+        </span>
+      </span>
+      {external && (
+        <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
+      )}
+    </>
+  )
+  const itemClassName = cn(
+    "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none transition-colors outline-none hover:bg-muted focus-visible:bg-muted",
+    className
+  )
+
+  return external ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={itemClassName}
+      onClick={onNavigate}
+    >
+      {content}
+    </a>
+  ) : (
+    <Link href={href} className={itemClassName} onClick={onNavigate}>
+      {content}
+    </Link>
+  )
+}
+
 export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   const [activeTitle, setActiveTitle] = React.useState<string | null>(null)
   const [renderedTitle, setRenderedTitle] = React.useState("Network")
   const [panelLeft, setPanelLeft] = React.useState(0)
   const navRef = React.useRef<HTMLElement | null>(null)
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
-  const renderedGroup = getHeaderGroup(site, renderedTitle)
+  const renderedGroup = getLivepeerOrgHeaderGroup(
+    site,
+    renderedTitle as (typeof livepeerOrgHeaderGroups)[number]
+  )
   const renderedLinks = renderedGroup
-    ? [...renderedGroup.links]
-        .filter(
-          (item) => item.label !== "Primer" && item.label !== "Foundation"
-        )
-        .sort((a, b) => {
-          const order =
-            renderedGroup.title === "Resources"
-              ? resourceOrder
-              : renderedGroup.title === "Network"
-                ? networkOrder
-                : null
-
-          return order ? (order[a.label] ?? 99) - (order[b.label] ?? 99) : 0
-        })
+    ? getLivepeerOrgHeaderLinks(renderedGroup)
     : []
   const columnCount = Math.min(3, renderedLinks.length)
   const panelWidth = columnCount * 288
@@ -177,7 +253,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
   return (
     <nav
       ref={navRef}
-      className="relative top-1 hidden items-end gap-0 lg:flex"
+      className="relative top-1 hidden items-end gap-0 before:absolute before:inset-x-0 before:-top-7 before:h-7 before:content-[''] lg:flex"
       aria-label="Site sections"
       onPointerEnter={cancelClose}
       onPointerLeave={scheduleClose}
@@ -185,22 +261,14 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
         if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
       }}
     >
-      {headerGroups.map((title) => {
+      {headerItems.map((title) => {
         if (title === "Foundation") {
           return (
             <Button
               key={title}
               variant="ghost"
               nativeButton={false}
-              render={
-                <Link
-                  href={resolveHref(
-                    site,
-                    "Foundation",
-                    "https://livepeer.org/foundation"
-                  )}
-                />
-              }
+              render={<Link href={getLivepeerOrgFoundationHref(site)} />}
               onPointerEnter={() => setActiveTitle(null)}
               onFocus={() => setActiveTitle(null)}
               className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
@@ -210,7 +278,7 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
           )
         }
 
-        const group = getHeaderGroup(site, title)
+        const group = getLivepeerOrgHeaderGroup(site, title)
         if (!group) return null
 
         return (
@@ -229,6 +297,14 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
           </Button>
         )
       })}
+
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none fixed inset-x-0 top-16 bottom-0 z-40 bg-black/40 transition-opacity duration-200 ease-out",
+          activeTitle ? "opacity-100" : "opacity-0"
+        )}
+      />
 
       <div
         id="livepeer-header-menu"
@@ -256,60 +332,14 @@ export function LivepeerOrgHeaderNav({ site }: { site: LivepeerOrgSite }) {
             }}
             className="grid max-w-full gap-1 data-[switching=true]:opacity-0 motion-safe:animate-in motion-safe:duration-150 motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-1"
           >
-            {renderedLinks.map((item) => {
-              const href = resolveHref(site, item.label, item.href)
-              const external = href.startsWith("http")
-              const label =
-                item.label === "Blog" ? "Latest Updates" : item.label
-              const Icon = linkIcons[item.label]
-
-              const content = (
-                <>
-                  <span className="flex size-10 shrink-0 items-center justify-center">
-                    <Icon
-                      className="size-6 text-muted-foreground"
-                      strokeWidth={2}
-                    />
-                  </span>
-                  <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                    <span className="text-sm text-popover-foreground">
-                      {label}
-                    </span>
-                    <span className="text-xs leading-snug text-muted-foreground">
-                      {linkDescriptions[item.label]}
-                    </span>
-                  </span>
-                  {external && (
-                    <ArrowUpRightIcon className="ml-auto size-3.5 text-muted-foreground" />
-                  )}
-                </>
-              )
-
-              const className =
-                "flex min-h-16 items-center rounded-sm bg-transparent px-4 py-3 font-normal shadow-none outline-none transition-colors hover:bg-muted focus-visible:bg-muted"
-
-              return external ? (
-                <a
-                  key={`${item.label}-${href}`}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={className}
-                  onClick={() => setActiveTitle(null)}
-                >
-                  {content}
-                </a>
-              ) : (
-                <Link
-                  key={`${item.label}-${href}`}
-                  href={href}
-                  className={className}
-                  onClick={() => setActiveTitle(null)}
-                >
-                  {content}
-                </Link>
-              )
-            })}
+            {renderedLinks.map((item) => (
+              <LivepeerOrgNavItem
+                key={`${item.label}-${item.href}`}
+                site={site}
+                item={item}
+                onNavigate={() => setActiveTitle(null)}
+              />
+            ))}
           </div>
         </div>
       </div>
