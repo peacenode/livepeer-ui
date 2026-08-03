@@ -174,7 +174,7 @@ export function LivepeerOrgNavItem({
       </span>
       <span className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="text-sm text-foreground">{label}</span>
-        <span className="text-xs leading-snug text-muted-foreground">
+        <span className="truncate text-xs leading-snug text-muted-foreground">
           {linkDescriptions[item.label]}
         </span>
       </span>
