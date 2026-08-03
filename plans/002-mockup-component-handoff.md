@@ -391,9 +391,9 @@ Current sources:
 
 ### Earn
 
-Public route: `/mockups/livepeer-org/earn`
+Public route: `/mockups/livepeer-org/compute`
 
-Current source: `app/mockups/playbooks/earn/page.tsx`
+Current source: `app/mockups/playbooks/compute/page.tsx`
 
 | Zone | Handoff section | Child components | Primitives |
 | --- | --- | --- | --- |

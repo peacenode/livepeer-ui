@@ -11,7 +11,7 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
     { label: "Home", href: "/mockups/livepeer-org" },
     { label: "Ecosystem", href: "/mockups/livepeer-org/ecosystem" },
     { label: "Livepeer Token", href: "/mockups/livepeer-org/token" },
-    { label: "GPU", href: "/mockups/livepeer-org/earn" },
+    { label: "GPU", href: "/mockups/livepeer-org/compute" },
     { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
     { label: "Blog", href: "/mockups/livepeer-org/blog" },
     { label: "Foundation", href: "/mockups/livepeer-org/foundation" },
@@ -99,7 +99,7 @@ export const livepeerOrgHomeFixture: NonNullable<
     heading: "Become an Orchestrator",
     description:
       "Put a GPU on the Livepeer network and earn from inference workloads, service payouts, and protocol rewards.",
-    cta: { label: "Get Started", href: "/mockups/livepeer-org/earn" },
+    cta: { label: "Get Started", href: "/mockups/livepeer-org/compute" },
   },
 }
 

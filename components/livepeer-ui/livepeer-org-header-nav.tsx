@@ -44,7 +44,7 @@ const localLinkMatches: Record<
     label === "Ecosystem" || href.includes("/ecosystem"),
   "Livepeer Token": (label, href) =>
     label === "Livepeer Token" || href.includes("/token"),
-  "Provide GPUs": (label, href) => label === "GPU" || href.includes("/earn"),
+  "Provide GPUs": (label, href) => label === "GPU" || href.includes("/compute"),
   Blog: (label, href) => label === "Blog" || href.includes("/blog"),
   Foundation: (label, href) =>
     label === "Foundation" || href.includes("/foundation"),

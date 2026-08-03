@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/mockups/livepeer-org/earn/:path*",
+        destination: "/mockups/livepeer-org/compute/:path*",
+        permanent: true,
+      },
+      {
         source: "/mockups/livepeer-org/:path*",
         destination: "/docs/public-beta/livepeer-org/:path*",
         permanent: true,
