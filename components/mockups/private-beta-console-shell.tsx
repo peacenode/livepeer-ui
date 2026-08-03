@@ -1,4 +1,4 @@
-import { agentConsoleUserFixture } from "@/components/mockups/fixtures/agent-console-user"
+import { agentConsoleUserFixture } from "@/components/demos/fixtures/agent-console-user"
 import { PlatformAuthGate } from "@/components/mockups/platform-auth-gate"
 import { PlatformSidebar } from "@/components/mockups/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
@@ -27,7 +27,7 @@ export async function PrivateBetaConsoleShell({
   }
   const navigation = shell.navigation.map((item) => ({
     ...item,
-    ...(item._key ? releaseCycleHrefs[item._key] ?? {} : {}),
+    ...(item._key ? (releaseCycleHrefs[item._key] ?? {}) : {}),
     external: false,
   }))
 
