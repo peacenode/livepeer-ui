@@ -17,22 +17,19 @@ import {
 function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
   return (
     <span aria-hidden="true" className="relative block h-4 w-8">
+      <span className="absolute top-0.5 right-0.5 h-1 w-[30px] bg-current" />
       <span
-        className={`absolute right-0.5 h-1 w-[30px] origin-[63.333%_50%] transition-[top,transform] duration-[3000ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
-          open ? "top-1.5 -rotate-45" : "top-0.5"
-        }`}
-      >
-        <span
-          className={`block h-full w-full origin-right bg-current transition-transform duration-[3000ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
-            open ? "scale-x-[0.7333]" : "scale-x-100"
-          }`}
-        />
-      </span>
-      <span
-        className={`absolute right-0.5 h-1 w-[22px] origin-center bg-current transition-[top,transform] duration-[3000ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
-          open ? "top-1.5 rotate-45" : "top-2.5"
+        className={`absolute top-2.5 right-0.5 h-1 w-[22px] bg-current transition-[transform,opacity] duration-300 ease-in-out motion-reduce:transition-none ${
+          open ? "translate-x-6 opacity-0" : "translate-x-0 opacity-100"
         }`}
       />
+      <span
+        className={`absolute top-2 right-0.5 text-xs leading-none font-normal transition-[transform,opacity] duration-300 ease-in-out motion-reduce:transition-none ${
+          open ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0"
+        }`}
+      >
+        Close
+      </span>
     </span>
   )
 }
