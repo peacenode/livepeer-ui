@@ -10,12 +10,11 @@ import type { LivepeerBlogPostSummary } from "@/sanity/lib/livepeer-blog"
 
 const categories = [
   "All",
-  "Protocol",
-  "Ecosystem",
   "Network",
+  "Agent",
   "Community",
-  "News",
-  "Governance",
+  "Proposals",
+  "Engineering",
 ]
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -24,10 +23,6 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
   timeZone: "UTC",
 })
-
-function displayCategory(category: string) {
-  return category === "Product & Protocol" ? "Protocol" : category
-}
 
 export function LivepeerBlogIndex({
   posts,
@@ -39,8 +34,7 @@ export function LivepeerBlogIndex({
   const visiblePosts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
     return posts.filter((post) => {
-      const matchesCategory =
-        category === "All" || displayCategory(post.category) === category
+      const matchesCategory = category === "All" || post.category === category
       const matchesQuery =
         normalizedQuery.length === 0 ||
         [post.title, post.description, post.author, post.category].some(
@@ -91,9 +85,7 @@ export function LivepeerBlogIndex({
                 {post.title}
               </h2>
               <div className="flex items-center gap-2 pl-[1px]">
-                <span className="text-xs text-foreground">
-                  {displayCategory(post.category)}
-                </span>
+                <span className="text-xs text-foreground">{post.category}</span>
                 <time
                   dateTime={post.publishedAt}
                   className="text-xs text-muted-foreground"
