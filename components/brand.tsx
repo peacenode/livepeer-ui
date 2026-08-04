@@ -88,7 +88,7 @@ function LivepeerLogo({ className, ...props }: React.ComponentProps<"span">) {
         .join(" ")}
       {...props}
     >
-      <LivepeerGradientSymbol className="h-4 w-auto" aria-hidden="true" />
+      {/* <LivepeerGradientSymbol className="h-4 w-auto" aria-hidden="true" /> */}
       <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
     </span>
   )
