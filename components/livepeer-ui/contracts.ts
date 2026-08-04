@@ -30,50 +30,6 @@ export interface AgentConsoleUser {
   email: string
 }
 
-export type VideoBuddyPageName =
-  | "home"
-  | "characters"
-  | "footage"
-  | "install"
-  | "projects"
-  | "protocol"
-  | "storyboards"
-
-export type VideoBuddyProtocolIcon = "play" | "blocks" | "cpu"
-
-export interface VideoBuddyPageContent {
-  _id: string
-  _type: "videoBuddyPageContent"
-  page: VideoBuddyPageName
-  metadataTitle: string
-  heading?: string
-  description?: string
-  primaryActionLabel?: string
-  emptyStateTitle?: string
-  supportingText?: string
-  protocol?: {
-    eyebrow: string
-    flowHeading: string
-    layers: {
-      _key: string
-      number: string
-      title: string
-      description: string
-      detail: string
-      href: string
-      icon: VideoBuddyProtocolIcon
-    }[]
-    requestHeading: string
-    requestSteps: { _key: string; title: string; description: string }[]
-    agentPropertyHeading: string
-    agentPropertyDescription: string
-    paymentPropertyHeading: string
-    paymentPropertyDescription: string
-    architectureLinkLabel: string
-    architectureLinkHref: string
-  }
-}
-
 export type EditorialLink = { _key?: string; label: string; href: string }
 export type LivepeerOrgPageSlug =
   | "home"

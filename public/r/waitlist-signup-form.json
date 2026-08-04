@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "waitlist-signup-form",
   "title": "Signup Form",
-  "description": "Email capture form with the emerald early-access action.",
+  "description": "Email capture form with a prominent early-access action.",
   "dependencies": [
     "lucide-react"
   ],
