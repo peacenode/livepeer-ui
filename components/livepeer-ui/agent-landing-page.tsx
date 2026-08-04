@@ -56,18 +56,14 @@ export function AgentLandingPage({
                 AGENT
               </span>
             </div>
-            <h1 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
+            <h1 className="max-w-3xl text-display-sm text-balance sm:text-display-lg">
               {content.hero.heading}
             </h1>
             <Button
               size="lg"
               nativeButton={false}
               render={<Link href="/mockups/private-beta/earlyaccess" />}
-              className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
-              style={{
-                backgroundImage:
-                  "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-              }}
+              className="h-16 rounded-sm px-4"
             >
               Join waitlist
               <ArrowRightIcon className="size-4" aria-hidden="true" />

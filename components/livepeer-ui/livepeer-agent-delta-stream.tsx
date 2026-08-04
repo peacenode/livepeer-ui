@@ -31,7 +31,13 @@ function makeParticles(count: number): DeltaParticle[] {
   }))
 }
 
-function LivepeerAgentDeltaStream({ className }: { className?: string }) {
+function LivepeerAgentDeltaStream({
+  className,
+  contained = false,
+}: {
+  className?: string
+  contained?: boolean
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -79,8 +85,11 @@ function LivepeerAgentDeltaStream({ className }: { className?: string }) {
       const isMobile = width < 640
       const particleSize = isMobile ? 2 : 3
       const sourceX = width * 0.5
-      const sourceY = height * (isMobile ? 0.255 : 0.39)
-      const travelHeight = height * (isMobile ? 0.34 : 0.4)
+      const sourceY =
+        height *
+        (contained ? (isMobile ? 0.92 : 0.94) : isMobile ? 0.255 : 0.39)
+      const travelHeight =
+        height * (contained ? (isMobile ? 0.96 : 0.98) : isMobile ? 0.34 : 0.4)
       const fanWidth = Math.min(
         width * (isMobile ? 0.46 : 0.34),
         isMobile ? 230 : 520
@@ -176,7 +185,7 @@ function LivepeerAgentDeltaStream({ className }: { className?: string }) {
       observer.disconnect()
       themeObserver.disconnect()
     }
-  }, [])
+  }, [contained])
 
   return (
     <canvas

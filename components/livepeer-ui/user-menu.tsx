@@ -71,7 +71,7 @@ export function UserMenu({
             onValueChange={(value) => {
               if (value[0]) setTheme(value[0])
             }}
-            className="rounded-lg bg-muted p-0.5"
+            className="rounded-sm bg-muted p-0.5"
           >
             {themes.map(({ value, label, icon: Icon }) => (
               <ToggleGroupItem

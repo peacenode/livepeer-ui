@@ -126,7 +126,7 @@ function AssetPromptEditor({
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder="Describe your changes..."
-        className="mt-2 min-h-24 resize-none rounded-md"
+        className="mt-2 min-h-24 resize-none rounded-sm"
       />
       <Button
         type="button"
@@ -210,7 +210,7 @@ export function ProjectResultPage({
       <div className="mx-auto w-full max-w-6xl md:pt-6">
         <header className="mb-10 flex items-center justify-between gap-4">
           <div>
-            <h1 className="font-sans text-[2rem] leading-[0.98] font-light tracking-[-0.025em] text-balance">
+            <h1 className="font-sans text-page-title text-balance">
               {projectName}
             </h1>
             <div
@@ -303,7 +303,7 @@ export function ProjectResultPage({
         }}
       >
         <DialogContent
-          className="h-[min(50rem,calc(100dvh-2rem))] overflow-hidden rounded-lg p-0 sm:max-w-6xl"
+          className="h-[min(50rem,calc(100dvh-2rem))] overflow-hidden rounded-sm p-0 sm:max-w-6xl"
         >
           {selectedAsset && (
             <div className="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_18rem] md:grid-rows-1">

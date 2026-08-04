@@ -107,11 +107,7 @@ export function SubmitEcosystemDialog({
                 rel="noreferrer"
               />
             }
-            className="h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-5 text-white hover:bg-emerald-500 sm:w-auto"
-            style={{
-              backgroundImage:
-                "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-            }}
+            className="h-16 w-full rounded-sm px-5 sm:w-auto"
           >
             {content.githubCta.label}
             <ArrowUpRightIcon aria-hidden="true" />

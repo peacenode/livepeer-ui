@@ -37,7 +37,7 @@ export function InstallAgentFooter({
           </span>
         </div>
         <div className="mt-5 flex flex-col items-center">
-          <h2 className="max-w-3xl text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-6xl">
+          <h2 className="max-w-3xl text-display-sm text-balance sm:text-display-lg">
             {title}
           </h2>
         </div>

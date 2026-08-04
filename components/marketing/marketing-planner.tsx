@@ -24,7 +24,7 @@ const displayDate = (date: string) =>
 
 function PlannerItem({ item }: { item: MarketingPlanItem }) {
   return (
-    <div className="flex min-w-0 flex-col gap-3 rounded-md bg-muted p-4">
+    <div className="flex min-w-0 flex-col gap-3 rounded-sm bg-muted p-4">
       <div className="flex flex-col gap-1">
         <h3 className="font-sans text-sm leading-6 font-medium">
           {item.title}
@@ -86,7 +86,7 @@ function PlannerDocuments({
         <Link
           key={document._id}
           href={`/marketing/planner/${kind}/${document.slug}`}
-          className="group flex min-w-0 items-start gap-3 rounded-md bg-muted p-4"
+          className="group flex min-w-0 items-start gap-3 rounded-sm bg-muted p-4"
         >
           <FileTextIcon
             className="mt-0.5 size-4 shrink-0 text-muted-foreground"

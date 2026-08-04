@@ -48,19 +48,19 @@ export function TokenExchangeCard({
 }) {
   return (
     <article className="grid aspect-square grid-rows-6 overflow-hidden">
-      <div className="flex items-center justify-center bg-black px-6 text-center text-white sm:px-10">
+      <div className="flex items-center justify-center bg-foreground px-6 text-center text-background sm:px-10">
         <h2 className="flex items-center gap-1.5">
-          <span className="text-xs font-normal tracking-tight text-white/60">
+          <span className="text-xs font-normal tracking-tight text-background/60">
             Get
           </span>
-          <span className="flex items-center gap-1 text-white">
+          <span className="flex items-center gap-1 text-background">
             <LivepeerGradientSymbol
               className="h-2.5 w-auto shrink-0 sm:h-3"
               aria-hidden="true"
             />
             <span className="text-xs font-normal">$LPT</span>
           </span>
-          <span className="text-xs font-normal tracking-tight text-white/60">
+          <span className="text-xs font-normal tracking-tight text-background/60">
             at…
           </span>
         </h2>

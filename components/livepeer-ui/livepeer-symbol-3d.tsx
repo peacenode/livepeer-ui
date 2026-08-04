@@ -151,7 +151,7 @@ function LivepeerSymbol3D({
   return (
     <div
       className={cn(
-        "absolute inset-0 overflow-hidden rounded-4xl [&_canvas]:!size-full",
+        "absolute inset-0 overflow-hidden rounded-sm [&_canvas]:!size-full",
         className
       )}
       aria-hidden="true"

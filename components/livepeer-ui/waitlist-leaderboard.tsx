@@ -23,7 +23,7 @@ export function WaitlistLeaderboard({
       <h2 id="waitlist-leaders" className="text-sm font-medium">
         {heading}
       </h2>
-      <div className="mt-3 overflow-hidden rounded-md border">
+      <div className="mt-3 overflow-hidden rounded-sm border">
         <div className="flex items-center justify-between border-b px-3 py-2 text-xs text-muted-foreground">
           <span>{personColumnLabel}</span>
           <span>{referralsColumnLabel}</span>

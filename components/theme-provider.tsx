@@ -55,6 +55,12 @@ function ThemeHotkey() {
         return
       }
 
+      event.preventDefault()
+
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+
       setTheme(resolvedTheme === "dark" ? "light" : "dark")
     }
 

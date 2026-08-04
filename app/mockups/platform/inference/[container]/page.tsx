@@ -192,7 +192,7 @@ export default async function ContainerDetailPage({
           <CardDescription>{content.runLocallyDescription}</CardDescription>
         </CardHeader>
         <CardContent>
-          <pre className="overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs leading-relaxed">
+          <pre className="overflow-x-auto rounded-sm bg-muted px-4 py-3 font-mono text-xs leading-relaxed">
             {`${container.run}\n${container.ping}`}
           </pre>
         </CardContent>
