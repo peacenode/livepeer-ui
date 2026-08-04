@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { ArrowLeftIcon, XIcon } from "lucide-react"
+import { ArrowLeftIcon } from "lucide-react"
 
 import { LivepeerLogo } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
@@ -16,16 +16,24 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-function LivepeerMenuIcon() {
+function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 32 16"
-      fill="currentColor"
-      aria-hidden="true"
-      className="size-4 w-8"
-    >
-      <path d="M1 2h30v4H1zM9 10h22v4H9z" />
-    </svg>
+    <span aria-hidden="true" className="relative block h-4 w-8">
+      <span
+        className={`absolute h-1 w-[30px] bg-current transition-[top,left,transform] duration-200 ease-out motion-reduce:transition-none ${
+          open
+            ? "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
+            : "top-0.5 left-0.5"
+        }`}
+      />
+      <span
+        className={`absolute h-1 w-[30px] origin-right bg-current transition-[top,right,transform] duration-200 ease-out motion-reduce:transition-none ${
+          open
+            ? "top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 scale-x-100 -rotate-45"
+            : "top-2.5 right-0.5 scale-x-[0.7333]"
+        }`}
+      />
+    </span>
   )
 }
 
@@ -110,7 +118,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           />
         }
       >
-        <LivepeerMenuIcon />
+        <LivepeerMenuIcon open={open} />
         <span className="sr-only">Open site navigation</span>
       </SheetTrigger>
       <SheetContent
@@ -139,7 +147,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
               />
             }
           >
-            <XIcon />
+            <LivepeerMenuIcon open />
             <span className="sr-only">Close site navigation</span>
           </SheetClose>
         </header>
