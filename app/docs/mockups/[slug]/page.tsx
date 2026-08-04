@@ -253,7 +253,7 @@ function MockupEmbed({
 }) {
   const preview = (
     <>
-      <div className="relative aspect-[1.91/1] overflow-hidden rounded-2xl border bg-black">
+      <div className="relative aspect-[1.91/1] overflow-hidden rounded-sm border bg-black">
         <Image
           src="/brand/og.png"
           alt=""
@@ -285,7 +285,7 @@ function MockupEmbed({
       href={href}
       target="_blank"
       aria-label={`Open the ${title} mockup`}
-      className="block rounded-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+      className="block rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
     >
       {preview}
     </Link>
@@ -305,7 +305,7 @@ function ProductSurfaceEmbed({
 }) {
   const content = (
     <>
-      <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl border bg-black sm:size-24">
+      <div className="flex size-20 shrink-0 items-center justify-center rounded-sm border bg-black sm:size-24">
         <LivepeerGradientSymbol
           className="h-8 w-auto sm:h-10"
           aria-hidden="true"
@@ -328,7 +328,7 @@ function ProductSurfaceEmbed({
       href={surface.href}
       target="_blank"
       aria-label={`Open the ${surface.title} mockup`}
-      className={`flex items-center gap-3 rounded-xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${className}`}
+      className={`flex items-center gap-3 rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none ${className}`}
     >
       {content}
     </Link>

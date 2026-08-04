@@ -38,7 +38,7 @@ function Swatch({ step, className }: { step: string; className: string }) {
           setCopied(true)
           setTimeout(() => setCopied(false), 1200)
         }}
-        className={`h-14 w-full cursor-pointer rounded-md border border-border/50 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 ${className}`}
+        className={`h-14 w-full cursor-pointer rounded-sm border border-border/50 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 ${className}`}
       />
       <span className="font-mono text-[11px] leading-none">{step}</span>
       <span className="truncate font-mono text-[10px] leading-none text-muted-foreground">

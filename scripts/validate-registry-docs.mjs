@@ -16,6 +16,41 @@ const metadataByName = new Map(metadataItems.map((item) => [item.name, item]))
 const registryByName = new Map(registry.items.map((item) => [item.name, item]))
 const errors = []
 
+const approvedGreenExpressionFiles = new Set([
+  "app/docs/colors/page.tsx",
+  "app/docs/mockups/[slug]/page.tsx",
+  "app/mockups/playbooks/compute/page.tsx",
+  "app/planner-access/page.tsx",
+  "components/brand.tsx",
+  "components/livepeer-ui/api-keys-section.tsx",
+  "components/livepeer-ui/livepeer-staking-card.tsx",
+  "components/livepeer-ui/platform-auth-gate.tsx",
+  "components/livepeer-ui/token-diagrams.tsx",
+  "components/livepeer-ui/waitlist-leaderboard.tsx",
+  "components/livepeer-ui/waitlist-referral-link.tsx",
+  "components/livepeer-ui/waitlist-status-card.tsx",
+])
+
+function walkSourceFiles(directory) {
+  return fs.readdirSync(path.join(root, directory), { withFileTypes: true }).flatMap(
+    (entry) => {
+      const relativePath = path.join(directory, entry.name)
+      if (entry.isDirectory()) return walkSourceFiles(relativePath)
+      return relativePath.endsWith(".tsx") ? [relativePath] : []
+    }
+  )
+}
+
+for (const file of [...walkSourceFiles("app"), ...walkSourceFiles("components")]) {
+  if (approvedGreenExpressionFiles.has(file)) continue
+
+  const source = fs.readFileSync(path.join(root, file), "utf8")
+  requireRelationship(
+    !/emerald-|color\(display-p3/.test(source),
+    `${file}: brand green is not allowed outside the approved non-interactive/status expression list`
+  )
+}
+
 function requireRelationship(condition, message) {
   if (!condition) errors.push(message)
 }

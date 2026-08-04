@@ -49,7 +49,7 @@ export function DisplayTypeScale() {
         </div>
       </Tabs>
 
-      <div className="mt-4 flex flex-col divide-y rounded-lg border">
+      <div className="mt-4 flex flex-col divide-y rounded-sm border">
         {textSizes.map((size) => (
           <div
             key={size.label}

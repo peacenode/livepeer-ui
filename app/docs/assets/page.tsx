@@ -65,7 +65,7 @@ export default async function AssetsPage() {
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Favicon</h2>
       <div className="mt-4 flex flex-col gap-3">
-        <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
+        <div className="grid grid-cols-1 overflow-hidden rounded-sm border sm:grid-cols-2">
           <div className="relative flex min-h-[140px] items-center justify-center bg-background p-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -122,7 +122,7 @@ export default async function AssetsPage() {
           return (
             <figure
               key={`${width}x${height}`}
-              className="overflow-hidden rounded-lg border"
+              className="overflow-hidden rounded-sm border"
             >
               <div className="relative flex aspect-4/3 items-center justify-center bg-muted p-6">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
