@@ -4,13 +4,11 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowLeftIcon } from "lucide-react"
 
-import { LivepeerLogo } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
@@ -131,40 +129,18 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
         }
       >
         <LivepeerMenuIcon open={open} />
-        <span className="sr-only">Open site navigation</span>
+        <span className="sr-only">
+          {open ? "Close site navigation" : "Open site navigation"}
+        </span>
       </SheetTrigger>
       <SheetContent
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="z-[90] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
+        className="z-[70] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
       >
-        <header className="flex h-16 items-center justify-between px-4 sm:px-6">
-          <SheetTitle className="text-left">
-            <Link
-              href={site.homeHref}
-              onClick={() => setOpen(false)}
-              className="flex shrink-0 items-center text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              aria-label="Livepeer.org home"
-            >
-              <LivepeerLogo />
-            </Link>
-          </SheetTitle>
-          <SheetClose
-            render={
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-              />
-            }
-          >
-            <LivepeerMenuIcon open />
-            <span className="sr-only">Close site navigation</span>
-          </SheetClose>
-        </header>
-
-        <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
+        <SheetTitle className="sr-only">Site navigation</SheetTitle>
+        <div className="h-dvh overflow-y-auto px-4 pt-[5.5rem] pb-6 sm:px-6 sm:pt-24 sm:pb-8">
           <nav className="flex flex-col" aria-label="Mobile site sections">
             {showLoginLinks ? (
               <>
