@@ -44,7 +44,7 @@ const localLinkMatches: Record<
     label === "Ecosystem" || href.includes("/ecosystem"),
   "Livepeer Token": (label, href) =>
     label === "Livepeer Token" || href.includes("/token"),
-  "Provide GPUs": (label, href) => label === "GPU" || href.includes("/earn"),
+  "Provide GPUs": (label, href) => label === "GPU" || href.includes("/compute"),
   Blog: (label, href) => label === "Blog" || href.includes("/blog"),
   Foundation: (label, href) =>
     label === "Foundation" || href.includes("/foundation"),
@@ -69,10 +69,14 @@ const networkOrder: Record<string, number> = {
 
 function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
   const matches = localLinkMatches[label]
-  return matches
+  const resolvedHref = matches
     ? (site.menuLinks.find((link) => matches(link.label, link.href))?.href ??
-        href)
+      href)
     : href
+
+  return label === "Provide GPUs"
+    ? resolvedHref.replace(/\/earn(?=\/|$)/, "/compute")
+    : resolvedHref
 }
 
 export function getLivepeerOrgHeaderGroup(
@@ -159,7 +163,7 @@ export function LivepeerOrgNavItem({
   className?: string
 }) {
   const href = resolveHref(site, item.label, item.href)
-  const external = href.startsWith("http")
+  const jumpOut = href.startsWith("http") || item.label === "Agent Playbooks"
   const label =
     item.label === "Blog"
       ? "Latest Updates"
@@ -183,7 +187,7 @@ export function LivepeerOrgNavItem({
       <span className="flex min-w-0 flex-1 flex-col gap-1 pt-1">
         <span className="flex items-start gap-1.5 text-sm text-foreground">
           <span className="min-w-0 truncate">{label}</span>
-          {external && (
+          {jumpOut && (
             <ArrowUpRightIcon className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" />
           )}
         </span>
@@ -198,7 +202,7 @@ export function LivepeerOrgNavItem({
     className
   )
 
-  return external ? (
+  return jumpOut ? (
     <a
       href={href}
       target="_blank"
@@ -290,7 +294,8 @@ export function LivepeerOrgHeaderNav({
         onPointerEnter={cancelClose}
         onPointerLeave={scheduleClose}
         onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) scheduleClose()
+          if (!event.currentTarget.contains(event.relatedTarget))
+            scheduleClose()
         }}
       >
         {headerItems.map((title) => {
@@ -303,7 +308,7 @@ export function LivepeerOrgHeaderNav({
                 render={<Link href={getLivepeerOrgFoundationHref(site)} />}
                 onPointerEnter={() => setActiveTitle(null)}
                 onFocus={() => setActiveTitle(null)}
-                className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+                className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 dark:hover:bg-transparent"
               >
                 Foundation
               </Button>

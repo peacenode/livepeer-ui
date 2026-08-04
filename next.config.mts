@@ -1,6 +1,7 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["m5.tail0de21e.ts.net", "127.0.0.1"],
   images: {
     remotePatterns: [
       {
@@ -25,6 +26,11 @@ const nextConfig: NextConfig = {
       {
         source: "/mockups/livepeer-org/install/:path*",
         destination: "/mockups/livepeer-org/agent/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/livepeer-org/earn/:path*",
+        destination: "/mockups/livepeer-org/compute/:path*",
         permanent: true,
       },
       {

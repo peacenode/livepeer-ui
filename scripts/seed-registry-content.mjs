@@ -163,7 +163,7 @@ const documents = [
         "ecosystem-card",
         "ecosystem-catalog",
       ]),
-      page("Provide GPU compute", "/mockups/livepeer-org/earn", [
+      page("Provide GPU compute", "/mockups/livepeer-org/compute", [
         ...livepeerOrgShell,
       ]),
     ],

@@ -31,6 +31,10 @@ export const livepeerBlogPostType = defineType({
       name: "category",
       title: "Category",
       type: "string",
+      options: {
+        list: ["Network", "Agent", "Community", "Proposals", "Engineering"],
+        layout: "radio",
+      },
       validation: (rule) => rule.required(),
     }),
     defineField({

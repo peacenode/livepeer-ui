@@ -77,6 +77,23 @@ function LivepeerWordmark(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+function LivepeerLogo({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      className={[
+        "inline-flex shrink-0 items-center gap-1.5 text-foreground",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      {...props}
+    >
+      {/* <LivepeerGradientSymbol className="h-4 w-auto" aria-hidden="true" /> */}
+      <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
+    </span>
+  )
+}
+
 function LivepeerLockup(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -115,13 +132,7 @@ function LivepeerGradientLockup({
           <stop offset=".32" stopColor="color(display-p3 0.04 0.74 0.49)" />
           <stop offset="1" stopColor="color(display-p3 0.02 0.58 0.36)" />
         </linearGradient>
-        <linearGradient
-          id={wordmarkGradientId}
-          x1="0"
-          y1="0"
-          x2=".342"
-          y2="1"
-        >
+        <linearGradient id={wordmarkGradientId} x1="0" y1="0" x2=".342" y2="1">
           <stop offset="0" stopColor="#fff" />
           <stop offset=".46" stopColor="#fff" />
           <stop offset=".72" stopColor="#ededed" />
@@ -142,9 +153,7 @@ function LivepeerGradientLockup({
       </defs>
       <g
         fill={
-          metallic
-            ? `url(#${metallicSymbolGradientId})`
-            : `url(#${gradientId})`
+          metallic ? `url(#${metallicSymbolGradientId})` : `url(#${gradientId})`
         }
         stroke={metallic ? "#45e7ab" : undefined}
         strokeWidth={metallic ? 1 : undefined}
@@ -205,6 +214,7 @@ export {
   LivepeerSymbol,
   LivepeerGradientSymbol,
   LivepeerWordmark,
+  LivepeerLogo,
   LivepeerLockup,
   LivepeerGradientLockup,
   AgentWordmark,

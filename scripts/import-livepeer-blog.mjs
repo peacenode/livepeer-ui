@@ -84,7 +84,16 @@ async function importPost(slug) {
       "category"
     )
   )
-  const category = sourceCategory === "Product & Protocol" ? "Protocol" : sourceCategory
+  const category = {
+    "Product & Protocol": "Network",
+    Protocol: "Network",
+    Ecosystem: "Community",
+    Community: "Community",
+    News: "Community",
+    Governance: "Proposals",
+    Network: "Network",
+  }[sourceCategory]
+  if (!category) throw new Error(`Unmapped blog category: ${sourceCategory}`)
   const publishedAt = extract(article, /<time dateTime="([^"]+)"/, "date")
   const readingTime = Number(
     extract(article, /<span>(\d+) min read<\/span>/, "reading time")

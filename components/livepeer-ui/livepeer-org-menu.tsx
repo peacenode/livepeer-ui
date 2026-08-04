@@ -2,30 +2,44 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { ArrowLeftIcon, XIcon } from "lucide-react"
+import { ArrowLeftIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 
-function LivepeerMenuIcon() {
+function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 32 16"
-      fill="currentColor"
-      aria-hidden="true"
-      className="size-4 w-8"
-    >
-      <path d="M1 2h30v4H1zM9 10h22v4H9z" />
-    </svg>
+    <span aria-hidden="true" className="relative block h-4 w-8">
+      <span
+        className="absolute right-0.5 h-1 w-[30px] transition-[top,transform] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
+        style={{
+          top: open ? 6 : 2,
+          transform: open ? "rotate(135deg)" : "rotate(0deg)",
+          transformOrigin: "19px 50%",
+        }}
+      >
+        <span
+          className="block h-full w-full origin-right bg-current transition-transform duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
+          style={{
+            transform: open ? "scaleX(0.733333)" : "scaleX(1)",
+          }}
+        />
+      </span>
+      <span
+        className="absolute right-0.5 h-1 w-[22px] origin-center bg-current transition-[top,transform] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
+        style={{
+          top: open ? 6 : 10,
+          transform: open ? "rotate(45deg)" : "rotate(0deg)",
+        }}
+      />
+    </span>
   )
 }
 
@@ -80,9 +94,9 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       label: "Provide Compute",
       href: findHref(
         ["GPU", "Provide GPUs", "Provide GPU", "Provide Compute"],
-        "/earn",
-        `${site.homeHref}/earn`
-      ),
+        "/compute",
+        `${site.homeHref}/compute`
+      ).replace(/\/earn(?=\/|$)/, "/compute"),
     },
     {
       label: "Latest Updates",
@@ -110,42 +124,19 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
           />
         }
       >
-        <LivepeerMenuIcon />
-        <span className="sr-only">Open site navigation</span>
+        <LivepeerMenuIcon open={open} />
+        <span className="sr-only">
+          {open ? "Close site navigation" : "Open site navigation"}
+        </span>
       </SheetTrigger>
       <SheetContent
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="z-[90] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
+        className="z-[70] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
       >
-        <header className="flex h-16 items-center justify-between px-4">
-          <SheetTitle className="text-left">
-            <Link
-              href={site.homeHref}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-1.5 text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              aria-label="Livepeer"
-            >
-              <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
-              <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
-            </Link>
-          </SheetTitle>
-          <SheetClose
-            render={
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent"
-              />
-            }
-          >
-            <XIcon />
-            <span className="sr-only">Close site navigation</span>
-          </SheetClose>
-        </header>
-
-        <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6 sm:py-8">
+        <SheetTitle className="sr-only">Site navigation</SheetTitle>
+        <div className="h-dvh overflow-y-auto px-4 pt-[5.5rem] pb-6 sm:px-6 sm:pt-24 sm:pb-8">
           <nav className="flex flex-col" aria-label="Mobile site sections">
             {showLoginLinks ? (
               <>
