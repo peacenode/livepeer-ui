@@ -20,25 +20,31 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
             <div key={group.title}>
               <h2 className="text-sm font-medium">{group.title}</h2>
               <nav className="mt-4 flex flex-col items-start gap-3">
-                {group.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      link.href.startsWith("http") ? "noreferrer" : undefined
-                    }
-                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-emerald-500"
-                  >
-                    {link.label}
-                    {link.href.startsWith("http") && (
-                      <ArrowUpRightIcon
-                        className="size-3.5"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </a>
-                ))}
+                {group.links.map((link) => {
+                  const isLatest = link.label === "Blog"
+                  const href = isLatest
+                    ? `${site.homeHref}/latest`
+                    : link.href
+                  const external = href.startsWith("http")
+
+                  return (
+                    <a
+                      key={link.label}
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noreferrer" : undefined}
+                      className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {isLatest ? "Latest Updates" : link.label}
+                      {external && (
+                        <ArrowUpRightIcon
+                          className="size-3.5"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </a>
+                  )
+                })}
               </nav>
             </div>
           ))}
@@ -63,7 +69,7 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={social.label}
-                  className="text-muted-foreground transition-colors hover:text-emerald-500"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Icon className="size-5" aria-hidden="true" />
                 </a>

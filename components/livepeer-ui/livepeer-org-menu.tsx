@@ -55,6 +55,9 @@ const loginLinks = [
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const [open, setOpen] = React.useState(false)
   const [showLoginLinks, setShowLoginLinks] = React.useState(false)
+  const resetLoginLinksTimer = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  )
   const allLinks = [
     ...site.menuLinks,
     ...site.footerGroups.flatMap((group) => group.links),
@@ -102,15 +105,30 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       label: "Latest Updates",
       href: findHref(
         ["Blog", "Latest Updates"],
-        "/blog",
-        `${site.homeHref}/blog`
-      ),
+        "/latest",
+        `${site.homeHref}/latest`
+      ).replace(/\/blog(?=\/|$)/, "/latest"),
     },
   ]
 
+  const clearLoginLinksReset = React.useCallback(() => {
+    if (resetLoginLinksTimer.current) {
+      clearTimeout(resetLoginLinksTimer.current)
+      resetLoginLinksTimer.current = null
+    }
+  }, [])
+
+  React.useEffect(() => clearLoginLinksReset, [clearLoginLinksReset])
+
   const handleOpenChange = (nextOpen: boolean) => {
+    clearLoginLinksReset()
     setOpen(nextOpen)
-    if (!nextOpen) setShowLoginLinks(false)
+    if (!nextOpen) {
+      resetLoginLinksTimer.current = setTimeout(() => {
+        setShowLoginLinks(false)
+        resetLoginLinksTimer.current = null
+      }, 220)
+    }
   }
 
   return (
@@ -137,7 +155,10 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
       >
         <SheetTitle className="sr-only">Site navigation</SheetTitle>
         <div className="h-dvh overflow-y-auto px-4 pt-[5.5rem] pb-6 sm:px-6 sm:pt-24 sm:pb-8">
-          <nav className="flex flex-col" aria-label="Mobile site sections">
+          <nav
+            className="relative -left-[0.04em] flex flex-col"
+            aria-label="Mobile site sections"
+          >
             {showLoginLinks ? (
               <>
                 <button
@@ -150,7 +171,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 </button>
                 {loginLinks.map((item) => {
                   const className =
-                    "flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
+                    "flex items-center gap-2 rounded-sm py-2.5 font-display text-display-sm text-foreground outline-none transition-colors hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-display-lg"
                   const content = (
                     <>
                       <span>{item.label}</span>
@@ -164,7 +185,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => setOpen(false)}
+                      onClick={() => handleOpenChange(false)}
                       className={className}
                     >
                       {content}
@@ -173,7 +194,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => handleOpenChange(false)}
                       className={className}
                     >
                       {content}
@@ -185,7 +206,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
               <>
                 {mobileLinks.map((item) => {
                   const className =
-                    "rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
+                    "rounded-sm py-2.5 font-display text-display-sm text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-display-lg"
 
                   return item.href.startsWith("http") ? (
                     <a
@@ -193,7 +214,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => setOpen(false)}
+                      onClick={() => handleOpenChange(false)}
                       className={className}
                     >
                       {item.label}
@@ -202,7 +223,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => handleOpenChange(false)}
                       className={className}
                     >
                       {item.label}
@@ -212,7 +233,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                 <button
                   type="button"
                   onClick={() => setShowLoginLinks(true)}
-                  className="mt-8 flex items-center gap-2 rounded-sm py-2.5 font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-6xl"
+                  className="mt-8 flex items-center gap-2 rounded-sm py-2.5 font-display text-display-sm text-foreground transition-colors outline-none hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:text-display-lg"
                 >
                   <span>Login</span>
                   <span aria-hidden="true">→</span>

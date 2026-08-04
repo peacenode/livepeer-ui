@@ -45,7 +45,8 @@ const localLinkMatches: Record<
   "Livepeer Token": (label, href) =>
     label === "Livepeer Token" || href.includes("/token"),
   "Provide GPUs": (label, href) => label === "GPU" || href.includes("/compute"),
-  Blog: (label, href) => label === "Blog" || href.includes("/blog"),
+  Blog: (label, href) =>
+    label === "Blog" || href.includes("/latest") || href.includes("/blog"),
   Foundation: (label, href) =>
     label === "Foundation" || href.includes("/foundation"),
   "Livepeer Agent": (label, href) =>
@@ -74,8 +75,12 @@ function resolveHref(site: LivepeerOrgSite, label: string, href: string) {
       href)
     : href
 
-  return label === "Provide GPUs"
-    ? resolvedHref.replace(/\/earn(?=\/|$)/, "/compute")
+  if (label === "Provide GPUs") {
+    return resolvedHref.replace(/\/earn(?=\/|$)/, "/compute")
+  }
+
+  return label === "Blog"
+    ? resolvedHref.replace(/\/blog(?=\/|$)/, "/latest")
     : resolvedHref
 }
 

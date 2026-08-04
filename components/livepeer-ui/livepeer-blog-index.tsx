@@ -64,14 +64,14 @@ export function LivepeerBlogIndex({
           categoryGridClassName="grid-cols-3"
         />
 
-        <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
           {visiblePosts.map((post, index) => (
             <Link
               key={post._id}
-              href={`/mockups/livepeer-org/blog/${post.slug}`}
+              href={`/mockups/livepeer-org/latest/${post.slug}`}
               className="group flex min-w-0 flex-col gap-2"
             >
-              <div className="relative aspect-[16/9] overflow-hidden rounded-sm border bg-muted">
+              <div className="relative aspect-square overflow-hidden rounded-sm border bg-muted">
                 <Image
                   src={post.heroImageUrl}
                   alt={post.heroImageAlt || ""}
@@ -81,14 +81,16 @@ export function LivepeerBlogIndex({
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
-              <h2 className="font-display text-xl font-light tracking-tight text-balance">
+              <h2 className="font-display text-xl leading-snug font-light tracking-tight text-pretty">
                 {post.title}
               </h2>
-              <div className="flex items-center gap-2 pl-[1px]">
-                <span className="text-xs text-foreground">{post.category}</span>
+              <div className="flex items-center gap-2 overflow-hidden pl-[1px] whitespace-nowrap">
+                <span className="shrink-0 text-xs text-foreground">
+                  {post.category}
+                </span>
                 <time
                   dateTime={post.publishedAt}
-                  className="text-xs text-muted-foreground"
+                  className="min-w-0 truncate text-xs text-muted-foreground"
                 >
                   {dateFormatter.format(new Date(post.publishedAt))}
                 </time>

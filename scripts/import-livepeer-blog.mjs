@@ -161,7 +161,7 @@ console.log(`Found ${slugs.length} posts`)
 for (const slug of slugs) await importPost(slug)
 const hasBlogLink = await client.fetch(
   `defined(*[_id == "livepeerOrgSite" && $href in menuLinks[].href][0])`,
-  { href: "/mockups/livepeer-org/blog" }
+  { href: "/mockups/livepeer-org/latest" }
 )
 if (!hasBlogLink) {
   await client
@@ -172,7 +172,7 @@ if (!hasBlogLink) {
         _key: "blog",
         _type: "livepeerOrgLink",
         label: "Blog",
-        href: "/mockups/livepeer-org/blog",
+        href: "/mockups/livepeer-org/latest",
       },
     ])
     .commit()

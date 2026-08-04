@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/docs/public-beta/livepeer-org/blog/:path*",
+        destination: "/docs/public-beta/livepeer-org/latest/:path*",
+        permanent: true,
+      },
+      {
+        source: "/mockups/livepeer-org/blog/:path*",
+        destination: "/docs/public-beta/livepeer-org/latest/:path*",
+        permanent: true,
+      },
+      {
         source: "/mockups/runner/:path*",
         destination: "/mockups/client/:path*",
         permanent: true,
@@ -96,10 +106,6 @@ const nextConfig: NextConfig = {
         {
           source: "/docs/public-beta/livepeer-org/:path*",
           destination: "/mockups/playbooks/:path*",
-        },
-        {
-          source: "/mockups/client/:path*",
-          destination: "/mockups/videobuddy/:path*",
         },
         {
           source: "/mockups/livepeer-agent/:path*",

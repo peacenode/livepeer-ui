@@ -23,7 +23,7 @@ export async function generateMetadata({
   return { title: post.title, description: post.description }
 }
 
-export default async function LivepeerBlogPostPage({
+export default async function LivepeerLatestPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>
@@ -38,10 +38,10 @@ export default async function LivepeerBlogPostPage({
         <header className="mb-12">
           <div className="mb-8 flex items-center gap-2 text-sm text-muted-foreground">
             <Link
-              href="/mockups/livepeer-org/blog"
+              href="/mockups/livepeer-org/latest"
               className="transition-colors hover:text-foreground"
             >
-              Blog
+              Latest Updates
             </Link>
             <span aria-hidden>›</span>
             <span>{post.category}</span>
@@ -77,7 +77,7 @@ export default async function LivepeerBlogPostPage({
 
         <div className="mt-16 border-t pt-10 text-center">
           <Link
-            href="/mockups/livepeer-org/blog"
+            href="/mockups/livepeer-org/latest"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             ← All posts
