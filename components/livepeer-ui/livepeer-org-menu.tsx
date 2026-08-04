@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowLeftIcon, XIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerLogo } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 import { Button } from "@/components/ui/button"
@@ -124,11 +124,10 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
             <Link
               href={site.homeHref}
               onClick={() => setOpen(false)}
-              className="flex shrink-0 items-center gap-3 text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="flex shrink-0 items-center text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
               aria-label="Livepeer.org home"
             >
-              <LivepeerGradientSymbol className="h-4 w-auto" />
-              <LivepeerWordmark className="h-4 w-auto" />
+              <LivepeerLogo />
             </Link>
           </SheetTitle>
           <SheetClose

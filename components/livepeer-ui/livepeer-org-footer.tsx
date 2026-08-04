@@ -1,6 +1,6 @@
 import { ArrowUpRightIcon, GlobeIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerLogo } from "@/components/brand"
 import { DiscordIcon, GitHubIcon, XIcon } from "@/components/brand-social-icons"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
 
@@ -47,11 +47,10 @@ export function LivepeerOrgFooter({ site }: { site: LivepeerOrgSite }) {
         <div className="mt-16 flex items-center justify-between gap-6 sm:grid sm:grid-cols-3 sm:justify-normal sm:gap-12 lg:gap-10">
           <a
             href={site.homeHref}
-            className="inline-flex items-center gap-1.5 text-foreground sm:col-start-1 sm:row-start-1"
+            className="inline-flex items-center text-foreground sm:col-start-1 sm:row-start-1"
             aria-label="Livepeer home"
           >
-            <LivepeerGradientSymbol className="h-4 w-auto" />
-            <LivepeerWordmark className="h-4 w-auto" />
+            <LivepeerLogo />
           </a>
           <div className="flex items-center gap-4 sm:col-start-2 sm:row-start-1">
             {site.socialLinks.map((social) => {

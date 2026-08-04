@@ -5,7 +5,7 @@ import Link from "next/link"
 import { createPortal } from "react-dom"
 import { ChevronDownIcon } from "lucide-react"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerLogo } from "@/components/brand"
 import { LivepeerOrgHeaderNav } from "@/components/livepeer-ui/livepeer-org-header-nav"
 import { LivepeerOrgMenu } from "@/components/livepeer-ui/livepeer-org-menu"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
@@ -106,10 +106,7 @@ export function LivepeerOrgHeader({
               className="relative z-10 flex shrink-0 items-center gap-3"
               aria-label="Livepeer.org home"
             >
-              <span className="flex items-center gap-1.5 text-foreground">
-                <LivepeerGradientSymbol className="h-4 w-auto" />
-                <LivepeerWordmark className="h-4 w-auto" />
-              </span>
+              <LivepeerLogo />
             </Link>
             {showMenu && (
               <LivepeerOrgHeaderNav
