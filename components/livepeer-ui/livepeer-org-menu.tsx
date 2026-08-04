@@ -124,11 +124,11 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
             <Link
               href={site.homeHref}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-1.5 text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-              aria-label="Livepeer"
+              className="flex shrink-0 items-center gap-3 text-foreground focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              aria-label="Livepeer.org home"
             >
-              <LivepeerGradientSymbol className="h-3.5 w-auto sm:h-4" />
-              <LivepeerWordmark className="h-3.5 w-auto sm:h-4" />
+              <LivepeerGradientSymbol className="h-4 w-auto" />
+              <LivepeerWordmark className="h-4 w-auto" />
             </Link>
           </SheetTitle>
           <SheetClose
