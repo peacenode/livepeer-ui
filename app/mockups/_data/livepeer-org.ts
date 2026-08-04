@@ -13,7 +13,7 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
     { label: "Livepeer Token", href: "/mockups/livepeer-org/token" },
     { label: "GPU", href: "/mockups/livepeer-org/compute" },
     { label: "Livepeer Agent", href: "/mockups/livepeer-org/agent" },
-    { label: "Blog", href: "/mockups/livepeer-org/blog" },
+    { label: "Blog", href: "/mockups/livepeer-org/latest" },
     { label: "Foundation", href: "/mockups/livepeer-org/foundation" },
   ],
   footerTagline: "The open inference network.",
@@ -37,7 +37,7 @@ export const livepeerOrgSiteFixture: LivepeerOrgSite = {
       title: "Resources",
       links: [
         { label: "Primer", href: "https://livepeer.org/primer" },
-        { label: "Blog", href: "https://livepeer.org/blog" },
+        { label: "Blog", href: "/mockups/livepeer-org/latest" },
         { label: "Foundation", href: "https://livepeer.org/foundation" },
         { label: "Brand", href: "https://livepeer.org/brand" },
         { label: "Documentation", href: "https://docs.livepeer.org" },
