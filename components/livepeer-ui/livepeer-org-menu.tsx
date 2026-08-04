@@ -39,7 +39,11 @@ function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
             : "top-2.5 right-0.5"
         }`}
       >
-        <span className="block h-full w-full origin-center scale-x-[0.7333] bg-current" />
+        <span
+          className={`block h-full w-full scale-x-[0.7333] bg-current transition-transform duration-200 ease-out motion-reduce:transition-none ${
+            open ? "origin-center" : "origin-right"
+          }`}
+        />
       </span>
     </span>
   )
