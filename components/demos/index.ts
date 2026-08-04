@@ -42,14 +42,6 @@ import ApiKeysSectionDemo from "./api-keys-section-demo"
 import ApiLogsSectionDemo from "./api-logs-section-demo"
 import BillingPageSummaryDemo from "./billing-page-summary-demo"
 import BillingWorkspaceSectionDemo from "./billing-workspace-section-demo"
-import ClientApplicationShellDemo from "./client-application-shell-demo"
-import ClientApplicationSidebarDemo from "./client-application-sidebar-demo"
-import ClientEmptyStateDemo from "./client-empty-state-demo"
-import ClientInstallCommandDemo from "./client-install-command-demo"
-import ClientMobileBottomNavigationDemo from "./client-mobile-bottom-navigation-demo"
-import ClipCardDemo from "./clip-card-demo"
-import ClipsHeaderDemo from "./clips-header-demo"
-import ClipsLibraryDemo from "./clips-library-demo"
 import ComputeMetricsDemo from "./compute-metrics-demo"
 import ComputeWorkspaceSectionDemo from "./compute-workspace-section-demo"
 import CopyButtonDemo from "./copy-button-demo"
@@ -67,9 +59,7 @@ import LivepeerAgentPageFrameDemo from "./livepeer-agent-page-frame-demo"
 import LivepeerAgentPromoCardsDemo from "./livepeer-agent-promo-cards-demo"
 import LivepeerAgentSidebarDemo from "./livepeer-agent-sidebar-demo"
 import LivepeerAgentSignInCardDemo from "./livepeer-agent-sign-in-card-demo"
-import MediaContextMenuDemo from "./media-context-menu-demo"
 import OrchestratorTableSectionDemo from "./orchestrator-table-section-demo"
-import ProjectPickerDemo from "./project-picker-demo"
 import LivepeerAgentFeatureSectionDemo from "./livepeer-agent-feature-section-demo"
 import LivepeerOrgFooterDemo from "./livepeer-org-footer-demo"
 import LivepeerOrgHeaderDemo from "./livepeer-org-header-demo"
@@ -78,10 +68,6 @@ import PlaybookCardDemo from "./playbook-card-demo"
 import PlaybookCatalogDemo from "./playbook-catalog-demo"
 import PlaybookLibraryHeaderDemo from "./playbook-library-header-demo"
 import PlaybooksCtaSectionDemo from "./playbooks-cta-section-demo"
-import ProtocolFlowSectionDemo from "./protocol-flow-section-demo"
-import ProtocolHeaderSectionDemo from "./protocol-header-section-demo"
-import ProtocolPropertiesSectionDemo from "./protocol-properties-section-demo"
-import ProtocolRequestFlowSectionDemo from "./protocol-request-flow-section-demo"
 import ResourceUsageTableDemo from "./resource-usage-table-demo"
 import SubmitEcosystemDialogDemo from "./submit-ecosystem-dialog-demo"
 import UsageWorkspaceSectionDemo from "./usage-workspace-section-demo"
@@ -96,11 +82,6 @@ import WaitlistStatusCardDemo from "./waitlist-status-card-demo"
 import WelcomeEmailDemo from "./welcome-email-demo"
 import NetworkHeroSectionDemo from "./network-hero-section-demo"
 import OrchestratorCtaSectionDemo from "./orchestrator-cta-section-demo"
-import CharactersWorkspaceSectionDemo from "./characters-workspace-section-demo"
-import ClipsLibrarySectionDemo from "./clips-library-section-demo"
-import GenerationWorkspaceSectionDemo from "./generation-workspace-section-demo"
-import ProjectsWorkspaceSectionDemo from "./projects-workspace-section-demo"
-import StoryboardsWorkspaceSectionDemo from "./storyboards-workspace-section-demo"
 
 export const demos: Record<string, ComponentType> = {
   accordion: AccordionDemo,
@@ -145,14 +126,6 @@ export const demos: Record<string, ComponentType> = {
   "api-logs-section": ApiLogsSectionDemo,
   "billing-page-summary": BillingPageSummaryDemo,
   "billing-workspace-section": BillingWorkspaceSectionDemo,
-  "client-application-shell": ClientApplicationShellDemo,
-  "client-application-sidebar": ClientApplicationSidebarDemo,
-  "client-empty-state": ClientEmptyStateDemo,
-  "client-install-command": ClientInstallCommandDemo,
-  "client-mobile-bottom-navigation": ClientMobileBottomNavigationDemo,
-  "clip-card": ClipCardDemo,
-  "clips-header": ClipsHeaderDemo,
-  "clips-library": ClipsLibraryDemo,
   "compute-metrics": ComputeMetricsDemo,
   "compute-workspace-section": ComputeWorkspaceSectionDemo,
   "copy-button": CopyButtonDemo,
@@ -170,9 +143,7 @@ export const demos: Record<string, ComponentType> = {
   "livepeer-agent-promo-cards": LivepeerAgentPromoCardsDemo,
   "livepeer-agent-sidebar": LivepeerAgentSidebarDemo,
   "livepeer-agent-sign-in-card": LivepeerAgentSignInCardDemo,
-  "media-context-menu": MediaContextMenuDemo,
   "orchestrator-table-section": OrchestratorTableSectionDemo,
-  "project-picker": ProjectPickerDemo,
   "livepeer-agent-feature-section": LivepeerAgentFeatureSectionDemo,
   "livepeer-org-footer": LivepeerOrgFooterDemo,
   "livepeer-org-header": LivepeerOrgHeaderDemo,
@@ -181,10 +152,6 @@ export const demos: Record<string, ComponentType> = {
   "playbook-catalog": PlaybookCatalogDemo,
   "playbook-library-header": PlaybookLibraryHeaderDemo,
   "playbooks-cta-section": PlaybooksCtaSectionDemo,
-  "protocol-flow-section": ProtocolFlowSectionDemo,
-  "protocol-header-section": ProtocolHeaderSectionDemo,
-  "protocol-properties-section": ProtocolPropertiesSectionDemo,
-  "protocol-request-flow-section": ProtocolRequestFlowSectionDemo,
   "resource-usage-table": ResourceUsageTableDemo,
   "submit-ecosystem-dialog": SubmitEcosystemDialogDemo,
   "usage-workspace-section": UsageWorkspaceSectionDemo,
@@ -199,9 +166,4 @@ export const demos: Record<string, ComponentType> = {
   "welcome-email": WelcomeEmailDemo,
   "network-hero-section": NetworkHeroSectionDemo,
   "orchestrator-cta-section": OrchestratorCtaSectionDemo,
-  "characters-workspace-section": CharactersWorkspaceSectionDemo,
-  "clips-library-section": ClipsLibrarySectionDemo,
-  "generation-workspace-section": GenerationWorkspaceSectionDemo,
-  "projects-workspace-section": ProjectsWorkspaceSectionDemo,
-  "storyboards-workspace-section": StoryboardsWorkspaceSectionDemo,
 }
