@@ -18,31 +18,17 @@ function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
   return (
     <span aria-hidden="true" className="relative block h-4 w-8">
       <span
-        className={`absolute h-1 w-[30px] transition-[top,right,transform] duration-200 ease-out motion-reduce:transition-none ${
+        className={`absolute h-1 origin-center bg-current transition-[top,right,width,transform] duration-200 ease-out motion-reduce:transition-none ${
           open
-            ? "top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 -rotate-45"
-            : "top-0.5 right-0.5"
+            ? "top-1.5 right-[5px] w-[22px] -rotate-45"
+            : "top-0.5 right-0.5 w-[30px]"
         }`}
-      >
-        <span
-          className={`block h-full w-full origin-center bg-current transition-transform duration-200 ease-out motion-reduce:transition-none ${
-            open ? "scale-x-[0.7333]" : "scale-x-100"
-          }`}
-        />
-      </span>
+      />
       <span
-        className={`absolute h-1 w-[30px] transition-[top,right,transform] duration-200 ease-out motion-reduce:transition-none ${
-          open
-            ? "top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 rotate-45"
-            : "top-2.5 right-0.5"
+        className={`absolute h-1 w-[22px] origin-center bg-current transition-[top,right,transform] duration-200 ease-out motion-reduce:transition-none ${
+          open ? "top-1.5 right-[5px] rotate-45" : "top-2.5 right-0.5"
         }`}
-      >
-        <span
-          className={`block h-full w-full scale-x-[0.7333] bg-current transition-transform duration-200 ease-out motion-reduce:transition-none ${
-            open ? "origin-center" : "origin-right"
-          }`}
-        />
-      </span>
+      />
     </span>
   )
 }
