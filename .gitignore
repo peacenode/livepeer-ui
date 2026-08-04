@@ -18,6 +18,7 @@
 # production
 /build
 /schema.json
+/plans/
 
 # misc
 .DS_Store
