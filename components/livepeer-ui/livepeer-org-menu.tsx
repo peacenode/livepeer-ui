@@ -19,13 +19,15 @@ function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
     <span aria-hidden="true" className="relative block h-4 w-8">
       <span className="absolute top-0.5 right-0.5 h-1 w-[30px] bg-current" />
       <span
-        className={`absolute top-2.5 right-0.5 h-1 w-[22px] origin-bottom bg-current transition-transform duration-300 ease-in-out motion-reduce:transition-none ${
-          open ? "scale-y-0" : "scale-y-100"
+        className={`absolute top-2.5 right-0.5 h-1 w-[22px] origin-bottom bg-current transition-transform duration-200 ease-in-out motion-reduce:transition-none motion-reduce:delay-0 ${
+          open ? "scale-y-0 delay-0" : "scale-y-100 delay-150"
         }`}
       />
       <span
-        className={`absolute top-2.5 right-0.5 text-[11px] leading-none font-normal transition-[transform,opacity] duration-300 ease-in-out motion-reduce:transition-none ${
-          open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
+        className={`absolute top-2.5 right-0.5 text-[11px] leading-none font-normal transition-[transform,opacity] duration-200 ease-in-out motion-reduce:transition-none motion-reduce:delay-0 ${
+          open
+            ? "translate-y-0 opacity-100 delay-150"
+            : "-translate-y-2 opacity-0 delay-0"
         }`}
       >
         Close
