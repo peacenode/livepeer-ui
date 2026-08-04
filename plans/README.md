@@ -9,6 +9,8 @@ honor its STOP conditions, and update its row when done.
 | Plan | Title | Priority | Effort | Depends on | Status |
 |---|---|---:|---:|---|---|
 | [001](./001-schema-driven-playbook-forms.md) | Replace heuristic playbook forms with a schema-driven renderer | P1 | L | — | TODO |
+| [003](./003-make-design-md-executable.md) | Make `/design.md` an executable Livepeer design specification | P1 | M | Design decision approval | BLOCKED — audit decisions not yet approved |
+| [004](./004-remove-brand-color-affordances.md) | Remove Livepeer brand color from interactive affordances | P1 | M | — | TODO |
 
 Status values: TODO, IN PROGRESS, DONE, BLOCKED (with a one-line reason), or
 REJECTED (with a one-line rationale).
@@ -19,6 +21,19 @@ REJECTED (with a one-line rationale).
   because the Storyboard backend is not part of this repository.
 - A future structured-catalog plan should follow Plan 001, not block it. Form
   correctness and path-aware serialization are the higher-risk dependency.
+- Plan 003 is independent of Plan 001, but the cross-surface audit found that it
+  depends on the remaining email-output decision. Typography, Agent face, and
+  brand-green decisions were approved on 2026-08-04. Do not execute the current draft until it is
+  revised against `design-system-decisions.md`.
+- Plan 004 implements the approved green-affordance deprecation and deliberately
+  preserves non-interactive brand expression.
+
+## Design-system audit artifacts
+
+- [Cross-surface audit](./design-system-audit.md)
+- [Proposed decision register](./design-system-decisions.md)
+- [Prioritized cleanup backlog](./design-system-cleanup-backlog.md)
+- [Rendered visual QA](./artifacts/visual-qa-20260804-092001/visual-qa.md)
 
 ## Findings considered and rejected
 
@@ -33,3 +48,11 @@ REJECTED (with a one-line rationale).
 - **Include catalog HTML scraping in Plan 001**: deferred. It should move to a
   structured endpoint, but it is separable from form correctness and would
   enlarge the migration blast radius.
+- **Create a root `DESIGN.md` beside the generated `/design.md` route**:
+  rejected because `README.md` already names `lib/design-md.ts` as the source
+  of truth; a second file would drift.
+- **Copy a Refero example's palette or aesthetic into Livepeer UI**: rejected.
+  Refero is useful for document structure and specificity, while Livepeer's
+  tokens and prototypes remain the visual authority.
+- **Use Livepeer brand green for interactive affordances**: deprecated by owner
+  decision. Approved brand marks and non-interactive expression remain valid.

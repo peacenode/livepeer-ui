@@ -285,7 +285,7 @@ upgrade unrelated dependencies.
 - Output-card or metadata layout in
   `app/mockups/playbooks/library/[slug]/page.tsx`
 - `components/site-footer.tsx` and all navigation/footer components
-- Platform, VideoBuddy, docs-site, and registry code
+- Platform, docs-site, and registry code
 - The external `storyboard.daydream.monster` backend
 - Live backend writes, deployment, PR creation, or pushing
 - Broad copy rewrites unrelated to form labels/help supplied by the contract

@@ -2,20 +2,18 @@
 
 ## Scope
 
-This inventory covers the three current public mockup namespaces:
+This inventory covers the two current public mockup namespaces:
 
 1. **Livepeer Agent** — `/mockups/livepeer-agent`
 2. **Livepeer.org** — `/mockups/livepeer-org`
-3. **Client** — `/mockups/client`
 
 The source directories still use the older internal names
-`app/mockups/platform`, `app/mockups/playbooks`, and
-`app/mockups/videobuddy`. `next.config.ts` rewrites the current public routes to
-those backing implementations. In this document, **route** always means the
+`app/mockups/platform` and `app/mockups/playbooks`. `next.config.ts` rewrites
+the current public routes to those backing implementations. In this document, **route** always means the
 canonical public URL; **source** means the current backing filesystem path.
 
 The waitlist experiment is not included. It is a separate single-page concept and
-does not share the information architecture of these three products.
+does not share the information architecture of these two products.
 
 The goal is to make every handoff unit land at one of three levels:
 
@@ -401,173 +399,6 @@ Current source: `app/mockups/playbooks/compute/page.tsx`
 | Earnings model | `EarningsModelSection` | earning mechanism cards | `Card` |
 | Requirements | `OrchestratorRequirementsSection` | requirement rows | `Table`/list |
 | Start CTA | `EarnStartSection` | final action | `Button` |
-
-## Mockup 3: Client
-
-Public route: `/mockups/client`
-
-Backing source: `app/mockups/videobuddy`
-
-### Shell zones
-
-Current source: `app/mockups/videobuddy/agent-shell.tsx`
-
-Target organization:
-
-```text
-components/client/shell/
-  client-shell.tsx
-  desktop-sidebar.tsx
-  mobile-tab-bar.tsx
-components/client/components/
-  media-context-menu.tsx
-  media-thumbnail.tsx
-  media-lightbox.tsx
-  media-upload-dropzone.tsx
-  project-picker.tsx
-  collection-heading.tsx
-  generation-composer.tsx
-components/client/sections/
-  ...
-```
-
-`AgentShell` contains two separately handoffable navigation zones:
-`DesktopSidebar` and `MobileTabBar`. Both consume one `navigationItems` model.
-The existing `/mockups/client` links are the canonical public routes and should
-remain stable even while the backing source stays under
-`app/mockups/videobuddy`.
-
-### Create
-
-Public route: `/mockups/client`
-
-Current source: `app/mockups/videobuddy/agent-workspace.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Composer | `GenerationComposerSection` | mode switcher, attachment strip, prompt field, reference/project selectors | `InputGroup`, `Attachment`, `DropdownMenu`, `Button` |
-| History controls | `GenerationHistoryHeader` | date heading, prompt search | `InputGroup` |
-| History | `GenerationHistorySection` | `GenerationResultRow`, reference summary | `Badge` |
-| Render detail | `GenerationLightbox` | media preview, metadata, download | `Dialog`, `Button`, `Badge` |
-| Floating create | `MobileCreateAction` | — | `Button` |
-
-This file is the highest-value first extraction. The section API should be:
-
-```ts
-type GenerationComposerSectionProps = {
-  value: GenerationDraft
-  projects: ProjectOption[]
-  references: ReferenceOption[]
-  attachments: SourceAttachment[]
-  isGenerating: boolean
-  onChange: (draft: GenerationDraft) => void
-  onAttach: (files: File[]) => void
-  onRemoveAttachment: (id: string) => void
-  onSubmit: () => void
-}
-```
-
-Generation state, artificial delays, seed fixtures, grouping, and search remain
-in a page-level hook such as `useGenerationWorkspace`.
-
-### Storyboards
-
-Public route: `/mockups/client/storyboards`
-
-Current source:
-`app/mockups/videobuddy/storyboards/storyboards-workspace.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Collection header | `StoryboardsHeaderSection` | create action | `Button` |
-| Storyboard groups | `StoryboardCollectionsSection` | editable heading, project picker, frame grid | `Input`, `Button`, `DropdownMenu` |
-| Frame actions | `StoryboardFrame` | context menu, final selector | `ContextMenu` |
-| Upload | `UploadStoryboardDialog` | name field, dropzone | `Dialog`, `Input`, `Button` |
-| Project creation | shared `CreateProjectDialog` | name field | `Dialog`, `Input`, `Button` |
-
-### Characters
-
-Public route: `/mockups/client/characters`
-
-Current source: `app/mockups/videobuddy/characters/characters-workspace.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Collection header | `CharactersHeaderSection` | create action | `Button` |
-| Character groups | `CharacterCollectionsSection` | editable heading, project picker, reference grid | `Input`, `DropdownMenu` |
-| Character detail | `CharacterLightbox` | image preview, metadata/actions | `Dialog`, `Button` |
-| Creation | `CreateCharacterDialog` | name field, dropzone | `Dialog`, `Input`, `Button` |
-| Project creation | shared `CreateProjectDialog` | name field | `Dialog`, `Input`, `Button` |
-
-Storyboards and Characters should share collection mechanics only after their
-props converge. Start with shared `EditableCollectionHeading`,
-`MediaUploadDropzone`, and `CreateProjectDialog`; keep the full sections
-product-specific.
-
-### Clips
-
-Public route: `/mockups/client/footage`
-
-Current source: `app/mockups/videobuddy/footage/footage-workspace.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Header/upload | `ClipsHeaderSection` | hidden upload control, create action | `Button` |
-| Clip library | `ClipLibrarySection` | `ClipCard`, media context menu | — |
-| Empty state | part of library | icon/message | shared `EmptyState` |
-
-### Projects
-
-Public route: `/mockups/client/projects`
-
-Current source: `app/mockups/videobuddy/projects/projects-workspace.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Project index | `ProjectIndexSection` | `ProjectCard`, card menu | `DropdownMenu`, `Button` |
-| Project header | `ProjectHeaderSection` | back, thumbnail, share | `Button` |
-| Project navigation | `ProjectContentTabs` | counts | `Tabs`, `Badge` |
-| Storyboard content | `ProjectStoryboardsSection` | `ProjectImageCollection` | — |
-| Character content | `ProjectCharactersSection` | `ProjectImageCollection` | — |
-| Renders | `ProjectRendersSection` | `RenderCard` | `Button`, `Badge` |
-| Finals | `ProjectFinalsSection` | `RenderCard`, empty state | `Button`, `Badge` |
-| Render detail | `ProjectRenderLightbox` | preview, project badge, final action | `Dialog`, `Badge`, `Button` |
-| Project creation | `CreateProjectDialog` | — | `Dialog`, `Input`, `Button` |
-| Storyboard creation | `CreateStoryboardDialog` | dropzone | `Dialog`, `Input`, `Button` |
-| Character creation | `CreateCharacterDialog` | dropzone | `Dialog`, `Input`, `Button` |
-| Thumbnail editor | `ProjectThumbnailDialog` | preview/upload | `Dialog`, `Button` |
-
-This file should be split before adding behavior. `ProjectImageCollections` and
-`RenderList` are already implicit components but remain local at the bottom of a
-1,000+ line file.
-
-### Install
-
-Public route: `/mockups/client/install`
-
-Current sources:
-
-- `app/mockups/videobuddy/install/page.tsx`
-- `app/mockups/videobuddy/install/install-command.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Intro | `ClientInstallHeaderSection` | — | — |
-| Command | `ClientInstallCommandSection` | copy action | `Button` |
-
-### Protocol
-
-Public route: `/mockups/client/protocol`
-
-Current source: `app/mockups/videobuddy/protocol/page.tsx`
-
-| Zone | Handoff section | Child components | Primitives |
-| --- | --- | --- | --- |
-| Intro | `ProtocolHeaderSection` | — | — |
-| Flow | `ProtocolFlowSection` | `ProtocolLayer`, connectors | link/button |
-| Properties | `ProtocolPropertiesSection` | property rows | — |
-| Participants | `ProtocolParticipantsSection` | creator/provider panels | — |
-| Learn more | `ProtocolResourcesSection` | resource link | `Button`/link |
 
 ## Handoff package format
 
