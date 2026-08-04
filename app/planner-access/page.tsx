@@ -106,7 +106,7 @@ export default async function PlannerAccessPage({
             </Button>
           </form>
         ) : (
-          <p className="mt-6 rounded-xl bg-muted p-3 text-sm text-muted-foreground">
+          <p className="mt-6 rounded-sm bg-muted p-3 text-sm text-muted-foreground">
             Planner access has not been configured.
           </p>
         )}

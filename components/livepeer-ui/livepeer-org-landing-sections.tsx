@@ -20,22 +20,17 @@ export function NetworkHeroSection({
     <section className="relative isolate flex min-h-[40rem] w-full items-center overflow-hidden bg-background sm:min-h-[76svh]">
       <LivepeerCubeStream className="z-0" />
       <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-4 py-28 sm:px-6 sm:py-32 lg:px-10">
-        <div className="flex max-w-3xl flex-col items-start">
-          <h1 className="max-w-[70%] text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:max-w-none sm:text-[clamp(2.5rem,4.5vw,4rem)]">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <h1 className="text-display-sm text-pretty sm:text-display-fluid">
             {content.heading}{" "}
             <span className="text-foreground/45">{content.accent}</span>
           </h1>
-          <div className="mt-12 flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+          <div className="mt-12 flex w-full flex-col justify-center gap-2 sm:w-auto sm:flex-row">
             <Button
               size="lg"
-              variant="secondary"
               nativeButton={false}
               render={<Link href={content.primaryCta.href} />}
-              className="h-16 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
-              style={{
-                backgroundImage:
-                  "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-              }}
+              className="h-16 rounded-sm px-4"
             >
               {content.primaryCta.label}
               <ArrowRightIcon className="size-4" aria-hidden="true" />
@@ -62,18 +57,24 @@ export function LivepeerAgentFeatureSection({
   content: HomeContent["agentFeature"]
 }) {
   return (
-    <section className="relative min-h-[38rem] overflow-hidden bg-muted sm:min-h-[56rem]">
+    <section className="relative overflow-hidden bg-muted sm:min-h-[56rem]">
       <Image
         src={sanityStaticAssets.playbooks.runnerBackground}
         alt=""
         fill
-        className="object-cover object-center dark:opacity-20 dark:mix-blend-luminosity"
+        className="hidden object-cover object-center dark:opacity-20 dark:mix-blend-luminosity sm:block"
         sizes="100vw"
       />
-      <div className="relative z-10 flex min-h-[38rem] flex-col items-start justify-center p-6 sm:min-h-[56rem] sm:p-10">
-        <h2 className="flex items-end gap-3" aria-label="Livepeer Agent">
-          <LivepeerWordmark className="h-8 w-auto sm:h-10" aria-hidden="true" />
-          <span className="translate-y-[0.17em] font-agent text-3xl leading-none font-medium sm:text-4xl">
+      <div className="relative z-10 flex flex-col items-center justify-center px-6 py-12 text-center sm:min-h-[56rem] sm:items-start sm:p-10 sm:text-left">
+        <h2
+          className="flex w-full min-w-0 flex-nowrap items-end justify-center gap-2 sm:w-auto sm:justify-start sm:gap-3"
+          aria-label="Livepeer Agent"
+        >
+          <LivepeerWordmark
+            className="h-5 w-auto shrink-0 min-[320px]:h-6 sm:h-10"
+            aria-hidden="true"
+          />
+          <span className="shrink-0 translate-y-[0.17em] font-agent text-2xl leading-none font-medium min-[320px]:text-3xl sm:text-4xl">
             AGENT
           </span>
         </h2>
@@ -92,6 +93,15 @@ export function LivepeerAgentFeatureSection({
           </Button>
         </div>
         <AgentCompatibility className="mt-7" responsiveAlignment />
+      </div>
+      <div className="relative aspect-[4/3] w-full sm:hidden">
+        <Image
+          src={sanityStaticAssets.playbooks.runnerBackground}
+          alt=""
+          fill
+          className="object-cover object-center dark:opacity-35 dark:mix-blend-luminosity"
+          sizes="100vw"
+        />
       </div>
     </section>
   )

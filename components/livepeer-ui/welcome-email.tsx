@@ -37,7 +37,7 @@ export function WelcomeEmail({ content }: { content: WelcomeEmailContent }) {
       </header>
 
       <div className="flex-1 px-7 py-10 sm:px-10 sm:py-12">
-        <h1 className="text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-5xl">
+        <h1 className="text-display-sm text-balance sm:text-display-md">
           {content.heading}
         </h1>
 
@@ -51,11 +51,7 @@ export function WelcomeEmail({ content }: { content: WelcomeEmailContent }) {
           size="lg"
           nativeButton={false}
           render={<Link href={content.ctaHref} />}
-          className="mt-9 h-14 rounded-sm border border-emerald-500 bg-emerald-500 px-5 text-white hover:bg-emerald-500"
-          style={{
-            backgroundImage:
-              "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-          }}
+          className="mt-9 h-14 rounded-sm px-5"
         >
           {content.ctaLabel}
           <ArrowRightIcon className="size-4" aria-hidden="true" />

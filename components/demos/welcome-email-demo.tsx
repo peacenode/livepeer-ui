@@ -15,7 +15,7 @@ const content = {
 
 export default function WelcomeEmailDemo() {
   return (
-    <div className="flex w-full justify-center overflow-hidden rounded-2xl bg-muted p-3">
+    <div className="flex w-full justify-center overflow-hidden rounded-sm bg-muted p-3">
       <WelcomeEmail content={content} />
     </div>
   )

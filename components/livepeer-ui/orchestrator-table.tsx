@@ -96,7 +96,7 @@ export function OrchestratorTable({
 
   if (rows.length === 0) {
     return (
-      <p className="rounded-md border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
+      <p className="rounded-sm border border-dashed px-4 py-8 text-center text-sm text-muted-foreground">
         Network data is unavailable right now.
       </p>
     )

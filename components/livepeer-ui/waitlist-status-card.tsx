@@ -13,7 +13,7 @@ export function WaitlistStatusCard({
 }) {
   return (
     <section
-      className="relative isolate overflow-hidden rounded-md border border-emerald-400/30 bg-black p-5 text-white"
+      className="relative isolate overflow-hidden rounded-sm border border-emerald-400/30 bg-black p-5 text-white"
       aria-labelledby="share-card-title"
     >
       <div className="pointer-events-none absolute -top-24 -right-20 -z-10 size-56 rounded-full bg-emerald-400/25 blur-3xl" />

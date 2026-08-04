@@ -14,7 +14,7 @@ const leaders: WaitlistLeader[] = [
 
 export default function WaitlistLeaderboardDemo() {
   return (
-    <div className="dark w-full max-w-sm rounded-xl bg-black p-6 text-foreground">
+    <div className="dark w-full max-w-sm rounded-sm bg-black p-6 text-foreground">
       <WaitlistLeaderboard
         {...waitlistContentFixture.leaderboard}
         leaders={leaders}

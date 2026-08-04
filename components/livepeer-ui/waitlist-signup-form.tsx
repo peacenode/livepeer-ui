@@ -47,11 +47,7 @@ export function WaitlistSignupForm({
           type="submit"
           size="icon-lg"
           aria-label={submitAriaLabel}
-          className="h-full w-14 rounded-[3px] border border-emerald-500 bg-emerald-500 text-white hover:bg-emerald-500"
-          style={{
-            backgroundImage:
-              "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-          }}
+          className="h-full w-14 rounded-[3px]"
         >
           <ArrowRight aria-hidden="true" />
         </Button>

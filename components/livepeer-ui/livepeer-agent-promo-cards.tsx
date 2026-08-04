@@ -39,19 +39,19 @@ export function LivepeerAgentPromoCards({
             key={plan.id}
             className={
               recommended
-                ? "relative flex min-h-64 flex-col rounded-sm border border-emerald-500 p-6"
+                ? "relative flex min-h-64 flex-col rounded-sm border border-foreground p-6"
                 : "flex min-h-64 flex-col rounded-sm border p-6"
             }
           >
             {plan.recommendedLabel ? (
-              <Badge className="absolute top-0 right-6 -translate-y-1/2 bg-emerald-500 text-white">
+              <Badge className="absolute top-0 right-6 -translate-y-1/2">
                 {plan.recommendedLabel}
               </Badge>
             ) : null}
             <p
               className={
                 recommended
-                  ? "text-sm font-medium text-emerald-700"
+                  ? "text-sm font-semibold text-foreground"
                   : "text-sm font-medium text-muted-foreground"
               }
             >
@@ -68,23 +68,11 @@ export function LivepeerAgentPromoCards({
               {plan.description}
             </p>
             <Button
-              variant={recommended ? "secondary" : "outline"}
+              variant={recommended ? "default" : "outline"}
               size="lg"
               nativeButton={false}
               render={<a href={plan.href} onClick={handleClick} />}
-              className={
-                recommended
-                  ? "mt-auto h-16 w-full rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500"
-                  : "mt-auto h-16 w-full rounded-sm px-4"
-              }
-              style={
-                recommended
-                  ? {
-                      backgroundImage:
-                        "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-                    }
-                  : undefined
-              }
+              className="mt-auto h-16 w-full rounded-sm px-4"
             >
               {plan.ctaLabel}
               <ArrowRightIcon aria-hidden="true" />

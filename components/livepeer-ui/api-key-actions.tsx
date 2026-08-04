@@ -80,13 +80,8 @@ function ApiKeyActions({ content }: { content: ApiKeyActionsContent }) {
             </DialogClose>
             <Button
               type="submit"
-              variant="secondary"
               disabled={!name.trim()}
-              className="h-16 w-full shrink-0 rounded-sm border border-emerald-500 bg-emerald-500 px-4 text-white hover:bg-emerald-500 sm:flex-1"
-              style={{
-                backgroundImage:
-                  "linear-gradient(160deg, color(display-p3 0.04 0.74 0.49) 0%, color(display-p3 0.04 0.74 0.49) 32%, color(display-p3 0.02 0.58 0.36) 100%)",
-              }}
+              className="h-16 w-full shrink-0 rounded-sm px-4 sm:flex-1"
             >
               {content.generateLabel}
             </Button>

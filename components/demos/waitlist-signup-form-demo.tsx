@@ -6,7 +6,7 @@ import { waitlistContentFixture } from "@/app/mockups/_data/waitlist-content"
 
 export default function WaitlistSignupFormDemo() {
   return (
-    <div className="dark w-full max-w-sm rounded-xl bg-black p-6 text-foreground">
+    <div className="dark w-full max-w-sm rounded-sm bg-black p-6 text-foreground">
       <WaitlistSignupForm
         {...waitlistContentFixture.signupForm}
         onJoin={() => undefined}

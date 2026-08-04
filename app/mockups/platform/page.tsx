@@ -102,7 +102,7 @@ export default async function MockupHomePage() {
               href={getForumTopicUrl(topic)}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-emerald-500"
+              className="group flex items-center gap-6 border-b py-5 transition-colors last:border-b-0 hover:text-foreground"
             >
               <div className="min-w-0 flex-1">
                 <h3 className="line-clamp-2 font-sans font-medium text-foreground">

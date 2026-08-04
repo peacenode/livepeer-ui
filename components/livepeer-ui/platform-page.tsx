@@ -22,7 +22,7 @@ export function PlatformPage({
   const header = (
     <header className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
       <div>
-        <h1 className="font-sans text-[2rem] leading-[0.98] font-light tracking-[-0.025em] text-balance">
+        <h1 className="font-sans text-page-title text-balance">
           {title}
         </h1>
         {description && (

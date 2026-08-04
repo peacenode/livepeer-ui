@@ -2,7 +2,10 @@
 
 import { useState } from "react"
 
-import { AgentWordmark, LivepeerGradientLockup } from "@/components/brand"
+import {
+  AgentWordmark,
+  LivepeerWordmark,
+} from "@/components/brand"
 import type { WaitlistPageContent } from "@/components/livepeer-ui/contracts"
 import { WaitlistSignInDialog } from "@/components/livepeer-ui/waitlist-sign-in-dialog"
 import { WaitlistSignupForm } from "@/components/livepeer-ui/waitlist-signup-form"
@@ -22,7 +25,8 @@ export function WaitlistPanel({
     <aside className="dark relative z-10 flex h-full min-h-0 w-full flex-col overflow-y-auto overscroll-contain bg-transparent px-6 py-6 text-foreground sm:px-8 sm:py-8">
       <div className="absolute top-6 right-6 left-6 z-20 flex items-center justify-between sm:top-8 sm:right-8 sm:left-8">
         <div className="flex text-white" aria-label="Livepeer">
-          <LivepeerGradientLockup className="h-4 w-auto" aria-hidden="true" />
+          {/* Livepeer symbol intentionally omitted while the mark is under review. */}
+          <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
         </div>
         {!sentEmail && <WaitlistSignInDialog />}
       </div>
@@ -60,10 +64,10 @@ export function WaitlistPanel({
               className="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,0.46fr)] items-end gap-2 text-white/90 md:gap-3"
               aria-label={content.panel.brandAriaLabel}
             >
-              <LivepeerGradientLockup
-                className="h-auto w-full"
-                aria-hidden="true"
-              />
+              <span className="flex min-w-0 items-center">
+                {/* Livepeer symbol intentionally omitted while the mark is under review. */}
+                <LivepeerWordmark className="h-auto w-full" aria-hidden="true" />
+              </span>
               <AgentWordmark
                 className="h-auto w-full self-end"
                 aria-hidden="true"

@@ -55,7 +55,7 @@ function ProfileFrame({
       <figcaption className="mb-2 text-xs font-medium text-muted-foreground">
         {label}
       </figcaption>
-      <div className="overflow-hidden rounded-xl border bg-background">
+      <div className="overflow-hidden rounded-sm border bg-background">
         <div
           className="relative aspect-3/1 bg-black"
           style={{ containerType: "size" }}

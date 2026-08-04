@@ -492,7 +492,7 @@ function PlaybookConfigurator({ playbook }: { playbook: Playbook }) {
                       }))
                     }
                     placeholder={field.placeholder}
-                    className="mt-2 min-h-28 rounded-md"
+                    className="mt-2 min-h-28 rounded-sm"
                   />
                 ) : (
                   <Input
@@ -505,7 +505,7 @@ function PlaybookConfigurator({ playbook }: { playbook: Playbook }) {
                       }))
                     }
                     placeholder={field.placeholder}
-                    className="mt-2 rounded-md"
+                    className="mt-2 rounded-sm"
                   />
                 )}
               </div>
@@ -526,7 +526,7 @@ function PlaybookConfigurator({ playbook }: { playbook: Playbook }) {
               >
                 <SelectTrigger
                   id={`${playbook.id}-aspect-ratio`}
-                  className="mt-2 w-full rounded-md"
+                  className="mt-2 w-full rounded-sm"
                 >
                   <SelectValue />
                 </SelectTrigger>
@@ -553,7 +553,7 @@ function PlaybookConfigurator({ playbook }: { playbook: Playbook }) {
               >
                 <SelectTrigger
                   id={`${playbook.id}-duration`}
-                  className="mt-2 w-full rounded-md"
+                  className="mt-2 w-full rounded-sm"
                 >
                   <SelectValue />
                 </SelectTrigger>

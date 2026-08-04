@@ -25,7 +25,7 @@ export function WaitlistReferralLink({
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-emerald-400/30 bg-white/[0.04] p-1.5 pl-4">
+    <div className="flex items-center gap-2 rounded-sm border border-emerald-400/30 bg-white/[0.04] p-1.5 pl-4">
       <p className="min-w-0 flex-1 truncate font-mono text-xs text-muted-foreground">
         {inviteUrl}
       </p>
@@ -35,7 +35,7 @@ export function WaitlistReferralLink({
         variant="ghost"
         aria-label={copyAriaLabel}
         onClick={copyInvite}
-        className="shrink-0 rounded-full"
+        className="shrink-0 rounded-sm"
       >
         {copied ? <Check /> : <Copy />}
       </Button>
