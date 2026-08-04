@@ -308,7 +308,7 @@ export function LivepeerOrgHeaderNav({
                 render={<Link href={getLivepeerOrgFoundationHref(site)} />}
                 onPointerEnter={() => setActiveTitle(null)}
                 onFocus={() => setActiveTitle(null)}
-                className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
+                className="h-auto rounded-sm px-3 py-0 leading-none font-normal text-muted-foreground transition-colors hover:bg-transparent hover:text-foreground active:translate-y-0 dark:hover:bg-transparent"
               >
                 Foundation
               </Button>
