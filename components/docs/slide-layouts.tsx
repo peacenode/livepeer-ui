@@ -169,7 +169,7 @@ function SlideLayout({
         format === "portrait" && "mx-auto w-full max-w-72"
       )}
     >
-      <div className="overflow-hidden rounded-lg border border-neutral-800 bg-neutral-950 shadow-sm">
+      <div className="overflow-hidden rounded-sm border border-neutral-800 bg-neutral-950 shadow-sm">
         <SlideCanvas format={format} alignment={alignment} />
       </div>
       <figcaption className="mt-2 text-sm text-muted-foreground capitalize">

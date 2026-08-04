@@ -25,7 +25,7 @@ export async function CodeBlock({
         className="absolute top-2 right-2 z-10 bg-muted/50 backdrop-blur-sm"
       />
       <div
-        className="max-h-[500px] overflow-auto rounded-lg border bg-muted/30 text-[13px] leading-relaxed [&_pre]:min-w-max [&_pre]:p-4 [&_pre]:pr-12"
+        className="max-h-[500px] overflow-auto rounded-sm border bg-muted/30 text-[13px] leading-relaxed [&_pre]:min-w-max [&_pre]:p-4 [&_pre]:pr-12"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

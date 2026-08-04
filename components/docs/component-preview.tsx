@@ -29,7 +29,7 @@ export async function ComponentPreview({
       <TabsContent value="preview">
         <div
           className={cn(
-            "flex min-h-[350px] w-full justify-center overflow-hidden rounded-lg border",
+            "flex min-h-[350px] w-full justify-center overflow-hidden rounded-sm border",
             isFullBleed ? "items-start p-0" : "items-center p-6 sm:p-10"
           )}
         >

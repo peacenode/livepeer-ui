@@ -60,14 +60,14 @@ export default function FavoritMonoPage() {
         .
       </p>
 
-      <div className="mt-8 flex flex-col gap-8 rounded-lg border p-6 font-mono sm:p-8">
+      <div className="mt-8 flex flex-col gap-8 rounded-sm border p-6 font-mono sm:p-8">
         <p className="text-4xl sm:text-5xl">LIVEPEER</p>
         <p className="break-words text-base text-muted-foreground">{ALPHABET}</p>
         <p className="text-lg">0O 1lI 5S 8B — legibility at a glance</p>
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Weights</h2>
-      <div className="mt-4 flex flex-col divide-y rounded-lg border">
+      <div className="mt-4 flex flex-col divide-y rounded-sm border">
         {WEIGHTS.map((weight) => (
           <div
             key={weight.value}
@@ -84,7 +84,7 @@ export default function FavoritMonoPage() {
       </div>
 
       <h2 className="mt-10 text-xl font-semibold tracking-tight">Scale</h2>
-      <div className="mt-4 flex flex-col divide-y rounded-lg border">
+      <div className="mt-4 flex flex-col divide-y rounded-sm border">
         {SIZES.map((sizeStep) => (
           <div key={sizeStep.label} className="flex flex-col gap-2 overflow-x-auto p-6">
             <span className="font-mono text-xs text-muted-foreground">

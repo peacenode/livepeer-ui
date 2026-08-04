@@ -51,7 +51,7 @@ function MarkTile({
   darkFile: string
 }) {
   return (
-    <div className="grid grid-cols-1 overflow-hidden rounded-lg border sm:grid-cols-2">
+    <div className="grid grid-cols-1 overflow-hidden rounded-sm border sm:grid-cols-2">
       <div className="relative flex min-h-[180px] items-center justify-center bg-background p-8 text-foreground">
         {children}
         <DownloadOverlay

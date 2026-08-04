@@ -14,7 +14,7 @@ function DisplayHeading({
   return (
     <Comp
       className={cn(
-        "font-display text-4xl leading-[0.98] font-light tracking-[-0.045em] text-balance sm:text-[clamp(2.5rem,4.5vw,4rem)]",
+        "font-display text-display-sm text-balance sm:text-display-fluid",
         className
       )}
       {...props}

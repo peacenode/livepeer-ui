@@ -24,7 +24,7 @@ export function InstallCommand({ url }: { url: string }) {
         const command = `${pm.command} shadcn@latest add ${url}`
         return (
           <TabsContent key={pm.name} value={pm.name}>
-            <div className="flex w-fit max-w-full items-center gap-1 rounded-lg border bg-muted/30 py-1 pr-1 pl-4">
+            <div className="flex w-fit max-w-full items-center gap-1 rounded-sm border bg-muted/30 py-1 pr-1 pl-4">
               <code className="overflow-x-auto font-mono text-[13px] whitespace-nowrap">
                 {command}
               </code>
