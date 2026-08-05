@@ -35,7 +35,7 @@ export function PlatformMobileHeader({
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6 md:hidden">
+    <header className="flex h-16 shrink-0 items-center justify-between bg-transparent px-4 sm:px-6 md:hidden">
       <PlatformBrandLink ariaLabel={homeAriaLabel} href={homeHref} />
       <MobileNavigationMenu
         title="console navigation"
