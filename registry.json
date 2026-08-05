@@ -846,8 +846,8 @@
     {
       "name": "livepeer-agent-sidebar",
       "type": "registry:component",
-      "title": "Sidebar",
-      "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+      "title": "Responsive Navigation",
+      "description": "Desktop sidebar and mobile application header with project navigation, account controls, and product links.",
       "dependencies": [
         "lucide-react",
         "next",
@@ -855,12 +855,18 @@
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/avatar.json",
+        "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/sheet.json",
         "https://livepeer.peaceno.de/r/toggle-group.json"
       ],
       "files": [
         {
           "path": "components/livepeer-ui/platform-sidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
           "type": "registry:component"
         },
         {
@@ -1032,10 +1038,13 @@
     {
       "name": "credit-balance",
       "type": "registry:component",
-      "title": "Credit Balance",
-      "description": "Current plan allocation, remaining credits, and refresh date.",
+      "title": "Cash Balance",
+      "description": "Pay-as-you-go balance, auto-reload state, funding action, and billing shortcuts.",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "https://livepeer.peaceno.de/r/badge.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1083,7 +1092,6 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://livepeer.peaceno.de/r/badge.json",
         "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/card.json",
         "https://livepeer.peaceno.de/r/table.json",
@@ -1100,10 +1108,6 @@
         },
         {
           "path": "components/livepeer-ui/daily-usage-table.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "components/livepeer-ui/livepeer-agent-promo-cards.tsx",
           "type": "registry:block"
         },
         {
@@ -1342,11 +1346,19 @@
           "type": "registry:component"
         },
         {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand-social-icons.tsx",
           "type": "registry:component"
         },
         {
           "path": "components/livepeer-ui/contracts.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
           "type": "registry:component"
         },
         {
@@ -1405,6 +1417,10 @@
         },
         {
           "path": "sanity/lib/livepeer-org-navigation.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
           "type": "registry:component"
         },
         {

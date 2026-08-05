@@ -291,17 +291,20 @@
         },
         {
           "name": "livepeer-agent-sidebar",
-          "title": "Sidebar",
-          "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+          "title": "Responsive Navigation",
+          "description": "Desktop sidebar and mobile application header with project navigation, account controls, and product links.",
           "level": "component",
           "uses": [
             "avatar",
+            "button",
             "dropdown-menu",
+            "sheet",
             "toggle-group"
           ],
           "previewPath": "/mockups/livepeer-agent",
           "files": [
             "components/livepeer-ui/platform-sidebar.tsx",
+            "components/livepeer-ui/mobile-navigation-menu.tsx",
             "components/livepeer-ui/contracts.ts",
             "components/livepeer-ui/project-menu.tsx",
             "components/livepeer-ui/user-menu.tsx"
@@ -397,11 +400,11 @@
         },
         {
           "name": "credit-balance",
-          "title": "Credit Balance",
-          "description": "Current plan allocation, remaining credits, and refresh date.",
+          "title": "Cash Balance",
+          "description": "Pay-as-you-go balance, auto-reload state, funding action, and billing shortcuts.",
           "level": "component",
           "uses": [
-            "badge"
+            "button"
           ],
           "files": [
             "components/livepeer-ui/credit-balance.tsx"
@@ -439,7 +442,6 @@
           "uses": [
             "tabs",
             "credit-balance",
-            "livepeer-agent-promo-cards",
             "usage-metrics",
             "daily-usage-table",
             "resource-usage-table"
@@ -595,6 +597,7 @@
           ],
           "files": [
             "components/livepeer-ui/livepeer-org-menu.tsx",
+            "components/livepeer-ui/mobile-navigation-menu.tsx",
             "components/brand-social-icons.tsx",
             "components/livepeer-ui/contracts.ts"
           ]

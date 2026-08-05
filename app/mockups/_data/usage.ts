@@ -8,9 +8,6 @@ import type { UsageWorkspaceContent } from "@/components/livepeer-ui/usage-works
 export const usageContent: UsageWorkspaceContent = {
   overviewTabLabel: "Overview",
   activityTabLabel: "Activity",
-  upgradeTitle: "Get more credits",
-  upgradeDescription:
-    "Upgrade for a larger credit allocation that refreshes every month.",
   dailyUsageTitle: "Daily usage",
   dailyUsageEmptyMessage: "No daily usage recorded yet.",
   resourceUsageTitle: "Usage by resource",
@@ -18,13 +15,38 @@ export const usageContent: UsageWorkspaceContent = {
 }
 
 export const creditBalance: CreditBalanceProps = {
-  title: "Credit balance",
-  planLabel: "Free",
-  balance: "32",
-  allowance: "50",
-  unitLabel: "credits",
-  refreshLabel: "Credits refresh",
-  refreshDate: "Aug 1, 2026",
+  title: "Current balance",
+  balance: "$9.50",
+  autoReloadTitle: "Auto-reload",
+  autoReloadDescription:
+    "When your balance reaches $0, new requests will stop. Enable auto-reload to keep your balance topped up.",
+  autoReloadEnabledLabel: "On",
+  autoReloadDisabledLabel: "Off",
+  enableAutoReloadLabel: "Enable auto-reload",
+  disableAutoReloadLabel: "Disable auto-reload",
+  addFundsLabel: "Add funds",
+  shortcuts: [
+    {
+      label: "Payment methods",
+      description: "Add or change a payment method",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+    },
+    {
+      label: "Billing history",
+      description: "View past and current invoices",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+    },
+    {
+      label: "Usage limits",
+      description: "Set a monthly spend limit",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+    },
+    {
+      label: "Pricing",
+      description: "Review usage pricing",
+      href: "https://livepeer.org/pricing",
+    },
+  ],
 }
 
 export const usageMetrics: readonly UsageMetric[] = [

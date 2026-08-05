@@ -5,7 +5,6 @@ import {
   resourceUsageRows,
   usageContent,
   usageMetrics,
-  usagePlans,
 } from "@/app/mockups/_data/usage"
 
 export default function UsageWorkspaceSectionDemo() {
@@ -16,7 +15,6 @@ export default function UsageWorkspaceSectionDemo() {
       metrics={usageMetrics}
       dailyRows={dailyUsageRows}
       resourceRows={resourceUsageRows}
-      plans={usagePlans}
     />
   )
 }

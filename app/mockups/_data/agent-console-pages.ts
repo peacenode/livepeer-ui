@@ -113,7 +113,11 @@ export const agentConsolePageFixtures = [
     },
   },
   {
-    ...common("usage", "Usage", "Review credit balance and project activity."),
+    ...common(
+      "usage",
+      "Usage",
+      "Keep your balance funded and review project activity."
+    ),
     usage: {
       overviewTabLabel: "Overview",
       activityTabLabel: "Activity",

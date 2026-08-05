@@ -2,7 +2,10 @@ import type { Metadata } from "next"
 
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
 import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
-import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
+import {
+  PlatformMobileHeader,
+  PlatformSidebar,
+} from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
@@ -40,18 +43,26 @@ export default async function MockupsLayout({
       authenticatedStorageKey="livepeer-agent-private-beta-authenticated"
       content={shell.auth}
     >
-      <div className="fixed inset-0 flex overflow-hidden overscroll-none bg-background">
+      <div className="fixed inset-0 flex flex-col overflow-hidden overscroll-none bg-background md:flex-row">
         <PlatformSidebar
           homeAriaLabel={shell.homeAriaLabel}
           navigation={navigation}
           userMenuContent={shell.userMenu}
           user={agentConsoleUserFixture}
         />
-        <main className="flex min-w-0 flex-1 flex-col overflow-hidden overscroll-none">
-          <div className="flex min-h-0 w-full flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
-            {children}
-          </div>
-        </main>
+        <div className="flex min-w-0 flex-1 flex-col overflow-y-auto overscroll-none md:overflow-hidden">
+          <PlatformMobileHeader
+            homeAriaLabel={shell.homeAriaLabel}
+            navigation={navigation}
+            userMenuContent={shell.userMenu}
+            user={agentConsoleUserFixture}
+          />
+          <main className="flex min-w-0 flex-1 flex-col">
+            <div className="flex min-h-0 w-full flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </PlatformAuthGate>
   )

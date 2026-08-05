@@ -1,6 +1,9 @@
 import type { AgentConsoleUser } from "@/components/livepeer-ui/contracts"
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
-import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
+import {
+  PlatformMobileHeader,
+  PlatformSidebar,
+} from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 const consoleHref = "/mockups/private-beta/landing/console"
@@ -42,7 +45,7 @@ export async function PrivateBetaConsoleShell({
       showDiscord={false}
       title="Sign in for early access"
     >
-      <div className="relative isolate flex h-dvh min-h-0 overflow-hidden bg-background">
+      <div className="relative isolate flex h-dvh min-h-0 flex-col overflow-hidden bg-background md:flex-row">
         <PlatformSidebar
           className="min-h-0 overscroll-contain"
           homeAriaLabel={shell.homeAriaLabel}
@@ -52,11 +55,21 @@ export async function PrivateBetaConsoleShell({
           homeHref={consoleHref}
           profileHref={`${consoleHref}/account`}
         />
-        <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-          <div className="flex min-h-0 w-full flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
-            {children}
-          </div>
-        </main>
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto md:overflow-hidden">
+          <PlatformMobileHeader
+            homeAriaLabel={shell.homeAriaLabel}
+            navigation={navigation}
+            userMenuContent={shell.userMenu}
+            user={user}
+            homeHref={consoleHref}
+            profileHref={`${consoleHref}/account`}
+          />
+          <main className="flex min-w-0 flex-1 flex-col">
+            <div className="flex min-h-0 w-full flex-1 flex-col px-4 pt-6 sm:px-6 md:px-10 md:pt-0">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </PlatformAuthGate>
   )

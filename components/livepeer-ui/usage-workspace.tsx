@@ -11,10 +11,6 @@ import {
   type DailyUsageRow,
 } from "@/components/livepeer-ui/daily-usage-table"
 import {
-  LivepeerAgentPromoCards,
-  type LivepeerAgentPromoPlan,
-} from "@/components/livepeer-ui/livepeer-agent-promo-cards"
-import {
   ResourceUsageTable,
   type ResourceUsageRow,
 } from "@/components/livepeer-ui/resource-usage-table"
@@ -27,8 +23,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 export type UsageWorkspaceContent = {
   overviewTabLabel: string
   activityTabLabel: string
-  upgradeTitle: string
-  upgradeDescription: string
   dailyUsageTitle: string
   dailyUsageEmptyMessage: string
   resourceUsageTitle: string
@@ -41,8 +35,6 @@ export type UsageWorkspaceProps = {
   metrics: readonly UsageMetric[]
   dailyRows: readonly DailyUsageRow[]
   resourceRows: readonly ResourceUsageRow[]
-  plans: readonly LivepeerAgentPromoPlan[]
-  onPlanSelect?: (plan: LivepeerAgentPromoPlan) => void
 }
 
 export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
@@ -52,8 +44,6 @@ export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
     metrics,
     dailyRows,
     resourceRows,
-    plans,
-    onPlanSelect,
   } = props
 
   return (
@@ -70,23 +60,7 @@ export function UsageWorkspace(props: UsageWorkspaceProps): JSX.Element {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="overview">
-        <div className="flex flex-col gap-10">
-          <CreditBalance {...balance} />
-          <section>
-            <h2 className="text-2xl font-medium tracking-tight">
-              {content.upgradeTitle}
-            </h2>
-            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {content.upgradeDescription}
-            </p>
-            <div className="mt-6">
-              <LivepeerAgentPromoCards
-                plans={plans}
-                onPlanSelect={onPlanSelect}
-              />
-            </div>
-          </section>
-        </div>
+        <CreditBalance {...balance} />
       </TabsContent>
       <TabsContent value="activity">
         <div className="flex flex-col gap-10">
