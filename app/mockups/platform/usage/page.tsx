@@ -5,7 +5,6 @@ import {
   dailyUsageRows,
   resourceUsageRows,
   usageMetrics,
-  usagePlans,
 } from "@/app/mockups/_data/usage"
 import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
 import { PlatformPage } from "@/components/livepeer-ui/platform-page"
@@ -27,7 +26,7 @@ export default async function MockupUsagePage() {
   return (
     <PlatformPage
       title={editorial.heading}
-      description={editorial.description}
+      description="Keep your balance funded and review project activity."
       variant="plain"
     >
       <UsageWorkspace
@@ -36,7 +35,6 @@ export default async function MockupUsagePage() {
         metrics={usageMetrics}
         dailyRows={dailyUsageRows}
         resourceRows={resourceUsageRows}
-        plans={usagePlans}
       />
     </PlatformPage>
   )

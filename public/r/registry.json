@@ -1032,10 +1032,13 @@
     {
       "name": "credit-balance",
       "type": "registry:component",
-      "title": "Credit Balance",
-      "description": "Current plan allocation, remaining credits, and refresh date.",
+      "title": "Cash Balance",
+      "description": "Pay-as-you-go balance, auto-reload state, funding action, and billing shortcuts.",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "https://livepeer.peaceno.de/r/badge.json"
+        "https://livepeer.peaceno.de/r/button.json"
       ],
       "files": [
         {
@@ -1083,7 +1086,6 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "https://livepeer.peaceno.de/r/badge.json",
         "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/card.json",
         "https://livepeer.peaceno.de/r/table.json",
@@ -1100,10 +1102,6 @@
         },
         {
           "path": "components/livepeer-ui/daily-usage-table.tsx",
-          "type": "registry:block"
-        },
-        {
-          "path": "components/livepeer-ui/livepeer-agent-promo-cards.tsx",
           "type": "registry:block"
         },
         {

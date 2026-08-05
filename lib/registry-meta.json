@@ -397,11 +397,11 @@
         },
         {
           "name": "credit-balance",
-          "title": "Credit Balance",
-          "description": "Current plan allocation, remaining credits, and refresh date.",
+          "title": "Cash Balance",
+          "description": "Pay-as-you-go balance, auto-reload state, funding action, and billing shortcuts.",
           "level": "component",
           "uses": [
-            "badge"
+            "button"
           ],
           "files": [
             "components/livepeer-ui/credit-balance.tsx"
@@ -439,7 +439,6 @@
           "uses": [
             "tabs",
             "credit-balance",
-            "livepeer-agent-promo-cards",
             "usage-metrics",
             "daily-usage-table",
             "resource-usage-table"

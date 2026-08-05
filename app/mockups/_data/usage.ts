@@ -8,9 +8,6 @@ import type { UsageWorkspaceContent } from "@/components/livepeer-ui/usage-works
 export const usageContent: UsageWorkspaceContent = {
   overviewTabLabel: "Overview",
   activityTabLabel: "Activity",
-  upgradeTitle: "Get more credits",
-  upgradeDescription:
-    "Upgrade for a larger credit allocation that refreshes every month.",
   dailyUsageTitle: "Daily usage",
   dailyUsageEmptyMessage: "No daily usage recorded yet.",
   resourceUsageTitle: "Usage by resource",
@@ -18,13 +15,43 @@ export const usageContent: UsageWorkspaceContent = {
 }
 
 export const creditBalance: CreditBalanceProps = {
-  title: "Credit balance",
-  planLabel: "Free",
-  balance: "32",
-  allowance: "50",
-  unitLabel: "credits",
-  refreshLabel: "Credits refresh",
-  refreshDate: "Aug 1, 2026",
+  title: "Cash balance",
+  balance: "$9.50",
+  description: "Your usage is deducted from this balance as you go.",
+  autoReloadTitle: "Auto-reload",
+  autoReloadDescription:
+    "When your balance reaches $0, new requests will stop. Enable auto-reload to keep your balance topped up.",
+  autoReloadEnabledLabel: "On",
+  autoReloadDisabledLabel: "Off",
+  enableAutoReloadLabel: "Enable auto-reload",
+  disableAutoReloadLabel: "Disable auto-reload",
+  addFundsLabel: "Add funds",
+  shortcuts: [
+    {
+      label: "Payment methods",
+      description: "Add or change a payment method",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+      icon: "payment",
+    },
+    {
+      label: "Billing history",
+      description: "View past and current invoices",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+      icon: "history",
+    },
+    {
+      label: "Usage limits",
+      description: "Set a monthly spend limit",
+      href: "/mockups/livepeer-agent/organization?tab=billing",
+      icon: "limits",
+    },
+    {
+      label: "Pricing",
+      description: "Review usage pricing",
+      href: "https://livepeer.org/pricing",
+      icon: "pricing",
+    },
+  ],
 }
 
 export const usageMetrics: readonly UsageMetric[] = [

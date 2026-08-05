@@ -5,7 +5,6 @@ import {
   dailyUsageRows,
   resourceUsageRows,
   usageMetrics,
-  usagePlans,
 } from "@/app/mockups/_data/usage"
 import { PlatformPage } from "@/components/livepeer-ui/platform-page"
 import { UsageWorkspace } from "@/components/livepeer-ui/usage-workspace"
@@ -24,15 +23,10 @@ export default async function PrivateBetaUsagePage() {
     )
   }
 
-  const releaseCyclePlans = usagePlans.map((plan) => ({
-    ...plan,
-    href: "/mockups/private-beta/landing/console/billing",
-  }))
-
   return (
     <PlatformPage
       title={editorial.heading}
-      description={editorial.description}
+      description="Keep your balance funded and review project activity."
       variant="plain"
     >
       <UsageWorkspace
@@ -41,7 +35,6 @@ export default async function PrivateBetaUsagePage() {
         metrics={usageMetrics}
         dailyRows={dailyUsageRows}
         resourceRows={resourceUsageRows}
-        plans={releaseCyclePlans}
       />
     </PlatformPage>
   )
