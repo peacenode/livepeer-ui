@@ -23,7 +23,6 @@ export type BalanceShortcut = {
 export type CreditBalanceProps = {
   title: string
   balance: string
-  description: string
   autoReloadTitle: string
   autoReloadDescription: string
   autoReloadEnabledLabel: string
@@ -44,7 +43,6 @@ const shortcutIcons = {
 export function CreditBalance({
   title,
   balance,
-  description,
   autoReloadTitle,
   autoReloadDescription,
   autoReloadEnabledLabel,
@@ -59,19 +57,19 @@ export function CreditBalance({
   return (
     <div className="flex flex-col gap-10">
       <section aria-labelledby="cash-balance-heading">
-        <div className="max-w-2xl">
-          <h2 id="cash-balance-heading" className="text-sm font-medium">
-            {title}
-          </h2>
-          <p className="mt-3 text-4xl leading-none font-normal tracking-tight tabular-nums sm:text-5xl">
-            {balance}
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            {description}
-          </p>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 id="cash-balance-heading" className="text-sm font-medium">
+              {title}
+            </h2>
+            <p className="mt-2 text-3xl leading-none font-normal tracking-tight tabular-nums sm:text-4xl">
+              {balance}
+            </p>
+          </div>
+          <Button type="button">{addFundsLabel}</Button>
         </div>
 
-        <div className="mt-8 flex flex-col gap-4 rounded-sm border p-4 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div className="mt-8 flex flex-col gap-5 rounded-sm bg-muted p-4 sm:p-6">
           <div className="flex min-w-0 gap-3">
             {autoReloadEnabled ? (
               <CircleDollarSign
@@ -106,7 +104,7 @@ export function CreditBalance({
           <Button
             type="button"
             variant={autoReloadEnabled ? "outline" : "default"}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto sm:self-start"
             onClick={() => setAutoReloadEnabled((enabled) => !enabled)}
           >
             {autoReloadEnabled
@@ -115,28 +113,22 @@ export function CreditBalance({
           </Button>
         </div>
 
-        <div className="mt-4">
-          <Button type="button">{addFundsLabel}</Button>
-        </div>
       </section>
 
       <nav
         aria-label="Balance and billing settings"
-        className="grid border-t sm:grid-cols-2"
+        className="grid gap-3 sm:grid-cols-2"
       >
-        {shortcuts.map((shortcut, index) => {
+        {shortcuts.map((shortcut) => {
           const Icon = shortcutIcons[shortcut.icon]
 
           return (
             <a
               key={shortcut.label}
               href={shortcut.href}
-              className={cn(
-                "group flex min-w-0 items-start gap-4 border-b py-5 transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30 sm:px-5",
-                index % 2 === 0 && "sm:border-r sm:pl-0"
-              )}
+              className="group flex min-w-0 items-start gap-4 rounded-sm bg-muted p-4 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
             >
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-muted">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-background">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
               <span className="min-w-0">

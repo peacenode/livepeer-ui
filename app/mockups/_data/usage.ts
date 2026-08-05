@@ -17,7 +17,6 @@ export const usageContent: UsageWorkspaceContent = {
 export const creditBalance: CreditBalanceProps = {
   title: "Current balance",
   balance: "$9.50",
-  description: "Your usage is deducted from this balance as you go.",
   autoReloadTitle: "Auto-reload",
   autoReloadDescription:
     "When your balance reaches $0, new requests will stop. Enable auto-reload to keep your balance topped up.",
