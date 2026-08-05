@@ -15,7 +15,7 @@ export const usageContent: UsageWorkspaceContent = {
 }
 
 export const creditBalance: CreditBalanceProps = {
-  title: "Cash balance",
+  title: "Current balance",
   balance: "$9.50",
   description: "Your usage is deducted from this balance as you go.",
   autoReloadTitle: "Auto-reload",
