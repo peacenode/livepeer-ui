@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { LivepeerGradientSymbol, LivepeerWordmark } from "@/components/brand"
+import { LivepeerWordmark } from "@/components/brand"
 import { cn } from "@/lib/utils"
 
 export function PlatformBrandLink({
@@ -19,7 +19,6 @@ export function PlatformBrandLink({
       className={cn("inline-flex h-9 items-center", className)}
     >
       <span className="flex items-end gap-1.5 text-foreground">
-        <LivepeerGradientSymbol className="h-4 w-auto" />
         <LivepeerWordmark className="h-4 w-auto" />
         <span
           className="translate-y-[0.17em] font-agent text-sm leading-none font-medium tracking-tight"

@@ -304,6 +304,7 @@
           "previewPath": "/mockups/livepeer-agent",
           "files": [
             "components/livepeer-ui/platform-sidebar.tsx",
+            "components/livepeer-ui/mobile-navigation-menu.tsx",
             "components/livepeer-ui/contracts.ts",
             "components/livepeer-ui/project-menu.tsx",
             "components/livepeer-ui/user-menu.tsx"
@@ -596,6 +597,7 @@
           ],
           "files": [
             "components/livepeer-ui/livepeer-org-menu.tsx",
+            "components/livepeer-ui/mobile-navigation-menu.tsx",
             "components/brand-social-icons.tsx",
             "components/livepeer-ui/contracts.ts"
           ]

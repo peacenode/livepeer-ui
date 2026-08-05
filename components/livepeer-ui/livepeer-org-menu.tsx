@@ -4,44 +4,10 @@ import * as React from "react"
 import Link from "next/link"
 import { ArrowLeftIcon } from "lucide-react"
 
+import { LivepeerLogo } from "@/components/brand"
 import { getLivepeerOrgFoundationHref } from "@/components/livepeer-ui/livepeer-org-header-nav"
+import { MobileNavigationMenu } from "@/components/livepeer-ui/mobile-navigation-menu"
 import type { LivepeerOrgSite } from "@/components/livepeer-ui/contracts"
-import { Button } from "@/components/ui/button"
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-
-function LivepeerMenuIcon({ open = false }: { open?: boolean }) {
-  return (
-    <span aria-hidden="true" className="relative block h-4 w-8">
-      <span
-        className="absolute right-0.5 h-1 w-[30px] transition-[top,transform] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
-        style={{
-          top: open ? 6 : 2,
-          transform: open ? "rotate(135deg)" : "rotate(0deg)",
-          transformOrigin: "19px 50%",
-        }}
-      >
-        <span
-          className="block h-full w-full origin-right bg-current transition-transform duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
-          style={{
-            transform: open ? "scaleX(0.733333)" : "scaleX(1)",
-          }}
-        />
-      </span>
-      <span
-        className="absolute right-0.5 h-1 w-[22px] origin-center bg-current transition-[top,transform] duration-[250ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none"
-        style={{
-          top: open ? 6 : 10,
-          transform: open ? "rotate(45deg)" : "rotate(0deg)",
-        }}
-      />
-    </span>
-  )
-}
 
 const loginLinks = [
   { label: "Forum", href: "https://forum.livepeer.org" },
@@ -55,9 +21,9 @@ const loginLinks = [
 export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   const [open, setOpen] = React.useState(false)
   const [showLoginLinks, setShowLoginLinks] = React.useState(false)
-  const resetLoginLinksTimer = React.useRef<ReturnType<typeof setTimeout> | null>(
-    null
-  )
+  const resetLoginLinksTimer = React.useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null)
   const allLinks = [
     ...site.menuLinks,
     ...site.footerGroups.flatMap((group) => group.links),
@@ -132,29 +98,18 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
   }
 
   return (
-    <Sheet open={open} onOpenChange={handleOpenChange}>
-      <SheetTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent dark:hover:bg-transparent"
-          />
-        }
-      >
-        <LivepeerMenuIcon open={open} />
-        <span className="sr-only">
-          {open ? "Close site navigation" : "Open site navigation"}
-        </span>
-      </SheetTrigger>
-      <SheetContent
-        side="top"
-        showCloseButton={false}
-        overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className="z-[70] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
-      >
-        <SheetTitle className="sr-only">Site navigation</SheetTitle>
-        <div className="h-dvh overflow-y-auto px-4 pt-[5.5rem] pb-6 sm:px-6 sm:pt-24 sm:pb-8">
+    <MobileNavigationMenu
+      title="site navigation"
+      open={open}
+      onOpenChange={handleOpenChange}
+      header={
+        <Link href={site.homeHref} aria-label="Livepeer.org home">
+          <LivepeerLogo />
+        </Link>
+      }
+    >
+      {(close) => (
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 pt-6 pb-6 sm:px-6 sm:pt-8 sm:pb-8">
           <nav
             className="relative -left-[0.04em] flex flex-col"
             aria-label="Mobile site sections"
@@ -185,7 +140,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => handleOpenChange(false)}
+                      onClick={close}
                       className={className}
                     >
                       {content}
@@ -194,7 +149,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      onClick={() => handleOpenChange(false)}
+                      onClick={close}
                       className={className}
                     >
                       {content}
@@ -214,7 +169,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                       href={item.href}
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => handleOpenChange(false)}
+                      onClick={close}
                       className={className}
                     >
                       {item.label}
@@ -223,7 +178,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
                     <Link
                       key={item.label}
                       href={item.href}
-                      onClick={() => handleOpenChange(false)}
+                      onClick={close}
                       className={className}
                     >
                       {item.label}
@@ -242,7 +197,7 @@ export function LivepeerOrgMenu({ site }: { site: LivepeerOrgSite }) {
             )}
           </nav>
         </div>
-      </SheetContent>
-    </Sheet>
+      )}
+    </MobileNavigationMenu>
   )
 }

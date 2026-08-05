@@ -866,6 +866,10 @@
           "type": "registry:component"
         },
         {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "components/livepeer-ui/contracts.ts",
           "type": "registry:component"
         },
@@ -1342,11 +1346,19 @@
           "type": "registry:component"
         },
         {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "components/brand-social-icons.tsx",
           "type": "registry:component"
         },
         {
           "path": "components/livepeer-ui/contracts.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/brand.tsx",
           "type": "registry:component"
         },
         {
@@ -1405,6 +1417,10 @@
         },
         {
           "path": "sanity/lib/livepeer-org-navigation.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/livepeer-ui/mobile-navigation-menu.tsx",
           "type": "registry:component"
         },
         {
