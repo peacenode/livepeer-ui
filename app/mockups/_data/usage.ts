@@ -30,25 +30,21 @@ export const creditBalance: CreditBalanceProps = {
       label: "Payment methods",
       description: "Add or change a payment method",
       href: "/mockups/livepeer-agent/organization?tab=billing",
-      icon: "payment",
     },
     {
       label: "Billing history",
       description: "View past and current invoices",
       href: "/mockups/livepeer-agent/organization?tab=billing",
-      icon: "history",
     },
     {
       label: "Usage limits",
       description: "Set a monthly spend limit",
       href: "/mockups/livepeer-agent/organization?tab=billing",
-      icon: "limits",
     },
     {
       label: "Pricing",
       description: "Review usage pricing",
       href: "https://livepeer.org/pricing",
-      icon: "pricing",
     },
   ],
 }
