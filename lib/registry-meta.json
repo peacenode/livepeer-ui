@@ -291,12 +291,14 @@
         },
         {
           "name": "livepeer-agent-sidebar",
-          "title": "Sidebar",
-          "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+          "title": "Responsive Navigation",
+          "description": "Desktop sidebar and mobile application header with project navigation, account controls, and product links.",
           "level": "component",
           "uses": [
             "avatar",
+            "button",
             "dropdown-menu",
+            "sheet",
             "toggle-group"
           ],
           "previewPath": "/mockups/livepeer-agent",

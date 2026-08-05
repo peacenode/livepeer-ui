@@ -2,7 +2,10 @@ import type { Metadata } from "next"
 
 import { PlatformAuthGate } from "@/components/livepeer-ui/platform-auth-gate"
 import { agentConsoleUserFixture } from "@/app/mockups/_data/agent-console-user"
-import { PlatformSidebar } from "@/components/livepeer-ui/platform-sidebar"
+import {
+  PlatformMobileHeader,
+  PlatformSidebar,
+} from "@/components/livepeer-ui/platform-sidebar"
 import { getAgentConsoleShell } from "@/sanity/lib/agent-console-pages"
 
 export const metadata: Metadata = {
@@ -40,7 +43,13 @@ export default async function MockupsLayout({
       authenticatedStorageKey="livepeer-agent-private-beta-authenticated"
       content={shell.auth}
     >
-      <div className="fixed inset-0 flex overflow-hidden overscroll-none bg-background">
+      <div className="fixed inset-0 flex flex-col overflow-hidden overscroll-none bg-background md:flex-row">
+        <PlatformMobileHeader
+          homeAriaLabel={shell.homeAriaLabel}
+          navigation={navigation}
+          userMenuContent={shell.userMenu}
+          user={agentConsoleUserFixture}
+        />
         <PlatformSidebar
           homeAriaLabel={shell.homeAriaLabel}
           navigation={navigation}

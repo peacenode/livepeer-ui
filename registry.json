@@ -846,8 +846,8 @@
     {
       "name": "livepeer-agent-sidebar",
       "type": "registry:component",
-      "title": "Sidebar",
-      "description": "Desktop application sidebar with project navigation, account controls, and product links.",
+      "title": "Responsive Navigation",
+      "description": "Desktop sidebar and mobile application header with project navigation, account controls, and product links.",
       "dependencies": [
         "lucide-react",
         "next",
@@ -855,7 +855,9 @@
       ],
       "registryDependencies": [
         "https://livepeer.peaceno.de/r/avatar.json",
+        "https://livepeer.peaceno.de/r/button.json",
         "https://livepeer.peaceno.de/r/dropdown-menu.json",
+        "https://livepeer.peaceno.de/r/sheet.json",
         "https://livepeer.peaceno.de/r/toggle-group.json"
       ],
       "files": [
