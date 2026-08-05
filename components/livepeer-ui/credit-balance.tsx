@@ -93,7 +93,7 @@ export function CreditBalance({
           </div>
           <Button
             type="button"
-            variant={autoReloadEnabled ? "outline" : "default"}
+            variant="outline"
             className="ml-8 w-[calc(100%-2rem)] sm:w-auto sm:self-start"
             onClick={() => setAutoReloadEnabled((enabled) => !enabled)}
           >
