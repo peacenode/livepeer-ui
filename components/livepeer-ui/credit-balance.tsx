@@ -114,7 +114,7 @@ export function CreditBalance({
             <a
               key={shortcut.label}
               href={shortcut.href}
-              className="group min-w-0 rounded-sm bg-muted p-4 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
+              className="group min-w-0 rounded-sm border bg-background p-4 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
             >
               <span className="min-w-0">
                 <span className="block text-sm font-medium">
