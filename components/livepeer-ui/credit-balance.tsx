@@ -114,12 +114,15 @@ export function CreditBalance({
             <a
               key={shortcut.label}
               href={shortcut.href}
-              className="group min-w-0 rounded-sm border bg-background p-4 transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
+              className="group min-w-0 rounded-sm border bg-background p-4 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30"
             >
               <span className="min-w-0">
                 <span className="block text-sm font-medium">
                   {shortcut.label}{" "}
-                  <span aria-hidden="true" className="font-sans font-normal">
+                  <span
+                    aria-hidden="true"
+                    className="inline-block font-sans font-normal transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none"
+                  >
                     →
                   </span>
                 </span>
