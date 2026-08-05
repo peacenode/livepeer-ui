@@ -63,7 +63,7 @@ export function CreditBalance({
           <h2 id="cash-balance-heading" className="text-sm font-medium">
             {title}
           </h2>
-          <p className="mt-3 text-5xl leading-none font-medium tracking-tight tabular-nums sm:text-6xl">
+          <p className="mt-3 text-4xl leading-none font-normal tracking-tight tabular-nums sm:text-5xl">
             {balance}
           </p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
