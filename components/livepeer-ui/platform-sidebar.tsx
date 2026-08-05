@@ -52,7 +52,7 @@ export function PlatformMobileHeader({
                   href={item.href}
                   onClick={close}
                   className={cn(
-                    "inline-flex w-full items-center gap-1 rounded-sm px-3 py-2.5 text-sm transition-colors hover:bg-muted",
+                    "inline-flex w-fit items-center gap-1 rounded-sm px-3 py-2.5 text-sm transition-colors hover:bg-muted",
                     pathname === item.href
                       ? "bg-muted font-medium text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -65,7 +65,7 @@ export function PlatformMobileHeader({
                 </Link>
               ))}
             </nav>
-            <div className="mt-auto border-t pt-3">
+            <div className="-mx-4 mt-auto border-t px-4 pt-3 sm:-mx-6 sm:px-6">
               <UserMenu
                 content={userMenuContent}
                 user={user}
