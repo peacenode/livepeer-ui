@@ -143,22 +143,14 @@ function Media({ item, eager = false }: { item: MediaItem; eager?: boolean }) {
 
 function ProductMediaFrame({
   scene,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   frameAnimation,
   large = false,
 }: {
   scene: StoryScene
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   frameAnimation?: FrameAnimation
   large?: boolean
 }) {
-  const currentItem = scene.media[activeMedia] ?? scene.media[0]
-  const previousItem =
-    previousMedia === null ? null : (scene.media[previousMedia] ?? null)
+  const currentItem = scene.media[0]
 
   if (!currentItem) return null
 
@@ -174,7 +166,7 @@ function ProductMediaFrame({
     >
       <div
         className={cn(
-          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[3.5rem] border border-border bg-muted [will-change:clip-path] [contain:paint] [backface-visibility:hidden]",
+          "absolute inset-0 [--scene-frame-radius:2rem] [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [backface-visibility:hidden] sm:[--scene-frame-radius:3.5rem]",
           frameAnimation === "exit-up" && "animate-scene-frame-exit-up",
           frameAnimation === "exit-down" && "animate-scene-frame-exit-down",
           frameAnimation === "reveal-up" && "animate-scene-frame-reveal-up",
@@ -185,20 +177,8 @@ function ProductMediaFrame({
             "animate-scene-frame-reveal-down-synced"
         )}
       >
-        {previousItem && (
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-0 overflow-hidden rounded-[3.25rem] bg-muted"
-          >
-            <Media item={previousItem} eager={large} />
-          </div>
-        )}
         <div
-          key={`${currentItem.id}-${mediaCycle}`}
-          className={cn(
-            "absolute inset-0 z-10 overflow-hidden rounded-[3.25rem] bg-muted",
-            previousItem && "animate-media-window-in"
-          )}
+          className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-muted sm:rounded-[3.25rem]"
         >
           <Media item={currentItem} eager={large} />
         </div>
@@ -234,25 +214,14 @@ function CompatibilityMarks({ theme }: { theme: SceneTheme }) {
 
 function ContentScene({
   scene,
-  sceneIndex,
-  activeSceneIndex,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   frameAnimation,
   contentAnimation,
 }: {
   scene: StoryScene
-  sceneIndex: number
-  activeSceneIndex: number
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   frameAnimation?: FrameAnimation
   contentAnimation?: ContentAnimation
 }) {
   const isHero = scene.layout === "hero"
-  const ownsMedia = sceneIndex === activeSceneIndex
 
   return (
     <div
@@ -267,9 +236,6 @@ function ContentScene({
         <div className="pointer-events-none order-2 justify-self-end md:order-1">
           <ProductMediaFrame
             scene={scene}
-            activeMedia={ownsMedia ? activeMedia : 0}
-            previousMedia={ownsMedia ? previousMedia : null}
-            mediaCycle={ownsMedia ? mediaCycle : 0}
             frameAnimation={frameAnimation}
           />
         </div>
@@ -315,9 +281,6 @@ function ContentScene({
         <div className="pointer-events-none order-2 mt-[clamp(1.5rem,4svh,3rem)] shrink-0">
           <ProductMediaFrame
             scene={scene}
-            activeMedia={ownsMedia ? activeMedia : 0}
-            previousMedia={ownsMedia ? previousMedia : null}
-            mediaCycle={ownsMedia ? mediaCycle : 0}
             frameAnimation={frameAnimation}
             large
           />
@@ -409,21 +372,11 @@ function FooterScene({
 
 function SceneComposition({
   scene,
-  sceneIndex,
-  activeSceneIndex,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   capabilities,
   frameAnimation,
   contentAnimation,
 }: {
   scene: StoryScene
-  sceneIndex: number
-  activeSceneIndex: number
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   capabilities: string[]
   frameAnimation?: FrameAnimation
   contentAnimation?: ContentAnimation
@@ -445,11 +398,6 @@ function SceneComposition({
   return (
     <ContentScene
       scene={scene}
-      sceneIndex={sceneIndex}
-      activeSceneIndex={activeSceneIndex}
-      activeMedia={activeMedia}
-      previousMedia={previousMedia}
-      mediaCycle={mediaCycle}
       frameAnimation={frameAnimation}
       contentAnimation={contentAnimation}
     />
@@ -530,11 +478,7 @@ export function AgentScrollerPage({
   const [visualSceneIndex, setVisualSceneIndex] = useState(0)
   const [transition, setTransition] = useState<TransitionState | null>(null)
   const [inputPhase, setInputPhase] = useState<InputPhase>("ready")
-  const [activeMedia, setActiveMedia] = useState(0)
-  const [previousMedia, setPreviousMedia] = useState<number | null>(null)
-  const [mediaCycle, setMediaCycle] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [pageVisible, setPageVisible] = useState(true)
 
   const maximumSceneIndex = scenes.length - 1
   const activeScene = scenes[visualSceneIndex]
@@ -610,9 +554,6 @@ export function AgentScrollerPage({
       setActiveSceneIndex(nextIndex)
       setVisualSceneIndex(nextIndex)
       setTransition(null)
-      setActiveMedia(0)
-      setPreviousMedia(null)
-      setMediaCycle((cycle) => cycle + 1)
       placeScrollAtScene(nextIndex)
 
       const requestedIndex = requestedSceneRef.current
@@ -653,9 +594,6 @@ export function AgentScrollerPage({
         activeSceneIndexRef.current = to
         setActiveSceneIndex(to)
         setVisualSceneIndex(to)
-        setActiveMedia(0)
-        setPreviousMedia(null)
-        setMediaCycle((cycle) => cycle + 1)
         placeScrollAtScene(to)
         setPhase("ready")
         return
@@ -708,40 +646,13 @@ export function AgentScrollerPage({
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     const updateMotionPreference = () => setReducedMotion(mediaQuery.matches)
-    const updateVisibility = () =>
-      setPageVisible(document.visibilityState === "visible")
-
     updateMotionPreference()
-    updateVisibility()
     mediaQuery.addEventListener("change", updateMotionPreference)
-    document.addEventListener("visibilitychange", updateVisibility)
 
     return () => {
       mediaQuery.removeEventListener("change", updateMotionPreference)
-      document.removeEventListener("visibilitychange", updateVisibility)
     }
   }, [])
-
-  useEffect(() => {
-    if (
-      transition !== null ||
-      !pageVisible ||
-      reducedMotion ||
-      activeScene.layout === "capabilities" ||
-      activeScene.layout === "footer" ||
-      activeScene.media.length < 2
-    ) {
-      return
-    }
-
-    const timeout = window.setTimeout(() => {
-      setPreviousMedia(activeMedia)
-      setActiveMedia((activeMedia + 1) % activeScene.media.length)
-      setMediaCycle((cycle) => cycle + 1)
-    }, 2800)
-
-    return () => window.clearTimeout(timeout)
-  }, [activeMedia, activeScene, pageVisible, reducedMotion, transition])
 
   useEffect(
     () => () => {
@@ -1050,11 +961,6 @@ export function AgentScrollerPage({
                 <div className="size-full">
                   <SceneComposition
                     scene={scene}
-                    sceneIndex={sceneIndex}
-                    activeSceneIndex={activeSceneIndex}
-                    activeMedia={activeMedia}
-                    previousMedia={previousMedia}
-                    mediaCycle={mediaCycle}
                     capabilities={showcaseCapabilities}
                     frameAnimation={frameAnimation}
                     contentAnimation={contentAnimation}
