@@ -264,7 +264,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
         variant="link"
         size="xs"
         onClick={() => updateSession()}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-xs font-normal text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
       >
         Sign out
       </Button>
@@ -275,7 +275,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
     <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
       <DialogTrigger
         render={<Button type="button" variant="link" size="xs" />}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-xs font-normal text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
       >
         Sign in
       </DialogTrigger>
