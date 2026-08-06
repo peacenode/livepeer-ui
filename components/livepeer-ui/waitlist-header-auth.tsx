@@ -38,13 +38,16 @@ const sessionEvent = "livepeer-waitlist-session-change"
 
 const WaitlistEmailInput = forwardRef<
   HTMLInputElement,
-  ComponentProps<typeof Input>
->(function WaitlistEmailInput({ className, ...props }, ref) {
+  Omit<ComponentProps<typeof Input>, "size"> & {
+    size?: "compact" | "chunky"
+  }
+>(function WaitlistEmailInput({ className, size = "compact", ...props }, ref) {
   return (
     <Input
       ref={ref}
       className={cn(
         "h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive",
+        size === "chunky" && "h-16 px-5 pr-16 md:text-base",
         className
       )}
       {...props}
@@ -342,6 +345,7 @@ function FixedWaitlistSignIn({
               <form onSubmit={submitSignIn} className="mt-8">
                 <div className="relative">
                   <WaitlistEmailInput
+                    size="chunky"
                     id="scroller-waitlist-sign-in"
                     aria-label="Email address"
                     type="email"
@@ -354,9 +358,9 @@ function FixedWaitlistSignIn({
                   <Button
                     type="submit"
                     variant="ghost"
-                    size="icon-sm"
+                    size="icon-lg"
                     aria-label="Sign in"
-                    className="absolute top-0 right-0 rounded-sm"
+                    className="absolute top-0 right-0 h-16 w-16 rounded-sm"
                   >
                     <ArrowRightIcon className="size-4" aria-hidden="true" />
                   </Button>
