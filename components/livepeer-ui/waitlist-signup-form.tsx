@@ -1,11 +1,9 @@
 "use client"
 
 import { type FormEvent, useState } from "react"
-import { ArrowRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { WaitlistEmailField } from "@/components/livepeer-ui/waitlist-email-field"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export function WaitlistSignupForm({
@@ -29,29 +27,19 @@ export function WaitlistSignupForm({
 
   return (
     <form onSubmit={submit}>
-      <Label htmlFor="waitlist-email" className="text-xs font-medium text-white">
+      <Label
+        htmlFor="waitlist-email"
+        className="text-xs font-medium text-white"
+      >
         {label}
       </Label>
-      <div className="mt-3 flex h-16 gap-1 rounded-sm border border-white/25 bg-transparent p-1 text-white transition-shadow focus-within:border-transparent focus-within:ring-2 focus-within:ring-white/30">
-        <Input
-          id="waitlist-email"
-          type="email"
-          placeholder={emailPlaceholder}
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required
-          autoComplete="email"
-          className="h-full min-w-0 flex-1 border-0 bg-transparent px-3 text-base text-white shadow-none placeholder:text-white/45 focus-visible:ring-0"
-        />
-        <Button
-          type="submit"
-          size="icon-lg"
-          aria-label={submitAriaLabel}
-          className="h-full w-14 rounded-[3px]"
-        >
-          <ArrowRight aria-hidden="true" />
-        </Button>
-      </div>
+      <WaitlistEmailField
+        id="waitlist-email"
+        placeholder={emailPlaceholder}
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        submitAriaLabel={submitAriaLabel}
+      />
       <div className="mt-4 flex items-start gap-3">
         <Checkbox
           id="newsletter-opt-in"
