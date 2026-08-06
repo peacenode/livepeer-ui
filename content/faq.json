@@ -1,0 +1,37 @@
+{
+  "_id": "faqPageContent",
+  "title": "FAQ",
+  "subtitle": "Common questions about the Sprint tools.",
+  "items": [
+    {
+      "_key": "what-is-livepeer",
+      "question": "What is Livepeer?",
+      "answer": "Livepeer is an open network of GPU compute that powers the Livepeer Agent's image, video, and audio generation — infrastructure you can build on, not just a single app."
+    },
+    {
+      "_key": "install-mcp",
+      "question": "How do I install Livepeer MCP?",
+      "answer": "Add the Livepeer Agent MCP server to your MCP client (Claude Code, Claude Desktop, or another compatible agent) and connect your account. The first generation you run walks you through authorization."
+    },
+    {
+      "_key": "how-much-does-it-cost",
+      "question": "How much does it cost?",
+      "answer": "Usage is metered per generation and varies by model and quality. Cost is shown before a job runs, so you always know the price before you commit to it."
+    },
+    {
+      "_key": "where-generations-live",
+      "question": "Where do my generations live?",
+      "answer": "Every generation gets a shareable viewer link and is saved to your project's library, so you can revisit, remix, or export past results at any time."
+    },
+    {
+      "_key": "build-an-app",
+      "question": "Can I build an app with Livepeer MCP?",
+      "answer": "Yes. The MCP is built for programmatic and agent-driven use, so you can wire generation into your own app or workflow instead of only using it through chat."
+    },
+    {
+      "_key": "agent-always-choose-livepeer",
+      "question": "How do I make my agent always choose Livepeer?",
+      "answer": "Add a short instruction to your project's rules file (like a CLAUDE.md or system prompt) telling the agent to default to the Livepeer MCP for image, video, and audio generation. Agents follow the tools ranked highest in their instructions, so an explicit preference there is the most reliable way to make it the default over other generation tools."
+    }
+  ]
+}
