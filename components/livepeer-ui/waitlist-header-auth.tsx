@@ -16,6 +16,7 @@ import {
   XIcon,
 } from "lucide-react"
 
+import { LivepeerWordmark } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -283,6 +284,12 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
         showCloseButton={false}
         className={`${theme === "inverse" ? "dark" : ""} inset-0 flex h-dvh w-full max-w-none translate-x-0 translate-y-0 items-center justify-center rounded-none bg-background p-6 text-foreground opacity-100 shadow-none ring-0 duration-200 sm:max-w-none data-open:zoom-in-100 data-open:slide-in-from-top-4 data-closed:zoom-out-100 data-closed:slide-out-to-top-4`}
       >
+        <div
+          className="absolute top-5 left-4 flex items-center sm:top-7 sm:left-6"
+          aria-label="Livepeer"
+        >
+          <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
+        </div>
         <DialogClose
           render={
             <Button
@@ -297,7 +304,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
         </DialogClose>
         <div className="flex w-full max-w-sm flex-col items-center text-center">
           <DialogHeader className="items-center text-center">
-            <DialogTitle className="text-base leading-none font-medium">
+            <DialogTitle className="font-display text-display-sm text-balance sm:text-display-lg">
               Sign in
             </DialogTitle>
             <DialogDescription className="mt-2">
