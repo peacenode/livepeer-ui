@@ -96,6 +96,9 @@ export function JoinWaitlistControl({
     ? `earlyaccess.livepeer.org/?ref=${inviteCode}`
     : ""
   const canSubmitEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+  const expandedWidth = defaultExpanded
+    ? "w-[min(60vw,22rem)]"
+    : "w-[clamp(10rem,40vw,20rem)]"
 
   function signIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -173,7 +176,7 @@ export function JoinWaitlistControl({
         </span>
       )}
       <div
-        className={`relative h-9 min-w-0 shrink transition-[width] duration-300 ease-out ${expanded ? "w-[clamp(10rem,40vw,20rem)] overflow-visible" : "w-[5.75rem] overflow-hidden"}`}
+        className={`relative h-9 min-w-0 shrink transition-[width] duration-300 ease-out ${expanded ? `${expandedWidth} overflow-visible` : "w-[5.75rem] overflow-hidden"}`}
       >
         <Button
           type="button"
