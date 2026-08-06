@@ -166,7 +166,7 @@ function ProductMediaFrame({
     >
       <div
         className={cn(
-          "absolute inset-0 [--scene-frame-radius:2rem] [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [backface-visibility:hidden] sm:[--scene-frame-radius:3.5rem]",
+          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:2rem] [backface-visibility:hidden] sm:[--scene-frame-radius:3.5rem]",
           frameAnimation === "exit-up" && "animate-scene-frame-exit-up",
           frameAnimation === "exit-down" && "animate-scene-frame-exit-down",
           frameAnimation === "reveal-up" && "animate-scene-frame-reveal-up",
@@ -177,9 +177,7 @@ function ProductMediaFrame({
             "animate-scene-frame-reveal-down-synced"
         )}
       >
-        <div
-          className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-muted sm:rounded-[3.25rem]"
-        >
+        <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-muted sm:rounded-[3.25rem]">
           <Media item={currentItem} eager={large} />
         </div>
       </div>
@@ -234,10 +232,7 @@ function ContentScene({
     >
       {!isHero && (
         <div className="pointer-events-none order-2 justify-self-end md:order-1">
-          <ProductMediaFrame
-            scene={scene}
-            frameAnimation={frameAnimation}
-          />
+          <ProductMediaFrame scene={scene} frameAnimation={frameAnimation} />
         </div>
       )}
 
@@ -245,35 +240,39 @@ function ContentScene({
         data-testid={isHero ? "scroller-intro-copy" : undefined}
         className={cn(
           "order-1 max-w-[38rem] md:order-2",
-          isHero ? "max-w-[64rem]" : "text-center md:text-left",
+          isHero
+            ? "flex max-w-[64rem] flex-col items-center gap-6"
+            : "text-center md:text-left",
           contentAnimation && `animate-scene-content-${contentAnimation}`
         )}
       >
         {isHero ? (
-          <h1 className="font-display text-display-sm text-balance sm:text-display-lg">
-            {scene.title}
-          </h1>
+          <>
+            <div>
+              <h1 className="font-display text-display-sm text-balance sm:text-display-lg">
+                {scene.title}
+              </h1>
+              <p className="mx-auto mt-5 max-w-[42rem] text-sm leading-relaxed text-balance text-current">
+                {scene.body}
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <JoinWaitlistControl defaultExpanded />
+            </div>
+          </>
         ) : (
-          <h2 className="font-display text-display-sm text-balance sm:text-display-md">
-            {scene.title}
-          </h2>
-        )}
-        {scene.compatibility ? (
-          <CompatibilityMarks theme={scene.theme} />
-        ) : (
-          <p
-            className={cn(
-              "mt-5 max-w-[34rem] text-sm leading-relaxed text-balance text-current",
-              isHero ? "mx-auto max-w-[42rem]" : "mx-auto md:mx-0"
+          <>
+            <h2 className="font-display text-display-sm text-balance sm:text-display-md">
+              {scene.title}
+            </h2>
+            {scene.compatibility ? (
+              <CompatibilityMarks theme={scene.theme} />
+            ) : (
+              <p className="mx-auto mt-5 max-w-[34rem] text-sm leading-relaxed text-balance text-current md:mx-0">
+                {scene.body}
+              </p>
             )}
-          >
-            {scene.body}
-          </p>
-        )}
-        {isHero && (
-          <div className="mt-6 flex justify-center">
-            <JoinWaitlistControl defaultExpanded />
-          </div>
+          </>
         )}
       </div>
 
