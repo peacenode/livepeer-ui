@@ -226,7 +226,7 @@ function ContentScene({
       className={cn(
         "flex h-full w-full overflow-hidden px-4 text-current sm:px-6",
         isHero
-          ? "flex-col items-center justify-start gap-[var(--hero-content-gap)] pt-[clamp(1.5rem,5svh,4rem)] text-center [--hero-content-gap:clamp(1.5rem,4svh,3rem)]"
+          ? "flex-col items-center justify-start gap-[var(--hero-content-gap)] pt-[clamp(0.75rem,2svh,2rem)] text-center [--hero-content-gap:clamp(1.5rem,4svh,3rem)]"
           : "flex-col items-center justify-center gap-7 py-10 md:grid md:grid-cols-[minmax(16rem,0.8fr)_minmax(20rem,1fr)] md:gap-[clamp(3rem,8vw,9rem)] md:px-[clamp(2rem,6vw,7rem)] md:py-12"
       )}
     >
