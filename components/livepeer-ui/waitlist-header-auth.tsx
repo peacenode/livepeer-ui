@@ -336,10 +336,10 @@ export function WaitlistHeaderAuth({
     <>
       <div className="flex min-w-0 items-center gap-2">
         <span className="flex h-8 shrink-0 items-center text-[10px] leading-none font-semibold sm:hidden">
-          Early Access
+          Livepeer MCP Early Access
         </span>
         <span className="hidden h-8 shrink-0 items-center text-[10px] leading-none font-semibold sm:flex">
-          {sessionEmail ? "Invite a friend" : "Early Access"}
+          {sessionEmail ? "Invite a friend" : "Livepeer MCP Early Access"}
         </span>
         <div className="hidden sm:block">
           <JoinWaitlistControl />
