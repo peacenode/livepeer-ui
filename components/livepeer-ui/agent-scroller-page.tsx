@@ -226,7 +226,7 @@ function ContentScene({
       className={cn(
         "flex h-full w-full overflow-hidden px-4 text-current sm:px-6",
         isHero
-          ? "flex-col items-center justify-start pt-[clamp(1.5rem,5svh,4rem)] text-center"
+          ? "flex-col items-center justify-start gap-[var(--hero-content-gap)] pt-[clamp(1.5rem,5svh,4rem)] text-center [--hero-content-gap:clamp(1.5rem,4svh,3rem)]"
           : "flex-col items-center justify-center gap-7 py-10 md:grid md:grid-cols-[minmax(16rem,0.8fr)_minmax(20rem,1fr)] md:gap-[clamp(3rem,8vw,9rem)] md:px-[clamp(2rem,6vw,7rem)] md:py-12"
       )}
     >
@@ -241,14 +241,14 @@ function ContentScene({
         className={cn(
           "order-1 max-w-[38rem] md:order-2",
           isHero
-            ? "flex max-w-[64rem] flex-col items-center gap-6"
+            ? "flex max-w-[64rem] flex-col items-center gap-[var(--hero-content-gap)]"
             : "text-center md:text-left",
           contentAnimation && `animate-scene-content-${contentAnimation}`
         )}
       >
         {isHero ? (
           <>
-            <div className="-translate-y-[clamp(1.5rem,3svh,2.5rem)]">
+            <div>
               <h1 className="font-display text-display-sm text-balance sm:text-display-lg">
                 {scene.title}
               </h1>
@@ -277,7 +277,7 @@ function ContentScene({
       </div>
 
       {isHero && (
-        <div className="pointer-events-none order-2 mt-[clamp(1.5rem,4svh,3rem)] shrink-0">
+        <div className="pointer-events-none order-2 shrink-0">
           <ProductMediaFrame
             scene={scene}
             frameAnimation={frameAnimation}
