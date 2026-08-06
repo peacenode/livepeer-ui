@@ -88,29 +88,29 @@ const nonShowcaseCapabilities = new Set([
 const storyContent = [
   {
     id: "studio",
-    title: "Livepeer MPC turns your agent into your dream production studio",
-    body: "Brings image, video, audio, 3D, editing, rendering, and production tools into your agent’s workflows with Livepeer MPC.",
+    title: "Livepeer Agent turns your agent into your dream production studio",
+    body: "Brings image, video, audio, 3D, editing, rendering, and production tools into your agent’s workflows with Livepeer Agent.",
     theme: "base",
     layout: "hero",
   },
   {
     id: "routing",
     title: "The right model for every request",
-    body: "Livepeer MPC understands the work you’re asking for and routes it to the model best suited to handle it.",
+    body: "Livepeer Agent understands the work you’re asking for and routes it to the model best suited to handle it.",
     theme: "inverse",
     layout: "split",
   },
   {
     id: "pricing",
     title: "Pay for the work, not a subscription",
-    body: "Livepeer MPC shows the real price of every render before it runs. Keep a balance in USD and pay only for the compute you use—no credits, plans, or hidden conversion.",
+    body: "Livepeer Agent shows the real price of every render before it runs. Keep a balance in USD and pay only for the compute you use—no credits, plans, or hidden conversion.",
     theme: "base",
     layout: "split",
   },
   {
     id: "workflow",
     title: "Run any part of your workflow",
-    body: "Send one step or an entire production through Livepeer MPC while keeping the files, applications, and processes you already use.",
+    body: "Send one step or an entire production through Livepeer Agent while keeping the files, applications, and processes you already use.",
     theme: "inverse",
     layout: "split",
   },
@@ -359,7 +359,7 @@ function FooterScene({
       <div className="flex flex-1 items-center justify-center">
         <div className="mx-auto flex w-full max-w-screen-2xl flex-col items-center gap-10 text-center">
           <h2 className="max-w-6xl font-display text-display-sm text-balance sm:text-display-lg">
-            Livepeer MPC. Keep creating. Automate the rest.
+            Livepeer Agent. Keep creating. Automate the rest.
           </h2>
           <JoinWaitlistControl defaultExpanded />
         </div>
@@ -438,7 +438,7 @@ export function AgentScrollerPage({
       },
       {
         id: "footer",
-        title: "Livepeer MPC. Keep creating. Automate the rest.",
+        title: "Livepeer Agent. Keep creating. Automate the rest.",
         theme: "base",
         layout: "footer",
         media: [],
