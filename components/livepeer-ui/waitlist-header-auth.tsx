@@ -325,7 +325,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
                 autoComplete="email"
                 className="h-14"
               />
-              <Button type="submit" size="lg" className="h-14 w-full">
+              <Button type="submit" size="lg" className="h-16 w-full">
                 Sign in
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </Button>
