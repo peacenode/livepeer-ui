@@ -4,6 +4,7 @@ import {
   CalendarIcon,
   CreditCardIcon,
   GalleryVerticalEndIcon,
+  HelpCircleIcon,
   ImagesIcon,
   PanelsTopLeftIcon,
 } from "lucide-react"
@@ -24,6 +25,7 @@ const singletonSchemaTypes = new Set([
   "agentConsolePage",
   "livepeerOrgSite",
   "livepeerOrgPage",
+  "faqPageContent",
 ])
 
 const flowsStructure: StructureResolver = (S) =>
@@ -48,6 +50,20 @@ const flowsStructure: StructureResolver = (S) =>
           )
       )
     )
+
+const faqStructure: StructureResolver = (S) =>
+  S.list()
+    .title("FAQ")
+    .items([
+      S.listItem()
+        .title("FAQ")
+        .icon(HelpCircleIcon)
+        .child(
+          S.document()
+            .schemaType("faqPageContent")
+            .documentId("faqPageContent")
+        ),
+    ])
 
 const plannerStructure: StructureResolver = (S) =>
   S.documentTypeList("marketingWeek")
@@ -237,6 +253,12 @@ export default defineConfig({
       title: "Planner",
       icon: CalendarIcon,
       structure: plannerStructure,
+    }),
+    structureTool({
+      name: "faq",
+      title: "FAQ",
+      icon: HelpCircleIcon,
+      structure: faqStructure,
     }),
     structureTool({
       name: "waitlist",

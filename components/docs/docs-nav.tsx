@@ -24,6 +24,7 @@ export function DocsNav({
         { title: "Brand Kit", href: "/marketing/brand-kit" },
         { title: "Stock Images", href: "/marketing/stock-images" },
         { title: "Agent Playbooks", href: "/marketing/agent-playbooks" },
+        { title: "FAQ", href: "/marketing/faq" },
       ],
     },
     {
