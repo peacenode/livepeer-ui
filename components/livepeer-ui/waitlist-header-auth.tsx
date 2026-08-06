@@ -206,7 +206,7 @@ export function JoinWaitlistControl({
               required
               autoComplete="email"
               tabIndex={expanded ? 0 : -1}
-              className="h-8 min-w-0 bg-muted px-2.5 pr-9 text-xs duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive"
+              className="h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive"
             />
             <Button
               type="submit"
