@@ -310,13 +310,10 @@ function FixedWaitlistSignIn({
         className={`${theme === "inverse" ? "dark" : ""} h-[calc(100dvh-var(--sign-in-gutter))] min-h-0 w-[calc(100vw-var(--sign-in-gutter))] max-w-none gap-0 overflow-hidden rounded-sm p-0 [--sign-in-gutter:clamp(2rem,10vw,6rem)] sm:max-w-none`}
       >
         <div
-          className="absolute top-6 left-6 z-10 text-foreground md:text-white"
+          className="absolute top-6 left-6 z-10 text-foreground md:left-[calc(50%+clamp(2.5rem,5vw,6rem))]"
           aria-label="Livepeer"
         >
-          <LivepeerWordmark
-            className="h-4 w-auto md:drop-shadow-sm"
-            aria-hidden="true"
-          />
+          <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
         </div>
         <DialogClose
           render={
@@ -334,13 +331,13 @@ function FixedWaitlistSignIn({
           <div className="order-1 flex min-h-0 items-center px-6 pt-16 pb-8 sm:px-10 md:order-2 md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
             <div className="w-full max-w-lg text-left">
               <DialogHeader className="sr-only">
-                <DialogTitle>Sign in</DialogTitle>
+                <DialogTitle>Sign in to Livepeer Agent</DialogTitle>
                 <DialogDescription>
                   Enter the email you used to join the waitlist.
                 </DialogDescription>
               </DialogHeader>
               <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
-                Sign in
+                Sign in to Livepeer Agent
               </h2>
               <form onSubmit={submitSignIn} className="mt-8 space-y-3">
                 <WaitlistEmailInput
