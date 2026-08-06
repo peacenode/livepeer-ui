@@ -10,6 +10,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react"
+import Image from "next/image"
 import {
   ArrowRightIcon,
   ArrowUpIcon,
@@ -257,7 +258,13 @@ export function JoinWaitlistControl({
   )
 }
 
-function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
+function FixedWaitlistSignIn({
+  theme,
+  signInImage,
+}: {
+  theme: "base" | "inverse"
+  signInImage?: { src: string; alt: string }
+}) {
   const sessionEmail = useSyncExternalStore(
     subscribeToSession,
     getSessionEmail,
@@ -300,10 +307,16 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className={`${theme === "inverse" ? "dark" : ""} h-[calc(100dvh-var(--sign-in-gutter))] min-h-0 w-[calc(100vw-var(--sign-in-gutter))] max-w-none gap-0 rounded-sm p-6 [--sign-in-gutter:clamp(2rem,10vw,6rem)] sm:max-w-none sm:p-10`}
+        className={`${theme === "inverse" ? "dark" : ""} h-[calc(100dvh-var(--sign-in-gutter))] min-h-0 w-[calc(100vw-var(--sign-in-gutter))] max-w-none gap-0 overflow-hidden rounded-sm p-0 [--sign-in-gutter:clamp(2rem,10vw,6rem)] sm:max-w-none`}
       >
-        <div className="absolute top-6 left-6" aria-label="Livepeer">
-          <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
+        <div
+          className="absolute top-6 left-6 z-10 text-foreground md:text-white"
+          aria-label="Livepeer"
+        >
+          <LivepeerWordmark
+            className="h-4 w-auto md:drop-shadow-sm"
+            aria-hidden="true"
+          />
         </div>
         <DialogClose
           render={
@@ -317,34 +330,48 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
           <XIcon className="size-5" aria-hidden="true" />
           <span className="sr-only">Close</span>
         </DialogClose>
-        <div className="flex items-center py-16 sm:px-8">
-          <div className="w-full max-w-lg text-left">
-            <DialogHeader className="sr-only">
-              <DialogTitle>Sign in</DialogTitle>
-              <DialogDescription>
-                Enter the email you used to join the waitlist.
-              </DialogDescription>
-            </DialogHeader>
-            <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
-              Sign in
-            </h2>
-            <form onSubmit={submitSignIn} className="mt-8 space-y-3">
-              <WaitlistEmailInput
-                id="scroller-waitlist-sign-in"
-                aria-label="Email address"
-                type="email"
-                value={signInEmail}
-                onChange={(event) => setSignInEmail(event.target.value)}
-                placeholder="you@example.com"
-                required
-                autoComplete="email"
-              />
-              <Button type="submit" size="lg" className="h-16 w-full">
+        <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_minmax(10rem,0.65fr)] md:grid-cols-2 md:grid-rows-1">
+          <div className="order-1 flex min-h-0 items-center px-6 pt-16 pb-8 sm:px-10 md:order-2 md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
+            <div className="w-full max-w-lg text-left">
+              <DialogHeader className="sr-only">
+                <DialogTitle>Sign in</DialogTitle>
+                <DialogDescription>
+                  Enter the email you used to join the waitlist.
+                </DialogDescription>
+              </DialogHeader>
+              <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
                 Sign in
-                <ArrowRightIcon className="size-4" aria-hidden="true" />
-              </Button>
-            </form>
+              </h2>
+              <form onSubmit={submitSignIn} className="mt-8 space-y-3">
+                <WaitlistEmailInput
+                  id="scroller-waitlist-sign-in"
+                  aria-label="Email address"
+                  type="email"
+                  value={signInEmail}
+                  onChange={(event) => setSignInEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                />
+                <Button type="submit" size="lg" className="h-16 w-full">
+                  Sign in
+                  <ArrowRightIcon className="size-4" aria-hidden="true" />
+                </Button>
+              </form>
+            </div>
           </div>
+          {signInImage && (
+            <div className="relative order-2 min-h-0 overflow-hidden bg-muted md:order-1">
+              <Image
+                src={signInImage.src}
+                alt={signInImage.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:bg-gradient-to-b md:from-black/25 md:to-transparent" />
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
@@ -353,8 +380,10 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
 
 export function WaitlistHeaderAuth({
   theme = "base",
+  signInImage,
 }: {
   theme?: "base" | "inverse"
+  signInImage?: { src: string; alt: string }
 }) {
   const sessionEmail = useSyncExternalStore(
     subscribeToSession,
@@ -375,7 +404,7 @@ export function WaitlistHeaderAuth({
           <JoinWaitlistControl />
         </div>
       </div>
-      <FixedWaitlistSignIn theme={theme} />
+      <FixedWaitlistSignIn theme={theme} signInImage={signInImage} />
     </>
   )
 }

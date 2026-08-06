@@ -871,7 +871,12 @@ export function AgentScrollerPage({
       <div className="sticky inset-x-0 top-0 z-50 h-16">
         <LivepeerOrgHeader
           site={site}
-          utility={<WaitlistHeaderAuth theme={activeScene.theme} />}
+          utility={
+            <WaitlistHeaderAuth
+              theme={activeScene.theme}
+              signInImage={scenes[0]?.media[0]}
+            />
+          }
           onLogoClick={returnToFirstScene}
           showMenu={false}
         />
