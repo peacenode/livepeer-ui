@@ -17,9 +17,16 @@ import {
 } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
-import { MobileNavigationMenu } from "@/components/livepeer-ui/mobile-navigation-menu"
 import { Button } from "@/components/ui/button"
-import { DisplayHeading } from "@/components/ui/display-heading"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 
 const storageKey = "livepeer-waitlist-email"
@@ -266,31 +273,43 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
   }
 
   return (
-    <MobileNavigationMenu
-      title="sign in"
-      open={signInOpen}
-      onOpenChange={setSignInOpen}
-      trigger="Sign in"
-      triggerClassName="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
-      closeContent={<XIcon className="size-5" aria-hidden="true" />}
-      contentClassName={theme === "inverse" ? "dark" : undefined}
-      header={
-        <div>
-          <span className="sr-only">Livepeer</span>
+    <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
+      <DialogTrigger
+        render={<Button type="button" variant="link" size="xs" />}
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+      >
+        Sign in
+      </DialogTrigger>
+      <DialogContent
+        showCloseButton={false}
+        className={`${theme === "inverse" ? "dark" : ""} min-h-[min(34rem,calc(100dvh-2rem))] max-w-[calc(100%-2rem)] gap-0 rounded-sm p-6 sm:min-h-[34rem] sm:max-w-3xl sm:p-10`}
+      >
+        <div className="absolute top-6 left-6" aria-label="Livepeer">
           <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
         </div>
-      }
-    >
-      {() => (
-        <div className="flex min-h-0 flex-1 items-center justify-center px-6 pb-16 text-foreground">
-          <div className="flex w-full max-w-sm flex-col items-start text-left">
-            <DisplayHeading as="h2" className="sm:text-display-lg">
-              Sign in
-            </DisplayHeading>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Enter the email you used to join the waitlist.
-            </p>
-            <form onSubmit={submitSignIn} className="mt-6 w-full space-y-3">
+        <DialogClose
+          render={
+            <Button
+              variant="ghost"
+              size="icon-lg"
+              className="absolute top-4 right-4 bg-transparent hover:bg-transparent sm:top-6 sm:right-6"
+            />
+          }
+        >
+          <XIcon className="size-5" aria-hidden="true" />
+          <span className="sr-only">Close</span>
+        </DialogClose>
+        <div className="flex items-center py-16 sm:px-8">
+          <div className="w-full max-w-lg text-left">
+            <DialogHeader>
+              <DialogTitle className="font-display text-display-sm text-balance sm:text-display-lg">
+                Sign in
+              </DialogTitle>
+              <DialogDescription className="mt-3 max-w-md text-base leading-relaxed">
+                Enter the email you used to join the waitlist.
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={submitSignIn} className="mt-8 space-y-3">
               <Input
                 id="scroller-waitlist-sign-in"
                 aria-label="Email address"
@@ -300,16 +319,17 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
+                className="h-14"
               />
-              <Button type="submit" size="lg" className="h-12 w-full">
+              <Button type="submit" size="lg" className="h-14 w-full">
                 Sign in
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </Button>
             </form>
           </div>
         </div>
-      )}
-    </MobileNavigationMenu>
+      </DialogContent>
+    </Dialog>
   )
 }
 

@@ -9,7 +9,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
 
 function MobileMenuIcon({ open = false }: { open?: boolean }) {
   return (
@@ -44,20 +43,12 @@ export function MobileNavigationMenu({
   children,
   open,
   onOpenChange,
-  trigger,
-  triggerClassName,
-  closeContent,
-  contentClassName,
 }: {
   title: string
   header: React.ReactNode
   children: (close: () => void) => React.ReactNode
   open: boolean
   onOpenChange: (open: boolean) => void
-  trigger?: React.ReactNode
-  triggerClassName?: string
-  closeContent?: React.ReactNode
-  contentClassName?: string
 }) {
   const close = React.useCallback(() => onOpenChange(false), [onOpenChange])
 
@@ -66,16 +57,13 @@ export function MobileNavigationMenu({
       <SheetTrigger
         render={
           <Button
-            variant={trigger ? "link" : "ghost"}
-            size={trigger ? "xs" : "icon-sm"}
-            className={cn(
-              "hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent dark:hover:bg-transparent",
-              triggerClassName
-            )}
+            variant="ghost"
+            size="icon-sm"
+            className="hover:bg-transparent hover:text-foreground aria-expanded:bg-transparent dark:hover:bg-transparent"
           />
         }
       >
-        {trigger ?? <MobileMenuIcon open={open} />}
+        <MobileMenuIcon open={open} />
         <span className="sr-only">
           {open ? `Close ${title}` : `Open ${title}`}
         </span>
@@ -84,10 +72,7 @@ export function MobileNavigationMenu({
         side="top"
         showCloseButton={false}
         overlayClassName="bg-transparent transition-none supports-backdrop-filter:backdrop-blur-none"
-        className={cn(
-          "z-[70] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background p-0 text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none",
-          contentClassName
-        )}
+        className="z-[70] h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-background p-0 text-foreground opacity-100 shadow-none transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=top]:h-dvh data-[side=top]:border-b-0 data-[side=top]:data-ending-style:translate-y-0 data-[side=top]:data-starting-style:translate-y-0 motion-reduce:transition-none"
       >
         <SheetTitle className="sr-only">{title}</SheetTitle>
         <div className="flex h-dvh flex-col">
@@ -101,7 +86,7 @@ export function MobileNavigationMenu({
               onClick={close}
               className="hover:bg-transparent dark:hover:bg-transparent"
             >
-              {closeContent ?? <MobileMenuIcon open />}
+              <MobileMenuIcon open />
             </Button>
           </div>
           {children(close)}
