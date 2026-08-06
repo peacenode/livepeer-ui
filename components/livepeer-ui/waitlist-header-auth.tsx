@@ -282,7 +282,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className={`${theme === "inverse" ? "dark" : ""} min-h-[min(34rem,calc(100dvh-2rem))] max-w-[calc(100%-2rem)] gap-0 rounded-sm p-6 sm:min-h-[34rem] sm:max-w-3xl sm:p-10`}
+        className={`${theme === "inverse" ? "dark" : ""} h-[calc(100dvh-var(--sign-in-gutter))] min-h-0 w-[calc(100vw-var(--sign-in-gutter))] max-w-none gap-0 rounded-sm p-6 [--sign-in-gutter:clamp(2rem,10vw,6rem)] sm:max-w-none sm:p-10`}
       >
         <div className="absolute top-6 left-6" aria-label="Livepeer">
           <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
@@ -301,14 +301,18 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
         </DialogClose>
         <div className="flex items-center py-16 sm:px-8">
           <div className="w-full max-w-lg text-left">
-            <DialogHeader>
-              <DialogTitle className="font-display text-display-sm text-balance sm:text-display-lg">
-                Sign in
-              </DialogTitle>
-              <DialogDescription className="mt-3 max-w-md text-base leading-relaxed">
+            <DialogHeader className="sr-only">
+              <DialogTitle>Sign in</DialogTitle>
+              <DialogDescription>
                 Enter the email you used to join the waitlist.
               </DialogDescription>
             </DialogHeader>
+            <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
+              Sign in
+            </h2>
+            <p className="mt-5 max-w-[42rem] text-sm leading-relaxed text-balance text-muted-foreground">
+              Enter the email you used to join the waitlist.
+            </p>
             <form onSubmit={submitSignIn} className="mt-8 space-y-3">
               <Input
                 id="scroller-waitlist-sign-in"
