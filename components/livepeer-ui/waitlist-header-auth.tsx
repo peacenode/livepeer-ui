@@ -17,16 +17,9 @@ import {
 } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
+import { MobileNavigationMenu } from "@/components/livepeer-ui/mobile-navigation-menu"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { DisplayHeading } from "@/components/ui/display-heading"
 import { Input } from "@/components/ui/input"
 
 const storageKey = "livepeer-waitlist-email"
@@ -273,63 +266,50 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
   }
 
   return (
-    <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
-      <DialogTrigger
-        render={<Button type="button" variant="link" size="xs" />}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
-      >
-        Sign in
-      </DialogTrigger>
-      <DialogContent
-        showCloseButton={false}
-        className={`${theme === "inverse" ? "dark" : ""} inset-0 flex h-dvh w-full max-w-none translate-x-0 translate-y-0 items-center justify-center rounded-none bg-background p-6 text-foreground opacity-100 shadow-none ring-0 duration-200 sm:max-w-none data-open:zoom-in-100 data-open:slide-in-from-top-4 data-closed:zoom-out-100 data-closed:slide-out-to-top-4`}
-      >
-        <div
-          className="absolute top-5 left-4 flex items-center sm:top-7 sm:left-6"
-          aria-label="Livepeer"
-        >
+    <MobileNavigationMenu
+      title="sign in"
+      open={signInOpen}
+      onOpenChange={setSignInOpen}
+      trigger="Sign in"
+      triggerClassName="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+      closeContent={<XIcon className="size-5" aria-hidden="true" />}
+      contentClassName={theme === "inverse" ? "dark" : undefined}
+      header={
+        <div>
+          <span className="sr-only">Livepeer</span>
           <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
         </div>
-        <DialogClose
-          render={
-            <Button
-              variant="ghost"
-              size="icon-lg"
-              className="absolute top-4 right-4 bg-transparent hover:bg-transparent sm:top-6 sm:right-6"
-            />
-          }
-        >
-          <XIcon className="size-5" aria-hidden="true" />
-          <span className="sr-only">Close</span>
-        </DialogClose>
-        <div className="flex w-full max-w-sm flex-col items-center text-center">
-          <DialogHeader className="items-center text-center">
-            <DialogTitle className="font-display text-display-sm text-balance sm:text-display-lg">
+      }
+    >
+      {() => (
+        <div className="flex min-h-0 flex-1 items-center justify-center px-6 pb-16 text-foreground">
+          <div className="flex w-full max-w-sm flex-col items-start text-left">
+            <DisplayHeading as="h2" className="sm:text-display-lg">
               Sign in
-            </DialogTitle>
-            <DialogDescription className="mt-2">
+            </DisplayHeading>
+            <p className="mt-2 text-sm text-muted-foreground">
               Enter the email you used to join the waitlist.
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={submitSignIn} className="mt-6 w-full space-y-3">
-            <Input
-              id="scroller-waitlist-sign-in"
-              aria-label="Email address"
-              type="email"
-              value={signInEmail}
-              onChange={(event) => setSignInEmail(event.target.value)}
-              placeholder="you@example.com"
-              required
-              autoComplete="email"
-            />
-            <Button type="submit" size="lg" className="h-12 w-full">
-              Sign in
-              <ArrowRightIcon className="size-4" aria-hidden="true" />
-            </Button>
-          </form>
+            </p>
+            <form onSubmit={submitSignIn} className="mt-6 w-full space-y-3">
+              <Input
+                id="scroller-waitlist-sign-in"
+                aria-label="Email address"
+                type="email"
+                value={signInEmail}
+                onChange={(event) => setSignInEmail(event.target.value)}
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+              />
+              <Button type="submit" size="lg" className="h-12 w-full">
+                Sign in
+                <ArrowRightIcon className="size-4" aria-hidden="true" />
+              </Button>
+            </form>
+          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      )}
+    </MobileNavigationMenu>
   )
 }
 
