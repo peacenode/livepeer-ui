@@ -281,44 +281,46 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className={`${theme === "inverse" ? "dark" : ""} gap-6 rounded-sm p-6 sm:max-w-md sm:p-8`}
+        className={`${theme === "inverse" ? "dark" : ""} inset-0 flex h-dvh w-full max-w-none translate-x-0 translate-y-0 items-center justify-center rounded-none bg-background p-6 text-foreground opacity-100 shadow-none ring-0 duration-200 sm:max-w-none data-open:zoom-in-100 data-open:slide-in-from-top-4 data-closed:zoom-out-100 data-closed:slide-out-to-top-4`}
       >
         <DialogClose
           render={
             <Button
               variant="ghost"
-              size="icon-sm"
-              className="absolute top-4 right-4 bg-transparent hover:bg-transparent"
+              size="icon-lg"
+              className="absolute top-4 right-4 bg-transparent hover:bg-transparent sm:top-6 sm:right-6"
             />
           }
         >
           <XIcon className="size-5" aria-hidden="true" />
           <span className="sr-only">Close</span>
         </DialogClose>
-        <DialogHeader className="items-center text-center">
-          <DialogTitle className="font-display text-3xl leading-none font-light tracking-[-0.04em]">
-            Sign in
-          </DialogTitle>
-          <DialogDescription>
-            Enter the email you used to join the waitlist.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={submitSignIn} className="space-y-3">
-          <Input
-            id="scroller-waitlist-sign-in"
-            aria-label="Email address"
-            type="email"
-            value={signInEmail}
-            onChange={(event) => setSignInEmail(event.target.value)}
-            placeholder="you@example.com"
-            required
-            autoComplete="email"
-          />
-          <Button type="submit" size="lg" className="h-12 w-full">
-            Sign in
-            <ArrowRightIcon className="size-4" aria-hidden="true" />
-          </Button>
-        </form>
+        <div className="flex w-full max-w-sm flex-col items-center text-center">
+          <DialogHeader className="items-center text-center">
+            <DialogTitle className="text-base leading-none font-medium">
+              Sign in
+            </DialogTitle>
+            <DialogDescription className="mt-2">
+              Enter the email you used to join the waitlist.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={submitSignIn} className="mt-6 w-full space-y-3">
+            <Input
+              id="scroller-waitlist-sign-in"
+              aria-label="Email address"
+              type="email"
+              value={signInEmail}
+              onChange={(event) => setSignInEmail(event.target.value)}
+              placeholder="you@example.com"
+              required
+              autoComplete="email"
+            />
+            <Button type="submit" size="lg" className="h-12 w-full">
+              Sign in
+              <ArrowRightIcon className="size-4" aria-hidden="true" />
+            </Button>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   )
