@@ -1,7 +1,9 @@
 "use client"
 
 import {
+  type ComponentProps,
   type FormEvent,
+  forwardRef,
   useId,
   useMemo,
   useRef,
@@ -28,9 +30,26 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 const storageKey = "livepeer-waitlist-email"
 const sessionEvent = "livepeer-waitlist-session-change"
+
+const WaitlistEmailInput = forwardRef<
+  HTMLInputElement,
+  ComponentProps<typeof Input>
+>(function WaitlistEmailInput({ className, ...props }, ref) {
+  return (
+    <Input
+      ref={ref}
+      className={cn(
+        "h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive",
+        className
+      )}
+      {...props}
+    />
+  )
+})
 
 function subscribeToSession(callback: () => void) {
   window.addEventListener("storage", callback)
@@ -195,7 +214,7 @@ export function JoinWaitlistControl({
           className={`absolute inset-x-0 top-0 min-w-0 p-0.5 transition-[opacity,transform] duration-200 ${expanded ? "translate-x-0 opacity-100 delay-100" : "pointer-events-none -translate-x-2 opacity-0"}`}
         >
           <div className="relative min-w-0">
-            <Input
+            <WaitlistEmailInput
               ref={emailInputRef}
               type="email"
               aria-label="Email address"
@@ -210,7 +229,6 @@ export function JoinWaitlistControl({
               required
               autoComplete="email"
               tabIndex={expanded ? 0 : -1}
-              className="h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive"
             />
             <Button
               type="submit"
@@ -276,7 +294,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
     <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
       <DialogTrigger
         render={<Button type="button" variant="link" size="xs" />}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out [text-shadow:0_0_2px_white,0_1px_8px_rgba(255,255,255,0.95)] sm:right-6 sm:bottom-6"
       >
         Sign in
       </DialogTrigger>
@@ -310,11 +328,8 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
             <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
               Sign in
             </h2>
-            <p className="mt-5 max-w-[42rem] text-sm leading-relaxed text-balance text-muted-foreground">
-              Enter the email you used to join the waitlist.
-            </p>
             <form onSubmit={submitSignIn} className="mt-8 space-y-3">
-              <Input
+              <WaitlistEmailInput
                 id="scroller-waitlist-sign-in"
                 aria-label="Email address"
                 type="email"
@@ -323,7 +338,6 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
-                className="h-14"
               />
               <Button type="submit" size="lg" className="h-16 w-full">
                 Sign in
