@@ -339,21 +339,28 @@ function FixedWaitlistSignIn({
               <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
                 Sign in to Livepeer Agent
               </h2>
-              <form onSubmit={submitSignIn} className="mt-8 space-y-3">
-                <WaitlistEmailInput
-                  id="scroller-waitlist-sign-in"
-                  aria-label="Email address"
-                  type="email"
-                  value={signInEmail}
-                  onChange={(event) => setSignInEmail(event.target.value)}
-                  placeholder="you@example.com"
-                  required
-                  autoComplete="email"
-                />
-                <Button type="submit" size="lg" className="h-16 w-full">
-                  Sign in
-                  <ArrowRightIcon className="size-4" aria-hidden="true" />
-                </Button>
+              <form onSubmit={submitSignIn} className="mt-8">
+                <div className="relative">
+                  <WaitlistEmailInput
+                    id="scroller-waitlist-sign-in"
+                    aria-label="Email address"
+                    type="email"
+                    value={signInEmail}
+                    onChange={(event) => setSignInEmail(event.target.value)}
+                    placeholder="you@example.com"
+                    required
+                    autoComplete="email"
+                  />
+                  <Button
+                    type="submit"
+                    variant="ghost"
+                    size="icon-sm"
+                    aria-label="Sign in"
+                    className="absolute top-0 right-0 rounded-sm"
+                  >
+                    <ArrowRightIcon className="size-4" aria-hidden="true" />
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
