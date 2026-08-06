@@ -11,12 +11,12 @@ function componentInventory(components: RegistryComponent[]) {
 function catalogInventory() {
   return registryMeta.catalog
     .map(
-      (group) => `### ${group.title}\n\n${group.items
-        .map(
-          (item) =>
-            `- \`${item.name}\` (${item.level}) — ${item.description}`
-        )
-        .join("\n")}`
+      (group) =>
+        `### ${group.title}\n\n${group.items
+          .map(
+            (item) => `- \`${item.name}\` (${item.level}) — ${item.description}`
+          )
+          .join("\n")}`
     )
     .join("\n\n")
 }
@@ -141,6 +141,7 @@ Start with the user's job, not a generic page category. The first viewport shoul
 - Use cards for self-contained objects, not as the default wrapper for every section.
 - Give repeated peers consistent structure and visual weight. Do not force unequal content into identical cards.
 - Keep labels concrete and sentence case. Avoid decorative eyebrows, invented categories, marketing filler, and redundant section introductions.
+- Never generate ornamental sequence numbers, slide counters, progress fractions, or labels such as “01 / 08” around headings. Show position or progress only when it is functional, user-relevant information required to navigate or understand the interface.
 - Prefer a compact table for exact comparison, prose for one conclusion, and charts only when a relationship becomes faster to understand visually.
 - Keep forms direct: visible labels, useful placeholders, nearby validation, and one obvious submit action.
 - Use badges for compact status or categorization, not ordinary metadata or decoration.
@@ -240,6 +241,7 @@ When a supplied reference conflicts with this system, preserve its product inten
 - Brand green on any interactive affordance or as a generic success color.
 - Favorit display inside routine product UI; the Agent face outside its lockup.
 - Monospace prose, uppercase tracking as decoration, emoji, or non-Lucide UI icons.
+- Decorative numbering, sequence labels, slide counts, or progress fractions that do not communicate required product state.
 - Hard-coded theme colors and arbitrary one-off radii or spacing.
 - Desktop layouts that only shrink instead of recomposing at smaller widths.
 

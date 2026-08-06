@@ -4,29 +4,22 @@ import {
   getPlaybookDocument,
   getSourcePlaybooks,
 } from "@/app/mockups/playbooks/daydream-source"
-import { AgentLandingPage } from "@/components/livepeer-ui/agent-landing-page"
-import {
-  getLivepeerOrgPage,
-  getLivepeerOrgSite,
-} from "@/sanity/lib/livepeer-org-pages"
+import { AgentScrollerPage } from "@/components/livepeer-ui/agent-scroller-page"
+import { getLivepeerOrgSite } from "@/sanity/lib/livepeer-org-pages"
+import { getStockImageLibrary } from "@/sanity/lib/stock-images"
 
 export const metadata: Metadata = {
   title: "Livepeer Agent — Private Beta",
   description:
-    "Private-beta marketing page for Livepeer Agent with access to Playbooks and the Agent Console.",
+    "Create, source, edit, and deliver media from the project already open in your agent.",
 }
 
 export default async function PrivateBetaEarlyAccessAboutPage() {
-  const [site, page, playbooks] = await Promise.all([
+  const [site, playbooks, stockImages] = await Promise.all([
     getLivepeerOrgSite(),
-    getLivepeerOrgPage("livepeer-agent"),
     getSourcePlaybooks(),
+    getStockImageLibrary(),
   ])
-  if (!page.agentContent) {
-    throw new Error(
-      'Required "agentContent" is missing from "livepeerOrgPage-livepeer-agent".'
-    )
-  }
   const documents = await Promise.all(
     playbooks.map(({ slug }) => getPlaybookDocument(slug))
   )
@@ -34,12 +27,23 @@ export default async function PrivateBetaEarlyAccessAboutPage() {
     ...new Set(documents.flatMap((document) => document?.caps ?? [])),
   ].sort((a, b) => a.localeCompare(b))
 
+  const networkImages = stockImages
+    .filter((image) => image.subgroup.group.name.toLowerCase() === "network")
+    .map((image) => ({
+      id: image._id,
+      src: image.url,
+      alt: image.name,
+    }))
+
+  if (!networkImages.length) {
+    throw new Error('The stock-image library has no images in "Network".')
+  }
+
   return (
-    <AgentLandingPage
-      capabilities={capabilities}
-      content={page.agentContent}
+    <AgentScrollerPage
       site={site}
-      privateBeta
+      capabilities={capabilities}
+      networkImages={networkImages}
     />
   )
 }

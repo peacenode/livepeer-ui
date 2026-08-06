@@ -40,6 +40,8 @@ export function LivepeerOrgHeader({
   consoleHref,
   playbooksHref,
   action,
+  utility,
+  onLogoClick,
   showMenu = true,
 }: {
   site: LivepeerOrgSite
@@ -49,7 +51,12 @@ export function LivepeerOrgHeader({
   action?: {
     label: string
     href: string
+    variant?: "link" | "muted" | "secondary"
+    className?: string
+    showArrow?: boolean
   }
+  utility?: React.ReactNode
+  onLogoClick?: () => void
   showMenu?: boolean
 }) {
   const mounted = React.useSyncExternalStore(
@@ -98,12 +105,17 @@ export function LivepeerOrgHeader({
           </>,
           document.body
         )}
-      <header className="relative z-50 w-full bg-transparent">
+      <header className="relative z-50 w-full bg-transparent text-current transition-colors duration-100 ease-out">
         <div className="relative z-10 mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between gap-2 px-4 sm:gap-6 sm:px-6 lg:px-10">
           <div className="flex min-w-0 items-end gap-5">
             <Link
               href={site.homeHref}
-              className="relative z-10 flex shrink-0 items-center gap-3"
+              onClick={(event) => {
+                if (!onLogoClick) return
+                event.preventDefault()
+                onLogoClick()
+              }}
+              className="relative z-10 flex shrink-0 items-center gap-3 text-current transition-colors duration-100 ease-out"
               aria-label="Livepeer.org home"
             >
               <LivepeerLogo />
@@ -117,6 +129,7 @@ export function LivepeerOrgHeader({
             )}
           </div>
           <div className="relative z-10 flex items-center gap-2 sm:gap-3">
+            {utility}
             {showMenu && (
               <>
                 <div
@@ -207,12 +220,25 @@ export function LivepeerOrgHeader({
             )}
             {action && (
               <Button
-                variant="link"
+                variant={action.variant ?? "link"}
                 nativeButton={false}
                 render={<Link href={action.href} />}
-                className="px-2 font-medium"
+                className={cn(
+                  "font-medium",
+                  action.variant === "secondary" || action.variant === "muted"
+                    ? "rounded-sm"
+                    : "px-2",
+                  action.className
+                )}
               >
-                {action.label} →
+                {action.label}
+                {(action.showArrow ||
+                  (action.variant !== "secondary" &&
+                    action.variant !== "muted")) && (
+                  <span className="font-sans" aria-hidden="true">
+                    →
+                  </span>
+                )}
               </Button>
             )}
             {showMenu && (

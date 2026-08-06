@@ -77,11 +77,35 @@ function LivepeerWordmark(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+function LivepeerForegroundGradientWordmark(
+  props: React.SVGProps<SVGSVGElement>
+) {
+  const gradientId = React.useId().replaceAll(":", "")
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="115 0 596 90"
+      role="img"
+      aria-label="Livepeer"
+      {...props}
+    >
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--foreground)" />
+          <stop offset="1" stopColor="var(--background)" />
+        </linearGradient>
+      </defs>
+      <g fill={`url(#${gradientId})`}>{wordmarkPaths}</g>
+    </svg>
+  )
+}
+
 function LivepeerLogo({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       className={[
-        "inline-flex shrink-0 items-center gap-1.5 text-foreground",
+        "inline-flex shrink-0 items-center gap-1.5 text-current",
         className,
       ]
         .filter(Boolean)
@@ -214,6 +238,7 @@ export {
   LivepeerSymbol,
   LivepeerGradientSymbol,
   LivepeerWordmark,
+  LivepeerForegroundGradientWordmark,
   LivepeerLogo,
   LivepeerLockup,
   LivepeerGradientLockup,
