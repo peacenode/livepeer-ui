@@ -11,13 +11,7 @@ import {
   useSyncExternalStore,
 } from "react"
 import Image from "next/image"
-import {
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckIcon,
-  CopyIcon,
-  XIcon,
-} from "lucide-react"
+import { ArrowUpIcon, CheckIcon, CopyIcon, XIcon } from "lucide-react"
 
 import { LivepeerWordmark } from "@/components/brand"
 import { Button } from "@/components/ui/button"
@@ -38,20 +32,49 @@ const sessionEvent = "livepeer-waitlist-session-change"
 
 const WaitlistEmailInput = forwardRef<
   HTMLInputElement,
-  Omit<ComponentProps<typeof Input>, "size"> & {
-    size?: "compact" | "chunky"
-  }
->(function WaitlistEmailInput({ className, size = "compact", ...props }, ref) {
+  Omit<ComponentProps<typeof Input>, "size">
+>(function WaitlistEmailInput({ className, ...props }, ref) {
   return (
     <Input
       ref={ref}
       className={cn(
         "h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive",
-        size === "chunky" && "h-16 px-5 pr-16 md:text-base",
         className
       )}
       {...props}
     />
+  )
+})
+
+const WaitlistEmailSubmitField = forwardRef<
+  HTMLInputElement,
+  Omit<ComponentProps<typeof WaitlistEmailInput>, "size"> & {
+    submitLabel: string
+    canSubmit?: boolean
+    submitTabIndex?: number
+  }
+>(function WaitlistEmailSubmitField(
+  { submitLabel, canSubmit = true, submitTabIndex, className, ...props },
+  ref
+) {
+  return (
+    <div className="relative min-w-0">
+      <WaitlistEmailInput ref={ref} className={className} {...props} />
+      <Button
+        type="submit"
+        variant="ghost"
+        size="icon-sm"
+        aria-label={submitLabel}
+        aria-disabled={!canSubmit}
+        tabIndex={submitTabIndex}
+        className={cn(
+          "absolute top-0 right-0 rounded-sm duration-100 ease-out",
+          canSubmit ? "text-foreground" : "text-muted-foreground"
+        )}
+      >
+        <ArrowUpIcon className="size-3.5" aria-hidden="true" />
+      </Button>
+    </div>
   )
 })
 
@@ -217,35 +240,25 @@ export function JoinWaitlistControl({
           noValidate
           className={`absolute inset-x-0 top-0 min-w-0 p-0.5 transition-[opacity,transform] duration-200 ${expanded ? "translate-x-0 opacity-100 delay-100" : "pointer-events-none -translate-x-2 opacity-0"}`}
         >
-          <div className="relative min-w-0">
-            <WaitlistEmailInput
-              ref={emailInputRef}
-              type="email"
-              aria-label="Email address"
-              aria-describedby={joinError ? helperId : undefined}
-              aria-invalid={joinError ? true : undefined}
-              placeholder="you@example.com"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value)
-                if (joinError) setJoinError("")
-              }}
-              required
-              autoComplete="email"
-              tabIndex={expanded ? 0 : -1}
-            />
-            <Button
-              type="submit"
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Join waitlist"
-              aria-disabled={!canSubmitEmail}
-              tabIndex={expanded ? 0 : -1}
-              className={`absolute top-0 right-0 rounded-sm duration-100 ease-out ${canSubmitEmail ? "text-foreground" : "text-muted-foreground"}`}
-            >
-              <ArrowUpIcon className="size-3.5" aria-hidden="true" />
-            </Button>
-          </div>
+          <WaitlistEmailSubmitField
+            ref={emailInputRef}
+            type="email"
+            aria-label="Email address"
+            aria-describedby={joinError ? helperId : undefined}
+            aria-invalid={joinError ? true : undefined}
+            placeholder="you@example.com"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value)
+              if (joinError) setJoinError("")
+            }}
+            required
+            autoComplete="email"
+            tabIndex={expanded ? 0 : -1}
+            submitLabel="Join waitlist"
+            canSubmit={canSubmitEmail}
+            submitTabIndex={expanded ? 0 : -1}
+          />
           {joinError && (
             <p
               id={helperId}
@@ -276,6 +289,7 @@ function FixedWaitlistSignIn({
   const [signInEmail, setSignInEmail] = useState("")
   const [signInOpen, setSignInOpen] = useState(false)
   const [signInSent, setSignInSent] = useState(false)
+  const canSubmitSignIn = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInEmail.trim())
 
   function submitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -371,28 +385,18 @@ function FixedWaitlistSignIn({
                     Sign in to Livepeer Agent
                   </h2>
                   <form onSubmit={submitSignIn} className="mt-8">
-                    <div className="relative">
-                      <WaitlistEmailInput
-                        size="chunky"
-                        id="scroller-waitlist-sign-in"
-                        aria-label="Email address"
-                        type="email"
-                        value={signInEmail}
-                        onChange={(event) => setSignInEmail(event.target.value)}
-                        placeholder="you@example.com"
-                        required
-                        autoComplete="email"
-                      />
-                      <Button
-                        type="submit"
-                        variant="ghost"
-                        size="icon-lg"
-                        aria-label="Sign in"
-                        className="absolute top-0 right-0 h-16 w-16 rounded-sm"
-                      >
-                        <ArrowRightIcon className="size-4" aria-hidden="true" />
-                      </Button>
-                    </div>
+                    <WaitlistEmailSubmitField
+                      id="scroller-waitlist-sign-in"
+                      aria-label="Email address"
+                      type="email"
+                      value={signInEmail}
+                      onChange={(event) => setSignInEmail(event.target.value)}
+                      placeholder="you@example.com"
+                      required
+                      autoComplete="email"
+                      submitLabel="Sign in"
+                      canSubmit={canSubmitSignIn}
+                    />
                   </form>
                 </>
               )}
