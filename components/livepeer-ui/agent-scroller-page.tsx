@@ -159,7 +159,7 @@ function ProductMediaFrame({
     <div
       data-testid="scroller-media-frame"
       className={cn(
-        "relative aspect-[6/13] shrink-0",
+        "relative aspect-[9/19.5] shrink-0",
         large
           ? "h-[min(62svh,39rem)] md:h-[min(74svh,46rem)]"
           : "h-[min(48svh,27rem)] md:h-[min(58svh,36rem)]"
