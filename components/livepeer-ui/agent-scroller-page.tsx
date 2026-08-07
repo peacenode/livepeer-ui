@@ -167,7 +167,7 @@ function ProductMediaFrame({
     >
       <div
         className={cn(
-          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:1.625rem] [backface-visibility:hidden] sm:[--scene-frame-radius:2.875rem]",
+          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:1.125rem] [backface-visibility:hidden] sm:[--scene-frame-radius:2rem]",
           frameAnimation === "exit-up" && "animate-scene-frame-exit-up",
           frameAnimation === "exit-down" && "animate-scene-frame-exit-down",
           frameAnimation === "reveal-up" && "animate-scene-frame-reveal-up",
@@ -178,7 +178,7 @@ function ProductMediaFrame({
             "animate-scene-frame-reveal-down-synced"
         )}
       >
-        <div className="absolute inset-0 overflow-hidden rounded-[1.375rem] bg-muted sm:rounded-[2.625rem]">
+        <div className="absolute inset-0 overflow-hidden rounded-2xl bg-muted sm:rounded-[1.875rem]">
           <Media item={currentItem} eager={large} />
         </div>
       </div>
