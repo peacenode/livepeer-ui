@@ -88,29 +88,30 @@ const nonShowcaseCapabilities = new Set([
 const storyContent = [
   {
     id: "studio",
-    title: "Livepeer MPC turns your agent into your dream production studio",
-    body: "Brings image, video, audio, 3D, editing, rendering, and production tools into your agent’s workflows with Livepeer MPC.",
+    title:
+      "Livepeer Agent turns your harness into your dream production studio",
+    body: "Brings image, video, audio, 3D, editing, rendering, and production tools into your agent’s workflows with Livepeer Agent.",
     theme: "base",
     layout: "hero",
   },
   {
     id: "routing",
     title: "The right model for every request",
-    body: "Livepeer MPC understands the work you’re asking for and routes it to the model best suited to handle it.",
+    body: "Livepeer Agent understands the work you’re asking for and routes it to the model best suited to handle it.",
     theme: "inverse",
     layout: "split",
   },
   {
     id: "pricing",
     title: "Pay for the work, not a subscription",
-    body: "Livepeer MPC shows the real price of every render before it runs. Keep a balance in USD and pay only for the compute you use—no credits, plans, or hidden conversion.",
+    body: "Livepeer Agent shows the real price of every render before it runs. Keep a balance in USD and pay only for the compute you use—no credits, plans, or hidden conversion.",
     theme: "base",
     layout: "split",
   },
   {
     id: "workflow",
     title: "Run any part of your workflow",
-    body: "Send one step or an entire production through Livepeer MPC while keeping the files, applications, and processes you already use.",
+    body: "Send one step or an entire production through Livepeer Agent while keeping the files, applications, and processes you already use.",
     theme: "inverse",
     layout: "split",
   },
@@ -136,29 +137,21 @@ function Media({ item, eager = false }: { item: MediaItem; eager?: boolean }) {
       height={900}
       loading={eager ? "eager" : "lazy"}
       sizes="(min-width: 768px) 22rem, 65vw"
-      className="absolute top-1/2 left-1/2 h-[56.25%] w-[177.778%] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90 object-cover"
+      className="absolute top-1/2 left-1/2 h-[46.154%] w-[216.667%] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90 object-cover"
     />
   )
 }
 
 function ProductMediaFrame({
   scene,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   frameAnimation,
   large = false,
 }: {
   scene: StoryScene
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   frameAnimation?: FrameAnimation
   large?: boolean
 }) {
-  const currentItem = scene.media[activeMedia] ?? scene.media[0]
-  const previousItem =
-    previousMedia === null ? null : (scene.media[previousMedia] ?? null)
+  const currentItem = scene.media[0]
 
   if (!currentItem) return null
 
@@ -166,7 +159,7 @@ function ProductMediaFrame({
     <div
       data-testid="scroller-media-frame"
       className={cn(
-        "relative aspect-[9/16] shrink-0",
+        "relative aspect-[9/19.5] shrink-0",
         large
           ? "h-[min(62svh,39rem)] md:h-[min(74svh,46rem)]"
           : "h-[min(48svh,27rem)] md:h-[min(58svh,36rem)]"
@@ -174,7 +167,7 @@ function ProductMediaFrame({
     >
       <div
         className={cn(
-          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[3.5rem] border border-border bg-muted [will-change:clip-path] [contain:paint] [backface-visibility:hidden]",
+          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:1.125rem] [backface-visibility:hidden] sm:[--scene-frame-radius:2rem]",
           frameAnimation === "exit-up" && "animate-scene-frame-exit-up",
           frameAnimation === "exit-down" && "animate-scene-frame-exit-down",
           frameAnimation === "reveal-up" && "animate-scene-frame-reveal-up",
@@ -185,21 +178,7 @@ function ProductMediaFrame({
             "animate-scene-frame-reveal-down-synced"
         )}
       >
-        {previousItem && (
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-0 overflow-hidden rounded-[3.25rem] bg-muted"
-          >
-            <Media item={previousItem} eager={large} />
-          </div>
-        )}
-        <div
-          key={`${currentItem.id}-${mediaCycle}`}
-          className={cn(
-            "absolute inset-0 z-10 overflow-hidden rounded-[3.25rem] bg-muted",
-            previousItem && "animate-media-window-in"
-          )}
-        >
+        <div className="absolute inset-0 overflow-hidden rounded-2xl bg-muted sm:rounded-[1.875rem]">
           <Media item={currentItem} eager={large} />
         </div>
       </div>
@@ -234,44 +213,27 @@ function CompatibilityMarks({ theme }: { theme: SceneTheme }) {
 
 function ContentScene({
   scene,
-  sceneIndex,
-  activeSceneIndex,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   frameAnimation,
   contentAnimation,
 }: {
   scene: StoryScene
-  sceneIndex: number
-  activeSceneIndex: number
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   frameAnimation?: FrameAnimation
   contentAnimation?: ContentAnimation
 }) {
   const isHero = scene.layout === "hero"
-  const ownsMedia = sceneIndex === activeSceneIndex
 
   return (
     <div
       className={cn(
         "flex h-full w-full overflow-hidden px-4 text-current sm:px-6",
         isHero
-          ? "flex-col items-center justify-start pt-[clamp(1.5rem,5svh,4rem)] text-center"
+          ? "flex-col items-center justify-start gap-[var(--hero-content-gap)] pt-[clamp(0.75rem,2svh,2rem)] text-center [--hero-content-gap:clamp(1.5rem,4svh,3rem)]"
           : "flex-col items-center justify-center gap-7 py-10 md:grid md:grid-cols-[minmax(16rem,0.8fr)_minmax(20rem,1fr)] md:gap-[clamp(3rem,8vw,9rem)] md:px-[clamp(2rem,6vw,7rem)] md:py-12"
       )}
     >
       {!isHero && (
         <div className="pointer-events-none order-2 justify-self-end md:order-1">
-          <ProductMediaFrame
-            scene={scene}
-            activeMedia={ownsMedia ? activeMedia : 0}
-            previousMedia={ownsMedia ? previousMedia : null}
-            mediaCycle={ownsMedia ? mediaCycle : 0}
-            frameAnimation={frameAnimation}
-          />
+          <ProductMediaFrame scene={scene} frameAnimation={frameAnimation} />
         </div>
       )}
 
@@ -279,45 +241,46 @@ function ContentScene({
         data-testid={isHero ? "scroller-intro-copy" : undefined}
         className={cn(
           "order-1 max-w-[38rem] md:order-2",
-          isHero ? "max-w-[64rem]" : "text-center md:text-left",
+          isHero
+            ? "flex max-w-[64rem] flex-col items-center gap-[var(--hero-content-gap)]"
+            : "text-center md:text-left",
           contentAnimation && `animate-scene-content-${contentAnimation}`
         )}
       >
         {isHero ? (
-          <h1 className="font-display text-display-sm text-balance sm:text-display-lg">
-            {scene.title}
-          </h1>
+          <>
+            <div>
+              <h1 className="font-display text-display-sm text-balance sm:text-display-lg">
+                {scene.title}
+              </h1>
+              <p className="mx-auto mt-5 max-w-[42rem] text-sm leading-relaxed text-balance text-current">
+                {scene.body}
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <JoinWaitlistControl defaultExpanded />
+            </div>
+          </>
         ) : (
-          <h2 className="font-display text-display-sm text-balance sm:text-display-md">
-            {scene.title}
-          </h2>
-        )}
-        {scene.compatibility ? (
-          <CompatibilityMarks theme={scene.theme} />
-        ) : (
-          <p
-            className={cn(
-              "mt-5 max-w-[34rem] text-sm leading-relaxed text-balance text-current",
-              isHero ? "mx-auto max-w-[42rem]" : "mx-auto md:mx-0"
+          <>
+            <h2 className="font-display text-display-sm text-balance sm:text-display-md">
+              {scene.title}
+            </h2>
+            {scene.compatibility ? (
+              <CompatibilityMarks theme={scene.theme} />
+            ) : (
+              <p className="mx-auto mt-5 max-w-[34rem] text-sm leading-relaxed text-balance text-current md:mx-0">
+                {scene.body}
+              </p>
             )}
-          >
-            {scene.body}
-          </p>
-        )}
-        {isHero && (
-          <div className="mt-6 flex justify-center">
-            <JoinWaitlistControl defaultExpanded />
-          </div>
+          </>
         )}
       </div>
 
       {isHero && (
-        <div className="pointer-events-none order-2 mt-[clamp(1.5rem,4svh,3rem)] shrink-0">
+        <div className="pointer-events-none order-2 shrink-0">
           <ProductMediaFrame
             scene={scene}
-            activeMedia={ownsMedia ? activeMedia : 0}
-            previousMedia={ownsMedia ? previousMedia : null}
-            mediaCycle={ownsMedia ? mediaCycle : 0}
             frameAnimation={frameAnimation}
             large
           />
@@ -397,7 +360,7 @@ function FooterScene({
       <div className="flex flex-1 items-center justify-center">
         <div className="mx-auto flex w-full max-w-screen-2xl flex-col items-center gap-10 text-center">
           <h2 className="max-w-6xl font-display text-display-sm text-balance sm:text-display-lg">
-            Livepeer MPC. Keep creating. Automate the rest.
+            Livepeer Agent. Keep creating. Automate the rest.
           </h2>
           <JoinWaitlistControl defaultExpanded />
         </div>
@@ -409,21 +372,11 @@ function FooterScene({
 
 function SceneComposition({
   scene,
-  sceneIndex,
-  activeSceneIndex,
-  activeMedia,
-  previousMedia,
-  mediaCycle,
   capabilities,
   frameAnimation,
   contentAnimation,
 }: {
   scene: StoryScene
-  sceneIndex: number
-  activeSceneIndex: number
-  activeMedia: number
-  previousMedia: number | null
-  mediaCycle: number
   capabilities: string[]
   frameAnimation?: FrameAnimation
   contentAnimation?: ContentAnimation
@@ -445,11 +398,6 @@ function SceneComposition({
   return (
     <ContentScene
       scene={scene}
-      sceneIndex={sceneIndex}
-      activeSceneIndex={activeSceneIndex}
-      activeMedia={activeMedia}
-      previousMedia={previousMedia}
-      mediaCycle={mediaCycle}
       frameAnimation={frameAnimation}
       contentAnimation={contentAnimation}
     />
@@ -491,7 +439,7 @@ export function AgentScrollerPage({
       },
       {
         id: "footer",
-        title: "Livepeer MPC. Keep creating. Automate the rest.",
+        title: "Livepeer Agent. Keep creating. Automate the rest.",
         theme: "base",
         layout: "footer",
         media: [],
@@ -530,11 +478,7 @@ export function AgentScrollerPage({
   const [visualSceneIndex, setVisualSceneIndex] = useState(0)
   const [transition, setTransition] = useState<TransitionState | null>(null)
   const [inputPhase, setInputPhase] = useState<InputPhase>("ready")
-  const [activeMedia, setActiveMedia] = useState(0)
-  const [previousMedia, setPreviousMedia] = useState<number | null>(null)
-  const [mediaCycle, setMediaCycle] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [pageVisible, setPageVisible] = useState(true)
 
   const maximumSceneIndex = scenes.length - 1
   const activeScene = scenes[visualSceneIndex]
@@ -610,9 +554,6 @@ export function AgentScrollerPage({
       setActiveSceneIndex(nextIndex)
       setVisualSceneIndex(nextIndex)
       setTransition(null)
-      setActiveMedia(0)
-      setPreviousMedia(null)
-      setMediaCycle((cycle) => cycle + 1)
       placeScrollAtScene(nextIndex)
 
       const requestedIndex = requestedSceneRef.current
@@ -653,9 +594,6 @@ export function AgentScrollerPage({
         activeSceneIndexRef.current = to
         setActiveSceneIndex(to)
         setVisualSceneIndex(to)
-        setActiveMedia(0)
-        setPreviousMedia(null)
-        setMediaCycle((cycle) => cycle + 1)
         placeScrollAtScene(to)
         setPhase("ready")
         return
@@ -708,40 +646,13 @@ export function AgentScrollerPage({
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     const updateMotionPreference = () => setReducedMotion(mediaQuery.matches)
-    const updateVisibility = () =>
-      setPageVisible(document.visibilityState === "visible")
-
     updateMotionPreference()
-    updateVisibility()
     mediaQuery.addEventListener("change", updateMotionPreference)
-    document.addEventListener("visibilitychange", updateVisibility)
 
     return () => {
       mediaQuery.removeEventListener("change", updateMotionPreference)
-      document.removeEventListener("visibilitychange", updateVisibility)
     }
   }, [])
-
-  useEffect(() => {
-    if (
-      transition !== null ||
-      !pageVisible ||
-      reducedMotion ||
-      activeScene.layout === "capabilities" ||
-      activeScene.layout === "footer" ||
-      activeScene.media.length < 2
-    ) {
-      return
-    }
-
-    const timeout = window.setTimeout(() => {
-      setPreviousMedia(activeMedia)
-      setActiveMedia((activeMedia + 1) % activeScene.media.length)
-      setMediaCycle((cycle) => cycle + 1)
-    }, 2800)
-
-    return () => window.clearTimeout(timeout)
-  }, [activeMedia, activeScene, pageVisible, reducedMotion, transition])
 
   useEffect(
     () => () => {
@@ -961,7 +872,12 @@ export function AgentScrollerPage({
       <div className="sticky inset-x-0 top-0 z-50 h-16">
         <LivepeerOrgHeader
           site={site}
-          utility={<WaitlistHeaderAuth theme={activeScene.theme} />}
+          utility={
+            <WaitlistHeaderAuth
+              theme={activeScene.theme}
+              signInImage={scenes[0]?.media[0]}
+            />
+          }
           onLogoClick={returnToFirstScene}
           showMenu={false}
         />
@@ -1050,11 +966,6 @@ export function AgentScrollerPage({
                 <div className="size-full">
                   <SceneComposition
                     scene={scene}
-                    sceneIndex={sceneIndex}
-                    activeSceneIndex={activeSceneIndex}
-                    activeMedia={activeMedia}
-                    previousMedia={previousMedia}
-                    mediaCycle={mediaCycle}
                     capabilities={showcaseCapabilities}
                     frameAnimation={frameAnimation}
                     contentAnimation={contentAnimation}

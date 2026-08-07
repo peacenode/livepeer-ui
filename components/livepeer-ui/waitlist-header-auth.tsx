@@ -1,21 +1,19 @@
 "use client"
 
 import {
+  type ComponentProps,
   type FormEvent,
+  forwardRef,
   useId,
   useMemo,
   useRef,
   useState,
   useSyncExternalStore,
 } from "react"
-import {
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckIcon,
-  CopyIcon,
-  XIcon,
-} from "lucide-react"
+import Image from "next/image"
+import { ArrowUpIcon, CheckIcon, CopyIcon, XIcon } from "lucide-react"
 
+import { LivepeerWordmark } from "@/components/brand"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -27,9 +25,58 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 const storageKey = "livepeer-waitlist-email"
 const sessionEvent = "livepeer-waitlist-session-change"
+
+const WaitlistEmailInput = forwardRef<
+  HTMLInputElement,
+  Omit<ComponentProps<typeof Input>, "size">
+>(function WaitlistEmailInput({ className, ...props }, ref) {
+  return (
+    <Input
+      ref={ref}
+      className={cn(
+        "h-8 min-w-0 bg-muted px-2.5 pr-9 text-base duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive",
+        className
+      )}
+      {...props}
+    />
+  )
+})
+
+const WaitlistEmailSubmitField = forwardRef<
+  HTMLInputElement,
+  Omit<ComponentProps<typeof WaitlistEmailInput>, "size"> & {
+    submitLabel: string
+    canSubmit?: boolean
+    submitTabIndex?: number
+  }
+>(function WaitlistEmailSubmitField(
+  { submitLabel, canSubmit = true, submitTabIndex, className, ...props },
+  ref
+) {
+  return (
+    <div className="relative min-w-0">
+      <WaitlistEmailInput ref={ref} className={className} {...props} />
+      <Button
+        type="submit"
+        variant="ghost"
+        size="icon-sm"
+        aria-label={submitLabel}
+        aria-disabled={!canSubmit}
+        tabIndex={submitTabIndex}
+        className={cn(
+          "absolute top-0 right-0 rounded-sm duration-100 ease-out",
+          canSubmit ? "text-foreground" : "text-muted-foreground"
+        )}
+      >
+        <ArrowUpIcon className="size-3.5" aria-hidden="true" />
+      </Button>
+    </div>
+  )
+})
 
 function subscribeToSession(callback: () => void) {
   window.addEventListener("storage", callback)
@@ -96,6 +143,9 @@ export function JoinWaitlistControl({
     ? `earlyaccess.livepeer.org/?ref=${inviteCode}`
     : ""
   const canSubmitEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+  const expandedWidth = defaultExpanded
+    ? "w-[min(60vw,22rem)]"
+    : "w-[clamp(10rem,40vw,20rem)]"
 
   function signIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -173,7 +223,7 @@ export function JoinWaitlistControl({
         </span>
       )}
       <div
-        className={`relative h-9 min-w-0 shrink transition-[width] duration-300 ease-out ${expanded ? "w-[clamp(10rem,40vw,20rem)] overflow-visible" : "w-[5.75rem] overflow-hidden"}`}
+        className={`relative h-9 min-w-0 shrink transition-[width] duration-300 ease-out ${expanded ? `${expandedWidth} overflow-visible` : "w-[5.75rem] overflow-hidden"}`}
       >
         <Button
           type="button"
@@ -190,36 +240,25 @@ export function JoinWaitlistControl({
           noValidate
           className={`absolute inset-x-0 top-0 min-w-0 p-0.5 transition-[opacity,transform] duration-200 ${expanded ? "translate-x-0 opacity-100 delay-100" : "pointer-events-none -translate-x-2 opacity-0"}`}
         >
-          <div className="relative min-w-0">
-            <Input
-              ref={emailInputRef}
-              type="email"
-              aria-label="Email address"
-              aria-describedby={joinError ? helperId : undefined}
-              aria-invalid={joinError ? true : undefined}
-              placeholder="you@example.com"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value)
-                if (joinError) setJoinError("")
-              }}
-              required
-              autoComplete="email"
-              tabIndex={expanded ? 0 : -1}
-              className="h-8 min-w-0 bg-muted px-2.5 pr-9 text-xs duration-100 ease-out aria-invalid:border-transparent aria-invalid:ring-destructive md:text-xs dark:aria-invalid:border-transparent dark:aria-invalid:ring-destructive"
-            />
-            <Button
-              type="submit"
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Join waitlist"
-              aria-disabled={!canSubmitEmail}
-              tabIndex={expanded ? 0 : -1}
-              className={`absolute top-0 right-0 rounded-sm duration-100 ease-out ${canSubmitEmail ? "text-foreground" : "text-muted-foreground"}`}
-            >
-              <ArrowUpIcon className="size-3.5" aria-hidden="true" />
-            </Button>
-          </div>
+          <WaitlistEmailSubmitField
+            ref={emailInputRef}
+            type="email"
+            aria-label="Email address"
+            aria-describedby={joinError ? helperId : undefined}
+            aria-invalid={joinError ? true : undefined}
+            placeholder="you@example.com"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value)
+              if (joinError) setJoinError("")
+            }}
+            required
+            autoComplete="email"
+            tabIndex={expanded ? 0 : -1}
+            submitLabel="Join waitlist"
+            canSubmit={canSubmitEmail}
+            submitTabIndex={expanded ? 0 : -1}
+          />
           {joinError && (
             <p
               id={helperId}
@@ -235,7 +274,13 @@ export function JoinWaitlistControl({
   )
 }
 
-function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
+function FixedWaitlistSignIn({
+  theme,
+  signInImage,
+}: {
+  theme: "base" | "inverse"
+  signInImage?: { src: string; alt: string }
+}) {
   const sessionEmail = useSyncExternalStore(
     subscribeToSession,
     getSessionEmail,
@@ -243,15 +288,23 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
   )
   const [signInEmail, setSignInEmail] = useState("")
   const [signInOpen, setSignInOpen] = useState(false)
+  const [signInSent, setSignInSent] = useState(false)
+  const canSubmitSignIn = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInEmail.trim())
 
   function submitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const normalizedEmail = signInEmail.trim().toLowerCase()
     if (!normalizedEmail) return
 
-    updateSession(normalizedEmail)
-    setSignInEmail("")
-    setSignInOpen(false)
+    setSignInSent(true)
+  }
+
+  function handleSignInOpenChange(nextOpen: boolean) {
+    setSignInOpen(nextOpen)
+    if (!nextOpen) {
+      setSignInEmail("")
+      setSignInSent(false)
+    }
   }
 
   if (sessionEmail) {
@@ -261,7 +314,7 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
         variant="link"
         size="xs"
         onClick={() => updateSession()}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-xs font-normal text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out sm:right-6 sm:bottom-6"
       >
         Sign out
       </Button>
@@ -269,53 +322,107 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
   }
 
   return (
-    <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
+    <Dialog open={signInOpen} onOpenChange={handleSignInOpenChange}>
       <DialogTrigger
         render={<Button type="button" variant="link" size="xs" />}
-        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-xs font-normal text-current duration-100 ease-out sm:right-6 sm:bottom-6"
+        className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out [text-shadow:0_0_2px_white,0_1px_8px_rgba(255,255,255,0.95)] sm:right-6 sm:bottom-6"
       >
         Sign in
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className={`${theme === "inverse" ? "dark" : ""} gap-6 rounded-sm p-6 sm:max-w-md sm:p-8`}
+        className={`${theme === "inverse" ? "dark" : ""} h-[calc(100dvh-var(--sign-in-gutter))] min-h-0 w-[calc(100vw-var(--sign-in-gutter))] max-w-none gap-0 overflow-hidden rounded-sm p-0 [--sign-in-gutter:clamp(2rem,10vw,6rem)] sm:max-w-none`}
       >
+        <div
+          className="absolute top-6 left-6 z-10 text-foreground md:left-[calc(50%+clamp(2.5rem,5vw,6rem))]"
+          aria-label="Livepeer"
+        >
+          <LivepeerWordmark className="h-4 w-auto" aria-hidden="true" />
+        </div>
         <DialogClose
           render={
             <Button
               variant="ghost"
-              size="icon-sm"
-              className="absolute top-4 right-4 bg-transparent hover:bg-transparent"
+              size="icon-lg"
+              className="absolute top-4 right-4 bg-transparent hover:bg-transparent sm:top-6 sm:right-6"
             />
           }
         >
           <XIcon className="size-5" aria-hidden="true" />
           <span className="sr-only">Close</span>
         </DialogClose>
-        <DialogHeader className="items-center text-center">
-          <DialogTitle className="font-display text-3xl leading-none font-light tracking-[-0.04em]">
-            Sign in
-          </DialogTitle>
-          <DialogDescription>
-            Enter the email you used to join the waitlist.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={submitSignIn} className="space-y-3">
-          <Input
-            id="scroller-waitlist-sign-in"
-            aria-label="Email address"
-            type="email"
-            value={signInEmail}
-            onChange={(event) => setSignInEmail(event.target.value)}
-            placeholder="you@example.com"
-            required
-            autoComplete="email"
-          />
-          <Button type="submit" size="lg" className="h-12 w-full">
-            Sign in
-            <ArrowRightIcon className="size-4" aria-hidden="true" />
-          </Button>
-        </form>
+        <a
+          href="https://livepeer.org"
+          target="_blank"
+          rel="noreferrer"
+          className="absolute bottom-6 left-6 z-10 text-[10px] leading-none font-semibold text-white underline-offset-4 [text-shadow:0_1px_8px_rgba(0,0,0,0.65)] hover:underline md:left-[calc(50%+clamp(2.5rem,5vw,6rem))] md:text-foreground md:[text-shadow:none]"
+        >
+          livepeer.org
+        </a>
+        <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-2 md:grid-rows-1">
+          <div className="order-1 flex min-h-0 items-end px-6 pt-16 pb-8 sm:px-10 md:order-2 md:items-center md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
+            <div className="w-full max-w-lg text-left">
+              <DialogHeader className="sr-only">
+                <DialogTitle>
+                  {signInSent
+                    ? "Check your email"
+                    : "Sign in to Livepeer Agent"}
+                </DialogTitle>
+                <DialogDescription>
+                  {signInSent
+                    ? "Your sign-in email will come from agentinfo@livepeer.org."
+                    : "Enter the email you used to join the waitlist."}
+                </DialogDescription>
+              </DialogHeader>
+              {signInSent ? (
+                <div role="status" aria-live="polite">
+                  <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
+                    Check your email
+                  </h2>
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+                    You&apos;ll receive a sign-in link from{" "}
+                    <span className="font-medium text-foreground">
+                      agentinfo@livepeer.org
+                    </span>
+                    .
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
+                    Sign in to Livepeer Agent
+                  </h2>
+                  <form onSubmit={submitSignIn} className="mt-8">
+                    <WaitlistEmailSubmitField
+                      id="scroller-waitlist-sign-in"
+                      aria-label="Email address"
+                      type="email"
+                      value={signInEmail}
+                      onChange={(event) => setSignInEmail(event.target.value)}
+                      placeholder="you@example.com"
+                      required
+                      autoComplete="email"
+                      submitLabel="Sign in"
+                      canSubmit={canSubmitSignIn}
+                    />
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+          {signInImage && (
+            <div className="relative order-2 min-h-0 overflow-hidden bg-muted md:order-1">
+              <Image
+                src={signInImage.src}
+                alt={signInImage.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:bg-gradient-to-b md:from-black/25 md:to-transparent" />
+            </div>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   )
@@ -323,8 +430,10 @@ function FixedWaitlistSignIn({ theme }: { theme: "base" | "inverse" }) {
 
 export function WaitlistHeaderAuth({
   theme = "base",
+  signInImage,
 }: {
   theme?: "base" | "inverse"
+  signInImage?: { src: string; alt: string }
 }) {
   const sessionEmail = useSyncExternalStore(
     subscribeToSession,
@@ -336,16 +445,16 @@ export function WaitlistHeaderAuth({
     <>
       <div className="flex min-w-0 items-center gap-2">
         <span className="flex h-8 shrink-0 items-center text-[10px] leading-none font-semibold sm:hidden">
-          Livepeer MCP Early Access
+          Livepeer Agent Early Access
         </span>
         <span className="hidden h-8 shrink-0 items-center text-[10px] leading-none font-semibold sm:flex">
-          {sessionEmail ? "Invite a friend" : "Livepeer MCP Early Access"}
+          {sessionEmail ? "Invite a friend" : "Livepeer Agent Early Access"}
         </span>
         <div className="hidden sm:block">
           <JoinWaitlistControl />
         </div>
       </div>
-      <FixedWaitlistSignIn theme={theme} />
+      <FixedWaitlistSignIn theme={theme} signInImage={signInImage} />
     </>
   )
 }

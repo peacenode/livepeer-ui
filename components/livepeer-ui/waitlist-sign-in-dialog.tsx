@@ -1,9 +1,8 @@
 "use client"
 
 import { type FormEvent, useState } from "react"
-import { ArrowRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { WaitlistEmailField } from "@/components/livepeer-ui/waitlist-email-field"
 import {
   Dialog,
   DialogContent,
@@ -12,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export function WaitlistSignInDialog() {
@@ -36,7 +34,7 @@ export function WaitlistSignInDialog() {
       <DialogTrigger className="text-xs font-medium text-white/65 hover:text-white">
         Sign in
       </DialogTrigger>
-      <DialogContent className="dark gap-8 rounded-sm border border-white/15 bg-[#0d0d0d] p-6 text-white opacity-100 shadow-2xl data-open:animate-none data-open:scale-100 sm:p-8">
+      <DialogContent className="dark gap-8 rounded-sm border border-white/15 bg-[#0d0d0d] p-6 text-white opacity-100 shadow-2xl sm:p-8 data-open:scale-100 data-open:animate-none">
         {sent ? (
           <div className="py-8 text-center" role="status" aria-live="polite">
             <DialogTitle className="font-display text-3xl leading-none font-light tracking-[-0.04em]">
@@ -64,26 +62,13 @@ export function WaitlistSignInDialog() {
               >
                 Email address
               </Label>
-              <div className="mt-3 flex h-16 gap-1 rounded-sm border border-white/25 bg-transparent p-1 text-white transition-shadow focus-within:border-transparent focus-within:ring-2 focus-within:ring-white/30">
-                <Input
-                  id="waitlist-sign-in-email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                  autoComplete="email"
-                  className="h-full min-w-0 flex-1 border-0 bg-transparent px-3 text-base text-white shadow-none placeholder:text-white/45 focus-visible:ring-0"
-                />
-                <Button
-                  type="submit"
-                  size="icon-lg"
-                  aria-label="Email me a sign-in link"
-                  className="h-full w-14 rounded-[3px]"
-                >
-                  <ArrowRight aria-hidden="true" />
-                </Button>
-              </div>
+              <WaitlistEmailField
+                id="waitlist-sign-in-email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                submitAriaLabel="Email me a sign-in link"
+              />
             </form>
           </>
         )}

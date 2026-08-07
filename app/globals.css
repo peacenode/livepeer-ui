@@ -345,82 +345,69 @@ body {
 }
 
 @layer utilities {
-  @keyframes media-window-in {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  .animate-media-window-in {
-    animation: media-window-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
   @keyframes scene-frame-exit-up {
     0%,
     8% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
     48%,
     100% {
-      clip-path: inset(0 0 100% 0 round 3.5rem);
+      clip-path: inset(0 0 100% 0 round var(--scene-frame-radius));
     }
   }
 
   @keyframes scene-frame-exit-down {
     0%,
     8% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
     48%,
     100% {
-      clip-path: inset(100% 0 0 0 round 3.5rem);
+      clip-path: inset(100% 0 0 0 round var(--scene-frame-radius));
     }
   }
 
   @keyframes scene-frame-reveal-up {
     0%,
     12% {
-      clip-path: inset(100% 0 0 0 round 3.5rem);
+      clip-path: inset(100% 0 0 0 round var(--scene-frame-radius));
     }
     92%,
     100% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
   }
 
   @keyframes scene-frame-reveal-down {
     0%,
     12% {
-      clip-path: inset(0 0 100% 0 round 3.5rem);
+      clip-path: inset(0 0 100% 0 round var(--scene-frame-radius));
     }
     92%,
     100% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
   }
 
   @keyframes scene-frame-reveal-up-synced {
     0%,
     48% {
-      clip-path: inset(100% 0 0 0 round 3.5rem);
+      clip-path: inset(100% 0 0 0 round var(--scene-frame-radius));
     }
     92%,
     100% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
   }
 
   @keyframes scene-frame-reveal-down-synced {
     0%,
     48% {
-      clip-path: inset(0 0 100% 0 round 3.5rem);
+      clip-path: inset(0 0 100% 0 round var(--scene-frame-radius));
     }
     92%,
     100% {
-      clip-path: inset(0 0 0 0 round 3.5rem);
+      clip-path: inset(0 0 0 0 round var(--scene-frame-radius));
     }
   }
 
