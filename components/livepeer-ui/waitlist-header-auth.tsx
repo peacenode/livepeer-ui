@@ -275,15 +275,22 @@ function FixedWaitlistSignIn({
   )
   const [signInEmail, setSignInEmail] = useState("")
   const [signInOpen, setSignInOpen] = useState(false)
+  const [signInSent, setSignInSent] = useState(false)
 
   function submitSignIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const normalizedEmail = signInEmail.trim().toLowerCase()
     if (!normalizedEmail) return
 
-    updateSession(normalizedEmail)
-    setSignInEmail("")
-    setSignInOpen(false)
+    setSignInSent(true)
+  }
+
+  function handleSignInOpenChange(nextOpen: boolean) {
+    setSignInOpen(nextOpen)
+    if (!nextOpen) {
+      setSignInEmail("")
+      setSignInSent(false)
+    }
   }
 
   if (sessionEmail) {
@@ -301,7 +308,7 @@ function FixedWaitlistSignIn({
   }
 
   return (
-    <Dialog open={signInOpen} onOpenChange={setSignInOpen}>
+    <Dialog open={signInOpen} onOpenChange={handleSignInOpenChange}>
       <DialogTrigger
         render={<Button type="button" variant="link" size="xs" />}
         className="fixed right-4 bottom-4 z-[60] h-auto p-0 text-[10px] leading-none font-semibold text-current duration-100 ease-out [text-shadow:0_0_2px_white,0_1px_8px_rgba(255,255,255,0.95)] sm:right-6 sm:bottom-6"
@@ -334,38 +341,61 @@ function FixedWaitlistSignIn({
           <div className="order-1 flex min-h-0 items-center px-6 pt-16 pb-8 sm:px-10 md:order-2 md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
             <div className="w-full max-w-lg text-left">
               <DialogHeader className="sr-only">
-                <DialogTitle>Sign in to Livepeer Agent</DialogTitle>
+                <DialogTitle>
+                  {signInSent
+                    ? "Check your email"
+                    : "Sign in to Livepeer Agent"}
+                </DialogTitle>
                 <DialogDescription>
-                  Enter the email you used to join the waitlist.
+                  {signInSent
+                    ? "Your sign-in email will come from agentinfo@livepeer.org."
+                    : "Enter the email you used to join the waitlist."}
                 </DialogDescription>
               </DialogHeader>
-              <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
-                Sign in to Livepeer Agent
-              </h2>
-              <form onSubmit={submitSignIn} className="mt-8">
-                <div className="relative">
-                  <WaitlistEmailInput
-                    size="chunky"
-                    id="scroller-waitlist-sign-in"
-                    aria-label="Email address"
-                    type="email"
-                    value={signInEmail}
-                    onChange={(event) => setSignInEmail(event.target.value)}
-                    placeholder="you@example.com"
-                    required
-                    autoComplete="email"
-                  />
-                  <Button
-                    type="submit"
-                    variant="ghost"
-                    size="icon-lg"
-                    aria-label="Sign in"
-                    className="absolute top-0 right-0 h-16 w-16 rounded-sm"
-                  >
-                    <ArrowRightIcon className="size-4" aria-hidden="true" />
-                  </Button>
+              {signInSent ? (
+                <div role="status" aria-live="polite">
+                  <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
+                    Check your email
+                  </h2>
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
+                    You&apos;ll receive a sign-in link from{" "}
+                    <span className="font-medium text-foreground">
+                      agentinfo@livepeer.org
+                    </span>
+                    .
+                  </p>
                 </div>
-              </form>
+              ) : (
+                <>
+                  <h2 className="font-display text-display-sm text-balance sm:text-display-lg">
+                    Sign in to Livepeer Agent
+                  </h2>
+                  <form onSubmit={submitSignIn} className="mt-8">
+                    <div className="relative">
+                      <WaitlistEmailInput
+                        size="chunky"
+                        id="scroller-waitlist-sign-in"
+                        aria-label="Email address"
+                        type="email"
+                        value={signInEmail}
+                        onChange={(event) => setSignInEmail(event.target.value)}
+                        placeholder="you@example.com"
+                        required
+                        autoComplete="email"
+                      />
+                      <Button
+                        type="submit"
+                        variant="ghost"
+                        size="icon-lg"
+                        aria-label="Sign in"
+                        className="absolute top-0 right-0 h-16 w-16 rounded-sm"
+                      >
+                        <ArrowRightIcon className="size-4" aria-hidden="true" />
+                      </Button>
+                    </div>
+                  </form>
+                </>
+              )}
             </div>
           </div>
           {signInImage && (
