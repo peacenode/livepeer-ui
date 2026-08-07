@@ -359,8 +359,8 @@ function FixedWaitlistSignIn({
         >
           livepeer.org
         </a>
-        <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_minmax(10rem,0.65fr)] md:grid-cols-2 md:grid-rows-1">
-          <div className="order-1 flex min-h-0 items-center px-6 pt-16 pb-8 sm:px-10 md:order-2 md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
+        <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-2 md:grid-rows-1">
+          <div className="order-1 flex min-h-0 items-end px-6 pt-16 pb-6 sm:px-10 md:order-2 md:items-center md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
             <div className="w-full max-w-lg text-left">
               <DialogHeader className="sr-only">
                 <DialogTitle>
