@@ -351,6 +351,14 @@ function FixedWaitlistSignIn({
           <XIcon className="size-5" aria-hidden="true" />
           <span className="sr-only">Close</span>
         </DialogClose>
+        <a
+          href="https://livepeer.org"
+          target="_blank"
+          rel="noreferrer"
+          className="absolute bottom-6 left-6 z-10 text-[10px] leading-none font-semibold text-white underline-offset-4 [text-shadow:0_1px_8px_rgba(0,0,0,0.65)] hover:underline md:left-[calc(50%+clamp(2.5rem,5vw,6rem))] md:text-foreground md:[text-shadow:none]"
+        >
+          livepeer.org
+        </a>
         <div className="grid h-full min-h-0 grid-rows-[minmax(0,1fr)_minmax(10rem,0.65fr)] md:grid-cols-2 md:grid-rows-1">
           <div className="order-1 flex min-h-0 items-center px-6 pt-16 pb-8 sm:px-10 md:order-2 md:px-[clamp(2.5rem,5vw,6rem)] md:py-16">
             <div className="w-full max-w-lg text-left">
