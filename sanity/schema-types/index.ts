@@ -29,9 +29,11 @@ import { agentRolloutFlowType } from "./agent-rollout-flow"
 import { livepeerBlogPostType } from "./livepeer-blog-post"
 import { stockImageGroupType, stockImageType } from "./stock-images"
 import { socialAssetSetType } from "./social-assets"
+import { faqPageContentType } from "./faq-content"
 
 export const schemaTypes = [
   agentRolloutFlowType,
+  faqPageContentType,
   marketingLinkType,
   marketingItemType,
   marketingWeekType,
