@@ -88,7 +88,8 @@ const nonShowcaseCapabilities = new Set([
 const storyContent = [
   {
     id: "studio",
-    title: "Livepeer Agent turns your agent into your dream production studio",
+    title:
+      "Livepeer Agent turns your harness into your dream production studio",
     body: "Brings image, video, audio, 3D, editing, rendering, and production tools into your agent’s workflows with Livepeer Agent.",
     theme: "base",
     layout: "hero",
@@ -136,7 +137,7 @@ function Media({ item, eager = false }: { item: MediaItem; eager?: boolean }) {
       height={900}
       loading={eager ? "eager" : "lazy"}
       sizes="(min-width: 768px) 22rem, 65vw"
-      className="absolute top-1/2 left-1/2 h-[56.25%] w-[177.778%] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90 object-cover"
+      className="absolute top-1/2 left-1/2 h-[46.154%] w-[216.667%] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90 object-cover"
     />
   )
 }
@@ -158,7 +159,7 @@ function ProductMediaFrame({
     <div
       data-testid="scroller-media-frame"
       className={cn(
-        "relative aspect-[9/16] shrink-0",
+        "relative aspect-[6/13] shrink-0",
         large
           ? "h-[min(62svh,39rem)] md:h-[min(74svh,46rem)]"
           : "h-[min(48svh,27rem)] md:h-[min(58svh,36rem)]"
@@ -166,7 +167,7 @@ function ProductMediaFrame({
     >
       <div
         className={cn(
-          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:2rem] [backface-visibility:hidden] sm:[--scene-frame-radius:3.5rem]",
+          "absolute inset-0 [transform:translateZ(0)] overflow-hidden rounded-[var(--scene-frame-radius)] border border-border bg-muted [will-change:clip-path] [contain:paint] [--scene-frame-radius:1.625rem] [backface-visibility:hidden] sm:[--scene-frame-radius:2.875rem]",
           frameAnimation === "exit-up" && "animate-scene-frame-exit-up",
           frameAnimation === "exit-down" && "animate-scene-frame-exit-down",
           frameAnimation === "reveal-up" && "animate-scene-frame-reveal-up",
@@ -177,7 +178,7 @@ function ProductMediaFrame({
             "animate-scene-frame-reveal-down-synced"
         )}
       >
-        <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-muted sm:rounded-[3.25rem]">
+        <div className="absolute inset-0 overflow-hidden rounded-[1.375rem] bg-muted sm:rounded-[2.625rem]">
           <Media item={currentItem} eager={large} />
         </div>
       </div>
